@@ -1,0 +1,36 @@
+{
+  "name": "rmnd-nuxt-typo3",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/module.ts",
+  "scripts": {
+    "dev": "nuxt example",
+    "lint": "eslint --ext .ts,.js,.vue .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon -e vue,ts,scss -x 'yalc push --private'"
+  },
+  "devDependencies": {
+    "@nuxt/types": "^2.15.4",
+    "@nuxt/typescript-build": "^2.1.0",
+    "@nuxtjs/eslint-config-typescript": "^6.0.0",
+    "@nuxtjs/eslint-module": "^3.0.2",
+    "@nuxtjs/stylelint-module": "^4.0.0",
+    "eslint": "^7.24.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-nuxt": "^2.0.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-vue": "^7.9.0",
+    "nuxt": "^2.15.4",
+    "nuxt-property-decorator": "^2.9.1",
+    "prettier": "^2.2.1",
+    "sass": "^1.32.12",
+    "sass-loader": "^10.1.1",
+    "stylelint": "^13.13.0",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-scss": "^3.19.0"
+  },
+  "peerDependencies": {
+    "nuxt-typo3": "^0.9.2"
+  }
+}
