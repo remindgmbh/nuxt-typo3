@@ -4,7 +4,7 @@ import { NuxtRouteConfig } from '@nuxt/types/config/router'
 import defu from 'defu'
 import { Options } from './options'
 
-const content: Module<Options> = function () {
+const content: Module = function () {
     const options = defu(this.options.rmndTypo3, new Options())
 
     this.addPlugin({
@@ -30,18 +30,11 @@ const content: Module<Options> = function () {
             routes: NuxtRouteConfig[],
             resolve: (...pathSegments: string[]) => string
         ) => {
-            const path = '/*'
-            const pageRoute = routes.find((route) => route.path === path)
-            const component = resolve(__dirname, './pages/_.vue')
-            if (pageRoute) {
-                pageRoute.component = component
-            } else {
-                routes.push({
-                    name: 'page',
-                    path,
-                    component,
-                })
-            }
+            routes.push({
+                name: 'rmnd-page',
+                path: '/*',
+                component: resolve(__dirname, './pages/_.vue'),
+            })
         }
     )
 
