@@ -14,7 +14,7 @@ export default Vue.extend({
         return createElement(
             'div',
             {
-                class: `background background--${context.props.background}`,
+                class: `ce-background ce-background--${context.props.background}`,
             },
             context.children
         )
@@ -24,7 +24,7 @@ export default Vue.extend({
 <style lang="scss">
 @import 'rmnd-nuxt-typo3/src/assets/styles/defaults.scss';
 
-.background {
+.ce-background {
     &--primary {
         background-color: var(--color-primary, #{$color-primary});
     }
