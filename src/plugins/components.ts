@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import { Plugin } from '@nuxt/types'
-import CeBackground from '~rmnd-typo3/components/content/CeBackground.vue'
-import CeBreadcrumbs from '~rmnd-typo3/components/content/CeBreadcrumbs'
-import CeFrame from '~rmnd-typo3/components/content/CeFrame.vue'
-import CeRenderer from '~rmnd-typo3/components/content/CeRenderer'
-import CeWrapper from '~rmnd-typo3/components/content/CeWrapper.vue'
+import CeBackground from '~rmnd-typo3/components/content/CeBackground/CeBackground'
+import CeBreadcrumbs from '~rmnd-typo3/components/content/CeBreadcrumbs/CeBreadcrumbs'
+import CeFrame from '~rmnd-typo3/components/content/CeFrame/CeFrame'
+import CeRenderer from '~rmnd-typo3/components/content/CeRenderer/CeRenderer'
+import CeWrapper from '~rmnd-typo3/components/content/CeWrapper/CeWrapper'
 
 const components = {
     CeBackground,

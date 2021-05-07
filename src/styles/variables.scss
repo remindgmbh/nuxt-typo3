@@ -1,0 +1,23 @@
+$breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+) !default;
+
+$container-max-widths: (
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1140px,
+    xxl: 1320px,
+) !default;
+
+$ce-frame-padding: 0.5rem 1rem !default;
+$ce-wrapper-padding: $ce-frame-padding !default;
+
+$color-primary: #6200ee !default;
+$color-secondary: #03dac6 !default;
+$color-accent: #b00020 !default;

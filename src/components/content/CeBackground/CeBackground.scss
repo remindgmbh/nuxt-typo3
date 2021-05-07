@@ -1,0 +1,15 @@
+@use '../../../styles/variables' as *;
+
+.ce-background {
+    &--primary {
+        background-color: $color-primary;
+    }
+
+    &--secondary {
+        background-color: $color-secondary;
+    }
+
+    &--accent {
+        background-color: $color-accent;
+    }
+}

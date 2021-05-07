@@ -1,0 +1,21 @@
+@use 'variables.scss' as *;
+
+.container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@each $breakpoint, $container-max-width in $container-max-widths {
+    $min-width: map-get($breakpoints, $breakpoint);
+
+    @if $min-width == null {
+        @error '"#{$breakpoint}" defined in $container-max-widths but not in $breakpoints';
+    }
+
+    @media (min-width: $min-width) {
+        .container {
+            max-width: $container-max-width;
+        }
+    }
+}

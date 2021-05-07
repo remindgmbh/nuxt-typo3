@@ -1,5 +1,5 @@
 <template>
-    <div class="be-default" :class="{ 'be-container': container }">
+    <div class="be-default" :class="{ container }">
         <div class="be-default__before-breadcrumbs">
             <ce-renderer :content="content.colPos1" />
         </div>
@@ -17,13 +17,13 @@
             <ce-frame>
                 <div class="footer">
                     <div class="footer__left">
-                        <ce-renderer :content="content.colPos2" />
+                        <ce-renderer :content="content.colPos10" />
                     </div>
                     <div class="footer__center">
-                        <ce-renderer :content="content.colPos3" />
+                        <ce-renderer :content="content.colPos11" />
                     </div>
                     <div class="footer__right">
-                        <ce-renderer :content="content.colPos4" />
+                        <ce-renderer :content="content.colPos12" />
                     </div>
                 </div>
             </ce-frame>
@@ -33,7 +33,7 @@
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import baseBe from 'nuxt-typo3/lib/templates/layouts/backend/mixins/baseBe'
-import { Breadcrumb } from '../../api/breadcrumb'
+import { Breadcrumb } from '../../../api/breadcrumb'
 
 @Component({ name: 'BeDefault' })
 export default class BeDefault extends mixins(baseBe) {
@@ -49,37 +49,3 @@ export default class BeDefault extends mixins(baseBe) {
     }
 }
 </script>
-<style lang="scss">
-@import 'rmnd-nuxt-typo3/src/assets/styles/defaults.scss';
-
-.be-default {
-    display: flex;
-    flex-direction: column;
-
-    &__footer {
-        .footer {
-            display: flex;
-
-            &__left,
-            &__center,
-            &__right {
-                width: calc(100% / 3);
-            }
-
-            .ce-frame {
-                padding: 0;
-            }
-        }
-    }
-
-    &.be-container {
-        width: var(--container-width, #{$container-width});
-        max-width: 100%;
-        margin: 0 auto;
-
-        .ce-frame {
-            width: auto;
-        }
-    }
-}
-</style>

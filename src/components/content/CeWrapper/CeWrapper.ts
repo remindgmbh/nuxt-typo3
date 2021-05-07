@@ -1,4 +1,3 @@
-<script lang="ts">
 import Vue from 'vue'
 
 export default Vue.extend({
@@ -14,11 +13,3 @@ export default Vue.extend({
         )
     },
 })
-</script>
-<style lang="scss">
-@import 'rmnd-nuxt-typo3/src/assets/styles/defaults.scss';
-
-.ce-wrapper {
-    padding: var(--ce-wrapper-padding, #{$ce-wrapper-padding});
-}
-</style>
