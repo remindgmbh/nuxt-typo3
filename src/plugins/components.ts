@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { Plugin } from '@nuxt/types'
-import CeStructuredContent from '~rmnd-typo3/components/content/elements/CeStructuredContent.vue'
+import CeStructuredContent from '~rmnd-typo3/components/content/elements/CeStructuredContent/CeStructuredContent.vue'
 import CeBackground from '~rmnd-typo3/components/content/CeBackground/CeBackground'
 import CeBreadcrumbs from '~rmnd-typo3/components/content/CeBreadcrumbs/CeBreadcrumbs'
 import CeFrame from '~rmnd-typo3/components/content/CeFrame/CeFrame'

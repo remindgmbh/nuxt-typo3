@@ -12,7 +12,7 @@
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import baseCe from 'nuxt-typo3/lib/templates/components/content/mixins/baseCe'
-import { Structure } from '../../../api/structure'
+import { Structure } from '../../../../api/structure'
 
 @Component({ name: 'CeStructuredContent' })
 export default class CeStructuredContent extends mixins(baseCe) {
