@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import { Plugin } from '@nuxt/types'
+import CeHeader from '~rmnd-typo3/components/content/elements/CeHeader/CeHeader'
 import CeStructuredContent from '~rmnd-typo3/components/content/elements/CeStructuredContent/CeStructuredContent.vue'
 import CeBackground from '~rmnd-typo3/components/content/CeBackground/CeBackground'
 import CeBreadcrumbs from '~rmnd-typo3/components/content/CeBreadcrumbs/CeBreadcrumbs'
@@ -8,6 +9,7 @@ import CeRenderer from '~rmnd-typo3/components/content/CeRenderer/CeRenderer'
 import CeWrapper from '~rmnd-typo3/components/content/CeWrapper/CeWrapper'
 
 const components = {
+    CeHeader,
     CeStructuredContent,
     CeBackground,
     CeBreadcrumbs,
