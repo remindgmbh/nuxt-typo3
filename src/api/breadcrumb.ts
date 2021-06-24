@@ -3,6 +3,6 @@ export interface Breadcrumb {
     current: number
     link: string
     spacer: number
-    targetr: string
+    target: string
     title: string
 }
