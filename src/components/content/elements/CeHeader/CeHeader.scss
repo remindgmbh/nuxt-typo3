@@ -1,5 +1,12 @@
 .ce-header {
     &__main {
+        margin: inherit;
+
+        a {
+            text-decoration: inherit;
+            color: inherit;
+        }
+
         &--center {
             text-align: center;
         }
