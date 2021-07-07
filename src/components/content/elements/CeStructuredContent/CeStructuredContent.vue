@@ -9,6 +9,14 @@
                 <ce-dynamic :data="item" :type="item.type" />
             </template>
         </RAccordion>
+        <RTabs v-if="isTabs" :items="items">
+            <template #title="{ item }">{{
+                item.content.gridElementTitle
+            }}</template>
+            <template #content="{ item }">
+                <ce-dynamic :data="item" :type="item.type" />
+            </template>
+        </RTabs>
     </div>
 </template>
 <script lang="ts">
@@ -23,6 +31,10 @@ export default class CeStructuredContent extends mixins(baseCe) {
 
     get isAccordion(): boolean {
         return this.structure.layout === 'accordion'
+    }
+
+    get isTabs(): boolean {
+        return this.structure.layout === 'tabs'
     }
 
     get items(): unknown[] {
