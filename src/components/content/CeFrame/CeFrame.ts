@@ -7,14 +7,24 @@ export default Vue.extend({
         spaceAfter: {
             type: String,
             required: false,
-            default: 'default',
+            default: '',
+        },
+        spaceAfterInside: {
+            type: String,
+            required: false,
+            default: '',
         },
         spaceBefore: {
             type: String,
             required: false,
-            default: 'default',
+            default: '',
         },
-        frameClass: {
+        spaceBeforeInside: {
+            type: String,
+            required: false,
+            default: '',
+        },
+        backgroundColor: {
             type: String,
             required: false,
             default: '',
@@ -22,20 +32,22 @@ export default Vue.extend({
     },
     render(createElement, context) {
         return createElement(
-            'div',
+            'article',
             {
                 class: [
                     'ce-frame',
-                    {
-                        container: context.props.frameClass !== 'none',
-                    },
+                    'container',
                     {
                         [`ce-frame--space-before-${context.props.spaceBefore}`]: context
                             .props.spaceBefore,
-                    },
-                    {
+                        [`ce-frame--space-before-inside-${context.props.spaceBeforeInside}`]:
+                            context.props.spaceBeforeInside &&
+                            context.props.backgroundColor,
                         [`ce-frame--space-after-${context.props.spaceAfter}`]: context
                             .props.spaceAfter,
+                        [`ce-frame--space-after-inside-${context.props.spaceAfterInside}`]:
+                            context.props.spaceAfterInside &&
+                            context.props.backgroundColor,
                     },
                 ],
             },

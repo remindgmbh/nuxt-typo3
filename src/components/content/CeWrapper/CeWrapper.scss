@@ -1,5 +1,8 @@
 @use '../../../styles/variables' as *;
 
 .ce-wrapper {
-    padding: $ce-wrapper-padding;
+    padding-left: $ce-wrapper-padding-x;
+    padding-right: $ce-wrapper-padding-x;
+    padding-top: $ce-wrapper-padding-y;
+    padding-bottom: $ce-wrapper-padding-y;
 }

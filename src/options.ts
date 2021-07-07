@@ -7,5 +7,8 @@ export class Options {
         header: {
             subHeaderPosition: 'top' as 'top' | 'bottom',
         },
+        structured: {
+            wrapper: false,
+        },
     }
 }

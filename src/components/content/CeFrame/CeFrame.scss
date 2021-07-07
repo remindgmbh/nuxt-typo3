@@ -17,7 +17,11 @@
         &--space-after-#{$name} {
             margin-bottom: $value;
         }
+        &--space-before-inside-#{$name} {
+            padding-top: $value;
+        }
+        &--space-after-inside-#{$name} {
+            padding-bottom: $value;
+        }
     }
-
-    padding: $ce-frame-padding;
 }
