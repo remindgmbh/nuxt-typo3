@@ -2,7 +2,9 @@
     <div class="ce-structured-content">
         <CeHeader v-bind="$props" />
         <RAccordion v-if="isAccordion" :items="items">
-            <template #title="{ item }">{{ item.content.header }}</template>
+            <template #title="{ item }">{{
+                item.content.gridElementTitle
+            }}</template>
             <template #content="{ item }">
                 <ce-dynamic :data="item" :type="item.type" />
             </template>
