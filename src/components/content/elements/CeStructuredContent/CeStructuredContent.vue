@@ -1,5 +1,5 @@
 <template>
-    <div class="ce-structured-content">
+    <div class="ce-structured-content" :class="`ce-${structure.layout}`">
         <CeHeader v-bind="$props" />
         <RAccordion v-if="isAccordion" :items="items">
             <template #title="{ item }">{{

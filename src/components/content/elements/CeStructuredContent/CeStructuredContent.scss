@@ -1,10 +1,8 @@
 @use '../../../../styles/variables' as *;
 
 .ce-structured-content {
-    padding: $ce-wrapper-padding-y 0;
-
     & > .ce-header {
-        padding: 0 $ce-wrapper-padding-x $ce-wrapper-padding-y;
+        padding: $ce-wrapper-padding-y $ce-wrapper-padding-x;
     }
 
     .r-tabs {
@@ -14,6 +12,16 @@
 
         &__contents {
             padding: $ce-wrapper-padding-y $ce-wrapper-padding-x;
+        }
+    }
+
+    .r-accordion {
+        &__link {
+            padding: $ce-wrapper-padding-y $ce-wrapper-padding-x;
+        }
+
+        &__content {
+            padding: 0 $ce-wrapper-padding-x $ce-wrapper-padding-y;
         }
     }
 }
