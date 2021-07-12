@@ -42,8 +42,8 @@ export default Vue.extend({
                     props: element.appearance,
                 },
                 [
-                    element.type === 'structured_content' &&
-                    !options.content.structured.wrapper
+                    options.content[element.type]?.wrapper !== undefined &&
+                    !options.content[element.type].wrapper
                         ? renderDynamic(element, index)
                         : renderWrapper(element, index),
                 ]
