@@ -49,13 +49,7 @@ export default class CeHeader extends mixins(baseCe) implements baseCe {
         return createElement(
             this.tag,
             {
-                class: [
-                    'ce-header__main',
-                    {
-                        [`ce-header__main--${this.headerPosition}`]: this
-                            .headerPosition,
-                    },
-                ],
+                class: 'ce-header__main',
             },
             this.headerLink ? [this.renderLink(createElement)] : this.header
         )
@@ -69,7 +63,15 @@ export default class CeHeader extends mixins(baseCe) implements baseCe {
         if (this.visible) {
             return createElement(
                 'header',
-                { class: 'ce-header' },
+                {
+                    class: [
+                        'ce-header',
+                        {
+                            [`text-${this.headerPosition}`]: this
+                                .headerPosition,
+                        },
+                    ],
+                },
                 this.subHeaderTop
                     ? [
                           this.renderSubHeader(createElement),

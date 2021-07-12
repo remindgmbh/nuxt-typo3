@@ -1,5 +1,6 @@
 @forward 'variables';
 @forward 'container';
+@forward 'text';
 
 // the following styles have to be imported here instead of
 // in the respective component files to allow variable overrides
