@@ -7,6 +7,8 @@ import CeBreadcrumbs from '~rmnd-typo3/components/content/CeBreadcrumbs/CeBreadc
 import CeFrame from '~rmnd-typo3/components/content/CeFrame/CeFrame'
 import CeRenderer from '~rmnd-typo3/components/content/CeRenderer/CeRenderer'
 import CeWrapper from '~rmnd-typo3/components/content/CeWrapper/CeWrapper'
+import CeTextpic from '~rmnd-typo3/components/content/elements/CeTextpic/CeTextpic'
+import MediaImage from '~rmnd-typo3/components/content/elements/MediaImage'
 
 const components = {
     CeHeader,
@@ -16,6 +18,8 @@ const components = {
     CeWrapper,
     CeRenderer,
     CeFrame,
+    CeTextpic,
+    MediaImage,
 }
 
 const plugin: Plugin = ({ app }) => {

@@ -10,5 +10,8 @@ export class Options {
         structured_content: {
             wrapper: false,
         },
+        textpic: {
+            wrapper: false,
+        },
     }
 }
