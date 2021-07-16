@@ -40,14 +40,22 @@
     </div>
 </template>
 <script lang="ts">
-import { Component, Prop, mixins } from 'nuxt-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
 import baseBe from 'nuxt-typo3/lib/templates/layouts/backend/mixins/baseBe'
+import { mapState } from 'vuex'
 import { Breadcrumb } from '../../../api/breadcrumb'
 import { Options } from '../../../options'
 
-@Component({ name: 'BeDefault' })
+@Component({
+    name: 'BeDefault',
+    computed: {
+        ...mapState({
+            breadcrumbs: (state: any) =>
+                state.typo3.page.page ? state.typo3.page.page.breadcrumbs : [], // get breadcrumbs for current page,
+        }),
+    },
+})
 export default class BeDefault extends mixins(baseBe) {
-    @Prop({ type: Array, required: false, default: () => [] })
     breadcrumbs!: Breadcrumb[]
 
     get container(): boolean {

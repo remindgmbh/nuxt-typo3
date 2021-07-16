@@ -2,11 +2,9 @@ import Vue from 'vue'
 import { Plugin } from '@nuxt/types'
 import { registerBackendLayouts } from 'nuxt-typo3/lib/templates/plugins/layouts'
 import BeDefault from '~rmnd-typo3/layouts/backend/BeDefault/BeDefault.vue'
-import BeDynamic from '~rmnd-typo3/layouts/backend/BeDynamic/BeDynamic'
 
 const layouts = {
     BeDefault,
-    BeDynamic,
 }
 
 const plugin: Plugin = (context) => {
