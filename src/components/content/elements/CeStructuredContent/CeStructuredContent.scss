@@ -1,27 +1,25 @@
-@use '../../../../styles/variables' as *;
-
 .ce-structured-content {
     & > .ce-header {
-        padding: $ce-wrapper-padding-y $ce-wrapper-padding-x;
+        padding: var(--ce-wrapper-padding-y) var(--ce-wrapper-padding-x);
     }
 
     .r-tabs {
         &__link {
-            padding: $ce-wrapper-padding-y $ce-wrapper-padding-x;
+            padding: var(--ce-wrapper-padding-y) var(--ce-wrapper-padding-x);
         }
 
         &__contents {
-            padding: $ce-wrapper-padding-y $ce-wrapper-padding-x;
+            padding: var(--ce-wrapper-padding-y) var(--ce-wrapper-padding-x);
         }
     }
 
     .r-accordion {
         &__link {
-            padding: $ce-wrapper-padding-y $ce-wrapper-padding-x;
+            padding: var(--ce-wrapper-padding-y) var(--ce-wrapper-padding-x);
         }
 
         &__content {
-            padding: 0 $ce-wrapper-padding-x $ce-wrapper-padding-y;
+            padding: 0 var(--ce-wrapper-padding-x) var(--ce-wrapper-padding-y);
         }
     }
 }

@@ -1,5 +1,3 @@
-@use '../../../../styles/variables' as *;
-
 .ce-textpic {
     display: flex;
 
@@ -30,6 +28,6 @@
     }
 
     &__text {
-        padding: $ce-wrapper-padding-y $ce-wrapper-padding-x;
+        padding: var(--ce-wrapper-padding-y) var(--ce-wrapper-padding-x);
     }
 }

@@ -23,3 +23,11 @@ $color-secondary: #03dac6 !default;
 $color-accent: #b00020 !default;
 $color-white: #fff !default;
 $color-black: #000 !default;
+
+$container-width: 100% !default;
+
+:root {
+    --ce-wrapper-padding-x: #{$ce-wrapper-padding-x};
+    --ce-wrapper-padding-y: #{$ce-wrapper-padding-y};
+    --container-width: #{$container-width};
+}
