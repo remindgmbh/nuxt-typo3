@@ -29,6 +29,11 @@ export default Vue.extend({
             required: false,
             default: '',
         },
+        container: {
+            type: Boolean,
+            required: false,
+            default: true,
+        },
     },
     render(createElement, context) {
         return createElement(
@@ -36,8 +41,8 @@ export default Vue.extend({
             {
                 class: [
                     'ce-frame',
-                    'container',
                     {
+                        container: context.props.container,
                         [`ce-frame--space-before-${context.props.spaceBefore}`]: context
                             .props.spaceBefore,
                         [`ce-frame--space-before-inside-${context.props.spaceBeforeInside}`]:

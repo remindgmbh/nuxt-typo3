@@ -35,11 +35,19 @@ export default Vue.extend({
             )
         }
 
-        function renderFrame(element: any, index: number, options: Options) {
+        function renderFrame(
+            element: any,
+            index: number,
+            options: Options,
+            container = true
+        ) {
             return createElement(
                 'ce-frame',
                 {
-                    props: element.appearance,
+                    props: {
+                        ...element.appearance,
+                        container,
+                    },
                 },
                 [
                     options.content[element.type]?.wrapper !== undefined &&
@@ -60,7 +68,14 @@ export default Vue.extend({
                 {
                     props: element.appearance,
                 },
-                [renderFrame(element, index, options)]
+                [
+                    renderFrame(
+                        element,
+                        index,
+                        options,
+                        !!element.appearance.backgroundWide
+                    ),
+                ]
             )
         }
 
