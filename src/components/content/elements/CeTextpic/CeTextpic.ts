@@ -28,7 +28,12 @@ export default class CeTextpic extends mixins(baseCe) {
         const renderImage = () => {
             return createElement(
                 'div',
-                { class: 'ce-textpic__image' },
+                {
+                    class: [
+                        'ce-textpic__image',
+                        { 'ce-textpic__image--small': this.ratio === 2 },
+                    ],
+                },
                 this.file
                     ? [
                           createElement('media-image', {
@@ -40,22 +45,27 @@ export default class CeTextpic extends mixins(baseCe) {
         }
 
         const renderText = () => {
-            return createElement('div', { class: 'ce-textpic__text' }, [
-                createElement('ce-header', { props: this.$props }),
-                createElement('html-parser', {
-                    attrs: { content: this.bodytext },
-                }),
-            ])
+            return createElement(
+                'div',
+                {
+                    class: [
+                        'ce-textpic__text',
+                        { 'ce-textpic__text--large': this.ratio === 2 },
+                    ],
+                },
+                [
+                    createElement('ce-header', { props: this.$props }),
+                    createElement('html-parser', {
+                        attrs: { content: this.bodytext },
+                    }),
+                ]
+            )
         }
 
         return createElement(
             'div',
             {
-                class: [
-                    'ce-textpic',
-                    { 'ce-textpic--1-1': this.ratio === 1 },
-                    { 'ce-textpic--2-1': this.ratio === 2 },
-                ],
+                class: 'ce-textpic',
             },
             this.position === 'left'
                 ? [renderImage.call(this), renderText.call(this)]
