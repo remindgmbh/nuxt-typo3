@@ -33,7 +33,7 @@
    export default {
        ...
        css: [
-           'rmnd-nuxt-typo3/src/styles/main.scss'
+           'rmnd-nuxt-typo3/src/styles/index.scss'
        ]
        ...
    }
@@ -69,7 +69,7 @@ export default {
 
 ### SCSS Variables
 
-Instead of including `rmnd-nuxt-typo3/src/styles/main.scss` in `nuxt.config.js` create a new scss file, override variables and include the new file in `nuxt.config.js`:
+Instead of including `rmnd-nuxt-typo3/src/styles/index.scss` in `nuxt.config.js` create a new scss file, override variables and include the new file in `nuxt.config.js`:
 
 ```scss
 // ./assets/styles/custom.scss
@@ -79,7 +79,7 @@ Instead of including `rmnd-nuxt-typo3/src/styles/main.scss` in `nuxt.config.js` 
     $color-accent: blue,
 );
     
-@forward 'rmnd-nuxt-typo3/src/styles/main';
+@forward 'rmnd-nuxt-typo3/src/styles/index';
 ```
 
 ```
