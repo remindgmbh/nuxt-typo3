@@ -1,6 +1,13 @@
+@use '../../../styles/variables';
+
 .ce-wrapper {
     padding-left: var(--ce-wrapper-padding-x);
     padding-right: var(--ce-wrapper-padding-x);
     padding-top: var(--ce-wrapper-padding-y);
     padding-bottom: var(--ce-wrapper-padding-y);
+}
+
+:root {
+    --ce-wrapper-padding-x: #{variables.$ce-wrapper-padding-x};
+    --ce-wrapper-padding-y: #{variables.$ce-wrapper-padding-y};
 }

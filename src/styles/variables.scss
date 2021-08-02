@@ -25,9 +25,3 @@ $color-white: #fff !default;
 $color-black: #000 !default;
 
 $container-width: 100% !default;
-
-:root {
-    --ce-wrapper-padding-x: #{$ce-wrapper-padding-x};
-    --ce-wrapper-padding-y: #{$ce-wrapper-padding-y};
-    --container-width: #{$container-width};
-}
