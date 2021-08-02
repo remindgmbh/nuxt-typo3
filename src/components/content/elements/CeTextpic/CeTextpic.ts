@@ -37,7 +37,7 @@ export default class CeTextpic extends mixins(baseCe) {
                 this.file
                     ? [
                           createElement('media-image', {
-                              attrs: { file: this.file },
+                              props: { file: this.file },
                           }),
                       ]
                     : []
@@ -56,7 +56,7 @@ export default class CeTextpic extends mixins(baseCe) {
                 [
                     createElement('ce-header', { props: this.$props }),
                     createElement('html-parser', {
-                        attrs: { content: this.bodytext },
+                        props: { content: this.bodytext },
                     }),
                 ]
             )
