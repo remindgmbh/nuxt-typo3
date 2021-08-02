@@ -1,4 +1,5 @@
-@use 'variables.scss' as *;
+@use 'sass:map';
+@use 'breakpoints';
 
 .container {
     width: var(--container-width);
@@ -6,16 +7,8 @@
     margin-left: auto;
 }
 
-@each $breakpoint, $container-max-width in $container-max-widths {
-    $min-width: map-get($breakpoints, $breakpoint);
-
-    @if $min-width == null {
-        @error '"#{$breakpoint}" defined in $container-max-widths but not in $breakpoints';
-    }
-
-    @media (min-width: $min-width) {
-        .container {
-            max-width: $container-max-width;
-        }
+@include breakpoints.loop using ($args) {
+    .container {
+        max-width: map.get($args, "container-max-width");
     }
 }

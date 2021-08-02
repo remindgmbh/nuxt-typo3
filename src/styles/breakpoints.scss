@@ -12,3 +12,17 @@
         @content;
     }
 }
+
+@mixin loop {
+    @each $breakpoint, $container-max-width in variables.$container-max-widths {
+        $min-width: map.get(variables.$breakpoints, $breakpoint);
+
+        @if $min-width == null {
+            @error '"#{$breakpoint}" defined in $container-max-widths but not in $breakpoints';
+        }
+
+        @media (min-width: $min-width) {
+            @content (("container-max-width": $container-max-width, "breakpoint": $breakpoint));
+        }
+    }
+}
