@@ -1,4 +1,5 @@
-import Vue from 'vue'
+import Vue, { PropType } from 'vue'
+import { ContentOptions } from '~rmnd-typo3/options'
 
 export default Vue.extend({
     name: 'CeBackground',
@@ -8,20 +9,29 @@ export default Vue.extend({
             type: String,
             required: true,
         },
-        backgroundWide: {
+        backgroundFullWidth: {
             type: Number,
             required: false,
             default: 0,
         },
+        options: {
+            type: Object as PropType<ContentOptions | undefined>,
+            required: false,
+            default: undefined,
+        },
     },
     render(createElement, context) {
+        const container =
+            !context.props.options?.fullWidth &&
+            !context.props.backgroundFullWidth
+
         return createElement(
             'div',
             {
                 class: [
                     'ce-background',
                     `ce-background--${context.props.backgroundColor}`,
-                    { container: !context.props.backgroundWide },
+                    { container },
                 ],
             },
             context.children

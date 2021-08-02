@@ -1,5 +1,5 @@
 import Vue, { PropType } from 'vue'
-import { Options } from '../../../options'
+import { ContentOptions, Options } from '../../../options'
 
 export default Vue.extend({
     name: 'CeRenderer',
@@ -38,20 +38,18 @@ export default Vue.extend({
         function renderFrame(
             element: any,
             index: number,
-            options: Options,
-            container = true
+            options: ContentOptions
         ) {
             return createElement(
                 'ce-frame',
                 {
                     props: {
                         ...element.appearance,
-                        container,
+                        options,
                     },
                 },
                 [
-                    options.content[element.type]?.wrapper !== undefined &&
-                    !options.content[element.type].wrapper
+                    options?.noWrapper
                         ? renderDynamic(element, index)
                         : renderWrapper(element, index),
                 ]
@@ -61,28 +59,29 @@ export default Vue.extend({
         function renderBackground(
             element: any,
             index: number,
-            options: Options
+            options: ContentOptions
         ) {
             return createElement(
                 'ce-background',
                 {
-                    props: element.appearance,
-                },
-                [
-                    renderFrame(
-                        element,
-                        index,
+                    props: {
+                        ...element.appearance,
                         options,
-                        !!element.appearance.backgroundWide
-                    ),
-                ]
+                    },
+                },
+                [renderFrame(element, index, options)]
             )
         }
 
-        return context.props.content.map((element: any, index) =>
-            element.appearance.backgroundColor
-                ? renderBackground(element, index, context.props.options)
-                : renderFrame(element, index, context.props.options)
-        )
+        return context.props.content.map((element: any, index) => {
+            const type =
+                element.type === 'structured_content'
+                    ? element.content.structure.layout
+                    : element.type
+            const options: ContentOptions = context.props.options.content[type]
+            return element.appearance.backgroundColor
+                ? renderBackground(element, index, options)
+                : renderFrame(element, index, options)
+        })
     },
 })

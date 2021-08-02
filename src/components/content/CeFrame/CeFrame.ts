@@ -1,4 +1,5 @@
-import Vue from 'vue'
+import Vue, { PropType } from 'vue'
+import { ContentOptions } from '~rmnd-typo3/options'
 
 export default Vue.extend({
     name: 'CeFrame',
@@ -29,20 +30,30 @@ export default Vue.extend({
             required: false,
             default: '',
         },
-        container: {
-            type: Boolean,
+        backgroundFullWidth: {
+            type: Number,
             required: false,
-            default: true,
+            default: 0,
+        },
+        options: {
+            type: Object as PropType<ContentOptions | undefined>,
+            required: false,
+            default: undefined,
         },
     },
     render(createElement, context) {
+        const container = context.props.options?.fullWidth
+            ? false
+            : !context.props.backgroundColor ||
+              context.props.backgroundFullWidth
+
         return createElement(
             'article',
             {
                 class: [
                     'ce-frame',
                     {
-                        container: context.props.container,
+                        container,
                         [`ce-frame--space-before-${context.props.spaceBefore}`]: context
                             .props.spaceBefore,
                         [`ce-frame--space-before-inside-${context.props.spaceBeforeInside}`]:
