@@ -2,6 +2,8 @@ import Vue from 'vue'
 import { Plugin } from '@nuxt/types'
 import CeHeader from '~rmnd-typo3/components/content/elements/CeHeader/CeHeader'
 import CeStructuredContent from '~rmnd-typo3/components/content/elements/CeStructuredContent/CeStructuredContent.vue'
+import CeTabs from '~rmnd-typo3/components/content/elements/CeTabs/CeTabs.vue'
+import CeAccordion from '~rmnd-typo3/components/content/elements/CeAccordion/CeAccordion.vue'
 import CeBackground from '~rmnd-typo3/components/content/CeBackground/CeBackground'
 import CeBreadcrumbs from '~rmnd-typo3/components/content/CeBreadcrumbs/CeBreadcrumbs'
 import CeFrame from '~rmnd-typo3/components/content/CeFrame/CeFrame'
@@ -15,6 +17,8 @@ import NavigationSidebars from '~rmnd-typo3/components/layout/NavigationSidebars
 const components = {
     CeHeader,
     CeStructuredContent,
+    CeTabs,
+    CeAccordion,
     CeBackground,
     CeBreadcrumbs,
     CeWrapper,

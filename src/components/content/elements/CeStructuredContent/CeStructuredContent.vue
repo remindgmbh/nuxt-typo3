@@ -1,23 +1,5 @@
 <template>
-    <div class="ce-structured-content" :class="`ce-${structure.layout}`">
-        <CeHeader v-bind="$props" />
-        <RAccordion v-if="isAccordion" :items="items">
-            <template #title="{ item }">{{
-                item.content.gridElementTitle
-            }}</template>
-            <template #content="{ item }">
-                <ce-dynamic :data="item" :type="item.type" />
-            </template>
-        </RAccordion>
-        <RTabs v-if="isTabs" :items="items">
-            <template #title="{ item }">{{
-                item.content.gridElementTitle
-            }}</template>
-            <template #content="{ item }">
-                <ce-dynamic :data="item" :type="item.type" />
-            </template>
-        </RTabs>
-    </div>
+    <ce-dynamic :data="contentData" :type="structure.layout"></ce-dynamic>
 </template>
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
@@ -29,12 +11,28 @@ export default class CeStructuredContent extends mixins(baseCe) {
     @Prop({ type: Object, required: true })
     structure!: Structure
 
-    get isAccordion(): boolean {
-        return this.structure.layout === 'accordion'
-    }
+    // Props from baseCe, required for TypeScript
+    id!: number
+    header!: string
+    headerLayout!: number
+    headerPosition!: string
+    date!: number
+    headerLink!: string | any
+    subheader!: string
 
-    get isTabs(): boolean {
-        return this.structure.layout === 'tabs'
+    get contentData(): unknown {
+        return {
+            id: this.id,
+            type: this.structure.layout,
+            content: {
+                items: this.items,
+                header: this.header,
+                headerLayout: this.headerLayout,
+                headerPosition: this.headerPosition,
+                headerLink: this.headerLink,
+                subheader: this.subheader,
+            },
+        }
     }
 
     get items(): unknown[] {
