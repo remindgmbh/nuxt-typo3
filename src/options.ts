@@ -19,6 +19,10 @@ export class Options {
         header: {
             subHeaderPosition: 'top' as 'top' | 'bottom',
         },
+        header_slider: {
+            noWrapper: true,
+            fullWidth: true,
+        },
         tabs: {
             noWrapper: true,
         },
