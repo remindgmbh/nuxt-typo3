@@ -5,6 +5,7 @@
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import baseCe from 'nuxt-typo3/lib/templates/components/content/mixins/baseCe'
 import { Structure } from '../../../../api/structure'
+import { Typolink } from '../../../../api/typolink'
 
 @Component({ name: 'CeStructuredContent' })
 export default class CeStructuredContent extends mixins(baseCe) {
@@ -17,7 +18,7 @@ export default class CeStructuredContent extends mixins(baseCe) {
     headerLayout!: number
     headerPosition!: string
     date!: number
-    headerLink!: string | any
+    headerLink!: string | Typolink
     subheader!: string
 
     get contentData(): unknown {

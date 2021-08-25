@@ -1,6 +1,7 @@
 import { Component, mixins } from 'nuxt-property-decorator'
 import baseCe from 'nuxt-typo3/lib/templates/components/content/mixins/baseCe'
 import { CreateElement, VNode } from 'vue'
+import { Typolink } from '../../../../api/typolink'
 
 @Component({
     name: 'CeHeader',
@@ -8,7 +9,7 @@ import { CreateElement, VNode } from 'vue'
 export default class CeHeader extends mixins(baseCe) implements baseCe {
     headerLayout!: number
     headerPosition!: string
-    headerLink!: any
+    headerLink!: Typolink | string
     header!: string
     subheader!: string
 
@@ -29,29 +30,21 @@ export default class CeHeader extends mixins(baseCe) implements baseCe {
             : 'div'
     }
 
-    private renderLink(createElement: CreateElement): VNode {
-        const tag = this.headerLink.type === 'page' ? 'nuxt-link' : 'a'
-        const linkAttrName = this.headerLink.type === 'page' ? 'to' : 'href'
-
-        return createElement(
-            tag,
-            {
-                attrs: {
-                    [linkAttrName]: this.headerLink.url,
-                    target: this.headerLink.target,
-                },
-            },
-            this.header
-        )
-    }
-
     private renderHeader(createElement: CreateElement): VNode {
         return createElement(
             this.tag,
             {
                 class: 'ce-header__main',
             },
-            this.headerLink ? [this.renderLink(createElement)] : this.header
+            this.headerLink
+                ? [
+                      createElement(
+                          'typolink',
+                          { props: { to: this.headerLink } },
+                          [this.header]
+                      ),
+                  ]
+                : this.header
         )
     }
 

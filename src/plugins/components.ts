@@ -13,6 +13,7 @@ import CeTextpic from '~rmnd-typo3/components/content/elements/CeTextpic/CeTextp
 import MediaImage from '~rmnd-typo3/components/content/elements/MediaImage'
 import NavigationSidebar from '~rmnd-typo3/components/layout/NavigationSidebar.vue'
 import NavigationSidebars from '~rmnd-typo3/components/layout/NavigationSidebars.vue'
+import Typolink from '~rmnd-typo3/components/utilities/Typolink'
 
 const components = {
     CeHeader,
@@ -28,6 +29,7 @@ const components = {
     MediaImage,
     NavigationSidebar,
     NavigationSidebars,
+    Typolink,
 }
 
 const plugin: Plugin = ({ app }) => {
