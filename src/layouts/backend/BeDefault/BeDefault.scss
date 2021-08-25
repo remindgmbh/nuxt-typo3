@@ -6,20 +6,4 @@
     &__main {
         flex-grow: 1;
     }
-
-    &__footer {
-        .footer {
-            display: flex;
-
-            &__left,
-            &__center,
-            &__right {
-                width: calc(100% / 3);
-            }
-
-            .ce-frame {
-                padding: 0;
-            }
-        }
-    }
 }

@@ -14,28 +14,7 @@
             <ce-renderer :content="content.colPos0" :options="options" />
         </div>
         <div class="be-default__footer">
-            <ce-frame>
-                <div class="footer">
-                    <div class="footer__left">
-                        <ce-renderer
-                            :content="content.colPos10"
-                            :options="options"
-                        />
-                    </div>
-                    <div class="footer__center">
-                        <ce-renderer
-                            :content="content.colPos11"
-                            :options="options"
-                        />
-                    </div>
-                    <div class="footer__right">
-                        <ce-renderer
-                            :content="content.colPos12"
-                            :options="options"
-                        />
-                    </div>
-                </div>
-            </ce-frame>
+            <ce-renderer :content="content.colPos2" :options="options" />
         </div>
     </div>
 </template>
