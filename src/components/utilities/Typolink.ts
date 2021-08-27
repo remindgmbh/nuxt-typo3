@@ -11,28 +11,47 @@ export default Vue.extend({
         },
     },
     render(createElement, context) {
-        const tag =
+        let data: any
+        let tag: string
+        let url: string
+        let target: string
+
+        if (typeof context.props.to === 'string') {
+            url = context.props.to
+            target = '_blank'
+        } else {
+            url = context.props.to.url
+            target = context.props.to.target
+        }
+
+        if (
             typeof context.props.to === 'string' ||
             context.props.to.type !== 'page'
-                ? 'a'
-                : 'nuxt-link'
-
-        const linkAttrName = tag === 'a' ? 'href' : 'to'
+        ) {
+            tag = 'a'
+            data = {
+                attrs: {
+                    target,
+                    href: url,
+                },
+            }
+        } else {
+            tag = 'nuxt-link'
+            data = {
+                props: {
+                    to: url,
+                },
+                attrs: {
+                    target,
+                },
+            }
+        }
 
         return createElement(
             tag,
             {
-                attrs: {
-                    [linkAttrName]:
-                        typeof context.props.to === 'string'
-                            ? context.props.to
-                            : context.props.to.url,
-                    target:
-                        typeof context.props.to === 'string'
-                            ? '_blank'
-                            : context.props.to.target,
-                },
                 ...context.data,
+                ...data,
             },
             context.children
         )
