@@ -30,29 +30,33 @@ export default class CeHeader extends mixins(baseCe) implements baseCe {
             : 'div'
     }
 
-    private renderHeader(createElement: CreateElement): VNode {
-        return createElement(
-            this.tag,
-            {
-                class: 'ce-header__main',
-            },
-            this.headerLink
-                ? [
-                      createElement(
-                          'typolink',
-                          { props: { to: this.headerLink } },
-                          [this.header]
-                      ),
-                  ]
-                : this.header
-        )
-    }
-
-    private renderSubHeader(createElement: CreateElement): VNode {
-        return createElement('div', { class: 'ce-header__sub' }, this.subheader)
-    }
-
     render(createElement: CreateElement): VNode {
+        const renderHeader = () => {
+            return createElement(
+                this.tag,
+                {
+                    class: 'ce-header__main',
+                },
+                this.headerLink
+                    ? [
+                          createElement(
+                              'typolink',
+                              { props: { to: this.headerLink } },
+                              [this.header]
+                          ),
+                      ]
+                    : this.header
+            )
+        }
+
+        const renderSubheader = () => {
+            return createElement(
+                'div',
+                { class: 'ce-header__sub' },
+                this.subheader
+            )
+        }
+
         if (this.visible) {
             return createElement(
                 'header',
@@ -66,14 +70,8 @@ export default class CeHeader extends mixins(baseCe) implements baseCe {
                     ],
                 },
                 this.subHeaderTop
-                    ? [
-                          this.renderSubHeader(createElement),
-                          this.renderHeader(createElement),
-                      ]
-                    : [
-                          this.renderHeader(createElement),
-                          this.renderSubHeader(createElement),
-                      ]
+                    ? [renderSubheader.call(this), renderHeader.call(this)]
+                    : [renderHeader.call(this), renderSubheader.call(this)]
             )
         } else {
             return createElement()
