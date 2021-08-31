@@ -1,7 +1,8 @@
+<script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import baseCe from 'nuxt-typo3/lib/templates/components/content/mixins/baseCe'
 import { CreateElement, VNode } from 'vue'
-import { Typolink } from '../../../../api/typolink'
+import { Typolink } from '../../../api/typolink'
 
 @Component({
     name: 'CeHeader',
@@ -40,7 +41,7 @@ export default class CeHeader extends mixins(baseCe) implements baseCe {
                 this.headerLink
                     ? [
                           createElement(
-                              'typolink',
+                              'r-typolink',
                               { props: { to: this.headerLink } },
                               [this.header]
                           ),
@@ -78,3 +79,17 @@ export default class CeHeader extends mixins(baseCe) implements baseCe {
         }
     }
 }
+</script>
+
+<style lang="scss">
+.ce-header {
+    &__main {
+        margin: inherit;
+
+        a {
+            text-decoration: inherit;
+            color: inherit;
+        }
+    }
+}
+</style>

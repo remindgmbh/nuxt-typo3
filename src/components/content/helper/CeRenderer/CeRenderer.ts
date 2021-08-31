@@ -1,5 +1,5 @@
 import Vue, { PropType } from 'vue'
-import { ContentOptions, Options } from '../../../options'
+import { ContentOptions, Options } from '../../../../options'
 
 export default Vue.extend({
     name: 'CeRenderer',

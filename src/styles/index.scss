@@ -9,11 +9,6 @@
 @forward '../layouts/backend/BeDefault/BeDefault';
 
 // components
-@forward '../components/content/CeBackground/CeBackground';
-@forward '../components/content/CeFrame/CeFrame';
-@forward '../components/content/CeWrapper/CeWrapper';
-@forward '../components/content/elements/CeHeader/CeHeader';
-@forward '../components/content/elements/CeStructuredContent/CeStructuredContent';
-@forward '../components/content/elements/CeTabs/CeTabs';
-@forward '../components/content/elements/CeAccordion/CeAccordion';
-@forward '../components/content/elements/CeTextpic/CeTextpic';
+@forward '../components/content/helper/CeBackground/CeBackground';
+@forward '../components/content/helper/CeFrame/CeFrame';
+@forward '../components/content/helper/CeWrapper/CeWrapper';

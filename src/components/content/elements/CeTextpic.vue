@@ -1,8 +1,9 @@
+<script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import { CreateElement, VNode } from 'vue'
 
 import baseCe from 'nuxt-typo3/lib/templates/components/content/mixins/baseCe'
-import { Image } from '../../../../api/image'
+import { Image } from '../../../api/image'
 
 @Component({
     name: 'CeTextpic',
@@ -40,7 +41,7 @@ export default class CeTextpic extends mixins(baseCe) {
                 },
                 this.file
                     ? [
-                          createElement('media-image', {
+                          createElement('r-image', {
                               props: { file: this.file },
                           }),
                       ]
@@ -77,3 +78,35 @@ export default class CeTextpic extends mixins(baseCe) {
         )
     }
 }
+</script>
+<style lang="scss">
+.ce-textpic {
+    display: flex;
+    flex-wrap: wrap;
+
+    &__image {
+        width: 50%;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        &--small {
+            width: calc(1 / 3 * 100%);
+        }
+    }
+
+    &__text {
+        width: 50%;
+        padding: var(--ce-wrapper-padding-y) var(--ce-wrapper-padding-x);
+        box-sizing: border-box;
+
+        &--large {
+            width: calc(2 / 3 * 100%);
+        }
+    }
+}
+</style>

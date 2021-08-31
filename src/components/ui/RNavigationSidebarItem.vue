@@ -1,6 +1,6 @@
 <template>
     <transition :name="transitionName">
-        <div v-if="visible" class="navigation-sidebar">
+        <div v-if="visible" class="r-navigation-sidebar-item">
             <slot :items="items" :back="back"></slot>
         </div>
     </transition>
@@ -11,9 +11,9 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 import { Navigation } from '../../api/navigation'
 
 @Component({
-    name: 'NavigationSidebar',
+    name: 'RNavigationSidebarItem',
 })
-export default class NavigationSidebar extends Vue {
+export default class RNavigationSidebarItem extends Vue {
     @Prop({ type: Boolean, required: true })
     visible!: boolean
 
@@ -41,7 +41,7 @@ export default class NavigationSidebar extends Vue {
 </script>
 
 <style lang="scss">
-.navigation-sidebar {
+.r-navigation-sidebar-item {
     z-index: 1;
     position: fixed;
     box-sizing: border-box;

@@ -21,3 +21,20 @@ export default class CeTabs extends mixins(baseCe) {
     items!: unknown[]
 }
 </script>
+<style lang="scss">
+.ce-tabs {
+    & > .ce-header {
+        padding: var(--ce-wrapper-padding-y) var(--ce-wrapper-padding-x);
+    }
+
+    .r-tabs {
+        &__link {
+            padding: var(--ce-wrapper-padding-y) var(--ce-wrapper-padding-x);
+        }
+
+        &__contents {
+            padding: var(--ce-wrapper-padding-y) var(--ce-wrapper-padding-x);
+        }
+    }
+}
+</style>

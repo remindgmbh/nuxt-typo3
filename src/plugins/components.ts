@@ -1,35 +1,65 @@
 import Vue from 'vue'
 import { Plugin } from '@nuxt/types'
-import CeHeader from '~rmnd-typo3/components/content/elements/CeHeader/CeHeader'
-import CeStructuredContent from '~rmnd-typo3/components/content/elements/CeStructuredContent/CeStructuredContent.vue'
-import CeTabs from '~rmnd-typo3/components/content/elements/CeTabs/CeTabs.vue'
-import CeAccordion from '~rmnd-typo3/components/content/elements/CeAccordion/CeAccordion.vue'
-import CeBackground from '~rmnd-typo3/components/content/CeBackground/CeBackground'
-import CeBreadcrumbs from '~rmnd-typo3/components/content/CeBreadcrumbs/CeBreadcrumbs'
-import CeFrame from '~rmnd-typo3/components/content/CeFrame/CeFrame'
-import CeRenderer from '~rmnd-typo3/components/content/CeRenderer/CeRenderer'
-import CeWrapper from '~rmnd-typo3/components/content/CeWrapper/CeWrapper'
-import CeTextpic from '~rmnd-typo3/components/content/elements/CeTextpic/CeTextpic'
-import MediaImage from '~rmnd-typo3/components/content/elements/MediaImage'
-import NavigationSidebar from '~rmnd-typo3/components/layout/NavigationSidebar.vue'
-import NavigationSidebars from '~rmnd-typo3/components/layout/NavigationSidebars.vue'
-import Typolink from '~rmnd-typo3/components/utilities/Typolink'
+// Content Helper
+import CeBackground from '~rmnd-typo3/components/content/helper/CeBackground/CeBackground'
+import CeBreadcrumbs from '~rmnd-typo3/components/content/helper/CeBreadcrumbs/CeBreadcrumbs'
+import CeFrame from '~rmnd-typo3/components/content/helper/CeFrame/CeFrame'
+import CeRenderer from '~rmnd-typo3/components/content/helper/CeRenderer/CeRenderer'
+import CeWrapper from '~rmnd-typo3/components/content/helper/CeWrapper/CeWrapper'
+
+// Content Elements
+import CeAccordion from '~rmnd-typo3/components/content/elements/CeAccordion.vue'
+import CeHeader from '~rmnd-typo3/components/content/elements/CeHeader.vue'
+import CeStructuredContent from '~rmnd-typo3/components/content/elements/CeStructuredContent.vue'
+import CeTabs from '~rmnd-typo3/components/content/elements/CeTabs.vue'
+import CeTextpic from '~rmnd-typo3/components/content/elements/CeTextpic.vue'
+
+// UI
+import RAccordion from '~rmnd-typo3/components/ui/RAccordion.vue'
+import RMenu from '~rmnd-typo3/components/ui/RMenu.vue'
+import RMenuContent from '~rmnd-typo3/components/ui/RMenuContent'
+import RMenuTrigger from '~rmnd-typo3/components/ui/RMenuTrigger'
+import RNavigationSidebar from '~rmnd-typo3/components/ui/RNavigationSidebar.vue'
+import RNavigationSidebarItem from '~rmnd-typo3/components/ui/RNavigationSidebarItem.vue'
+import RResponsiveHeightContainer from '~rmnd-typo3/components/ui/RResponsiveHeightContainer.vue'
+import RTabs from '~rmnd-typo3/components/ui/RTabs.vue'
+import RTopbarLayout from '~rmnd-typo3/components/ui/RTopbarLayout.vue'
+
+// Transitions
+import CollapseTransition from '~rmnd-typo3/components/transitions/CollapseTransition'
+
+// Util
+import RImage from '~rmnd-typo3/components/util/RImage'
+import RTypolink from '~rmnd-typo3/components/util/RTypolink'
 
 const components = {
+    // Content Helper
+    CeBackground,
+    CeBreadcrumbs,
+    CeFrame,
+    CeRenderer,
+    CeWrapper,
+    // Content Elements
+    CeAccordion,
     CeHeader,
     CeStructuredContent,
     CeTabs,
-    CeAccordion,
-    CeBackground,
-    CeBreadcrumbs,
-    CeWrapper,
-    CeRenderer,
-    CeFrame,
     CeTextpic,
-    MediaImage,
-    NavigationSidebar,
-    NavigationSidebars,
-    Typolink,
+    // UI
+    RAccordion,
+    RMenu,
+    RMenuContent,
+    RMenuTrigger,
+    RNavigationSidebar,
+    RNavigationSidebarItem,
+    RResponsiveHeightContainer,
+    RTabs,
+    RTopbarLayout,
+    // Util
+    RImage,
+    RTypolink,
+    // Transitions
+    CollapseTransition,
 }
 
 const plugin: Plugin = ({ app }) => {

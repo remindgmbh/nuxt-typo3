@@ -6,7 +6,7 @@
                 item.content.gridElementTitle
             }}</template>
             <template #content="{ item }">
-                <ce-dynamic :data="item" :type="item.type" />
+                <CeDynamic :data="item" :type="item.type" />
             </template>
         </RAccordion>
     </div>
@@ -21,3 +21,21 @@ export default class CeAccordion extends mixins(baseCe) {
     items!: unknown[]
 }
 </script>
+
+<style lang="scss">
+.ce-accordion {
+    & > .ce-header {
+        padding: var(--ce-wrapper-padding-y) var(--ce-wrapper-padding-x);
+    }
+
+    .r-accordion {
+        &__link {
+            padding: var(--ce-wrapper-padding-y) var(--ce-wrapper-padding-x);
+        }
+
+        &__content {
+            padding: 0 var(--ce-wrapper-padding-x) var(--ce-wrapper-padding-y);
+        }
+    }
+}
+</style>

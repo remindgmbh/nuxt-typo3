@@ -2,7 +2,7 @@ import Vue, { PropType } from 'vue'
 import { Typolink } from '../../api/typolink'
 
 export default Vue.extend({
-    name: 'Typolink',
+    name: 'RTypolink',
     functional: true,
     props: {
         to: {

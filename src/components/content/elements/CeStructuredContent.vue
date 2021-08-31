@@ -1,11 +1,11 @@
 <template>
-    <ce-dynamic :data="contentData" :type="structure.layout"></ce-dynamic>
+    <CeDynamic :data="contentData" :type="structure.layout"></CeDynamic>
 </template>
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import baseCe from 'nuxt-typo3/lib/templates/components/content/mixins/baseCe'
-import { Structure } from '../../../../api/structure'
-import { Typolink } from '../../../../api/typolink'
+import { Structure } from '../../../api/structure'
+import { Typolink } from '../../../api/typolink'
 
 @Component({ name: 'CeStructuredContent' })
 export default class CeStructuredContent extends mixins(baseCe) {
@@ -43,3 +43,31 @@ export default class CeStructuredContent extends mixins(baseCe) {
     }
 }
 </script>
+
+<style lang="scss">
+.ce-structured-content {
+    & > .ce-header {
+        padding: var(--ce-wrapper-padding-y) var(--ce-wrapper-padding-x);
+    }
+
+    .r-tabs {
+        &__link {
+            padding: var(--ce-wrapper-padding-y) var(--ce-wrapper-padding-x);
+        }
+
+        &__contents {
+            padding: var(--ce-wrapper-padding-y) var(--ce-wrapper-padding-x);
+        }
+    }
+
+    .r-accordion {
+        &__link {
+            padding: var(--ce-wrapper-padding-y) var(--ce-wrapper-padding-x);
+        }
+
+        &__content {
+            padding: 0 var(--ce-wrapper-padding-x) var(--ce-wrapper-padding-y);
+        }
+    }
+}
+</style>

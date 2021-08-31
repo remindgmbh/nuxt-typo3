@@ -1,13 +1,13 @@
-import Vue from 'vue'
+import Vue, { PropType } from 'vue'
+import { Image } from '../../api/image'
 
 export default Vue.extend({
-    name: 'MediaImage',
+    name: 'RImage',
     functional: true,
     props: {
         file: {
-            type: Object,
+            type: Object as PropType<Image>,
             required: true,
-            default: () => {},
         },
     },
     render(createElement, context) {
@@ -23,12 +23,14 @@ export default Vue.extend({
             })
         }
 
-        return context.props.file.properties.link
-            ? createElement(
-                  'nuxt-link',
-                  { attrs: { to: context.props.file.properties.link } },
-                  [renderImage()]
-              )
-            : renderImage()
+        return context.props.file
+            ? context.props.file.properties.link
+                ? createElement(
+                      'nav-link',
+                      { attrs: { to: context.props.file.properties.link } },
+                      [renderImage()]
+                  )
+                : renderImage()
+            : createElement()
     },
 })

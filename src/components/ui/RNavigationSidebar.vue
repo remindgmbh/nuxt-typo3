@@ -1,6 +1,6 @@
 <template>
-    <div class="navigation-sidebars">
-        <navigation-sidebar
+    <div class="r-navigation-sidebar">
+        <RNavigationSidebarItem
             v-for="sidebar in sidebars"
             :key="sidebar.navItem.link"
             v-slot="{ items, back }"
@@ -19,7 +19,7 @@
                 :level="sidebar.level"
                 :nav-item="sidebar.navItem"
             ></slot>
-        </navigation-sidebar>
+        </RNavigationSidebarItem>
     </div>
 </template>
 
@@ -28,9 +28,9 @@ import { Vue, Component, Watch, Prop } from 'vue-property-decorator'
 import { Navigation } from '../../api/navigation'
 
 @Component({
-    name: 'NavigationSidebars',
+    name: 'RNavigationSidebar',
 })
-export default class NavigationSidebars extends Vue {
+export default class RNavigationSidebar extends Vue {
     @Prop({ type: Object, required: true, default: () => {} })
     navigation!: Navigation
 
