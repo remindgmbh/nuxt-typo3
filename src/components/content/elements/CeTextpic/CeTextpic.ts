@@ -2,11 +2,15 @@ import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import { CreateElement, VNode } from 'vue'
 
 import baseCe from 'nuxt-typo3/lib/templates/components/content/mixins/baseCe'
+import { Image } from '../../../../api/image'
 
 @Component({
     name: 'CeTextpic',
 })
 export default class CeTextpic extends mixins(baseCe) {
+    @Prop({ type: Array, required: true, default: () => [] })
+    images!: Image[]
+
     @Prop({ type: Object, required: true, default: () => {} })
     gallery!: any
 
@@ -16,8 +20,8 @@ export default class CeTextpic extends mixins(baseCe) {
     @Prop({ type: Number, required: true, default: 1 })
     ratio!: number
 
-    get file(): any {
-        return this.gallery.rows[1]?.columns[1]
+    get file(): Image {
+        return this.images[0]
     }
 
     get position(): 'left' | 'right' {
