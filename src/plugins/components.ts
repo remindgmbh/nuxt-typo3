@@ -20,6 +20,7 @@ import RAccordion from '~rmnd-typo3/components/ui/RAccordion.vue'
 import RMenu from '~rmnd-typo3/components/ui/RMenu.vue'
 import RMenuContent from '~rmnd-typo3/components/ui/RMenuContent'
 import RMenuTrigger from '~rmnd-typo3/components/ui/RMenuTrigger'
+import RModal from '~rmnd-typo3/components/ui/RModal.vue'
 import RNavigationSidebar from '~rmnd-typo3/components/ui/RNavigationSidebar.vue'
 import RNavigationSidebarItem from '~rmnd-typo3/components/ui/RNavigationSidebarItem.vue'
 import RResponsiveHeightContainer from '~rmnd-typo3/components/ui/RResponsiveHeightContainer.vue'
@@ -52,6 +53,7 @@ const components = {
     RMenu,
     RMenuContent,
     RMenuTrigger,
+    RModal,
     RNavigationSidebar,
     RNavigationSidebarItem,
     RResponsiveHeightContainer,
