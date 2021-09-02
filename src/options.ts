@@ -19,6 +19,9 @@ export class Options {
         header: {
             subHeaderPosition: 'top' as 'top' | 'bottom',
         },
+        image: {
+            noWrapper: true,
+        },
         tabs: {
             noWrapper: true,
         },

@@ -10,6 +10,7 @@ import CeWrapper from '~rmnd-typo3/components/content/helper/CeWrapper/CeWrapper
 // Content Elements
 import CeAccordion from '~rmnd-typo3/components/content/elements/CeAccordion.vue'
 import CeHeader from '~rmnd-typo3/components/content/elements/CeHeader.vue'
+import CeImage from '~rmnd-typo3/components/content/elements/CeImage.vue'
 import CeStructuredContent from '~rmnd-typo3/components/content/elements/CeStructuredContent.vue'
 import CeTabs from '~rmnd-typo3/components/content/elements/CeTabs.vue'
 import CeTextpic from '~rmnd-typo3/components/content/elements/CeTextpic.vue'
@@ -42,6 +43,7 @@ const components = {
     // Content Elements
     CeAccordion,
     CeHeader,
+    CeImage,
     CeStructuredContent,
     CeTabs,
     CeTextpic,
