@@ -12,21 +12,17 @@ export default class CeTextpic extends mixins(baseCe) {
     @Prop({ type: Array, required: true, default: () => [] })
     images!: Image[]
 
-    @Prop({ type: Object, required: true, default: () => {} })
-    gallery!: any
-
     @Prop({ type: String, required: true, default: '' })
     bodytext!: string
 
     @Prop({ type: Number, required: true, default: 1 })
     ratio!: number
 
+    @Prop({ type: String, required: true, default: 'left' })
+    imagePosition!: 'left' | 'right'
+
     get file(): Image {
         return this.images[0]
-    }
-
-    get position(): 'left' | 'right' {
-        return this.gallery.position.horizontal
     }
 
     render(createElement: CreateElement): VNode {
@@ -72,7 +68,7 @@ export default class CeTextpic extends mixins(baseCe) {
             {
                 class: 'ce-textpic',
             },
-            this.position === 'left'
+            this.imagePosition === 'left'
                 ? [renderImage.call(this), renderText.call(this)]
                 : [renderText.call(this), renderImage.call(this)]
         )
