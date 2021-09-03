@@ -32,7 +32,7 @@ export default class CeTabs extends mixins(baseCe) {
             padding: var(--ce-wrapper-padding-y) var(--ce-wrapper-padding-x);
         }
 
-        &__contents {
+        &__content {
             padding: var(--ce-wrapper-padding-y) var(--ce-wrapper-padding-x);
         }
     }
