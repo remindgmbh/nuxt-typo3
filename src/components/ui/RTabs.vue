@@ -1,7 +1,7 @@
 <template>
     <section class="r-tabs">
         <div class="r-tabs__links">
-            <div
+            <button
                 v-for="(item, index) in items"
                 :key="index"
                 class="r-tabs__link"
@@ -9,7 +9,7 @@
                 @click="toggle(index)"
             >
                 <slot name="title" :item="item"></slot>
-            </div>
+            </button>
         </div>
         <RResponsiveHeightContainer class="r-tabs__contents">
             <transition name="tab-change" mode="out-in">
