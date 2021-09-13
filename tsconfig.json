@@ -18,7 +18,9 @@
     ],
     "types": [
       "@nuxt/types",
-      "@types/node"
+      "@types/node",
+      "nuxt-typo3",
+      "@nuxtjs/axios",
     ],
     "paths": {
       "~rmnd-typo3/*": [

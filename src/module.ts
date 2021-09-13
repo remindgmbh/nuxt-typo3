@@ -38,6 +38,8 @@ const content: Module = function () {
         }
     )
 
+    this.addModule(['@braid/vue-formulate/nuxt', options])
+
     this.extendBuild((config) => {
         if (config.resolve?.alias) {
             config.resolve.alias['~rmnd-typo3'] = resolve(__dirname)
