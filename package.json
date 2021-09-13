@@ -2,7 +2,7 @@
   "name": "rmnd-nuxt-typo3",
   "version": "0.1.0",
   "private": true,
-  "main": "src/module.ts",
+  "main": "src/index.ts",
   "scripts": {
     "dev": "nuxt example",
     "lint": "eslint --ext .ts,.js,.vue .",

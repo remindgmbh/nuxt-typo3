@@ -1,12 +1,6 @@
 import { Plugin } from '@nuxt/types'
 import { Options } from '../options'
 
-declare module '@nuxt/types' {
-    interface Context {
-        $rmndTypo3: Options
-    }
-}
-
 declare module 'vue/types/vue' {
     interface Vue {
         $rmndTypo3: Options

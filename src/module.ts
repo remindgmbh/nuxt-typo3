@@ -46,5 +46,3 @@ const content: Module = function () {
 }
 
 export default content
-
-module.exports.meta = require('../package.json')
