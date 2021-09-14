@@ -7,7 +7,7 @@ import { Typolink } from '../../../api/typolink'
 @Component({
     name: 'CeHeader',
 })
-export default class CeHeader extends mixins(baseCe) implements baseCe {
+export default class CeHeader extends mixins(baseCe) {
     headerLayout!: number
     headerPosition!: string
     headerLink!: Typolink | string
