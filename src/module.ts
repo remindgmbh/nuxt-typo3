@@ -4,7 +4,7 @@ import { NuxtRouteConfig } from '@nuxt/types/config/router'
 import defu from 'defu'
 import { Options } from './options'
 
-const content: Module = function () {
+const nuxtModule: Module = function () {
     const options = defu(this.options.rmndTypo3, new Options())
 
     this.addPlugin({
@@ -47,4 +47,6 @@ const content: Module = function () {
     })
 }
 
-export default content
+;(nuxtModule as any).meta = require('../package.json')
+
+export default nuxtModule

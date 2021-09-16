@@ -1,30 +1,37 @@
-<script lang="ts">
-import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { CreateElement, VNode } from 'vue'
+import { CreateElement, VNode, PropType } from 'vue'
 
-import baseCe from 'nuxt-typo3/lib/templates/components/content/mixins/baseCe'
-import { Image } from '../../../api/image'
+import BaseCe from '../../mixins/BaseCe'
+import { Image } from '../../../../api/image'
 
-@Component({
+export default BaseCe.extend({
     name: 'CeTextpic',
-})
-export default class CeTextpic extends mixins(baseCe) {
-    @Prop({ type: Array, required: true, default: () => [] })
-    images!: Image[]
-
-    @Prop({ type: String, required: true, default: '' })
-    bodytext!: string
-
-    @Prop({ type: Number, required: true, default: 1 })
-    ratio!: number
-
-    @Prop({ type: String, required: true, default: 'left' })
-    imagePosition!: 'left' | 'right'
-
-    get file(): Image {
-        return this.images[0]
-    }
-
+    props: {
+        images: {
+            type: Array as PropType<Image[]>,
+            required: true,
+            default: () => [],
+        },
+        bodytext: {
+            type: String,
+            required: true,
+            default: '',
+        },
+        ratio: {
+            type: Number,
+            required: true,
+            default: 1,
+        },
+        imagePosition: {
+            type: String as PropType<'left' | 'right'>,
+            required: true,
+            default: 'left',
+        },
+    },
+    computed: {
+        file(): Image {
+            return this.images[0]
+        },
+    },
     render(createElement: CreateElement): VNode {
         const renderImage = () => {
             return createElement(
@@ -72,37 +79,5 @@ export default class CeTextpic extends mixins(baseCe) {
                 ? [renderImage.call(this), renderText.call(this)]
                 : [renderText.call(this), renderImage.call(this)]
         )
-    }
-}
-</script>
-<style lang="scss">
-.ce-textpic {
-    display: flex;
-    flex-wrap: wrap;
-
-    &__image {
-        width: 50%;
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top;
-        }
-
-        &--small {
-            width: calc(1 / 3 * 100%);
-        }
-    }
-
-    &__text {
-        width: 50%;
-        padding: var(--ce-wrapper-padding-y) var(--ce-wrapper-padding-x);
-        box-sizing: border-box;
-
-        &--large {
-            width: calc(2 / 3 * 100%);
-        }
-    }
-}
-</style>
+    },
+})

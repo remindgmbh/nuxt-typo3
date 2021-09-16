@@ -8,7 +8,18 @@
 // layouts
 @forward '../layouts/backend/BeDefault/BeDefault';
 
-// components
+//  components
+
+//      content
+
+//          helper
 @forward '../components/content/helper/CeBackground/CeBackground';
 @forward '../components/content/helper/CeFrame/CeFrame';
 @forward '../components/content/helper/CeWrapper/CeWrapper';
+
+//          elements
+@forward '../components/content/elements/CeAccordion/CeAccordion';
+@forward '../components/content/elements/CeHeader/CeHeader';
+@forward '../components/content/elements/CeImage/CeImage';
+@forward '../components/content/elements/CeTabs/CeTabs';
+@forward '../components/content/elements/CeTextpic/CeTextpic';

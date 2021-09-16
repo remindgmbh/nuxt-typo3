@@ -19,6 +19,10 @@ export interface Form {
         }
     }
     elements: FormElement[]
-    i18n: any[]
+    i18n: {
+        loading: string
+        success: string
+        submit: string
+    }
     id: string
 }

@@ -1,36 +1,27 @@
-<script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
-import baseCe from 'nuxt-typo3/lib/templates/components/content/mixins/baseCe'
 import { CreateElement, VNode } from 'vue'
-import { Typolink } from '../../../api/typolink'
 
-@Component({
+import BaseCe from '../../mixins/BaseCe'
+
+export default BaseCe.extend({
     name: 'CeHeader',
-})
-export default class CeHeader extends mixins(baseCe) {
-    headerLayout!: number
-    headerPosition!: string
-    headerLink!: Typolink | string
-    header!: string
-    subheader!: string
-
-    get visible(): boolean {
-        return this.headerLayout !== 100 && (!!this.header || !!this.subheader)
-    }
-
-    get subHeaderTop(): boolean {
-        return (
-            this.$nuxt.context.$rmndTypo3.content.header.subHeaderPosition ===
-            'top'
-        )
-    }
-
-    get tag(): string {
-        return this.headerLayout > 0 && this.headerLayout <= 6
-            ? `h${this.headerLayout}`
-            : 'div'
-    }
-
+    computed: {
+        visible(): boolean {
+            return (
+                this.headerLayout !== 100 && (!!this.header || !!this.subheader)
+            )
+        },
+        subHeaderTop(): boolean {
+            return (
+                this.$nuxt.context.$rmndTypo3.content.header
+                    .subHeaderPosition === 'top'
+            )
+        },
+        tag(): string {
+            return this.headerLayout > 0 && this.headerLayout <= 6
+                ? `h${this.headerLayout}`
+                : 'div'
+        },
+    },
     render(createElement: CreateElement): VNode {
         const renderHeader = () => {
             return createElement(
@@ -77,19 +68,5 @@ export default class CeHeader extends mixins(baseCe) {
         } else {
             return createElement()
         }
-    }
-}
-</script>
-
-<style lang="scss">
-.ce-header {
-    &__main {
-        margin: inherit;
-
-        a {
-            text-decoration: inherit;
-            color: inherit;
-        }
-    }
-}
-</style>
+    },
+})
