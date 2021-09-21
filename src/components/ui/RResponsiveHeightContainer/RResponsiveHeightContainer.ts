@@ -1,14 +1,14 @@
-<script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
-import { CreateElement, VNode } from 'vue'
+import Vue, { CreateElement, VNode } from 'vue'
 
-@Component({
+export default Vue.extend({
     name: 'RResponsiveHeightContainer',
-})
-export default class RResponsiveHeightContainer extends Vue {
-    @Prop({ type: String, required: false, default: 'div' })
-    tag!: string
-
+    props: {
+        tag: {
+            type: String,
+            required: false,
+            default: 'div',
+        },
+    },
     mounted(): void {
         const container = this.$refs.container as HTMLElement
         const content = this.$refs.content as Element
@@ -16,8 +16,7 @@ export default class RResponsiveHeightContainer extends Vue {
             container.style.height = `${content.scrollHeight}px`
         })
         resizeObserver.observe(content)
-    }
-
+    },
     render(createElement: CreateElement): VNode {
         return createElement(
             this.tag,
@@ -36,13 +35,5 @@ export default class RResponsiveHeightContainer extends Vue {
                 ),
             ]
         )
-    }
-}
-</script>
-
-<style lang="scss">
-.r-responsive-height-container {
-    height: 0;
-    overflow: hidden;
-}
-</style>
+    },
+})

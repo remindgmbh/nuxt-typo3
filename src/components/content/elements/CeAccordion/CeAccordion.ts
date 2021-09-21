@@ -1,6 +1,7 @@
 import { CreateElement, VNode } from 'vue'
 
-import BaseCe from '../../mixins/BaseCe'
+import CeDynamic from 'nuxt-typo3/lib/templates/components/content/CeDynamic'
+import { BaseCe, CeHeader, RAccordion } from '../../..'
 
 export default BaseCe.extend({
     name: 'CeAccordion',
@@ -13,8 +14,8 @@ export default BaseCe.extend({
     },
     render(createElement: CreateElement): VNode {
         return createElement('div', { class: 'ce-accordion' }, [
-            createElement('CeHeader', { props: this.$props }),
-            createElement('RAccordion', {
+            createElement(CeHeader, { props: this.$props }),
+            createElement(RAccordion, {
                 props: {
                     items: this.items,
                 },
@@ -23,7 +24,7 @@ export default BaseCe.extend({
                         return item.content.gridElementTitle
                     },
                     content({ item }): VNode {
-                        return createElement('CeDynamic', {
+                        return createElement(CeDynamic, {
                             props: { data: item, type: item.type },
                         })
                     },

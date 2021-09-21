@@ -1,5 +1,5 @@
 import Vue, { PropType } from 'vue'
-import { Image } from '../../api/image'
+import { Image } from '../../api'
 
 export default Vue.extend({
     name: 'RImage',

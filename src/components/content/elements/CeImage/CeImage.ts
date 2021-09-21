@@ -1,7 +1,7 @@
 import { CreateElement, PropType, VNode } from 'vue'
 
-import BaseCe from '../../mixins/BaseCe'
-import { Image } from '../../../../api/image'
+import { Image } from '../../../../api'
+import { BaseCe, CeHeader, RImage } from '../../..'
 
 export default BaseCe.extend({
     name: 'CeImage',
@@ -19,7 +19,7 @@ export default BaseCe.extend({
     },
     render(createElement: CreateElement): VNode {
         const renderHeader = () =>
-            createElement('ce-header', { props: this.$props })
+            createElement(CeHeader, { props: this.$props })
 
         return createElement(
             'div',
@@ -27,7 +27,7 @@ export default BaseCe.extend({
             this.file
                 ? [
                       renderHeader.call(this),
-                      createElement('r-image', {
+                      createElement(RImage, {
                           props: { file: this.file },
                       }),
                   ]

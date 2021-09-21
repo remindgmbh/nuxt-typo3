@@ -1,5 +1,5 @@
 import Vue, { PropType, VNode } from 'vue'
-import { Breadcrumb } from '../../../../api/breadcrumb'
+import { Breadcrumb } from '../../../../api'
 
 export default Vue.extend({
     name: 'CeBreadcrumbs',

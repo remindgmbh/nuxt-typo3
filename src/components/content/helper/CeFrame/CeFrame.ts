@@ -1,5 +1,5 @@
 import Vue, { PropType } from 'vue'
-import { ContentOptions } from '~rmnd-typo3/options'
+import { ContentOptions } from '../../../../options'
 
 export default Vue.extend({
     name: 'CeFrame',

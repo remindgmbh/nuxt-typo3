@@ -1,5 +1,6 @@
 import { CreateElement, VNode } from 'vue'
-import BaseCe from '../../mixins/BaseCe'
+import CeDynamic from 'nuxt-typo3/lib/templates/components/content/CeDynamic'
+import { BaseCe, CeHeader, RTabs } from '../../..'
 
 export default BaseCe.extend({
     name: 'CeTabs',
@@ -11,15 +12,15 @@ export default BaseCe.extend({
     },
     render(createElement: CreateElement): VNode {
         return createElement('div', { class: 'ce-tabs' }, [
-            createElement('CeHeader', { props: this.$props }),
-            createElement('RTabs', {
+            createElement(CeHeader, { props: this.$props }),
+            createElement(RTabs, {
                 props: { items: this.items },
                 scopedSlots: {
                     title({ item }): string {
                         return item.content.gridElementTitle
                     },
                     content({ item }): VNode {
-                        return createElement('CeDynamic', {
+                        return createElement(CeDynamic, {
                             props: { data: item, type: item.type },
                         })
                     },

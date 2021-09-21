@@ -1,5 +1,7 @@
 import Vue, { PropType } from 'vue'
+import CeDynamic from 'nuxt-typo3/lib/templates/components/content/CeDynamic'
 import { ContentOptions, Options } from '../../../../options'
+import { CeBackground, CeFrame, CeWrapper } from './..'
 
 export default Vue.extend({
     name: 'CeRenderer',
@@ -16,7 +18,7 @@ export default Vue.extend({
     },
     render(createElement, context) {
         function renderDynamic(element: any, index: number) {
-            return createElement('ce-dynamic', {
+            return createElement(CeDynamic, {
                 props: {
                     data: element,
                     type: element.type,
@@ -27,7 +29,7 @@ export default Vue.extend({
 
         function renderWrapper(element: any, index: number) {
             return createElement(
-                'ce-wrapper',
+                CeWrapper,
                 {
                     props: element.appearance,
                 },
@@ -41,7 +43,7 @@ export default Vue.extend({
             options: ContentOptions
         ) {
             return createElement(
-                'ce-frame',
+                CeFrame,
                 {
                     props: {
                         ...element.appearance,
@@ -62,7 +64,7 @@ export default Vue.extend({
             options: ContentOptions
         ) {
             return createElement(
-                'ce-background',
+                CeBackground,
                 {
                     props: {
                         ...element.appearance,

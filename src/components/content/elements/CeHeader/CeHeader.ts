@@ -1,6 +1,6 @@
 import { CreateElement, VNode } from 'vue'
 
-import BaseCe from '../../mixins/BaseCe'
+import { BaseCe, RTypolink } from '../../..'
 
 export default BaseCe.extend({
     name: 'CeHeader',
@@ -32,7 +32,7 @@ export default BaseCe.extend({
                 this.headerLink
                     ? [
                           createElement(
-                              'r-typolink',
+                              RTypolink,
                               { props: { to: this.headerLink } },
                               [this.header]
                           ),

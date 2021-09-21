@@ -1,0 +1,17 @@
+.r-topbar-layout {
+    &__bar {
+        height: var(--top-bar-height);
+        position: fixed;
+        width: 100%;
+        z-index: 1;
+    }
+
+    &__content {
+        padding-top: var(--top-bar-height);
+        min-height: calc(100vh - var(--top-bar-height));
+        position: relative;
+        z-index: 0;
+        width: 100%;
+        display: flex;
+    }
+}

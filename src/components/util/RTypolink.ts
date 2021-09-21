@@ -1,5 +1,5 @@
 import Vue, { PropType } from 'vue'
-import { Typolink } from '../../api/typolink'
+import { Typolink } from '../../api'
 
 export default Vue.extend({
     name: 'RTypolink',

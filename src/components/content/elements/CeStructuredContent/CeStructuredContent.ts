@@ -1,6 +1,7 @@
 import { PropType, VNode, CreateElement } from 'vue'
-import BaseCe from '../../mixins/BaseCe'
-import { Structure } from '../../../../api/structure'
+import CeDynamic from 'nuxt-typo3/lib/templates/components/content/CeDynamic'
+import { BaseCe } from '../../..'
+import { Structure } from '../../../../api'
 
 export default BaseCe.extend({
     name: 'CeStructuredContent',
@@ -32,7 +33,7 @@ export default BaseCe.extend({
         },
     },
     render(createElement: CreateElement): VNode {
-        return createElement('CeDynamic', {
+        return createElement(CeDynamic, {
             props: { data: this.data, type: this.structure.layout },
         })
     },

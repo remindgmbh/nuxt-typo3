@@ -22,7 +22,7 @@
 import { Component, mixins } from 'nuxt-property-decorator'
 import baseBe from 'nuxt-typo3/lib/templates/layouts/backend/mixins/baseBe'
 import { mapState } from 'vuex'
-import { Breadcrumb } from '../../../api/breadcrumb'
+import { Breadcrumb } from '../../../api'
 import { Options } from '../../../options'
 
 @Component({
