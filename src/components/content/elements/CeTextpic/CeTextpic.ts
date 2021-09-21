@@ -1,6 +1,6 @@
 import { CreateElement, VNode, PropType } from 'vue'
 
-import { BaseCe } from '../../..'
+import BaseCe from '../../mixins/BaseCe'
 import { Image } from '../../../../api'
 
 export default BaseCe.extend({

@@ -1,6 +1,7 @@
 import { CreateElement, VNode } from 'vue'
 import CeDynamic from 'nuxt-typo3/lib/templates/components/content/CeDynamic'
-import { BaseCe, CeHeader, RTabs } from '../../..'
+import { CeHeader, RTabs } from '../../..'
+import BaseCe from '../../mixins/BaseCe'
 
 export default BaseCe.extend({
     name: 'CeTabs',

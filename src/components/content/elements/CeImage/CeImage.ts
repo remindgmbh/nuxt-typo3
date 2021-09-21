@@ -1,7 +1,8 @@
 import { CreateElement, PropType, VNode } from 'vue'
 
 import { Image } from '../../../../api'
-import { BaseCe, CeHeader, RImage } from '../../..'
+import { CeHeader, RImage } from '../../..'
+import BaseCe from '../../mixins/BaseCe'
 
 export default BaseCe.extend({
     name: 'CeImage',

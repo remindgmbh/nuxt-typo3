@@ -1,7 +1,8 @@
 import { CreateElement, VNode } from 'vue'
 
 import CeDynamic from 'nuxt-typo3/lib/templates/components/content/CeDynamic'
-import { BaseCe, CeHeader, RAccordion } from '../../..'
+import { CeHeader, RAccordion } from '../../..'
+import BaseCe from '../../mixins/BaseCe'
 
 export default BaseCe.extend({
     name: 'CeAccordion',

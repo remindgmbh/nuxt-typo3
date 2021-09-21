@@ -1,6 +1,7 @@
 import { CreateElement, VNode } from 'vue'
 
-import { BaseCe, RTypolink } from '../../..'
+import BaseCe from '../../mixins/BaseCe'
+import { RTypolink } from '../../..'
 
 export default BaseCe.extend({
     name: 'CeHeader',

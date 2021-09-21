@@ -1,5 +1,5 @@
 import { CreateElement, PropType, VNode } from 'vue'
-import { BaseCe } from '../../..'
+import BaseCe from '../../mixins/BaseCe'
 import { Form, FormElement, Typolink } from '../../../../api'
 
 // Map TYPO3 Input types to vueformulate

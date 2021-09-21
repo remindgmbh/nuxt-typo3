@@ -1,6 +1,6 @@
 import { PropType, VNode, CreateElement } from 'vue'
 import CeDynamic from 'nuxt-typo3/lib/templates/components/content/CeDynamic'
-import { BaseCe } from '../../..'
+import BaseCe from '../../mixins/BaseCe'
 import { Structure } from '../../../../api'
 
 export default BaseCe.extend({
