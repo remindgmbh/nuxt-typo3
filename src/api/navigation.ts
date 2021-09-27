@@ -6,4 +6,5 @@ export interface Navigation {
     space: number
     target: string
     title: string
+    overviewLabel?: string
 }
