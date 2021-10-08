@@ -12,11 +12,14 @@ export interface FormElement {
 
 export interface Form {
     api: {
+        actionAfterSuccess: any
+        errors: { [fieldName: string]: string } | null
         page: {
             current: number
             nextPage: number
             page: number
         }
+        status: 'success' | 'failure' | null
     }
     elements: FormElement[]
     i18n: {

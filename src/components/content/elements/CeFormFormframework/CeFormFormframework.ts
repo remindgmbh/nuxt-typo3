@@ -1,6 +1,7 @@
 import { CreateElement, PropType, VNode } from 'vue'
 import BaseCe from '../../mixins/BaseCe'
 import { Form, FormElement, Typolink } from '../../../../api'
+import { SET_CONTENT } from '../../../../pages/Default'
 
 // Map TYPO3 Input types to vueformulate
 const TYPES = {
@@ -43,6 +44,15 @@ export default BaseCe.extend({
         },
     },
     computed: {
+        isSuccess(): boolean {
+            return this.form.api?.status === 'success'
+        },
+        isFailure(): boolean {
+            return this.form.api?.status === 'failure'
+        },
+        isSubmitted(): boolean {
+            return this.isSuccess || this.isFailure
+        },
         initialValues(): { [key: string]: any } {
             return this.form.elements.reduce((result, value) => {
                 result[this.getFormElementName(value)] =
@@ -84,11 +94,26 @@ export default BaseCe.extend({
                 return result
             }, new FormData())
 
+            formData.set('responseElementId', this.id.toString())
+
             this.$axios.setBaseURL(this.$typo3.options.api.baseURL)
 
-            return this.$axios.post(this.link.url, formData).then(() => {
-                this.$formulate.reset(this.form.id, this.initialValues)
-            })
+            return this.$axios
+                .post(this.link.url, formData)
+                .then((response) => {
+                    this.$nuxt.$emit(SET_CONTENT, {
+                        index: this.index,
+                        content: response.data,
+                    })
+                    this.$nextTick(() => {
+                        if (this.isSuccess) {
+                            this.$formulate.reset(
+                                this.form.id,
+                                this.initialValues
+                            )
+                        }
+                    })
+                })
         },
     },
     render(createElement: CreateElement): VNode {
