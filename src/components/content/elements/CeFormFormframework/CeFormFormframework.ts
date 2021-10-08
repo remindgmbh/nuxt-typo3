@@ -140,6 +140,7 @@ export default BaseCe.extend({
         }
 
         return createElement('div', { class: 'ce-form' }, [
+            createElement('ce-header', { props: this.$props }),
             createElement('FormulateForm', {
                 props: { name: this.form.id, values: this.initialValues },
                 on: { submit: this.submit },
