@@ -33,7 +33,7 @@ const nuxtModule: Module = function () {
             routes.push({
                 name: 'rmnd-page',
                 path: '/*',
-                component: resolve(__dirname, './pages/_.vue'),
+                component: resolve(__dirname, './pages/Default.ts'),
             })
         }
     )

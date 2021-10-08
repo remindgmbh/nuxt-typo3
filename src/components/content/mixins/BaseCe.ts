@@ -67,5 +67,10 @@ export default Vue.extend({
             required: false,
             default: '',
         },
+        index: {
+            type: Number,
+            required: true,
+            default: 0,
+        },
     },
 })
