@@ -133,6 +133,11 @@ export default BaseCe.extend({
                         uploader: (file: File) =>
                             this.uploadFile(file, formInput),
                     },
+                    class: {
+                        required: formInput.validation.includes(
+                            VALIDATIONS.NotEmpty
+                        ),
+                    },
                 })
             })
         }
