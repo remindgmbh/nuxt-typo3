@@ -26,6 +26,16 @@ const VALIDATIONS = {
     Number: 'number',
 }
 
+interface FormInput {
+    id: string
+    name: string
+    type: any
+    label: string
+    placeholder: any
+    options: any
+    validation: string[]
+}
+
 export default BaseCe.extend({
     name: 'CeFormFormframework',
     props: {
@@ -60,15 +70,7 @@ export default BaseCe.extend({
                 return result
             }, {})
         },
-        formInputs(): {
-            id: string
-            name: string
-            type: any
-            label: string
-            placeholder: any
-            options: any
-            validation: string[]
-        }[] {
+        formInputs(): FormInput[] {
             return this.form.elements.map((formElement) => ({
                 id: formElement.identifier,
                 name: this.getFormElementName(formElement),
@@ -84,13 +86,22 @@ export default BaseCe.extend({
             }))
         },
     },
+    data() {
+        return {
+            files: {} as { [id: string]: File },
+        }
+    },
     methods: {
         getFormElementName(formElement: FormElement): string {
             return `tx_form_formframework[${this.form.id}][${formElement.identifier}]`
         },
-        submit(data: { [key: string]: any }): Promise<void> {
+        uploadFile(file: File, formInput: FormInput): void {
+            this.files[formInput.name] = file
+        },
+        async submit(data: { [key: string]: any }): Promise<void> {
             const formData = Object.keys(data).reduce((result, key) => {
-                result.set(key, data[key] || '')
+                const value = this.files[key] || data[key] || ''
+                result.set(key, value)
                 return result
             }, new FormData())
 
@@ -98,22 +109,17 @@ export default BaseCe.extend({
 
             this.$axios.setBaseURL(this.$typo3.options.api.baseURL)
 
-            return this.$axios
-                .post(this.link.url, formData)
-                .then((response) => {
-                    this.$nuxt.$emit(SET_CONTENT, {
-                        index: this.index,
-                        content: response.data,
-                    })
-                    this.$nextTick(() => {
-                        if (this.isSuccess) {
-                            this.$formulate.reset(
-                                this.form.id,
-                                this.initialValues
-                            )
-                        }
-                    })
-                })
+            const response = await this.$axios.post(this.link.url, formData)
+            this.$nuxt.$emit(SET_CONTENT, {
+                index: this.index,
+                content: response.data,
+            })
+            this.$nextTick(() => {
+                if (this.isSuccess) {
+                    this.files = {}
+                    this.$formulate.reset(this.form.id, this.initialValues)
+                }
+            })
         },
     },
     render(createElement: CreateElement): VNode {
@@ -124,6 +130,8 @@ export default BaseCe.extend({
                     props: {
                         disabled: isLoading,
                         ...formInput,
+                        uploader: (file: File) =>
+                            this.uploadFile(file, formInput),
                     },
                 })
             })
