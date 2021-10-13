@@ -138,6 +138,13 @@ export default BaseCe.extend({
                             VALIDATIONS.NotEmpty
                         ),
                     },
+                    scopedSlots: {
+                        errors: ({ visibleValidationErrors }) => {
+                            return this.$scopedSlots.errors?.({
+                                visibleValidationErrors,
+                            })
+                        },
+                    },
                 })
             })
         }
