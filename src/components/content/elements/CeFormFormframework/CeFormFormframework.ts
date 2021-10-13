@@ -19,6 +19,8 @@ const TYPES = {
     RadioButton: 'radio',
 }
 
+const STATIC_TEXT = 'StaticText'
+
 // Map TYPO3 validation rules to vueformulate
 const VALIDATIONS = {
     EmailAddress: 'email',
@@ -26,7 +28,11 @@ const VALIDATIONS = {
     Number: 'number',
 }
 
-interface FormInput {
+function getFormElementName(formId: string, formElement: FormElement): string {
+    return `tx_form_formframework[${formId}][${formElement.identifier}]`
+}
+
+class FormInput {
     id: string
     name: string
     type: any
@@ -34,6 +40,29 @@ interface FormInput {
     placeholder: any
     options: any
     validation: string[]
+
+    constructor(formId: string, formElement: FormElement) {
+        this.id = formElement.identifier
+        this.name = getFormElementName(formId, formElement)
+        this.type = TYPES[formElement.type] || 'hidden'
+        this.label = formElement.label
+        this.placeholder =
+            formElement.properties?.fluidAdditionalAttributes?.placeholder
+        this.options = formElement.properties.options
+        this.validation = (formElement.validators || []).map(
+            (validator) => VALIDATIONS[validator.identifier]
+        )
+    }
+}
+
+class StaticText {
+    label: string
+    text: string
+
+    constructor(formElement: FormElement) {
+        this.label = formElement.label
+        this.text = formElement.properties.text
+    }
 }
 
 export default BaseCe.extend({
@@ -65,25 +94,17 @@ export default BaseCe.extend({
         },
         initialValues(): { [key: string]: any } {
             return this.form.elements.reduce((result, value) => {
-                result[this.getFormElementName(value)] =
+                result[getFormElementName(this.form.id, value)] =
                     value.defaultValue || null
                 return result
             }, {})
         },
-        formInputs(): FormInput[] {
-            return this.form.elements.map((formElement) => ({
-                id: formElement.identifier,
-                name: this.getFormElementName(formElement),
-                type: TYPES[formElement.type] || 'hidden',
-                label: formElement.label,
-                placeholder:
-                    formElement.properties?.fluidAdditionalAttributes
-                        ?.placeholder,
-                options: formElement.properties.options,
-                validation: (formElement.validators || []).map(
-                    (validator) => VALIDATIONS[validator.identifier]
-                ),
-            }))
+        formInputs(): Array<FormInput | StaticText> {
+            return this.form.elements.map((formElement) => {
+                return formElement.type === STATIC_TEXT
+                    ? new StaticText(formElement)
+                    : new FormInput(this.form.id, formElement)
+            })
         },
     },
     data() {
@@ -92,9 +113,6 @@ export default BaseCe.extend({
         }
     },
     methods: {
-        getFormElementName(formElement: FormElement): string {
-            return `tx_form_formframework[${this.form.id}][${formElement.identifier}]`
-        },
         uploadFile(file: File, formInput: FormInput): void {
             this.files[formInput.name] = file
         },
@@ -125,27 +143,32 @@ export default BaseCe.extend({
     render(createElement: CreateElement): VNode {
         const formulateInputs = (isLoading: boolean) => {
             return this.formInputs.map((formInput) => {
-                return createElement('FormulateInput', {
-                    key: formInput.id,
-                    props: {
-                        disabled: isLoading,
-                        ...formInput,
-                        uploader: (file: File) =>
-                            this.uploadFile(file, formInput),
-                    },
-                    class: {
-                        required: formInput.validation.includes(
-                            VALIDATIONS.NotEmpty
-                        ),
-                    },
-                    scopedSlots: {
-                        errors: ({ visibleValidationErrors }) => {
-                            return this.$scopedSlots.errors?.({
-                                visibleValidationErrors,
-                            })
-                        },
-                    },
-                })
+                return formInput instanceof StaticText
+                    ? createElement('div', { class: 'ce-form__static-text' }, [
+                          createElement('div', formInput.label),
+                          createElement('div', formInput.text),
+                      ])
+                    : createElement('FormulateInput', {
+                          key: formInput.id,
+                          props: {
+                              disabled: isLoading,
+                              ...formInput,
+                              uploader: (file: File) =>
+                                  this.uploadFile(file, formInput),
+                          },
+                          class: {
+                              required: formInput.validation.includes(
+                                  VALIDATIONS.NotEmpty
+                              ),
+                          },
+                          scopedSlots: {
+                              errors: ({ visibleValidationErrors }) => {
+                                  return this.$scopedSlots.errors?.({
+                                      visibleValidationErrors,
+                                  })
+                              },
+                          },
+                      })
             })
         }
 
