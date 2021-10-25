@@ -123,9 +123,9 @@ export default BaseCe.extend({
                 return result
             }, new FormData())
 
+            // https://docs.typo3.org/p/friendsoftypo3/headless/master/en-us/Configuration/Index.html
+            // required so API returns only current content element instead of whole page
             formData.set('responseElementId', this.id.toString())
-
-            this.$axios.setBaseURL(this.$typo3.options.api.baseURL)
 
             const response = await this.$axios.post(this.link.url, formData)
             this.$nuxt.$emit(SET_CONTENT, {
@@ -151,10 +151,12 @@ export default BaseCe.extend({
                     : createElement('FormulateInput', {
                           key: formInput.id,
                           props: {
-                              disabled: isLoading,
-                              ...formInput,
                               uploader: (file: File) =>
                                   this.uploadFile(file, formInput),
+                          },
+                          attrs: {
+                              disabled: isLoading,
+                              ...formInput,
                           },
                           class: {
                               required: formInput.validation.includes(
@@ -173,13 +175,20 @@ export default BaseCe.extend({
         }
 
         const submitButton = (isLoading: boolean) => {
-            return createElement(
-                'FormulateInput',
-                {
-                    props: { type: 'submit', disabled: isLoading },
+            return createElement('FormulateInput', {
+                props: {
+                    type: 'submit',
+                    label: isLoading
+                        ? this.form.i18n.loading
+                        : this.form.i18n.submit,
                 },
-                [isLoading ? this.form.i18n.loading : this.form.i18n.submit]
-            )
+                class: {
+                    'is-loading': isLoading,
+                },
+                attrs: {
+                    disabled: isLoading,
+                },
+            })
         }
 
         return createElement('div', { class: 'ce-form' }, [
