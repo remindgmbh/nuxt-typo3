@@ -22,6 +22,9 @@ export class Options {
         image: {
             noWrapper: true,
         },
+        solr_pi_results: {
+            paginationPosition: 'bottom' as 'top' | 'bottom' | 'both',
+        },
         tabs: {
             noWrapper: true,
         },

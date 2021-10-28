@@ -1,0 +1,8 @@
+{
+    "search": {
+        "term": "Suchbegriff",
+        "link": "Link",
+        "button": "Suche",
+        "loading": "Lädt"
+    }
+}

@@ -11,6 +11,7 @@
     "noEmit": true,
     "experimentalDecorators": true,
     "baseUrl": ".",
+    "resolveJsonModule": true,
     "lib": [
       "ESNext",
       "ESNext.AsyncIterable",
@@ -19,6 +20,7 @@
     "types": [
       "@nuxt/types",
       "@types/node",
+      "@nuxtjs/i18n",
       "nuxt-typo3",
       "@nuxtjs/axios",
     ],
