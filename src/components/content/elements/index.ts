@@ -1,6 +1,6 @@
 export { default as CeAccordion } from './CeAccordion/CeAccordion'
 export { default as CeFeloginLogin } from './CeFeloginLogin/CeFeloginLogin'
-export { default as CeFormFormframework } from './CeFormFormframework/CeFormFormframework'
+export { default as CeFormFormframework } from './CeForm/CeFormFormframework'
 export { default as CeHeader } from './CeHeader/CeHeader'
 export { default as CeImage } from './CeImage/CeImage'
 export { default as CeSolrPiResults } from './CeSolr/CeSolrPiResults'
