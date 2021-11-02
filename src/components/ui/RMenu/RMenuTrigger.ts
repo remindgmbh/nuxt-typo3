@@ -17,6 +17,11 @@ export default (Vue as VueConstructor<Vue & Injectable>).extend({
             required: false,
             default: 'button',
         },
+        disabled: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
     },
     created(): void {
         this.register(this)
@@ -37,6 +42,7 @@ export default (Vue as VueConstructor<Vue & Injectable>).extend({
                 },
                 attrs: {
                     type: 'button',
+                    disabled: this.disabled,
                 },
             },
             this.$slots.default
