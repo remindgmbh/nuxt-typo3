@@ -5,6 +5,11 @@ export const SEARCH_TERM_INPUT_NAME = 'search_term'
 export default Vue.extend({
     name: 'SolrForm',
     props: {
+        disabled: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
         isLoading: {
             type: Boolean,
             required: false,
@@ -38,7 +43,7 @@ export default Vue.extend({
                             value: this.searchTerm,
                         },
                         attrs: {
-                            disabled: this.isLoading,
+                            disabled: this.isLoading || this.disabled,
                             placeholder: this.$t(
                                 'rmnd-nuxt-typo3.search.term'
                             ).toString(),
@@ -57,7 +62,7 @@ export default Vue.extend({
                             'is-loading': this.isLoading,
                         },
                         attrs: {
-                            disabled: this.isLoading,
+                            disabled: this.isLoading || this.disabled,
                         },
                     }),
                 ]
