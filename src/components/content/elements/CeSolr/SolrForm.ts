@@ -7,7 +7,8 @@ export default Vue.extend({
     props: {
         isLoading: {
             type: Boolean,
-            required: true,
+            required: false,
+            default: false,
         },
         searchTerm: {
             type: String,

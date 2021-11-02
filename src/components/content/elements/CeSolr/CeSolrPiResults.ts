@@ -1,39 +1,8 @@
 import { CreateElement, PropType, VNode } from 'vue'
 import BaseCe from '../../mixins/BaseCe'
 import { SET_PAGE } from '../../../../pages/Default'
-import { Typolink } from '../../../../api'
+import { SearchForm, SearchResult } from '../../../../api'
 import { SEARCH_TERM_INPUT_NAME } from './SolrForm'
-
-export interface SearchForm {
-    pluginNamespace: string
-    queryParams: {
-        q: string
-        page: string
-    }
-}
-
-export interface SearchPagination {
-    current: number
-    numberOfPages: number
-}
-
-export interface SearchDocument {
-    title: string
-    content: string
-    url: Typolink
-}
-
-interface SearchDocuments {
-    pagination: SearchPagination
-    list: SearchDocument[]
-    count: number
-}
-
-export interface SearchResult {
-    documents: SearchDocuments
-    allResultCount: number
-    query: string
-}
 
 export default BaseCe.extend({
     name: 'CeSolrPiResults',

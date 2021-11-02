@@ -1,5 +1,5 @@
 import Vue, { CreateElement, PropType, VNode } from 'vue'
-import { SearchResult, SearchDocument } from './CeSolrPiResults'
+import { SearchResult, SearchDocument } from '../../../../api'
 
 export default Vue.extend({
     name: 'SolrResult',

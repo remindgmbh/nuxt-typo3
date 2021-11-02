@@ -1,7 +1,7 @@
 import Vue, { CreateElement, PropType, VNode } from 'vue'
 import { Route } from 'vue-router'
 import defu from 'defu'
-import { SearchPagination, SearchForm } from './CeSolrPiResults'
+import { SearchForm, SearchPagination } from '../../../../api'
 
 export interface Page {
     value: number
