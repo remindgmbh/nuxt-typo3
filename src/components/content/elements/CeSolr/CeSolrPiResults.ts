@@ -8,10 +8,13 @@ export default BaseCe.extend({
     name: 'CeSolrPiResults',
     props: {
         data: {
-            type: Object as PropType<{
-                form: SearchForm
-                result?: SearchResult
-            }>,
+            type: [Object, String] as PropType<
+                | string
+                | {
+                      form: SearchForm
+                      result?: SearchResult
+                  }
+            >,
             required: true,
         },
     },
@@ -34,33 +37,35 @@ export default BaseCe.extend({
         },
     },
     created() {
-        this.searchTerm = this.data.result?.query || ''
+        if (typeof this.data !== 'string') {
+            this.searchTerm = this.data.result?.query || ''
+        }
     },
     methods: {
         submit(data: { [key: string]: any }): void {
+            if (typeof this.data === 'string') {
+                return
+            }
+
             const term = data[SEARCH_TERM_INPUT_NAME] || '*'
 
-            this.$router.push({
-                path: this.$route.path,
-                query: { [this.data.form.queryParams.q]: term },
-            })
+            const query = { [this.data.form.queryParams.q]: term }
+
+            if (JSON.stringify(query) !== JSON.stringify(this.$route.query)) {
+                this.isLoading = true
+
+                this.$router.push({
+                    path: this.$route.path,
+                    query,
+                })
+            }
         },
     },
     watch: {
-        async $route(): Promise<void> {
-            try {
-                this.isLoading = true
-
-                const response = await this.$axios.get(this.$route.path, {
-                    params: this.$route.query,
-                })
-
-                this.$nuxt.$emit(SET_PAGE, response.data)
-
-                this.$emit('loaded')
-            } finally {
-                this.isLoading = false
-            }
+        $route(): void {
+            this.$nuxt.$emit(SET_PAGE, this.$store.state.typo3.page)
+            this.$emit('loaded')
+            this.isLoading = false
         },
     },
     render(createElement: CreateElement): VNode {
@@ -77,7 +82,7 @@ export default BaseCe.extend({
         }
 
         const renderResult = () => {
-            if (this.data.result) {
+            if (typeof this.data !== 'string' && this.data.result) {
                 return [
                     this.paginationPositionTop
                         ? createElement('solr-pagination', {
@@ -106,9 +111,19 @@ export default BaseCe.extend({
             }
         }
 
+        const renderMessage = () => {
+            if (typeof this.data === 'string') {
+                return createElement('html-parser', {
+                    class: 'ce-solr__message',
+                    props: { content: this.data },
+                })
+            }
+        }
+
         return createElement('div', { class: 'ce-solr' }, [
             createElement('ce-header', { props: this.$props }),
             renderForm(),
+            renderMessage(),
             renderResult(),
         ])
     },
