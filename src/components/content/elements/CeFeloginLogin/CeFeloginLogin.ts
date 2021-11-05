@@ -72,8 +72,6 @@ export default BaseCe.extend({
                 return result
             }, new FormData())
 
-            this.$axios.setBaseURL(this.$typo3.options.api.baseURL)
-
             const response = await this.$axios.post(
                 this.data.form.action,
                 formData
