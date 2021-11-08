@@ -7,6 +7,7 @@ export interface Image {
         alternative?: string
         title?: string
         link?: string
+        originalUrl: string
     }
     publicUrl: string
 }
