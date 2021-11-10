@@ -70,15 +70,20 @@ export default BaseCe.extend({
     },
     render(createElement: CreateElement): VNode {
         const renderForm = () => {
-            return createElement('solr-form', {
-                props: {
-                    isLoading: this.isLoading,
-                    searchTerm: this.searchTerm,
-                },
-                on: {
-                    submit: this.submit,
-                },
-            })
+            if (typeof this.data !== 'string') {
+                return createElement('solr-form', {
+                    props: {
+                        isLoading: this.isLoading,
+                        searchTerm: this.searchTerm,
+                        form: this.data.form,
+                    },
+                    on: {
+                        'update:searchTerm': (value: string) =>
+                            (this.searchTerm = value),
+                        submit: this.submit,
+                    },
+                })
+            }
         }
 
         const renderResult = () => {

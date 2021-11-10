@@ -1,10 +1,16 @@
-import Vue, { CreateElement, VNode } from 'vue'
+import Vue, { CreateElement, VNode, PropType } from 'vue'
+// import VueSimpleSuggest from 'vue-simple-suggest'
+import { SearchForm } from '../../../../api'
 
 export const SEARCH_TERM_INPUT_NAME = 'search_term'
 
 export default Vue.extend({
     name: 'SolrForm',
     props: {
+        form: {
+            type: Object as PropType<SearchForm>,
+            required: true,
+        },
         disabled: {
             type: Boolean,
             required: false,
@@ -20,10 +26,21 @@ export default Vue.extend({
             required: false,
             default: '',
         },
+        suggestionsTop: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
     },
     methods: {
-        submit(data: { [key: string]: any }) {
-            this.$emit('submit', data)
+        async getSuggestionList(value: string): Promise<string[]> {
+            const response = await this.$axios.get(this.form.suggest.url, {
+                params: {
+                    [this.form.suggest.queryParam]: value,
+                },
+            })
+
+            return Object.keys(response.data.suggestions)
         },
     },
     render(createElement: CreateElement): VNode {
@@ -32,13 +49,15 @@ export default Vue.extend({
                 'FormulateForm',
                 {
                     on: {
-                        submit: this.submit,
+                        submit: (data: { [key: string]: any }) => {
+                            this.$emit('submit', data)
+                        },
                     },
                 },
                 [
                     createElement('FormulateInput', {
                         props: {
-                            type: 'text',
+                            type: 'suggest',
                             name: SEARCH_TERM_INPUT_NAME,
                             value: this.searchTerm,
                         },
@@ -47,6 +66,8 @@ export default Vue.extend({
                             placeholder: this.$t(
                                 'rmnd-nuxt-typo3.search.term'
                             ).toString(),
+                            list: this.getSuggestionList,
+                            top: this.suggestionsTop,
                         },
                     }),
                     createElement('FormulateInput', {

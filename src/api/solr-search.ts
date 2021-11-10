@@ -1,11 +1,15 @@
 import { Typolink } from './typolink'
 
 export interface SearchForm {
-    targetPage: string
+    targetUrl: string
     pluginNamespace: string
     queryParams: {
         q: string
         page: string
+    }
+    suggest: {
+        url: string
+        queryParam: string
     }
 }
 

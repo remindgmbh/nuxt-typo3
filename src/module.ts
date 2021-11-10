@@ -31,6 +31,12 @@ const nuxtModule: Module = function () {
         filename: join('rmnd-typo3', 'plugins.context.ts'),
     })
 
+    this.addPlugin({
+        src: resolve(__dirname, './plugins/vue-formulate.ts'),
+        options,
+        filename: join('rmnd-typo3', 'plugins.vue-formulate.ts'),
+    })
+
     this.extendRoutes(
         (
             routes: NuxtRouteConfig[],
