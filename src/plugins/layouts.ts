@@ -1,11 +1,7 @@
 import Vue from 'vue'
 import { Plugin } from '@nuxt/types'
 import { registerBackendLayouts } from 'nuxt-typo3/lib/templates/plugins/layouts'
-import BeDefault from '~rmnd-typo3/layouts/backend/BeDefault/BeDefault.vue'
-
-const layouts = {
-    BeDefault,
-}
+import * as layouts from '~rmnd-typo3/layouts/backend'
 
 const plugin: Plugin = (context) => {
     Vue.use(registerBackendLayouts, {
