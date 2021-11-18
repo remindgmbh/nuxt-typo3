@@ -13,6 +13,7 @@ export default BaseCe.extend({
         },
     },
     render(createElement: CreateElement): VNode {
+        const type = this.type
         return createElement('div', { class: 'ce-accordion' }, [
             createElement(CeHeader, { props: this.$props }),
             createElement(RAccordion, {
@@ -25,7 +26,7 @@ export default BaseCe.extend({
                     },
                     content({ item }): VNode {
                         return createElement('ce-text', {
-                            props: { ...item, bodytext: item.bodytext },
+                            props: { ...item, bodytext: item.bodytext, type },
                         })
                     },
                 },
