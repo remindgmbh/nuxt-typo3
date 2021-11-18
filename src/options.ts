@@ -12,10 +12,6 @@ export class Options {
         accordion: {
             noWrapper: true,
         },
-        carousel: {
-            fullWidth: true,
-            noWrapper: true,
-        },
         header: {
             subHeaderPosition: 'top' as 'top' | 'bottom',
         },

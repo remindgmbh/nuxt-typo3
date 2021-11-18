@@ -76,11 +76,8 @@ export default Vue.extend({
         }
 
         return context.props.content.map((element: any, index) => {
-            const type =
-                element.type === 'structured_content'
-                    ? element.content.structure.layout
-                    : element.type
-            const options: ContentOptions = context.props.options.content[type]
+            const options: ContentOptions =
+                context.props.options.content[element.type]
             return element.appearance.backgroundColor
                 ? renderBackground(element, index, options)
                 : renderFrame(element, index, options)
