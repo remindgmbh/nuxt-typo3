@@ -12,6 +12,10 @@ export default (Vue as VueConstructor<Vue & Injectable>).extend({
         },
     },
     props: {
+        id: {
+            type: String,
+            required: true,
+        },
         tag: {
             type: String,
             required: false,

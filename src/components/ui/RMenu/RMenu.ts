@@ -1,18 +1,24 @@
 import Vue, { CreateElement, PropType, VNode } from 'vue'
+import RMenuTrigger from './RMenuTrigger'
+import RMenuDropdown from './RMenuDropdown'
 
 export default Vue.extend({
     name: 'RMenu',
     provide() {
         return {
-            registerContent: (content: Vue) => {
-                content.$emit('setCloseOnClick', this.closeOnClick)
-                content.$on('click-outside', this.close)
+            registerDropdown: (
+                dropdown: InstanceType<typeof RMenuDropdown>
+            ) => {
+                this.dropdown = dropdown
+                dropdown.$on('close', this.close)
             },
-            registerTrigger: (trigger: Vue) => {
-                const key = trigger.$vnode.key as string
-                trigger.$on('toggle', () => {
-                    this.activeKey = this.activeKey === key ? null : key
-                })
+            registerTrigger: (trigger: InstanceType<typeof RMenuTrigger>) => {
+                trigger.$on(
+                    'toggle',
+                    () =>
+                        (this.activeItem =
+                            this.activeItem === trigger.id ? null : trigger.id)
+                )
             },
         }
     },
@@ -22,19 +28,19 @@ export default Vue.extend({
             required: false,
             default: 'div',
         },
-        closeOnClick: {
-            type: Boolean,
-            required: false,
-            default: false,
-        },
         value: {
             type: String as PropType<string | null>,
             required: false,
             default: null,
         },
     },
+    data() {
+        return {
+            dropdown: null as null | InstanceType<typeof RMenuDropdown>,
+        }
+    },
     computed: {
-        activeKey: {
+        activeItem: {
             get(): string | null {
                 return this.value
             },
@@ -44,13 +50,22 @@ export default Vue.extend({
         },
     },
     watch: {
+        activeItem(newKey?: string): void {
+            this.dropdown?.$emit('set-active-item', newKey)
+        },
         $route(): void {
             this.close()
         },
     },
+    mounted(): void {
+        // parent created hook is called before child, but parent mounted hook is called after child
+        if (!this.dropdown) {
+            console.warn("RMenu doesn't contain RMenuDropdown")
+        }
+    },
     methods: {
         close(): void {
-            this.activeKey = null
+            this.activeItem = null
         },
     },
     render(createElement: CreateElement): VNode {

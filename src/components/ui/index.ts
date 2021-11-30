@@ -1,6 +1,6 @@
 export { default as RAccordion } from './RAccordion/RAccordion'
 export { default as RMenu } from './RMenu/RMenu'
-export { default as RMenuContent } from './RMenu/RMenuContent'
+export { default as RMenuDropdown } from './RMenu/RMenuDropdown'
 export { default as RMenuTrigger } from './RMenu/RMenuTrigger'
 export { default as RNavigationSidebar } from './RNavigationSidebar/RNavigationSidebar'
 export { default as RNavigationSidebarItem } from './RNavigationSidebar/RNavigationSidebarItem'
