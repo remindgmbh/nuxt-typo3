@@ -29,5 +29,6 @@ module.exports = {
                 allow: ['warn', 'error'],
             },
         ],
+        'import/namespace': [2, { allowComputed: true }],
     },
 }

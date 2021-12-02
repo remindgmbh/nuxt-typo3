@@ -57,8 +57,8 @@ export default BaseCe.extend({
                     class: [
                         'ce-header',
                         {
-                            [`text-${this.headerPosition}`]: this
-                                .headerPosition,
+                            [`text-${this.headerPosition}`]:
+                                this.headerPosition,
                         },
                     ],
                 },

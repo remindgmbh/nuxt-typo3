@@ -1,6 +1,6 @@
-@use 'sass:map';
-@use 'breakpoints';
-@use 'variables';
+@use "sass:map";
+@use "breakpoints";
+@use "variables";
 
 :root {
     --container-width: #{variables.$container-width};

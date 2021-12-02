@@ -54,13 +54,13 @@ export default Vue.extend({
                     'ce-frame',
                     {
                         container,
-                        [`ce-frame--space-before-${context.props.spaceBefore}`]: context
-                            .props.spaceBefore,
+                        [`ce-frame--space-before-${context.props.spaceBefore}`]:
+                            context.props.spaceBefore,
                         [`ce-frame--space-before-inside-${context.props.spaceBeforeInside}`]:
                             context.props.spaceBeforeInside &&
                             context.props.backgroundColor,
-                        [`ce-frame--space-after-${context.props.spaceAfter}`]: context
-                            .props.spaceAfter,
+                        [`ce-frame--space-after-${context.props.spaceAfter}`]:
+                            context.props.spaceAfter,
                         [`ce-frame--space-after-inside-${context.props.spaceAfterInside}`]:
                             context.props.spaceAfterInside &&
                             context.props.backgroundColor,

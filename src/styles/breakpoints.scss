@@ -1,5 +1,5 @@
-@use 'sass:map';
-@use 'variables';
+@use "sass:map";
+@use "variables";
 
 @mixin up($name) {
     @media only screen and (min-width: map.get(variables.$breakpoints, $name)) {
@@ -17,7 +17,7 @@
     @each $breakpoint, $container-max-width in variables.$container-max-widths {
         $min-width: map.get(variables.$breakpoints, $breakpoint);
 
-        @if $min-width == null {
+        @if not $min-width {
             @error '"#{$breakpoint}" defined in $container-max-widths but not in $breakpoints';
         }
 

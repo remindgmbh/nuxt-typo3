@@ -92,8 +92,8 @@ export default BaseCe.extend({
                     this.paginationPositionTop
                         ? createElement('solr-pagination', {
                               props: {
-                                  pagination: this.data.result.documents
-                                      .pagination,
+                                  pagination:
+                                      this.data.result.documents.pagination,
                                   form: this.data.form,
                               },
                           })
@@ -106,8 +106,8 @@ export default BaseCe.extend({
                     this.paginationPositionBottom
                         ? createElement('solr-pagination', {
                               props: {
-                                  pagination: this.data.result.documents
-                                      .pagination,
+                                  pagination:
+                                      this.data.result.documents.pagination,
                                   form: this.data.form,
                               },
                           })

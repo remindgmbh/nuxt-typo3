@@ -64,9 +64,8 @@ export default Vue.extend({
                                 class: [
                                     'r-accordion__link',
                                     {
-                                        'is-active': this.activeItems.includes(
-                                            index
-                                        ),
+                                        'is-active':
+                                            this.activeItems.includes(index),
                                     },
                                 ],
                                 attrs: {
@@ -88,15 +87,13 @@ export default Vue.extend({
                                       ? createElement(
                                             'section',
                                             {
-                                                class:
-                                                    'r-accordion__content-wrapper',
+                                                class: 'r-accordion__content-wrapper',
                                             },
                                             [
                                                 createElement(
                                                     'div',
                                                     {
-                                                        class:
-                                                            'r-accordion__content',
+                                                        class: 'r-accordion__content',
                                                     },
                                                     [
                                                         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
