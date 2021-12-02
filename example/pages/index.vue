@@ -1,5 +1,7 @@
 <template>
-    <div>Index</div>
+    <div>
+        <nuxt-link to="/menu">menu</nuxt-link>
+    </div>
 </template>
 
 <script lang="ts">

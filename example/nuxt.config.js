@@ -5,8 +5,19 @@ export default {
     rootDir: resolve(__dirname, '..'),
     buildDir: resolve(__dirname, '.nuxt'),
     srcDir: __dirname,
-    modules: [{ handler: require('../') }],
+    modules: ['../src/module', 'nuxt-typo3', '@nuxtjs/i18n', '~/modules/mock'],
     build: {
         transpile: ['nuxt-typo3'],
+        postcss: null,
+    },
+    typo3: {
+        baseURL: 'http://localhost:3000',
+        api: {
+            baseURL: 'http://localhost:3000/api',
+        },
+        i18n: {
+            locales: ['en'],
+            defaultLocale: 'en',
+        },
     },
 }

@@ -22,6 +22,7 @@
     "eslint-plugin-nuxt": "^3.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.1.1",
+    "msw": "^0.35.0",
     "nuxt": "^2.15.8",
     "nuxt-property-decorator": "^2.9.1",
     "postcss": "^8.4.4",
