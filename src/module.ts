@@ -6,10 +6,17 @@ import { Options } from './options'
 import de from './locale/de.json'
 
 const nuxtModule: Module = function () {
-    const rmndNuxtTypo3 = 'rmnd-nuxt-typo3'
+    const i18n = {
+        vueI18n: {
+            messages: {
+                de: {
+                    'rmnd-nuxt-typo3': de,
+                },
+            },
+        },
+    }
 
-    const messagesDe = this.options.i18n.vueI18n.messages.de
-    messagesDe[rmndNuxtTypo3] = defu(messagesDe[rmndNuxtTypo3], de)
+    this.options.i18n = defu(this.options.i18n, i18n)
 
     const options = defu(this.options.rmndTypo3, new Options())
 

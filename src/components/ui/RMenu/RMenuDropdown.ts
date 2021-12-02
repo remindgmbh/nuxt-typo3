@@ -92,14 +92,16 @@ export default (Vue as VueConstructor<Vue & Injectable>).extend({
                     },
                     this.items.map((item: any) =>
                         this.activeItem === item[this.idField]
-                            ? createElement(
-                                  'section',
-                                  {
-                                      key: item[this.idField],
-                                      class: 'r-menu__content',
+                            ? createElement('r-menu-content', {
+                                  key: item[this.idField],
+                                  props: { item, idField: this.idField },
+                                  scopedSlots: {
+                                      default: ({ item }) =>
+                                          this.$scopedSlots.default?.({
+                                              item,
+                                          }),
                                   },
-                                  this.$scopedSlots.default?.({ item })
-                              )
+                              })
                             : createElement()
                     )
                 ),

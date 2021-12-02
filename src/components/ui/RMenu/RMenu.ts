@@ -36,22 +36,17 @@ export default Vue.extend({
     },
     data() {
         return {
+            activeItem: this.value as string | null,
             dropdown: null as null | InstanceType<typeof RMenuDropdown>,
         }
     },
-    computed: {
-        activeItem: {
-            get(): string | null {
-                return this.value
-            },
-            set(value: string | null) {
-                this.$emit('input', value)
-            },
-        },
-    },
     watch: {
-        activeItem(newKey?: string): void {
-            this.dropdown?.$emit('set-active-item', newKey)
+        value(value: string | null): void {
+            this.activeItem = value
+        },
+        activeItem(value?: string): void {
+            this.dropdown?.$emit('set-active-item', value)
+            this.$emit('input', value)
         },
         $route(): void {
             this.close()
