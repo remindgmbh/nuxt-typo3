@@ -74,8 +74,7 @@ export default Vue.extend({
                                 on: { click: () => this.toggle(index) },
                             },
                             [
-                                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                                this.$scopedSlots.title!({
+                                this.$scopedSlots.title?.({
                                     item,
                                     index,
                                 }),
@@ -96,11 +95,11 @@ export default Vue.extend({
                                                         class: 'r-accordion__content',
                                                     },
                                                     [
-                                                        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                                                        this.$scopedSlots
-                                                            .content!({
-                                                            item,
-                                                        }),
+                                                        this.$scopedSlots.content?.(
+                                                            {
+                                                                item,
+                                                            }
+                                                        ),
                                                     ]
                                                 ),
                                             ]

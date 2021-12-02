@@ -58,16 +58,12 @@ export default Vue.extend({
             },
             [
                 createElement('header', { class: 'r-topbar-layout__bar' }, [
-                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                    this.$scopedSlots.bar!({ expanded: this.top }),
+                    this.$scopedSlots.bar?.({ expanded: this.top }),
                 ]),
                 createElement(
                     'main',
                     { class: 'r-topbar-layout__content', ref: 'content' },
-                    [
-                        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                        this.$scopedSlots.content!({ expanded: !this.top }),
-                    ]
+                    [this.$scopedSlots.content?.({ expanded: !this.top })]
                 ),
             ]
         )

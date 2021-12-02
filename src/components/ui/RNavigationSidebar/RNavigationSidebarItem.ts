@@ -40,8 +40,7 @@ export default Vue.extend({
                 props: { name: this.transitionName },
             },
             this.visible
-                ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                  this.$scopedSlots.default!({
+                ? this.$scopedSlots.default?.({
                       items: this.items,
                       back: this.back,
                   })

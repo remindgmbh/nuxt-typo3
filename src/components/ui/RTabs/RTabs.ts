@@ -35,8 +35,7 @@ export default Vue.extend({
                                 click: () => this.toggle(index),
                             },
                         },
-                        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                        this.$scopedSlots.title!({ item })
+                        this.$scopedSlots.title?.({ item })
                     )
                 ),
             ]),
@@ -59,8 +58,7 @@ export default Vue.extend({
                                           key: index,
                                           class: 'r-tabs__content',
                                       },
-                                      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                                      this.$scopedSlots.content!({ item })
+                                      this.$scopedSlots.content?.({ item })
                                   )
                                 : undefined
                         )

@@ -103,8 +103,7 @@ export default Vue.extend({
                     },
                     scopedSlots: {
                         default: ({ items, back }) => [
-                            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                            this.$scopedSlots.default!({
+                            this.$scopedSlots.default?.({
                                 items,
                                 back,
                                 level: sidebar.level,
