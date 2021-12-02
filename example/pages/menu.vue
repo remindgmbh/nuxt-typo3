@@ -1,5 +1,5 @@
 <template>
-    <r-menu class="menu-example">
+    <r-menu v-model="activeItem" class="menu-example">
         <r-menu-trigger id="item-1" class="menu-example__trigger"
             >trigger 1</r-menu-trigger
         >
@@ -21,7 +21,10 @@
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component
-export default class Index extends Vue {
+export default class Menu extends Vue {
+    // v-model is optional but can be used to initially show content or to determine current active item
+    activeItem = null
+
     items = [
         { id: 'item-1', content: 'content for item-1' },
         { id: 'item-2', content: 'content for item-2' },

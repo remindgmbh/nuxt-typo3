@@ -36,7 +36,7 @@ export default Vue.extend({
     },
     data() {
         return {
-            activeItem: this.value as string | null,
+            activeItem: null as string | null,
             dropdown: null as null | InstanceType<typeof RMenuDropdown>,
         }
     },
@@ -57,6 +57,7 @@ export default Vue.extend({
         if (!this.dropdown) {
             console.warn("RMenu doesn't contain RMenuDropdown")
         }
+        this.activeItem = this.value
     },
     methods: {
         close(): void {
