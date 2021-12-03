@@ -1,5 +1,6 @@
 <template>
     <div class="examples">
+        <nuxt-link to="/accordion">accordion</nuxt-link>
         <nuxt-link to="/menu">menu</nuxt-link>
         <nuxt-link to="/tabs">tabs</nuxt-link>
     </div>
