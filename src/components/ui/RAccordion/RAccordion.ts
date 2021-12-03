@@ -64,7 +64,7 @@ export default Vue.extend({
                                 class: [
                                     'r-accordion__link',
                                     {
-                                        'is-active':
+                                        'r-accordion__link--active':
                                             this.activeItems.includes(index),
                                     },
                                 ],
