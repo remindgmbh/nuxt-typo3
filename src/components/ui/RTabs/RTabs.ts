@@ -29,7 +29,10 @@ export default Vue.extend({
                             key: index,
                             class: [
                                 'r-tabs__link',
-                                { 'is-active': this.activeItem === index },
+                                {
+                                    'r-tabs__link--active':
+                                        this.activeItem === index,
+                                },
                             ],
                             on: {
                                 click: () => this.toggle(index),
