@@ -12,11 +12,15 @@ export default Vue.extend({
             required: true,
         },
     },
+    computed: {
+        id(): string {
+            return this.item[this.idField]
+        },
+    },
     render(createElement: CreateElement): VNode {
         return createElement(
             'section',
             {
-                key: this.item[this.idField],
                 class: 'r-menu__content',
             },
             this.$scopedSlots.default?.({ item: this.item })

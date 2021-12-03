@@ -2,7 +2,7 @@ import { directive as vClickOutside } from 'v-click-outside'
 import Vue, { CreateElement, VNode, VueConstructor } from 'vue'
 
 interface Injectable {
-    register: (dropdown: any) => void
+    register: (dropdown: Vue) => void
 }
 
 export default (Vue as VueConstructor<Vue & Injectable>).extend({

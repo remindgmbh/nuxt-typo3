@@ -1,7 +1,7 @@
 import Vue, { CreateElement, VNode, VueConstructor } from 'vue'
 
 interface Injectable {
-    register: (trigger: any) => void
+    register: (trigger: Vue) => void
 }
 
 export default (Vue as VueConstructor<Vue & Injectable>).extend({
