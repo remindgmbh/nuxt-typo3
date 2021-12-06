@@ -1,17 +1,21 @@
 .r-topbar-layout {
-    &__bar {
-        height: var(--top-bar-height);
-        position: fixed;
-        width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    &__header {
+        position: sticky;
+        top: 0;
         z-index: 1;
     }
 
     &__content {
-        padding-top: var(--top-bar-height);
-        min-height: calc(100vh - var(--top-bar-height));
-        position: relative;
-        z-index: 0;
+        flex-grow: 1;
         width: 100%;
-        display: flex;
+    }
+
+    &__sidebar {
+        flex-grow: 1;
+        z-index: 1;
     }
 }
