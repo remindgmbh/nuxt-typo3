@@ -1,7 +1,7 @@
 const ROOT_MARGINS = {
     top: '100% 0px -100% 0px',
-    right: '0px 100% 0px -101%',
-    bottom: '-101% 0px 100% 0px',
+    right: '0px 100% 0px -100%',
+    bottom: '-100% 0px 100% 0px',
     left: '0px -100% 0px 100%',
 }
 
