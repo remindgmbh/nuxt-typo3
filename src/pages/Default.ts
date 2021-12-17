@@ -40,14 +40,12 @@ export default (Vue as VueConstructor<Vue & DefaultPageAsyncData>).extend({
         },
     },
     render(createElement: CreateElement): VNode {
-        return createElement('div', { class: 'page' }, [
-            createElement('be-dynamic', {
-                props: {
-                    page: this.page.page,
-                    content: this.page.content,
-                    type: this.backendLayout,
-                },
-            }),
-        ])
+        return createElement('be-dynamic', {
+            props: {
+                page: this.page.page,
+                content: this.page.content,
+                type: this.backendLayout,
+            },
+        })
     },
 })
