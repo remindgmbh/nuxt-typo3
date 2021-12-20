@@ -1,6 +1,6 @@
 export interface Navigation {
     active: number
-    children: Navigation[]
+    children?: Navigation[]
     current: number
     link: string
     space: number

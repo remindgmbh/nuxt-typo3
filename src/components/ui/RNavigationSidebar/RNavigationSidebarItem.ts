@@ -19,7 +19,7 @@ export default Vue.extend({
     },
     computed: {
         items(): Array<{ title: string; open?: () => void }> {
-            return this.navigation.children.map((child) => ({
+            return (this.navigation.children || []).map((child) => ({
                 title: child.title,
                 open: child.children
                     ? () => this.$emit('open-sidebar', child.link)
