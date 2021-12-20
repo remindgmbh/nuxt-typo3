@@ -8,8 +8,9 @@ export default Vue.extend({
     name: 'SolrForm',
     props: {
         form: {
-            type: Object as PropType<SearchForm>,
-            required: true,
+            type: Object as PropType<SearchForm | null>,
+            required: false,
+            default: null,
         },
         disabled: {
             type: Boolean,
@@ -34,6 +35,10 @@ export default Vue.extend({
     },
     methods: {
         async getSuggestionList(value: string): Promise<string[]> {
+            if (!this.form) {
+                return Promise.resolve([])
+            }
+
             const response = await this.$axios.get(this.form.suggest.url, {
                 params: {
                     [this.form.suggest.queryParam]: value,
