@@ -27,57 +27,13 @@ export default BaseCe.extend({
             default: 'left',
         },
     },
-    computed: {
-        file(): Image {
-            return this.images[0]
-        },
-    },
     render(createElement: CreateElement): VNode {
-        const renderImage = () => {
-            return createElement(
-                'div',
-                {
-                    class: [
-                        'ce-textpic__image',
-                        { 'ce-textpic__image--small': this.ratio === 2 },
-                    ],
-                },
-                this.file
-                    ? [
-                          createElement('r-image', {
-                              props: { file: this.file },
-                          }),
-                      ]
-                    : []
-            )
-        }
-
-        const renderText = () => {
-            return createElement(
-                'div',
-                {
-                    class: [
-                        'ce-textpic__text',
-                        { 'ce-textpic__text--large': this.ratio === 2 },
-                    ],
-                },
-                [
-                    createElement('ce-header', { props: this.$props }),
-                    createElement('html-parser', {
-                        props: { content: this.bodytext },
-                    }),
-                ]
-            )
-        }
-
-        return createElement(
-            'div',
-            {
-                class: 'ce-textpic',
+        return createElement('ce-textmedia', {
+            props: {
+                assets: this.images,
+                assetPosition: this.imagePosition,
+                ...this.$props,
             },
-            this.imagePosition === 'left'
-                ? [renderImage.call(this), renderText.call(this)]
-                : [renderText.call(this), renderImage.call(this)]
-        )
+        })
     },
 })

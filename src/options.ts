@@ -24,6 +24,9 @@ export class Options {
         tabs: {
             noWrapper: true,
         },
+        textmedia: {
+            noWrapper: true,
+        },
         textpic: {
             noWrapper: true,
         },
