@@ -4,35 +4,51 @@
     display: flex;
     flex-wrap: wrap;
 
-    &__media {
+    &__asset {
         width: 50%;
 
-        figure {
-            margin: 0;
-            line-height: 0;
-        }
+        .ce-media-image {
+            &,
+            & > div,
+            figure,
+            img {
+                width: 100%;
+                height: 100%;
+            }
 
-        .ce-media-image,
-        .ce-media-image > div,
-        figure,
-        img,
-        video,
-        iframe {
-            width: 100%;
-            height: 100%;
-        }
+            figure {
+                margin: 0;
+                line-height: 0;
+            }
 
-        video {
-            background-color: variables.$color-black;
-        }
-
-        img {
-            object-fit: cover;
-            object-position: top;
+            img {
+                object-fit: cover;
+                object-position: top;
+            }
         }
 
         &--small {
             width: calc(1 / 3 * 100%);
+        }
+    }
+
+    &__video-container {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+
+        // Aspect Ratio 16 / 9
+        padding-top: calc(9 / 16 * 100%);
+
+        video,
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
         }
     }
 

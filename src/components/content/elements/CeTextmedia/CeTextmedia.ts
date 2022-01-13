@@ -32,23 +32,39 @@ export default BaseCe.extend({
         },
     },
     render(createElement: CreateElement): VNode {
-        const renderImage = () => {
+        const renderAsset = () => {
             return createElement(
                 'div',
                 {
                     class: [
-                        'ce-textmedia__media',
-                        { 'ce-textmedia__media--small': this.ratio === 2 },
+                        'ce-textmedia__asset',
+                        { 'ce-textmedia__asset--small': this.ratio === 2 },
                     ],
                 },
                 this.file
                     ? [
-                          createElement('ce-media-file', {
-                              props: { file: this.file },
-                          }),
+                          this.file.properties.type === 'video'
+                              ? renderVideo()
+                              : renderFile(),
                       ]
                     : []
             )
+        }
+
+        const renderVideo = () => {
+            return createElement(
+                'div',
+                {
+                    class: 'ce-textmedia__video-container',
+                },
+                [renderFile()]
+            )
+        }
+
+        const renderFile = () => {
+            return createElement('ce-media-file', {
+                props: { file: this.file },
+            })
         }
 
         const renderText = () => {
@@ -75,8 +91,8 @@ export default BaseCe.extend({
                 class: 'ce-textmedia',
             },
             this.assetPosition === 'left'
-                ? [renderImage.call(this), renderText.call(this)]
-                : [renderText.call(this), renderImage.call(this)]
+                ? [renderAsset.call(this), renderText.call(this)]
+                : [renderText.call(this), renderAsset.call(this)]
         )
     },
 })
