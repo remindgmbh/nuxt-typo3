@@ -18,15 +18,21 @@ export default Vue.extend({
                         content: document.content,
                     },
                 })
+            } else {
+                return createElement('br')
             }
         }
 
         const renderDocument = (document: SearchDocument) => {
             return createElement('div', { class: 'solr-result__item' }, [
-                createElement('html-parser', {
-                    class: 'solr-result__title',
-                    props: { content: document.title },
-                }),
+                createElement(
+                    'r-typolink',
+                    {
+                        class: 'solr-result__title',
+                        props: { to: document.url },
+                    },
+                    document.title
+                ),
                 renderContent(document),
                 createElement(
                     'r-typolink',
@@ -34,7 +40,7 @@ export default Vue.extend({
                         class: 'solr-result__link',
                         props: { to: document.url },
                     },
-                    this.$t('rmnd-nuxt-typo3.search.link').toString()
+                    document.url.url
                 ),
             ])
         }
