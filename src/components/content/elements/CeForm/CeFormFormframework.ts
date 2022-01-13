@@ -40,6 +40,7 @@ class FormInput {
     placeholder: any
     options: any
     validation: string[]
+    accept?: string
 
     constructor(formId: string, formElement: FormElement) {
         this.id = formElement.identifier
@@ -52,6 +53,15 @@ class FormInput {
         this.validation = (formElement.validators || []).map(
             (validator) => VALIDATIONS[validator.identifier]
         )
+        if (formElement.properties.allowedMimeTypes) {
+            const allowedMimeTypes = formElement.properties
+                .allowedMimeTypes as string[]
+            if (allowedMimeTypes.length > 0) {
+                const joinedAllowedMimeTypes = allowedMimeTypes.join(',')
+                this.validation.push(`mime:${joinedAllowedMimeTypes}`)
+                this.accept = joinedAllowedMimeTypes
+            }
+        }
     }
 }
 
