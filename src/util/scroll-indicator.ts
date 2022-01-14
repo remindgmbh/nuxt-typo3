@@ -8,18 +8,35 @@ const ROOT_MARGINS = {
 export interface Options {
     viewport?: Element
     content: Element
-    direction: keyof typeof ROOT_MARGINS
+    direction: keyof typeof ROOT_MARGINS | 'right-fixed'
 }
 
 export class ScrollIndicator {
     private content: Element
     private viewport?: Element
-    private direction: keyof typeof ROOT_MARGINS
+    private direction: keyof typeof ROOT_MARGINS | 'right-fixed'
 
     constructor(options: Options) {
         this.viewport = options.viewport
         this.content = options.content
         this.direction = options.direction
+
+        // Content with auto or percentage width can contain subpixels.
+        // This can lead to IntersectionObserver not detecting scrolls to the right,
+        // because less than a pixel is missing to intersect.
+        if (this.viewport && this.direction === 'right') {
+            const content = this.content as HTMLElement
+
+            const resizeObserver = new ResizeObserver(() => {
+                content.style.width = '100%'
+
+                const width = parseFloat(getComputedStyle(content).width)
+                if (!Number.isInteger(width)) {
+                    content.style.width = `${Math.ceil(width)}px`
+                }
+            })
+            resizeObserver.observe(this.viewport)
+        }
     }
 
     public watch(callback: (detached: boolean) => void): void {
@@ -32,8 +49,13 @@ export class ScrollIndicator {
             },
             {
                 root: this.viewport,
-                rootMargin: ROOT_MARGINS[this.direction],
-                threshold: [0, 1e-12],
+                rootMargin:
+                    ROOT_MARGINS[
+                        this.direction === 'right-fixed'
+                            ? 'right'
+                            : this.direction
+                    ],
+                threshold: [0, Number.MIN_VALUE],
             }
         )
         io.observe(this.content)
