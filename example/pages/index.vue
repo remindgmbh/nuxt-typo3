@@ -2,6 +2,7 @@
     <div class="examples">
         <nuxt-link to="/accordion">accordion</nuxt-link>
         <nuxt-link to="/menu">menu</nuxt-link>
+        <nuxt-link to="/scroll-indicator">scroll-indicator</nuxt-link>
         <nuxt-link to="/tabs">tabs</nuxt-link>
         <nuxt-link to="/topbar-layout">topbar-layout</nuxt-link>
     </div>
