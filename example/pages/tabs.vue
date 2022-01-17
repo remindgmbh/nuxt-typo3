@@ -1,8 +1,8 @@
 <template>
-    <r-tabs :items="items">
+    <t3-tabs :items="items">
         <template #title="{ item }">{{ item.title }}</template>
         <template #content="{ item }">{{ item.content }}</template>
-    </r-tabs>
+    </t3-tabs>
 </template>
 
 <script lang="ts">
@@ -17,7 +17,7 @@ export default class TabsExample extends Vue {
 }
 </script>
 <style lang="scss">
-.r-tabs {
+.t3-tabs {
     background-color: lightgrey;
 
     &__link {

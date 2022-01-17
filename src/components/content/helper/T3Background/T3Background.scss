@@ -1,0 +1,23 @@
+@use "../../../../styles/variables.scss" as *;
+
+.t3-background {
+    &--primary {
+        background-color: $color-primary;
+    }
+
+    &--secondary {
+        background-color: $color-secondary;
+    }
+
+    &--accent {
+        background-color: $color-accent;
+    }
+
+    &--white {
+        background-color: $color-white;
+    }
+
+    &--black {
+        background-color: $color-black;
+    }
+}

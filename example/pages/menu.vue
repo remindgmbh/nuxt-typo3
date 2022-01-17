@@ -1,20 +1,20 @@
 <template>
-    <r-menu v-model="activeItem" class="menu-example">
-        <r-menu-trigger id="item-1" class="menu-example__trigger"
-            >trigger 1</r-menu-trigger
+    <t3-menu v-model="activeItem" class="menu-example">
+        <t3-menu-trigger id="item-1" class="menu-example__trigger"
+            >trigger 1</t3-menu-trigger
         >
-        <r-menu-trigger id="item-2" class="menu-example__trigger"
-            >trigger 2</r-menu-trigger
+        <t3-menu-trigger id="item-2" class="menu-example__trigger"
+            >trigger 2</t3-menu-trigger
         >
-        <r-menu-dropdown
+        <t3-menu-dropdown
             v-slot="{ item }"
             class="menu-example__dropdown"
             :items="items"
             close-on-outside-click
         >
             <div class="menu-example__content">{{ item.content }}</div>
-        </r-menu-dropdown>
-    </r-menu>
+        </t3-menu-dropdown>
+    </t3-menu>
 </template>
 
 <script lang="ts">

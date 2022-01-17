@@ -1,8 +1,8 @@
 <template>
-    <r-accordion :items="items">
+    <t3-accordion :items="items">
         <template #title="{ item }">{{ item.title }}</template>
         <template #content="{ item }">{{ item.content }}</template>
-    </r-accordion>
+    </t3-accordion>
 </template>
 
 <script lang="ts">
@@ -17,7 +17,7 @@ export default class AccordionExample extends Vue {
 }
 </script>
 <style lang="scss">
-.r-accordion {
+.t3-accordion {
     &__item {
         background-color: lightgrey;
     }

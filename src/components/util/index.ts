@@ -1,3 +1,4 @@
-export { default as RImage } from './RImage'
-export { default as RScrollIndicator } from './RScrollIndicator/RScrollIndicator'
-export { default as RTypolink } from './RTypolink'
+export * from './T3Image'
+export * from './T3ResponsiveHeightContainer'
+export * from './T3ScrollIndicator'
+export * from './T3Typolink'

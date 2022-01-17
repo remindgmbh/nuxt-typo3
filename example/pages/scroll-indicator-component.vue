@@ -1,5 +1,5 @@
 <template>
-    <r-scroll-indicator top right bottom left class="scroll-indicator-example">
+    <t3-scroll-indicator top right bottom left class="scroll-indicator-example">
         <template #top="{ visible }">
             <div
                 class="scroll-indicator-example__top"
@@ -31,7 +31,7 @@
             ></div>
         </template>
         <div ref="content" class="scroll-indicator-example__content"></div>
-    </r-scroll-indicator>
+    </t3-scroll-indicator>
 </template>
 
 <script lang="ts">

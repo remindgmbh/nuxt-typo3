@@ -1,11 +1,24 @@
 import Vue from 'vue'
 import { Plugin } from '@nuxt/types'
 
-import HtmlParser from '~rmnd-typo3/components/util/HtmlParser.vue'
-import * as components from '~rmnd-typo3/components'
+import * as content from '~rmnd-typo3/components/content'
+import * as layout from '~rmnd-typo3/components/layout'
+import * as transition from '~rmnd-typo3/components/transition'
+import * as ui from '~rmnd-typo3/components/ui'
+import * as util from '~rmnd-typo3/components/util'
+import * as vueFormulate from '~rmnd-typo3/components/vue-formulate'
+
+const components = {
+    ...content,
+    ...layout,
+    ...transition,
+    ...ui,
+    ...util,
+    ...vueFormulate,
+}
 
 const plugin: Plugin = ({ app }) => {
-    Object.keys({ ...components, HtmlParser }).forEach((key) => {
+    Object.keys(components).forEach((key) => {
         if (app.components) {
             Vue.component(key, components[key])
             app.components[key] = components[key]

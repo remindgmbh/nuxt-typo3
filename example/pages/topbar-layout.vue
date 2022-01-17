@@ -1,26 +1,26 @@
 <template>
-    <r-topbar-layout
+    <t3-topbar-layout
         class="topbar-example"
         :scrollbar-disabled="scrollbarDisabled"
     >
-        <r-topbar-layout-header class="topbar-example__header">
+        <t3-topbar-layout-header class="topbar-example__header">
             <div>header</div>
             <button @click="sidebarVisible = !sidebarVisible">
                 toggle sidebar
             </button>
-        </r-topbar-layout-header>
-        <r-topbar-layout-content ref="content" class="topbar-example__content">
+        </t3-topbar-layout-header>
+        <t3-topbar-layout-content ref="content" class="topbar-example__content">
             <button @click="scrollbarDisabled = !scrollbarDisabled">
                 toggle scrollbar
             </button>
-        </r-topbar-layout-content>
-        <r-topbar-layout-sidebar
+        </t3-topbar-layout-content>
+        <t3-topbar-layout-sidebar
             v-model="sidebarVisible"
             class="topbar-example__sidebar"
         >
             <div>sidebar content</div>
-        </r-topbar-layout-sidebar>
-    </r-topbar-layout>
+        </t3-topbar-layout-sidebar>
+    </t3-topbar-layout>
 </template>
 
 <script lang="ts">
@@ -33,7 +33,7 @@ export default class TopbarLayoutExample extends Vue {
 }
 </script>
 <style lang="scss">
-@forward '../../src/components/ui/RTopbarLayout/RTopbarLayout';
+@forward '../../src/components/layout/T3TopbarLayout/T3TopbarLayout';
 
 .topbar-example {
     height: 32rem;

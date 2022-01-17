@@ -1,35 +1,3 @@
 @forward "variables";
 @forward "container";
 @forward "text";
-
-// the following styles have to be imported here instead of
-// in the respective component files to allow variable overrides
-
-// layouts
-@forward "../layouts/backend/BeDefault/BeDefault";
-
-//  components
-
-//      content
-
-//          helper
-@forward "../components/content/helper/CeBackground/CeBackground";
-@forward "../components/content/helper/CeFrame/CeFrame";
-@forward "../components/content/helper/CeWrapper/CeWrapper";
-
-//          elements
-@forward "../components/content/elements/CeAccordion/CeAccordion";
-@forward "../components/content/elements/CeHeader/CeHeader";
-@forward "../components/content/elements/CeImage/CeImage";
-@forward "../components/content/elements/CeTable/CeTable";
-@forward "../components/content/elements/CeTabs/CeTabs";
-@forward "../components/content/elements/CeTextmedia/CeTextmedia";
-
-//          ui
-@forward "../components/ui/RModal/RModal.scss";
-@forward "../components/ui/RNavigationSidebar/RNavigationSidebar.scss";
-@forward "../components/ui/RResponsiveHeightContainer/RResponsiveHeightContainer.scss";
-@forward "../components/ui/RTopbarLayout/RTopbarLayout.scss";
-
-//          util
-@forward "../components/util/RScrollIndicator/RScrollIndicator.scss";
