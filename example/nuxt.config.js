@@ -13,6 +13,7 @@ export default {
         transpile: ['nuxt-typo3'],
         postcss: null,
     },
+    css: ['../src/styles/index'],
     typo3: {
         baseURL: 'http://localhost:4000',
         api: {

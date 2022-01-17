@@ -1,0 +1,16 @@
+.r-scroll-indicator {
+    position: relative;
+
+    &__viewport {
+        overflow: auto;
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__content {
+        display: inline-block;
+        position: relative;
+        min-width: 100%;
+    }
+}

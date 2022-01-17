@@ -21,7 +21,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component
-export default class Menu extends Vue {
+export default class MenuExample extends Vue {
     // v-model is optional but can be used to initially show content or to determine current active item
     activeItem = null
 

@@ -27,7 +27,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import { ScrollIndicator } from '../../src/util/scroll-indicator'
 
 @Component
-export default class TopbarLayout extends Vue {
+export default class ScrollIndicatorExample extends Vue {
     top = true
     right = false
     bottom = false

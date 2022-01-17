@@ -9,7 +9,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component
-export default class Tabs extends Vue {
+export default class TabsExample extends Vue {
     items = [
         { title: 'item-1', content: 'content for item-1' },
         { title: 'item-2', content: 'content for item-2' },
