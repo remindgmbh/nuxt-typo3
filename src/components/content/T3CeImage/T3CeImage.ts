@@ -1,7 +1,7 @@
 import { CreateElement, PropType, VNode } from 'vue'
 import { Image } from '../../../api'
 import BaseCe from '../../../mixins/components/BaseCe'
-// import './T3CeImage.scss'
+import './T3CeImage.scss'
 
 export default BaseCe.extend({
     name: 'T3CeImage',
@@ -23,7 +23,7 @@ export default BaseCe.extend({
 
         return createElement(
             'div',
-            { class: 'ce-image' },
+            { class: 't3-ce-image' },
             this.file
                 ? [
                       renderHeader.call(this),
