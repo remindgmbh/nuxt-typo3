@@ -78,11 +78,6 @@ class StaticText {
 export default BaseCe.extend({
     name: 'T3CeFormFormframework',
     props: {
-        bodytext: {
-            type: String,
-            required: true,
-            default: '',
-        },
         form: {
             type: Object as PropType<Form>,
             required: true,
