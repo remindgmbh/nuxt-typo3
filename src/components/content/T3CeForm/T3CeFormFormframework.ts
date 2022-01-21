@@ -17,6 +17,7 @@ const TYPES = {
     FileUpload: 'file',
     Checkbox: 'checkbox',
     RadioButton: 'radio',
+    GridRow: 'row',
 }
 
 const STATIC_TEXT = 'StaticText'
@@ -32,7 +33,7 @@ function getFormElementName(formId: string, formElement: FormElement): string {
     return `tx_form_formframework[${formId}][${formElement.identifier}]`
 }
 
-class FormInput {
+class FormulateElement {
     id: string
     name: string
     type: any
@@ -41,6 +42,9 @@ class FormInput {
     options: any
     validation: string[]
     accept?: string
+    // eslint-disable-next-line no-use-before-define
+    elements?: FormulateElement[]
+    size?: number
 
     constructor(formId: string, formElement: FormElement) {
         this.id = formElement.identifier
@@ -53,6 +57,14 @@ class FormInput {
         this.validation = (formElement.validators || []).map(
             (validator) => VALIDATIONS[validator.identifier]
         )
+        if (formElement.elements) {
+            this.elements = formElement.elements
+                .filter((element) => element.type !== STATIC_TEXT)
+                .map((element) => new FormulateElement(formId, element))
+        }
+        if (formElement.properties.size) {
+            this.size = formElement.properties.size
+        }
         if (formElement.properties.allowedMimeTypes) {
             const allowedMimeTypes = formElement.properties
                 .allowedMimeTypes as string[]
@@ -104,11 +116,11 @@ export default BaseCe.extend({
                 return result
             }, {})
         },
-        formInputs(): Array<FormInput | StaticText> {
-            return this.form.elements.map((formElement) => {
-                return formElement.type === STATIC_TEXT
-                    ? new StaticText(formElement)
-                    : new FormInput(this.form.id, formElement)
+        formulateElements(): Array<FormulateElement | StaticText> {
+            return this.form.elements.map((element) => {
+                return element.type === STATIC_TEXT
+                    ? new StaticText(element)
+                    : new FormulateElement(this.form.id, element)
             })
         },
     },
@@ -118,8 +130,8 @@ export default BaseCe.extend({
         }
     },
     methods: {
-        uploadFile(file: File, formInput: FormInput): void {
-            this.files[formInput.name] = file
+        uploadFile(file: File, element: FormulateElement): void {
+            this.files[element.name] = file
         },
         async submit(data: { [key: string]: any }): Promise<void> {
             const formData = Object.keys(data).reduce((result, key) => {
@@ -146,44 +158,86 @@ export default BaseCe.extend({
         },
     },
     render(createElement: CreateElement): VNode {
-        const formulateInputs = (isLoading: boolean) => {
-            return this.formInputs.map((formInput) => {
-                return formInput instanceof StaticText
-                    ? createElement(
-                          'div',
-                          { class: 't3-ce-form__static-text' },
-                          [
-                              createElement('div', formInput.label),
-                              createElement('div', formInput.text),
-                          ]
-                      )
-                    : createElement('FormulateInput', {
-                          key: formInput.id,
-                          props: {
-                              uploader: (file: File) =>
-                                  this.uploadFile(file, formInput),
-                          },
-                          attrs: {
-                              disabled: isLoading,
-                              ...formInput,
-                          },
-                          class: {
-                              required: formInput.validation.includes(
-                                  VALIDATIONS.NotEmpty
-                              ),
-                          },
-                          scopedSlots: {
-                              errors: ({ visibleValidationErrors }) => {
-                                  return this.$scopedSlots.errors?.({
-                                      visibleValidationErrors,
-                                  })
-                              },
-                          },
-                      })
+        const renderElements = (isLoading: boolean) => {
+            return createElement(
+                'div',
+                { class: 't3-ce-form__elements' },
+                this.formulateElements.map((element) =>
+                    element instanceof StaticText
+                        ? renderStaticText(element)
+                        : renderElement(element, isLoading)
+                )
+            )
+        }
+
+        const renderStaticText = (staticText: StaticText) => {
+            return createElement('div', { class: 't3-ce-form__static-text' }, [
+                createElement('div', staticText.label),
+                createElement('div', staticText.text),
+            ])
+        }
+
+        const renderRow = (
+            elements: FormulateElement[] = [],
+            isLoading: boolean
+        ) => {
+            return createElement(
+                'div',
+                {
+                    class: 't3-ce-form__row',
+                },
+                elements.map((element) => {
+                    return renderElement(element, isLoading, true)
+                })
+            )
+        }
+
+        const renderElement = (
+            element: FormulateElement,
+            isLoading: boolean,
+            parentIsRow?: boolean
+        ) => {
+            if (element.type === 'row' && element.elements) {
+                return renderRow(element.elements, isLoading)
+            }
+
+            if (element.size && !parentIsRow) {
+                return renderRow([element], isLoading)
+            }
+
+            return renderInput(element, isLoading)
+        }
+
+        const renderInput = (element: FormulateElement, isLoading: boolean) => {
+            return createElement('FormulateInput', {
+                key: element.id,
+                props: {
+                    uploader: (file: File) => this.uploadFile(file, element),
+                },
+                attrs: {
+                    disabled: isLoading,
+                    ...element,
+                },
+                class: [
+                    't3-ce-form__element',
+                    {
+                        [`t3-ce-form__element--${element.size}`]: element.size,
+                        required: element.validation.includes(
+                            VALIDATIONS.NotEmpty
+                        ),
+                    },
+                ],
+                scopedSlots: {
+                    errors: ({ visibleValidationErrors }) => {
+                        return this.$scopedSlots.errors?.({
+                            visibleValidationErrors,
+                        })
+                    },
+                },
             })
         }
 
-        const submitButton = (isLoading: boolean) => {
+        const renderSubmitButton = (isLoading: boolean) => {
             return createElement('FormulateInput', {
                 props: {
                     type: 'submit',
@@ -208,8 +262,8 @@ export default BaseCe.extend({
                 scopedSlots: {
                     default({ isLoading }: { isLoading: boolean }): VNode[] {
                         return [
-                            ...formulateInputs(isLoading),
-                            submitButton(isLoading),
+                            renderElements(isLoading),
+                            renderSubmitButton(isLoading),
                         ]
                     },
                 },

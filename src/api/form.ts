@@ -8,6 +8,7 @@ export interface FormElement {
     validators: Array<{
         identifier: string
     }>
+    elements?: FormElement[]
 }
 
 export interface Form {
