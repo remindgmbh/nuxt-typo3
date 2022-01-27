@@ -2,8 +2,26 @@
     top: 0;
     left: 0;
     position: fixed;
-    height: 100%;
-    width: 100%;
-    z-index: 1;
-    overflow-y: auto;
+    width: 0;
+    height: 0;
+    overflow: auto;
+    display: flex;
+
+    &--visible {
+        height: 100%;
+        width: 100%;
+    }
+
+    &--transitioning {
+        overflow: hidden;
+    }
+
+    &__background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: -1;
+    }
 }
