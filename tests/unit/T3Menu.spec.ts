@@ -24,7 +24,7 @@ describe('RMenu', () => {
     const localVue = createLocalVue()
     localVue.component('T3MenuContent', T3MenuContent)
 
-    let mountFunction: (options?: {
+    const mountFunction: (options?: {
         menu?: ThisTypedMountOptions<InstanceType<typeof T3Menu>>
         trigger?: VNodeData
         dropdown?: VNodeData
@@ -33,66 +33,62 @@ describe('RMenu', () => {
         triggerWrapper: Wrapper<InstanceType<typeof T3MenuTrigger>>
         dropdownWrapper: Wrapper<InstanceType<typeof T3MenuDropdown>>
         getContentWrapper: () => Wrapper<InstanceType<typeof T3MenuContent>>
-    }
+    } = (options = { menu: {}, dropdown: {}, trigger: {} }) => {
+        const items: Array<{ id: string }> = []
+        const triggers: Array<{ render(h: CreateElement): VNode }> = []
 
-    beforeEach(() => {
-        mountFunction = (options = { menu: {}, dropdown: {}, trigger: {} }) => {
-            const items: Array<{ id: string }> = []
-            const triggers: Array<{ render(h: CreateElement): VNode }> = []
-
-            for (let index = 1; index < 5; index++) {
-                const id = `item-${index}`
-                items.push({ id })
-                triggers.push({
-                    render(h: CreateElement): VNode {
-                        return h(
-                            T3MenuTrigger,
-                            defu(options.trigger ?? {}, { props: { id } })
-                        )
-                    },
-                })
-            }
-
-            const dropdown = {
+        for (let index = 1; index < 5; index++) {
+            const id = `item-${index}`
+            items.push({ id })
+            triggers.push({
                 render(h: CreateElement): VNode {
                     return h(
-                        T3MenuDropdown,
-                        defu(options.dropdown ?? {}, {
-                            props: { items },
-                        })
+                        T3MenuTrigger,
+                        defu(options.trigger ?? {}, { props: { id } })
                     )
                 },
-            }
-
-            const menuWrapper = mount(
-                T3Menu,
-                defu(options.menu ?? {}, {
-                    slots: {
-                        default: [...triggers, dropdown],
-                    },
-                    localVue,
-                })
-            )
-
-            const triggerWrapper = menuWrapper.findComponent(
-                T3MenuTrigger
-            ) as Wrapper<InstanceType<typeof T3MenuTrigger>>
-            const dropdownWrapper = menuWrapper.findComponent(
-                T3MenuDropdown
-            ) as Wrapper<InstanceType<typeof T3MenuDropdown>>
-            const getContentWrapper = () =>
-                menuWrapper.findComponent(T3MenuContent) as Wrapper<
-                    InstanceType<typeof T3MenuContent>
-                >
-
-            return {
-                menuWrapper,
-                triggerWrapper,
-                dropdownWrapper,
-                getContentWrapper,
-            }
+            })
         }
-    })
+
+        const dropdown = {
+            render(h: CreateElement): VNode {
+                return h(
+                    T3MenuDropdown,
+                    defu(options.dropdown ?? {}, {
+                        props: { items },
+                    })
+                )
+            },
+        }
+
+        const menuWrapper = mount(
+            T3Menu,
+            defu(options.menu ?? {}, {
+                slots: {
+                    default: [...triggers, dropdown],
+                },
+                localVue,
+            })
+        )
+
+        const triggerWrapper = menuWrapper.findComponent(
+            T3MenuTrigger
+        ) as Wrapper<InstanceType<typeof T3MenuTrigger>>
+        const dropdownWrapper = menuWrapper.findComponent(
+            T3MenuDropdown
+        ) as Wrapper<InstanceType<typeof T3MenuDropdown>>
+        const getContentWrapper = () =>
+            menuWrapper.findComponent(T3MenuContent) as Wrapper<
+                InstanceType<typeof T3MenuContent>
+            >
+
+        return {
+            menuWrapper,
+            triggerWrapper,
+            dropdownWrapper,
+            getContentWrapper,
+        }
+    }
 
     it('should register dropdown', () => {
         const { menuWrapper } = mountFunction()
