@@ -19,7 +19,10 @@ export default BaseBl.extend({
             return this.options.layout.container
         },
         showBreadcrumbs(): boolean {
-            return this.breadcrumbs.length > 1
+            return (
+                this.breadcrumbs.length > 1 &&
+                !!this.breadcrumbs[this.breadcrumbs.length - 1].current
+            )
         },
     },
     render(createElement: CreateElement): VNode {
