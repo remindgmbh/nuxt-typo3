@@ -13,7 +13,9 @@ export interface FormElement {
 
 export interface Form {
     api: {
-        actionAfterSuccess: any
+        actionAfterSuccess?: {
+            redirectUri?: string
+        }
         errors: { [fieldName: string]: string } | null
         page: {
             current: number

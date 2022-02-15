@@ -151,6 +151,12 @@ export default BaseCe.extend({
             })
             this.$nextTick(() => {
                 if (this.isSuccess) {
+                    const redirectUri =
+                        this.form.api.actionAfterSuccess?.redirectUri
+                    if (redirectUri) {
+                        this.$router.push(redirectUri)
+                    }
+
                     this.files = {}
                     this.$formulate.reset(this.form.id, this.initialValues)
                 }
