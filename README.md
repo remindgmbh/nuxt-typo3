@@ -1,12 +1,21 @@
-# rmnd-nuxt-typo3
+# REMIND - Nuxt TYPO3
+
+This module is an extension to [nuxt-typo3](https://github.com/TYPO3-Headless/nuxt-typo3) and contains layouts and content elements defined in remind/typo3-headless as well as general Vue components to be used in a frontend application.
 
 ## Requirements
 
+### Backend
+TYPO3 Instance with the following extensions:
+- friendsoftypo3/headless
+- remind/typo3-content
+- remind/typo3-headless
+
+### Frontend
 - nuxt-typo3
 
 ## Installation
 
-1. install using npm install `rmnd-nuxt-typo3`
+1. install using npm install `@remindgmbh/nuxt-typo3`
 
 2. add module in nuxt.config.js
 
@@ -15,7 +24,7 @@
        ...
        modules: [
            ...
-           'rmnd-nuxt-typo3',
+           '@remindgmbh/nuxt-typo3',
            'nuxt-typo3',
            ...
        ]
@@ -23,7 +32,7 @@
    }
    ```
 
-   **IMPORTANT: **`rmnd-nuxt-typo3` has to be above `nuxt-typo3`
+   **IMPORTANT: **`@remindgmbh/nuxt-typo3` has to be above `nuxt-typo3`
 
    
 
@@ -33,7 +42,7 @@
    export default {
        ...
        css: [
-           'rmnd-nuxt-typo3/src/styles/index.scss'
+           '@remindgmbh/nuxt-typo3/src/styles/index.scss'
        ]
        ...
    }
@@ -69,17 +78,17 @@ export default {
 
 ### SCSS Variables
 
-Instead of including `rmnd-nuxt-typo3/src/styles/index.scss` in `nuxt.config.js` create a new scss file, override variables and include the new file in `nuxt.config.js`:
+Instead of including `@remindgmbh/nuxt-typo3/src/styles/index.scss` in `nuxt.config.js` create a new scss file, override variables and include the new file in `nuxt.config.js`:
 
 ```scss
 // ./assets/styles/custom.scss
 
-@forward 'rmnd-nuxt-typo3/src/styles/variables' with (
+@forward '@remindgmbh/nuxt-typo3/src/styles/variables' with (
     $color-primary: red,
     $color-accent: blue,
 );
     
-@forward 'rmnd-nuxt-typo3/src/styles/index';
+@forward '@remindgmbh/nuxt-typo3/src/styles/index';
 ```
 
 ```
@@ -92,5 +101,9 @@ export default {
 }
 ```
 
-Variables available for override can be found in `rmnd-nuxt-typo3/src/styles/variables`.
+Variables available for override can be found in `@remindgmbh/nuxt-typo3/src/styles/variables`.
 
+## Development
+
+The easiest way to develop this module is to use yalc to add it to a nuxt application. Yalc can be installed globally using `npm i yalc -g`. Use `yalc add @remindgmbh/nuxt-typo3` in your nuxt application to add the dependency.
+In this module run `npm run watch` to watch for changes and then automatically publish these changes to yalc.

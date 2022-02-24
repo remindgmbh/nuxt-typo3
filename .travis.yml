@@ -1,0 +1,16 @@
+language: node_js
+
+os: linux
+dist: xenial
+
+node_js:
+    - 16
+    - lts/*
+
+notifications:
+    email:
+        on_success: never
+
+script:
+  - npm i
+  - npm test
