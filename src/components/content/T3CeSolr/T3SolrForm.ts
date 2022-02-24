@@ -66,6 +66,7 @@ export default Vue.extend({
                             value: this.searchTerm,
                         },
                         attrs: {
+                            autocomplete: 'off',
                             disabled: this.isLoading || this.disabled,
                             placeholder: this.$t(
                                 'rmnd-nuxt-typo3.search.term'
