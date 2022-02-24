@@ -1,7 +1,9 @@
 {
-  "name": "rmnd-nuxt-typo3",
+  "name": "@remindgmbh/nuxt-typo3",
   "version": "0.1.0",
-  "private": true,
+  "description": "Extension to nuxt-typo3 module",
+  "author": "David Mellen <d.mellen@remind.de>",
+  "license": "BSD-3-Clause",
   "main": "src/index.ts",
   "scripts": {
     "dev": "nuxt example",
