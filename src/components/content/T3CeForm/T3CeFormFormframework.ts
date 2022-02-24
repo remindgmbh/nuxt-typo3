@@ -4,29 +4,29 @@ import { Form, FormElement, Typolink } from '../../../api'
 import { SET_CONTENT } from '../../../pages/Default'
 
 // Map TYPO3 Input types to vueformulate
-const TYPES = {
-    Text: 'text',
-    Textarea: 'textarea',
-    Password: 'password',
-    Email: 'email',
-    Telephone: 'tel',
-    Url: 'url',
-    Number: 'number',
-    Date: 'date',
-    SingleSelect: 'select',
-    FileUpload: 'file',
-    Checkbox: 'checkbox',
-    RadioButton: 'radio',
-    GridRow: 'row',
+enum TYPES {
+    Text = 'text',
+    Textarea = 'textarea',
+    Password = 'password',
+    Email = 'email',
+    Telephone = 'tel',
+    Url = 'url',
+    Number = 'number',
+    Date = 'date',
+    SingleSelect = 'select',
+    FileUpload = 'file',
+    Checkbox = 'checkbox',
+    RadioButton = 'radio',
+    GridRow = 'row',
 }
 
 const STATIC_TEXT = 'StaticText'
 
 // Map TYPO3 validation rules to vueformulate
-const VALIDATIONS = {
-    EmailAddress: 'email',
-    NotEmpty: 'required',
-    Number: 'number',
+enum VALIDATIONS {
+    EmailAddress = 'email',
+    NotEmpty = 'required',
+    Number = 'number',
 }
 
 function getFormElementName(formId: string, formElement: FormElement): string {
@@ -110,11 +110,10 @@ export default BaseCe.extend({
             return this.isSuccess || this.isFailure
         },
         initialValues(): { [key: string]: any } {
-            return this.form.elements.reduce((result, value) => {
-                result[getFormElementName(this.form.id, value)] =
-                    value.defaultValue || null
-                return result
-            }, {})
+            return this.form.elements.reduce(
+                (result, element) => this.getInitialValue(element, result),
+                {}
+            )
         },
         formulateElements(): Array<FormulateElement | StaticText> {
             return this.form.elements.map((element) => {
@@ -130,8 +129,27 @@ export default BaseCe.extend({
         }
     },
     methods: {
+        getInitialValue(
+            element: FormElement,
+            result: { [key: string]: any } = {}
+        ): { [key: string]: any } {
+            if (element.type === this.getTypesKeyByValue(TYPES.GridRow)) {
+                if (element.elements) {
+                    element.elements.forEach((childElement) => {
+                        this.getInitialValue(childElement, result)
+                    })
+                }
+            } else {
+                result[getFormElementName(this.form.id, element)] =
+                    element.defaultValue || null
+            }
+            return result
+        },
         uploadFile(file: File, element: FormulateElement): void {
             this.files[element.name] = file
+        },
+        getTypesKeyByValue(type: TYPES) {
+            return Object.keys(TYPES).find((key) => TYPES[key] === type)
         },
         async submit(data: { [key: string]: any }): Promise<void> {
             const formData = Object.keys(data).reduce((result, key) => {
@@ -203,7 +221,7 @@ export default BaseCe.extend({
             isLoading: boolean,
             parentIsRow?: boolean
         ) => {
-            if (element.type === 'row' && element.elements) {
+            if (element.type === TYPES.GridRow && element.elements) {
                 return renderRow(element.elements, isLoading)
             }
 
