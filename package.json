@@ -5,6 +5,9 @@
   "author": "David Mellen <d.mellen@remind.de>",
   "license": "BSD-3-Clause",
   "main": "src/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "nuxt example",
     "test": "jest",
