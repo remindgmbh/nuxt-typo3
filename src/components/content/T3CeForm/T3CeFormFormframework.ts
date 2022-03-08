@@ -57,6 +57,12 @@ class FormulateElement {
         this.validation = (formElement.validators || []).map(
             (validator) => VALIDATIONS[validator.identifier]
         )
+        if (
+            this.validation.includes(VALIDATIONS.EmailAddress) &&
+            !this.validation.includes(VALIDATIONS.NotEmpty)
+        ) {
+            this.validation.push('optional')
+        }
         if (formElement.elements) {
             this.elements = formElement.elements
                 .filter((element) => element.type !== STATIC_TEXT)
