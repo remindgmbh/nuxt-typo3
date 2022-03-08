@@ -1,6 +1,6 @@
 {
   "name": "@remindgmbh/nuxt-typo3",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Extension to nuxt-typo3 module",
   "author": "David Mellen <d.mellen@remind.de>",
   "license": "BSD-3-Clause",
@@ -11,7 +11,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/remindgmbh/nuxt-typo3"
-},
+  },
   "scripts": {
     "dev": "nuxt example",
     "test": "jest",
