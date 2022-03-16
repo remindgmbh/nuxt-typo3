@@ -168,7 +168,10 @@ export default BaseCe.extend({
             // required so API returns only current content element instead of whole page
             formData.set('responseElementId', this.id.toString())
 
-            const response = await this.$axios.post(this.link.url, formData)
+            const response = await (this.$typo3.api as any).$http.post(
+                this.link.url,
+                formData
+            )
             this.$nuxt.$emit(SET_CONTENT, {
                 index: this.index,
                 content: response.data,

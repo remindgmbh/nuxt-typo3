@@ -72,7 +72,7 @@ export default BaseCe.extend({
                 return result
             }, new FormData())
 
-            const response = await this.$axios.post(
+            const response = await (this.$typo3.api as any).$http.post(
                 this.data.form.action,
                 formData
             )

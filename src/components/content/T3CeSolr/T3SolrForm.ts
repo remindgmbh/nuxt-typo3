@@ -38,11 +38,14 @@ export default Vue.extend({
                 return Promise.resolve([])
             }
 
-            const response = await this.$axios.get(this.form.suggest.url, {
-                params: {
-                    [this.form.suggest.queryParam]: value,
-                },
-            })
+            const response = await (this.$typo3.api as any).$http.get(
+                this.form.suggest.url,
+                {
+                    params: {
+                        [this.form.suggest.queryParam]: value,
+                    },
+                }
+            )
 
             return Object.keys(response.data.suggestions)
         },

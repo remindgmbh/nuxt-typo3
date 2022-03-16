@@ -22,7 +22,6 @@
       "@types/node",
       "@nuxtjs/i18n",
       "nuxt-typo3",
-      "@nuxtjs/axios",
       "jest"
     ],
     "paths": {
