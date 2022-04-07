@@ -1,0 +1,28 @@
+$breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px,
+) !default;
+$container-max-widths: (
+    xs: 100%,
+    sm: 540px,
+    md: 720px,
+    lg: 960px,
+    xl: 1140px,
+    xxl: 1320px,
+) !default;
+$frame-spaces: (
+    extra-small: 0.5rem,
+    small: 1rem,
+    medium: 2rem,
+    large: 4rem,
+    extra-large: 8rem,
+) !default;
+$color-primary: #6200ee !default;
+$color-secondary: #03dac6 !default;
+$color-accent: #b00020 !default;
+$color-white: #fff !default;
+$color-black: #000 !default;

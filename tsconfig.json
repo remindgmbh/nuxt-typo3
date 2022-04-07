@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "jsx": "preserve",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "skipLibCheck": true,
+    "strict": true,
+    "allowJs": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "types": [
+      "node",
+      "@nuxt/kit",
+      "@pinia/nuxt"
+    ],
+    "baseUrl": ".",
+  },
+  "include": [
+    "src",
+    "./playground/.nuxt/nuxt.d.ts"
+  ]
+}
