@@ -4,7 +4,8 @@
 </template>
 
 <script setup lang="ts">
-import { Ref } from 'vue'
+import { Ref, ref, onMounted, onBeforeUnmount, nextTick, watch } from 'vue'
+import { useRouter } from '#app'
 
 const props = defineProps<{
     content: string

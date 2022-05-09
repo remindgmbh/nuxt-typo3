@@ -21,7 +21,8 @@
 </template>
 
 <script setup lang="ts">
-import { Content } from 'src/api'
+import { useCeHeader } from '../../composables/content-elements/useCeHeader'
+import { Content } from '../../api'
 
 const props = defineProps<{
     id: number

@@ -1,5 +1,5 @@
-import { h } from 'vue'
-import { Content } from 'src/api'
+import { h, computed } from 'vue'
+import { Content } from '../../api'
 
 export const useCeHeader = (
     props: Readonly<{

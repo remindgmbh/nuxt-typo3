@@ -9,8 +9,6 @@ import {
 } from '@nuxt/kit'
 import { name, version } from '../package.json'
 
-export * from './api'
-
 const CONFIG_KEY = 'typo3'
 
 export interface ModuleOptions {
@@ -77,6 +75,6 @@ export default defineNuxtModule<ModuleOptions>({
             })
         })
 
-        nuxt.options.alias['#nuxt-typo3'] = resolver.resolve('')
+        // nuxt.options.alias['#nuxt-typo3'] = resolver.resolve('runtime')
     },
 })

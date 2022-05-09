@@ -1,5 +1,6 @@
 import { MetaObject } from '@nuxt/schema'
-import { PageData } from 'src/api'
+import { useHead } from '#head'
+import { PageData } from '../api'
 
 export const usePageHead = (pageData: PageData) => {
     const title = pageData.breadcrumbs.find((bc) => bc.current)?.title

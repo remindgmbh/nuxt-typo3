@@ -1,4 +1,6 @@
-import { InitialData } from 'src/api'
+import { InitialData } from '../api'
+import { useCurrentPath } from './useCurrentPath'
+import { useTypo3Api_ } from './useTypo3Api'
 
 export const useInitialData = () => {
     const path = useCurrentPath()

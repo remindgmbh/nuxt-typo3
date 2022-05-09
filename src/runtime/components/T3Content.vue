@@ -7,7 +7,8 @@
 </template>
 
 <script setup lang="ts">
-import { Content } from 'src/api'
+import { useDynamicComponent } from '../composables/useDynamicComponent'
+import { Content } from '../api'
 
 const props = defineProps<{
     id: number

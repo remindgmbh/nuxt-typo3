@@ -12,13 +12,20 @@
     "allowSyntheticDefaultImports": true,
     "types": [
       "node",
-      "@nuxt/kit",
-      "@pinia/nuxt"
+      "@nuxt/kit"
     ],
     "baseUrl": ".",
+    "paths": {
+      "#app": [
+        "./node_modules/nuxt/dist/app"
+      ],
+      "#head": [
+        "./node_modules/nuxt/dist/head/runtime"
+      ],
+    }
   },
   "include": [
-    "src",
-    "./playground/.nuxt/nuxt.d.ts"
+    "./playground/.nuxt/components.d.ts",
+    "src"
   ]
 }

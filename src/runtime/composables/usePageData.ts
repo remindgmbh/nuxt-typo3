@@ -1,5 +1,7 @@
-import { AsyncData } from 'nuxt/dist/app'
-import { PageData } from 'src/api'
+import { AsyncData } from '#app'
+import { PageData } from '../api'
+import { useCurrentPath } from './useCurrentPath'
+import { useTypo3Api } from './useTypo3Api'
 
 export const usePageData = () => {
     const path = useCurrentPath()

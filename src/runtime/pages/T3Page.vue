@@ -1,9 +1,14 @@
 <template>
     <component :is="BackendLayoutComponent" :data="pageData.content" />
+    <!-- <pre>{{ data }}</pre> -->
 </template>
 
 <script setup lang="ts">
+import { useDynamicComponent } from '../composables/useDynamicComponent'
+import { useInitialData } from '../composables/useInitialData'
+import { usePageData } from '../composables/usePageData'
 import { usePageHead } from '../composables/usePageHead'
+import { useTypo3Store } from '../stores/typo3'
 
 const typo3Store = useTypo3Store()
 

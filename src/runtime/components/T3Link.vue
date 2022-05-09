@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { TypoLink } from 'src/api'
+import { TypoLink } from '../api'
 
 const props = defineProps<{
     to: TypoLink

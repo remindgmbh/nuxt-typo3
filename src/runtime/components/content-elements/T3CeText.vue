@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { Content } from 'src/api'
+import { Content } from '../../api'
 
 const props = defineProps<{
     id: number

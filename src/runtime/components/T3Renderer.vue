@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { ContentElement } from 'src/api'
+import { ContentElement } from '../api'
 
 const props = withDefaults(
     defineProps<{

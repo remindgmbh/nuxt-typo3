@@ -1,6 +1,6 @@
-import { Ref } from 'vue'
+import { Ref, ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { InitialData, Language } from 'src/api'
+import { InitialData, Language } from '../api'
 
 export const useTypo3Store = defineStore('typo3', () => {
     // const navigation: Ref<NavItem[]> = ref([])

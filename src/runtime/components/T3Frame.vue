@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { Appearance } from 'src/api'
+import { Appearance } from '../api'
 
 const props = defineProps<{
     appearance: Appearance

@@ -1,4 +1,5 @@
 import { defu } from 'defu'
+import { defineNuxtPlugin } from '#app'
 // import { InitialData } from 'src/api/initialData'
 // import { useTypo3Store } from '../stores/typo3'
 // import { defineNuxtPlugin } from '#app'
