@@ -2,15 +2,19 @@
     <div class="app">
         <div class="app__nav-bar">
             <div class="app__nav-items">
-                <NuxtLink class="app__nav-item" :to="navItemRoot.link">{{
-                    navItemRoot.title
-                }}</NuxtLink>
-                <NuxtLink
-                    v-for="navItem in navItems"
-                    :key="navItem.link"
-                    :to="navItem.link"
-                    >{{ navItem.title }}</NuxtLink
-                >
+                <template v-if="rootPageNavigation">
+                    <NuxtLink
+                        class="app__nav-item"
+                        :to="rootPageNavigation.link"
+                        >{{ rootPageNavigation.title }}</NuxtLink
+                    >
+                    <NuxtLink
+                        v-for="navItem in rootPageNavigation.children"
+                        :key="navItem.link"
+                        :to="navItem.link"
+                        >{{ navItem.title }}</NuxtLink
+                    >
+                </template>
             </div>
             <div class="app__nav-items">
                 <NuxtLink
@@ -32,11 +36,7 @@ import { storeToRefs } from 'pinia'
 
 const typo3Store = useTypo3Store()
 
-const { initialData } = storeToRefs(typo3Store)
-
-const navItemRoot = computed(() => initialData.value.navigation[0])
-const navItems = computed(() => initialData.value.navigation[0].children)
-const languages = computed(() => initialData.value.i18n)
+const { languages, rootPageNavigation } = storeToRefs(typo3Store)
 </script>
 <style lang="scss">
 @use '@/assets/variables.scss' as *;

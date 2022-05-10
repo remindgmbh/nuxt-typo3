@@ -3,9 +3,6 @@ import { defineStore } from 'pinia'
 import { InitialData, Language } from '../api'
 
 export const useTypo3Store = defineStore('typo3', () => {
-    // const navigation: Ref<NavItem[]> = ref([])
-    // const languages: Ref<Language[]> = ref([])
-
     const initialData: Ref<InitialData> = ref({
         navigation: [],
         i18n: [],
@@ -13,8 +10,6 @@ export const useTypo3Store = defineStore('typo3', () => {
 
     function setInitialData(data: InitialData) {
         initialData.value = data
-        // navigation.value = data.navigation
-        // languages.value = data.i18n
     }
     function setLanguages(languages: Language[]) {
         initialData.value.i18n = languages
@@ -25,17 +20,14 @@ export const useTypo3Store = defineStore('typo3', () => {
     )
 
     const languages = computed(() => initialData.value.i18n)
-    const navigation = computed(() => initialData.value.navigation)
-    // const navItemRoot = computed(() => initialData.value.navigation[0])
-    // const navItems = computed(() => navItemRoot.value?.children)
-
+    const rootPageNavigation = computed(() =>
+        initialData.value.navigation.at(0)
+    )
     return {
         activeLanguage,
         initialData,
         languages,
-        navigation,
-        // navItemRoot,
-        // navItems,
+        rootPageNavigation,
         setInitialData,
         setLanguages,
     }
