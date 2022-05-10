@@ -32,11 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
-
-const typo3Store = useTypo3Store()
-
-const { languages, rootPageNavigation } = storeToRefs(typo3Store)
+const { languages, rootPageNavigation } = useTypo3State()
 </script>
 <style lang="scss">
 @use '@/assets/variables.scss' as *;

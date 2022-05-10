@@ -1,10 +1,7 @@
-import { AsyncData } from '#app'
 import { PageData } from '../api'
-import { useCurrentPath } from './useCurrentPath'
-import { useTypo3Api } from './useTypo3Api'
+import { useTypo3Fetch } from './useTypo3Fetch'
 
 export const usePageData = () => {
-    const path = useCurrentPath()
-    console.log('pageData', path)
-    return useTypo3Api(path) as AsyncData<PageData, any>
+    const { typo3Fetch } = useTypo3Fetch()
+    return typo3Fetch<PageData>()
 }

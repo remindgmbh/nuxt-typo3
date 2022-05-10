@@ -1,35 +1,33 @@
 <template>
-    <component :is="BackendLayoutComponent" :data="pageData.content" />
-    <!-- <pre>{{ data }}</pre> -->
+    <div class="t3-page">
+        <component :is="BackendLayoutComponent" :data="data.content" />
+    </div>
 </template>
 
 <script setup lang="ts">
 import { useDynamicComponent } from '../composables/useDynamicComponent'
-import { useInitialData } from '../composables/useInitialData'
 import { usePageData } from '../composables/usePageData'
 import { usePageHead } from '../composables/usePageHead'
-import { useTypo3Store } from '../stores/typo3'
+import { useTypo3State } from '../composables/useTypo3State'
 
-const typo3Store = useTypo3Store()
+const { activeLanguage, updateInitialData, setLanguages } = useTypo3State()
 
 const { data } = await usePageData()
-const pageData = data.value
 
-usePageHead(pageData)
+usePageHead(data.value)
 
-const newLanguages = pageData.i18n
+const newLanguages = data.value.i18n
 
 const newActiveLanguage = newLanguages.find((language) => language.active)
 
-if (typo3Store.activeLanguage?.languageId !== newActiveLanguage?.languageId) {
-    const initialData = await useInitialData()
-    typo3Store.setInitialData(initialData)
+if (activeLanguage.value?.languageId !== newActiveLanguage?.languageId) {
+    await updateInitialData()
 } else {
-    typo3Store.setLanguages(newLanguages)
+    setLanguages(newLanguages)
 }
 
 const BackendLayoutComponent = useDynamicComponent(
     'T3Bl',
-    pageData.appearance.backendLayout
+    data.value.appearance.backendLayout
 )
 </script>

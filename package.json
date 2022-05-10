@@ -22,19 +22,17 @@
     "dev:preview": "nuxi preview playground"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.0.0-rc.1",
-    "@nuxt/webpack-builder": "^3.0.0-rc.1",
-    "@pinia/nuxt": "^0.1.8",
-    "pinia": "^2.0.13"
+    "@nuxt/kit": "^3.0.0-rc.3",
+    "@nuxt/webpack-builder": "^3.0.0-rc.3"
   },
   "devDependencies": {
     "@nuxt/module-builder": "latest",
     "@nuxtjs/eslint-config-typescript": "^10.0.0",
-    "eslint": "latest",
+    "eslint": "^8.15.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-nuxt": "^3.2.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "nuxt": "npm:nuxt3@latest",
+    "nuxt": "^3.0.0-rc.3",
     "postcss": "^8.4.13",
     "postcss-html": "^1.4.1",
     "postcss-scss": "^4.0.4",

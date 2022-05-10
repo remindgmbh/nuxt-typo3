@@ -5,15 +5,19 @@ import {
     createResolver,
     defineNuxtModule,
     extendPages,
-    installModule,
 } from '@nuxt/kit'
+import { defu } from 'defu'
 import { name, version } from '../package.json'
 
 const CONFIG_KEY = 'typo3'
 
 export interface ModuleOptions {
+    api: {
+        baseUrl: string
+        initialDataType?: number
+    }
     customCssVariables?: string
-    forms: boolean
+    forms?: boolean
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -22,8 +26,19 @@ export default defineNuxtModule<ModuleOptions>({
         version,
         configKey: CONFIG_KEY,
     },
+    defaults: {
+        api: {
+            baseUrl: '',
+            initialDataType: 834,
+        },
+    },
     setup(options, nuxt) {
         const resolver = createResolver(import.meta.url)
+
+        options = nuxt.options.runtimeConfig.public.typo3 = defu(
+            nuxt.options.runtimeConfig.public.typo3,
+            options
+        )
 
         if (options.customCssVariables) {
             const forwardStatement = `@forward "${options.customCssVariables}";`
@@ -54,14 +69,11 @@ export default defineNuxtModule<ModuleOptions>({
             resolver.resolve('runtime/assets/styles/text.scss')
         )
 
-        installModule('@pinia/nuxt')
         addAutoImportDir([
             resolver.resolve('runtime/composables'),
             resolver.resolve('runtime/composables/content-elements'),
-            resolver.resolve('runtime/stores'),
         ])
         addPlugin(resolver.resolve('runtime/plugins/initialData'))
-        addPlugin(resolver.resolve('runtime/plugins/context'))
         addComponentsDir({
             path: resolver.resolve('runtime/components'),
             pathPrefix: false,

@@ -9,7 +9,9 @@ export default defineNuxtConfig({
     runtimeConfig: {
         public: {
             typo3: {
-                apiBase: '',
+                api: {
+                    baseUrl: '',
+                },
             },
         },
     },

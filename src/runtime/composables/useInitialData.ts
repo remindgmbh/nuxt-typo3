@@ -1,9 +1,11 @@
+import { useRuntimeConfig } from '#app'
 import { InitialData } from '../api'
-import { useCurrentPath } from './useCurrentPath'
-import { useTypo3Api_ } from './useTypo3Api'
+import { useTypo3Fetch } from './useTypo3Fetch'
 
 export const useInitialData = () => {
-    const path = useCurrentPath()
-    console.log('initialData', path)
-    return useTypo3Api_(path, { type: '834' }) as Promise<InitialData>
+    const runtimeConfig = useRuntimeConfig()
+    const { $typo3Fetch } = useTypo3Fetch()
+    return $typo3Fetch<InitialData>({
+        params: { type: runtimeConfig.public.typo3.api.initialDataType },
+    })
 }
