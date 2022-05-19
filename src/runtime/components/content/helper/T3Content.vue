@@ -1,5 +1,5 @@
 <template>
-    <div
+    <article
         class="t3-content"
         :class="{
             container,
@@ -20,7 +20,7 @@
             :id="props.id"
             :content="props.content"
         />
-    </div>
+    </article>
 </template>
 
 <script setup lang="ts">

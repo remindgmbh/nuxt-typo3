@@ -1,6 +1,10 @@
 <template>
     <div class="t3-page">
-        <component :is="BackendLayoutComponent" :data="data.content" />
+        <component
+            :is="BackendLayoutComponent"
+            :content="data.content"
+            :breadcrumbs="data.breadcrumbs"
+        />
     </div>
 </template>
 

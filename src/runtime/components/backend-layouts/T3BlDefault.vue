@@ -1,19 +1,28 @@
 <template>
     <div class="t3-bl-default">
-        <!-- <div class="t3-bl-default__before-breadcrumbs">
-            {{ props.data.colPos1 }}
-        </div> -->
-        <div class="t3-bl-default__main">
-            <T3Renderer :content-elements="props.data.colPos0" />
+        <div class="t3-bl-default__before-breadcrumbs">
+            <T3Renderer :content-elements="props.content.colPos1" />
         </div>
-        <!-- <div class="t3-bl-default__footer">{{ props.data.colPos2 }}</div> -->
+        <nav v-if="breadcrumbsVisible" class="t3-bl-default__breadcrumbs">
+            <T3Breadcrumbs :breadcrumbs="props.breadcrumbs" />
+        </nav>
+        <div class="t3-bl-default__main">
+            <T3Renderer :content-elements="props.content.colPos0" />
+        </div>
+        <footer class="t3-bl-default__footer">
+            <T3Renderer :content-elements="props.content.colPos2" />
+        </footer>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ContentElement } from '#nuxt-typo3/api'
+import { computed } from 'vue'
+import { Breadcrumb, ContentElement } from '#nuxt-typo3/api'
 
 const props = defineProps<{
-    data: { [colPos: string]: ContentElement[] }
+    content: { [colPos: string]: ContentElement[] }
+    breadcrumbs: Breadcrumb[]
 }>()
+
+const breadcrumbsVisible = computed(() => props.breadcrumbs.length > 1)
 </script>

@@ -14,10 +14,20 @@ const CONFIG_KEY = 'typo3'
 export interface ModuleOptions {
     api: {
         baseUrl: string
-        initialDataType?: number
+        initialDataType: number
+    }
+    contentElements: {
+        [type: string]: {
+            fullWidth?: boolean
+        }
     }
     customCssVariables?: string
-    forms?: boolean
+    forms: boolean
+    layout: {
+        breadcrumbs: {
+            fullWidth: boolean
+        }
+    }
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -30,6 +40,13 @@ export default defineNuxtModule<ModuleOptions>({
         api: {
             baseUrl: '',
             initialDataType: 834,
+        },
+        contentElements: {},
+        forms: false,
+        layout: {
+            breadcrumbs: {
+                fullWidth: false,
+            },
         },
     },
     setup(options, nuxt) {
