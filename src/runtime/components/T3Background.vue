@@ -1,11 +1,9 @@
 <template>
-    <slot v-if="!props.appearance.backgroundColor" />
     <div
-        v-else
         class="t3-background"
         :class="[
             `t3-background--${props.appearance.backgroundColor}`,
-            { container: !props.appearance.backgroundFullWidth },
+            { container },
         ]"
     >
         <slot />
@@ -13,11 +11,18 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { Appearance } from '../api'
+import { isFullWidth } from '../composables/useContentHelper'
 
 const props = defineProps<{
     appearance: Appearance
+    type: string
 }>()
+
+const container = computed(
+    () => !isFullWidth(props.type) && !props.appearance.backgroundFullWidth
+)
 </script>
 
 <style lang="scss">

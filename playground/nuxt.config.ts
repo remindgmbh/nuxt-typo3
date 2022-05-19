@@ -28,6 +28,11 @@ export default defineNuxtConfig({
     css: ['@/assets/base.scss'],
     typo3: {
         customCssVariables: '@/assets/variables.scss',
+        contentElements: {
+            header: {
+                fullWidth: false,
+            },
+        },
     },
     modules: [MyModule],
 })

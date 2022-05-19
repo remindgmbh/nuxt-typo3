@@ -26,7 +26,6 @@
   },
   "include": [
     "./playground/.nuxt/components.d.ts",
-    "./playground/.nuxt/types/schema.d.ts",
     "src"
   ]
 }

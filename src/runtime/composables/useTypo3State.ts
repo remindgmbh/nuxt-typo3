@@ -22,6 +22,7 @@ export const useTypo3State = () => {
     )
 
     const languages = computed(() => initialData.value.i18n)
+
     const rootPageNavigation = computed(() =>
         initialData.value.navigation.at(0)
     )

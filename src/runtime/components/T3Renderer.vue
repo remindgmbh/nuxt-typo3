@@ -3,16 +3,25 @@
         v-for="contentElement in props.contentElements"
         :key="contentElement.id"
     >
-        <!-- TODO only use T3Background if background color is set -->
-        <T3Background :appearance="contentElement.appearance">
-            <T3Frame :appearance="contentElement.appearance">
-                <T3Content
-                    :id="contentElement.id"
-                    :type="contentElement.type"
-                    :content="contentElement.content"
-                />
-            </T3Frame>
+        <T3Background
+            v-if="contentElement.appearance.backgroundColor"
+            :appearance="contentElement.appearance"
+            :type="contentElement.type"
+        >
+            <T3Content
+                :id="contentElement.id"
+                :type="contentElement.type"
+                :content="contentElement.content"
+                :appearance="contentElement.appearance"
+            />
         </T3Background>
+        <T3Content
+            v-else
+            :id="contentElement.id"
+            :type="contentElement.type"
+            :content="contentElement.content"
+            :appearance="contentElement.appearance"
+        />
     </template>
 </template>
 
