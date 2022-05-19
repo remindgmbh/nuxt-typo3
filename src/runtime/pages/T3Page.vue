@@ -5,10 +5,10 @@
 </template>
 
 <script setup lang="ts">
-import { useDynamicComponent } from '../composables/useDynamicComponent'
-import { usePageData } from '../composables/usePageData'
-import { usePageHead } from '../composables/usePageHead'
-import { useTypo3State } from '../composables/useTypo3State'
+import { useDynamicComponent } from '#nuxt-typo3/composables/useDynamicComponent'
+import { usePageData } from '#nuxt-typo3/composables/usePageData'
+import { usePageHead } from '#nuxt-typo3/composables/usePageHead'
+import { useTypo3State } from '#nuxt-typo3/composables/useTypo3State'
 
 const { activeLanguage, updateInitialData, setLanguages } = useTypo3State()
 

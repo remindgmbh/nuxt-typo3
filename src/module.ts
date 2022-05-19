@@ -87,6 +87,6 @@ export default defineNuxtModule<ModuleOptions>({
             })
         })
 
-        // nuxt.options.alias['#nuxt-typo3'] = resolver.resolve('runtime')
+        nuxt.options.alias['#nuxt-typo3'] = resolver.resolve('runtime')
     },
 })

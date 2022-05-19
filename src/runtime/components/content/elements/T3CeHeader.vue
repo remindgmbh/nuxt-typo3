@@ -21,8 +21,8 @@
 </template>
 
 <script setup lang="ts">
-import { useCeHeader } from '../../composables/content-elements/useCeHeader'
-import { Content } from '../../api'
+import { useCeHeader } from '#nuxt-typo3/composables/content-elements/useCeHeader'
+import { Content } from '#nuxt-typo3/api'
 
 const props = defineProps<{
     id: number

@@ -25,9 +25,9 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useDynamicComponent } from '../composables/useDynamicComponent'
-import { Appearance, Content } from '../api'
-import { isFullWidth } from '../composables/useContentHelper'
+import { useDynamicComponent } from '#nuxt-typo3/composables/useDynamicComponent'
+import { Appearance, Content } from '#nuxt-typo3/api'
+import { isFullWidth } from '#nuxt-typo3/composables/useContentHelper'
 
 const props = defineProps<{
     id: number
@@ -41,7 +41,7 @@ const ContentElementComponent = useDynamicComponent('T3Ce', props.type)
 </script>
 
 <style lang="scss">
-@use '../assets/styles/variables' as *;
+@use '#nuxt-typo3/assets/styles/variables' as *;
 
 .t3-content {
     box-sizing: border-box;

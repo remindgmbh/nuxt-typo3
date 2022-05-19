@@ -1,7 +1,7 @@
 import { useState } from '#app'
 import { computed } from 'vue'
-import { InitialData, Language } from '../api'
 import { useInitialData } from './useInitialData'
+import { InitialData, Language } from '#nuxt-typo3/api'
 
 export const useTypo3State = () => {
     const initialData = useState<InitialData>('initialData', () => ({

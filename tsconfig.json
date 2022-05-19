@@ -22,6 +22,12 @@
       "#head": [
         "./node_modules/nuxt/dist/head/runtime"
       ],
+      "#nuxt-typo3": [
+        "./src/runtime"
+      ],
+      "#nuxt-typo3/*": [
+        "./src/runtime/*"
+      ]
     }
   },
   "include": [

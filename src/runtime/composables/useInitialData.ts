@@ -1,6 +1,6 @@
 import { useRuntimeConfig } from '#app'
-import { InitialData } from '../api'
 import { useTypo3Fetch } from './useTypo3Fetch'
+import { InitialData } from '#nuxt-typo3/api'
 
 export const useInitialData = () => {
     const runtimeConfig = useRuntimeConfig()

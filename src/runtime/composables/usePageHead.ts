@@ -1,6 +1,6 @@
 import { MetaObject } from '@nuxt/schema'
 import { useHead } from '#head'
-import { PageData } from '../api'
+import { PageData } from '#nuxt-typo3/api'
 
 export const usePageHead = (pageData: PageData) => {
     const title = pageData.breadcrumbs.find((bc) => bc.current)?.title

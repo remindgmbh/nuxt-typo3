@@ -1,5 +1,5 @@
 import { h, computed } from 'vue'
-import { Content } from '../../api'
+import { Content } from '#nuxt-typo3/api'
 
 export const useCeHeader = (
     props: Readonly<{

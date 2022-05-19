@@ -12,8 +12,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Appearance } from '../api'
-import { isFullWidth } from '../composables/useContentHelper'
+import { Appearance } from '#nuxt-typo3/api'
+import { isFullWidth } from '#nuxt-typo3/composables/useContentHelper'
 
 const props = defineProps<{
     appearance: Appearance
@@ -26,7 +26,7 @@ const container = computed(
 </script>
 
 <style lang="scss">
-@use '../assets/styles/variables' as *;
+@use '#nuxt-typo3/assets/styles/variables' as *;
 
 .t3-background {
     &--primary {

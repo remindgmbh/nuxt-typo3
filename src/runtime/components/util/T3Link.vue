@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { TypoLink } from '../api'
+import { TypoLink } from '#nuxt-typo3/api'
 
 const props = defineProps<{
     to: TypoLink
