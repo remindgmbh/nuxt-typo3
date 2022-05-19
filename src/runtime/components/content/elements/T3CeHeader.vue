@@ -2,19 +2,16 @@
     <header
         class="t3-ce-header"
         :class="{
-            [`text-${props.content.headerPosition}`]:
-                props.content.headerPosition,
+            [`text-${content.headerPosition}`]: content.headerPosition,
         }"
     >
-        <div v-if="props.content.subheader" class="t3-ce-header__sub">
-            {{ props.content.subheader }}
+        <div v-if="content.subheader" class="t3-ce-header__sub">
+            {{ content.subheader }}
         </div>
         <component :is="tag" v-if="visible" class="t3-ce-header__main">
-            <template v-if="!props.content.headerLink">{{
-                props.content.header
-            }}</template>
-            <T3Link v-else :to="props.content.headerLink">
-                {{ props.content.header }}
+            <template v-if="!content.headerLink">{{ content.header }}</template>
+            <T3Link v-else :to="content.headerLink">
+                {{ content.header }}
             </T3Link>
         </component>
     </header>

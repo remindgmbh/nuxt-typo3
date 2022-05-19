@@ -1,6 +1,6 @@
 <template>
     <template
-        v-for="contentElement in props.contentElements"
+        v-for="contentElement in contentElements"
         :key="contentElement.id"
     >
         <T3Background
@@ -28,7 +28,7 @@
 <script setup lang="ts">
 import { ContentElement } from '#nuxt-typo3/api'
 
-const props = withDefaults(
+withDefaults(
     defineProps<{
         contentElements?: ContentElement[]
     }>(),
