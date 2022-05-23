@@ -1,4 +1,4 @@
-export interface Image {
+export interface Asset {
     publicUrl: string
     properties: {
         title?: string
@@ -21,8 +21,8 @@ export interface Image {
             width: number
             height: number
         }
-        crop: {
-            social: {
+        crop?: {
+            [key: string]: {
                 cropArea: {
                     x: number
                     y: number
@@ -33,7 +33,7 @@ export interface Image {
                 focusArea?: any
             }
         }
-        autoplay?: any
+        autoplay?: 0 | 1
         extension: string
     }
 }

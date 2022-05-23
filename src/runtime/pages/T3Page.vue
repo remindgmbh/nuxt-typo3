@@ -1,7 +1,7 @@
 <template>
     <div class="t3-page">
         <component
-            :is="BackendLayoutComponent"
+            :is="component"
             :content="data.content"
             :breadcrumbs="data.breadcrumbs"
         />
@@ -30,7 +30,7 @@ if (activeLanguage.value?.languageId !== newActiveLanguage?.languageId) {
     setLanguages(newLanguages)
 }
 
-const BackendLayoutComponent = useDynamicComponent(
+const component = useDynamicComponent(
     'T3Bl',
     data.value.appearance.backendLayout
 )

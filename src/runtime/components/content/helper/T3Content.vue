@@ -15,11 +15,7 @@
                 props.appearance.backgroundColor,
         }"
     >
-        <component
-            :is="ContentElementComponent"
-            :id="props.id"
-            :content="props.content"
-        />
+        <component :is="component" :id="props.id" :content="props.content" />
     </article>
 </template>
 
@@ -37,7 +33,7 @@ const props = defineProps<{
 }>()
 
 const container = computed(() => !isFullWidth(props.type))
-const ContentElementComponent = useDynamicComponent('T3Ce', props.type)
+const component = useDynamicComponent('T3Ce', props.type)
 </script>
 
 <style lang="scss">

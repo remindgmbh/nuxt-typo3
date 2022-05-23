@@ -3,25 +3,25 @@
         <div class="app__nav-bar">
             <div class="app__nav-items">
                 <template v-if="rootPageNavigation">
-                    <NuxtLink
+                    <router-link
                         class="app__nav-item"
                         :to="rootPageNavigation.link"
-                        >{{ rootPageNavigation.title }}</NuxtLink
+                        >{{ rootPageNavigation.title }}</router-link
                     >
-                    <NuxtLink
+                    <router-link
                         v-for="navItem in rootPageNavigation.children"
                         :key="navItem.link"
                         :to="navItem.link"
-                        >{{ navItem.title }}</NuxtLink
+                        >{{ navItem.title }}</router-link
                     >
                 </template>
             </div>
             <div class="app__nav-items">
-                <NuxtLink
+                <router-link
                     v-for="language in languages"
                     :key="language.link"
                     :to="language.link"
-                    >{{ language.navigationTitle }}</NuxtLink
+                    >{{ language.navigationTitle }}</router-link
                 >
             </div>
         </div>

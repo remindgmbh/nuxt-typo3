@@ -1,4 +1,4 @@
-import { Image, TypoLink } from '.'
+import { Asset, TypoLink } from '.'
 export interface Meta {
     title: string
     subtitle: string
@@ -14,9 +14,9 @@ export interface Meta {
     authorEmail: string
     ogTitle: string
     ogDescription: string
-    ogImage?: Image
+    ogImage?: Asset
     twitterTitle: string
     twitterDescription: string
     twitterCard: string
-    twitterImage?: Image
+    twitterImage?: Asset
 }

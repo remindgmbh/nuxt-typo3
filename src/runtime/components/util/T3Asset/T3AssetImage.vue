@@ -1,17 +1,11 @@
 <template>
-    <T3Link
-        v-if="props.file.properties.linkData"
-        :to="props.file.properties.linkData"
-    >
-        <img v-bind="attrs" />
-    </T3Link>
-    <img v-else v-bind="attrs" />
+    <img v-bind="attrs" />
 </template>
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Image } from '#nuxt-typo3/api'
+import { Asset } from '#nuxt-typo3/api'
 
-const props = defineProps<{ file: Image }>()
+const props = defineProps<{ file: Asset }>()
 
 const attrs = computed(() => ({
     src: props.file.publicUrl,
