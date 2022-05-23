@@ -1,5 +1,6 @@
 export { Content } from './content'
 export { ContentImage } from './contentImage'
+export { ContentTable } from './contentTable'
 export { ContentText } from './contentText'
 export { ContentTextmedia } from './contentTextmedia'
 export { ContentTextpic } from './contentTextpic'
