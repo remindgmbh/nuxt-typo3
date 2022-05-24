@@ -11,6 +11,7 @@
                     <router-link
                         v-for="navItem in rootPageNavigation.children"
                         :key="navItem.link"
+                        class="app__nav-item"
                         :to="navItem.link"
                         >{{ navItem.title }}</router-link
                     >
@@ -20,6 +21,7 @@
                 <router-link
                     v-for="language in languages"
                     :key="language.link"
+                    class="app__nav-item"
                     :to="language.link"
                     >{{ language.navigationTitle }}</router-link
                 >
