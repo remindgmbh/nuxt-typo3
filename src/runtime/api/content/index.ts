@@ -1,6 +1,8 @@
 export { Content } from './content'
+export { ContentAccordion } from './contentAccordion'
 export { ContentImage } from './contentImage'
 export { ContentTable } from './contentTable'
 export { ContentText } from './contentText'
 export { ContentTextmedia } from './contentTextmedia'
 export { ContentTextpic } from './contentTextpic'
+export { Item } from './item'
