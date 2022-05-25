@@ -8,7 +8,7 @@ export default T3CeHeader
 
 .t3-ce-header {
     &__main {
-        color: $color-accent;
+        color: #b00020;
     }
 }
 </style>

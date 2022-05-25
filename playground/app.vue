@@ -1,6 +1,6 @@
 <template>
-    <div class="app">
-        <div class="app__nav-bar">
+    <T3TopbarLayout v-model:scrollbar-disabled="scrollbarDisabled" class="app">
+        <T3TopbarLayoutHeader class="app__header">
             <div class="app__nav-items">
                 <template v-if="rootPageNavigation">
                     <router-link
@@ -25,30 +25,71 @@
                     :to="language.link"
                     >{{ language.navigationTitle }}</router-link
                 >
+                <button @click="toggleSidebar">Toggle Sidebar</button>
+                <button @click="toggleScrollbar">Toggle Scrollbar</button>
             </div>
-        </div>
-        <div class="app__page">
+        </T3TopbarLayoutHeader>
+        <T3TopbarLayoutSidebar v-model="sidebarVisible" class="app__sidebar">
+            <div>Sidebar Content</div>
+        </T3TopbarLayoutSidebar>
+        <T3TopbarLayoutContent>
             <NuxtPage />
-        </div>
-    </div>
+        </T3TopbarLayoutContent>
+    </T3TopbarLayout>
 </template>
 
 <script setup lang="ts">
 const { languages, rootPageNavigation } = useTypo3State()
+
+const sidebarVisible = ref(false)
+const scrollbarDisabled = ref(false)
+
+function toggleSidebar(): void {
+    sidebarVisible.value = !sidebarVisible.value
+}
+
+function toggleScrollbar(): void {
+    scrollbarDisabled.value = !scrollbarDisabled.value
+}
 </script>
 <style lang="scss">
 @use '@/assets/variables.scss' as *;
 
 .app {
-    &__nav-bar {
+    &__header {
+        background-color: $color-background;
         display: flex;
         justify-content: space-between;
-        padding: 1rem;
+    }
+
+    &__sidebar {
+        background-color: $color-secondary;
     }
 
     &__nav-items {
         display: flex;
         gap: 1rem;
+        padding: 1rem;
+    }
+
+    .sidebar-transition {
+        &-enter-active {
+            transition: transform 0.5s;
+        }
+
+        &-leave-active {
+            transition: transform 0.25s;
+        }
+
+        &-enter-from,
+        &-leave-to {
+            transform: translateX(-100%);
+        }
+
+        &-enter-to,
+        &-leave-from {
+            transform: translateX(0);
+        }
     }
 }
 
