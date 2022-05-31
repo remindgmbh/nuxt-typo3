@@ -7,8 +7,7 @@
 </template>
 
 <script setup lang="ts">
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { onMounted, ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref, Ref } from 'vue'
 
 withDefaults(
     defineProps<{
@@ -17,14 +16,20 @@ withDefaults(
     { tag: 'div' }
 )
 
-const container = ref<HTMLElement>()
-const content = ref<HTMLElement>()
+const container = ref<HTMLElement>() as Ref<HTMLElement>
+const content = ref<HTMLElement>() as Ref<HTMLElement>
+
+let resizeObserver: ResizeObserver | undefined
 
 onMounted(() => {
-    const resizeObserver = new ResizeObserver(() => {
-        container.value!.style.height = `${content.value!.scrollHeight}px`
+    resizeObserver = new ResizeObserver(() => {
+        container.value.style.height = `${content.value.scrollHeight}px`
     })
-    resizeObserver.observe(content.value!)
+    resizeObserver.observe(content.value)
+})
+
+onBeforeUnmount(() => {
+    resizeObserver?.disconnect()
 })
 </script>
 
