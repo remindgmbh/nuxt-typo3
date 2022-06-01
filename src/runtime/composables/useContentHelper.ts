@@ -1,6 +1,13 @@
 import { useRuntimeConfig } from '#app'
 
-export const isFullWidth = (type: string) => {
+export function useContentHelper() {
     const runtimeConfig = useRuntimeConfig()
-    return runtimeConfig.public.typo3.contentElements[type]?.fullWidth
+
+    function isFullWidth(type: string) {
+        return runtimeConfig.public.typo3.contentElements[type]?.fullWidth
+    }
+
+    return {
+        isFullWidth,
+    }
 }

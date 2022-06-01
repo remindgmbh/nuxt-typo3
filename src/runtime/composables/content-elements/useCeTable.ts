@@ -2,14 +2,14 @@ import { computed, ref, onMounted, Ref } from 'vue'
 import { ContentTable } from '#nuxt-typo3/api'
 import { useScrollIndicator } from '#nuxt-typo3/composables/useScrollIndicator'
 
-export const useCeTable = (
+export function useCeTable(
     props: Readonly<{
         id: number
         content: ContentTable
     }>,
     table?: Ref<HTMLElement | undefined>,
     viewport?: Ref<HTMLElement | undefined>
-) => {
+) {
     const headerTop = computed(() =>
         [1, 3].includes(props.content.tableHeaderPosition)
     )

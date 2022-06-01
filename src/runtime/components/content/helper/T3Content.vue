@@ -23,7 +23,7 @@
 import { computed } from 'vue'
 import { useDynamicComponent } from '#nuxt-typo3/composables/useDynamicComponent'
 import { Appearance, Content } from '#nuxt-typo3/api'
-import { isFullWidth } from '#nuxt-typo3/composables/useContentHelper'
+import { useContentHelper } from '#nuxt-typo3/composables/useContentHelper'
 
 const props = defineProps<{
     id: number
@@ -32,7 +32,7 @@ const props = defineProps<{
     appearance: Appearance
 }>()
 
-const container = computed(() => !isFullWidth(props.type))
+const container = computed(() => !useContentHelper().isFullWidth(props.type))
 const component = useDynamicComponent('T3Ce', props.type)
 </script>
 

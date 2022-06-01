@@ -10,11 +10,11 @@ const ROOT_MARGINS = {
     left: '0px -100% 0px 100%',
 }
 
-export const useScrollIndicator = (
+export function useScrollIndicator(
     content: HTMLElement,
     direction: keyof typeof ROOT_MARGINS,
     viewport?: HTMLElement
-) => {
+) {
     const watch = (callback: (detached: boolean) => void) => {
         const io = new IntersectionObserver(
             (entries) => {

@@ -10,8 +10,8 @@ export interface PageResponse {
     errorMessage?: string
 }
 
-export const usePage = () => {
-    const isPageData = (obj: any): obj is PageData => {
+export function usePage() {
+    function isPageData(obj: any): obj is PageData {
         return (
             obj instanceof Object &&
             'breadcrumbs' in obj &&
@@ -21,7 +21,7 @@ export const usePage = () => {
         )
     }
 
-    const getPageData = async (): Promise<PageResponse> => {
+    async function getPageData(): Promise<PageResponse> {
         const { $typo3Fetch } = useTypo3Fetch()
         try {
             const data = await $typo3Fetch<PageData>()
@@ -39,7 +39,7 @@ export const usePage = () => {
         }
     }
 
-    const setPageHead = (pageData: PageData) => {
+    function setPageHead(pageData: PageData) {
         const title = pageData.breadcrumbs.find((bc) => bc.current)?.title
         const meta = pageData.meta
 

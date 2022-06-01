@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Appearance } from '#nuxt-typo3/api'
-import { isFullWidth } from '#nuxt-typo3/composables/useContentHelper'
+import { useContentHelper } from '#nuxt-typo3/composables/useContentHelper'
 
 const props = defineProps<{
     appearance: Appearance
@@ -21,7 +21,9 @@ const props = defineProps<{
 }>()
 
 const container = computed(
-    () => !isFullWidth(props.type) && !props.appearance.backgroundFullWidth
+    () =>
+        !useContentHelper().isFullWidth(props.type) &&
+        !props.appearance.backgroundFullWidth
 )
 </script>
 
