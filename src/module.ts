@@ -23,6 +23,7 @@ export interface ModuleOptions {
     }
     customCssVariables?: string
     forms: boolean
+    languages: string[]
     layout: {
         breadcrumbs: {
             fullWidth: boolean
@@ -43,6 +44,7 @@ export default defineNuxtModule<ModuleOptions>({
         },
         contentElements: {},
         forms: false,
+        languages: [],
         layout: {
             breadcrumbs: {
                 fullWidth: false,
@@ -90,7 +92,7 @@ export default defineNuxtModule<ModuleOptions>({
             resolver.resolve('runtime/composables'),
             resolver.resolve('runtime/composables/content-elements'),
         ])
-        addPlugin(resolver.resolve('runtime/plugins/initialData'))
+        addPlugin(resolver.resolve('runtime/plugins/init'))
         addComponentsDir({
             path: resolver.resolve('runtime/components'),
             pathPrefix: false,

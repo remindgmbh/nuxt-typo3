@@ -5,7 +5,7 @@ export interface Meta {
     abstract: string
     description: string
     keywords: string
-    canonical: TypoLink
+    canonical?: TypoLink
     robots: {
         noIndex: boolean
         noFollow: boolean

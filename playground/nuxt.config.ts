@@ -33,6 +33,7 @@ export default defineNuxtConfig({
                 fullWidth: false,
             },
         },
+        languages: ['/de/'],
     },
     modules: [MyModule],
 })

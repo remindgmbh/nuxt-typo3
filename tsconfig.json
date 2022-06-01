@@ -19,6 +19,9 @@
       "#app": [
         "./node_modules/nuxt/dist/app"
       ],
+      "#app/*": [
+        "./node_modules/nuxt/dist/app/*"
+      ],
       "#head": [
         "./node_modules/nuxt/dist/head/runtime"
       ],

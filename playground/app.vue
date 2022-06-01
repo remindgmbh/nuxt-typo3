@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-const { languages, rootPageNavigation } = useTypo3State()
+const { languages, rootPageNavigation } = useInitialData()
 
 const sidebarVisible = ref(false)
 const scrollbarDisabled = ref(false)

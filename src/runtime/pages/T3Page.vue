@@ -2,36 +2,44 @@
     <div class="t3-page">
         <component
             :is="component"
-            :content="data.content"
-            :breadcrumbs="data.breadcrumbs"
+            v-if="pageResponse.data"
+            :content="pageResponse.data.content"
+            :breadcrumbs="pageResponse.data.breadcrumbs"
+        />
+        <T3PageError
+            v-else
+            :message="pageResponse.errorMessage!"
+            :response="pageResponse.errorResponse"
         />
     </div>
 </template>
 
 <script setup lang="ts">
 import { useDynamicComponent } from '#nuxt-typo3/composables/useDynamicComponent'
-import { usePageData } from '#nuxt-typo3/composables/usePageData'
-import { usePageHead } from '#nuxt-typo3/composables/usePageHead'
-import { useTypo3State } from '#nuxt-typo3/composables/useTypo3State'
+import { usePage } from '#nuxt-typo3/composables/usePage'
+import { useInitialData } from '#nuxt-typo3/composables/useInitialData'
 
-const { activeLanguage, updateInitialData, setLanguages } = useTypo3State()
+const { activeLanguage, updateInitialData, setLanguages } = useInitialData()
+const { getPageData, setPageHead } = usePage()
 
-const { data } = await usePageData()
+const pageResponse = await getPageData()
 
-usePageHead(data.value)
+if (pageResponse.data) {
+    setPageHead(pageResponse.data)
 
-const newLanguages = data.value.i18n
+    const newLanguages = pageResponse.data.i18n
 
-const newActiveLanguage = newLanguages.find((language) => language.active)
+    const newActiveLanguage = newLanguages.find((language) => language.active)
 
-if (activeLanguage.value?.languageId !== newActiveLanguage?.languageId) {
-    await updateInitialData()
-} else {
-    setLanguages(newLanguages)
+    if (activeLanguage.value?.languageId !== newActiveLanguage?.languageId) {
+        await updateInitialData()
+    } else {
+        setLanguages(newLanguages)
+    }
 }
 
 const component = useDynamicComponent(
     'T3Bl',
-    data.value.appearance.backendLayout
+    pageResponse.data?.appearance.backendLayout
 )
 </script>
