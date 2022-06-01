@@ -22,9 +22,8 @@ export function usePage() {
     }
 
     async function getPageData(): Promise<PageResponse> {
-        const { $typo3Fetch } = useTypo3Fetch()
         try {
-            const data = await $typo3Fetch<PageData>()
+            const data = await useTypo3Fetch<PageData>()
             return { data }
         } catch (error) {
             if (error instanceof FetchError) {

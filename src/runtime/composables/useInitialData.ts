@@ -4,7 +4,6 @@ import { useTypo3Fetch } from './useTypo3Fetch'
 import { InitialData, Language } from '#nuxt-typo3/api'
 
 export function useInitialData() {
-    const { $typo3Fetch } = useTypo3Fetch()
     const runtimeConfig = useRuntimeConfig()
 
     const initialData = useState<InitialData>('initialData', () => ({
@@ -52,7 +51,7 @@ export function useInitialData() {
     async function getInitialData(): Promise<InitialData> {
         const path = getLocalizedRootPath()
 
-        return await $typo3Fetch<InitialData>({
+        return await useTypo3Fetch<InitialData>({
             path,
             params: { type: runtimeConfig.public.typo3.api.initialDataType },
         })
