@@ -1,4 +1,4 @@
-import { Content } from '#nuxt-typo3/api'
+import { Content } from '..'
 
 export interface ContentTable extends Content {
     bodytext: string[][]

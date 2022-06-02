@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { ContentText } from '#nuxt-typo3/api'
+import { ContentText } from '#nuxt-typo3'
 
 defineProps<{
     id: number

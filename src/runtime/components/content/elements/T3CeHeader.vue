@@ -18,8 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { useCeHeader } from '#nuxt-typo3/composables/content-elements/useCeHeader'
-import { Content } from '#nuxt-typo3/api'
+import { Content, useCeHeader } from '#nuxt-typo3'
 
 const props = defineProps<{
     id: number

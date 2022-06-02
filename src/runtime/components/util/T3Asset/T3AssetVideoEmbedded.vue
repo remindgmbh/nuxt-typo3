@@ -2,7 +2,7 @@
     <iframe :src="file.publicUrl" :title="file.properties.title" />
 </template>
 <script setup lang="ts">
-import { Asset } from '#nuxt-typo3/api'
+import { Asset } from '#nuxt-typo3'
 
 defineProps<{ file: Asset }>()
 </script>

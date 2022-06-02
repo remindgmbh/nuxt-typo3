@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { ContentAccordion } from '#nuxt-typo3/api'
+import { ContentAccordion } from '#nuxt-typo3'
 
 defineProps<{
     id: number

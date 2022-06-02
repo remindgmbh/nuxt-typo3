@@ -3,27 +3,27 @@
         <T3TopbarLayoutHeader class="app__header">
             <div class="app__nav-items">
                 <template v-if="rootPageNavigation">
-                    <router-link
+                    <NuxtLink
                         class="app__nav-item"
                         :to="rootPageNavigation.link"
-                        >{{ rootPageNavigation.title }}</router-link
+                        >{{ rootPageNavigation.title }}</NuxtLink
                     >
-                    <router-link
+                    <NuxtLink
                         v-for="navItem in rootPageNavigation.children"
                         :key="navItem.link"
                         class="app__nav-item"
                         :to="navItem.link"
-                        >{{ navItem.title }}</router-link
+                        >{{ navItem.title }}</NuxtLink
                     >
                 </template>
             </div>
             <div class="app__nav-items">
-                <router-link
+                <NuxtLink
                     v-for="language in languages"
                     :key="language.link"
                     class="app__nav-item"
                     :to="language.link"
-                    >{{ language.navigationTitle }}</router-link
+                    >{{ language.navigationTitle }}</NuxtLink
                 >
                 <button @click="toggleSidebar">Toggle Sidebar</button>
                 <button @click="toggleScrollbar">Toggle Scrollbar</button>
@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-const { languages, rootPageNavigation } = useInitialData()
+const { rootPageNavigation, languages } = await useApiData()
 
 const sidebarVisible = ref(false)
 const scrollbarDisabled = ref(false)

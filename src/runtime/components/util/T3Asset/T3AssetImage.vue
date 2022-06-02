@@ -3,7 +3,7 @@
 </template>
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Asset } from '#nuxt-typo3/api'
+import { Asset } from '#nuxt-typo3'
 
 const props = defineProps<{ file: Asset }>()
 

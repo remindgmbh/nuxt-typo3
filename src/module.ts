@@ -1,7 +1,6 @@
 import {
     addAutoImportDir,
     addComponentsDir,
-    addPlugin,
     createResolver,
     defineNuxtModule,
     extendPages,
@@ -92,7 +91,6 @@ export default defineNuxtModule<ModuleOptions>({
             resolver.resolve('runtime/composables'),
             resolver.resolve('runtime/composables/content-elements'),
         ])
-        addPlugin(resolver.resolve('runtime/plugins/init'))
         addComponentsDir({
             path: resolver.resolve('runtime/components'),
             pathPrefix: false,

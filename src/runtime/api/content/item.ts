@@ -1,4 +1,4 @@
-import { Asset, ContentText } from '#nuxt-typo3/api'
+import { Asset, ContentText } from '..'
 
 export interface Item extends ContentText {
     id: number

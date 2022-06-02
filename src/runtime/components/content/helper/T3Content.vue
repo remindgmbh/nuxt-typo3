@@ -21,9 +21,12 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useDynamicComponent } from '#nuxt-typo3/composables/useDynamicComponent'
-import { Appearance, Content } from '#nuxt-typo3/api'
-import { useContentHelper } from '#nuxt-typo3/composables/useContentHelper'
+import {
+    Appearance,
+    Content,
+    useContentHelper,
+    useDynamicComponent,
+} from '#nuxt-typo3'
 
 const props = defineProps<{
     id: number

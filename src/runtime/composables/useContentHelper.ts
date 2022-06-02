@@ -1,10 +1,10 @@
-import { useRuntimeConfig } from '#app'
+import { useConfig } from '#nuxt-typo3'
 
 export function useContentHelper() {
-    const runtimeConfig = useRuntimeConfig()
+    const config = useConfig()
 
     function isFullWidth(type: string) {
-        return runtimeConfig.public.typo3.contentElements[type]?.fullWidth
+        return config.contentElements[type]?.fullWidth
     }
 
     return {

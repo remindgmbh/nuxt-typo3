@@ -1,5 +1,5 @@
 import { computed } from 'vue'
-import { ContentTextmedia } from '#nuxt-typo3/api'
+import { ContentTextmedia } from '#nuxt-typo3'
 
 export function useCeTextmedia(
     props: Readonly<{

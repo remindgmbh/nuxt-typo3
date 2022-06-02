@@ -9,8 +9,7 @@
 </template>
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Asset } from '#nuxt-typo3/api'
-import { useDynamicComponent } from '#nuxt-typo3/composables/useDynamicComponent'
+import { Asset, useDynamicComponent } from '#nuxt-typo3'
 
 const props = defineProps<{ file: Asset }>()
 

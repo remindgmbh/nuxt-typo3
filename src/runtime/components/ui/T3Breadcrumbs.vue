@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRuntimeConfig } from '#app'
-import { Breadcrumb } from '#nuxt-typo3/api'
+import { Breadcrumb } from '#nuxt-typo3'
 const runtimeConfig = useRuntimeConfig()
 
 const props = defineProps<{ breadcrumbs: Breadcrumb[] }>()

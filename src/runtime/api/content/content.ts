@@ -1,4 +1,4 @@
-import { TypoLink } from '#nuxt-typo3/api'
+import { TypoLink } from '..'
 
 export interface Content {
     header?: string

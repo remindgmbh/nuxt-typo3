@@ -12,8 +12,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Appearance } from '#nuxt-typo3/api'
-import { useContentHelper } from '#nuxt-typo3/composables/useContentHelper'
+import { Appearance, useContentHelper } from '#nuxt-typo3'
 
 const props = defineProps<{
     appearance: Appearance

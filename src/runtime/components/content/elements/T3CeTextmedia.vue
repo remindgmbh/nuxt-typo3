@@ -30,8 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { ContentTextmedia } from '#nuxt-typo3/api'
-import { useCeTextmedia } from '#nuxt-typo3/composables/content-elements/useCeTextmedia'
+import { ContentTextmedia, useCeTextmedia } from '#nuxt-typo3'
 
 const props = defineProps<{
     id: number

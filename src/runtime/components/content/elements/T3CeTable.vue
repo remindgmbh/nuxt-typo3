@@ -50,8 +50,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { ContentTable } from '#nuxt-typo3/api'
-import { useCeTable } from '#nuxt-typo3/composables/content-elements/useCeTable'
+import { ContentTable, useCeTable } from '#nuxt-typo3'
 
 const props = defineProps<{
     id: number

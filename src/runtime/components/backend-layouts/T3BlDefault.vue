@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Breadcrumb, ContentElement } from '#nuxt-typo3/api'
+import { Breadcrumb, ContentElement } from '#nuxt-typo3'
 
 const props = defineProps<{
     content: { [colPos: string]: ContentElement[] }

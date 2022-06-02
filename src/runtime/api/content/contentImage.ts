@@ -1,4 +1,4 @@
-import { Asset, Content } from '#nuxt-typo3/api'
+import { Asset, Content } from '..'
 
 export interface ContentImage extends Content {
     images: Asset[]

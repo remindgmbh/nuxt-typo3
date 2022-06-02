@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { ContentTabs } from '#nuxt-typo3/api'
+import { ContentTabs } from '#nuxt-typo3'
 
 defineProps<{
     id: number

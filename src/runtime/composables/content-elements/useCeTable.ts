@@ -1,6 +1,5 @@
 import { computed, ref, onMounted, Ref } from 'vue'
-import { ContentTable } from '#nuxt-typo3/api'
-import { useScrollIndicator } from '#nuxt-typo3/composables/useScrollIndicator'
+import { ContentTable, useScrollIndicator } from '#nuxt-typo3'
 
 export function useCeTable(
     props: Readonly<{

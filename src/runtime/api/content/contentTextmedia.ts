@@ -1,4 +1,4 @@
-import { Asset, ContentText } from '#nuxt-typo3/api'
+import { Asset, ContentText } from '..'
 
 export interface ContentTextmedia extends ContentText {
     assets: Asset[]

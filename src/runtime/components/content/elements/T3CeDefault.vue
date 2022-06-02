@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { Content } from '#nuxt-typo3/api'
+import { Content } from '#nuxt-typo3'
 
 const props = defineProps<{
     id: number

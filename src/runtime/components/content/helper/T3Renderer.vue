@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { ContentElement } from '#nuxt-typo3/api'
+import { ContentElement } from '#nuxt-typo3'
 
 withDefaults(
     defineProps<{
