@@ -1,8 +1,8 @@
 import { MetaObject } from '@nuxt/schema'
 import { useHead } from '#head'
-import { PageData } from '#nuxt-typo3'
+import { Api } from '#nuxt-typo3'
 
-export function usePageHead(pageData: PageData) {
+export function usePageHead(pageData: Api.PageData) {
     const title = pageData.breadcrumbs.find((bc) => bc.current)?.title
     const meta = pageData.meta
 

@@ -12,7 +12,8 @@
     "allowSyntheticDefaultImports": true,
     "types": [
       "node",
-      "@nuxt/kit"
+      "@nuxt/kit",
+      "@formkit/vue"
     ],
     "baseUrl": ".",
     "paths": {

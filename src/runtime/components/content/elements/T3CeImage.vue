@@ -7,11 +7,11 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { ContentImage } from '#nuxt-typo3'
+import { Api } from '#nuxt-typo3'
 
 const props = defineProps<{
     id: number
-    content: ContentImage
+    content: Api.ContentImage
 }>()
 
 const image = computed(() => props.content.images.at(0))

@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-const { rootPageNavigation, languages } = await useApiData()
+const { languages, rootPageNavigation } = useApiData()
 
 const sidebarVisible = ref(false)
 const scrollbarDisabled = ref(false)

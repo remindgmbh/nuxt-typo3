@@ -3,9 +3,9 @@
 </template>
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Asset } from '#nuxt-typo3'
+import { Api } from '#nuxt-typo3'
 
-const props = defineProps<{ file: Asset }>()
+const props = defineProps<{ file: Api.Asset }>()
 
 const attrs = computed(() => ({
     src: props.file.publicUrl,

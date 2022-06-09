@@ -3,40 +3,39 @@
         class="t3-content"
         :class="{
             container,
-            [`t3-content--space-before-${props.appearance.spaceBefore}`]:
-                props.appearance.spaceBefore,
-            [`t3-content--space-before-inside-${props.appearance.spaceBeforeInside}`]:
-                props.appearance.spaceBeforeInside &&
-                props.appearance.backgroundColor,
-            [`t3-content--space-after-${props.appearance.spaceAfter}`]:
-                props.appearance.spaceAfter,
-            [`t3-content--space-after-inside-${props.appearance.spaceAfterInside}`]:
-                props.appearance.spaceAfterInside &&
-                props.appearance.backgroundColor,
+            [`t3-content--space-before-${contentElement.appearance.spaceBefore}`]:
+                contentElement.appearance.spaceBefore,
+            [`t3-content--space-before-inside-${contentElement.appearance.spaceBeforeInside}`]:
+                contentElement.appearance.spaceBeforeInside &&
+                contentElement.appearance.backgroundColor,
+            [`t3-content--space-after-${contentElement.appearance.spaceAfter}`]:
+                contentElement.appearance.spaceAfter,
+            [`t3-content--space-after-inside-${contentElement.appearance.spaceAfterInside}`]:
+                contentElement.appearance.spaceAfterInside &&
+                contentElement.appearance.backgroundColor,
         }"
     >
-        <component :is="component" :id="props.id" :content="props.content" />
+        <component
+            :is="component"
+            :id="contentElement.id"
+            :content="contentElement.content"
+            :type="contentElement.type"
+        />
     </article>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import {
-    Appearance,
-    Content,
-    useContentHelper,
-    useDynamicComponent,
-} from '#nuxt-typo3'
+import { Api, useContentHelper, useDynamicComponent } from '#nuxt-typo3'
 
 const props = defineProps<{
-    id: number
-    type: string
-    content: Content
-    appearance: Appearance
+    contentElement: Api.ContentElement
 }>()
 
-const container = computed(() => !useContentHelper().isFullWidth(props.type))
-const component = useDynamicComponent('T3Ce', props.type)
+const container = computed(
+    () => !useContentHelper().isFullWidth(props.contentElement.type)
+)
+const component = useDynamicComponent('T3Ce', props.contentElement.type)
 </script>
 
 <style lang="scss">

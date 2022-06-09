@@ -6,10 +6,10 @@
 </template>
 
 <script setup lang="ts">
-import { ContentText } from '#nuxt-typo3'
+import { Api } from '#nuxt-typo3'
 
 defineProps<{
     id: number
-    content: ContentText
+    content: Api.ContentText
 }>()
 </script>

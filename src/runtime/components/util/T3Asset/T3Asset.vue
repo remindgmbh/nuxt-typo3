@@ -9,9 +9,9 @@
 </template>
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Asset, useDynamicComponent } from '#nuxt-typo3'
+import { Api, useDynamicComponent } from '#nuxt-typo3'
 
-const props = defineProps<{ file: Asset }>()
+const props = defineProps<{ file: Api.Asset }>()
 
 const type = computed(() => {
     switch (props.file.properties.type) {

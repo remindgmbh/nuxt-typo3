@@ -1,6 +1,7 @@
 import {
     addAutoImportDir,
     addComponentsDir,
+    addPlugin,
     createResolver,
     defineNuxtModule,
     extendPages,
@@ -21,7 +22,6 @@ export interface ModuleOptions {
         }
     }
     customCssVariables?: string
-    forms: boolean
     languages: string[]
     layout: {
         breadcrumbs: {
@@ -42,7 +42,6 @@ export default defineNuxtModule<ModuleOptions>({
             initialDataType: 834,
         },
         contentElements: {},
-        forms: false,
         languages: [],
         layout: {
             breadcrumbs: {
@@ -96,6 +95,9 @@ export default defineNuxtModule<ModuleOptions>({
             pathPrefix: false,
             global: true,
             ignore: ['**/shared.ts'],
+        })
+        addPlugin({
+            src: resolver.resolve('runtime/plugins/init'),
         })
         extendPages((pages) => {
             pages.push({

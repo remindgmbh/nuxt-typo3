@@ -1,47 +1,70 @@
 import { computed } from 'vue'
-import { FetchError } from 'ohmyfetch'
-import { useFetch, useRoute } from '#app'
-import { InitialData, PageData, useConfig } from '#nuxt-typo3'
-
-// TODO add $fetch with baseURL
+import { NitroFetchRequest } from 'nitropack'
+import { FetchError, FetchOptions } from 'ohmyfetch'
+import { useRequestHeaders } from '#app'
+import { Api, Model, useApiPath, useConfig } from '#nuxt-typo3'
 
 export function useApi() {
     const config = useConfig()
-    const baseURL = config.api.baseUrl
+    const apiPath = useApiPath()
 
-    const pagePath = computed(() => useRoute().fullPath)
+    const defaultOptions = computed<FetchOptions>(() => ({
+        baseURL: config.api.baseUrl,
+        // credentials: 'include',
+        headers: useRequestHeaders(['cookie']),
+    }))
 
-    const initialDataPath = computed(() => {
-        return (
-            config.languages.find(
-                (languagePath) =>
-                    pagePath.value.startsWith(languagePath) ||
-                    pagePath.value === languagePath.slice(0, -1)
-            ) ?? '/'
-        )
-    })
-
-    async function getInitialData() {
+    async function getInitialData(
+        path: string = apiPath.currentInitialDataPath.value
+    ) {
         const type = config.api.initialDataType
-        return await useFetch<InitialData>(initialDataPath.value, {
-            baseURL,
-            params: { type },
+        return await get<Api.InitialData>(path, { params: { type } })
+    }
+
+    async function getPageData(path: string = apiPath.currentPagePath.value) {
+        try {
+            return await get<Api.PageData>(path)
+        } catch (error) {
+            if (error instanceof FetchError) {
+                const pageError = new Model.PageError()
+                pageError.message = error.message
+                pageError.status = error.response?.status
+                pageError.statusText = error.response?.statusText
+                pageError.url = error.response?.url
+                if (typeof error.data !== 'string') {
+                    pageError.data = error.data
+                }
+                throw pageError
+            }
+        }
+    }
+
+    async function get<T = unknown>(
+        request: NitroFetchRequest,
+        options?: FetchOptions
+    ) {
+        return await $fetch<T>(request, {
+            ...defaultOptions.value,
+            method: 'GET',
+            ...options,
         })
     }
 
-    async function getPageData() {
-        return await useFetch<PageData, FetchError<PageData | string>>(
-            pagePath.value,
-            {
-                baseURL,
-            }
-        )
+    async function post<T = unknown>(
+        request: NitroFetchRequest,
+        options?: FetchOptions
+    ) {
+        return await $fetch<T>(request, {
+            ...defaultOptions.value,
+            method: 'POST',
+            ...options,
+        })
     }
 
     return {
-        initialDataPath,
-        pagePath,
         getInitialData,
         getPageData,
+        get,
+        post,
     }
 }

@@ -12,11 +12,11 @@
 </template>
 
 <script setup lang="ts">
-import { ContentTextpic } from '#nuxt-typo3'
+import { Api } from '#nuxt-typo3'
 
 defineProps<{
     id: number
-    content: ContentTextpic
+    content: Api.ContentTextpic
 }>()
 </script>
 

@@ -5,9 +5,9 @@
 </template>
 
 <script setup lang="ts">
-import { TypoLink } from '#nuxt-typo3'
+import { Api } from '#nuxt-typo3'
 
 defineProps<{
-    to: TypoLink
+    to: Api.TypoLink
 }>()
 </script>

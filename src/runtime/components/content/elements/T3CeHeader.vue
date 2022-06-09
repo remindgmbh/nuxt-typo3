@@ -18,11 +18,11 @@
 </template>
 
 <script setup lang="ts">
-import { Content, useCeHeader } from '#nuxt-typo3'
+import { Api, useCeHeader } from '#nuxt-typo3'
 
 const props = defineProps<{
     id: number
-    content: Content
+    content: Api.Content
 }>()
 
 const { visible, tag } = useCeHeader(props)

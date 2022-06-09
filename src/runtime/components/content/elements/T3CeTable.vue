@@ -50,11 +50,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { ContentTable, useCeTable } from '#nuxt-typo3'
+import { Api, useCeTable } from '#nuxt-typo3'
 
 const props = defineProps<{
     id: number
-    content: ContentTable
+    content: Api.ContentTable
 }>()
 
 const table = ref<HTMLTableElement>()

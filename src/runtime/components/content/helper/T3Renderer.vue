@@ -8,29 +8,18 @@
             :appearance="contentElement.appearance"
             :type="contentElement.type"
         >
-            <T3Content
-                :id="contentElement.id"
-                :type="contentElement.type"
-                :content="contentElement.content"
-                :appearance="contentElement.appearance"
-            />
+            <T3Content :content-element="contentElement" />
         </T3Background>
-        <T3Content
-            v-else
-            :id="contentElement.id"
-            :type="contentElement.type"
-            :content="contentElement.content"
-            :appearance="contentElement.appearance"
-        />
+        <T3Content v-else :content-element="contentElement" />
     </template>
 </template>
 
 <script setup lang="ts">
-import { ContentElement } from '#nuxt-typo3'
+import { Api } from '#nuxt-typo3'
 
 withDefaults(
     defineProps<{
-        contentElements?: ContentElement[]
+        contentElements?: Api.ContentElement[]
     }>(),
     { contentElements: () => [] }
 )

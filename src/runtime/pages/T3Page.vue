@@ -13,11 +13,7 @@
 <script setup lang="ts">
 import { useApiData, useDynamicComponent, usePageHead } from '#nuxt-typo3'
 
-const { pageData, pageError, updatePageData } = await useApiData()
-
-// shouldn't be necessary because page updates on route change,
-// but without update data is always one page behind
-await updatePageData()
+const { pageData, pageError } = useApiData()
 
 if (pageData.value) {
     usePageHead(pageData.value)

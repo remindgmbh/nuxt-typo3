@@ -2,7 +2,7 @@
     <pre>{{ file }}</pre>
 </template>
 <script setup lang="ts">
-import { Asset } from '#nuxt-typo3'
+import { Api } from '#nuxt-typo3'
 
-defineProps<{ file: Asset }>()
+defineProps<{ file: Api.Asset }>()
 </script>

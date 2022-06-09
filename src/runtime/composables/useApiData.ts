@@ -1,91 +1,36 @@
-import { useAsyncData } from '#app'
+import { useState } from '#app'
 import { computed } from 'vue'
-import { InitialData, useApi, PageData } from '#nuxt-typo3'
-import { useAsyncDataWithError } from '#nuxt-typo3/composables/useAsyncDataWithError'
+import { Api, Model, useApi, useApiPath } from '#nuxt-typo3'
 
-export interface PageError {
-    data?: PageData
-    message?: string
-    url?: string
-    status?: number
-    statusText?: string
-}
-
-export async function useApiData() {
+export function useApiData() {
     const api = useApi()
+    const apiPath = useApiPath()
 
-    async function getInitialData() {
-        return await useAsyncData<InitialData>(
-            'initialData',
-            async () => {
-                const { data } = await api.getInitialData()
+    const loading = useState<boolean>('loading', () => false)
 
-                // TODO Error handling
+    const initialDataCache = useState<{
+        [path: string]: Api.InitialData | undefined
+    }>('initialData', () => ({}))
 
-                return data.value
-            },
-            {
-                watch: [api.initialDataPath],
-            }
-        )
-    }
+    const pageDataCache = useState<{
+        [path: string]: Api.PageData | undefined
+    }>('pageData', () => ({}))
 
-    async function getPageData() {
-        return await useAsyncDataWithError<PageData, PageError>(
-            'pageData',
-            async () => {
-                const { data, error } = await api.getPageData()
+    const pageError = useState<Model.PageError | undefined>('pageError')
 
-                if (error.value) {
-                    const pageError: PageError = {}
-                    if (typeof error.value !== 'boolean') {
-                        pageError.message = error.value.message
-                        pageError.status = error.value.response?.status
-                        pageError.statusText = error.value.response?.statusText
-                        pageError.url = error.value.response?.url
-                        if (typeof error.value.data !== 'string') {
-                            pageError.data = error.value.data
-                        }
-                    }
-                    throw pageError
-                } else {
-                    return data.value
-                }
-            },
-            {
-                watch: [api.pagePath],
-            }
-        )
-    }
-
-    const [initialDataResult, pageDataResult] = await Promise.all([
-        getInitialData(),
-        getPageData(),
-    ])
-
-    const initialData = computed<InitialData | undefined>(
-        () => initialDataResult.data.value
+    const initialData = computed(
+        () => initialDataCache.value[apiPath.currentInitialDataPath.value]
     )
 
     const rootPageNavigation = computed(() =>
         initialData.value?.navigation.at(0)
     )
 
-    const pageError = computed(() =>
-        typeof pageDataResult.error.value === 'boolean'
-            ? {}
-            : pageDataResult.error.value
+    const pageData = computed(
+        () =>
+            pageDataCache.value[apiPath.currentPagePath.value] ??
+            pageError.value?.data
     )
-
-    const pageData = computed<PageData | undefined>(() => {
-        if (pageDataResult.data.value) {
-            return pageDataResult.data.value
-        } else if (pageError.value) {
-            return pageError.value.data
-        } else {
-            return undefined
-        }
-    })
 
     const initialDataLanguages = computed(() => initialData.value?.i18n ?? [])
 
@@ -108,11 +53,65 @@ export async function useApiData() {
         })
     )
 
+    const activeLanguage = computed(() =>
+        languages.value.find((language) => language.active)
+    )
+
+    async function loadInitialData(path: string) {
+        const initialDataPath = apiPath.getInitialDataPath(path)
+
+        if (!initialDataCache.value[initialDataPath]) {
+            const result = await api.getInitialData(initialDataPath)
+            initialDataCache.value[initialDataPath] = result
+        }
+    }
+
+    async function loadPageData(path: string) {
+        pageError.value = {}
+        if (!pageDataCache.value[path]) {
+            try {
+                const result = await api.getPageData(path)
+                pageDataCache.value[path] = result
+            } catch (error) {
+                if (error instanceof Model.PageError) {
+                    // assigning error directly leads to "Cannot stringify arbitrary non-POJOs PageError"
+                    pageError.value = { ...error }
+                }
+            }
+        }
+    }
+
+    async function loadAllData(path: string) {
+        loading.value = true
+
+        await Promise.all([loadInitialData(path), loadPageData(path)])
+
+        loading.value = false
+    }
+
+    function setCurrentPage(data: Api.PageData) {
+        pageDataCache.value[apiPath.currentPagePath.value] = data
+    }
+
+    function setCurrentInitialData(data: Api.InitialData) {
+        initialDataCache.value[apiPath.currentInitialDataPath.value] = data
+    }
+
+    function clearData() {
+        initialDataCache.value = {}
+        pageDataCache.value = {}
+    }
+
     return {
-        rootPageNavigation,
+        activeLanguage,
         languages,
+        loading,
         pageData,
         pageError,
-        updatePageData: pageDataResult.refresh,
+        rootPageNavigation,
+        clearData,
+        loadAllData,
+        setCurrentInitialData,
+        setCurrentPage,
     }
 }

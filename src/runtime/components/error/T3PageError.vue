@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { PageError } from '#nuxt-typo3'
+import { Model } from '#nuxt-typo3'
 
-defineProps<{ error: PageError }>()
+defineProps<{ error: Model.PageError }>()
 </script>

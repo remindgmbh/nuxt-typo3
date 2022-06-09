@@ -12,10 +12,10 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Appearance, useContentHelper } from '#nuxt-typo3'
+import { Api, useContentHelper } from '#nuxt-typo3'
 
 const props = defineProps<{
-    appearance: Appearance
+    appearance: Api.Appearance
     type: string
 }>()
 

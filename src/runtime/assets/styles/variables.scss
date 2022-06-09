@@ -22,8 +22,11 @@ $frame-spaces: (
     extra-large: 8rem,
 ) !default;
 $color-background: #fff !default;
-$color-primary: #6200ee !default;
-$color-secondary: #03dac6 !default;
-$color-accent: #b00020 !default;
+$color-primary: #607d8b !default;
+$color-secondary: #009688 !default;
+$color-accent: #fdd835 !default;
 $color-white: #fff !default;
 $color-black: #000 !default;
+$color-error: #b3261e !default;
+$transition-duration-input-error: 0.5s !default;
+$transition-duration-select: 0.5 !default;
