@@ -1,6 +1,6 @@
 <template>
     <transition
-        name="collapse"
+        :name="transitionName"
         @before-enter="beforeEnter"
         @enter="enter"
         @after-enter="afterEnter"
@@ -13,7 +13,19 @@
 </template>
 
 <script setup lang="ts">
+withDefaults(
+    defineProps<{
+        transitionName?: string
+    }>(),
+    { transitionName: 'collapse-transition' }
+)
+
+let initialHeight = ''
+let initialOverflowY = ''
+
 function beforeEnter(el: HTMLElement) {
+    initialHeight = el.style.height
+    initialOverflowY = el.style.overflowY
     el.style.height = '0'
 }
 function enter(el: HTMLElement) {
@@ -34,7 +46,7 @@ function leave(el: HTMLElement) {
     }
 }
 function afterLeave(el: HTMLElement) {
-    el.style.height = ''
-    el.style.overflowY = ''
+    el.style.height = initialHeight
+    el.style.overflowY = initialOverflowY
 }
 </script>
