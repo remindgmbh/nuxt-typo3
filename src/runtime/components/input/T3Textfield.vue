@@ -50,9 +50,11 @@ const { value, errorMessage } = useField(name, props.validation, {
         box-sizing: border-box;
     }
 
-    .collapse-enter-active,
-    .collapse-leave-active {
-        transition: height $transition-duration-input-error;
+    .collapse-transition {
+        &-enter-active,
+        &-leave-active {
+            transition: height $transition-duration-input-error;
+        }
     }
 }
 </style>

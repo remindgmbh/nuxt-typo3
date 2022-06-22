@@ -50,9 +50,11 @@ const errorMessage = useFieldError(props.name)
         color: $color-error;
     }
 
-    .collapse-enter-active,
-    .collapse-leave-active {
-        transition: height $transition-duration-input-error;
+    .collapse-transition {
+        &-enter-active,
+        &-leave-active {
+            transition: height $transition-duration-input-error;
+        }
     }
 }
 </style>

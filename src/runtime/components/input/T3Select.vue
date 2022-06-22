@@ -29,7 +29,7 @@
                 <div class="t3-select__trigger">
                     {{ options[value] ?? emptyLabel }}
                 </div>
-                <T3CollapseTransition>
+                <T3CollapseTransition transition-name="options-transition">
                     <div v-show="isOpen" class="t3-select__options">
                         <div
                             v-for="(optionLabel, optionValue) in options"
@@ -51,7 +51,7 @@
                 </T3CollapseTransition>
             </div>
         </div>
-        <T3CollapseTransition>
+        <T3CollapseTransition transition-name="error-transition">
             <div v-if="errorMessage" class="t3-select__error">
                 {{ errorMessage }}
             </div>
@@ -178,11 +178,6 @@ function supportKeyboardNavigation(e: KeyboardEvent) {
 @use '#nuxt-typo3/assets/styles/variables' as *;
 
 .t3-select {
-    .collapse-enter-active,
-    .collapse-leave-active {
-        transition: height $transition-duration-input-error;
-    }
-
     $color-background: #fff;
     $color-border: #8f8f9d;
     $color-border-active: #676774;
@@ -213,9 +208,11 @@ function supportKeyboardNavigation(e: KeyboardEvent) {
             pointer-events: auto;
         }
 
-        .collapse-enter-active,
-        .collapse-leave-active {
-            transition: height $transition-duration-select;
+        .options-transition {
+            &-enter-active,
+            &-leave-active {
+                transition: height $transition-duration-select;
+            }
         }
     }
 
@@ -263,6 +260,13 @@ function supportKeyboardNavigation(e: KeyboardEvent) {
 
     &__error {
         color: $color-error;
+    }
+
+    .error-transition {
+        &-enter-active,
+        &-leave-active {
+            transition: height $transition-duration-input-error;
+        }
     }
 }
 </style>
