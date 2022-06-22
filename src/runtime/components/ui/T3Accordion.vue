@@ -34,7 +34,7 @@ import { ref } from 'vue'
 
 const props = withDefaults(
     defineProps<{
-        items: unknown[]
+        items: any[]
         multiple?: boolean
         initialActiveItems?: number[]
         disabledItems?: number[]

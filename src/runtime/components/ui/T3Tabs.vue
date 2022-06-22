@@ -25,7 +25,7 @@
 import { computed, ref } from 'vue'
 
 const props = defineProps<{
-    items: unknown[]
+    items: any[]
 }>()
 
 const activeItemIndex = ref(0)
