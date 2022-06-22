@@ -98,11 +98,11 @@ const { headerTop, left, right, thead, tbody, tfoot } = useCeTable(
         position: absolute;
         width: 0;
         height: 100%;
-        transition: width 0.5s;
+        transition: width $transition-duration-table-overlay;
         z-index: $viewport-z-index + 1;
 
         &--visible {
-            width: 4rem;
+            width: $table-overlay-width;
         }
     }
 
