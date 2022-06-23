@@ -73,3 +73,15 @@ function redirect(event: MouseEvent, target: HTMLAnchorElement) {
     }
 }
 </script>
+
+<style lang="scss">
+.t3-html {
+    :first-child {
+        margin-top: 0;
+    }
+
+    :last-child {
+        margin-bottom: 0;
+    }
+}
+</style>
