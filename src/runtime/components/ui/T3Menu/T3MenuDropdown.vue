@@ -30,6 +30,22 @@ const props = withDefaults(
     }
 )
 
+const itemWithoutId = props.items.find((item) => item[props.idField] == null)
+
+if (itemWithoutId) {
+    console.warn(
+        `At least one menu item does not have a property called '${props.idField}'`
+    )
+} else {
+    const uniqueIds = new Set(props.items.map((item) => item[props.idField]))
+
+    if (uniqueIds.size < props.items.length) {
+        console.warn(
+            `Multiple items with same value for field '${props.idField}' found`
+        )
+    }
+}
+
 const dropdown = ref<HTMLDivElement>()
 
 const activeItemId = inject(activeItemIdSymbol)
