@@ -39,3 +39,13 @@ function toggle(index: number): void {
 }
 const activeItem = computed(() => props.items.at(activeItemIndex.value))
 </script>
+
+<style lang="scss">
+@use '#nuxt-typo3/assets/styles/variables' as *;
+
+.t3-tabs {
+    &__contents {
+        transition: height $transition-duration-tabs;
+    }
+}
+</style>

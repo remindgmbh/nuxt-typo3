@@ -59,3 +59,16 @@ function toggle(index: number): void {
     }
 }
 </script>
+
+<style lang="scss">
+@use '#nuxt-typo3/assets/styles/variables' as *;
+
+.t3-accordion {
+    .collapse-transition {
+        &-enter-active,
+        &-leave-active {
+            transition: height $transition-duration-accordion;
+        }
+    }
+}
+</style>

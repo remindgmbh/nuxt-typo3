@@ -6,11 +6,7 @@ export default T3CeTabs
 <style lang="scss">
 .t3-ce-tabs {
     .t3-tabs {
-        &__contents {
-            transition: height 1s;
-        }
-
-        .tab-change {
+        .tab-change-transition {
             &-enter-active,
             &-leave-active {
                 transition: opacity 0.5s;
