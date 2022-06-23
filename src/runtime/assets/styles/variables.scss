@@ -22,12 +22,25 @@ $frame-spaces: (
     extra-large: 8rem,
 ) !default;
 $color-background: #fff !default;
+
+// colors used for T3Background
 $color-primary: #607d8b !default;
 $color-secondary: #009688 !default;
 $color-accent: #fdd835 !default;
 $color-white: #fff !default;
 $color-black: #000 !default;
+
+// font colors for background colors
+$color-font-primary: #fff !default;
+$color-font-secondary: #000 !default;
+$color-font-accent: #000 !default;
+$color-font-white: #000 !default;
+$color-font-black: #fff !default;
+
+// color used for input errors
 $color-error: #b3261e !default;
+
+// transition durations
 $transition-duration-input-error: 0.5s !default;
 $transition-duration-select: 0.5s !default;
 $transition-duration-menu-change: 0.5s !default;

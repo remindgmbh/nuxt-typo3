@@ -32,22 +32,27 @@ const container = computed(
 .t3-background {
     &--primary {
         background-color: $color-primary;
+        color: $color-font-primary;
     }
 
     &--secondary {
         background-color: $color-secondary;
+        color: $color-font-secondary;
     }
 
     &--accent {
         background-color: $color-accent;
+        color: $color-font-accent;
     }
 
     &--white {
         background-color: $color-white;
+        color: $color-font-white;
     }
 
     &--black {
         background-color: $color-black;
+        color: $color-font-black;
     }
 }
 </style>
