@@ -2,7 +2,8 @@
     <header
         class="t3-ce-header"
         :class="{
-            [`text-${content.headerPosition}`]: content.headerPosition,
+            [`t3-ce-header--${contentElement.content.headerPosition}`]:
+                contentElement.content.headerPosition,
         }"
     >
         <div v-if="content.subheader" class="t3-ce-header__sub">
@@ -30,6 +31,18 @@ const { visible, tag } = useCeHeader(props)
 
 <style lang="scss">
 .t3-ce-header {
+    &--center {
+        text-align: center;
+    }
+
+    &--left {
+        text-align: left;
+    }
+
+    &--right {
+        text-align: right;
+    }
+
     &__main {
         margin: inherit;
 
