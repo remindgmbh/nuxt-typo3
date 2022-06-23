@@ -1,5 +1,7 @@
 <template>
-    <header
+    <component
+        :is="tag"
+        v-if="visible"
         class="t3-ce-header"
         :class="{
             [`t3-ce-header--${contentElement.appearance.backgroundColor}`]:
@@ -11,15 +13,15 @@
         <div v-if="contentElement.content.subheader" class="t3-ce-header__sub">
             {{ contentElement.content.subheader }}
         </div>
-        <component :is="tag" v-if="visible" class="t3-ce-header__main">
+        <div class="t3-ce-header__main">
             <template v-if="!contentElement.content.headerLink">{{
                 contentElement.content.header
             }}</template>
             <T3Link v-else :to="contentElement.content.headerLink">
                 {{ contentElement.content.header }}
             </T3Link>
-        </component>
-    </header>
+        </div>
+    </component>
 </template>
 
 <script setup lang="ts">
@@ -34,6 +36,8 @@ const { visible, tag } = useCeHeader(props.contentElement.content)
 
 <style lang="scss">
 .t3-ce-header {
+    margin: inherit;
+
     &--center {
         text-align: center;
     }
@@ -46,9 +50,12 @@ const { visible, tag } = useCeHeader(props.contentElement.content)
         text-align: right;
     }
 
-    &__main {
-        margin: inherit;
+    &__sub {
+        font-size: initial;
+        font-weight: initial;
+    }
 
+    &__main {
         a {
             text-decoration: inherit;
             color: inherit;
