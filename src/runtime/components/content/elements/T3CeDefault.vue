@@ -1,14 +1,12 @@
 <template>
-    <pre>{{ props }}</pre>
+    <pre>{{ contentElement }}</pre>
 </template>
 
 <script setup lang="ts">
 import { Api } from '#nuxt-typo3'
 
-const props = defineProps<{
-    id: number
-    content: Api.Content
-    type: string
+defineProps<{
+    contentElement: Api.ContentElement
 }>()
 </script>
 

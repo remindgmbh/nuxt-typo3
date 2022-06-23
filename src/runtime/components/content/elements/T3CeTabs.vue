@@ -1,12 +1,20 @@
 <template>
-    <div class="t3-ce-tabs">
-        <T3CeHeader :id="id" :content="content" />
-        <T3Tabs :items="content.items">
+    <div
+        class="t3-ce-tabs"
+        :class="{
+            [`t3-ce-tabs--${contentElement.appearance.backgroundColor}`]:
+                contentElement.appearance.backgroundColor,
+        }"
+    >
+        <T3CeHeader :content-element="contentElement" />
+        <T3Tabs :items="contentElement.content.items">
             <template #title="{ item }">
                 {{ item.title }}
             </template>
             <template #content="{ item }">
-                <T3CeText :id="item.id" :content="item" />
+                <T3CeText
+                    :content-element="{ ...contentElement, content: item }"
+                />
             </template>
         </T3Tabs>
     </div>
@@ -16,7 +24,6 @@
 import { Api } from '#nuxt-typo3'
 
 defineProps<{
-    id: number
-    content: Api.ContentTabs
+    contentElement: Api.ContentElement<Api.ContentTabs>
 }>()
 </script>

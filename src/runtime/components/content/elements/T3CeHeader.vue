@@ -2,17 +2,21 @@
     <header
         class="t3-ce-header"
         :class="{
+            [`t3-ce-header--${contentElement.appearance.backgroundColor}`]:
+                contentElement.appearance.backgroundColor,
             [`t3-ce-header--${contentElement.content.headerPosition}`]:
                 contentElement.content.headerPosition,
         }"
     >
-        <div v-if="content.subheader" class="t3-ce-header__sub">
-            {{ content.subheader }}
+        <div v-if="contentElement.content.subheader" class="t3-ce-header__sub">
+            {{ contentElement.content.subheader }}
         </div>
         <component :is="tag" v-if="visible" class="t3-ce-header__main">
-            <template v-if="!content.headerLink">{{ content.header }}</template>
-            <T3Link v-else :to="content.headerLink">
-                {{ content.header }}
+            <template v-if="!contentElement.content.headerLink">{{
+                contentElement.content.header
+            }}</template>
+            <T3Link v-else :to="contentElement.content.headerLink">
+                {{ contentElement.content.header }}
             </T3Link>
         </component>
     </header>
@@ -22,11 +26,10 @@
 import { Api, useCeHeader } from '#nuxt-typo3'
 
 const props = defineProps<{
-    id: number
-    content: Api.Content
+    contentElement: Api.ContentElement<Api.Content>
 }>()
 
-const { visible, tag } = useCeHeader(props)
+const { visible, tag } = useCeHeader(props.contentElement.content)
 </script>
 
 <style lang="scss">

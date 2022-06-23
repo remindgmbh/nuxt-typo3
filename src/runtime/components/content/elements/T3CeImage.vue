@@ -1,6 +1,12 @@
 <template>
-    <div class="t3-ce-image">
-        <T3CeHeader :id="id" :content="content" />
+    <div
+        class="t3-ce-image"
+        :class="{
+            [`t3-ce-image--${contentElement.appearance.backgroundColor}`]:
+                contentElement.appearance.backgroundColor,
+        }"
+    >
+        <T3CeHeader :content-element="contentElement" />
         <T3Asset v-if="image" :file="image" />
     </div>
 </template>
@@ -10,9 +16,8 @@ import { computed } from 'vue'
 import { Api } from '#nuxt-typo3'
 
 const props = defineProps<{
-    id: number
-    content: Api.ContentImage
+    contentElement: Api.ContentElement<Api.ContentImage>
 }>()
 
-const image = computed(() => props.content.images.at(0))
+const image = computed(() => props.contentElement.content.images.at(0))
 </script>

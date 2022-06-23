@@ -1,15 +1,10 @@
 import { computed } from 'vue'
-import { ContentTextmedia } from '#nuxt-typo3'
+import { Api } from '#nuxt-typo3'
 
-export function useCeTextmedia(
-    props: Readonly<{
-        id: number
-        content: ContentTextmedia
-    }>
-) {
-    const asset = computed(() => props.content.assets.at(0))
-    const assetIsSmall = computed(() => props.content.ratio === 2)
-    const assetIsRight = computed(() => props.content.assetPosition === 'right')
+export function useCeTextmedia(content: Api.ContentTextmedia) {
+    const asset = computed(() => content.assets.at(0))
+    const assetIsSmall = computed(() => content.ratio === 2)
+    const assetIsRight = computed(() => content.assetPosition === 'right')
     const assetIsVideo = computed(
         () => asset.value?.properties.type === 'video'
     )

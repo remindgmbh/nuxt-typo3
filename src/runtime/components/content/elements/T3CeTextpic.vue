@@ -1,23 +1,30 @@
 <template>
-    <div class="t3-ce-textpic">
-        <T3CeTextmedia
-            :id="id"
-            :content="{
-                ...content,
-                assets: content.images,
-                assetPosition: content.imagePosition,
-            }"
-        />
+    <div
+        class="t3-ce-textpic"
+        :class="{
+            [`t3-ce-textpic--${contentElement.appearance.backgroundColor}`]:
+                contentElement.appearance.backgroundColor,
+        }"
+    >
+        <T3CeTextmedia :content-element="contentElement" />
     </div>
 </template>
 
 <script setup lang="ts">
 import { Api } from '#nuxt-typo3'
 
-defineProps<{
-    id: number
-    content: Api.ContentTextpic
+const props = defineProps<{
+    contentElement: Api.ContentElement<Api.ContentTextpic>
 }>()
+
+const contentElement: Api.ContentElement<Api.ContentTextmedia> = {
+    ...props.contentElement,
+    content: {
+        ...props.contentElement.content,
+        assetPosition: props.contentElement.content.imagePosition,
+        assets: props.contentElement.content.images,
+    },
+}
 </script>
 
 <style lang="scss">

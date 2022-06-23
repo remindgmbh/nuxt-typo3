@@ -1,27 +1,24 @@
 import { computed, ref, onMounted, Ref } from 'vue'
-import { ContentTable, useScrollIndicator } from '#nuxt-typo3'
+import { Api, useScrollIndicator } from '#nuxt-typo3'
 
 export function useCeTable(
-    props: Readonly<{
-        id: number
-        content: ContentTable
-    }>,
+    content: Api.ContentTable,
     table?: Ref<HTMLElement | undefined>,
     viewport?: Ref<HTMLElement | undefined>
 ) {
     const headerTop = computed(() =>
-        [1, 3].includes(props.content.tableHeaderPosition)
+        [1, 3].includes(content.tableHeaderPosition)
     )
     const headerLeft = computed(() =>
-        [2, 3].includes(props.content.tableHeaderPosition)
+        [2, 3].includes(content.tableHeaderPosition)
     )
 
     const thead = computed(() =>
-        headerTop ? [...props.content.bodytext].shift() : false
+        headerTop ? [...content.bodytext].shift() : false
     )
 
     const tbody = computed(() => {
-        const tbody = [...props.content.bodytext]
+        const tbody = [...content.bodytext]
         if (thead.value) {
             tbody.shift()
         }
@@ -32,9 +29,7 @@ export function useCeTable(
     })
 
     const tfoot = computed(() =>
-        props.content.tableTfoot === 1
-            ? [...props.content.bodytext].pop()
-            : false
+        content.tableTfoot === 1 ? [...content.bodytext].pop() : false
     )
 
     const left = ref(true)

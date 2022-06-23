@@ -2,7 +2,7 @@
     <div
         class="t3-background"
         :class="[
-            `t3-background--${props.appearance.backgroundColor}`,
+            `t3-background--${props.contentElement.appearance.backgroundColor}`,
             { container },
         ]"
     >
@@ -15,14 +15,15 @@ import { computed } from 'vue'
 import { Api, useContentHelper } from '#nuxt-typo3'
 
 const props = defineProps<{
-    appearance: Api.Appearance
-    type: string
+    contentElement: Api.ContentElement
 }>()
+
+const { isFullWidth } = useContentHelper(props.contentElement)
 
 const container = computed(
     () =>
-        !useContentHelper().isFullWidth(props.type) &&
-        !props.appearance.backgroundFullWidth
+        !isFullWidth.value &&
+        !props.contentElement.appearance.backgroundFullWidth
 )
 </script>
 

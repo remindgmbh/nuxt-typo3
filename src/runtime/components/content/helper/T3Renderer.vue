@@ -5,8 +5,7 @@
     >
         <T3Background
             v-if="contentElement.appearance.backgroundColor"
-            :appearance="contentElement.appearance"
-            :type="contentElement.type"
+            :content-element="contentElement"
         >
             <T3Content :content-element="contentElement" />
         </T3Background>

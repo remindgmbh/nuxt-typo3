@@ -2,7 +2,7 @@
     <article
         class="t3-content"
         :class="{
-            container,
+            container: !isFullWidth,
             [`t3-content--space-before-${contentElement.appearance.spaceBefore}`]:
                 contentElement.appearance.spaceBefore,
             [`t3-content--space-before-inside-${contentElement.appearance.spaceBeforeInside}`]:
@@ -15,26 +15,19 @@
                 contentElement.appearance.backgroundColor,
         }"
     >
-        <component
-            :is="component"
-            :id="contentElement.id"
-            :content="contentElement.content"
-            :type="contentElement.type"
-        />
+        <component :is="component" :content-element="contentElement" />
     </article>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { Api, useContentHelper, useDynamicComponent } from '#nuxt-typo3'
 
 const props = defineProps<{
     contentElement: Api.ContentElement
 }>()
 
-const container = computed(
-    () => !useContentHelper().isFullWidth(props.contentElement.type)
-)
+const { isFullWidth } = useContentHelper(props.contentElement)
+
 const component = useDynamicComponent('T3Ce', props.contentElement.type)
 </script>
 

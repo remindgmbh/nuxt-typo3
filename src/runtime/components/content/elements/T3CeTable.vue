@@ -1,6 +1,12 @@
 <template>
-    <div class="t3-ce-table">
-        <T3CeHeader :id="id" :content="content" />
+    <div
+        class="t3-ce-table"
+        :class="{
+            [`t3-ce-table--${contentElement.appearance.backgroundColor}`]:
+                contentElement.appearance.backgroundColor,
+        }"
+    >
+        <T3CeHeader :content-element="contentElement" />
         <div class="t3-ce-table__container">
             <div
                 class="t3-ce-table__overlay-left"
@@ -12,9 +18,9 @@
             />
             <div ref="viewport" class="t3-ce-table__viewport">
                 <table ref="table">
-                    <caption v-if="content.tableCaption">
+                    <caption v-if="contentElement.content.tableCaption">
                         {{
-                            content.tableCaption
+                            contentElement.content.tableCaption
                         }}
                     </caption>
                     <thead v-if="thead">
@@ -53,15 +59,14 @@ import { ref } from 'vue'
 import { Api, useCeTable } from '#nuxt-typo3'
 
 const props = defineProps<{
-    id: number
-    content: Api.ContentTable
+    contentElement: Api.ContentElement<Api.ContentTable>
 }>()
 
 const table = ref<HTMLTableElement>()
 const viewport = ref<HTMLDivElement>()
 
 const { headerTop, left, right, thead, tbody, tfoot } = useCeTable(
-    props,
+    props.contentElement.content,
     table,
     viewport
 )

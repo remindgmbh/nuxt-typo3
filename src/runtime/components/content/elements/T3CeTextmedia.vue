@@ -1,5 +1,11 @@
 <template>
-    <div class="t3-ce-textmedia">
+    <div
+        class="t3-ce-textmedia"
+        :class="{
+            [`t3-ce-textmedia--${contentElement.appearance.backgroundColor}`]:
+                contentElement.appearance.backgroundColor,
+        }"
+    >
         <div
             class="t3-ce-textmedia__asset"
             :class="{
@@ -23,8 +29,8 @@
                 't3-ce-textmedia__text--large': assetIsSmall,
             }"
         >
-            <T3CeHeader :id="id" :content="content" />
-            <T3HtmlParser :content="content.bodytext" />
+            <T3CeHeader :content-element="contentElement" />
+            <T3HtmlParser :content="contentElement.content.bodytext" />
         </div>
     </div>
 </template>
@@ -33,12 +39,12 @@
 import { Api, useCeTextmedia } from '#nuxt-typo3'
 
 const props = defineProps<{
-    id: number
-    content: Api.ContentTextmedia
+    contentElement: Api.ContentElement<Api.ContentTextmedia>
 }>()
 
-const { asset, assetIsRight, assetIsSmall, assetIsVideo } =
-    useCeTextmedia(props)
+const { asset, assetIsRight, assetIsSmall, assetIsVideo } = useCeTextmedia(
+    props.contentElement.content
+)
 </script>
 
 <style lang="scss">

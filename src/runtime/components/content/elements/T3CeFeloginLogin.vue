@@ -1,12 +1,18 @@
 <template>
-    <div class="t3-ce-login">
-        <T3CeHeader :id="id" :content="content" />
+    <div
+        class="t3-ce-login"
+        :class="{
+            [`t3-ce-login--${contentElement.appearance.backgroundColor}`]:
+                contentElement.appearance.backgroundColor,
+        }"
+    >
+        <T3CeHeader :content-element="contentElement" />
         <div v-if="showMessage" class="t3-ce-login__message">
             <div class="t3-ce-login__message-header">
-                {{ content.data.message.header }}
+                {{ contentElement.content.data.message.header }}
             </div>
             <div class="t3-ce-login__message-body">
-                {{ content.data.message.message }}
+                {{ contentElement.content.data.message.message }}
             </div>
         </div>
         <T3Form
@@ -24,8 +30,7 @@ import { computed, ref } from 'vue'
 import { Api, Model, useApi, useApiData } from '#nuxt-typo3'
 
 const props = defineProps<{
-    id: number
-    content: Api.ContentLogin
+    contentElement: Api.ContentElement<Api.ContentLogin>
 }>()
 
 const api = useApi()
@@ -35,18 +40,19 @@ const loading = ref(false)
 
 const showMessage = computed(
     () =>
-        props.content.data.message.header || props.content.data.message.message
+        props.contentElement.content.data.message.header ||
+        props.contentElement.content.data.message.message
 )
 
 const formElements = computed(() =>
-    props.content.data.form.fields.pages
+    props.contentElement.content.data.form.fields.pages
         .filter((field) => field.name !== 'submit')
         .map(Model.FormElement.createFromApiLoginElement)
 )
 
 const submitLabel = computed(
     () =>
-        props.content.data.form.fields.pages.find(
+        props.contentElement.content.data.form.fields.pages.find(
             (field) => field.name === 'submit'
         )?.value ?? ''
 )
@@ -60,7 +66,7 @@ async function submit(data: Record<string, any>) {
     })
 
     const result = await api.post<Api.PageData>(
-        props.content.data.form.action,
+        props.contentElement.content.data.form.action,
         {
             body,
         }

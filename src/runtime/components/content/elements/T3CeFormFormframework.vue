@@ -1,10 +1,16 @@
 <template>
-    <div class="t3-ce-form">
-        <T3CeHeader :id="id" :content="content" />
-        <div class="t3-ce-form__form">
+    <div
+        class="t3-ce-form"
+        :class="{
+            [`t3-ce-form--${contentElement.appearance.backgroundColor}`]:
+                contentElement.appearance.backgroundColor,
+        }"
+    >
+        <T3CeHeader :content-element="contentElement" />
+        <div :class="`t3-ce-form__form`">
             <T3Form
                 :form-elements="formElements"
-                :submit-label="content.form.i18n.submit"
+                :submit-label="contentElement.content.form.i18n.submit"
                 @submit="submit"
             />
         </div>
@@ -20,24 +26,25 @@ const api = useApi()
 const router = useRouter()
 
 const props = defineProps<{
-    id: number
-    content: Api.ContentForm
+    contentElement: Api.ContentElement<Api.ContentForm>
 }>()
 
 const formElements = computed(() =>
-    props.content.form.elements.map(Model.FormElement.createFromApiFormElement)
+    props.contentElement.content.form.elements.map(
+        Model.FormElement.createFromApiFormElement
+    )
 )
 
 async function submit(data: Record<string, any>) {
     const body = new FormData()
-    body.set('responseElementId', props.id.toString())
+    body.set('responseElementId', props.contentElement.id.toString())
 
     Object.keys(data).forEach((key) => {
         body.set(key, data[key] ?? '')
     })
 
     const result = await api.post<Api.ContentElement<Api.ContentForm>>(
-        props.content.link.href,
+        props.contentElement.content.link.href,
         { body }
     )
     if (

@@ -1,11 +1,12 @@
-import { useConfig } from '#nuxt-typo3'
+import { computed } from 'vue'
+import { Api, useConfig } from '#nuxt-typo3'
 
-export function useContentHelper() {
+export function useContentHelper(contentElement: Api.ContentElement) {
     const config = useConfig()
 
-    function isFullWidth(type: string) {
-        return config.contentElements[type]?.fullWidth
-    }
+    const isFullWidth = computed(
+        () => config.contentElements[contentElement.type]?.fullWidth
+    )
 
     return {
         isFullWidth,

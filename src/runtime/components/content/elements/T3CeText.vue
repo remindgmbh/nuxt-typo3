@@ -1,7 +1,13 @@
 <template>
-    <div class="t3-ce-text">
-        <T3CeHeader :id="id" :content="content" />
-        <T3HtmlParser :content="content.bodytext" />
+    <div
+        class="t3-ce-text"
+        :class="{
+            [`t3-ce-text--${contentElement.appearance.backgroundColor}`]:
+                contentElement.appearance.backgroundColor,
+        }"
+    >
+        <T3CeHeader :content-element="contentElement" />
+        <T3HtmlParser :content="contentElement.content.bodytext" />
     </div>
 </template>
 
@@ -9,7 +15,6 @@
 import { Api } from '#nuxt-typo3'
 
 defineProps<{
-    id: number
-    content: Api.ContentText
+    contentElement: Api.ContentElement<Api.ContentText>
 }>()
 </script>
