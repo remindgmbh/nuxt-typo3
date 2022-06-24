@@ -5,12 +5,16 @@ export default T3CeHeader
 
 <style lang="scss">
 .t3-ce-header {
-    &--accent {
-        --t3-ce-header-main-color: #424242;
+    &--accent & {
+        &__main {
+            color: #424242;
+        }
     }
 
-    &__main {
-        color: var(--t3-ce-header-main-color);
+    &--primary & {
+        &__sub {
+            color: #b2ff59;
+        }
     }
 }
 </style>
