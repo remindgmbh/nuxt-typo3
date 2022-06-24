@@ -1,16 +1,13 @@
 import { MetaObject } from '@nuxt/schema'
 import { useHead } from '#head'
-import { Api } from '#nuxt-typo3'
+import { Api, useConfig } from '#nuxt-typo3'
 
 export function usePageHead(pageData: Api.PageData) {
     const title = pageData.breadcrumbs.find((bc) => bc.current)?.title
     const meta = pageData.meta
 
-    // TODO add canonical
-    // const canonical = meta.canonical
-
     const head: MetaObject = {
-        title: meta.title || title, // || this.$nuxt.$options.head.title,
+        title: meta.title || title,
         htmlAttrs: {
             lang: pageData.i18n.find((language) => language.active)
                 ?.twoLetterIsoCode,
@@ -34,7 +31,6 @@ export function usePageHead(pageData: Api.PageData) {
                 hid: 'twitter:title',
                 name: 'twitter:title',
                 content: meta.twitterTitle || meta.title || title,
-                // || this.$nuxt.$options.head.title,
             },
             {
                 hid: 'twitter:description',
@@ -50,7 +46,6 @@ export function usePageHead(pageData: Api.PageData) {
                 hid: 'og:title',
                 property: 'og:title',
                 content: meta.ogTitle || meta.title || title,
-                // || this.$nuxt.$options.head.title,
             },
             {
                 hid: 'og:description',
@@ -81,20 +76,24 @@ export function usePageHead(pageData: Api.PageData) {
         })
     }
 
-    // if (canonical && canonical.href) {
-    //     const url = `${baseUrl}${meta.canonical.href}`
+    if (meta.canonical && meta.canonical.href) {
+        const config = useConfig()
+        const baseUrl = config.baseUrl
+        const url = `${baseUrl}${meta.canonical.href}`
 
-    //     head.link.push({
-    //         rel: 'canonical',
-    //         href: url,
-    //     })
+        head.link = [
+            {
+                rel: 'canonical',
+                href: url,
+            },
+        ]
 
-    //     head.meta.push({
-    //         hid: 'og:url',
-    //         property: 'og:url',
-    //         content: url,
-    //     })
-    // }
+        head.meta?.push({
+            hid: 'og:url',
+            property: 'og:url',
+            content: url,
+        })
+    }
 
     return useHead(head)
 }

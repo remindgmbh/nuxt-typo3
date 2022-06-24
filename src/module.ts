@@ -16,6 +16,7 @@ export interface ModuleOptions {
         baseUrl: string
         initialDataType: number
     }
+    baseUrl: string
     contentElements: {
         [type: string]: {
             fullWidth?: boolean
@@ -41,6 +42,7 @@ export default defineNuxtModule<ModuleOptions>({
             baseUrl: '',
             initialDataType: 834,
         },
+        baseUrl: '',
         contentElements: {},
         languages: [],
         layout: {
