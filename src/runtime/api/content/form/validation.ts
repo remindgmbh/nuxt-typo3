@@ -1,43 +1,81 @@
-import * as yup from 'yup'
+import { Schema, array, boolean, date, number, string } from 'yup'
 import { FormElementType } from './formElement'
+import { useInputUtil } from '#nuxt-typo3'
+
+const { parseDateString, parseNumber } = useInputUtil()
+
+export const REGEX_ALPHANUMERIC = /^(\w*)$/
 
 export type ValidationType =
     | 'NotEmpty'
     | 'StringLength'
     | 'EmailAddress'
     | 'Alphanumeric'
+    | 'Integer'
+    | 'Float'
+    | 'NumberRange'
+    | 'RegularExpression'
+    | 'DateRange'
 
 export function getValidationScheme(
     identifier: ValidationType,
     options: { [key: string]: string },
     formElementType: FormElementType
-): yup.Schema {
+): Schema {
     switch (identifier) {
         case 'StringLength': {
-            const min = options.minimum ?? '0'
-            const max = options.maximum ?? '0'
-            return yup
-                .string()
-                .min(Number.parseInt(min))
-                .max(Number.parseInt(max))
+            const min = Number.parseInt(options.minimum) || 0
+            const max = Number.parseInt(options.maximum) || 0
+            return string().min(min).max(max)
         }
         case 'EmailAddress':
-            return yup.string().email()
+            return string().email()
         case 'NotEmpty': {
             switch (formElementType) {
                 case 'Checkbox':
-                    return yup.boolean().required().isTrue()
+                    return boolean().required().isTrue()
                 case 'MultiCheckbox':
-                    return yup.array().required().min(1)
+                    return array().required().min(1)
                 case 'RadioButton':
-                case 'SingleSelect':
-                    return yup.string().required()
+                case 'Number':
+                    return number().required()
+                case 'Date': {
+                    return date().transform(parseDateString).required()
+                }
                 default:
-                    return yup.string().required()
+                    return string().required()
             }
         }
-        // TODO
         case 'Alphanumeric':
-            return yup.string()
+            return string().matches(REGEX_ALPHANUMERIC)
+        case 'Integer': {
+            switch (formElementType) {
+                case 'Text':
+                    return number().transform(parseNumber).integer()
+                default:
+                    return number().integer()
+            }
+        }
+        case 'Float':
+            switch (formElementType) {
+                case 'Text':
+                    return number().transform(parseNumber)
+                default:
+                    return number()
+            }
+        case 'NumberRange': {
+            const min = Number.parseInt(options.minimum) || 0
+            const max = Number.parseInt(options.maximum) || 0
+            return number().min(min).max(max)
+        }
+        case 'RegularExpression': {
+            const regex = new RegExp(options.regularExpression)
+            return string().matches(regex)
+        }
+        case 'DateRange': {
+            const min = options.minimum
+            const max = options.maximum
+            return date().min(min).max(max)
+        }
     }
 }

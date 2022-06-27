@@ -1,5 +1,7 @@
 import { defineNuxtConfig } from 'nuxt'
 import MyModule from '..'
+import de from './locales/de.json'
+import en from './locales/en.json'
 
 export default defineNuxtConfig({
     head: {
@@ -32,6 +34,12 @@ export default defineNuxtConfig({
         contentElements: {
             header: {
                 fullWidth: false,
+            },
+        },
+        i18n: {
+            messages: {
+                de,
+                en,
             },
         },
         languages: ['/de/'],

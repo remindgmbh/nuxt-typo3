@@ -1,14 +1,14 @@
-import * as yup from 'yup'
+import { Schema, string } from 'yup'
 
 export type ValidationType = 'required' | 'password' | 'email'
 
-export function getValidationScheme(identifier: ValidationType): yup.Schema {
+export function getValidationScheme(identifier: ValidationType): Schema {
     switch (identifier) {
         case 'email':
-            return yup.string().email()
+            return string().email()
         case 'required':
-            return yup.string().required()
+            return string().required()
         case 'password':
-            return yup.string()
+            return string()
     }
 }

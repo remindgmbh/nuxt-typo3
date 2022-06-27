@@ -20,13 +20,13 @@
 </template>
 
 <script setup lang="ts">
-import { Api, useContentHelper, useDynamicComponent } from '#nuxt-typo3'
+import { Api, useContentUtil, useDynamicComponent } from '#nuxt-typo3'
 
 const props = defineProps<{
     contentElement: Api.ContentElement
 }>()
 
-const { isFullWidth } = useContentHelper(props.contentElement)
+const { isFullWidth } = useContentUtil(props.contentElement)
 
 const component = useDynamicComponent('T3Ce', props.contentElement.type)
 </script>

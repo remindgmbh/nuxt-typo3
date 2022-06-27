@@ -1,4 +1,4 @@
-import * as yup from 'yup'
+import { MixedSchema, Schema } from 'yup'
 import { Api } from '#nuxt-typo3'
 
 export type FormElementType =
@@ -24,7 +24,7 @@ interface IFormElement {
     name: string
     label?: string
     size?: number
-    validation?: yup.Schema
+    validation?: Schema
 }
 
 interface IFormElementWithOptions extends IFormElement {
@@ -41,7 +41,7 @@ export class FormElement implements IFormElement {
     name: string
     label?: string
     size?: number
-    validation?: yup.Schema
+    validation?: Schema
 
     constructor(formElement: IFormElement) {
         this.type = formElement.type
@@ -71,7 +71,7 @@ export class FormElement implements IFormElement {
                                   formElement.type
                               )
                           ),
-                      new yup.MixedSchema()
+                      new MixedSchema()
                   )
                 : undefined,
         }
@@ -120,7 +120,7 @@ export class FormElement implements IFormElement {
                                   type as Api.Login.ValidationType
                               )
                           ),
-                      new yup.MixedSchema()
+                      new MixedSchema()
                   )
                 : undefined,
         })

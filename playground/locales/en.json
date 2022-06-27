@@ -1,0 +1,5 @@
+{
+    "validation": {
+        "email": "{label}: Custom email error message"
+    }
+}

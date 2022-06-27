@@ -19,22 +19,46 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useField } from 'vee-validate'
-import * as yup from 'yup'
+import { Schema, date } from 'yup'
+import { useInputUtil } from '#nuxt-typo3'
+
+const { parseDateString } = useInputUtil()
 
 const props = defineProps<{
     name: string
     label?: string
     type: string
-    validation?: yup.Schema
+    validation?: Schema
     defaultValue?: string | number
 }>()
+
+const validation = computed(() => {
+    let typeValidation: Schema | undefined
+    switch (props.type) {
+        case 'date':
+            typeValidation = date().transform(parseDateString)
+            break
+        default:
+            typeValidation = undefined
+    }
+
+    if (typeValidation && props.validation) {
+        typeValidation = typeValidation.concat(props.validation)
+    }
+
+    return typeValidation ?? props.validation
+})
 
 const name = computed(() => props.name)
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
-const { value, errorMessage } = useField(name, props.validation, {
-    initialValue: props.defaultValue,
-})
+const { value, errorMessage } = useField(
+    name,
+    validation.value?.label(props.label ?? ''),
+    {
+        initialValue: props.defaultValue,
+    }
+)
 </script>
 
 <style lang="scss">

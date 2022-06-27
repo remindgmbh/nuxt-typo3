@@ -1,0 +1,13 @@
+{
+    "validation": {
+        "alphanumeric": "{label} may only contain alpha-numeric characters.",
+        "email": "{label} must be a valid email address.",
+        "integer": "{label} must be an integer.",
+        "max": "{label} must be {max} or less.",
+        "min": "{label} must be {min} or more.",
+        "numeric": "{label} may only contain numeric characters.",
+        "regex": "{label} format is invalid.",
+        "required": "{label} is required.",
+        "type": "{label} must be of type {type}."
+    }
+}

@@ -47,7 +47,10 @@ async function submit(data: Record<string, any>) {
         props.contentElement.content.link.href,
         { body }
     )
-    if (
+
+    if (typeof result.content.form === 'string') {
+        console.error(result.content.form)
+    } else if (
         result.content.form.api.status === 'success' &&
         result.content.form.api.actionAfterSuccess
     ) {

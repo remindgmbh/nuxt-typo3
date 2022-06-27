@@ -63,7 +63,9 @@ export function useApiData() {
         if (!initialDataCache.value[initialDataPath]) {
             const result = await api.getInitialData(initialDataPath)
             initialDataCache.value[initialDataPath] = result
+            return result
         }
+        return initialDataCache.value[initialDataPath]
     }
 
     async function loadPageData(path: string) {
@@ -72,6 +74,7 @@ export function useApiData() {
             try {
                 const result = await api.getPageData(path)
                 pageDataCache.value[path] = result
+                return result
             } catch (error) {
                 if (error instanceof Model.PageError) {
                     // assigning error directly leads to "Cannot stringify arbitrary non-POJOs PageError"
@@ -79,14 +82,22 @@ export function useApiData() {
                 }
             }
         }
+        return pageDataCache.value[path]
     }
 
-    async function loadAllData(path: string) {
+    async function loadAllData(
+        path: string
+    ): Promise<[Api.InitialData | undefined, Api.PageData | undefined]> {
         loading.value = true
 
-        await Promise.all([loadInitialData(path), loadPageData(path)])
+        const [initialData, pageData] = await Promise.all([
+            loadInitialData(path),
+            loadPageData(path),
+        ])
 
         loading.value = false
+
+        return [initialData, pageData]
     }
 
     function setCurrentPage(data: Api.PageData) {

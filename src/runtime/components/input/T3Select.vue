@@ -62,14 +62,14 @@
 <script setup lang="ts">
 import { useField } from 'vee-validate'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import * as yup from 'yup'
+import { Schema } from 'yup'
 
 const props = defineProps<{
     name: string
     label?: string
     options: { [key: string]: string }
     defaultValue?: string
-    validation?: yup.Schema
+    validation?: Schema
     emptyLabel?: string
 }>()
 
@@ -88,7 +88,7 @@ const name = computed(() => props.name)
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
 const { errorMessage, value, setValue } = useField<string>(
     name,
-    props.validation,
+    props.validation?.label(props.label ?? ''),
     {
         initialValue: props.defaultValue,
     }

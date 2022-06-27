@@ -10,6 +10,7 @@
                 :default-value="defaultValue"
                 :label="optionLabel"
                 :validation="validation"
+                :group-label="label"
                 multi
             />
         </div>
@@ -22,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import * as yup from 'yup'
+import { Schema } from 'yup'
 import { useFieldError } from 'vee-validate'
 
 const props = defineProps<{
@@ -30,7 +31,7 @@ const props = defineProps<{
     label?: string
     options: { [key: string]: string }
     defaultValue?: string[]
-    validation?: yup.Schema
+    validation?: Schema
 }>()
 
 const errorMessage = useFieldError(props.name)

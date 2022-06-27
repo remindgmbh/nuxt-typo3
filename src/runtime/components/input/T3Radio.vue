@@ -15,14 +15,15 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useField } from 'vee-validate'
-import * as yup from 'yup'
+import { Schema } from 'yup'
 
 const props = defineProps<{
     name: string
     label: string
     value: string
     defaultValue?: string
-    validation?: yup.Schema
+    validation?: Schema
+    groupLabel?: string
 }>()
 
 const name = computed(() => props.name)
@@ -30,7 +31,7 @@ const name = computed(() => props.name)
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
 const { value: modelValue } = useField<string | undefined>(
     name,
-    props.validation,
+    props.validation?.label(props.groupLabel ?? ''),
     {
         initialValue: props.defaultValue,
     }

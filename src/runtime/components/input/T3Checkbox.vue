@@ -23,15 +23,16 @@
 <script setup lang="ts">
 import { useField } from 'vee-validate'
 import { computed } from 'vue'
-import * as yup from 'yup'
+import { Schema } from 'yup'
 
 const props = defineProps<{
     name: string
-    label?: string
+    label: string
     value?: string
     defaultValue?: string[] | true
     multi?: boolean
-    validation?: yup.Schema
+    validation?: Schema
+    groupLabel?: string
 }>()
 
 const name = computed(() => props.name)
@@ -46,7 +47,7 @@ const checked = computed(
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
 const { errorMessage, handleChange } = useField<string[] | true | undefined>(
     name,
-    props.validation,
+    props.validation?.label(props.multi ? props.groupLabel ?? '' : props.label),
     {
         type: 'checkbox',
         initialValue: props.defaultValue,

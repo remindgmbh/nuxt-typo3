@@ -5,8 +5,10 @@ import {
     createResolver,
     defineNuxtModule,
     extendPages,
+    installModule,
 } from '@nuxt/kit'
 import { defu } from 'defu'
+import { I18nOptions } from 'vue-i18n'
 import { name, version } from '../package.json'
 
 const CONFIG_KEY = 'typo3'
@@ -23,6 +25,7 @@ export interface ModuleOptions {
         }
     }
     customCssVariables?: string
+    i18n: I18nOptions
     languages: string[]
     layout: {
         breadcrumbs: {
@@ -44,6 +47,9 @@ export default defineNuxtModule<ModuleOptions>({
         },
         baseUrl: '',
         contentElements: {},
+        i18n: {
+            locale: 'de',
+        },
         languages: [],
         layout: {
             breadcrumbs: {
@@ -98,7 +104,10 @@ export default defineNuxtModule<ModuleOptions>({
             ignore: ['**/shared.ts'],
         })
         addPlugin({
-            src: resolver.resolve('runtime/plugins/init'),
+            src: resolver.resolve('runtime/plugins/middleware'),
+        })
+        addPlugin({
+            src: resolver.resolve('runtime/plugins/i18n'),
         })
         extendPages((pages) => {
             pages.push({
@@ -107,7 +116,9 @@ export default defineNuxtModule<ModuleOptions>({
                 file: resolver.resolve('runtime/pages/T3Page'),
             })
         })
-
+        installModule('@intlify/nuxt3', {
+            localeDir: resolver.resolve('runtime/locales'),
+        })
         nuxt.options.alias['#nuxt-typo3'] = resolver.resolve('runtime')
     },
 })

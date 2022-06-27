@@ -22,6 +22,7 @@
     "dev:preview": "nuxi preview playground"
   },
   "dependencies": {
+    "@intlify/nuxt3": "^0.2.2",
     "@nuxt/kit": "^3.0.0-rc.3",
     "@nuxt/webpack-builder": "^3.0.0-rc.3",
     "sass": "^1.53.0",
