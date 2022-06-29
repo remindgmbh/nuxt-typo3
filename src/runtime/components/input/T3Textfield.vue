@@ -37,7 +37,9 @@ const validation = computed(() => {
     let typeValidation: Schema | undefined
     switch (props.type) {
         case 'date':
-            typeValidation = date().transform(parseDateString)
+            typeValidation = date()
+                .transform(parseDateString)
+                .default(undefined)
             break
         default:
             typeValidation = undefined

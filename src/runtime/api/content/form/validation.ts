@@ -40,7 +40,10 @@ export function getValidationScheme(
                 case 'Number':
                     return number().required()
                 case 'Date': {
-                    return date().transform(parseDateString).required()
+                    return date()
+                        .transform(parseDateString)
+                        .required()
+                        .default(undefined)
                 }
                 default:
                     return string().required()
@@ -75,7 +78,11 @@ export function getValidationScheme(
         case 'DateRange': {
             const min = options.minimum
             const max = options.maximum
-            return date().min(min).max(max)
+            return date()
+                .transform(parseDateString)
+                .min(min)
+                .max(max)
+                .default(undefined)
         }
     }
 }
