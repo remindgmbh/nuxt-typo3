@@ -1,5 +1,8 @@
 <template>
-    <fieldset class="t3-checkbox-group">
+    <fieldset
+        class="t3-checkbox-group"
+        :class="{ 't3-checkbox-group--required': required }"
+    >
         <legend class="t3-checkbox-group__label">{{ label }}</legend>
         <div class="t3-checkbox-group__values">
             <T3Checkbox
@@ -32,6 +35,7 @@ const props = defineProps<{
     options: { [key: string]: string }
     defaultValue?: string[]
     validation?: Schema
+    required?: boolean
 }>()
 
 const errorMessage = useFieldError(props.name)
@@ -49,6 +53,14 @@ const errorMessage = useFieldError(props.name)
 
     &__error {
         color: $color-error;
+    }
+
+    &--required & {
+        &__label {
+            &::after {
+                content: '*';
+            }
+        }
     }
 
     .collapse-transition {

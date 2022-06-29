@@ -25,6 +25,7 @@ interface IFormElement {
     label?: string
     size?: number
     validation?: Schema
+    required?: boolean
 }
 
 interface IFormElementWithOptions extends IFormElement {
@@ -42,6 +43,7 @@ export class FormElement implements IFormElement {
     label?: string
     size?: number
     validation?: Schema
+    required?: boolean
 
     constructor(formElement: IFormElement) {
         this.type = formElement.type
@@ -50,6 +52,7 @@ export class FormElement implements IFormElement {
         this.defaultValue = formElement.defaultValue
         this.size = formElement.size
         this.validation = formElement.validation
+        this.required = formElement.required
     }
 
     public static createFromApiFormElement(
@@ -61,6 +64,9 @@ export class FormElement implements IFormElement {
             name: formElement.name,
             defaultValue: formElement.defaultValue,
             size: formElement.properties?.size,
+            required: !!formElement.validators?.find(
+                (validator) => validator.identifier === 'NotEmpty'
+            ),
             validation: formElement.validators
                 ? formElement.validators.reduce(
                       (result, validator) =>
@@ -112,6 +118,7 @@ export class FormElement implements IFormElement {
             label: formElement.label,
             name: formElement.name,
             defaultValue: formElement.value,
+            required: !!formElement.validate?.required,
             validation: formElement.validate
                 ? Object.keys(formElement.validate).reduce(
                       (result, type) =>

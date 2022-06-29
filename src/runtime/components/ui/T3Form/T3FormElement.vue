@@ -15,6 +15,7 @@
             :label="formElement.label"
             :default-value="formElement.defaultValue"
             :validation="formElement.validation"
+            :required="formElement.required"
         />
         <T3CheckboxGroup
             v-else-if="formElement.type === 'checkbox-group'"
@@ -23,13 +24,15 @@
             :label="formElement.label"
             :default-value="formElement.defaultValue"
             :validation="formElement.validation"
+            :required="formElement.required"
         />
         <T3Checkbox
             v-else-if="formElement.type === 'checkbox'"
             :name="formElement.name"
-            :label="formElement.label"
+            :label="formElement.label ?? formElement.name"
             :default-value="formElement.defaultValue"
             :validation="formElement.validation"
+            :required="formElement.required"
         />
         <T3Select
             v-else-if="formElement.isSelect()"
@@ -39,6 +42,7 @@
             :default-value="formElement.defaultValue"
             :validation="formElement.validation"
             :empty-label="formElement.emptyLabel"
+            :required="formElement.required"
         />
         <T3Textfield
             v-else
@@ -47,6 +51,7 @@
             :default-value="formElement.defaultValue"
             :validation="formElement.validation"
             :type="formElement.type"
+            :required="formElement.required"
         />
     </div>
 </template>

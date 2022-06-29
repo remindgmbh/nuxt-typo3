@@ -1,5 +1,5 @@
 <template>
-    <div class="t3-checkbox">
+    <div class="t3-checkbox" :class="{ 't3-checkbox--required': required }">
         <div class="t3-checkbox__wrapper">
             <input
                 :id="key"
@@ -33,6 +33,7 @@ const props = defineProps<{
     multi?: boolean
     validation?: Schema
     groupLabel?: string
+    required?: boolean
 }>()
 
 const name = computed(() => props.name)
@@ -70,6 +71,14 @@ const { errorMessage, handleChange } = useField<string[] | true | undefined>(
 
     &__error {
         color: $color-error;
+    }
+
+    &--required & {
+        &__label {
+            &::after {
+                content: '*';
+            }
+        }
     }
 
     .collapse-transition {

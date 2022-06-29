@@ -1,5 +1,5 @@
 <template>
-    <div class="t3-select">
+    <div class="t3-select" :class="{ 't3-select--required': required }">
         <span :id="name" class="t3-select__label">{{ label }}</span>
         <div class="t3-select__wrapper">
             <select
@@ -71,6 +71,7 @@ const props = defineProps<{
     defaultValue?: string
     validation?: Schema
     emptyLabel?: string
+    required?: boolean
 }>()
 
 onMounted(() => {
@@ -266,6 +267,14 @@ function supportKeyboardNavigation(e: KeyboardEvent) {
         &-enter-active,
         &-leave-active {
             transition: height $transition-duration-input-error;
+        }
+    }
+
+    &--required & {
+        &__label {
+            &::after {
+                content: '*';
+            }
         }
     }
 }

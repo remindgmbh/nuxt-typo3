@@ -1,5 +1,8 @@
 <template>
-    <fieldset class="t3-radio-group">
+    <fieldset
+        class="t3-radio-group"
+        :class="{ 't3-radio-group--required': required }"
+    >
         <legend class="t3-radio-group__label">{{ label }}</legend>
         <div class="t3-radio-group__values">
             <T3Radio
@@ -31,6 +34,7 @@ const props = defineProps<{
     options: { [key: string]: string }
     defaultValue?: string
     validation?: Schema
+    required?: boolean
 }>()
 
 const errorMessage = useFieldError(props.name)
@@ -48,6 +52,14 @@ const errorMessage = useFieldError(props.name)
 
     &__error {
         color: $color-error;
+    }
+
+    &--required & {
+        &__label {
+            &::after {
+                content: '*';
+            }
+        }
     }
 
     .collapse-transition {

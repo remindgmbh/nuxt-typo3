@@ -1,5 +1,5 @@
 <template>
-    <div class="t3-textfield">
+    <div class="t3-textfield" :class="{ 't3-textfield--required': required }">
         <label class="t3-textfield__label" :for="name">{{ label }}</label>
         <input
             :id="name"
@@ -30,6 +30,7 @@ const props = defineProps<{
     type: string
     validation?: Schema
     defaultValue?: string | number
+    required?: boolean
 }>()
 
 const validation = computed(() => {
@@ -72,6 +73,14 @@ const { value, errorMessage } = useField(
     &__input {
         width: 100%;
         box-sizing: border-box;
+    }
+
+    &--required & {
+        &__label {
+            &::after {
+                content: '*';
+            }
+        }
     }
 
     .collapse-transition {
