@@ -2,20 +2,21 @@ import { ValidationType } from './validation'
 import { Model } from '#nuxt-typo3'
 
 export type FormElementType =
-    | 'Text'
-    | 'Textarea'
-    | 'Password'
-    | 'Email'
-    | 'Telephone'
-    | 'Url'
-    | 'Number'
-    | 'Date'
-    | 'SingleSelect'
-    | 'FileUpload'
     | 'Checkbox'
-    | 'RadioButton'
+    | 'Date'
+    | 'Email'
+    | 'FileUpload'
     | 'GridRow'
     | 'MultiCheckbox'
+    | 'Number'
+    | 'Password'
+    | 'RadioButton'
+    | 'SingleSelect'
+    | 'StaticText'
+    | 'Text'
+    | 'Textarea'
+    | 'Telephone'
+    | 'Url'
 
 export interface FormElement {
     identifier: string
@@ -26,6 +27,7 @@ export interface FormElement {
         size?: number
         options?: { [key: string]: string }
         prependOptionLabel?: string
+        text?: string
     }
     defaultValue?: any
     elements?: FormElement[]
@@ -50,6 +52,7 @@ export const formElementTypeMapping: FormElementTypeMapping = {
     Password: 'password',
     RadioButton: 'radio-group',
     SingleSelect: 'select',
+    StaticText: 'static-text',
     Telephone: 'tel',
     Text: 'text',
     Textarea: 'textarea',

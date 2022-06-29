@@ -12,6 +12,7 @@ export type FormElementType =
     | 'radio-group'
     | 'row'
     | 'select'
+    | 'static-text'
     | 'submit'
     | 'tel'
     | 'text'
@@ -34,6 +35,10 @@ interface IFormElementWithOptions extends IFormElement {
 
 interface IFormElementSelect extends IFormElementWithOptions {
     emptyLabel?: string
+}
+
+interface IFormElementStaticText extends IFormElement {
+    text: string
 }
 
 export class FormElement implements IFormElement {
@@ -104,6 +109,11 @@ export class FormElement implements IFormElement {
                     emptyLabel: formElement.properties?.prependOptionLabel,
                     options: formElement.properties?.options ?? {},
                 })
+            case 'StaticText':
+                return new FormElementStaticText({
+                    ...f,
+                    text: formElement.properties?.text ?? '',
+                })
             default:
                 return new FormElement(f)
         }
@@ -141,6 +151,10 @@ export class FormElement implements IFormElement {
         return this.type === 'select'
     }
 
+    public isStaticText(): this is FormElementStaticText {
+        return this.type === 'static-text'
+    }
+
     public hasOptions(): this is FormElementWithOptions {
         const optionTypes: FormElementType[] = [
             'checkbox-group',
@@ -175,6 +189,18 @@ export class FormElementSelect
     constructor(formElement: IFormElementSelect) {
         super(formElement)
         this.emptyLabel = formElement.emptyLabel
+    }
+}
+
+export class FormElementStaticText
+    extends FormElement
+    implements IFormElementStaticText
+{
+    text: string
+
+    constructor(formElement: IFormElementStaticText) {
+        super(formElement)
+        this.text = formElement.text
     }
 }
 

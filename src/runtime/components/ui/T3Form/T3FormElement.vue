@@ -8,8 +8,13 @@
             },
         ]"
     >
+        <T3FormStaticText
+            v-if="formElement.isStaticText()"
+            :header="formElement.label"
+            :text="formElement.text"
+        />
         <T3RadioGroup
-            v-if="formElement.type === 'radio-group'"
+            v-else-if="formElement.type === 'radio-group'"
             :name="formElement.name"
             :options="options"
             :label="formElement.label"
