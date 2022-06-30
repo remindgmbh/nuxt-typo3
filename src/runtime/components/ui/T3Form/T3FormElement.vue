@@ -49,6 +49,14 @@
             :empty-label="formElement.emptyLabel"
             :required="formElement.required"
         />
+        <T3Textarea
+            v-else-if="formElement.type === 'textarea'"
+            :name="formElement.name"
+            :label="formElement.label"
+            :default-value="formElement.defaultValue"
+            :validation="formElement.validation"
+            :required="formElement.required"
+        />
         <T3Textfield
             v-else
             :name="formElement.name"
