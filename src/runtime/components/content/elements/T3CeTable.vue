@@ -59,7 +59,7 @@ import { ref } from 'vue'
 import { Api, useCeTable } from '#nuxt-typo3'
 
 const props = defineProps<{
-    contentElement: Api.ContentElement<Api.ContentTable>
+    contentElement: Api.ContentElement<Api.Content.Table>
 }>()
 
 const table = ref<HTMLTableElement>()

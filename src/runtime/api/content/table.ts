@@ -1,6 +1,6 @@
-import { Content } from '..'
+import { Base } from '.'
 
-export interface ContentTable extends Content {
+export interface Table extends Base {
     bodytext: string[][]
     tableCaption: string
     tableHeaderPosition: number

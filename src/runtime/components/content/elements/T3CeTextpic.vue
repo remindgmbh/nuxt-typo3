@@ -14,10 +14,10 @@
 import { Api } from '#nuxt-typo3'
 
 const props = defineProps<{
-    contentElement: Api.ContentElement<Api.ContentTextpic>
+    contentElement: Api.ContentElement<Api.Content.Textpic>
 }>()
 
-const contentElement: Api.ContentElement<Api.ContentTextmedia> = {
+const contentElement: Api.ContentElement<Api.Content.Textmedia> = {
     ...props.contentElement,
     content: {
         ...props.contentElement.content,

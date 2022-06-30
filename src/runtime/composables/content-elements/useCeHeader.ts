@@ -1,7 +1,7 @@
 import { computed } from 'vue'
 import { Api } from '#nuxt-typo3'
 
-export function useCeHeader(content: Api.Content) {
+export function useCeHeader(content: Api.Content.Base) {
     const visible = computed(
         () => content.header && content.headerLayout !== 100
     )

@@ -1,6 +1,7 @@
-import { Asset, ContentText } from '..'
+import { Asset } from '..'
+import { Text } from '.'
 
-export interface Item extends ContentText {
+export interface Item extends Text {
     id: number
     pid: number
     title: string

@@ -30,7 +30,7 @@ import { computed, ref } from 'vue'
 import { Api, Model, useApi, useApiData } from '#nuxt-typo3'
 
 const props = defineProps<{
-    contentElement: Api.ContentElement<Api.ContentLogin>
+    contentElement: Api.ContentElement<Api.Content.FeLogin>
 }>()
 
 const api = useApi()

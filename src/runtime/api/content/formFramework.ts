@@ -1,8 +1,8 @@
 import { TypoLink } from '..'
 import { Form } from './form'
-import { Content } from '.'
+import { Base } from '.'
 
-export interface ContentForm extends Content {
+export interface FormFramework extends Base {
     link: TypoLink
     form: Form
 }

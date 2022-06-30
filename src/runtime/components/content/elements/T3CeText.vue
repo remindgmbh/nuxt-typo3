@@ -15,6 +15,6 @@
 import { Api } from '#nuxt-typo3'
 
 defineProps<{
-    contentElement: Api.ContentElement<Api.ContentText>
+    contentElement: Api.ContentElement<Api.Content.Text>
 }>()
 </script>

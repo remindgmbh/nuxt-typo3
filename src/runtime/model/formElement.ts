@@ -64,10 +64,12 @@ export class FormElement implements IFormElement {
     }
 
     public static createFromApiFormElement(
-        formElement: Api.Form.FormElement
+        formElement: Api.Content.Form.FormElement
     ): FormElement {
         const f: IFormElement = {
-            type: Api.Form.formElementTypeMapping[formElement.type] ?? 'hidden',
+            type:
+                Api.Content.Form.formElementTypeMapping[formElement.type] ??
+                'hidden',
             label: formElement.label,
             name: formElement.name,
             defaultValue: formElement.defaultValue,
@@ -81,7 +83,7 @@ export class FormElement implements IFormElement {
                 ? formElement.validators.reduce(
                       (result, validator) =>
                           result.concat(
-                              Api.Form.getValidationScheme(
+                              Api.Content.Form.getValidationScheme(
                                   validator.identifier,
                                   validator.options,
                                   formElement.type
@@ -125,11 +127,12 @@ export class FormElement implements IFormElement {
     }
 
     public static createFromApiLoginElement(
-        formElement: Api.Login.FormElement
+        formElement: Api.Content.Login.FormElement
     ): FormElement {
         return new FormElement({
             type:
-                Api.Login.formElementTypeMapping[formElement.type] ?? 'hidden',
+                Api.Content.Login.formElementTypeMapping[formElement.type] ??
+                'hidden',
             label: formElement.label,
             name: formElement.name,
             defaultValue: formElement.value,
@@ -138,8 +141,8 @@ export class FormElement implements IFormElement {
                 ? Object.keys(formElement.validate).reduce(
                       (result, type) =>
                           result.concat(
-                              Api.Login.getValidationScheme(
-                                  type as Api.Login.ValidationType
+                              Api.Content.Login.getValidationScheme(
+                                  type as Api.Content.Login.ValidationType
                               )
                           ),
                       new MixedSchema()

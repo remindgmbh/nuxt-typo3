@@ -26,7 +26,7 @@ const api = useApi()
 const router = useRouter()
 
 const props = defineProps<{
-    contentElement: Api.ContentElement<Api.ContentForm>
+    contentElement: Api.ContentElement<Api.Content.FormFramework>
 }>()
 
 const formElements = computed(() =>
@@ -43,10 +43,9 @@ async function submit(data: Record<string, any>) {
         body.set(key, data[key] ?? '')
     })
 
-    const result = await api.post<Api.ContentElement<Api.ContentForm>>(
-        props.contentElement.content.link.href,
-        { body }
-    )
+    const result = await api.post<
+        Api.ContentElement<Api.Content.FormFramework>
+    >(props.contentElement.content.link.href, { body })
 
     if (typeof result.content.form === 'string') {
         console.error(result.content.form)

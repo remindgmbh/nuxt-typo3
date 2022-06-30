@@ -44,7 +44,7 @@ export default defineNuxtPlugin((nuxt) => {
         string: {
             email: ({ label }) => t('validation.email', { label }),
             matches: ({ label, regex }) => {
-                if (regex === Api.Form.REGEX_ALPHANUMERIC) {
+                if (regex === Api.Content.Form.REGEX_ALPHANUMERIC) {
                     return t('validation.alphanumeric', { label })
                 } else {
                     return t('validation.regex', { label, regex })

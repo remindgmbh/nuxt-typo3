@@ -2,7 +2,7 @@ import { computed, ref, onMounted, Ref } from 'vue'
 import { Api, useScrollIndicator } from '#nuxt-typo3'
 
 export function useCeTable(
-    content: Api.ContentTable,
+    content: Api.Content.Table,
     table?: Ref<HTMLElement | undefined>,
     viewport?: Ref<HTMLElement | undefined>
 ) {

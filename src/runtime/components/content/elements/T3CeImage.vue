@@ -16,7 +16,7 @@ import { computed } from 'vue'
 import { Api } from '#nuxt-typo3'
 
 const props = defineProps<{
-    contentElement: Api.ContentElement<Api.ContentImage>
+    contentElement: Api.ContentElement<Api.Content.Image>
 }>()
 
 const image = computed(() => props.contentElement.content.images.at(0))

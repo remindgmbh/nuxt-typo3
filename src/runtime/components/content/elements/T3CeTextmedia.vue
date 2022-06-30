@@ -39,7 +39,7 @@
 import { Api, useCeTextmedia } from '#nuxt-typo3'
 
 const props = defineProps<{
-    contentElement: Api.ContentElement<Api.ContentTextmedia>
+    contentElement: Api.ContentElement<Api.Content.Textmedia>
 }>()
 
 const { asset, assetIsRight, assetIsSmall, assetIsVideo } = useCeTextmedia(

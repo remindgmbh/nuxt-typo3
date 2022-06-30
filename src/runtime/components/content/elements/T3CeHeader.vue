@@ -28,7 +28,7 @@
 import { Api, useCeHeader } from '#nuxt-typo3'
 
 const props = defineProps<{
-    contentElement: Api.ContentElement<Api.Content>
+    contentElement: Api.ContentElement<Api.Content.Base>
 }>()
 
 const { visible, tag } = useCeHeader(props.contentElement.content)

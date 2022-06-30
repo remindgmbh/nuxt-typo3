@@ -1,4 +1,4 @@
-export * from './content'
+export * as Content from './content'
 export type { Appearance } from './appearance'
 export type { Asset } from './asset'
 export type { Breadcrumb } from './breadcrumb'

@@ -24,6 +24,6 @@
 import { Api } from '#nuxt-typo3'
 
 defineProps<{
-    contentElement: Api.ContentElement<Api.ContentTabs>
+    contentElement: Api.ContentElement<Api.Content.Tabs>
 }>()
 </script>

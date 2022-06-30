@@ -1,6 +1,6 @@
 import { TypoLink } from '..'
 
-export interface Content {
+export interface Base {
     header?: string
     headerLayout: number
     headerPosition?: string

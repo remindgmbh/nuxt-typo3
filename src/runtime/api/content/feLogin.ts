@@ -1,7 +1,7 @@
 import { Form } from './login'
-import { Content } from '.'
+import { Base } from '.'
 
-export interface ContentLogin extends Content {
+export interface FeLogin extends Base {
     data: {
         form: Form
         message: {
