@@ -6,6 +6,7 @@
             v-model="value"
             class="t3-textarea__input"
             :name="name"
+            :placeholder="placeholder"
         />
         <T3CollapseTransition>
             <div v-if="errorMessage" class="t3-textarea__error">
@@ -26,6 +27,7 @@ const props = defineProps<{
     validation?: Schema
     defaultValue?: string | number
     required?: boolean
+    placeholder?: string
 }>()
 
 const name = computed(() => props.name)

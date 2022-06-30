@@ -28,6 +28,9 @@ export interface FormElement {
         options?: { [key: string]: string }
         prependOptionLabel?: string
         text?: string
+        fluidAdditionalAttributes?: {
+            placeholder?: string
+        }
     }
     defaultValue?: any
     elements?: FormElement[]

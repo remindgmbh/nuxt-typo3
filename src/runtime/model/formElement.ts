@@ -27,6 +27,7 @@ interface IFormElement {
     size?: number
     validation?: Schema
     required?: boolean
+    placeholder?: string
 }
 
 interface IFormElementWithOptions extends IFormElement {
@@ -49,6 +50,7 @@ export class FormElement implements IFormElement {
     size?: number
     validation?: Schema
     required?: boolean
+    placeholder?: string
 
     constructor(formElement: IFormElement) {
         this.type = formElement.type
@@ -58,6 +60,7 @@ export class FormElement implements IFormElement {
         this.size = formElement.size
         this.validation = formElement.validation
         this.required = formElement.required
+        this.placeholder = formElement.placeholder
     }
 
     public static createFromApiFormElement(
@@ -72,6 +75,8 @@ export class FormElement implements IFormElement {
             required: !!formElement.validators?.find(
                 (validator) => validator.identifier === 'NotEmpty'
             ),
+            placeholder:
+                formElement.properties?.fluidAdditionalAttributes?.placeholder,
             validation: formElement.validators
                 ? formElement.validators.reduce(
                       (result, validator) =>

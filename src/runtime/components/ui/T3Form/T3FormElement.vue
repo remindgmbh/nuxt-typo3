@@ -56,6 +56,7 @@
             :default-value="formElement.defaultValue"
             :validation="formElement.validation"
             :required="formElement.required"
+            :placeholder="formElement.placeholder"
         />
         <T3Textfield
             v-else
@@ -65,6 +66,7 @@
             :validation="formElement.validation"
             :type="formElement.type"
             :required="formElement.required"
+            :placeholder="formElement.placeholder"
         />
     </div>
 </template>
