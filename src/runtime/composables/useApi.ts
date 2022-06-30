@@ -35,6 +35,8 @@ export function useApi() {
                     pageError.data = error.data
                 }
                 throw pageError
+            } else {
+                throw error
             }
         }
     }
