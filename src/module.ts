@@ -32,6 +32,11 @@ export interface ModuleOptions {
             fullWidth: boolean
         }
     }
+    news: {
+        pagination: {
+            position: 'top' | 'bottom' | 'both'
+        }
+    }
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -54,6 +59,11 @@ export default defineNuxtModule<ModuleOptions>({
         layout: {
             breadcrumbs: {
                 fullWidth: false,
+            },
+        },
+        news: {
+            pagination: {
+                position: 'bottom',
             },
         },
     },

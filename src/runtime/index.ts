@@ -14,6 +14,7 @@ export { useScrollIndicator } from './composables/useScrollIndicator'
 export { useCeHeader } from './composables/content-elements/useCeHeader'
 export { useCeTable } from './composables/content-elements/useCeTable'
 export { useCeTextmedia } from './composables/content-elements/useCeTextmedia'
+export { useNewsElement } from './composables/content-elements/useNewsElement'
 
 // api
 export * as Api from './api'
