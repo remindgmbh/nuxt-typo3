@@ -1,5 +1,5 @@
 <template>
-    <form @submit="submit">
+    <form class="t3-form" @submit="submit">
         <template
             v-for="formElement in formElements"
             :key="formElement.identifier"
@@ -10,7 +10,13 @@
             />
             <T3FormElement v-else :form-element="formElement" />
         </template>
-        <button type="submit">{{ submitLabel }}</button>
+        <button
+            class="t3-form__submit"
+            :class="{ 't3-form__submit--loading': loading }"
+            type="submit"
+        >
+            <span class="t3-form__submit-label">{{ submitLabel }}</span>
+        </button>
     </form>
 </template>
 
@@ -21,8 +27,9 @@ import { Model } from '#nuxt-typo3'
 const { handleSubmit } = useForm()
 
 defineProps<{
-    submitLabel: string
     formElements: Model.FormElement[]
+    loading?: boolean
+    submitLabel: string
 }>()
 
 const emit = defineEmits<{

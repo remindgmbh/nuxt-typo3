@@ -18,22 +18,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { useRouter } from '#app'
-import { Api, Model, useApi } from '#nuxt-typo3'
+import { Api, useApi, useCeFormFormframework } from '#nuxt-typo3'
+
+const props = defineProps<{
+    contentElement: Api.ContentElement<Api.Content.Formframework>
+}>()
 
 const api = useApi()
 const router = useRouter()
-
-const props = defineProps<{
-    contentElement: Api.ContentElement<Api.Content.FormFramework>
-}>()
-
-const formElements = computed(() =>
-    props.contentElement.content.form.elements.map(
-        Model.FormElement.createFromApiFormElement
-    )
-)
+const { formElements } = useCeFormFormframework(props.contentElement.content)
 
 async function submit(data: Record<string, any>) {
     const body = new FormData()
@@ -44,7 +38,7 @@ async function submit(data: Record<string, any>) {
     })
 
     const result = await api.post<
-        Api.ContentElement<Api.Content.FormFramework>
+        Api.ContentElement<Api.Content.Formframework>
     >(props.contentElement.content.link.href, { body })
 
     if (typeof result.content.form === 'string') {

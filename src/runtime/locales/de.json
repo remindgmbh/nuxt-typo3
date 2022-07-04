@@ -1,4 +1,9 @@
 {
+    "solr": {
+        "loading": "Lädt",
+        "placeholder": "Suchbegriff",
+        "submit": "Suchen"
+    },
     "validation": {
         "alphanumeric": "{label} darf nur alphabetische Zeichen enthalten.",
         "email": "{label} muss eine gültige E-Mail-Adresse sein.",

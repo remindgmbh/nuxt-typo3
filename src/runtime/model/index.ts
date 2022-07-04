@@ -1,7 +1,11 @@
-export { PageError } from './pageError'
 export {
     FormElement,
-    FormElementWithOptions,
     FormElementRow,
+    FormElementSelect,
+    FormElementStaticText,
+    FormElementWithOptions,
 } from './formElement'
-export type { FormElementType } from './formElement'
+export type { FormElementType, IFormElement } from './formElement'
+export { PageError } from './pageError'
+export { Pagination } from './pagination'
+export type { IPagination } from './pagination'

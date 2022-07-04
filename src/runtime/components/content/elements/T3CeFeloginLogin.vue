@@ -27,14 +27,15 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { Api, Model, useApi, useApiData } from '#nuxt-typo3'
+import { Api, useApi, useApiData, useCeFeloginLogin } from '#nuxt-typo3'
 
 const props = defineProps<{
-    contentElement: Api.ContentElement<Api.Content.FeLogin>
+    contentElement: Api.ContentElement<Api.Content.Felogin>
 }>()
 
 const api = useApi()
 const apiData = useApiData()
+const { formElements } = useCeFeloginLogin(props.contentElement.content)
 
 const loading = ref(false)
 
@@ -42,12 +43,6 @@ const showMessage = computed(
     () =>
         props.contentElement.content.data.message.header ||
         props.contentElement.content.data.message.message
-)
-
-const formElements = computed(() =>
-    props.contentElement.content.data.form.fields.pages
-        .filter((field) => field.name !== 'submit')
-        .map(Model.FormElement.createFromApiLoginElement)
 )
 
 const submitLabel = computed(

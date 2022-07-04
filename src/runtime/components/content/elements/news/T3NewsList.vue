@@ -1,8 +1,9 @@
 <template>
     <div class="t3-news-list">
         <T3CeHeader :content-element="contentElement" />
-        <T3NewsListPagination
+        <T3Pagination
             v-if="pagination && paginationTop"
+            class="t3-news-list__pagination t3-news-list__pagination--top"
             :pagination="pagination"
         />
         <div class="t3-news-list__elements">
@@ -12,8 +13,9 @@
                 :list-element="listElement"
             />
         </div>
-        <T3NewsListPagination
+        <T3Pagination
             v-if="pagination && paginationBottom"
+            class="t3-news-list__pagination t3-news-list__pagination--bottom"
             :pagination="pagination"
         />
     </div>
@@ -21,24 +23,14 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Api, useConfig } from '#nuxt-typo3'
-
-const config = useConfig()
+import { Api, useNewsList } from '#nuxt-typo3'
 
 const props = defineProps<{
     contentElement: Api.ContentElement<Api.Content.NewsPi>
 }>()
 
-const listElements = computed(
-    () => props.contentElement.content.data.list ?? []
-)
-const pagination = computed(() => props.contentElement.content.data.pagination)
+const content = computed(() => props.contentElement.content)
 
-const paginationTop = computed(() =>
-    ['top', 'both'].includes(config.news.pagination.position)
-)
-
-const paginationBottom = computed(() =>
-    ['bottom', 'both'].includes(config.news.pagination.position)
-)
+const { listElements, pagination, paginationBottom, paginationTop } =
+    useNewsList(content)
 </script>

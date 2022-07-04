@@ -37,6 +37,11 @@ export interface ModuleOptions {
             position: 'top' | 'bottom' | 'both'
         }
     }
+    solr: {
+        pagination: {
+            position: 'top' | 'bottom' | 'both'
+        }
+    }
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -62,6 +67,11 @@ export default defineNuxtModule<ModuleOptions>({
             },
         },
         news: {
+            pagination: {
+                position: 'bottom',
+            },
+        },
+        solr: {
             pagination: {
                 position: 'bottom',
             },

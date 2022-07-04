@@ -1,4 +1,9 @@
 {
+    "solr": {
+        "loading": "Loading",
+        "placeholder": "Search term",
+        "submit": "Search"
+    },
     "validation": {
         "alphanumeric": "{label} may only contain alpha-numeric characters.",
         "email": "{label} must be a valid email address.",
