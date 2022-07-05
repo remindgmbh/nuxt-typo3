@@ -1,7 +1,10 @@
 <template>
     <fieldset
         class="t3-checkbox-group"
-        :class="{ 't3-checkbox-group--required': required }"
+        :class="{
+            't3-checkbox-group--required': required,
+            't3-checkbox-group--disabled': disabled,
+        }"
     >
         <legend class="t3-checkbox-group__label">{{ label }}</legend>
         <div class="t3-checkbox-group__values">
@@ -14,6 +17,7 @@
                 :label="optionLabel"
                 :validation="validation"
                 :group-label="label"
+                :disabled="disabled"
                 multi
             />
         </div>
@@ -36,6 +40,7 @@ const props = defineProps<{
     defaultValue?: string[]
     validation?: Schema
     required?: boolean
+    disabled?: boolean
 }>()
 
 const errorMessage = useFieldError(props.name)

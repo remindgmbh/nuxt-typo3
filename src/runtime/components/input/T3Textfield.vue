@@ -1,5 +1,11 @@
 <template>
-    <div class="t3-textfield" :class="{ 't3-textfield--required': required }">
+    <div
+        class="t3-textfield"
+        :class="{
+            't3-textfield--required': required,
+            't3-textfield--disabled': disabled,
+        }"
+    >
         <label class="t3-textfield__label" :for="name">{{ label }}</label>
         <input
             :id="name"
@@ -8,6 +14,7 @@
             :type="type"
             :name="name"
             :placeholder="placeholder"
+            :disabled="disabled"
         />
         <T3CollapseTransition>
             <div v-if="errorMessage" class="t3-textfield__error">
@@ -33,6 +40,7 @@ const props = defineProps<{
     defaultValue?: string | number
     required?: boolean
     placeholder?: string
+    disabled?: boolean
 }>()
 
 const validation = computed(() => {

@@ -1,5 +1,11 @@
 <template>
-    <div class="t3-checkbox" :class="{ 't3-checkbox--required': required }">
+    <div
+        class="t3-checkbox"
+        :class="{
+            't3-checkbox--required': required,
+            't3-checkbox--disabled': disabled,
+        }"
+    >
         <div class="t3-checkbox__wrapper">
             <input
                 :id="key"
@@ -8,6 +14,7 @@
                 :name="name"
                 :value="key"
                 :checked="checked"
+                :disabled="disabled"
                 @click="handleChange(checkedValue)"
             />
             <label class="t3-checkbox__label" :for="key">{{ label }}</label>
@@ -34,6 +41,7 @@ const props = defineProps<{
     validation?: Schema
     groupLabel?: string
     required?: boolean
+    disabled?: boolean
 }>()
 
 const name = computed(() => props.name)

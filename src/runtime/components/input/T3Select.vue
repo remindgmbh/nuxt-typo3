@@ -1,5 +1,11 @@
 <template>
-    <div class="t3-select" :class="{ 't3-select--required': required }">
+    <div
+        class="t3-select"
+        :class="{
+            't3-select--required': required,
+            't3-select--disabled': disabled,
+        }"
+    >
         <span :id="name" class="t3-select__label">{{ label }}</span>
         <div class="t3-select__wrapper">
             <select
@@ -9,6 +15,7 @@
                 class="t3-select__native"
                 :aria-labelledby="name"
                 :name="name"
+                :disabled="disabled"
             >
                 <option
                     v-for="(optionLabel, optionValue) in options"
@@ -72,6 +79,7 @@ const props = defineProps<{
     validation?: Schema
     emptyLabel?: string
     required?: boolean
+    disabled?: boolean
 }>()
 
 onMounted(() => {
@@ -111,6 +119,9 @@ function toggle() {
 }
 
 function open() {
+    if (props.disabled) {
+        return
+    }
     isOpen.value = true
     nativeSelect.value?.removeEventListener('keydown', openCustomSelect)
     document.addEventListener('keydown', supportKeyboardNavigation)

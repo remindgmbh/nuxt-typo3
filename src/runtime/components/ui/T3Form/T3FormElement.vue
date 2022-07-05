@@ -21,6 +21,7 @@
             :default-value="formElement.defaultValue"
             :validation="formElement.validation"
             :required="formElement.required"
+            :disabled="loading"
         />
         <T3CheckboxGroup
             v-else-if="formElement.type === 'checkbox-group'"
@@ -30,6 +31,7 @@
             :default-value="formElement.defaultValue"
             :validation="formElement.validation"
             :required="formElement.required"
+            :disabled="loading"
         />
         <T3Checkbox
             v-else-if="formElement.type === 'checkbox'"
@@ -38,6 +40,7 @@
             :default-value="formElement.defaultValue"
             :validation="formElement.validation"
             :required="formElement.required"
+            :disabled="loading"
         />
         <T3Select
             v-else-if="formElement.isSelect()"
@@ -48,6 +51,7 @@
             :validation="formElement.validation"
             :empty-label="formElement.emptyLabel"
             :required="formElement.required"
+            :disabled="loading"
         />
         <T3Textarea
             v-else-if="formElement.type === 'textarea'"
@@ -57,6 +61,7 @@
             :validation="formElement.validation"
             :required="formElement.required"
             :placeholder="formElement.placeholder"
+            :disabled="loading"
         />
         <T3Textfield
             v-else
@@ -67,6 +72,7 @@
             :type="formElement.type"
             :required="formElement.required"
             :placeholder="formElement.placeholder"
+            :disabled="loading"
         />
     </div>
 </template>
@@ -75,7 +81,10 @@
 import { computed } from 'vue'
 import { Model } from '#nuxt-typo3'
 
-const props = defineProps<{ formElement: Model.FormElement }>()
+const props = defineProps<{
+    formElement: Model.FormElement
+    loading?: boolean
+}>()
 
 const options = computed(() =>
     props.formElement.hasOptions() ? props.formElement.options : {}

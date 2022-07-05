@@ -7,6 +7,7 @@
             :value="value"
             type="radio"
             :name="name"
+            :disabled="disabled"
         />
         <label class="t3-radio__label" :for="value">{{ label }}</label>
     </div>
@@ -24,6 +25,7 @@ const props = defineProps<{
     defaultValue?: string
     validation?: Schema
     groupLabel?: string
+    disabled?: boolean
 }>()
 
 const name = computed(() => props.name)

@@ -1,5 +1,11 @@
 <template>
-    <div class="t3-textarea" :class="{ 't3-textarea--required': required }">
+    <div
+        class="t3-textarea"
+        :class="{
+            't3-textarea--required': required,
+            't3-textarea--disabled': disabled,
+        }"
+    >
         <label class="t3-textarea__label" :for="name">{{ label }}</label>
         <textarea
             :id="name"
@@ -7,6 +13,7 @@
             class="t3-textarea__input"
             :name="name"
             :placeholder="placeholder"
+            :disabled="disabled"
         />
         <T3CollapseTransition>
             <div v-if="errorMessage" class="t3-textarea__error">
@@ -28,6 +35,7 @@ const props = defineProps<{
     defaultValue?: string | number
     required?: boolean
     placeholder?: string
+    disabled?: boolean
 }>()
 
 const name = computed(() => props.name)

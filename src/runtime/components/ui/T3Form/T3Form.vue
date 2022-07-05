@@ -7,8 +7,13 @@
             <T3FormGroup
                 v-if="formElement.isRow()"
                 :form-elements="formElement.formElements"
+                :loading="loading"
             />
-            <T3FormElement v-else :form-element="formElement" />
+            <T3FormElement
+                v-else
+                :form-element="formElement"
+                :loading="loading"
+            />
         </template>
         <button
             class="t3-form__submit"
