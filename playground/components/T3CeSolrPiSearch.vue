@@ -5,26 +5,30 @@ export default T3CeSolrPiSearch
 
 <style lang="scss">
 .t3-ce-solr-search {
-    .t3-form {
-        display: flex;
+    &__submit {
+        padding: 0 1rem;
 
-        &__submit {
-            padding: 0 1rem;
+        &::after {
+            content: '🔎︎';
+        }
 
+        &--loading {
             &::after {
-                content: '🔎︎';
-            }
-
-            &--loading {
-                &::after {
-                    content: '...';
-                }
+                content: '...';
             }
         }
+    }
 
-        &__submit-label {
-            display: none;
+    .t3-autocomplete {
+        &__options {
+            a {
+                color: green;
+            }
         }
+    }
+
+    &__submit-label {
+        display: none;
     }
 }
 </style>

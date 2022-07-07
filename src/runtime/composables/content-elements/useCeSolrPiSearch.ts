@@ -1,37 +1,69 @@
 import { computed, ref } from 'vue'
 import { useRouter } from '#app'
 import { useI18n } from 'vue-i18n'
-import { Api, Model } from '#nuxt-typo3'
-
-const SEARCH_TERM_INPUT_NAME = 'search_term'
+import { useForm } from 'vee-validate'
+import { Api, Model, useApi } from '#nuxt-typo3'
 
 export function useCeSolrPiSearch(
     content: Api.Content.SolrSearch | Api.Content.SolrResults
 ) {
-    const { t } = useI18n()
-
+    const inputName = 'search_term'
+    const api = useApi()
     const router = useRouter()
-
+    const { handleSubmit } = useForm()
+    const { t } = useI18n()
+    const optionGroups = ref<Model.AutocompleteOptionGroup[]>([])
     const loading = ref(false)
 
-    const formElements = computed<Model.FormElement[]>(() => {
-        const formElement = new Model.FormElement({
-            name: SEARCH_TERM_INPUT_NAME,
-            type: 'text',
-            defaultValue: (content as Api.Content.SolrResults).data.result
-                ?.query,
-            placeholder: t('solr.placeholder'),
-        })
-
-        return [formElement]
-    })
-
-    const submitLabel = computed(() =>
-        loading ? t('solr.loading') : t('solr.submit')
+    const defaultValue = computed(
+        () => (content as Api.Content.SolrResults).data.result?.query
     )
 
+    const placeholder = computed(() => t('solr.placeholder'))
+
+    const submitLabel = computed(() =>
+        loading.value ? t('solr.loading') : t('solr.submit')
+    )
+
+    async function onInput(value: string) {
+        if (!value) {
+            optionGroups.value = []
+            return
+        }
+
+        const path = content.data.form.suggest.url
+        const params = {
+            [content.data.form.suggest.queryParam]: value,
+        }
+
+        const suggestions = await api.get<Api.Content.Solr.Suggestions>(path, {
+            params,
+        })
+
+        optionGroups.value = [
+            {
+                name: 'default',
+                options: Object.keys(suggestions.suggestions ?? []).map(
+                    (key) => ({
+                        key,
+                        label: key,
+                    })
+                ),
+            },
+            {
+                name: 'links',
+                label: t('solr.directLinks'),
+                options: (suggestions.documents ?? []).map((document) => ({
+                    key: document.link,
+                    label: document.title,
+                    link: document.link,
+                })),
+            },
+        ]
+    }
+
     async function search(data: { [key: string]: any }) {
-        const term = data[SEARCH_TERM_INPUT_NAME] || '*'
+        const term = data[inputName] || '*'
 
         const path = content.data.form.targetUrl
 
@@ -49,5 +81,16 @@ export function useCeSolrPiSearch(
         loading.value = false
     }
 
-    return { formElements, loading, submitLabel, search }
+    const submit = handleSubmit(search)
+
+    return {
+        defaultValue,
+        inputName,
+        loading,
+        optionGroups,
+        placeholder,
+        submitLabel,
+        onInput,
+        submit,
+    }
 }

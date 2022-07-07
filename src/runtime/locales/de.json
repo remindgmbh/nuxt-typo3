@@ -1,5 +1,6 @@
 {
     "solr": {
+        "directLinks": "Direkte Links",
         "loading": "Lädt",
         "placeholder": "Suchbegriff",
         "submit": "Suchen"

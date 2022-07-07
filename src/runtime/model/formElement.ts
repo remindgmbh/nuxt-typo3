@@ -66,21 +66,20 @@ export class FormElement implements IFormElement {
         return this.type === 'row'
     }
 
+    public isCheckboxGroup(): this is FormElementWithOptions {
+        return this.type === 'checkbox-group'
+    }
+
+    public isRadioGroup(): this is FormElementWithOptions {
+        return this.type === 'radio-group'
+    }
+
     public isSelect(): this is FormElementSelect {
         return this.type === 'select'
     }
 
     public isStaticText(): this is FormElementStaticText {
         return this.type === 'static-text'
-    }
-
-    public hasOptions(): this is FormElementWithOptions {
-        const optionTypes: FormElementType[] = [
-            'checkbox-group',
-            'radio-group',
-            'select',
-        ]
-        return optionTypes.includes(this.type)
     }
 }
 

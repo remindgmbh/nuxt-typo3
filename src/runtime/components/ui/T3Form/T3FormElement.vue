@@ -14,9 +14,9 @@
             :text="formElement.text"
         />
         <T3RadioGroup
-            v-else-if="formElement.type === 'radio-group'"
+            v-else-if="formElement.isRadioGroup()"
             :name="formElement.name"
-            :options="options"
+            :options="formElement.options"
             :label="formElement.label"
             :default-value="formElement.defaultValue"
             :validation="formElement.validation"
@@ -24,9 +24,9 @@
             :disabled="loading"
         />
         <T3CheckboxGroup
-            v-else-if="formElement.type === 'checkbox-group'"
+            v-else-if="formElement.isCheckboxGroup()"
             :name="formElement.name"
-            :options="options"
+            :options="formElement.options"
             :label="formElement.label"
             :default-value="formElement.defaultValue"
             :validation="formElement.validation"
@@ -45,7 +45,7 @@
         <T3Select
             v-else-if="formElement.isSelect()"
             :name="formElement.name"
-            :options="options"
+            :options="formElement.options"
             :label="formElement.label"
             :default-value="formElement.defaultValue"
             :validation="formElement.validation"
@@ -78,17 +78,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { Model } from '#nuxt-typo3'
 
-const props = defineProps<{
+defineProps<{
     formElement: Model.FormElement
     loading?: boolean
 }>()
-
-const options = computed(() =>
-    props.formElement.hasOptions() ? props.formElement.options : {}
-)
 </script>
 
 <style lang="scss">

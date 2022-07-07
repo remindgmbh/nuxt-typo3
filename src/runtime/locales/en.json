@@ -1,5 +1,6 @@
 {
     "solr": {
+        "directLinks": "Direct links",
         "loading": "Loading",
         "placeholder": "Search term",
         "submit": "Search"

@@ -1,12 +1,20 @@
 <template>
-    <div class="t3-ce-solr-search">
-        <T3Form
-            :form-elements="formElements"
-            :loading="loading"
-            :submit-label="submitLabel"
-            @submit="search"
+    <form class="t3-ce-solr-search" @submit="submit">
+        <T3Autocomplete
+            class="t3-ce-solr-search__input"
+            :disabled="loading"
+            :name="inputName"
+            :placeholder="placeholder"
+            :default-value="defaultValue"
+            :option-groups="optionGroups"
+            @input="onInput"
         />
-    </div>
+        <button class="t3-ce-solr-search__submit" type="submit">
+            <span class="t3-ce-solr-search__submit-label">{{
+                submitLabel
+            }}</span>
+        </button>
+    </form>
 </template>
 
 <script setup lang="ts">
@@ -18,7 +26,24 @@ const props = defineProps<{
     >
 }>()
 
-const { formElements, loading, submitLabel, search } = useCeSolrPiSearch(
-    props.contentElement.content
-)
+const {
+    defaultValue,
+    inputName,
+    loading,
+    optionGroups,
+    placeholder,
+    submitLabel,
+    onInput,
+    submit,
+} = useCeSolrPiSearch(props.contentElement.content)
 </script>
+
+<style lang="scss">
+.t3-ce-solr-search {
+    display: flex;
+
+    &__input {
+        flex-grow: 1;
+    }
+}
+</style>

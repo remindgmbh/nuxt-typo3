@@ -1,3 +1,7 @@
+export type {
+    AutocompleteOption,
+    AutocompleteOptionGroup,
+} from './autocompleteOption'
 export {
     FormElement,
     FormElementRow,
