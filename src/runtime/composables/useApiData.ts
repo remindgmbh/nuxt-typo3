@@ -8,33 +8,33 @@ export function useApiData() {
 
     const loading = useState<boolean>('loading', () => false)
 
-    const initialDataCache = useState<{
+    const initialData = useState<{
         [path: string]: Api.InitialData | undefined
     }>('initialData', () => ({}))
 
-    const pageDataCache = useState<{
+    const pageData = useState<{
         [path: string]: Api.PageData | undefined
     }>('pageData', () => ({}))
 
     const pageError = useState<Model.PageError | undefined>('pageError')
 
-    const initialData = computed(
-        () => initialDataCache.value[apiPath.currentInitialDataPath.value]
+    const currentInitialData = computed(
+        () => initialData.value[apiPath.currentInitialDataPath.value]
     )
 
     const rootPageNavigation = computed(() =>
-        initialData.value?.navigation.at(0)
+        currentInitialData.value?.navigation.at(0)
     )
 
-    const pageData = computed(
-        () =>
-            pageDataCache.value[apiPath.currentPagePath.value] ??
-            pageError.value?.data
+    const currentPageData = computed(
+        () => pageData.value[apiPath.currentPagePath.value]
     )
 
-    const initialDataLanguages = computed(() => initialData.value?.i18n ?? [])
+    const initialDataLanguages = computed(
+        () => currentInitialData.value?.i18n ?? []
+    )
 
-    const pageDataLanguages = computed(() => pageData.value?.i18n ?? [])
+    const pageDataLanguages = computed(() => currentPageData.value?.i18n ?? [])
 
     const languages = computed(() =>
         pageDataLanguages.value.map((pageDataLanguage) => {
@@ -60,20 +60,20 @@ export function useApiData() {
     async function loadInitialData(path: string) {
         const initialDataPath = apiPath.getInitialDataPath(path)
 
-        if (!initialDataCache.value[initialDataPath]) {
+        if (!initialData.value[initialDataPath]) {
             const result = await api.getInitialData(initialDataPath)
-            initialDataCache.value[initialDataPath] = result
+            initialData.value[initialDataPath] = result
             return result
         }
-        return initialDataCache.value[initialDataPath]
+        return initialData.value[initialDataPath]
     }
 
     async function loadPageData(path: string) {
         pageError.value = {}
-        if (!pageDataCache.value[path]) {
+        if (!pageData.value[path]) {
             try {
                 const result = await api.getPageData(path)
-                pageDataCache.value[path] = result
+                pageData.value[path] = result
                 return result
             } catch (error) {
                 if (error instanceof Model.PageError) {
@@ -82,7 +82,7 @@ export function useApiData() {
                 }
             }
         }
-        return pageDataCache.value[path]
+        return pageData.value[path]
     }
 
     async function loadAllData(
@@ -101,16 +101,16 @@ export function useApiData() {
     }
 
     function setCurrentPage(data: Api.PageData) {
-        pageDataCache.value[apiPath.currentPagePath.value] = data
+        pageData.value[apiPath.currentPagePath.value] = data
     }
 
     function setCurrentInitialData(data: Api.InitialData) {
-        initialDataCache.value[apiPath.currentInitialDataPath.value] = data
+        initialData.value[apiPath.currentInitialDataPath.value] = data
     }
 
     function clearData() {
-        initialDataCache.value = {}
-        pageDataCache.value = {}
+        initialData.value = {}
+        pageData.value = {}
     }
 
     return {

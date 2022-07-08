@@ -27,7 +27,13 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { Api, useApi, useApiData, useCeFeloginLogin } from '#nuxt-typo3'
+import {
+    Api,
+    useApi,
+    useApiPath,
+    useApiData,
+    useCeFeloginLogin,
+} from '#nuxt-typo3'
 
 const props = defineProps<{
     contentElement: Api.ContentElement<Api.Content.Felogin>
@@ -35,6 +41,7 @@ const props = defineProps<{
 
 const api = useApi()
 const apiData = useApiData()
+const { currentPagePath } = useApiPath()
 const { formElements } = useCeFeloginLogin(props.contentElement.content)
 
 const loading = ref(false)
@@ -68,7 +75,8 @@ async function submit(data: Record<string, any>) {
     )
 
     // Store current page languages because result from login contains query parameters
-    result.i18n = apiData.pageData.value?.i18n ?? result.i18n
+    result.i18n =
+        apiData.pageData.value[currentPagePath.value]?.i18n ?? result.i18n
 
     // Clear cached data and get new initialData in case logged in user has extended access
     const initialData = await api.getInitialData()
