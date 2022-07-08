@@ -12,8 +12,7 @@
     "allowSyntheticDefaultImports": true,
     "types": [
       "node",
-      "@nuxt/kit",
-      "@intlify/nuxt3"
+      "@nuxt/kit"
     ],
     "baseUrl": ".",
     "paths": {

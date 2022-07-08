@@ -1,11 +1,23 @@
 import { defineNuxtPlugin } from '#app'
-import { setLocale } from 'yup'
-import { Api, useConfig, useI18n } from '#nuxt-typo3'
+import { createI18n } from 'vue-i18n'
+import de from '#nuxt-typo3/locales/de.json'
+import en from '#nuxt-typo3/locales/en.json'
+import { useConfig } from '#nuxt-typo3'
+
+export const i18n = createI18n({
+    legacy: false,
+    globalInjection: true,
+    locale: 'de',
+    messages: {
+        de,
+        en,
+    },
+})
 
 export default defineNuxtPlugin((nuxt) => {
     const config = useConfig()
-
-    const { t, mergeLocaleMessage } = useI18n(nuxt)
+    const { vueApp } = nuxt
+    const { mergeLocaleMessage } = i18n.global
 
     if (config.i18n.messages) {
         Object.keys(config.i18n.messages).forEach((locale) =>
@@ -13,43 +25,5 @@ export default defineNuxtPlugin((nuxt) => {
         )
     }
 
-    setLocale({
-        mixed: {
-            required: ({ label }) => t('validation.required', { label }),
-            notType: ({ label, type }) => {
-                switch (type) {
-                    case 'number':
-                        return t('validation.numeric', { label })
-                }
-                return t('validation.type', { label, type })
-            },
-        },
-        array: {
-            min: ({ label, min }) => {
-                if (min === 1) {
-                    return t('validation.required', { label })
-                }
-            },
-        },
-        date: {
-            // TODO Date format based on locale
-            min: ({ label, min }) => t('validation.min', { label, min }),
-            max: ({ label, max }) => t('validation.max', { label, max }),
-        },
-        number: {
-            integer: ({ label }) => t('validation.integer', { label }),
-            min: ({ label, min }) => t('validation.min', { label, min }),
-            max: ({ label, max }) => t('validation.max', { label, max }),
-        },
-        string: {
-            email: ({ label }) => t('validation.email', { label }),
-            matches: ({ label, regex }) => {
-                if (regex === Api.Content.Form.REGEX_ALPHANUMERIC) {
-                    return t('validation.alphanumeric', { label })
-                } else {
-                    return t('validation.regex', { label, regex })
-                }
-            },
-        },
-    })
+    vueApp.use(i18n)
 })

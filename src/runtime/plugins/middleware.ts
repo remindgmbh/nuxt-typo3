@@ -1,9 +1,10 @@
 import { addRouteMiddleware, defineNuxtPlugin } from '#app'
-import { useApiData, useI18n } from '#nuxt-typo3'
+import { i18n } from './i18n'
+import { useApiData } from '#nuxt-typo3'
 
-export default defineNuxtPlugin((nuxt) => {
+export default defineNuxtPlugin(() => {
     const apiData = useApiData()
-    const { locale } = useI18n(nuxt)
+    const { locale } = i18n.global
 
     addRouteMiddleware(
         'global',
@@ -16,7 +17,7 @@ export default defineNuxtPlugin((nuxt) => {
             const language = pageData?.i18n.find((language) => language.active)
 
             if (language?.twoLetterIsoCode) {
-                locale.value = language.twoLetterIsoCode
+                locale.value = language.twoLetterIsoCode as any
             }
         },
         { global: true }
