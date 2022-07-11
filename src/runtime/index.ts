@@ -6,9 +6,9 @@ export { useConfig } from './composables/useConfig'
 export { useContentUtil } from './composables/useContentUtil'
 export { useDynamicComponent } from './composables/useDynamicComponent'
 export { useI18n } from './composables/useI18n'
-export { useInputUtil } from './composables/useInputUtil'
 export { usePageHead } from './composables/usePageHead'
 export { useScrollIndicator } from './composables/useScrollIndicator'
+export { useYupUtil } from './composables/useYupUtil'
 
 // composables/content-elements
 export { useCeFeloginLogin } from './composables/content-elements/useCeFeloginLogin'

@@ -1,8 +1,8 @@
 import { Schema, array, boolean, date, number, string } from 'yup'
 import { FormElementType } from './formElement'
-import { useInputUtil } from '#nuxt-typo3'
+import { useYupUtil } from '#nuxt-typo3'
 
-const { parseDateString, parseNumber } = useInputUtil()
+const { parseDateString, parseNumber } = useYupUtil()
 
 export const REGEX_ALPHANUMERIC = /^(\w*)$/
 

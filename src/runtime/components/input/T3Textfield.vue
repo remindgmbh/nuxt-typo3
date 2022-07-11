@@ -28,9 +28,9 @@
 import { computed } from 'vue'
 import { useField } from 'vee-validate'
 import { Schema, date } from 'yup'
-import { useInputUtil } from '#nuxt-typo3'
+import { useYupUtil } from '#nuxt-typo3'
 
-const { parseDateString } = useInputUtil()
+const { parseDateString } = useYupUtil()
 
 const props = defineProps<{
     name: string
