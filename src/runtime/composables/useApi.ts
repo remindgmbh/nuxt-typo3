@@ -10,7 +10,7 @@ export function useApi() {
 
     const defaultOptions = computed<FetchOptions>(() => ({
         baseURL: config.api.baseUrl,
-        // credentials: 'include',
+        credentials: 'include',
         headers: useRequestHeaders(['cookie']),
     }))
 
