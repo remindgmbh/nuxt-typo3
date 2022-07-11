@@ -1,11 +1,15 @@
 import { computed, Ref } from 'vue'
 import { useRoute, useRouter } from '#app'
+import { useI18n } from 'vue-i18n'
 import { Api, Model, useConfig } from '#nuxt-typo3'
 
 export function useCeSolrPiResults(content: Ref<Api.Content.SolrResults>) {
+    const { t } = useI18n()
     const config = useConfig()
     const route = useRoute()
     const router = useRouter()
+
+    const noResultsFound = computed(() => t('solr.noResults'))
 
     const pagination = computed<Model.Pagination>(() => {
         const form = content.value.data.form
@@ -78,5 +82,5 @@ export function useCeSolrPiResults(content: Ref<Api.Content.SolrResults>) {
         ['bottom', 'both'].includes(config.solr.pagination.position)
     )
 
-    return { pagination, paginationBottom, paginationTop }
+    return { noResultsFound, pagination, paginationBottom, paginationTop }
 }

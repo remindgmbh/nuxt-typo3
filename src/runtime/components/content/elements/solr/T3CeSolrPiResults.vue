@@ -20,6 +20,9 @@
                 :pagination="pagination"
             />
         </template>
+        <div v-else class="t3-ce-solr-results__no-results">
+            {{ noResultsFound }}
+        </div>
     </div>
 </template>
 
@@ -33,6 +36,6 @@ const props = defineProps<{
 
 const content = computed(() => props.contentElement.content)
 
-const { pagination, paginationBottom, paginationTop } =
+const { noResultsFound, pagination, paginationBottom, paginationTop } =
     useCeSolrPiResults(content)
 </script>
