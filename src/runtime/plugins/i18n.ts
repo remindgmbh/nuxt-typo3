@@ -20,9 +20,9 @@ export default defineNuxtPlugin((nuxt) => {
     const { mergeLocaleMessage } = i18n.global
 
     if (config.i18n.messages) {
-        Object.keys(config.i18n.messages).forEach((locale) =>
-            mergeLocaleMessage(locale, config.i18n.messages?.[locale])
-        )
+        for (const locale of Object.keys(config.i18n.messages)) {
+            mergeLocaleMessage(locale, config.i18n.messages[locale])
+        }
     }
 
     vueApp.use(i18n)
