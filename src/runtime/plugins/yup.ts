@@ -23,6 +23,13 @@ export default defineNuxtPlugin(() => {
                 }
             },
         },
+        boolean: {
+            isValue: ({ label, value }) => {
+                if (value === 'true') {
+                    return t('validation.required', { label })
+                }
+            },
+        },
         date: {
             // TODO Date format based on locale
             min: ({ label, min }) => t('validation.min', { label, min }),

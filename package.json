@@ -26,7 +26,7 @@
     "@nuxt/webpack-builder": "^3.0.0-rc.3",
     "sass": "^1.53.0",
     "sass-loader": "^13.0.2",
-    "vee-validate": "^4.5.11",
+    "vee-validate": "^4.6.0",
     "vue-i18n": "^9.1.10",
     "yup": "^1.0.0-beta.4"
   },
