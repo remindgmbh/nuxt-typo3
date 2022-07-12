@@ -63,7 +63,7 @@
         <T3TopbarLayoutSidebar v-model="sidebarVisible" class="app__sidebar">
             <div>Sidebar Content</div>
         </T3TopbarLayoutSidebar>
-        <T3TopbarLayoutContent>
+        <T3TopbarLayoutContent class="app__content">
             <NuxtPage />
         </T3TopbarLayoutContent>
     </T3TopbarLayout>
@@ -104,6 +104,11 @@ function toggleScrollbar(): void {
         background-color: $color-secondary;
     }
 
+    &__content {
+        overflow-x: hidden;
+        position: relative;
+    }
+
     &__nav-items {
         display: flex;
         gap: 1rem;
@@ -111,6 +116,10 @@ function toggleScrollbar(): void {
 
         &--column {
             flex-direction: column;
+        }
+
+        .router-link-active {
+            color: $color-primary;
         }
     }
 
@@ -154,9 +163,27 @@ function toggleScrollbar(): void {
             transform: translateX(0);
         }
     }
-}
 
-.router-link-active {
-    color: $color-primary;
+    .page-transition {
+        &-enter-active,
+        &-leave-active {
+            transition: transform 0.5s;
+            position: absolute;
+            width: 100%;
+        }
+
+        &-enter-from {
+            transform: translateX(100%);
+        }
+
+        &-leave-to {
+            transform: translateX(-100%);
+        }
+
+        &-enter-to,
+        &-leave-from {
+            transform: translateY(0);
+        }
+    }
 }
 </style>

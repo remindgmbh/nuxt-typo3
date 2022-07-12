@@ -1,5 +1,6 @@
 import { defineNuxtConfig } from 'nuxt'
 import MyModule from '..'
+import PageTransitionModule from './modules/pageTransition'
 import de from './locales/de.json'
 import en from './locales/en.json'
 
@@ -44,5 +45,5 @@ export default defineNuxtConfig({
         },
         languages: ['/de/'],
     },
-    modules: [MyModule],
+    modules: [MyModule, PageTransitionModule],
 })
