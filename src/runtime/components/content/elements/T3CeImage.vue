@@ -21,3 +21,13 @@ const props = defineProps<{
 
 const image = computed(() => props.contentElement.content.images.at(0))
 </script>
+
+<style lang="scss">
+.t3-ce-image {
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+}
+</style>
