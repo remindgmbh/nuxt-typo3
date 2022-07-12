@@ -115,6 +115,10 @@ export default defineNuxtModule<ModuleOptions>({
             __INTLIFY_PROD_DEVTOOLS__: false,
         }
 
+        nuxt.options.pages = true
+
+        nuxt.options.alias['#nuxt-typo3'] = resolver.resolve('runtime')
+
         nuxt.options.css.unshift(
             resolver.resolve('runtime/assets/styles/container.scss')
         )
@@ -145,6 +149,5 @@ export default defineNuxtModule<ModuleOptions>({
                 file: resolver.resolve('runtime/pages/T3Page'),
             })
         })
-        nuxt.options.alias['#nuxt-typo3'] = resolver.resolve('runtime')
     },
 })
