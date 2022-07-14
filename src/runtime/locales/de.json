@@ -1,4 +1,7 @@
 {
+    "imageGallery": {
+        "close": "Schließen"
+    },
     "solr": {
         "directLinks": "Direkte Links",
         "loading": "Lädt",

@@ -41,7 +41,8 @@ $color-font-black: #fff !default;
 $color-error: #b3261e !default;
 
 // background colors for modals
-$color-modal-background: rbga(0 0 0 / 50%);
+$color-modal-background: rgba(0 0 0 / 50%);
+$color-image-gallery-background: rgba(0 0 0 / 90%);
 
 // transition durations
 $transition-duration-accordion: 0.5s !default;
@@ -51,7 +52,14 @@ $transition-duration-menu-change: 0.5s !default;
 $transition-duration-menu-collapse: 0.5s !default;
 $transition-duration-table-overlay: 0.5s !default;
 $transition-duration-tabs: 0.5s !default;
+
+// sizes
 $table-overlay-width: 4rem !default;
+$image-gallery-height: 12rem !default;
+$image-gallery-scrollbar-height: 0.25rem !default;
+$image-gallery-scrollbar-color: rgba(0 0 0 / 80%) !default;
+$image-gallery-scrollbar-color-background: rgba(0 0 0 / 20%) !default;
+$image-gallery-slide-navigation-height: 12rem !default;
 
 // z-index
 $z-index-header: 10 !default;
