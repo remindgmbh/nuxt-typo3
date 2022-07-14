@@ -40,6 +40,9 @@ $color-font-black: #fff !default;
 // color used for input errors
 $color-error: #b3261e !default;
 
+// background colors for modals
+$color-modal-background: rbga(0 0 0 / 50%);
+
 // transition durations
 $transition-duration-accordion: 0.5s !default;
 $transition-duration-input-error: 0.5s !default;
@@ -53,3 +56,4 @@ $table-overlay-width: 4rem !default;
 // z-index
 $z-index-header: 10 !default;
 $z-index-sidebar: 20 !default;
+$z-index-modal: 30 !default;
