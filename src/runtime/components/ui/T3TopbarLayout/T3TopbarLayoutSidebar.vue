@@ -57,8 +57,10 @@ function afterLeave(): void {
 </script>
 
 <style lang="scss">
+@use '#nuxt-typo3/assets/styles/variables' as *;
+
 .t3-topbar-layout-sidebar {
     flex-grow: 1;
-    z-index: 1;
+    z-index: $z-index-sidebar;
 }
 </style>

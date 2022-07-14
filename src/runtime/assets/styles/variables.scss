@@ -49,3 +49,7 @@ $transition-duration-menu-collapse: 0.5s !default;
 $transition-duration-table-overlay: 0.5s !default;
 $transition-duration-tabs: 0.5s !default;
 $table-overlay-width: 4rem !default;
+
+// z-index
+$z-index-header: 10 !default;
+$z-index-sidebar: 20 !default;
