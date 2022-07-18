@@ -52,7 +52,7 @@ export function useUtil() {
             {
                 root: viewport,
                 rootMargin: ROOT_MARGINS[direction],
-                threshold: [0, Number.MIN_VALUE],
+                threshold: [0, 1e-12],
             }
         )
         io.observe(content)
