@@ -1,6 +1,9 @@
 <template>
     <T3TopbarLayout v-model:scrollbar-disabled="scrollbarDisabled" class="app">
-        <T3TopbarLayoutHeader class="app__header">
+        <T3TopbarLayoutHeader
+            class="app__header"
+            :class="{ 'app__header--dense': !top }"
+        >
             <T3Menu class="app__nav">
                 <div class="app__nav-items">
                     <template v-if="rootPageNavigation">
@@ -61,7 +64,9 @@
             </T3Menu>
         </T3TopbarLayoutHeader>
         <T3TopbarLayoutSidebar v-model="sidebarVisible" class="app__sidebar">
-            <div>Sidebar Content</div>
+            <div>top</div>
+            <div v-for="i in 100" :key="i">{{ i }}</div>
+            <div>bottom</div>
         </T3TopbarLayoutSidebar>
         <T3TopbarLayoutContent class="app__content">
             <NuxtPage />
@@ -74,6 +79,7 @@ const { languages, rootPageNavigation } = useApiData()
 
 const sidebarVisible = ref(false)
 const scrollbarDisabled = ref(false)
+const top = ref(true)
 
 const navItemsWithChildren = computed(() =>
     (rootPageNavigation.value?.children ?? []).filter((child) => child.children)
@@ -86,6 +92,15 @@ function toggleSidebar(): void {
 function toggleScrollbar(): void {
     scrollbarDisabled.value = !scrollbarDisabled.value
 }
+
+onMounted(() => {
+    const { watch } = useScrollIndicator(document.body, 'top')
+    watch((detached) => {
+        if (!scrollbarDisabled.value) {
+            top.value = !detached
+        }
+    })
+})
 </script>
 <style lang="scss">
 @use '@/assets/variables.scss' as *;
@@ -93,15 +108,29 @@ function toggleScrollbar(): void {
 .app {
     &__header {
         background-color: $color-background;
+        height: 5rem;
+        transition: height 0.5s;
+        display: flex;
+
+        &--dense {
+            height: 3rem;
+        }
     }
 
     &__nav {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        border-bottom: 0.125rem $color-secondary solid;
+        width: 100%;
     }
 
     &__sidebar {
-        background-color: $color-secondary;
+        background-color: $color-primary;
+        width: 100%;
+        border-bottom: solid 1rem $color-accent;
+        box-sizing: border-box;
+        overflow: auto;
     }
 
     &__content {

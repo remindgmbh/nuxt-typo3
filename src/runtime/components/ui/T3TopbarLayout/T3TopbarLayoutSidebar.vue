@@ -5,7 +5,15 @@
         @before-leave="beforeLeave"
         @after-leave="afterLeave"
     >
-        <component :is="tag" v-if="modelValue" class="t3-topbar-layout-sidebar">
+        <component
+            :is="tag"
+            v-if="modelValue"
+            class="t3-topbar-layout-sidebar"
+            :style="{
+                top: headerHeight,
+                height: `calc(100% - ${headerHeight})`,
+            }"
+        >
             <slot :close="() => emit('update:modelValue', false)" />
         </component>
     </transition>
@@ -13,7 +21,7 @@
 
 <script setup lang="ts">
 import { ref, inject } from 'vue'
-import { toggleScrollbarSymbol } from './shared'
+import { headerHeightSymbol, toggleScrollbarSymbol } from './shared'
 
 enum Status {
     Entering,
@@ -30,6 +38,7 @@ withDefaults(
 )
 
 const toggleScrollbar = inject(toggleScrollbarSymbol)
+const headerHeight = inject(headerHeightSymbol)
 
 const emit = defineEmits<{
     (e: 'update:modelValue', value: boolean): void
@@ -60,7 +69,7 @@ function afterLeave(): void {
 @use '#nuxt-typo3/assets/styles/variables' as *;
 
 .t3-topbar-layout-sidebar {
-    flex-grow: 1;
     z-index: $z-index-sidebar;
+    position: fixed;
 }
 </style>

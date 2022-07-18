@@ -3,7 +3,7 @@ export function useUtil() {
         let timer: NodeJS.Timeout
         return (...args: any[]) => {
             clearTimeout(timer)
-            timer = setTimeout(() => fn(args), timeout)
+            timer = setTimeout(() => fn(...args), timeout)
         }
     }
 
@@ -14,7 +14,7 @@ export function useUtil() {
                 return
             }
             timer = setTimeout(() => {
-                fn(args)
+                fn(...args)
                 timer = undefined
             }, timeout)
         }
