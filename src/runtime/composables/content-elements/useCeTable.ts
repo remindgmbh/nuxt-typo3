@@ -1,11 +1,13 @@
 import { computed, ref, onMounted, Ref } from 'vue'
-import { Api, useScrollIndicator } from '#nuxt-typo3'
+import { Api, useUtil } from '#nuxt-typo3'
 
 export function useCeTable(
     content: Api.Content.Table,
     table?: Ref<HTMLElement | undefined>,
     viewport?: Ref<HTMLElement | undefined>
 ) {
+    const { detectScrollEnd } = useUtil()
+
     const headerTop = computed(() =>
         [1, 3].includes(content.tableHeaderPosition)
     )
@@ -37,19 +39,19 @@ export function useCeTable(
 
     onMounted(() => {
         if (table?.value && viewport?.value) {
-            const { watch: watchLeft } = useScrollIndicator(
+            detectScrollEnd(
                 table.value,
                 'left',
-                viewport.value
-            )
-            const { watch: watchRight } = useScrollIndicator(
-                table.value,
-                'right',
+                (detached) => (left.value = !detached),
                 viewport.value
             )
 
-            watchLeft((detached) => (left.value = !detached))
-            watchRight((detached) => (right.value = !detached))
+            detectScrollEnd(
+                table.value,
+                'right',
+                (detached) => (right.value = !detached),
+                viewport.value
+            )
         }
     })
 

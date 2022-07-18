@@ -76,6 +76,7 @@
 
 <script setup lang="ts">
 const { languages, rootPageNavigation } = useApiData()
+const { detectScrollEnd } = useUtil()
 
 const sidebarVisible = ref(false)
 const scrollbarDisabled = ref(false)
@@ -94,8 +95,7 @@ function toggleScrollbar(): void {
 }
 
 onMounted(() => {
-    const { watch } = useScrollIndicator(document.body, 'top')
-    watch((detached) => {
+    detectScrollEnd(document.body, 'top', (detached) => {
         if (!scrollbarDisabled.value) {
             top.value = !detached
         }

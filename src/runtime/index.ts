@@ -8,7 +8,6 @@ export { useContentUtil } from './composables/useContentUtil'
 export { useDynamicComponent } from './composables/useDynamicComponent'
 export { useI18n } from './composables/useI18n'
 export { usePageHead } from './composables/usePageHead'
-export { useScrollIndicator } from './composables/useScrollIndicator'
 export { useUtil } from './composables/useUtil'
 export { useYupUtil } from './composables/useYupUtil'
 
