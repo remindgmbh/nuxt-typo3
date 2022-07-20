@@ -37,20 +37,23 @@ export function useApiData() {
     const pageDataLanguages = computed(() => currentPageData.value?.i18n ?? [])
 
     const languages = computed(() =>
-        pageDataLanguages.value.map((pageDataLanguage) => {
-            if (pageDataLanguage.available) {
-                return pageDataLanguage
-            } else {
-                // if current page doesn't exist in selected language show link to root page
-                return (
-                    initialDataLanguages.value.find(
-                        (initialDataLanguage) =>
-                            initialDataLanguage.languageId ===
-                            pageDataLanguage.languageId
-                    ) ?? pageDataLanguage
-                )
-            }
-        })
+        // page languages may be empty if error occured
+        pageDataLanguages.value.length > 0
+            ? pageDataLanguages.value.map((pageDataLanguage) => {
+                  if (pageDataLanguage.available) {
+                      return pageDataLanguage
+                  } else {
+                      // if current page doesn't exist in selected language show link to root page
+                      return (
+                          initialDataLanguages.value.find(
+                              (initialDataLanguage) =>
+                                  initialDataLanguage.languageId ===
+                                  pageDataLanguage.languageId
+                          ) ?? pageDataLanguage
+                      )
+                  }
+              })
+            : initialDataLanguages.value
     )
 
     const activeLanguage = computed(() =>
