@@ -9,9 +9,6 @@
         <div class="t3-bl-default__main">
             <T3Renderer :content-elements="props.content.colPos0" />
         </div>
-        <footer class="t3-bl-default__footer">
-            <T3Renderer :content-elements="props.content.colPos2" />
-        </footer>
     </div>
 </template>
 

@@ -12,6 +12,10 @@ export function useApiData() {
         [path: string]: Api.InitialData | undefined
     }>('initialData', () => ({}))
 
+    const footerContent = useState<Api.ContentElement<any> | undefined>(
+        'footerContent'
+    )
+
     const pageData = useState<{
         [path: string]: Api.PageData | undefined
     }>('pageData', () => ({}))
@@ -71,6 +75,17 @@ export function useApiData() {
         return initialData.value[initialDataPath]
     }
 
+    async function loadFooterContent(path: string) {
+        const initialDataPath = apiPath.getInitialDataPath(path)
+
+        if (!footerContent.value) {
+            const result = await api.getFooterContent(initialDataPath)
+            footerContent.value = result
+        }
+
+        return footerContent.value
+    }
+
     async function loadPageData(path: string) {
         pageError.value = {}
         if (!pageData.value[path]) {
@@ -90,17 +105,24 @@ export function useApiData() {
 
     async function loadAllData(
         path: string
-    ): Promise<[Api.InitialData | undefined, Api.PageData | undefined]> {
+    ): Promise<
+        [
+            Api.ContentElement<any> | undefined,
+            Api.InitialData | undefined,
+            Api.PageData | undefined
+        ]
+    > {
         loading.value = true
 
-        const [initialData, pageData] = await Promise.all([
+        const [footerContent, initialData, pageData] = await Promise.all([
+            loadFooterContent(path),
             loadInitialData(path),
             loadPageData(path),
         ])
 
         loading.value = false
 
-        return [initialData, pageData]
+        return [footerContent, initialData, pageData]
     }
 
     function setCurrentPage(data: Api.PageData) {
@@ -118,6 +140,7 @@ export function useApiData() {
 
     return {
         activeLanguage,
+        footerContent,
         languages,
         loading,
         pageData,

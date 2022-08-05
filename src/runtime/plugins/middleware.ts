@@ -10,9 +10,8 @@ export default defineNuxtPlugin(() => {
         'global',
         async (to) => {
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const [initialData, pageData] = await apiData.loadAllData(
-                to.fullPath
-            )
+            const [footerContent, initialData, pageData] =
+                await apiData.loadAllData(to.fullPath)
 
             const language = pageData?.i18n.find((language) => language.active)
 

@@ -71,11 +71,14 @@
         <T3TopbarLayoutContent class="app__content">
             <NuxtPage />
         </T3TopbarLayoutContent>
+        <T3TopbarLayoutFooter v-if="footerContent" class="app__footer">
+            <pre>{{ footerContent.content }}</pre>
+        </T3TopbarLayoutFooter>
     </T3TopbarLayout>
 </template>
 
 <script setup lang="ts">
-const { languages, rootPageNavigation } = useApiData()
+const { footerContent, languages, rootPageNavigation } = useApiData()
 const { detectScrollEnd } = useUtil()
 
 const sidebarVisible = ref(false)
@@ -115,6 +118,11 @@ onMounted(() => {
         &--dense {
             height: 3rem;
         }
+    }
+
+    &__footer {
+        background-color: $color-secondary;
+        color: $color-white;
     }
 
     &__nav {

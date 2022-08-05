@@ -26,6 +26,5 @@ if (register && currentInstance && currentInstance.proxy) {
 <style lang="scss">
 .t3-topbar-layout-content {
     flex-grow: 1;
-    width: 100%;
 }
 </style>

@@ -41,6 +41,13 @@ export function useApi() {
         }
     }
 
+    async function getFooterContent(
+        path: string = apiPath.currentInitialDataPath.value
+    ) {
+        const type = config.api.footerContentType
+        return await get<Api.ContentElement<any>>(path, { params: { type } })
+    }
+
     async function get<T = unknown>(
         request: NitroFetchRequest,
         options?: FetchOptions
@@ -64,6 +71,7 @@ export function useApi() {
     }
 
     return {
+        getFooterContent,
         getInitialData,
         getPageData,
         get,

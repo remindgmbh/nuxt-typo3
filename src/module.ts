@@ -15,6 +15,7 @@ const CONFIG_KEY = 'typo3'
 export interface ModuleOptions {
     api: {
         baseUrl: string
+        footerContentType: number
         initialDataType: number
     }
     baseUrl: string
@@ -52,6 +53,7 @@ export default defineNuxtModule<ModuleOptions>({
     defaults: {
         api: {
             baseUrl: '',
+            footerContentType: 836,
             initialDataType: 834,
         },
         baseUrl: '',
