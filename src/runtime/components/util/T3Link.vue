@@ -1,5 +1,5 @@
 <template>
-    <NuxtLink :to="to.href" :target="to.target">
+    <NuxtLink class="t3-link" :to="to.href" :target="to.target">
         <slot>{{ to.title }}</slot>
     </NuxtLink>
 </template>
