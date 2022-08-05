@@ -28,6 +28,7 @@ const image = computed(() => props.contentElement.content.images.at(0))
         height: 100%;
         width: 100%;
         object-fit: contain;
+        display: block;
     }
 }
 </style>
