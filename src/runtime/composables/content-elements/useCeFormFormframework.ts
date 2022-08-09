@@ -45,6 +45,11 @@ export function useCeFormFormframework(content: Api.Content.Formframework) {
                 return new Model.FormElementRow({ ...f, formElements })
             }
             case 'MultiCheckbox':
+                f.defaultValue = formElement.defaultValue || []
+                return new Model.FormElementWithOptions({
+                    ...f,
+                    options: formElement.properties?.options ?? {},
+                })
             case 'RadioButton':
                 return new Model.FormElementWithOptions({
                     ...f,
