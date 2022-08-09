@@ -8,16 +8,19 @@
     >
         <T3CeHeader :content-element="contentElement" />
         <div v-if="showMessage" class="t3-ce-login__message">
-            <div class="t3-ce-login__message-header">
-                {{ contentElement.content.data.message.header }}
+            <div v-if="messageHeader" class="t3-ce-login__message-header">
+                {{ messageHeader }}
             </div>
-            <div class="t3-ce-login__message-body">
-                {{ contentElement.content.data.message.message }}
+            <div v-if="messageBody" class="t3-ce-login__message-body">
+                {{ messageBody }}
             </div>
+            <T3HtmlParser v-if="loginMessage" :content="loginMessage" />
         </div>
         <T3Form
+            v-if="!loginMessage"
             class="t3-ce-login__form"
             :form-elements="formElements"
+            :loading="loading"
             :submit-label="submitLabel"
             @submit="submit"
         >
@@ -27,62 +30,63 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import {
-    Api,
-    useApi,
-    useApiPath,
-    useApiData,
-    useCeFeloginLogin,
-} from '#nuxt-typo3'
+import { Api, useCeFeloginLogin, useUserState } from '#nuxt-typo3'
 
 const props = defineProps<{
     contentElement: Api.ContentElement<Api.Content.Felogin>
 }>()
 
-const api = useApi()
-const apiData = useApiData()
-const { currentPagePath } = useApiPath()
-const { formElements } = useCeFeloginLogin(props.contentElement.content)
+const content = computed(() => props.contentElement.content)
+
+const { formElements } = useCeFeloginLogin(content)
+const { login } = useUserState()
 
 const loading = ref(false)
 
-const showMessage = computed(
-    () =>
-        props.contentElement.content.data.message.header ||
-        props.contentElement.content.data.message.message
+const showMessage = computed(() =>
+    typeof props.contentElement.content.data !== 'string'
+        ? !!props.contentElement.content.data.message.header ||
+          !!props.contentElement.content.data.message.message
+        : !!loginMessage.value
 )
 
-const submitLabel = computed(
-    () =>
-        props.contentElement.content.data.form.fields.pages.find(
-            (field) => field.name === 'submit'
-        )?.value ?? ''
+const messageHeader = computed(() =>
+    typeof props.contentElement.content.data !== 'string'
+        ? props.contentElement.content.data.message.header
+        : undefined
+)
+
+const messageBody = computed(() =>
+    typeof props.contentElement.content.data !== 'string'
+        ? props.contentElement.content.data.message.message
+        : undefined
+)
+
+const loginMessage = computed(() =>
+    typeof props.contentElement.content.data === 'string'
+        ? props.contentElement.content.data
+        : undefined
+)
+
+const submitLabel = computed(() =>
+    typeof props.contentElement.content.data !== 'string'
+        ? props.contentElement.content.data.form.fields.pages.find(
+              (field) => field.name === 'submit'
+          )?.value ?? ''
+        : ''
 )
 
 async function submit(data: Record<string, any>) {
+    if (typeof props.contentElement.content.data === 'string') {
+        return
+    }
+
     loading.value = true
-    const body = new FormData()
 
-    Object.keys(data).forEach((key) => {
-        body.set(key, data[key])
-    })
-
-    const result = await api.post<Api.PageData>(
-        props.contentElement.content.data.form.action,
-        {
-            body,
-        }
-    )
-
-    // Store current page languages because result from login contains query parameters
-    result.i18n =
-        apiData.pageData.value[currentPagePath.value]?.i18n ?? result.i18n
-
-    // Clear cached data and get new initialData in case logged in user has extended access
-    const initialData = await api.getInitialData()
-    apiData.clearData()
-    apiData.setCurrentPage(result)
-    apiData.setCurrentInitialData(initialData)
-    loading.value = false
+    try {
+        await login(props.contentElement.content.data.form.action, data)
+    } finally {
+        loading.value = false
+    }
 }
 </script>

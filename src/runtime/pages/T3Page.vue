@@ -11,6 +11,7 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import {
     useApiData,
     useApiPath,
@@ -18,18 +19,19 @@ import {
     usePageHead,
 } from '#nuxt-typo3'
 
-const { currentPagePath } = useApiPath()
+const currentPagePath = useApiPath().currentPagePath.value
 const { pageData, pageError } = useApiData()
 
-const currentPageData =
-    pageData.value[currentPagePath.value] ?? pageError.value?.data
+const currentPageData = computed(
+    () => pageData.value[currentPagePath] ?? pageError.value?.data
+)
 
-if (currentPageData) {
-    usePageHead(currentPageData)
+if (currentPageData.value) {
+    usePageHead(currentPageData.value)
 }
 
 const component = useDynamicComponent(
     'T3Bl',
-    currentPageData?.appearance.backendLayout
+    currentPageData.value?.appearance.backendLayout
 )
 </script>

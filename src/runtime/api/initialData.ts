@@ -4,4 +4,5 @@ import { NavItem } from './navItem'
 export interface InitialData {
     navigation: NavItem[]
     i18n: Language[]
+    logoutLink?: string
 }

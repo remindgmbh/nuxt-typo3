@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { useField } from 'vee-validate'
 import { Schema, date } from 'yup'
 import { useYupUtil } from '#nuxt-typo3'
@@ -37,7 +37,7 @@ const props = defineProps<{
     label?: string
     type: string
     validation?: Schema
-    defaultValue?: string | number
+    defaultValue?: string | number | boolean
     required?: boolean
     placeholder?: string
     disabled?: boolean
@@ -65,13 +65,17 @@ const validation = computed(() => {
 const name = computed(() => props.name)
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
-const { value, errorMessage } = useField(
+const { value, errorMessage, setValue } = useField(
     name,
     validation.value?.label(props.label ?? ''),
     {
         initialValue: props.defaultValue,
     }
 )
+
+if (props.type === 'hidden') {
+    watch(() => props.defaultValue, setValue)
+}
 </script>
 
 <style lang="scss">

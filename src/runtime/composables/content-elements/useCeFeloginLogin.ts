@@ -1,12 +1,14 @@
 import { MixedSchema } from 'yup'
-import { computed } from 'vue'
+import { computed, Ref } from 'vue'
 import { Api, Model } from '#nuxt-typo3'
 
-export function useCeFeloginLogin(content: Api.Content.Felogin) {
+export function useCeFeloginLogin(content: Ref<Api.Content.Felogin>) {
     const formElements = computed(() =>
-        content.data.form.fields.pages
-            .filter((field) => field.name !== 'submit')
-            .map(convert)
+        typeof content.value.data !== 'string'
+            ? content.value.data.form.fields.pages
+                  .filter((field) => field.name !== 'submit')
+                  .map(convert)
+            : []
     )
 
     function convert(

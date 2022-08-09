@@ -8,6 +8,7 @@ export { useContentUtil } from './composables/useContentUtil'
 export { useDynamicComponent } from './composables/useDynamicComponent'
 export { useI18n } from './composables/useI18n'
 export { usePageHead } from './composables/usePageHead'
+export { useUserState } from './composables/useUserState'
 export { useUtil } from './composables/useUtil'
 export { useYupUtil } from './composables/useYupUtil'
 

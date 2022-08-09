@@ -38,6 +38,7 @@
                     >
                     <button @click="toggleSidebar">Toggle Sidebar</button>
                     <button @click="toggleScrollbar">Toggle Scrollbar</button>
+                    <button v-if="isLoggedIn" @click="logout">Logout</button>
                 </div>
                 <T3MenuDropdown
                     v-slot="{ item }"
@@ -79,6 +80,7 @@
 
 <script setup lang="ts">
 const { footerContent, languages, rootPageNavigation } = useApiData()
+const { isLoggedIn, logout } = useUserState()
 const { detectScrollEnd } = useUtil()
 
 const sidebarVisible = ref(false)

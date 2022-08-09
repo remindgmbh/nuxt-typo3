@@ -30,6 +30,8 @@ export function useApiData() {
         currentInitialData.value?.navigation.at(0)
     )
 
+    const logoutLink = computed(() => currentInitialData.value?.logoutLink)
+
     const currentPageData = computed(
         () => pageData.value[apiPath.currentPagePath.value]
     )
@@ -68,7 +70,7 @@ export function useApiData() {
         const initialDataPath = apiPath.getInitialDataPath(path)
 
         if (!initialData.value[initialDataPath]) {
-            const result = await api.getInitialData(initialDataPath)
+            const result = await api.getInitialData({ path: initialDataPath })
             initialData.value[initialDataPath] = result
             return result
         }
@@ -90,7 +92,7 @@ export function useApiData() {
         pageError.value = {}
         if (!pageData.value[path]) {
             try {
-                const result = await api.getPageData(path)
+                const result = await api.getPageData({ path })
                 pageData.value[path] = result
                 return result
             } catch (error) {
@@ -134,7 +136,15 @@ export function useApiData() {
     }
 
     function clearData() {
+        clearInitialData()
+        clearPageData()
+    }
+
+    function clearInitialData() {
         initialData.value = {}
+    }
+
+    function clearPageData() {
         pageData.value = {}
     }
 
@@ -143,10 +153,13 @@ export function useApiData() {
         footerContent,
         languages,
         loading,
+        logoutLink,
         pageData,
         pageError,
         rootPageNavigation,
         clearData,
+        clearInitialData,
+        clearPageData,
         loadAllData,
         setCurrentInitialData,
         setCurrentPage,

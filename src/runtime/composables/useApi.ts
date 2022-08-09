@@ -14,16 +14,26 @@ export function useApi() {
         headers: useRequestHeaders(['cookie']),
     }))
 
-    async function getInitialData(
-        path: string = apiPath.currentInitialDataPath.value
-    ) {
+    async function getInitialData(options?: {
+        path?: string
+        fetchOptions?: FetchOptions
+    }) {
         const type = config.api.initialDataType
-        return await get<Api.InitialData>(path, { params: { type } })
+        const path = options?.path ?? apiPath.currentInitialDataPath.value
+        const fetchOptions = options?.fetchOptions ?? {}
+        return await get<Api.InitialData>(path, {
+            ...fetchOptions,
+            params: { type },
+        })
     }
 
-    async function getPageData(path: string = apiPath.currentPagePath.value) {
+    async function getPageData(options?: {
+        path?: string
+        fetchOptions?: FetchOptions
+    }) {
+        const path = options?.path ?? apiPath.currentPagePath.value
         try {
-            return await get<Api.PageData>(path)
+            return await get<Api.PageData>(path, options?.fetchOptions)
         } catch (error) {
             if (error instanceof FetchError) {
                 const pageError = new Model.PageError()
