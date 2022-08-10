@@ -8,11 +8,20 @@ export function useApi() {
     const config = useConfig()
     const apiPath = useApiPath()
 
-    const defaultOptions = computed<FetchOptions>(() => ({
-        baseURL: config.api.baseUrl,
-        credentials: 'include',
-        headers: useRequestHeaders(['cookie']),
-    }))
+    const defaultOptions = computed<FetchOptions>(() => {
+        // remove undefined header values
+        const headers = Object.fromEntries(
+            Object.entries(useRequestHeaders(['cookie'])).filter(
+                ([_key, value]) => !!value
+            )
+        ) as HeadersInit
+
+        return {
+            baseURL: config.api.baseUrl,
+            credentials: 'include',
+            headers,
+        }
+    })
 
     async function getInitialData(options?: {
         path?: string

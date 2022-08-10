@@ -22,8 +22,8 @@
     "dev:preview": "nuxi preview playground"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.0.0-rc.3",
-    "@nuxt/webpack-builder": "^3.0.0-rc.3",
+    "@nuxt/kit": "^3.0.0-rc.6",
+    "@nuxt/webpack-builder": "^3.0.0-rc.6",
     "sass": "^1.53.0",
     "sass-loader": "^13.0.2",
     "swiper": "^8.3.0",
@@ -38,7 +38,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-nuxt": "^3.2.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "nuxt": "^3.0.0-rc.3",
+    "nuxt": "^3.0.0-rc.6",
     "postcss": "^8.4.13",
     "postcss-html": "^1.5.0",
     "postcss-scss": "^4.0.4",
