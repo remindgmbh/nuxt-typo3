@@ -44,6 +44,9 @@ $color-error: #b3261e !default;
 $color-modal-background: rgba(0 0 0 / 50%);
 $color-image-gallery-background: rgba(0 0 0 / 90%);
 
+// color for table overlay
+$color-table-overlay: $color-background !default;
+
 // transition durations
 $transition-duration-accordion: 0.5s !default;
 $transition-duration-input-error: 0.5s !default;

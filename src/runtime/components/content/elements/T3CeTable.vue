@@ -92,7 +92,7 @@ const { headerTop, left, right, thead, tbody, tfoot } = useCeTable(
         background: linear-gradient(
             to $side,
             rgb(255 255 255 / 0%) 0%,
-            $color-background 100%
+            $color-table-overlay 100%
         );
     }
 
@@ -105,6 +105,7 @@ const { headerTop, left, right, thead, tbody, tfoot } = useCeTable(
         height: 100%;
         transition: width $transition-duration-table-overlay;
         z-index: $viewport-z-index + 1;
+        pointer-events: none;
 
         &--visible {
             width: $table-overlay-width;
