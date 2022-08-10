@@ -60,11 +60,17 @@ export function useApi() {
         }
     }
 
-    async function getFooterContent(
-        path: string = apiPath.currentInitialDataPath.value
-    ) {
+    async function getFooterContent(options?: {
+        path?: string
+        fetchOptions?: FetchOptions
+    }) {
         const type = config.api.footerContentType
-        return await get<Api.ContentElement<any>>(path, { params: { type } })
+        const path = options?.path ?? apiPath.currentInitialDataPath.value
+        const fetchOptions = options?.fetchOptions ?? {}
+        return await get<Api.ContentElement<any>>(path, {
+            ...fetchOptions,
+            params: { type },
+        })
     }
 
     async function get<T = unknown>(

@@ -12,9 +12,9 @@ export function useApiData() {
         [path: string]: Api.InitialData | undefined
     }>('initialData', () => ({}))
 
-    const footerContent = useState<Api.ContentElement<any> | undefined>(
-        'footerContent'
-    )
+    const footerContent = useState<{
+        [path: string]: Api.ContentElement<any> | undefined
+    }>('footerContent', () => ({}))
 
     const pageData = useState<{
         [path: string]: Api.PageData | undefined
@@ -26,6 +26,8 @@ export function useApiData() {
         () => initialData.value[apiPath.currentInitialDataPath.value]
     )
 
+    const currentFooterContent = computed(
+        () => footerContent.value[apiPath.currentInitialDataPath.value]
     )
 
     const currentPageData = computed(
@@ -46,12 +48,13 @@ export function useApiData() {
     async function loadFooterContent(path: string) {
         const initialDataPath = apiPath.getInitialDataPath(path)
 
-        if (!footerContent.value) {
-            const result = await api.getFooterContent(initialDataPath)
-            footerContent.value = result
+        if (!footerContent.value[initialDataPath]) {
+            const result = await api.getFooterContent({ path: initialDataPath })
+            footerContent.value[initialDataPath] = result
+            return result
         }
 
-        return footerContent.value
+        return footerContent.value[initialDataPath]
     }
 
     async function loadPageData(path: string) {
@@ -115,7 +118,7 @@ export function useApiData() {
     }
 
     return {
-        footerContent,
+        currentFooterContent,
         currentInitialData,
         currentPageData,
         loading,

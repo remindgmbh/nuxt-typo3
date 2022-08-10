@@ -72,14 +72,14 @@
         <T3TopbarLayoutContent class="app__content">
             <NuxtPage />
         </T3TopbarLayoutContent>
-        <T3TopbarLayoutFooter v-if="footerContent" class="app__footer">
-            <pre>{{ footerContent.content }}</pre>
+        <T3TopbarLayoutFooter v-if="currentFooterContent" class="app__footer">
+            <pre>{{ currentFooterContent.content }}</pre>
         </T3TopbarLayoutFooter>
     </T3TopbarLayout>
 </template>
 
 <script setup lang="ts">
-const { footerContent } = useApiData()
+const { currentFooterContent } = useApiData()
 const { availableLanguages } = useLanguages()
 const { navItemsWithChildren, rootPageNavigation } = useNavigation()
 const { isLoggedIn, logout } = useUserState()
