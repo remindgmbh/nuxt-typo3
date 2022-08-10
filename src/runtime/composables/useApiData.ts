@@ -26,44 +26,10 @@ export function useApiData() {
         () => initialData.value[apiPath.currentInitialDataPath.value]
     )
 
-    const rootPageNavigation = computed(() =>
-        currentInitialData.value?.navigation.at(0)
     )
-
-    const logoutLink = computed(() => currentInitialData.value?.logoutLink)
 
     const currentPageData = computed(
         () => pageData.value[apiPath.currentPagePath.value]
-    )
-
-    const initialDataLanguages = computed(
-        () => currentInitialData.value?.i18n ?? []
-    )
-
-    const pageDataLanguages = computed(() => currentPageData.value?.i18n ?? [])
-
-    const languages = computed(() =>
-        // page languages may be empty if error occured
-        pageDataLanguages.value.length > 0
-            ? pageDataLanguages.value.map((pageDataLanguage) => {
-                  if (pageDataLanguage.available) {
-                      return pageDataLanguage
-                  } else {
-                      // if current page doesn't exist in selected language show link to root page
-                      return (
-                          initialDataLanguages.value.find(
-                              (initialDataLanguage) =>
-                                  initialDataLanguage.languageId ===
-                                  pageDataLanguage.languageId
-                          ) ?? pageDataLanguage
-                      )
-                  }
-              })
-            : initialDataLanguages.value
-    )
-
-    const activeLanguage = computed(() =>
-        languages.value.find((language) => language.active)
     )
 
     async function loadInitialData(path: string) {
@@ -149,14 +115,12 @@ export function useApiData() {
     }
 
     return {
-        activeLanguage,
         footerContent,
-        languages,
+        currentInitialData,
+        currentPageData,
         loading,
-        logoutLink,
         pageData,
         pageError,
-        rootPageNavigation,
         clearData,
         clearInitialData,
         clearPageData,

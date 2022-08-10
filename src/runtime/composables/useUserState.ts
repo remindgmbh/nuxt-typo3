@@ -6,7 +6,10 @@ export function useUserState() {
     const api = useApi()
     const router = useRouter()
 
-    const { logoutLink, clearData, setCurrentInitialData } = useApiData()
+    const { currentInitialData, clearData, setCurrentInitialData } =
+        useApiData()
+
+    const logoutLink = computed(() => currentInitialData.value?.logoutLink)
 
     const isLoggedIn = computed(() => !!logoutLink.value)
 

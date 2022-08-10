@@ -30,7 +30,7 @@
                 </div>
                 <div class="app__nav-items">
                     <NuxtLink
-                        v-for="language in languages"
+                        v-for="language in availableLanguages"
                         :key="language.link"
                         class="app__nav-item"
                         :to="language.link"
@@ -79,18 +79,15 @@
 </template>
 
 <script setup lang="ts">
-const { footerContent, languages, rootPageNavigation } = useApiData()
+const { footerContent } = useApiData()
+const { availableLanguages } = useLanguages()
+const { navItemsWithChildren, rootPageNavigation } = useNavigation()
 const { isLoggedIn, logout } = useUserState()
 const { detectScrollEnd } = useUtil()
 
 const sidebarVisible = ref(false)
 const scrollbarDisabled = ref(false)
 const top = ref(true)
-
-const navItemsWithChildren = computed(() =>
-    (rootPageNavigation.value?.children ?? []).filter((child) => child.children)
-)
-
 function toggleSidebar(): void {
     sidebarVisible.value = !sidebarVisible.value
 }
