@@ -17,9 +17,12 @@
   "scripts": {
     "prepack": "nuxt-module-build",
     "dev": "nuxi dev playground",
-    "dev:build": "nuxi build playground",
-    "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
-    "dev:preview": "nuxi preview playground"
+    "build": "nuxi build playground",
+    "lint:script": "eslint --ext \".js,.ts,.vue\" .",
+    "lint:style": "stylelint \"**/*.{vue,[s]css}\"",
+    "lint": "yarn lint:script && yarn lint:style",
+    "prepare": "nuxt-module-build --stub && nuxi prepare playground",
+    "preview": "nuxi preview playground"
   },
   "dependencies": {
     "@nuxt/kit": "^3.0.0-rc.6",
@@ -49,5 +52,9 @@
     "stylelint-config-standard-scss": "^5.0.0",
     "stylelint-prettier": "^2.0.0",
     "vue-tsc": "^0.39.5"
+  },
+  "volta": {
+    "node": "16.16.0",
+    "yarn": "1.22.19"
   }
 }
