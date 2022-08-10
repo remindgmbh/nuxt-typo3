@@ -24,30 +24,30 @@
   "dependencies": {
     "@nuxt/kit": "^3.0.0-rc.6",
     "@nuxt/webpack-builder": "^3.0.0-rc.6",
-    "sass": "^1.53.0",
+    "sass": "^1.54.4",
     "sass-loader": "^13.0.2",
-    "swiper": "^8.3.0",
-    "vee-validate": "^4.6.0",
-    "vue-i18n": "^9.1.10",
+    "swiper": "^8.3.2",
+    "vee-validate": "^4.6.4",
+    "vue-i18n": "^9.2.2",
     "yup": "^1.0.0-beta.4"
   },
   "devDependencies": {
     "@nuxt/module-builder": "latest",
     "@nuxtjs/eslint-config-typescript": "^10.0.0",
-    "eslint": "^8.19.0",
+    "eslint": "^8.21.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-nuxt": "^3.2.0",
     "eslint-plugin-prettier": "^4.2.1",
     "nuxt": "^3.0.0-rc.6",
-    "postcss": "^8.4.13",
+    "postcss": "^8.4.16",
     "postcss-html": "^1.5.0",
     "postcss-scss": "^4.0.4",
     "prettier": "^2.6.2",
     "stylelint": "^14.8.2",
-    "stylelint-config-html": "^1.0.0",
+    "stylelint-config-html": "^1.1.0",
     "stylelint-config-prettier": "^9.0.3",
-    "stylelint-config-standard-scss": "^4.0.0",
+    "stylelint-config-standard-scss": "^5.0.0",
     "stylelint-prettier": "^2.0.0",
-    "vue-tsc": "^0.38.4"
+    "vue-tsc": "^0.39.5"
   }
 }
