@@ -25,6 +25,10 @@ export { useCeTextmedia } from './composables/content-elements/useCeTextmedia'
 export { useNewsElement } from './composables/content-elements/useNewsElement'
 export { useNewsList } from './composables/content-elements/useNewsList'
 
+// composables/html-parser
+export { useLinkReplacer } from './composables/html-parser/useLinkReplacer'
+export { useTableEnhancer } from './composables/html-parser/useTableEnhancer'
+
 // api
 export * as Api from './api'
 
