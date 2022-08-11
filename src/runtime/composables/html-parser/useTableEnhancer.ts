@@ -36,40 +36,33 @@ export function useTableEnhancer(
                 viewport.appendChild(table)
                 container.appendChild(viewport)
 
-                detectScrollEnd(
-                    table,
-                    'left',
-                    (detached) => {
-                        if (detached) {
-                            overlayLeft.classList.add(
-                                't3-table__overlay-left--visible'
-                            )
-                        } else {
-                            overlayLeft.classList.remove(
-                                't3-table__overlay-left--visible'
-                            )
-                        }
-                    },
-                    viewport
-                )
-
-                detectScrollEnd(
-                    table,
-                    'right',
-                    (detached) => {
-                        if (detached) {
-                            overlayRight.classList.add(
-                                't3-table__overlay-right--visible'
-                            )
-                        } else {
-                            overlayRight.classList.remove(
-                                't3-table__overlay-right--visible'
-                            )
-                        }
-                    },
-                    viewport
-                )
+                detectOverlayScrollEnd('left', overlayLeft, table, viewport)
+                detectOverlayScrollEnd('right', overlayRight, table, viewport)
             }
         }
+    }
+
+    function detectOverlayScrollEnd(
+        direction: 'left' | 'right',
+        overlay: HTMLDivElement,
+        table: HTMLTableElement,
+        viewport: HTMLDivElement
+    ) {
+        detectScrollEnd(
+            table,
+            direction,
+            (detached) => {
+                if (detached) {
+                    overlay.classList.add(
+                        `t3-table__overlay-${direction}--visible`
+                    )
+                } else {
+                    overlay.classList.remove(
+                        `t3-table__overlay-${direction}--visible`
+                    )
+                }
+            },
+            viewport
+        )
     }
 }
