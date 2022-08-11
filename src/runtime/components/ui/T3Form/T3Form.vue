@@ -19,6 +19,7 @@
             class="t3-form__submit"
             :class="{ 't3-form__submit--loading': loading }"
             type="submit"
+            :disabled="loading"
         >
             <span class="t3-form__submit-label">{{ submitLabel }}</span>
         </button>
