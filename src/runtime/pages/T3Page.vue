@@ -6,19 +6,25 @@
             :content="currentPageData.content"
             :breadcrumbs="currentPageData.breadcrumbs"
         />
-        <T3PageError v-else-if="pageError" :error="pageError" />
+        <T3PageError
+            v-else
+            :error="pageError ?? { statusText: t('unexpectedError') }"
+        />
     </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { useRoute } from '#app'
+import { useI18n } from 'vue-i18n'
 import {
     useApiData,
     useApiPath,
     useDynamicComponent,
     usePageHead,
 } from '#nuxt-typo3'
+
+const { t } = useI18n()
 
 // when the route changes the old page remains visible until the new page is loaded
 // using the computed currentPagePath the old page content is not available anymore

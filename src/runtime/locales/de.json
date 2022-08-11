@@ -9,6 +9,7 @@
         "placeholder": "Suchbegriff",
         "submit": "Suchen"
     },
+    "unexpectedError": "unerwarteter Fehler",
     "validation": {
         "alphanumeric": "{label} darf nur alphabetische Zeichen enthalten.",
         "email": "{label} muss eine gültige E-Mail-Adresse sein.",
