@@ -38,9 +38,16 @@ export function useApiData() {
         const initialDataPath = apiPath.getInitialDataPath(path)
 
         if (!initialData.value[initialDataPath]) {
-            const result = await api.getInitialData({ path: initialDataPath })
-            initialData.value[initialDataPath] = result
-            return result
+            try {
+                const result = await api.getInitialData({
+                    path: initialDataPath,
+                })
+                initialData.value[initialDataPath] = result
+                return result
+            } catch (error) {
+                // log error and do nothing so undefined is returned
+                console.error(error)
+            }
         }
         return initialData.value[initialDataPath]
     }
@@ -49,9 +56,16 @@ export function useApiData() {
         const initialDataPath = apiPath.getInitialDataPath(path)
 
         if (!footerContent.value[initialDataPath]) {
-            const result = await api.getFooterContent({ path: initialDataPath })
-            footerContent.value[initialDataPath] = result
-            return result
+            try {
+                const result = await api.getFooterContent({
+                    path: initialDataPath,
+                })
+                footerContent.value[initialDataPath] = result
+                return result
+            } catch (error) {
+                // log error and do nothing so undefined is returned
+                console.error(error)
+            }
         }
 
         return footerContent.value[initialDataPath]
@@ -68,6 +82,9 @@ export function useApiData() {
                 if (error instanceof Model.PageError) {
                     // assigning error directly leads to "Cannot stringify arbitrary non-POJOs PageError"
                     pageError.value = { ...error }
+                } else {
+                    // log error and do nothing so undefined is returned
+                    console.error(error)
                 }
             }
         }
