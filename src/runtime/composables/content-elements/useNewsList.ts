@@ -11,7 +11,7 @@ export function useNewsList(content: Ref<Api.Content.NewsPi>) {
             return undefined
         }
 
-        return new Model.Pagination({
+        return {
             first: pagination.first,
             last: pagination.last,
             prev: pagination.prev,
@@ -23,7 +23,7 @@ export function useNewsList(content: Ref<Api.Content.NewsPi>) {
                     pageNumber: page.page,
                 }
             }),
-        })
+        }
     })
 
     const listElements = computed(() => content.value.data.list ?? [])

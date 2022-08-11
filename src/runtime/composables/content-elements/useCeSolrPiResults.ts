@@ -48,7 +48,7 @@ export function useCeSolrPiResults(content: Ref<Api.Content.SolrResults>) {
                   })
                 : undefined
 
-        return new Model.Pagination({
+        return {
             first: first.fullPath,
             last: last.fullPath,
             prev: prev?.fullPath,
@@ -71,7 +71,7 @@ export function useCeSolrPiResults(content: Ref<Api.Content.SolrResults>) {
                     }
                 }
             ),
-        })
+        }
     })
 
     const paginationTop = computed(() =>
