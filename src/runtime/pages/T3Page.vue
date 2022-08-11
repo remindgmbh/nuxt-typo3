@@ -11,7 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
+import { useRoute } from '#app'
 import {
     useApiData,
     useApiPath,
@@ -19,11 +20,16 @@ import {
     usePageHead,
 } from '#nuxt-typo3'
 
-const currentPagePath = useApiPath().currentPagePath.value
+// when the route changes the old page remains visible until the new page is loaded
+// using the computed currentPagePath the old page content is not available anymore
+// so currentPagePath is only set during created hook and when only the route query
+// params (e.g. for solr) change
+const currentPagePath = ref<string>(useApiPath().currentPagePath.value)
 const { pageData, pageError } = useApiData()
+const route = useRoute()
 
 const currentPageData = computed(
-    () => pageData.value[currentPagePath] ?? pageError.value?.data
+    () => pageData.value[currentPagePath.value] ?? pageError.value?.data
 )
 
 if (currentPageData.value) {
@@ -33,5 +39,14 @@ if (currentPageData.value) {
 const component = useDynamicComponent(
     'T3Bl',
     currentPageData.value?.appearance.backendLayout
+)
+
+watch(
+    () => ({ ...route }),
+    (value, oldValue) => {
+        if (value.path === oldValue.path) {
+            currentPagePath.value = value.fullPath
+        }
+    }
 )
 </script>
