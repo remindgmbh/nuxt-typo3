@@ -11,7 +11,11 @@
                 :option-groups="optionGroups"
                 @input="onInput"
             />
-            <button class="t3-ce-solr-search__submit" type="submit">
+            <button
+                class="t3-ce-solr-search__submit"
+                type="submit"
+                :disabled="loading"
+            >
                 <span class="t3-ce-solr-search__submit-label">{{
                     submitLabel
                 }}</span>
