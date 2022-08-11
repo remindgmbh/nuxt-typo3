@@ -87,27 +87,22 @@ export default defineNuxtModule<ModuleOptions>({
         )
 
         if (options.customCssVariables) {
-            const forwardStatement = `@forward "${options.customCssVariables}";`
-            switch (nuxt.options.builder) {
-                case '@nuxt/vite-builder':
-                    nuxt.options.vite.css = {
-                        ...nuxt.options.vite.css,
-                        preprocessorOptions: {
-                            ...nuxt.options.vite.css?.preprocessorOptions,
-                            scss: {
-                                ...nuxt.options.vite.css?.preprocessorOptions
-                                    ?.scss,
-                                additionalData: forwardStatement,
-                            },
-                        },
-                    }
-                    break
-                case '@nuxt/webpack-builder':
-                    nuxt.options.webpack.loaders.scss.additionalData =
-                        forwardStatement
-                    break
-                default:
+            const cssOptions = {
+                preprocessorOptions: {
+                    scss: {
+                        additionalData:
+                            `@forward "${options.customCssVariables}";`.concat(
+                                nuxt.options.vite.css?.preprocessorOptions?.scss
+                                    .additionalData ?? ''
+                            ),
+                    },
+                },
             }
+
+            nuxt.options.vite.css = defu(
+                cssOptions,
+                nuxt.options.vite.css ?? {}
+            )
         }
 
         nuxt.options.vite.define = {
