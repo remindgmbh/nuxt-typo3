@@ -120,10 +120,7 @@ export default defineNuxtModule<ModuleOptions>({
             resolver.resolve('runtime/assets/styles/container.scss')
         )
 
-        addAutoImportDir([
-            resolver.resolve('runtime/composables'),
-            resolver.resolve('runtime/composables/content-elements'),
-        ])
+        addAutoImportDir([resolver.resolve('runtime/composables/**/use*.ts')])
         addComponentsDir({
             path: resolver.resolve('runtime/components'),
             pathPrefix: false,
