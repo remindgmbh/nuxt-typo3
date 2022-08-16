@@ -1,6 +1,5 @@
 <script lang="ts">
-import T3NewsList from '../../src/runtime/components/content/elements/news/T3NewsList.vue'
-export default T3NewsList
+export { T3NewsList as default } from '#nuxt-typo3'
 </script>
 
 <style lang="scss">

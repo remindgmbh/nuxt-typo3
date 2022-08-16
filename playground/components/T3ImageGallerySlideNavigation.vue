@@ -1,6 +1,5 @@
 <script lang="ts">
-import T3ImageGallerySlideNavigation from '../../src/runtime/components/ui/T3ImageGallery/T3ImageGallerySlideNavigation.vue'
-export default T3ImageGallerySlideNavigation
+export { T3ImageGallerySlideNavigation as default } from '#nuxt-typo3'
 </script>
 
 <style lang="scss">

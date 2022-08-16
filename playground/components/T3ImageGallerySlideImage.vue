@@ -1,6 +1,5 @@
 <script lang="ts">
-import T3ImageGallerySlideImage from '../../src/runtime/components/ui/T3ImageGallery/T3ImageGallerySlideImage.vue'
-export default T3ImageGallerySlideImage
+export { T3ImageGallerySlideImage as default } from '#nuxt-typo3'
 </script>
 
 <style lang="scss">

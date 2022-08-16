@@ -1,6 +1,5 @@
 <script lang="ts">
-import T3CeHeader from '../../src/runtime/components/content/elements/T3CeHeader.vue'
-export default T3CeHeader
+export { T3CeHeader as default } from '#nuxt-typo3'
 </script>
 
 <style lang="scss">

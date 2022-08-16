@@ -1,6 +1,5 @@
 <script lang="ts">
-import T3ImageGallerySlideHeader from '../../src/runtime/components/ui/T3ImageGallery/T3ImageGallerySlideHeader.vue'
-export default T3ImageGallerySlideHeader
+export { T3ImageGallerySlideHeader as default } from '#nuxt-typo3'
 </script>
 
 <style lang="scss">

@@ -1,6 +1,5 @@
 <script lang="ts">
-import T3Checkbox from '../../src/runtime/components/input/T3Checkbox.vue'
-export default T3Checkbox
+export { T3Checkbox as default } from '#nuxt-typo3'
 </script>
 
 <style lang="scss">

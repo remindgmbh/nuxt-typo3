@@ -125,7 +125,7 @@ export default defineNuxtModule<ModuleOptions>({
             path: resolver.resolve('runtime/components'),
             pathPrefix: false,
             global: true,
-            ignore: ['**/shared.ts'],
+            ignore: ['**/shared.ts', '**/index.ts'],
         })
         addPlugin({
             src: resolver.resolve('runtime/plugins/i18n'),

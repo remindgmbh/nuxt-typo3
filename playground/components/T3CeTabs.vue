@@ -1,6 +1,5 @@
 <script lang="ts">
-import T3CeTabs from '../../src/runtime/components/content/elements/T3CeTabs.vue'
-export default T3CeTabs
+export { T3CeTabs as default } from '#nuxt-typo3'
 </script>
 
 <style lang="scss">
