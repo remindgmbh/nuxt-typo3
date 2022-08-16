@@ -70,7 +70,9 @@ function setSwiper(swiper: SwiperClass) {
     }
 
     &__slide {
-        width: initial;
+        &.swiper-slide {
+            width: initial;
+        }
     }
 
     &__image {
