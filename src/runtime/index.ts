@@ -68,6 +68,7 @@ export { default as T3Modal } from './components/ui/T3Modal.vue'
 export { default as T3Pagination } from './components/ui/T3Pagination.vue'
 export { default as T3Table } from './components/ui/T3Table.vue'
 export { default as T3Tabs } from './components/ui/T3Tabs.vue'
+export { default as T3TruncatedText } from './components/ui/T3TruncatedText.vue'
 
 // export * from './components/content/helper'
 export { default as T3Background } from './components/content/helper/T3Background.vue'
