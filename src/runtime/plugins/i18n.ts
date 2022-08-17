@@ -1,8 +1,13 @@
 import { defineNuxtPlugin } from '#app'
 import { createI18n } from 'vue-i18n'
-import de from '#nuxt-typo3/locales/de.json'
-import en from '#nuxt-typo3/locales/en.json'
+import de from '#nuxt-typo3/locales/de'
+import en from '#nuxt-typo3/locales/en'
 import { useConfig } from '#nuxt-typo3'
+
+export interface MessageContext {
+    named: (value: string) => string
+    linked: (value: string) => string
+}
 
 export const i18n = createI18n({
     legacy: false,

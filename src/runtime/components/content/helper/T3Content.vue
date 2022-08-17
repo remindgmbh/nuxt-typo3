@@ -15,18 +15,39 @@
                 contentElement.appearance.backgroundColor,
         }"
     >
-        <component :is="component" :content-element="contentElement" />
+        <component
+            :is="component"
+            v-if="cookieAccepted"
+            :content-element="contentElement"
+        />
+        <T3CookieOverlay
+            v-else
+            :message="contentElement.cookie.message"
+            :category="contentElement.cookie.category"
+        />
     </article>
 </template>
 
 <script setup lang="ts">
-import { Api, useContentUtil, useDynamicComponent } from '#nuxt-typo3'
+import { computed } from 'vue'
+import {
+    Api,
+    useContentUtil,
+    useCookiebot,
+    useDynamicComponent,
+} from '#nuxt-typo3'
+
+const { isAccepted } = useCookiebot()
 
 const props = defineProps<{
     contentElement: Api.ContentElement
 }>()
 
 const { isFullWidth } = useContentUtil(props.contentElement)
+
+const cookieAccepted = computed(() =>
+    isAccepted(props.contentElement.cookie.category)
+)
 
 const component = useDynamicComponent('T3Ce', props.contentElement.type)
 </script>

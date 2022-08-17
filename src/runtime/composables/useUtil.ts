@@ -11,6 +11,10 @@ const ROOT_MARGINS = {
 }
 
 export function useUtil() {
+    function capitalize(value: string) {
+        return value.charAt(0).toUpperCase() + value.slice(1)
+    }
+
     function debounce(fn: (...args: any[]) => any, timeout = 300) {
         let timer: NodeJS.Timeout
         return (...args: any[]) => {
@@ -59,6 +63,7 @@ export function useUtil() {
     }
 
     return {
+        capitalize,
         debounce,
         detectScrollEnd,
         padNumber,

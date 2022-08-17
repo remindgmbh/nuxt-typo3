@@ -74,11 +74,13 @@
         </T3TopbarLayoutContent>
         <T3TopbarLayoutFooter v-if="currentFooterContent" class="app__footer">
             <pre>{{ currentFooterContent.content }}</pre>
+            <button @click="showBanner">Cookies</button>
         </T3TopbarLayoutFooter>
     </T3TopbarLayout>
 </template>
 
 <script setup lang="ts">
+const { showBanner } = useCookiebot()
 const { currentFooterContent } = useApiData()
 const { availableLanguages } = useLanguages()
 const { navItemsWithChildren, rootPageNavigation } = useNavigation()
@@ -88,6 +90,7 @@ const { detectScrollEnd } = useUtil()
 const sidebarVisible = ref(false)
 const scrollbarDisabled = ref(false)
 const top = ref(true)
+
 function toggleSidebar(): void {
     sidebarVisible.value = !sidebarVisible.value
 }

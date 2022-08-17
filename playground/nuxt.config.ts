@@ -1,5 +1,4 @@
 import { defineNuxtConfig } from 'nuxt'
-import MyModule from '..'
 import PageTransitionModule from './modules/pageTransition'
 import de from './locales/de.json'
 import en from './locales/en.json'
@@ -16,6 +15,7 @@ export default defineNuxtConfig({
                 api: {
                     baseUrl: '',
                 },
+                cookiebotUid: '',
             },
         },
     },
@@ -45,5 +45,5 @@ export default defineNuxtConfig({
         },
         languages: ['/de/'],
     },
-    modules: [MyModule, PageTransitionModule],
+    modules: ['@remindgmbh/nuxt-typo3', PageTransitionModule],
 })

@@ -1,4 +1,4 @@
-import { Appearance, Content } from '.'
+import { Appearance, Content, Cookie } from '.'
 
 export interface ContentElement<T extends Content.Base = Content.Base> {
     id: number
@@ -7,4 +7,5 @@ export interface ContentElement<T extends Content.Base = Content.Base> {
     categories: string
     appearance: Appearance
     content: T
+    cookie: Cookie
 }

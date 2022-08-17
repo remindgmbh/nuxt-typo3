@@ -24,6 +24,7 @@ export interface ModuleOptions {
             fullWidth?: boolean
         }
     }
+    cookiebotUid?: string
     customCssVariables?: string
     i18n: I18nOptions
     languages: string[]
@@ -126,6 +127,9 @@ export default defineNuxtModule<ModuleOptions>({
             pathPrefix: false,
             global: true,
             ignore: ['**/shared.ts', '**/index.ts'],
+        })
+        addPlugin({
+            src: resolver.resolve('runtime/plugins/cookiebot'),
         })
         addPlugin({
             src: resolver.resolve('runtime/plugins/i18n'),
