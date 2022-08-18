@@ -36,6 +36,9 @@ export default defineNuxtConfig({
             header: {
                 fullWidth: false,
             },
+            textmedia: {
+                ignoreCookies: true,
+            },
         },
         i18n: {
             messages: {
