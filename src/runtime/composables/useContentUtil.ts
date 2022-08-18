@@ -1,14 +1,20 @@
 import { computed } from 'vue'
-import { Api, useConfig } from '#nuxt-typo3'
+import { Api, useConfig, useCookiebot } from '#nuxt-typo3'
 
 export function useContentUtil(contentElement: Api.ContentElement) {
     const config = useConfig()
+    const { isAccepted } = useCookiebot()
+
+    const cookieAccepted = computed(() =>
+        isAccepted(contentElement.cookie.category)
+    )
 
     const isFullWidth = computed(
         () => config.contentElements[contentElement.type]?.fullWidth
     )
 
     return {
+        cookieAccepted,
         isFullWidth,
     }
 }

@@ -29,25 +29,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import {
-    Api,
-    useContentUtil,
-    useCookiebot,
-    useDynamicComponent,
-} from '#nuxt-typo3'
-
-const { isAccepted } = useCookiebot()
+import { Api, useContentUtil, useDynamicComponent } from '#nuxt-typo3'
 
 const props = defineProps<{
     contentElement: Api.ContentElement
 }>()
 
-const { isFullWidth } = useContentUtil(props.contentElement)
-
-const cookieAccepted = computed(() =>
-    isAccepted(props.contentElement.cookie.category)
-)
+const { cookieAccepted, isFullWidth } = useContentUtil(props.contentElement)
 
 const component = useDynamicComponent('T3Ce', props.contentElement.type)
 </script>
