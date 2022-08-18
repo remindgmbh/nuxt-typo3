@@ -6,7 +6,7 @@
                 contentElement.appearance.backgroundColor,
         }"
     >
-        <T3CeHeader :content-element="contentElement" />
+        <T3Header :content-element="contentElement" />
         <div v-if="showMessage" class="t3-ce-login__message">
             <div v-if="messageHeader" class="t3-ce-login__message-header">
                 {{ messageHeader }}

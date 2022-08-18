@@ -1,6 +1,6 @@
 <template>
     <div class="t3-ce-solr-results">
-        <T3CeSolrPiSearch :content-element="contentElement" />
+        <T3SolrSearch :content-element="contentElement" />
         <template v-if="content.data.result.allResultCount">
             <T3Pagination
                 v-if="paginationTop"

@@ -6,7 +6,7 @@
                 contentElement.appearance.backgroundColor,
         }"
     >
-        <T3CeTextmedia :content-element="contentElement" />
+        <T3TextAsset :content-element="contentElement" />
     </div>
 </template>
 

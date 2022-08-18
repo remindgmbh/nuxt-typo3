@@ -1,12 +1,13 @@
 <template>
     <div
-        class="t3-ce-text"
+        class="t3-text"
         :class="{
-            [`t3-ce-text--${contentElement.appearance.backgroundColor}`]:
+            [`t3-text--${contentElement.appearance.backgroundColor}`]:
                 contentElement.appearance.backgroundColor,
         }"
     >
-        <T3Text :content-element="contentElement" />
+        <T3Header :content-element="contentElement" />
+        <T3HtmlParser :content="contentElement.content.bodytext" />
     </div>
 </template>
 

@@ -6,13 +6,13 @@
                 contentElement.appearance.backgroundColor,
         }"
     >
-        <T3CeHeader :content-element="contentElement" />
+        <T3Header :content-element="contentElement" />
         <T3Tabs :items="contentElement.content.items">
             <template #title="{ item }">
                 {{ item.title }}
             </template>
             <template #content="{ item }">
-                <T3CeText
+                <T3Text
                     :content-element="{ ...contentElement, content: item }"
                 />
             </template>

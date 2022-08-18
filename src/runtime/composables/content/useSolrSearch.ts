@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n'
 import { useForm } from 'vee-validate'
 import { Api, Model, useApi, useUtil } from '#nuxt-typo3'
 
-export function useCeSolrPiSearch(
+export function useSolrSearch(
     content: Api.Content.SolrSearch | Api.Content.SolrResults
 ) {
     const inputName = 'search_term'

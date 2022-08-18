@@ -74,6 +74,10 @@ export { default as T3TruncatedText } from './components/ui/T3TruncatedText.vue'
 export { default as T3Background } from './components/content/helper/T3Background.vue'
 export { default as T3Content } from './components/content/helper/T3Content.vue'
 export { default as T3Renderer } from './components/content/helper/T3Renderer.vue'
+export { default as T3Header } from './components/content/helper/T3Header.vue'
+export { default as T3Text } from './components/content/helper/T3Text.vue'
+export { default as T3TextAsset } from './components/content/helper/T3TextAsset.vue'
+export { default as T3CookieOverlay } from './components/content/helper/T3CookieOverlay.vue'
 
 // export * from './components/content/elements'
 export { default as T3CeDefault } from './components/content/elements/T3CeDefault.vue'
@@ -98,6 +102,7 @@ export { default as T3CeNewsPi1 } from './components/content/elements/news/T3CeN
 
 // export * from './components/content/elements/solr'
 export { default as T3SolrListItem } from './components/content/elements/solr/T3SolrListItem.vue'
+export { default as T3SolrSearch } from './components/content/elements/solr/T3SolrSearch.vue'
 export { default as T3CeSolrPiSearch } from './components/content/elements/solr/T3CeSolrPiSearch.vue'
 export { default as T3CeSolrPiResults } from './components/content/elements/solr/T3CeSolrPiResults.vue'
 

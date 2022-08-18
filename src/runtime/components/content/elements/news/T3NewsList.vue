@@ -1,6 +1,6 @@
 <template>
     <div class="t3-news-list">
-        <T3CeHeader :content-element="contentElement" />
+        <T3Header :content-element="contentElement" />
         <T3Pagination
             v-if="pagination && paginationTop"
             class="t3-news-list__pagination t3-news-list__pagination--top"

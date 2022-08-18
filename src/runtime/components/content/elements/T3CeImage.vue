@@ -6,7 +6,7 @@
                 contentElement.appearance.backgroundColor,
         }"
     >
-        <T3CeHeader :content-element="contentElement" />
+        <T3Header :content-element="contentElement" />
         <T3Asset v-if="image" :file="image" />
     </div>
 </template>

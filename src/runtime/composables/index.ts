@@ -1,4 +1,4 @@
-export * from './content-elements'
+export * from './content'
 export * from './html-parser'
 export { useApi } from './useApi'
 export { useApiData } from './useApiData'
