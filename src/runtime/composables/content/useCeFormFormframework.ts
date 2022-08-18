@@ -1,9 +1,18 @@
 import { MixedSchema } from 'yup'
-import { computed } from 'vue'
-import { Api, Model } from '#nuxt-typo3'
+import { computed, ref } from 'vue'
+import { useRouter } from '#app'
+import { Api, Model, useApi } from '#nuxt-typo3'
 
-export function useCeFormFormframework(content: Api.Content.Formframework) {
-    const formElements = computed(() => content.form.elements.map(convert))
+export function useCeFormFormframework(
+    contentElement: Api.ContentElement<Api.Content.Formframework>
+) {
+    const api = useApi()
+    const router = useRouter()
+
+    const formElements = computed(() =>
+        contentElement.content.form.elements.map(convert)
+    )
+    const loading = ref(false)
 
     function convert(
         formElement: Api.Content.Form.FormElement
@@ -71,5 +80,35 @@ export function useCeFormFormframework(content: Api.Content.Formframework) {
         }
     }
 
-    return { formElements }
+    async function submit(data: Record<string, any>) {
+        loading.value = true
+        const body = new FormData()
+        body.set('responseElementId', contentElement.id.toString())
+
+        Object.keys(data).forEach((key) => {
+            body.set(key, data[key] ?? '')
+        })
+
+        try {
+            const result = await api.post<
+                Api.ContentElement<Api.Content.Formframework>
+            >(contentElement.content.link.href, { body })
+
+            if (typeof result.content.form === 'string') {
+                console.error(result.content.form)
+            } else if (
+                result.content.form.api.status === 'success' &&
+                result.content.form.api.actionAfterSuccess
+            ) {
+                router.push({
+                    path: result.content.form.api.actionAfterSuccess
+                        .redirectUrl,
+                })
+            }
+        } finally {
+            loading.value = false
+        }
+    }
+
+    return { formElements, loading, submit }
 }
