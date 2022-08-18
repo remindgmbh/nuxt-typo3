@@ -26,6 +26,9 @@
                                 {{ navItem.title }} ↓
                             </T3MenuTrigger>
                         </template>
+                        <NuxtLink class="app__nav-item" to="/static"
+                            >Static</NuxtLink
+                        >
                     </template>
                 </div>
                 <div class="app__nav-items">
