@@ -17,7 +17,7 @@
     >
         <component
             :is="component"
-            v-if="cookieAccepted"
+            v-if="cookieAccepted || ignoreCookies"
             :content-element="contentElement"
         />
         <T3CookieOverlay
@@ -35,7 +35,9 @@ const props = defineProps<{
     contentElement: Api.ContentElement
 }>()
 
-const { cookieAccepted, isFullWidth } = useContentUtil(props.contentElement)
+const { cookieAccepted, ignoreCookies, isFullWidth } = useContentUtil(
+    props.contentElement
+)
 
 const component = useDynamicComponent('T3Ce', props.contentElement.type)
 </script>

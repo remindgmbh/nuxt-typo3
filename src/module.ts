@@ -22,6 +22,7 @@ export interface ModuleOptions {
     contentElements: {
         [type: string]: {
             fullWidth?: boolean
+            ignoreCookies?: boolean
         }
     }
     cookiebotUid?: string

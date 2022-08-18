@@ -9,12 +9,17 @@ export function useContentUtil(contentElement: Api.ContentElement) {
         isAccepted(contentElement.cookie.category)
     )
 
+    const ignoreCookies = computed(
+        () => config.contentElements[contentElement.type]?.ignoreCookies
+    )
+
     const isFullWidth = computed(
         () => config.contentElements[contentElement.type]?.fullWidth
     )
 
     return {
         cookieAccepted,
+        ignoreCookies,
         isFullWidth,
     }
 }
