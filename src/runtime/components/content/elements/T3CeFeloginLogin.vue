@@ -29,64 +29,20 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { Api, useCeFeloginLogin, useUserState } from '#nuxt-typo3'
+import { Api, useCeFeloginLogin } from '#nuxt-typo3'
 
 const props = defineProps<{
     contentElement: Api.ContentElement<Api.Content.Felogin>
 }>()
 
-const content = computed(() => props.contentElement.content)
-
-const { formElements } = useCeFeloginLogin(content)
-const { login } = useUserState()
-
-const loading = ref(false)
-
-const showMessage = computed(() =>
-    typeof props.contentElement.content.data !== 'string'
-        ? !!props.contentElement.content.data.message.header ||
-          !!props.contentElement.content.data.message.message
-        : !!loginMessage.value
-)
-
-const messageHeader = computed(() =>
-    typeof props.contentElement.content.data !== 'string'
-        ? props.contentElement.content.data.message.header
-        : undefined
-)
-
-const messageBody = computed(() =>
-    typeof props.contentElement.content.data !== 'string'
-        ? props.contentElement.content.data.message.message
-        : undefined
-)
-
-const loginMessage = computed(() =>
-    typeof props.contentElement.content.data === 'string'
-        ? props.contentElement.content.data
-        : undefined
-)
-
-const submitLabel = computed(() =>
-    typeof props.contentElement.content.data !== 'string'
-        ? props.contentElement.content.data.form.fields.pages.find(
-              (field) => field.name === 'submit'
-          )?.value ?? ''
-        : ''
-)
-
-async function submit(data: Record<string, any>) {
-    if (typeof props.contentElement.content.data === 'string') {
-        return
-    }
-
-    loading.value = true
-
-    try {
-        await login(props.contentElement.content.data.form.action, data)
-    } finally {
-        loading.value = false
-    }
-}
+const {
+    formElements,
+    loading,
+    loginMessage,
+    messageBody,
+    messageHeader,
+    submitLabel,
+    showMessage,
+    submit,
+} = useCeFeloginLogin(props.contentElement)
 </script>

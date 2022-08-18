@@ -1,11 +1,50 @@
 import { MixedSchema } from 'yup'
-import { computed, Ref } from 'vue'
-import { Api, Model } from '#nuxt-typo3'
+import { computed, ref } from 'vue'
+import { Api, Model, useUserState } from '#nuxt-typo3'
 
-export function useCeFeloginLogin(content: Ref<Api.Content.Felogin>) {
+export function useCeFeloginLogin(
+    contentElement: Api.ContentElement<Api.Content.Felogin>
+) {
+    const { login } = useUserState()
+
+    const loading = ref(false)
+
+    const showMessage = computed(() =>
+        typeof contentElement.content.data !== 'string'
+            ? !!contentElement.content.data.message.header ||
+              !!contentElement.content.data.message.message
+            : !!loginMessage.value
+    )
+
+    const messageHeader = computed(() =>
+        typeof contentElement.content.data !== 'string'
+            ? contentElement.content.data.message.header
+            : undefined
+    )
+
+    const messageBody = computed(() =>
+        typeof contentElement.content.data !== 'string'
+            ? contentElement.content.data.message.message
+            : undefined
+    )
+
+    const loginMessage = computed(() =>
+        typeof contentElement.content.data === 'string'
+            ? contentElement.content.data
+            : undefined
+    )
+
+    const submitLabel = computed(() =>
+        typeof contentElement.content.data !== 'string'
+            ? contentElement.content.data.form.fields.pages.find(
+                  (field) => field.name === 'submit'
+              )?.value ?? ''
+            : ''
+    )
+
     const formElements = computed(() =>
-        typeof content.value.data !== 'string'
-            ? content.value.data.form.fields.pages
+        typeof contentElement.content.data !== 'string'
+            ? contentElement.content.data.form.fields.pages
                   .filter((field) => field.name !== 'submit')
                   .map(convert)
             : []
@@ -36,5 +75,28 @@ export function useCeFeloginLogin(content: Ref<Api.Content.Felogin>) {
         })
     }
 
-    return { formElements }
+    async function submit(data: Record<string, any>) {
+        if (typeof contentElement.content.data === 'string') {
+            return
+        }
+
+        loading.value = true
+
+        try {
+            await login(contentElement.content.data.form.action, data)
+        } finally {
+            loading.value = false
+        }
+    }
+
+    return {
+        formElements,
+        loading,
+        loginMessage,
+        messageBody,
+        messageHeader,
+        showMessage,
+        submitLabel,
+        submit,
+    }
 }
