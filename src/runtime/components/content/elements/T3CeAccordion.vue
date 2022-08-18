@@ -8,13 +8,17 @@
     >
         <T3Header :content-element="contentElement" />
         <T3Accordion :items="contentElement.content.items">
-            <template #title="{ item }">
-                {{ item.title }}
+            <template #title="{ item, index }">
+                <slot name="title" :item="item" :index="index">
+                    {{ item.title }}
+                </slot>
             </template>
-            <template #content="{ item }">
-                <T3Text
-                    :content-element="{ ...contentElement, content: item }"
-                />
+            <template #content="{ item, index }">
+                <slot name="content" :item="item" :index="index">
+                    <T3Text
+                        :content-element="{ ...contentElement, content: item }"
+                    />
+                </slot>
             </template>
         </T3Accordion>
     </div>
