@@ -86,7 +86,7 @@
 import { useField } from 'vee-validate'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { Schema } from 'yup'
-import { useRouter } from '#app'
+import { navigateTo } from '#app'
 import { Model } from '#nuxt-typo3'
 
 const props = defineProps<{
@@ -110,8 +110,6 @@ onUnmounted(() => {
     input.value?.removeEventListener('focus', open)
     document.removeEventListener('click', closeOnOutsideClick)
 })
-
-const router = useRouter()
 
 const emit = defineEmits<{
     (e: 'input', value: string): void
@@ -211,7 +209,7 @@ function supportKeyboardNavigation(e: KeyboardEvent) {
         if (hoverOption.value) {
             e.preventDefault()
             if (hoverOption.value.link) {
-                router.push(hoverOption.value.link)
+                return navigateTo(hoverOption.value.link)
             } else {
                 onSelect(hoverOption.value)
             }

@@ -1,5 +1,5 @@
 import { computed, ref } from 'vue'
-import { useRouter } from '#app'
+import { navigateTo } from '#app'
 import { useI18n } from 'vue-i18n'
 import { useForm } from 'vee-validate'
 import { Api, Model, useApi, useUtil } from '#nuxt-typo3'
@@ -9,7 +9,6 @@ export function useSolrSearch(
 ) {
     const inputName = 'search_term'
     const api = useApi()
-    const router = useRouter()
     const { debounce } = useUtil()
     const { handleSubmit } = useForm()
     const { t } = useI18n()
@@ -74,10 +73,7 @@ export function useSolrSearch(
 
         loading.value = true
 
-        await router.push({
-            path,
-            query,
-        })
+        await navigateTo({ path, query })
 
         loading.value = false
     }

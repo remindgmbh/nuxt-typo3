@@ -1,13 +1,12 @@
 import { MixedSchema } from 'yup'
 import { computed, ref } from 'vue'
-import { useRouter } from '#app'
+import { navigateTo } from '#app'
 import { Api, Model, useApi } from '#nuxt-typo3'
 
 export function useCeFormFormframework(
     contentElement: Api.ContentElement<Api.Content.Formframework>
 ) {
     const api = useApi()
-    const router = useRouter()
 
     const formElements = computed(() =>
         contentElement.content.form.elements.map(convert)
@@ -100,7 +99,7 @@ export function useCeFormFormframework(
                 result.content.form.api.status === 'success' &&
                 result.content.form.api.actionAfterSuccess
             ) {
-                router.push({
+                await navigateTo({
                     path: result.content.form.api.actionAfterSuccess
                         .redirectUrl,
                 })

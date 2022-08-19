@@ -1,11 +1,10 @@
 import { onBeforeUnmount, onMounted, Ref, watch } from 'vue'
-import { useRouter } from '#app'
+import { navigateTo } from '#app'
 
 export function useLinkReplacer(
     el: Ref<HTMLElement | undefined>,
     content: Ref<string>
 ) {
-    const router = useRouter()
     let links: HTMLCollectionOf<HTMLAnchorElement> | undefined
 
     onMounted(() => {
@@ -61,7 +60,7 @@ export function useLinkReplacer(
         // Get link target, if local link, navigate with router link
         if (href && href[0] === '/') {
             event.preventDefault()
-            router.push(href)
+            return navigateTo(href)
         }
     }
 }

@@ -1,10 +1,9 @@
-import { useRouter } from '#app'
+import { navigateTo } from '#app'
 import { computed } from 'vue'
 import { Api, useApi, useApiData } from '#nuxt-typo3'
 
 export function useUserState() {
     const api = useApi()
-    const router = useRouter()
 
     const { currentInitialData, clearData, setCurrentInitialData } =
         useApiData()
@@ -42,7 +41,7 @@ export function useUserState() {
         clearData()
         setCurrentInitialData(initialData)
 
-        router.push({ path: newPageData.slug, force: true, replace: true })
+        await navigateTo({ path: newPageData.slug, force: true, replace: true })
     }
 
     return { isLoggedIn, login, logout }
