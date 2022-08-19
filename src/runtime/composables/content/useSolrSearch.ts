@@ -2,14 +2,14 @@ import { computed, ref } from 'vue'
 import { navigateTo } from '#app'
 import { useI18n } from 'vue-i18n'
 import { useForm } from 'vee-validate'
-import { Api, Model, useApi, useUtil } from '#nuxt-typo3'
+import { debounce } from 'perfect-debounce'
+import { Api, Model, useApi } from '#nuxt-typo3'
 
 export function useSolrSearch(
     content: Api.Content.SolrSearch | Api.Content.SolrResults
 ) {
     const inputName = 'search_term'
     const api = useApi()
-    const { debounce } = useUtil()
     const { handleSubmit } = useForm()
     const { t } = useI18n()
     const optionGroups = ref<Model.AutocompleteOptionGroup[]>([])
@@ -87,7 +87,7 @@ export function useSolrSearch(
         optionGroups,
         placeholder,
         submitLabel,
-        onInput: debounce(onInput),
+        onInput: debounce(onInput, 300),
         submit,
     }
 }

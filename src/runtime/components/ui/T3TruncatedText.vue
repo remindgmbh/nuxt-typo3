@@ -11,9 +11,7 @@
 </template>
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { useUtil } from '#nuxt-typo3'
-
-const { debounce } = useUtil()
+import { debounce } from 'perfect-debounce'
 
 const root = ref<HTMLDivElement>()
 const content = ref<HTMLDivElement>()

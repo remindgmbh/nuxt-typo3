@@ -16,15 +16,13 @@ import {
     watch,
     WatchStopHandle,
 } from 'vue'
+import { debounce } from 'perfect-debounce'
 import {
     headerHeightSymbol,
     registerContentSymbol,
     registerHeaderSymbol,
     toggleScrollbarSymbol,
 } from './shared'
-import { useUtil } from '#nuxt-typo3'
-
-const { debounce } = useUtil()
 
 const content = ref<ComponentPublicInstance>()
 const header = ref<ComponentPublicInstance>()
