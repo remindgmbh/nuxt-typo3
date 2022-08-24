@@ -6,26 +6,33 @@
                 contentElement.appearance.backgroundColor,
         }"
     >
-        <div v-if="settings.action === 'list'" class="t3-ce-news__list">
+        <div v-if="isList(contentElement)" class="t3-ce-news__list">
             <T3NewsList :content-element="contentElement" />
         </div>
+        <div v-else-if="isDetail(contentElement)" class="t3-ce-news__detail">
+            <T3NewsDetail :element="contentElement.content.data.detail" />
+        </div>
         <div
-            v-else-if="settings.action === 'detail' && detailElement"
-            class="t3-ce-news__detail"
+            v-else-if="isTagsList(contentElement)"
+            class="t3-ce-news__tags-list"
         >
-            <T3NewsDetail :element="detailElement" />
+            <T3NewsTagsList :content-element="contentElement" />
+        </div>
+        <div
+            v-else-if="isDateMenu(contentElement)"
+            class="t3-ce-news__date-menu"
+        >
+            <T3NewsDateMenu :content-element="contentElement" />
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { Api } from '#nuxt-typo3'
+import { Api, useCeNewsPi1 } from '#nuxt-typo3'
 
-const props = defineProps<{
+defineProps<{
     contentElement: Api.ContentElement<Api.Content.NewsPi>
 }>()
 
-const settings = computed(() => props.contentElement.content.data.settings)
-const detailElement = computed(() => props.contentElement.content.data.detail)
+const { isDateMenu, isDetail, isList, isTagsList } = useCeNewsPi1()
 </script>

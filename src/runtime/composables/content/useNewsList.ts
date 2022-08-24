@@ -1,7 +1,7 @@
 import { computed, Ref } from 'vue'
 import { Api, Model, useConfig } from '#nuxt-typo3'
 
-export function useNewsList(content: Ref<Api.Content.NewsPi>) {
+export function useNewsList(content: Ref<Api.Content.NewsPiList>) {
     const config = useConfig()
 
     const pagination = computed<Model.Pagination | undefined>(() => {

@@ -1,6 +1,7 @@
 export { useCeFeloginLogin } from './useCeFeloginLogin'
 export { useCeFormFormframework } from './useCeFormFormframework'
 export { useCeImageGallery } from './useCeImageGallery'
+export { useCeNewsPi1 } from './useCeNewsPi1'
 export { useCeSolrPiResults } from './useCeSolrPiResults'
 export { useSolrSearch } from './useSolrSearch'
 export { useCeTable } from './useCeTable'

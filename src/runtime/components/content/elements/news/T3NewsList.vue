@@ -26,7 +26,7 @@ import { computed } from 'vue'
 import { Api, useNewsList } from '#nuxt-typo3'
 
 const props = defineProps<{
-    contentElement: Api.ContentElement<Api.Content.NewsPi>
+    contentElement: Api.ContentElement<Api.Content.NewsPiList>
 }>()
 
 const content = computed(() => props.contentElement.content)
