@@ -6,7 +6,25 @@ export function useApiData() {
     const api = useApi()
     const apiPath = useApiPath()
 
-    const loading = useState<boolean>('loading', () => false)
+    // Remove loading once NuxtLoadingIndicator supports middleware
+    // https://github.com/nuxt/framework/pull/5121
+    // https://github.com/nuxt/framework/issues/6837
+    const initialDataLoading = useState<boolean>(
+        'initialDataLoading',
+        () => false
+    )
+    const pageDataLoading = useState<boolean>('pageDataLoading', () => false)
+    const footerContentLoading = useState<boolean>(
+        'footerContentLoading',
+        () => false
+    )
+
+    const loading = computed(
+        () =>
+            initialDataLoading.value ||
+            pageDataLoading.value ||
+            footerContentLoading.value
+    )
 
     const initialData = useState<{
         [path: string]: Api.InitialData | undefined
@@ -39,6 +57,7 @@ export function useApiData() {
 
         if (!initialData.value[initialDataPath]) {
             try {
+                initialDataLoading.value = true
                 const result = await api.getInitialData({
                     path: initialDataPath,
                 })
@@ -47,6 +66,8 @@ export function useApiData() {
             } catch (error) {
                 // log error and do nothing so undefined is returned
                 console.error(error)
+            } finally {
+                initialDataLoading.value = false
             }
         }
         return initialData.value[initialDataPath]
@@ -57,6 +78,7 @@ export function useApiData() {
 
         if (!footerContent.value[initialDataPath]) {
             try {
+                footerContentLoading.value = true
                 const result = await api.getFooterContent({
                     path: initialDataPath,
                 })
@@ -65,6 +87,8 @@ export function useApiData() {
             } catch (error) {
                 // log error and do nothing so undefined is returned
                 console.error(error)
+            } finally {
+                footerContentLoading.value = true
             }
         }
 
@@ -75,6 +99,7 @@ export function useApiData() {
         pageError.value = {}
         if (!pageData.value[path]) {
             try {
+                pageDataLoading.value = true
                 const result = await api.getPageData({ path })
                 pageData.value[path] = result
                 return result
@@ -86,31 +111,11 @@ export function useApiData() {
                     // log error and do nothing so undefined is returned
                     console.error(error)
                 }
+            } finally {
+                pageDataLoading.value = true
             }
         }
         return pageData.value[path]
-    }
-
-    async function loadAllData(
-        path: string
-    ): Promise<
-        [
-            Api.ContentElement<any> | undefined,
-            Api.InitialData | undefined,
-            Api.PageData | undefined
-        ]
-    > {
-        loading.value = true
-
-        const [footerContent, initialData, pageData] = await Promise.all([
-            loadFooterContent(path),
-            loadInitialData(path),
-            loadPageData(path),
-        ])
-
-        loading.value = false
-
-        return [footerContent, initialData, pageData]
     }
 
     function setCurrentPage(data: Api.PageData) {
@@ -144,7 +149,9 @@ export function useApiData() {
         clearData,
         clearInitialData,
         clearPageData,
-        loadAllData,
+        loadFooterContent,
+        loadInitialData,
+        loadPageData,
         setCurrentInitialData,
         setCurrentPage,
     }

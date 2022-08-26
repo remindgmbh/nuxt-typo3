@@ -1,6 +1,6 @@
 import { addRouteMiddleware, defineNuxtPlugin } from '#app'
 import { i18n } from './i18n'
-import { useApiData } from '#nuxt-typo3'
+import { Api, useApiData } from '#nuxt-typo3'
 
 export default defineNuxtPlugin(() => {
     const apiData = useApiData()
@@ -9,16 +9,24 @@ export default defineNuxtPlugin(() => {
     addRouteMiddleware(
         'global',
         async (to) => {
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const [footerContent, initialData, pageData] =
-                await apiData.loadAllData(to.fullPath)
+            const initialData = await apiData.loadInitialData(to.fullPath)
+            await apiData.loadFooterContent(to.fullPath)
 
-            const language = pageData?.i18n.find((language) => language.active)
-
-            if (language?.twoLetterIsoCode) {
-                locale.value = language.twoLetterIsoCode as any
+            if (to.name === 'T3Page') {
+                const pageData = await apiData.loadPageData(to.fullPath)
+                setLocale(pageData?.i18n)
+            } else {
+                setLocale(initialData?.i18n)
             }
         },
         { global: true }
     )
+
+    function setLocale(languages: Api.Language[] = []) {
+        const language = languages.find((language) => language.active)
+
+        if (language?.twoLetterIsoCode) {
+            locale.value = language.twoLetterIsoCode as any
+        }
+    }
 })
