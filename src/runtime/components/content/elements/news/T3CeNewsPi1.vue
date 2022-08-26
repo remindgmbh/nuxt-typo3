@@ -24,6 +24,12 @@
         >
             <T3NewsDateMenu :content-element="contentElement" />
         </div>
+        <div
+            v-else-if="isCategoryMenu(contentElement)"
+            class="t3-ce-category-menu"
+        >
+            <T3NewsCategoryMenu :content-element="contentElement" />
+        </div>
     </div>
 </template>
 
@@ -34,5 +40,6 @@ defineProps<{
     contentElement: Api.ContentElement<Api.Content.NewsPi>
 }>()
 
-const { isDateMenu, isDetail, isList, isTagsList } = useCeNewsPi1()
+const { isCategoryMenu, isDateMenu, isDetail, isList, isTagsList } =
+    useCeNewsPi1()
 </script>

@@ -1,5 +1,12 @@
 import { Pagination } from '..'
-import { DetailElement, ListElement, Settings, Tag, Year } from './news'
+import {
+    Category,
+    DetailElement,
+    ListElement,
+    Settings,
+    Tag,
+    Year,
+} from './news'
 import { Base } from '.'
 
 export interface NewsPiList extends Base {
@@ -31,8 +38,16 @@ export interface NewsPiDateMenu extends Base {
     }
 }
 
+export interface NewsPiCategoryMenu extends Base {
+    data: {
+        categories: Category[]
+        settings: Settings
+    }
+}
+
 export type NewsPi =
     | NewsPiList
     | NewsPiTagsList
     | NewsPiDetails
     | NewsPiDateMenu
+    | NewsPiCategoryMenu

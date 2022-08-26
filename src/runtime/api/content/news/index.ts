@@ -1,4 +1,5 @@
 export type { BaseElement } from './baseElement'
+export type { Category } from './category'
 export type { DetailElement } from './detailElement'
 export type { Image } from './image'
 export type { ListElement } from './listElement'

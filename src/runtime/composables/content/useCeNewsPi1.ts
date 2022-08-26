@@ -21,10 +21,16 @@ export function useCeNewsPi1() {
     ): news is Api.ContentElement<Api.Content.NewsPiDateMenu> =>
         news.content.data.settings.action === 'dateMenu'
 
+    const isCategoryMenu = (
+        news: Api.ContentElement<Api.Content.NewsPi>
+    ): news is Api.ContentElement<Api.Content.NewsPiCategoryMenu> =>
+        news.content.data.settings.action === 'categoryMenu'
+
     return {
         isDetail,
         isList,
         isTagsList,
         isDateMenu,
+        isCategoryMenu,
     }
 }

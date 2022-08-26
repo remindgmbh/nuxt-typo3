@@ -10,6 +10,7 @@ export type { ImageGallery } from './imageGallery'
 export type { Felogin } from './felogin'
 export type {
     NewsPi,
+    NewsPiCategoryMenu,
     NewsPiDateMenu,
     NewsPiDetails,
     NewsPiList,
