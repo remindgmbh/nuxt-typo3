@@ -7,7 +7,7 @@
                 :key="category.slug"
                 :to="category.slug"
                 class="t3-news-category-menu__link"
-                >{{ category.title }}</NuxtLink
+                >{{ category.title }} ({{ category.count }})</NuxtLink
             >
         </div>
     </div>

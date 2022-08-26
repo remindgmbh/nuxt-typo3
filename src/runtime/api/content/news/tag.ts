@@ -4,6 +4,7 @@ export interface Tag {
     title: string
     slug: string
     active: boolean
+    count: number
     seo?: {
         title: string
         description: string

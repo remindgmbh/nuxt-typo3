@@ -7,7 +7,7 @@
                 :key="tag.slug"
                 :to="tag.slug"
                 class="t3-news-tags-list__link"
-                >{{ tag.title }}</NuxtLink
+                >{{ tag.title }} ({{ tag.count }})</NuxtLink
             >
         </div>
     </div>
