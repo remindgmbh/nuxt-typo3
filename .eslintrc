@@ -1,55 +1,5 @@
 {
-  "root": true,
-  "env": {
-    "node": true
-  },
   "extends": [
-    "plugin:@typescript-eslint/recommended",
-    "@nuxtjs/eslint-config-typescript",
-    "plugin:prettier/recommended",
-    "plugin:nuxt/recommended"
-  ],
-  "parserOptions": {
-    "ecmaVersion": 2020
-  },
-  "rules": {
-    "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-inferrable-types": "off",
-    "@typescript-eslint/no-empty-function": "off",
-    "vue/no-v-for-template-key": "off",
-    "vue/no-multiple-template-root": "off",
-    "vue/no-v-model-argument": "off",
-    "prettier/prettier": [
-      "error",
-      {
-        "singleQuote": true,
-        "semi": false
-      }
-    ],
-    "no-console": [
-      "warn",
-      {
-        "allow": [
-          "warn",
-          "error"
-        ]
-      }
-    ],
-    "import/namespace": [
-      2,
-      {
-        "allowComputed": true
-      }
-    ]
-  },
-  "overrides": [
-    {
-      "files": [
-        "**/pages/**/*.vue"
-      ],
-      "rules": {
-        "vue/multi-word-component-names": "off",
-      }
-    }
+    "@remindgmbh/eslint-config-nuxt"
   ]
 }
