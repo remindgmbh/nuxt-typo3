@@ -16,7 +16,7 @@ export function useSolrSearch(
     const loading = ref(false)
 
     const defaultValue = computed(
-        () => (content as Api.Content.SolrResults).data.result?.query
+        () => (content as Api.Content.SolrResults).data.results.query
     )
 
     const placeholder = computed(() => t('solr.placeholder'))
@@ -65,10 +65,10 @@ export function useSolrSearch(
     async function search(data: { [key: string]: any }) {
         const term = data[inputName] || '*'
 
-        const path = content.data.form.targetUrl
+        const path = content.data.form.search.url
 
         const query = {
-            [content.data.form.queryParams.q]: term,
+            [content.data.form.search.queryParam]: term,
         }
 
         loading.value = true

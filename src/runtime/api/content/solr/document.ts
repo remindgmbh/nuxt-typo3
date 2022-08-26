@@ -1,4 +1,4 @@
-export interface ListItem {
+export interface Document {
     title: string
     content: string
     url: string

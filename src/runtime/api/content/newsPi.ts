@@ -1,11 +1,5 @@
-import {
-    DetailElement,
-    ListElement,
-    Pagination,
-    Settings,
-    Tag,
-    Year,
-} from './news'
+import { Pagination } from '..'
+import { DetailElement, ListElement, Settings, Tag, Year } from './news'
 import { Base } from '.'
 
 export interface NewsPiList extends Base {

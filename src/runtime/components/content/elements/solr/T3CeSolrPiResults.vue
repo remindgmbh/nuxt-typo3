@@ -1,21 +1,21 @@
 <template>
     <div class="t3-ce-solr-results">
         <T3SolrSearch :content-element="contentElement" />
-        <template v-if="content.data.result.allResultCount">
+        <template v-if="content.data.results.count">
             <T3Pagination
-                v-if="paginationTop"
+                v-if="pagination && paginationTop"
                 class="t3-ce-solr-results__pagination t3-ce-solr-results__pagination--top"
                 :pagination="pagination"
             />
             <div class="t3-ce-solr-results__list">
                 <T3SolrListItem
-                    v-for="item in content.data.result.documents.list"
+                    v-for="item in content.data.results.documents"
                     :key="item.url"
                     :list-item="item"
                 />
             </div>
             <T3Pagination
-                v-if="paginationBottom"
+                v-if="pagination && paginationBottom"
                 class="t3-ce-solr-results__pagination t3-ce-solr-results__pagination--bottom"
                 :pagination="pagination"
             />

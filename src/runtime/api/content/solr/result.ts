@@ -1,14 +1,9 @@
-import { ListItem } from './listItem'
+import { Pagination } from '../..'
+import { Document } from '.'
 
 export interface Result {
-    documents: {
-        pagination: {
-            current: number
-            numberOfPages: number
-        }
-        list: ListItem[]
-        count: number
-    }
-    allResultCount: number
+    documents: Document[]
+    count: number
     query?: string
+    pagination: Pagination
 }

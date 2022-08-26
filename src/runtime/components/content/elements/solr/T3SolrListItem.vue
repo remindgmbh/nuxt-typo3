@@ -15,6 +15,6 @@
 import { Api } from '#nuxt-typo3'
 
 defineProps<{
-    listItem: Api.Content.Solr.ListItem
+    listItem: Api.Content.Solr.Document
 }>()
 </script>

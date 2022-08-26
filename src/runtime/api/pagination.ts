@@ -4,8 +4,8 @@ export interface Pagination {
     prev?: string
     next?: string
     pages: Array<{
-        page: number
+        pageNumber: number
         link: string
-        current: 0 | 1
+        current: boolean
     }>
 }

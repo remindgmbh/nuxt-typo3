@@ -1,9 +1,7 @@
 export interface Form {
-    targetUrl: string
-    pluginNamespace: string
-    queryParams: {
-        q: string
-        page: string
+    search: {
+        url: string
+        queryParam: string
     }
     suggest: {
         url: string
