@@ -1,17 +1,13 @@
 <template>
-    <img v-bind="attrs" />
+    <NuxtImg v-bind="imageAttrs" />
 </template>
 <script setup lang="ts">
-import { computed } from 'vue'
-import { Api } from '#nuxt-typo3'
+import { Api, useAsset } from '#nuxt-typo3'
 
-const props = defineProps<{ file: Api.Asset }>()
+const props = defineProps<{
+    file: Api.Asset
+    assetAttrs?: { [key: string]: any }
+}>()
 
-const attrs = computed(() => ({
-    src: props.file.publicUrl,
-    height: props.file.properties.dimensions.height,
-    width: props.file.properties.dimensions.width,
-    alt: props.file.properties.alternative,
-    title: props.file.properties.title,
-}))
+const { imageAttrs } = useAsset(props.file, props.assetAttrs)
 </script>

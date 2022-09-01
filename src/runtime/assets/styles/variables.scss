@@ -1,3 +1,5 @@
+@use "sass:map";
+
 $breakpoints: (
     xs: 0,
     sm: 576px,
@@ -21,6 +23,21 @@ $frame-spaces: (
     large: 4rem,
     extra-large: 8rem,
 ) !default;
+
+// ce specific breakpoints
+// use map.merge to allow overriding single map values
+$ce-breakpoints: () !default;
+$ce-breakpoints: map.merge(
+    (
+        textpic-two-columns-small-asset: md,
+        textpic-two-columns-large-asset: sm,
+        textmedia-two-columns-small-asset: md,
+        textmedia-two-columns-large-asset: sm,
+    ),
+    $ce-breakpoints
+);
+
+// default app background
 $color-background: #fff !default;
 
 // colors used for T3Background

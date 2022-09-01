@@ -7,19 +7,18 @@
         }"
     >
         <T3Header :content-element="contentElement" />
-        <T3Asset v-if="image" :file="image" />
+        <T3Asset v-if="image" :file="image" :asset-attrs="imageAttrs" />
     </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { Api } from '#nuxt-typo3'
+import { Api, useCeImage } from '#nuxt-typo3'
 
 const props = defineProps<{
     contentElement: Api.ContentElement<Api.Content.Image>
 }>()
 
-const image = computed(() => props.contentElement.content.images.at(0))
+const { image, imageAttrs } = useCeImage(props.contentElement)
 </script>
 
 <style lang="scss">

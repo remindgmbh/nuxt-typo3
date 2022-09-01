@@ -5,6 +5,7 @@ import {
     createResolver,
     defineNuxtModule,
     extendPages,
+    installModule,
 } from '@nuxt/kit'
 import { defu } from 'defu'
 import { I18nOptions } from 'vue-i18n'
@@ -28,6 +29,25 @@ export interface ModuleOptions {
     cookiebotUid?: string
     customCssVariables?: string
     i18n: I18nOptions
+    images: {
+        ceGallery: {
+            lazy: boolean
+            navigationHeight: number
+            previewHeight: number
+        }
+        ceImage: {
+            lazy: boolean
+            responsive: boolean
+        }
+        ceTextmedia: {
+            lazy: boolean
+            responsive: boolean
+        }
+        ceTextpic: {
+            lazy: boolean
+            responsive: boolean
+        }
+    }
     languages: string[]
     layout: {
         breadcrumbs: {
@@ -67,6 +87,25 @@ export default defineNuxtModule<ModuleOptions>({
         layout: {
             breadcrumbs: {
                 fullWidth: false,
+            },
+        },
+        images: {
+            ceImage: {
+                lazy: true,
+                responsive: true,
+            },
+            ceGallery: {
+                lazy: true,
+                navigationHeight: 256,
+                previewHeight: 256,
+            },
+            ceTextmedia: {
+                lazy: true,
+                responsive: true,
+            },
+            ceTextpic: {
+                lazy: true,
+                responsive: true,
             },
         },
         news: {
@@ -122,6 +161,16 @@ export default defineNuxtModule<ModuleOptions>({
             resolver.resolve('runtime/assets/styles/container.scss')
         )
 
+        installModule('@nuxt/image-edge', {
+            provider: 'typo3',
+            providers: {
+                typo3: {
+                    name: 'typo3',
+                    provider: resolver.resolve('runtime/providers/typo3'),
+                },
+            },
+        })
+
         addAutoImportDir([resolver.resolve('runtime/composables/**/use*.ts')])
         addComponentsDir({
             path: resolver.resolve('runtime/components'),
@@ -140,6 +189,9 @@ export default defineNuxtModule<ModuleOptions>({
         })
         addPlugin({
             src: resolver.resolve('runtime/plugins/middleware'),
+        })
+        addPlugin({
+            src: resolver.resolve('runtime/plugins/image'),
         })
         extendPages((pages) => {
             pages.push({

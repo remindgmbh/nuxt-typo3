@@ -46,6 +46,11 @@ export default defineNuxtConfig({
                 en,
             },
         },
+        images: {
+            ceTextpic: {
+                fullWidthBreakpoint: 'sm',
+            },
+        },
         languages: ['/de/'],
     },
     modules: ['@remindgmbh/nuxt-typo3', PageTransitionModule],

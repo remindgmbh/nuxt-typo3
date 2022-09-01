@@ -10,6 +10,8 @@
         <T3ImageGallery
             :header="header"
             :images="images"
+            :navigation-images="navigationImages"
+            :preview-images="previewImages"
             :subheader="subheader"
             :type="type"
         />
@@ -23,7 +25,6 @@ const props = defineProps<{
     contentElement: Api.ContentElement<Api.Content.ImageGallery>
 }>()
 
-const { header, images, type, subheader } = useCeImageGallery(
-    props.contentElement.content
-)
+const { header, images, navigationImages, previewImages, type, subheader } =
+    useCeImageGallery(props.contentElement.content)
 </script>

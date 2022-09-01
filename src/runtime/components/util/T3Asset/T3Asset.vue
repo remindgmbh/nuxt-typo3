@@ -3,34 +3,19 @@
         v-if="props.file.properties.linkData"
         :to="props.file.properties.linkData"
     >
-        <component :is="component" :file="file" />
+        <component :is="component" :file="file" :asset-attrs="assetAttrs" />
     </T3Link>
-    <component :is="component" v-else :file="file" />
+    <component :is="component" v-else :file="file" :asset-attrs="assetAttrs" />
 </template>
 <script setup lang="ts">
-import { computed } from 'vue'
-import { Api, useDynamicComponent } from '#nuxt-typo3'
+import { Api, useAsset, useDynamicComponent } from '#nuxt-typo3'
 
-const props = defineProps<{ file: Api.Asset }>()
+const props = defineProps<{
+    file: Api.Asset
+    assetAttrs?: { [key: string]: any }
+}>()
 
-const type = computed(() => {
-    switch (props.file.properties.type) {
-        case 'video': {
-            if (
-                ['youtube', 'vimeo'].includes(props.file.properties.extension)
-            ) {
-                return 'video-embedded'
-            }
-            return 'video'
-        }
-        case 'audio':
-            return 'audio'
-        case 'image':
-            return 'image'
-        default:
-            return 'default'
-    }
-})
+const { type } = useAsset(props.file)
 
 const component = useDynamicComponent('T3Asset', type.value)
 </script>

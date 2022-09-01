@@ -6,7 +6,10 @@
                 contentElement.appearance.backgroundColor,
         }"
     >
-        <T3TextAsset :content-element="contentElement">
+        <T3TextAsset
+            :content-element="contentElement"
+            :asset-attrs="imageAttrs"
+        >
             <template #asset="{ asset }">
                 <slot name="asset" :asset="asset" />
             </template>
@@ -18,9 +21,11 @@
 </template>
 
 <script setup lang="ts">
-import { Api } from '#nuxt-typo3'
+import { Api, useCeTextmedia } from '#nuxt-typo3'
 
-defineProps<{
+const props = defineProps<{
     contentElement: Api.ContentElement<Api.Content.Textmedia>
 }>()
+
+const { imageAttrs } = useCeTextmedia(props.contentElement)
 </script>

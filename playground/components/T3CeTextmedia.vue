@@ -1,8 +1,12 @@
 <template>
     <div class="pg-ce-textmedia">
-        <DefaultT3CeTextmedia :content-element="contentElement">
+        <BaseT3CeTextmedia :content-element="contentElement">
             <template #asset="{ asset }">
-                <T3Asset v-if="cookieAccepted" :file="asset" />
+                <T3Asset
+                    v-if="cookieAccepted"
+                    :file="asset"
+                    :asset-attrs="imageAttrs"
+                />
                 <T3CookieOverlay
                     v-else
                     class="pg-ce-textmedia__cookie-overlay"
@@ -10,22 +14,20 @@
                     :category="contentElement.cookie.category"
                 />
             </template>
-        </DefaultT3CeTextmedia>
+        </BaseT3CeTextmedia>
     </div>
 </template>
 
 <script setup lang="ts">
-import {
-    Api,
-    useContentUtil,
-    T3CeTextmedia as DefaultT3CeTextmedia,
-} from '#nuxt-typo3'
+import { Api, T3CeTextmedia as BaseT3CeTextmedia } from '#nuxt-typo3'
 
 const props = defineProps<{
     contentElement: Api.ContentElement<Api.Content.Textmedia>
 }>()
 
 const { cookieAccepted } = useContentUtil(props.contentElement)
+
+const { imageAttrs } = useCeTextmedia(props.contentElement)
 </script>
 
 <style lang="scss">

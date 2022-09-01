@@ -4,19 +4,23 @@
             class="t3-text-asset__asset"
             :class="{
                 't3-text-asset__asset--small': assetIsSmall,
+                't3-text-asset__asset--large': !assetIsSmall,
                 't3-text-asset__asset--right': assetIsRight,
                 [`t3-text-asset--${contentElement.appearance.backgroundColor}`]:
                     contentElement.appearance.backgroundColor,
             }"
         >
             <template v-if="asset">
-                <div v-if="assetIsVideo" class="t3-text-asset__video-container">
+                <div
+                    v-if="type === 'video'"
+                    class="t3-text-asset__video-container"
+                >
                     <slot name="asset" :asset="asset">
-                        <T3Asset :file="asset" />
+                        <T3Asset :file="asset" :asset-attrs="assetAttrs" />
                     </slot>
                 </div>
                 <slot v-else name="asset" :asset="asset">
-                    <T3Asset :file="asset" />
+                    <T3Asset :file="asset" :asset-attrs="assetAttrs" />
                 </slot>
             </template>
         </div>
@@ -24,6 +28,7 @@
             class="t3-text-asset__text"
             :class="{
                 't3-text-asset__text--large': assetIsSmall,
+                't3-text-asset__text--small': !assetIsSmall,
             }"
         >
             <slot name="text">
@@ -38,24 +43,57 @@ import { Api, useTextAsset } from '#nuxt-typo3'
 
 const props = defineProps<{
     contentElement: Api.ContentElement<Api.Content.Textmedia>
+    assetAttrs?: { [key: string]: any }
 }>()
 
-const { asset, assetIsRight, assetIsSmall, assetIsVideo } = useTextAsset(
+const { asset, assetIsRight, assetIsSmall, type } = useTextAsset(
     props.contentElement.content
 )
 </script>
 
 <style lang="scss">
+@use 'sass:map';
+@use '#nuxt-typo3/assets/styles/variables' as variables;
+@use '#nuxt-typo3/assets/styles/breakpoints' as breakpoints;
+
+@mixin width($small-asset, $large-asset) {
+    .t3-text-asset {
+        &__asset {
+            &--large {
+                @include breakpoints.up($large-asset) {
+                    width: 50%;
+                }
+            }
+
+            &--small {
+                @include breakpoints.up($small-asset) {
+                    width: calc(1 / 3 * 100%);
+                }
+            }
+        }
+
+        &__text {
+            &--small {
+                @include breakpoints.up($large-asset) {
+                    width: 50%;
+                }
+            }
+
+            &--large {
+                @include breakpoints.up($small-asset) {
+                    width: calc(2 / 3 * 100%);
+                }
+            }
+        }
+    }
+}
+
 .t3-text-asset {
     display: flex;
     flex-wrap: wrap;
 
     &__asset {
-        width: 50%;
-
-        &--small {
-            width: calc(1 / 3 * 100%);
-        }
+        width: 100%;
 
         &--right {
             order: 1;
@@ -90,11 +128,21 @@ const { asset, assetIsRight, assetIsSmall, assetIsVideo } = useTextAsset(
     }
 
     &__text {
-        width: 50%;
-
-        &--large {
-            width: calc(2 / 3 * 100%);
-        }
+        width: 100%;
     }
+}
+
+.t3-ce-textpic {
+    @include width(
+        map.get(variables.$ce-breakpoints, 'textpic-two-columns-small-asset'),
+        map.get(variables.$ce-breakpoints, 'textpic-two-columns-large-asset')
+    );
+}
+
+.t3-ce-textmedia {
+    @include width(
+        map.get(variables.$ce-breakpoints, 'textmedia-two-columns-small-asset'),
+        map.get(variables.$ce-breakpoints, 'textmedia-two-columns-large-asset')
+    );
 }
 </style>

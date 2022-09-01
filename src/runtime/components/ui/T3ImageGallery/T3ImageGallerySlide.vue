@@ -23,7 +23,7 @@
         <div ref="navigationDiv" class="t3-image-gallery-slide__navigation">
             <T3ImageGallerySlideNavigation
                 :active-index="activeIndex"
-                :images="images"
+                :images="navigationImages"
                 @set-swiper="setThumbsSwiper"
             />
         </div>
@@ -40,6 +40,7 @@ const props = defineProps<{
     header?: string
     subheader?: string
     images: Model.Image[]
+    navigationImages: Model.Image[]
     scrollToIndex: number
 }>()
 

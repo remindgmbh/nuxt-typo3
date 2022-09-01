@@ -23,11 +23,11 @@
             }"
         >
             <SwiperSlide
-                v-for="(image, index) in images"
+                v-for="(image, index) in previewImages"
                 :key="index"
                 class="t3-image-gallery__slide"
             >
-                <img v-bind="image" @click="showModal(index)" />
+                <NuxtImg v-bind="image" @click="showModal(index)" />
             </SwiperSlide>
             <div class="t3-image-gallery__scrollbar"></div>
             <div
@@ -50,6 +50,7 @@
                 "
                 :header="header"
                 :images="images"
+                :navigation-images="navigationImages"
                 :subheader="subheader"
                 :scroll-to-index="scrollToIndex"
                 @close="hideModal"
@@ -69,9 +70,16 @@ withDefaults(
         header?: string
         subheader?: string
         images: Model.Image[]
+        navigationImages?: Model.Image[]
+        previewImages: Model.Image[]
         type?: 'scroll' | 'slide'
     }>(),
-    { header: undefined, subheader: undefined, type: 'scroll' }
+    {
+        header: undefined,
+        subheader: undefined,
+        type: 'scroll',
+        navigationImages: () => [],
+    }
 )
 
 const modalVisible = ref(false)

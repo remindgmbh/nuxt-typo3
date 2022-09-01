@@ -5,4 +5,5 @@ export interface Image {
     alt?: string
     title?: string
     description?: string
+    [key: string]: any
 }

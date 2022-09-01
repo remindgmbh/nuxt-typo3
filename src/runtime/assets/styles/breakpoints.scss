@@ -1,3 +1,4 @@
+@use "sass:list";
 @use "sass:map";
 @use "variables";
 
@@ -14,6 +15,13 @@
 }
 
 @mixin loop {
+    /* stylelint-disable-next-line scss/operator-no-newline-after */
+    @if list.length(variables.$breakpoints) !=
+        list.length(variables.$container-max-widths)
+    {
+        @error '$breakpoints and $container-max-widths differ in length';
+    }
+
     @each $breakpoint, $container-max-width in variables.$container-max-widths {
         $min-width: map.get(variables.$breakpoints, $breakpoint);
 

@@ -23,7 +23,7 @@
                 :key="index"
                 class="t3-image-gallery-slide-image__slide"
             >
-                <img
+                <NuxtImg
                     class="t3-image-gallery-slide-image__image"
                     :class="{
                         't3-image-gallery-slide-image__image--active': isActive,
