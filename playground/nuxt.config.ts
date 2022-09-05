@@ -1,5 +1,4 @@
 import { defineNuxtConfig } from 'nuxt'
-import PageTransitionModule from './modules/pageTransition'
 import de from './locales/de.json'
 import en from './locales/en.json'
 
@@ -17,6 +16,12 @@ export default defineNuxtConfig({
                 },
                 cookiebotUid: '',
             },
+        },
+    },
+    app: {
+        pageTransition: {
+            name: 'page-transition',
+            mode: 'in-out',
         },
     },
     components: [
@@ -53,5 +58,5 @@ export default defineNuxtConfig({
         },
         languages: ['/de/'],
     },
-    modules: ['@remindgmbh/nuxt-typo3', PageTransitionModule],
+    modules: ['@remindgmbh/nuxt-typo3'],
 })
