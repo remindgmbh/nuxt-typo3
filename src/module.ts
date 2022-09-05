@@ -1,5 +1,5 @@
 import {
-    addAutoImportDir,
+    addImportsDir,
     addComponentsDir,
     addPlugin,
     createResolver,
@@ -171,7 +171,7 @@ export default defineNuxtModule<ModuleOptions>({
             },
         })
 
-        addAutoImportDir([resolver.resolve('runtime/composables/**/use*.ts')])
+        addImportsDir([resolver.resolve('runtime/composables/**/use*.ts')])
         addComponentsDir({
             path: resolver.resolve('runtime/components'),
             pathPrefix: false,

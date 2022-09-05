@@ -1,4 +1,3 @@
-# use mobileFirst approach until this pr is merged: https://github.com/nuxt/image/pull/482
 diff --git a/node_modules/@nuxt/image-edge/dist/runtime/image.mjs b/node_modules/@nuxt/image-edge/dist/runtime/image.mjs
 index 4aaf90e..fe261c9 100644
 --- a/node_modules/@nuxt/image-edge/dist/runtime/image.mjs
