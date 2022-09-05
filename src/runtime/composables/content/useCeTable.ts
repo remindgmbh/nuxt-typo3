@@ -10,7 +10,7 @@ export function useCeTable(content: Api.Content.Table) {
     )
 
     const thead = computed(() =>
-        headerTop ? [...content.bodytext].shift() : undefined
+        headerTop.value ? [...content.bodytext].shift() : undefined
     )
 
     const tbody = computed(() => {
