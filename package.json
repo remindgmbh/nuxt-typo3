@@ -28,7 +28,6 @@
   "dependencies": {
     "@nuxt/image-edge": "^1.0.0-27703825.db0934c",
     "@nuxt/kit": "^3.0.0-rc.9",
-    "@nuxt/webpack-builder": "^3.0.0-rc.9",
     "@vue/reactivity": "^3.2.38",
     "json5": "^2.2.1",
     "patch-package": "^6.4.7",
