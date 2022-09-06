@@ -31,7 +31,7 @@ export function useBreakpoints() {
         )
     )
 
-    const breakpoints = computed<Breakpoint[]>(() =>
+    const breakpointsAsc = computed<Breakpoint[]>(() =>
         Object.entries(screenWidths.value)
             .map(([key, value]) => ({
                 name: key,
@@ -41,8 +41,13 @@ export function useBreakpoints() {
             .sort((a, b) => a.screenWidth - b.screenWidth)
     )
 
+    const breakpointsDesc = computed<Breakpoint[]>(() =>
+        [...breakpointsAsc.value].reverse()
+    )
+
     return {
-        breakpoints,
+        breakpointsAsc,
+        breakpointsDesc,
         containerMaxWidths,
         screenWidths,
         getCeBreakpoint,

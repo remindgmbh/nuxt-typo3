@@ -27,7 +27,7 @@
                 :key="index"
                 class="t3-image-gallery__slide"
             >
-                <NuxtImg v-bind="image" @click="showModal(index)" />
+                <T3Img v-bind="image" @click="showModal(index)" />
             </SwiperSlide>
             <div class="t3-image-gallery__scrollbar"></div>
             <div

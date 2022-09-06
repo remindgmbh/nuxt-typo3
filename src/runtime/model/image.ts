@@ -1,5 +1,8 @@
 export interface Image {
-    src: string
+    uid?: number
+    src?: string
+    maxHeight?: number
+    maxWidth?: number
     height: number
     width: number
     alt?: string

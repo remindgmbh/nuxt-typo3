@@ -29,7 +29,7 @@
                         class="t3-image-gallery-scroll__item"
                     >
                         <div class="t3-image-gallery-scroll__image">
-                            <NuxtImg v-bind="image" />
+                            <T3Img v-bind="image" />
                         </div>
                         <div class="t3-image-gallery-scroll__text">
                             <div class="t3-image-gallery-scroll__number">

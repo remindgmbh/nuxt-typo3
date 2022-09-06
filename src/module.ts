@@ -5,7 +5,6 @@ import {
     createResolver,
     defineNuxtModule,
     extendPages,
-    installModule,
 } from '@nuxt/kit'
 import { defu } from 'defu'
 import { I18nOptions } from 'vue-i18n'
@@ -161,16 +160,6 @@ export default defineNuxtModule<ModuleOptions>({
             resolver.resolve('runtime/assets/styles/container.scss')
         )
 
-        installModule('@nuxt/image-edge', {
-            provider: 'typo3',
-            providers: {
-                typo3: {
-                    name: 'typo3',
-                    provider: resolver.resolve('runtime/providers/typo3'),
-                },
-            },
-        })
-
         addImportsDir([resolver.resolve('runtime/composables/**/use*.ts')])
         addComponentsDir({
             path: resolver.resolve('runtime/components'),
@@ -189,9 +178,6 @@ export default defineNuxtModule<ModuleOptions>({
         })
         addPlugin({
             src: resolver.resolve('runtime/plugins/middleware'),
-        })
-        addPlugin({
-            src: resolver.resolve('runtime/plugins/image'),
         })
         extendPages((pages) => {
             pages.push({

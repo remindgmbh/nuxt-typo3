@@ -25,7 +25,7 @@
                 :key="index"
                 class="t3-image-gallery-slide-navigation__slide"
             >
-                <NuxtImg
+                <T3Img
                     v-bind="image"
                     class="t3-image-gallery-slide-navigation__image"
                     :class="{

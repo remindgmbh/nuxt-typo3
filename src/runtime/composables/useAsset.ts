@@ -8,7 +8,8 @@ export function useAsset(
 ) {
     const imageAttrs = computed<Model.Image>(() =>
         defu<any, Model.Image>(assetAttrs, {
-            src: asset.properties.fileReferenceUid.toString(),
+            src: asset.publicUrl,
+            uid: asset.properties.fileReferenceUid,
             alt: asset.properties.alternative,
             height: asset.properties.dimensions.height,
             width: asset.properties.dimensions.width,

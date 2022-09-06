@@ -19,7 +19,7 @@ export function useCeImageGallery(content: Api.Content.ImageGallery) {
     const previewImages = computed<Model.Image[]>(() =>
         content.images.map((asset) => {
             const { imageAttrs } = useAsset(asset, {
-                height: config.previewHeight,
+                maxHeight: config.previewHeight,
             })
             return imageAttrs.value
         })
@@ -28,7 +28,7 @@ export function useCeImageGallery(content: Api.Content.ImageGallery) {
     const navigationImages = computed<Model.Image[]>(() =>
         content.images.map((asset) => {
             const { imageAttrs } = useAsset(asset, {
-                height: config.navigationHeight,
+                maxHeight: config.navigationHeight,
             })
             return imageAttrs.value
         })

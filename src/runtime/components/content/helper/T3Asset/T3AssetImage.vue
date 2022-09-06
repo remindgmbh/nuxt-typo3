@@ -1,5 +1,5 @@
 <template>
-    <NuxtImg v-bind="imageAttrs" />
+    <T3Img v-bind="imageAttrs" />
 </template>
 <script setup lang="ts">
 import { Api, useAsset } from '#nuxt-typo3'

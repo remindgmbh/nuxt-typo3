@@ -4,7 +4,7 @@ import { Api, useConfig, useBreakpoints } from '#nuxt-typo3'
 export function useCeImage(
     contentElement: Api.ContentElement<Api.Content.Image>
 ) {
-    const { breakpoints } = useBreakpoints()
+    const { breakpointsAsc } = useBreakpoints()
     const config = useConfig().images.ceImage
 
     const image = computed(() => contentElement.content.images.at(0))
@@ -15,18 +15,12 @@ export function useCeImage(
     }))
 
     const sizes = computed(() =>
-        breakpoints.value
-            .reduce((result, breakpoint) => {
-                result.push(
-                    `${breakpoint.name}:${
-                        breakpoint.containerMaxWidth
-                            ? `${breakpoint.containerMaxWidth}px`
-                            : '100vw'
-                    }`
-                )
-                return result
-            }, [] as string[])
-            .join(' ')
+        breakpointsAsc.value.reduce((result, breakpoint) => {
+            result[breakpoint.name] = breakpoint.containerMaxWidth
+                ? `${breakpoint.containerMaxWidth}px`
+                : '100vw'
+            return result
+        }, {} as { [breakpoint: string]: string })
     )
 
     return { image, imageAttrs }

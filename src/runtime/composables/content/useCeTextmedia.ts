@@ -5,7 +5,7 @@ export function useCeTextmedia(
     contentElement: Api.ContentElement<Api.Content.Textmedia>,
     config = useConfig().images.ceTextmedia
 ) {
-    const { breakpoints, getCeBreakpoint } = useBreakpoints()
+    const { breakpointsAsc, getCeBreakpoint } = useBreakpoints()
     const { assetIsSmall, type } = useTextAsset(contentElement.content)
 
     const imageAttrs = computed(() => {
@@ -26,22 +26,16 @@ export function useCeTextmedia(
         )
         let twoColumns = false
 
-        return breakpoints.value
-            .reduce((result, breakpoint) => {
-                if (twoColumnsBreakpoint === breakpoint.name) {
-                    twoColumns = true
-                }
-                const divider = !twoColumns ? 1 : assetIsSmall.value ? 3 : 2
-                result.push(
-                    `${breakpoint.name}:${
-                        breakpoint.containerMaxWidth
-                            ? `${breakpoint.containerMaxWidth / divider}px`
-                            : `${100 / divider}vw`
-                    }`
-                )
-                return result
-            }, [] as string[])
-            .join(' ')
+        return breakpointsAsc.value.reduce((result, breakpoint) => {
+            if (twoColumnsBreakpoint === breakpoint.name) {
+                twoColumns = true
+            }
+            const divider = !twoColumns ? 1 : assetIsSmall.value ? 3 : 2
+            result[breakpoint.name] = breakpoint.containerMaxWidth
+                ? `${Math.ceil(breakpoint.containerMaxWidth / divider)}px`
+                : `${Math.ceil(100 / divider)}vw`
+            return result
+        }, {} as { [breakpoint: string]: string })
     })
 
     return { imageAttrs }
