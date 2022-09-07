@@ -1,5 +1,6 @@
 export type { Form } from './form'
-export type { FormElement, FormElementType as Type } from './formElement'
-export type { ValidationType } from './validation'
-export { getValidationScheme } from './validation'
-export { formElementTypeMapping } from './formElement'
+export type {
+    FormElement,
+    FormElementType,
+    ValidationType,
+} from './formElement'

@@ -1,4 +1,4 @@
-import { Schema } from 'yup'
+import { RuleExpression } from 'vee-validate'
 
 export type FormElementType =
     | 'checkbox'
@@ -24,7 +24,7 @@ export interface IFormElement {
     name: string
     label?: string
     size?: number
-    validation?: Schema
+    validation?: RuleExpression<any>
     required?: boolean
     placeholder?: string
 }
@@ -47,7 +47,7 @@ export class FormElement implements IFormElement {
     name: string
     label?: string
     size?: number
-    validation?: Schema
+    validation?: RuleExpression<any>
     required?: boolean
     placeholder?: string
 

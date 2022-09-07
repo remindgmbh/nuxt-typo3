@@ -1,10 +1,23 @@
-import { MixedSchema } from 'yup'
+import Joi from 'joi'
+import { GenericValidateFunction } from 'vee-validate'
 import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { Api, Model, useUserState } from '#nuxt-typo3'
+
+type FormElementTypeMapping = {
+    [Property in Api.Content.Login.FormElementType]: Model.FormElementType
+}
+
+const formElementTypeMapping: FormElementTypeMapping = {
+    text: 'text',
+    password: 'password',
+    submit: 'submit',
+}
 
 export function useCeFeloginLogin(
     contentElement: Api.ContentElement<Api.Content.Felogin>
 ) {
+    const { t } = useI18n()
     const { login } = useUserState()
 
     const loading = ref(false)
@@ -50,28 +63,54 @@ export function useCeFeloginLogin(
             : []
     )
 
+    function getValidation(formElement: Api.Content.Login.FormElement) {
+        const result: GenericValidateFunction[] = []
+
+        if (formElement.validate) {
+            Object.keys(formElement.validate).forEach((identifier) => {
+                let schema: Joi.Schema | undefined
+                switch (identifier) {
+                    case 'email':
+                        schema = Joi.string()
+                        break
+                    case 'required':
+                        schema = Joi.string()
+                            .required()
+                            .error(
+                                new Error(
+                                    t('validation.required', {
+                                        label: formElement.label,
+                                    })
+                                )
+                            )
+                        break
+                    case 'password':
+                        schema = Joi.string()
+                        break
+                }
+                if (schema) {
+                    const validateFunction = (value: any) => {
+                        const validateResult = schema?.validate(value)
+                        return validateResult?.error?.message ?? true
+                    }
+                    result.push(validateFunction)
+                }
+            })
+        }
+
+        return result
+    }
+
     function convert(
         formElement: Api.Content.Login.FormElement
     ): Model.FormElement {
         return new Model.FormElement({
-            type:
-                Api.Content.Login.formElementTypeMapping[formElement.type] ??
-                'hidden',
+            type: formElementTypeMapping[formElement.type] ?? 'hidden',
             label: formElement.label,
             name: formElement.name,
             defaultValue: formElement.value,
             required: !!formElement.validate?.required,
-            validation: formElement.validate
-                ? Object.keys(formElement.validate).reduce(
-                      (result, type) =>
-                          result.concat(
-                              Api.Content.Login.getValidationScheme(
-                                  type as Api.Content.Login.ValidationType
-                              )
-                          ),
-                      new MixedSchema()
-                  )
-                : undefined,
+            validation: getValidation(formElement),
         })
     }
 

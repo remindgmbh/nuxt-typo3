@@ -1,5 +1,7 @@
 export type { Form } from './form'
-export type { FormElement, FormElementType } from './formElement'
-export type { ValidationType } from './validation'
-export { getValidationScheme, REGEX_ALPHANUMERIC } from './validation'
-export { formElementTypeMapping } from './formElement'
+export type {
+    FormElement,
+    FormElementType,
+    Validator,
+    ValidationType,
+} from './formElement'

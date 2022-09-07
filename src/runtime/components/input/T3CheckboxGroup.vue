@@ -30,15 +30,14 @@
 </template>
 
 <script setup lang="ts">
-import { Schema } from 'yup'
-import { useFieldError } from 'vee-validate'
+import { RuleExpression, useFieldError } from 'vee-validate'
 
 const props = defineProps<{
     name: string
     label?: string
     options: { [key: string]: string }
     defaultValue?: string[]
-    validation?: Schema
+    validation?: RuleExpression<any>
     required?: boolean
     disabled?: boolean
 }>()

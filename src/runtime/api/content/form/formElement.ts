@@ -1,5 +1,13 @@
-import { ValidationType } from './validation'
-import { Model } from '#nuxt-typo3'
+export type ValidationType =
+    | 'NotEmpty'
+    | 'StringLength'
+    | 'EmailAddress'
+    | 'Alphanumeric'
+    | 'Integer'
+    | 'Float'
+    | 'NumberRange'
+    | 'RegularExpression'
+    | 'DateRange'
 
 export type FormElementType =
     | 'Checkbox'
@@ -18,6 +26,11 @@ export type FormElementType =
     | 'Telephone'
     | 'Url'
 
+export interface Validator {
+    identifier: ValidationType
+    options: { [key: string]: string }
+}
+
 export interface FormElement {
     identifier: string
     type: FormElementType
@@ -34,30 +47,5 @@ export interface FormElement {
     }
     defaultValue?: any
     elements?: FormElement[]
-    validators?: Array<{
-        identifier: ValidationType
-        options: { [key: string]: string }
-    }>
-}
-
-type FormElementTypeMapping = {
-    [Property in FormElementType]: Model.FormElementType
-}
-
-export const formElementTypeMapping: FormElementTypeMapping = {
-    Checkbox: 'checkbox',
-    Date: 'date',
-    Email: 'email',
-    FileUpload: 'file',
-    GridRow: 'row',
-    MultiCheckbox: 'checkbox-group',
-    Number: 'number',
-    Password: 'password',
-    RadioButton: 'radio-group',
-    SingleSelect: 'select',
-    StaticText: 'static-text',
-    Telephone: 'tel',
-    Text: 'text',
-    Textarea: 'textarea',
-    Url: 'url',
+    validators?: Validator[]
 }

@@ -83,9 +83,8 @@
 </template>
 
 <script setup lang="ts">
-import { useField } from 'vee-validate'
+import { RuleExpression, useField } from 'vee-validate'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
-import { Schema } from 'yup'
 import { navigateTo } from '#app'
 import { Model } from '#nuxt-typo3'
 
@@ -94,7 +93,7 @@ const props = defineProps<{
     label?: string
     optionGroups: Model.AutocompleteOptionGroup[]
     defaultValue?: string
-    validation?: Schema
+    validation?: RuleExpression<any>
     emptyLabel?: string
     required?: boolean
     placeholder?: string
@@ -131,7 +130,7 @@ const hoverOptionIndex = computed(() =>
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
 const { errorMessage, value, setValue } = useField<string>(
     name,
-    props.validation?.label(props.label ?? ''),
+    props.validation,
     {
         initialValue: props.defaultValue,
     }

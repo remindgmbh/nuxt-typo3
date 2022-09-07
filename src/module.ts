@@ -174,9 +174,6 @@ export default defineNuxtModule<ModuleOptions>({
             src: resolver.resolve('runtime/plugins/i18n'),
         })
         addPlugin({
-            src: resolver.resolve('runtime/plugins/yup'),
-        })
-        addPlugin({
             src: resolver.resolve('runtime/plugins/middleware'),
         })
         extendPages((pages) => {

@@ -1,5 +1,4 @@
-import { ValidationType } from './validation'
-import { Model } from '#nuxt-typo3'
+export type ValidationType = 'required' | 'password' | 'email'
 
 export type FormElementType = 'text' | 'password' | 'submit'
 
@@ -9,14 +8,4 @@ export interface FormElement {
     name: string
     value?: string
     validate?: { [Property in ValidationType]: 1 }
-}
-
-type FormElementTypeMapping = {
-    [Property in FormElementType]: Model.FormElementType
-}
-
-export const formElementTypeMapping: FormElementTypeMapping = {
-    text: 'text',
-    password: 'password',
-    submit: 'submit',
 }

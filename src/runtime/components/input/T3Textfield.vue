@@ -26,52 +26,27 @@
 
 <script setup lang="ts">
 import { computed, watch } from 'vue'
-import { useField } from 'vee-validate'
-import { Schema, date } from 'yup'
-import { useYupUtil } from '#nuxt-typo3'
-
-const { parseDateString } = useYupUtil()
+import { RuleExpression, useField } from 'vee-validate'
 
 const props = defineProps<{
     name: string
     label?: string
     type: string
-    validation?: Schema
+    validation?: RuleExpression<any>
     defaultValue?: string | number | boolean
     required?: boolean
     placeholder?: string
     disabled?: boolean
 }>()
 
-const validation = computed(() => {
-    let typeValidation: Schema | undefined
-    switch (props.type) {
-        case 'date':
-            typeValidation = date()
-                .transform(parseDateString)
-                .default(undefined)
-            break
-        default:
-            typeValidation = undefined
-    }
-
-    if (typeValidation && props.validation) {
-        typeValidation = typeValidation.concat(props.validation)
-    }
-
-    return typeValidation ?? props.validation
-})
-
 const name = computed(() => props.name)
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
-const { value, errorMessage, setValue } = useField(
-    name,
-    validation.value?.label(props.label ?? ''),
-    {
-        initialValue: props.defaultValue,
-    }
-)
+const { value, errorMessage, setValue } = useField<
+    string | number | boolean | undefined
+>(name, props.validation, {
+    initialValue: props.defaultValue,
+})
 
 if (props.type === 'hidden') {
     watch(() => props.defaultValue, setValue)
