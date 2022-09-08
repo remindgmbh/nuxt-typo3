@@ -1,5 +1,5 @@
 <script lang="ts">
-export { T3NewsList as default } from '#nuxt-typo3'
+export { default } from '#nuxt-typo3/components/content/elements/news/T3NewsList.vue'
 </script>
 
 <style lang="scss">

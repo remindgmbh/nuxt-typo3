@@ -1,5 +1,5 @@
 <script lang="ts">
-export { T3Header as default } from '#nuxt-typo3'
+export { default } from '#nuxt-typo3/components/content/helper/T3Header.vue'
 </script>
 
 <style lang="scss">

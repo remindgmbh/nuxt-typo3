@@ -19,7 +19,8 @@
 </template>
 
 <script setup lang="ts">
-import { Api, T3CeTextmedia as BaseT3CeTextmedia } from '#nuxt-typo3'
+import { Api } from '#nuxt-typo3'
+import BaseT3CeTextmedia from '#nuxt-typo3/components/content/elements/T3CeTextmedia.vue'
 
 const props = defineProps<{
     contentElement: Api.ContentElement<Api.Content.Textmedia>

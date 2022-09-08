@@ -1,5 +1,5 @@
 <script lang="ts">
-export { T3ImageGallerySlideHeader as default } from '#nuxt-typo3'
+export { default } from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallerySlideHeader.vue'
 </script>
 
 <style lang="scss">
