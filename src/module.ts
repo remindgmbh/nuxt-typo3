@@ -169,12 +169,12 @@ export default defineNuxtModule<ModuleOptions>({
             resolver.resolve('runtime/assets/styles/container.scss')
         )
 
-        addImportsDir([resolver.resolve('runtime/composables/**/use*.ts')])
+        addImportsDir([resolver.resolve('runtime/composables/**/use*.*')])
         addComponentsDir({
             path: resolver.resolve('runtime/components'),
             pathPrefix: false,
             global: true,
-            ignore: ['**/shared.ts', '**/index.ts'],
+            ignore: ['**/shared.*'],
         })
         addPlugin({
             src: resolver.resolve('runtime/plugins/cookiebot'),
