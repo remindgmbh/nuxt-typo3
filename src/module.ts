@@ -6,7 +6,9 @@ import {
     defineNuxtModule,
     extendPages,
 } from '@nuxt/kit'
+import { ViteConfig } from '@nuxt/schema'
 import { defu } from 'defu'
+import { CSSOptions } from 'vite'
 import { I18nOptions } from 'vue-i18n'
 import { name, version } from '../package.json'
 
@@ -127,7 +129,7 @@ export default defineNuxtModule<ModuleOptions>({
         )
 
         if (options.customCssVariables) {
-            const cssOptions = {
+            const cssOptions: CSSOptions = {
                 preprocessorOptions: {
                     scss: {
                         additionalData:
@@ -145,12 +147,19 @@ export default defineNuxtModule<ModuleOptions>({
             )
         }
 
-        nuxt.options.vite.define = {
-            ...nuxt.options.vite.define,
-            __VUE_I18N_FULL_INSTALL__: true,
-            __VUE_I18N_LEGACY_API__: false,
-            __INTLIFY_PROD_DEVTOOLS__: false,
+        const viteConfig: ViteConfig = {
+            // https://github.com/vitejs/vite/issues/9220
+            optimizeDeps: {
+                include: ['joi'],
+            },
+            define: {
+                __VUE_I18N_FULL_INSTALL__: true,
+                __VUE_I18N_LEGACY_API__: false,
+                __INTLIFY_PROD_DEVTOOLS__: false,
+            },
         }
+
+        nuxt.options.vite = defu(viteConfig, nuxt.options.vite)
 
         nuxt.options.pages = true
 
