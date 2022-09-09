@@ -1,8 +1,8 @@
-import Joi from 'joi'
+import { string, Schema } from 'yup'
 import { GenericValidateFunction } from 'vee-validate'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { Api, Model, useUserState } from '#nuxt-typo3'
+import { Api, Model, useUserState, useYupUtil } from '#nuxt-typo3'
 
 type FormElementTypeMapping = {
     [Property in Api.Content.Login.FormElementType]: Model.FormElementType
@@ -19,6 +19,7 @@ export function useCeFeloginLogin(
 ) {
     const { t } = useI18n()
     const { login } = useUserState()
+    const { schemaToValidateFunction } = useYupUtil()
 
     const loading = ref(false)
 
@@ -68,32 +69,24 @@ export function useCeFeloginLogin(
 
         if (formElement.validate) {
             Object.keys(formElement.validate).forEach((identifier) => {
-                let schema: Joi.Schema | undefined
+                let schema: Schema | undefined
                 switch (identifier) {
                     case 'email':
-                        schema = Joi.string()
+                        schema = string()
                         break
                     case 'required':
-                        schema = Joi.string()
-                            .required()
-                            .error(
-                                new Error(
-                                    t('validation.required', {
-                                        label: formElement.label,
-                                    })
-                                )
-                            )
+                        schema = string().required(
+                            t('validation.required', {
+                                label: formElement.label,
+                            })
+                        )
                         break
                     case 'password':
-                        schema = Joi.string()
+                        schema = string()
                         break
                 }
                 if (schema) {
-                    const validateFunction = (value: any) => {
-                        const validateResult = schema?.validate(value)
-                        return validateResult?.error?.message ?? true
-                    }
-                    result.push(validateFunction)
+                    result.push(schemaToValidateFunction(schema))
                 }
             })
         }

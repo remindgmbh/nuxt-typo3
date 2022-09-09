@@ -1,9 +1,9 @@
-import Joi from 'joi'
+import { array, boolean, date, number, string, Schema } from 'yup'
 import { computed, ref } from 'vue'
 import { navigateTo } from '#app'
-import { GenericValidateFunction, RuleExpression } from 'vee-validate'
 import { useI18n } from 'vue-i18n'
-import { Api, Model, useApi } from '#nuxt-typo3'
+import { GenericValidateFunction, RuleExpression } from 'vee-validate'
+import { Api, Model, useApi, useYupUtil } from '#nuxt-typo3'
 
 const REGEX_ALPHANUMERIC = /^(\w*)$/
 
@@ -34,6 +34,8 @@ export function useCeFormFormframework(
 ) {
     const api = useApi()
     const { t } = useI18n()
+    const { parseDateString, parseNumber, schemaToValidateFunction } =
+        useYupUtil()
 
     const formElements = computed(() =>
         contentElement.content.form.elements.map(convert)
@@ -46,171 +48,127 @@ export function useCeFormFormframework(
         const result: GenericValidateFunction[] = []
         const label = formElement.label
 
-        formElement.validators?.forEach((validator) => {
-            let schema: Joi.Schema | undefined
+        if (formElement.validators) {
+            formElement.validators.forEach((validator) => {
+                let schema: Schema | undefined
 
-            switch (validator.identifier) {
-                case 'StringLength': {
-                    // minimum and maximum both are requried for StringLength validator
-                    const min = Number.parseInt(validator.options.minimum) || 0
-                    const max = Number.parseInt(validator.options.maximum) || 0
-                    schema = Joi.string()
-                        .min(min)
-                        .max(max)
-                        .error(([error]) => {
-                            let message = ''
-                            switch (error.code) {
-                                case 'string.min':
-                                case 'string.empty':
-                                    message = t('validation.min', {
-                                        label,
-                                        min,
-                                    })
-                                    break
-                                case 'string.max':
-                                    message = t('validation.max', {
-                                        label,
-                                        max,
-                                    })
-                                    break
+                switch (validator.identifier) {
+                    case 'StringLength': {
+                        const min =
+                            Number.parseInt(validator.options.minimum) || 0
+                        const max =
+                            Number.parseInt(validator.options.maximum) || 0
+                        schema = string()
+                            .min(min, t('validation.min', { label, min }))
+                            .max(max, t('validation.max', { label, max }))
+
+                        break
+                    }
+                    case 'EmailAddress':
+                        schema = string().email(
+                            t('validation.email', { label })
+                        )
+                        break
+
+                    case 'NotEmpty': {
+                        const msg = t('validation.required', { label })
+                        switch (formElement.type) {
+                            case 'MultiCheckbox':
+                                schema = array().required(msg).min(1, msg)
+                                break
+                            case 'Checkbox':
+                                schema = boolean().required(msg).isTrue(msg)
+                                break
+                            case 'Number':
+                                schema = number()
+                                    .transform(parseNumber)
+                                    .required(msg)
+                                break
+                            case 'Date':
+                                schema = date()
+                                    .transform(parseDateString)
+                                    .required(msg)
+                                    .default(undefined)
+                                break
+                            default: {
+                                schema = string().required(msg)
                             }
-                            return new Error(message)
-                        })
-                    break
-                }
-                case 'EmailAddress':
-                    schema = Joi.string()
-                        .allow('')
-                        .email({ tlds: { allow: false } })
-                        .error(new Error(t('validation.email', { label })))
-                    break
-                case 'NotEmpty': {
-                    switch (formElement.type) {
-                        case 'Checkbox':
-                            schema = Joi.boolean().required().invalid(false)
-                            break
-                        case 'MultiCheckbox':
-                            schema = Joi.array().required().min(1)
-                            break
-                        case 'RadioButton':
-                        case 'Number':
-                            schema = Joi.number().required()
-                            break
-                        case 'Date': {
-                            schema = Joi.date().required()
-                            break
                         }
-                        default:
-                            schema = Joi.string().required()
+                        break
                     }
-                    if (schema) {
-                        schema = schema.error(
-                            new Error(t('validation.required', { label }))
+                    case 'Alphanumeric':
+                        schema = string().matches(
+                            REGEX_ALPHANUMERIC,
+                            t('validation.alphanumeric', { label })
                         )
-                    }
-                    break
-                }
-                case 'Alphanumeric':
-                    schema = Joi.string()
-                        .allow('')
-                        .regex(REGEX_ALPHANUMERIC)
-                        .error(
-                            new Error(t('validation.alphanumeric', { label }))
-                        )
-                    break
-                case 'Integer': {
-                    schema = Joi.number()
-                        .allow('')
-                        .integer()
-                        .error(new Error(t('validation.integer', { label })))
-                    break
-                }
-                case 'Float':
-                    schema = Joi.number()
-                        .allow('')
-                        .error(new Error(t('validation.numeric', { label })))
-                    break
-                case 'NumberRange': {
-                    // minimum and maximum both are requried for NumberRange validator
-                    const min = Number.parseInt(validator.options.minimum) || 0
-                    const max = Number.parseInt(validator.options.maximum) || 0
-                    schema = Joi.number()
-                        .allow('')
-                        .min(min)
-                        .max(max)
-                        .error(([error]) => {
-                            let message = ''
-                            switch (error.code) {
-                                case 'number.min':
-                                    message = t('validation.min', {
-                                        label,
-                                        min,
-                                    })
-                                    break
-                                case 'number.max':
-                                    message = t('validation.max', {
-                                        label,
-                                        max,
-                                    })
-                                    break
-                            }
-                            return new Error(message)
-                        })
-                    break
-                }
-                case 'RegularExpression': {
-                    const regex = new RegExp(
-                        validator.options.regularExpression
-                    )
-                    schema = Joi.string()
-                        .regex(regex)
-                        .error(
-                            new Error(t('validation.regex', { label, regex }))
-                        )
-                    break
-                }
-                case 'DateRange': {
-                    const min = validator.options.minimum
-                    const max = validator.options.maximum
-                    const dateSchema = Joi.date()
-                        .empty('')
-                        .error(([error]) => {
-                            let message = ''
-                            switch (error.code) {
-                                case 'date.min':
-                                    message = t('validation.min', {
-                                        label,
-                                        min,
-                                    })
-                                    break
-                                case 'date.max':
-                                    message = t('validation.max', {
-                                        label,
-                                        max,
-                                    })
-                                    break
-                            }
-                            return new Error(message)
-                        })
-                    if (min) {
-                        schema = dateSchema.min(min)
-                    }
-                    if (max) {
-                        schema = dateSchema.max(max)
-                    }
-                    break
-                }
-            }
+                        break
+                    case 'Integer': {
+                        const msg = t('validation.integer', { label })
+                        schema = number()
+                            .transform(parseNumber)
+                            .integer(msg)
+                            .typeError(msg)
 
-            if (schema) {
-                const validateFunction = (value: any) => {
-                    const validateResult = schema?.validate(value)
-                    return validateResult?.error?.message ?? true
-                }
-                result.push(validateFunction)
-            }
-        })
+                        break
+                    }
+                    case 'Float':
+                        schema = number()
+                            .transform(parseNumber)
+                            .typeError(t('validation.numeric', { label }))
+                        break
+                    case 'NumberRange': {
+                        const min =
+                            Number.parseInt(validator.options.minimum) || 0
+                        const max =
+                            Number.parseInt(validator.options.maximum) || 0
+                        schema = number()
+                            .transform(parseNumber)
+                            .min(min)
+                            .max(max)
 
+                        break
+                    }
+                    case 'RegularExpression': {
+                        const regex = new RegExp(
+                            validator.options.regularExpression
+                        )
+                        schema = string().matches(
+                            regex,
+                            t('validation.regex', { label })
+                        )
+                        break
+                    }
+                    case 'DateRange': {
+                        const min = validator.options.minimum
+                        const max = validator.options.maximum
+
+                        let dateSchema = date()
+                            .transform(parseDateString)
+                            .default(undefined)
+
+                        if (min) {
+                            dateSchema = dateSchema.min(
+                                min,
+                                t('validation.min', { label })
+                            )
+                        }
+
+                        if (max) {
+                            dateSchema = dateSchema.max(
+                                max,
+                                t('validation.max', { label })
+                            )
+                        }
+
+                        schema = dateSchema
+                        break
+                    }
+                }
+                if (schema) {
+                    result.push(schemaToValidateFunction(schema))
+                }
+            })
+        }
         return result
     }
 
@@ -239,11 +197,13 @@ export function useCeFormFormframework(
 
                 return new Model.FormElementRow({ ...f, formElements })
             }
+            case 'Checkbox':
+                return new Model.FormElement({ ...f, defaultValue: false })
             case 'MultiCheckbox':
-                f.defaultValue = formElement.defaultValue || []
                 return new Model.FormElementWithOptions({
                     ...f,
                     options: formElement.properties?.options ?? {},
+                    defaultValue: formElement.defaultValue || [],
                 })
             case 'RadioButton':
                 return new Model.FormElementWithOptions({

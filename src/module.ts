@@ -150,7 +150,7 @@ export default defineNuxtModule<ModuleOptions>({
         const viteConfig: ViteConfig = {
             // https://github.com/vitejs/vite/issues/9220
             optimizeDeps: {
-                include: ['joi'],
+                include: ['yup'],
             },
             define: {
                 __VUE_I18N_FULL_INSTALL__: true,

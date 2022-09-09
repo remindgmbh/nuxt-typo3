@@ -1,6 +1,4 @@
 import { defineNuxtPlugin, useCookie, useHead } from '#app'
-// eslint-disable-next-line import/default
-import JSON5 from 'json5'
 import { useConfig, useCookiebot } from '#nuxt-typo3'
 
 interface CookieConsent {
@@ -42,10 +40,14 @@ export default defineNuxtPlugin((plugin) => {
     })
 
     function setCookieCategories() {
-        const cookieConsent = useCookie('CookieConsent', {
-            decode: (value: string) =>
-                // eslint-disable-next-line import/no-named-as-default-member
-                JSON5.parse<CookieConsent>(decodeURIComponent(value)),
+        const cookieConsent = useCookie<CookieConsent>('CookieConsent', {
+            decode: (value) =>
+                // use regex from https://www.cookiebot.com/en/developer/ (Server side usage - PHP)
+                JSON.parse(
+                    decodeURIComponent(value)
+                        .replaceAll("'", '"')
+                        .replaceAll(/([{[,])\s*([a-zA-Z0-9_]+?):/g, '$1"$2":')
+                ),
         })
 
         if (cookieConsent.value) {
