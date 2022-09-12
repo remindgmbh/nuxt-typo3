@@ -11,7 +11,8 @@
             <T3Form
                 :form-elements="formElements"
                 :loading="loading"
-                :submit-label="contentElement.content.form.i18n.submit"
+                :loading-label="loadingLabel"
+                :submit-label="submitLabel"
                 @submit="submit"
             />
         </div>
@@ -25,7 +26,6 @@ const props = defineProps<{
     contentElement: Api.ContentElement<Api.Content.Formframework>
 }>()
 
-const { formElements, loading, submit } = useCeFormFormframework(
-    props.contentElement
-)
+const { formElements, loading, loadingLabel, submitLabel, submit } =
+    useCeFormFormframework(props.contentElement)
 </script>

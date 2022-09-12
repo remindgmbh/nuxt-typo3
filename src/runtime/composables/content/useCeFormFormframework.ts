@@ -37,6 +37,14 @@ export function useCeFormFormframework(
     const { parseDateString, parseNumber, schemaToValidateFunction } =
         useYupUtil()
 
+    const i18n = computed(() => contentElement.content.form.i18n)
+
+    const submitLabel = computed(() => i18n.value.submit || t('form.submit'))
+
+    const loadingLabel = computed(() => i18n.value.loading || t('form.loading'))
+
+    const successLabel = computed(() => i18n.value.success || t('form.success'))
+
     const formElements = computed(() =>
         contentElement.content.form.elements.map(convert)
     )
@@ -256,5 +264,12 @@ export function useCeFormFormframework(
         }
     }
 
-    return { formElements, loading, submit }
+    return {
+        formElements,
+        loading,
+        loadingLabel,
+        submitLabel,
+        successLabel,
+        submit,
+    }
 }

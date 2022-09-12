@@ -6,12 +6,6 @@ export { default } from '#nuxt-typo3/components/ui/T3Form/T3Form.vue'
 @use '@/assets/variables' as *;
 
 .t3-form {
-    &__submit--loading & {
-        &__submit-label {
-            display: none;
-        }
-    }
-
     &__submit {
         &--loading {
             &::after {

@@ -19,6 +19,11 @@ export default {
             return `Damit dieser Inhalt angezeigt werden kann müssen ${categoryValue} Cookies zugelassen werden.`
         },
     },
+    form: {
+        submit: 'Absenden',
+        loading: 'Lädt',
+        success: 'Erfolgreich',
+    },
     imageGallery: {
         close: 'Schließen',
     },

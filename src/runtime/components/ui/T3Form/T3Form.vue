@@ -21,7 +21,9 @@
             type="submit"
             :disabled="loading"
         >
-            <span class="t3-form__submit-label">{{ submitLabel }}</span>
+            <span class="t3-form__submit-label">{{
+                loading && loadingLabel ? loadingLabel : submitLabel
+            }}</span>
         </button>
     </form>
 </template>
@@ -35,6 +37,7 @@ const { handleSubmit } = useForm()
 defineProps<{
     formElements: Model.FormElement[]
     loading?: boolean
+    loadingLabel?: string
     submitLabel: string
 }>()
 

@@ -24,6 +24,11 @@ export default {
             return `${capitalizedCategoryValue} cookies have to be accepted to show this content.`
         },
     },
+    form: {
+        submit: 'Submit',
+        loading: 'Loading',
+        success: 'Success',
+    },
     imageGallery: {
         close: 'Close',
     },
