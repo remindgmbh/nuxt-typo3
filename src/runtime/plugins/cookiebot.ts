@@ -12,7 +12,7 @@ interface CookieConsent {
     region: string
 }
 
-export default defineNuxtPlugin((plugin) => {
+export default defineNuxtPlugin((nuxt) => {
     const config = useConfig()
 
     if (!config.cookiebotUid) {
@@ -23,7 +23,7 @@ export default defineNuxtPlugin((plugin) => {
 
     setCookieCategories()
 
-    plugin.hook('app:beforeMount', () => {
+    nuxt.hook('app:beforeMount', () => {
         window.addEventListener('CookiebotOnAccept', setCookieCategories)
         window.addEventListener('CookiebotOnDecline', setCookieCategories)
     })
