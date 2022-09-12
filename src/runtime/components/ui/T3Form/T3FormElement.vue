@@ -73,6 +73,9 @@
             :required="formElement.required"
             :placeholder="formElement.placeholder"
             :disabled="loading"
+            :step="formElement.isNumber() ? formElement.step : undefined"
+            :min="formElement.isNumber() ? formElement.min : undefined"
+            :max="formElement.isNumber() ? formElement.max : undefined"
         />
     </div>
 </template>

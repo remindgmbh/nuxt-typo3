@@ -224,6 +224,23 @@ export function useCeFormFormframework(
                     emptyLabel: formElement.properties?.prependOptionLabel,
                     options: formElement.properties?.options ?? {},
                 })
+            case 'Number':
+                return new Model.FormElementNumber({
+                    ...f,
+                    step:
+                        Number.parseInt(
+                            formElement.properties?.fluidAdditionalAttributes
+                                ?.step ?? ''
+                        ) || 1,
+                    min: Number.parseInt(
+                        formElement.properties?.fluidAdditionalAttributes
+                            ?.min ?? ''
+                    ),
+                    max: Number.parseInt(
+                        formElement.properties?.fluidAdditionalAttributes
+                            ?.max ?? ''
+                    ),
+                })
             case 'StaticText':
                 return new Model.FormElementStaticText({
                     ...f,

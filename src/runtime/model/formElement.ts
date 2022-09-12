@@ -37,6 +37,12 @@ interface IFormElementSelect extends IFormElementWithOptions {
     emptyLabel?: string
 }
 
+interface IFormElementNumber extends IFormElement {
+    step: number
+    min?: number
+    max?: number
+}
+
 interface IFormElementStaticText extends IFormElement {
     text: string
 }
@@ -78,6 +84,10 @@ export class FormElement implements IFormElement {
         return this.type === 'select'
     }
 
+    public isNumber(): this is FormElementNumber {
+        return this.type === 'number'
+    }
+
     public isStaticText(): this is FormElementStaticText {
         return this.type === 'static-text'
     }
@@ -107,6 +117,22 @@ export class FormElementSelect
     constructor(formElement: IFormElementSelect) {
         super(formElement)
         this.emptyLabel = formElement.emptyLabel
+    }
+}
+
+export class FormElementNumber
+    extends FormElement
+    implements IFormElementNumber
+{
+    step: number
+    min?: number
+    max?: number
+
+    constructor(formElement: IFormElementNumber) {
+        super(formElement)
+        this.step = formElement.step
+        this.min = formElement.min
+        this.max = formElement.max
     }
 }
 

@@ -42,7 +42,10 @@ export interface FormElement {
         prependOptionLabel?: string
         text?: string
         fluidAdditionalAttributes?: {
+            max?: string
+            min?: string
             placeholder?: string
+            step?: string
         }
     }
     defaultValue?: any

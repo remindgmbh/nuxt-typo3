@@ -4,6 +4,7 @@ export type {
 } from './autocompleteOption'
 export {
     FormElement,
+    FormElementNumber,
     FormElementRow,
     FormElementSelect,
     FormElementStaticText,

@@ -13,6 +13,9 @@
             class="t3-textfield__input"
             :type="type"
             :name="name"
+            :min="min"
+            :max="max"
+            :step="step"
             :placeholder="placeholder"
             :disabled="disabled"
         />
@@ -37,6 +40,9 @@ const props = defineProps<{
     required?: boolean
     placeholder?: string
     disabled?: boolean
+    step?: number
+    min?: number
+    max?: number
 }>()
 
 const name = computed(() => props.name)
