@@ -1,4 +1,3 @@
-import { defineNuxtConfig } from 'nuxt'
 import de from './locales/de.json'
 import en from './locales/en.json'
 
@@ -16,12 +15,6 @@ export default defineNuxtConfig({
                 },
                 cookiebotUid: '',
             },
-        },
-    },
-    app: {
-        pageTransition: {
-            name: 'page-transition',
-            mode: 'in-out',
         },
     },
     components: [

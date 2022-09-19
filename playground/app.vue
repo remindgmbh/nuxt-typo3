@@ -73,7 +73,9 @@
             <div>bottom</div>
         </T3TopbarLayoutSidebar>
         <T3TopbarLayoutContent class="app__content">
-            <NuxtPage />
+            <NuxtPage
+                :transition="{ name: 'page-transition', mode: 'in-out' }"
+            />
         </T3TopbarLayoutContent>
         <T3TopbarLayoutFooter v-if="currentFooterContent" class="app__footer">
             <pre>{{ currentFooterContent.content }}</pre>
