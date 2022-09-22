@@ -4,7 +4,6 @@ export interface Category {
     title: string
     slug: string
     active: boolean
-    count: number
     seo?: {
         title: string
         description: string
