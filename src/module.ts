@@ -15,25 +15,47 @@ import { name, version } from '../package.json'
 const CONFIG_KEY = 'typo3'
 
 export interface ModuleOptions {
+    // TYPO3 Headless Backend information
     api: {
+        // URL of the TYPO3 Backend
         baseUrl: string
+        // Type number of the footer content, only required if changed in backend
         footerContentType: number
+        // Type number of the initial data, only required if changed in backend
         initialDataType: number
     }
+    // URL of the frontend project, used for page meta data
     baseUrl: string
+    // config for content elements, type key has to match CType
     contentElements: {
         [type: string]: {
+            // if set to true, content element ignores container width
             fullWidth?: boolean
+            // if set to true, content element is shown even if cookie should block it
+            // required if not the whole content element should be blocked by cookie,
+            // but only one part, for example a video in a textmedia element.
+            // in that case cookie behaviour has to be implemented in custom component,
+            // see T3CeTextmedia in playground for example
             ignoreCookies?: boolean
         }
     }
+    // UID from cookiebot, required if cookie consent banner should be shown
     cookiebotUid?: string
-    customCssVariables?: string
+    // Path to SCSS Variables to override default values defined in runtime/assets/style/variables.scss
+    // See playground assets/variables.scss for example
+    customScssVariables?: string
+    // options from https://github.com/intlify/vue-i18n-next
     i18n: I18nOptions
+    // image options for content elements
+    // lazy: load images only when in viewport
+    // responsive: load image with dimensions according to windows size
     images: {
-        ceGallery: {
+        ceImageGallery: {
+            // lazy doesn't work for navigation and preview images
             lazy: boolean
+            // max height for images used in navigation
             navigationHeight: number
+            // max height for images used in preview
             previewHeight: number
         }
         ceImage: {
@@ -49,19 +71,23 @@ export interface ModuleOptions {
             responsive: boolean
         }
     }
+    // language paths in addition to default language
     languages: string[]
     layout: {
         breadcrumbs: {
+            // if set to true, breadcrumbs ignore container width
             fullWidth: boolean
         }
     }
     news: {
         pagination: {
+            // Position of the pagination for news list
             position: 'top' | 'bottom' | 'both'
         }
     }
     solr: {
         pagination: {
+            // Position of the pagination for solr search results
             position: 'top' | 'bottom' | 'both'
         }
     }
@@ -95,7 +121,7 @@ export default defineNuxtModule<ModuleOptions>({
                 lazy: true,
                 responsive: true,
             },
-            ceGallery: {
+            ceImageGallery: {
                 lazy: true,
                 navigationHeight: 256,
                 previewHeight: 256,
@@ -128,12 +154,12 @@ export default defineNuxtModule<ModuleOptions>({
             options
         )
 
-        if (options.customCssVariables) {
+        if (options.customScssVariables) {
             const cssOptions: CSSOptions = {
                 preprocessorOptions: {
                     scss: {
                         additionalData:
-                            `@forward "${options.customCssVariables}";`.concat(
+                            `@forward "${options.customScssVariables}";`.concat(
                                 nuxt.options.vite.css?.preprocessorOptions?.scss
                                     .additionalData ?? ''
                             ),
