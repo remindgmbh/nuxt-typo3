@@ -19,6 +19,7 @@
             <div
                 v-if="visible"
                 class="t3-modal__background"
+                data-testid="background"
                 @click="onBackgroundClick"
             ></div>
         </transition>
@@ -56,7 +57,7 @@ const props = withDefaults(
     }
 )
 
-const toggleScrollbar = inject(toggleScrollbarSymbol)
+const toggleScrollbar = inject(toggleScrollbarSymbol, undefined)
 
 const emit = defineEmits<{
     (e: 'update:modelValue', value: boolean): void
