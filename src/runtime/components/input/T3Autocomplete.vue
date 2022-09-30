@@ -49,8 +49,8 @@
                                         't3-autocomplete__option--hover':
                                             hoverOption === option,
                                     }"
-                                    @mouseover="setHover(option)"
-                                    @mouseleave="setHover(undefined)"
+                                    @mouseover="hoverOption = option"
+                                    @mouseleave="hoverOption = undefined"
                                     >{{ option.label }}</NuxtLink
                                 >
                                 <div
@@ -63,8 +63,8 @@
                                             hoverOption === option,
                                     }"
                                     @click="onSelect(option)"
-                                    @mouseover="setHover(option)"
-                                    @mouseleave="setHover(undefined)"
+                                    @mouseover="hoverOption = option"
+                                    @mouseleave="hoverOption = undefined"
                                 >
                                     {{ option.label }}
                                 </div>
@@ -117,6 +117,7 @@ const emit = defineEmits<{
 const wrapper = ref<HTMLDivElement>()
 const input = ref<HTMLInputElement>()
 const isOpen = ref(false)
+const optionGroups = ref<Model.AutocompleteOptionGroup[]>([])
 
 const options = computed(() =>
     props.optionGroups.flatMap((optionGroup) => optionGroup.options)
@@ -147,6 +148,7 @@ const { errorMessage, value, setValue } = useField<string>(
 
 function onOptionsChanged(value: Model.AutocompleteOptionGroup[]) {
     if (value.length) {
+        optionGroups.value = value
         open()
     } else {
         close()
@@ -154,10 +156,6 @@ function onOptionsChanged(value: Model.AutocompleteOptionGroup[]) {
 }
 
 watch(() => props.optionGroups, onOptionsChanged)
-
-function setHover(value?: Model.AutocompleteOption) {
-    hoverOption.value = value
-}
 
 function onInput() {
     emit('input', value.value)
@@ -255,6 +253,13 @@ function close() {
         &-enter-active,
         &-leave-active {
             transition: height $transition-duration-input-error;
+        }
+    }
+
+    .options-transition {
+        &-enter-active,
+        &-leave-active {
+            transition: height $transition-duration-select;
         }
     }
 
