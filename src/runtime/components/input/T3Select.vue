@@ -44,12 +44,12 @@
                             class="t3-select__option"
                             :class="{
                                 't3-select__option--selected':
-                                    value === option.value,
+                                    option.value === value,
                                 't3-select__option--hover':
-                                    option.value === hoverOption,
+                                    option.value === hoverOption?.value,
                             }"
-                            @click="setValue(option.value?.toString())"
-                            @mouseover="hoverOption = option.value?.toString()"
+                            @click="setValue(option.value)"
+                            @mouseover="hoverOption = option"
                             @mouseleave="hoverOption = undefined"
                         >
                             {{ option.label }}
@@ -69,6 +69,7 @@
 <script setup lang="ts">
 import { RuleExpression, useField } from 'vee-validate'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { useSelectInput } from '#nuxt-typo3'
 
 const props = defineProps<{
     name: string
@@ -105,7 +106,6 @@ const { errorMessage, value, setValue } = useField<string>(
 const customSelect = ref<HTMLDivElement>()
 const nativeSelect = ref<HTMLSelectElement>()
 const isOpen = ref(false)
-const hoverOption = ref<string>()
 
 // Add empty option to options, use nbsp (160) for label if none is defined
 const options = computed(() =>
@@ -117,13 +117,20 @@ const options = computed(() =>
     )
 )
 
+function select(hoverOption: { value: string; label: string }) {
+    setValue(hoverOption.value)
+    close()
+}
+
+const { hoverOption, supportKeyboardNavigation } = useSelectInput(
+    select,
+    options
+)
+
 const selectedOption = computed(() =>
     options.value.find((option) => option.value === value.value)
 )
 
-const hoverOptionIndex = computed(() =>
-    options.value.findIndex(({ value }) => hoverOption.value === value)
-)
 const canHover = computed(() => window.matchMedia('(hover: hover)').matches)
 
 function toggle() {
@@ -161,38 +168,6 @@ function closeOnOutsideClick(e: MouseEvent) {
         e.target instanceof Node &&
         !customSelect.value.contains(e.target)
     ) {
-        close()
-    }
-}
-
-function supportKeyboardNavigation(e: KeyboardEvent) {
-    // press down -> go next
-    if (
-        e.key === 'ArrowDown' &&
-        hoverOptionIndex.value < options.value.length - 1
-    ) {
-        e.preventDefault() // prevent page scrolling
-        hoverOption.value = options.value.at(hoverOptionIndex.value + 1)?.value
-    }
-
-    // press up -> go previous
-    if (e.key === 'ArrowUp' && hoverOptionIndex.value > 0) {
-        e.preventDefault() // prevent page scrolling
-        hoverOption.value = options.value.at(hoverOptionIndex.value - 1)?.value
-    }
-
-    // press Enter or space -> select the option
-    if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault()
-
-        if (hoverOption.value !== undefined) {
-            setValue(hoverOption.value)
-            close()
-        }
-    }
-
-    // press ESC -> close selectCustom
-    if (e.key === 'Escape') {
         close()
     }
 }

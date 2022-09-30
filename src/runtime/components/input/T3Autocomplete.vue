@@ -86,7 +86,7 @@
 import { RuleExpression, useField } from 'vee-validate'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { navigateTo } from '#app'
-import { Model } from '#nuxt-typo3'
+import { Model, useSelectInput } from '#nuxt-typo3'
 
 const props = defineProps<{
     name: string
@@ -117,14 +117,23 @@ const emit = defineEmits<{
 const wrapper = ref<HTMLDivElement>()
 const input = ref<HTMLInputElement>()
 const isOpen = ref(false)
-const hoverOption = ref<Model.AutocompleteOption>()
 
 const options = computed(() =>
     props.optionGroups.flatMap((optionGroup) => optionGroup.options)
 )
 const name = computed(() => props.name)
-const hoverOptionIndex = computed(() =>
-    !hoverOption.value ? -1 : options.value.indexOf(hoverOption.value)
+
+function onKeyboardSelect(hoverOption: Model.AutocompleteOption) {
+    if (hoverOption.value.link) {
+        return navigateTo(hoverOption.value.link)
+    } else {
+        onSelect(hoverOption.value)
+    }
+}
+
+const { hoverOption, supportKeyboardNavigation } = useSelectInput(
+    onKeyboardSelect,
+    options
 )
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
@@ -185,40 +194,6 @@ function close() {
     isOpen.value = false
     input.value?.removeEventListener('keydown', supportKeyboardNavigation)
     document.removeEventListener('click', closeOnOutsideClick)
-}
-
-function supportKeyboardNavigation(e: KeyboardEvent) {
-    // press down -> go next
-    if (
-        e.key === 'ArrowDown' &&
-        hoverOptionIndex.value < options.value.length - 1
-    ) {
-        e.preventDefault() // prevent page scrolling
-        hoverOption.value = options.value.at(hoverOptionIndex.value + 1)
-    }
-
-    // press up -> go previous
-    if (e.key === 'ArrowUp' && hoverOptionIndex.value > 0) {
-        e.preventDefault() // prevent page scrolling
-        hoverOption.value = options.value.at(hoverOptionIndex.value - 1)
-    }
-
-    // press Enter or space -> select the option
-    if (e.key === 'Enter' || e.key === ' ') {
-        if (hoverOption.value) {
-            e.preventDefault()
-            if (hoverOption.value.link) {
-                return navigateTo(hoverOption.value.link)
-            } else {
-                onSelect(hoverOption.value)
-            }
-        }
-    }
-
-    // press ESC -> close selectCustom
-    if (e.key === 'Escape') {
-        close()
-    }
 }
 </script>
 

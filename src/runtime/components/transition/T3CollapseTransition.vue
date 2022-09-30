@@ -33,8 +33,8 @@ function enter(el: HTMLElement) {
     el.style.height = `${el.scrollHeight}px`
 }
 function afterEnter(el: HTMLElement) {
-    el.style.height = ''
-    el.style.overflowY = ''
+    el.style.height = initialHeight
+    el.style.overflowY = initialOverflowY
 }
 function beforeLeave(el: HTMLElement) {
     el.style.height = `${el.scrollHeight}px`
