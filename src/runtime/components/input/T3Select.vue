@@ -18,11 +18,11 @@
                 :disabled="disabled"
             >
                 <option
-                    v-for="(optionLabel, optionValue) in options"
-                    :key="optionValue"
-                    :value="optionValue"
+                    v-for="option in options"
+                    :key="option.value"
+                    :value="option.value"
                 >
-                    {{ optionLabel }}
+                    {{ option.label }}
                 </option>
             </select>
 
@@ -34,25 +34,25 @@
                 @click="toggle"
             >
                 <div class="t3-select__trigger">
-                    {{ options[value] ?? emptyLabel }}
+                    {{ selectedOption?.label }}
                 </div>
                 <T3CollapseTransition transition-name="options-transition">
                     <div v-show="isOpen" class="t3-select__options">
                         <div
-                            v-for="(optionLabel, optionValue) in options"
-                            :key="optionValue"
+                            v-for="option in options"
+                            :key="option.value"
                             class="t3-select__option"
                             :class="{
                                 't3-select__option--selected':
-                                    value === optionValue,
+                                    value === option.value,
                                 't3-select__option--hover':
-                                    optionValue === hoverOption,
+                                    option.value === hoverOption,
                             }"
-                            @click="setValue(optionValue.toString())"
-                            @mouseover="hoverOption = optionValue.toString()"
+                            @click="setValue(option.value?.toString())"
+                            @mouseover="hoverOption = option.value?.toString()"
                             @mouseleave="hoverOption = undefined"
                         >
-                            {{ optionLabel }}
+                            {{ option.label }}
                         </div>
                     </div>
                 </T3CollapseTransition>
@@ -107,9 +107,22 @@ const nativeSelect = ref<HTMLSelectElement>()
 const isOpen = ref(false)
 const hoverOption = ref<string>()
 
-const optionKeys = computed(() => Object.keys(props.options))
+// Add empty option to options, use nbsp (160) for label if none is defined
+const options = computed(() =>
+    [{ value: '', label: props.emptyLabel ?? String.fromCharCode(160) }].concat(
+        Object.entries(props.options).map(([value, label]) => ({
+            value,
+            label,
+        }))
+    )
+)
+
+const selectedOption = computed(() =>
+    options.value.find((option) => option.value === value.value)
+)
+
 const hoverOptionIndex = computed(() =>
-    optionKeys.value.indexOf(hoverOption.value ?? '')
+    options.value.findIndex(({ value }) => hoverOption.value === value)
 )
 const canHover = computed(() => window.matchMedia('(hover: hover)').matches)
 
@@ -156,23 +169,23 @@ function supportKeyboardNavigation(e: KeyboardEvent) {
     // press down -> go next
     if (
         e.key === 'ArrowDown' &&
-        hoverOptionIndex.value < optionKeys.value.length - 1
+        hoverOptionIndex.value < options.value.length - 1
     ) {
         e.preventDefault() // prevent page scrolling
-        hoverOption.value = optionKeys.value.at(hoverOptionIndex.value + 1)
+        hoverOption.value = options.value.at(hoverOptionIndex.value + 1)?.value
     }
 
     // press up -> go previous
     if (e.key === 'ArrowUp' && hoverOptionIndex.value > 0) {
         e.preventDefault() // prevent page scrolling
-        hoverOption.value = optionKeys.value.at(hoverOptionIndex.value - 1)
+        hoverOption.value = options.value.at(hoverOptionIndex.value - 1)?.value
     }
 
     // press Enter or space -> select the option
     if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault()
 
-        if (hoverOption.value) {
+        if (hoverOption.value !== undefined) {
             setValue(hoverOption.value)
             close()
         }
