@@ -17,6 +17,9 @@ export default defineNuxtConfig({
             },
         },
     },
+    logger: {
+        level: 3,
+    },
     components: [
         {
             path: '@/components',

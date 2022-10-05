@@ -5,6 +5,7 @@ import {
     createResolver,
     defineNuxtModule,
     extendPages,
+    installModule,
 } from '@nuxt/kit'
 import { ViteConfig } from '@nuxt/schema'
 import { defu } from 'defu'
@@ -110,12 +111,6 @@ export default defineNuxtModule<ModuleOptions>({
         i18n: {
             locale: 'de',
         },
-        languages: [],
-        layout: {
-            breadcrumbs: {
-                fullWidth: false,
-            },
-        },
         images: {
             ceImage: {
                 lazy: true,
@@ -133,6 +128,12 @@ export default defineNuxtModule<ModuleOptions>({
             ceTextpic: {
                 lazy: true,
                 responsive: true,
+            },
+        },
+        languages: [],
+        layout: {
+            breadcrumbs: {
+                fullWidth: false,
             },
         },
         news: {
@@ -194,6 +195,10 @@ export default defineNuxtModule<ModuleOptions>({
         nuxt.options.css.unshift(
             resolver.resolve('runtime/assets/styles/container.scss')
         )
+
+        installModule('@remindgmbh/nuxt-logger')
+        // needed to prevent error: https://github.com/nuxt/framework/issues/2542#issuecomment-1008211886
+        nuxt.options.modules.push('@remindgmbh/nuxt-logger')
 
         addImportsDir([resolver.resolve('runtime/composables/**/use*.*')])
         addComponentsDir({

@@ -24,6 +24,7 @@ import {
     toggleScrollbarSymbol,
 } from './shared'
 
+const logger = useLogger()
 const content = ref<ComponentPublicInstance>()
 const header = ref<ComponentPublicInstance>()
 const headerHeight = ref('0px')
@@ -58,7 +59,7 @@ let unwatchScrollbarDisabled: WatchStopHandle | undefined
 
 onMounted(() => {
     if (!header.value) {
-        console.warn('T3TopbarLayoutHeader component missing')
+        logger.warn('T3TopbarLayoutHeader component missing')
     } else {
         const headerDivElement = header.value?.$el as HTMLDivElement
         const resizeObserver = new ResizeObserver(
@@ -72,7 +73,7 @@ onMounted(() => {
         resizeObserver.observe(headerDivElement)
     }
     if (!content.value) {
-        console.warn('T3TopbarLayoutContent component missing')
+        logger.warn('T3TopbarLayoutContent component missing')
     }
     unwatchScrollbarDisabled = watch(scrollbarDisabled, toggleScrollbar)
 })

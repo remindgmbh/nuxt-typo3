@@ -32,6 +32,7 @@ const formElementTypeMapping: FormElementTypeMapping = {
 export function useCeFormFormframework(
     contentElement: Api.ContentElement<Api.Content.Formframework>
 ) {
+    const logger = useLogger()
     const api = useApi()
     const { t } = useI18n()
     const { parseDateString, parseNumber, schemaToValidateFunction } =
@@ -266,7 +267,7 @@ export function useCeFormFormframework(
             >(contentElement.content.link.href, { body })
 
             if (typeof result.content.form === 'string') {
-                console.error(result.content.form)
+                logger.error(result.content.form)
             } else if (
                 result.content.form.api.status === 'success' &&
                 result.content.form.api.actionAfterSuccess

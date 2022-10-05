@@ -1,3 +1,4 @@
+import type { useLogger as _useLogger } from '@remindgmbh/nuxt-logger/dist/runtime/useLogger'
 interface Cookiebot {
     consent: {
         marketing: boolean
@@ -31,6 +32,8 @@ declare global {
     interface Window {
         Cookiebot?: Cookiebot
     }
+
+    const useLogger: typeof _useLogger
 }
 
 export {}

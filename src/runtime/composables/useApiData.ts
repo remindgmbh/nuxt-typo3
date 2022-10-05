@@ -5,6 +5,7 @@ import { Api, Model, useApi, useApiPath } from '#nuxt-typo3'
 export function useApiData() {
     const api = useApi()
     const apiPath = useApiPath()
+    const logger = useLogger()
 
     // Remove loading once NuxtLoadingIndicator supports middleware
     // https://github.com/nuxt/framework/pull/5121
@@ -65,7 +66,7 @@ export function useApiData() {
                 return result
             } catch (error) {
                 // log error and do nothing so undefined is returned
-                console.error(error)
+                logger.error(error)
             } finally {
                 initialDataLoading.value = false
             }
@@ -86,7 +87,7 @@ export function useApiData() {
                 return result
             } catch (error) {
                 // log error and do nothing so undefined is returned
-                console.error(error)
+                logger.error(error)
             } finally {
                 footerContentLoading.value = true
             }
@@ -109,7 +110,7 @@ export function useApiData() {
                     pageError.value = { ...error }
                 } else {
                     // log error and do nothing so undefined is returned
-                    console.error(error)
+                    logger.error(error)
                 }
             } finally {
                 pageDataLoading.value = true

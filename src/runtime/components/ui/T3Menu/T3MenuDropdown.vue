@@ -16,6 +16,8 @@
 import { computed, inject, ref, watch } from 'vue'
 import { activeItemIdSymbol, setActiveItemIdSymbol } from './shared'
 
+const logger = useLogger()
+
 const props = withDefaults(
     defineProps<{
         items: any[]
@@ -33,14 +35,14 @@ const props = withDefaults(
 const itemWithoutId = props.items.find((item) => item[props.idField] == null)
 
 if (itemWithoutId) {
-    console.warn(
+    logger.warn(
         `At least one menu item does not have a property called '${props.idField}'`
     )
 } else {
     const uniqueIds = new Set(props.items.map((item) => item[props.idField]))
 
     if (uniqueIds.size < props.items.length) {
-        console.warn(
+        logger.warn(
             `Multiple items with same value for field '${props.idField}' found`
         )
     }
