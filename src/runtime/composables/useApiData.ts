@@ -1,5 +1,6 @@
 import { useState } from '#app'
 import { computed } from 'vue'
+import { useLogger } from '#nuxt-logger'
 import { Api, Model, useApi, useApiPath } from '#nuxt-typo3'
 
 export function useApiData() {

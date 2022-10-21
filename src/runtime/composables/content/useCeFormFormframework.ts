@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import { navigateTo } from '#app'
 import { useI18n } from 'vue-i18n'
 import { GenericValidateFunction, RuleExpression } from 'vee-validate'
+import { useLogger } from '#nuxt-logger'
 import { Api, Model, useApi, useYupUtil } from '#nuxt-typo3'
 
 const REGEX_ALPHANUMERIC = /^(\w*)$/

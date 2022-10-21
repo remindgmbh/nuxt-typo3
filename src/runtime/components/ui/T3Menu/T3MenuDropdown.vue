@@ -14,6 +14,7 @@
 
 <script setup lang="ts">
 import { computed, inject, ref, watch } from 'vue'
+import { useLogger } from '#nuxt-logger'
 import { activeItemIdSymbol, setActiveItemIdSymbol } from './shared'
 
 const logger = useLogger()

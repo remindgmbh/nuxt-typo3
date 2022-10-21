@@ -17,6 +17,7 @@ import {
     WatchStopHandle,
 } from 'vue'
 import { debounce } from 'perfect-debounce'
+import { useLogger } from '#nuxt-logger'
 import {
     headerHeightSymbol,
     registerContentSymbol,

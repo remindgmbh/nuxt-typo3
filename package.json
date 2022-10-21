@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@nuxt/kit": "^3.0.0-rc.11",
-    "@remindgmbh/nuxt-logger": "^1.0.0",
+    "@remindgmbh/nuxt-logger": "^1.0.1",
     "defu": "^6.1.0",
     "perfect-debounce": "^0.1.3",
     "sass": "^1.54.9",
