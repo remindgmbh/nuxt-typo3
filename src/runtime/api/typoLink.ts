@@ -3,6 +3,6 @@ export interface TypoLink {
     target?: string
     class?: string
     title?: string
-    linkText: string
+    linkText?: string
     // additionalAttributes: string[]
 }

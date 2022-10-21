@@ -1,11 +1,13 @@
+import { TypoLink } from '.'
+
 export interface Asset {
     publicUrl: string
     properties: {
         title?: string
         alternative?: string
         description?: string
-        link?: any
-        linkData?: any
+        link?: string
+        linkData?: TypoLink
         mimeType: string
         type: string
         filename: string
