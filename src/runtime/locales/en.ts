@@ -32,13 +32,6 @@ export default {
     imageGallery: {
         close: 'Close',
     },
-    solr: {
-        directLinks: 'Direct links',
-        loading: 'Loading',
-        noResults: 'No results found.',
-        placeholder: 'Search term',
-        submit: 'Search',
-    },
     unexpectedError: 'unexpected error',
     validation: {
         alphanumeric: '{label} may only contain alpha-numeric characters.',

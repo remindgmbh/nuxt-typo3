@@ -27,13 +27,6 @@ export default {
     imageGallery: {
         close: 'Schließen',
     },
-    solr: {
-        directLinks: 'Direkte Links',
-        loading: 'Lädt',
-        noResults: 'Keine Ergebnisse gefunden.',
-        placeholder: 'Suchbegriff',
-        submit: 'Suchen',
-    },
     unexpectedError: 'unerwarteter Fehler',
     validation: {
         alphanumeric: '{label} darf nur alphabetische Zeichen enthalten.',
