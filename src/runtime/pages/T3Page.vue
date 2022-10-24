@@ -18,10 +18,10 @@ import { computed, ref, watch } from 'vue'
 import { useRoute } from '#app'
 import { useI18n } from 'vue-i18n'
 import {
-    useApiData,
-    useApiPath,
-    useDynamicComponent,
-    usePageHead,
+    useT3ApiData,
+    useT3ApiPath,
+    useT3DynamicComponent,
+    useT3PageHead,
 } from '#nuxt-typo3'
 
 const { t } = useI18n()
@@ -30,8 +30,8 @@ const { t } = useI18n()
 // using the computed currentPagePath the old page content is not available anymore
 // so currentPagePath is only set during created hook and when only the route query
 // params (e.g. for solr) change
-const currentPagePath = ref<string>(useApiPath().currentPagePath.value)
-const { pageData, pageError } = useApiData()
+const currentPagePath = ref<string>(useT3ApiPath().currentPagePath.value)
+const { pageData, pageError } = useT3ApiData()
 const route = useRoute()
 
 const currentPageData = computed(
@@ -39,10 +39,10 @@ const currentPageData = computed(
 )
 
 if (currentPageData.value) {
-    usePageHead(currentPageData.value)
+    useT3PageHead(currentPageData.value)
 }
 
-const component = useDynamicComponent(
+const component = useT3DynamicComponent(
     'T3Bl',
     currentPageData.value?.appearance.backendLayout
 )

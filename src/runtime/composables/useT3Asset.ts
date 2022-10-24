@@ -1,11 +1,11 @@
 import { computed } from 'vue'
-import { Api, Model } from '#nuxt-typo3'
+import { T3Api, T3Model } from '#nuxt-typo3'
 
-export function useAsset(
-    asset: Api.Asset,
+export function useT3Asset(
+    asset: T3Api.Asset,
     assetAttrs: { [key: string]: any } = {}
 ) {
-    const imageAttrs = computed<Model.Image>(() => ({
+    const imageAttrs = computed<T3Model.Image>(() => ({
         src: asset.publicUrl,
         uid: asset.properties.fileReferenceUid,
         alt: asset.properties.alternative,

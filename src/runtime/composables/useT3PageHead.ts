@@ -1,8 +1,8 @@
 import { MetaObject } from '@nuxt/schema'
 import { useHead } from '#head'
-import { Api, useConfig } from '#nuxt-typo3'
+import { T3Api, useT3Config } from '#nuxt-typo3'
 
-export function usePageHead(pageData: Api.PageData) {
+export function useT3PageHead(pageData: T3Api.PageData) {
     const title = pageData.breadcrumbs.find((bc) => bc.current)?.title
     const meta = pageData.meta
 
@@ -77,7 +77,7 @@ export function usePageHead(pageData: Api.PageData) {
     }
 
     if (meta.canonical && meta.canonical.href) {
-        const config = useConfig()
+        const config = useT3Config()
         const baseUrl = config.baseUrl
         const url = `${baseUrl}${meta.canonical.href}`
 

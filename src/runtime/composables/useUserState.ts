@@ -1,12 +1,12 @@
 import { navigateTo } from '#app'
 import { computed } from 'vue'
-import { Api, useApi, useApiData } from '#nuxt-typo3'
+import { T3Api, useT3Api, useT3ApiData } from '#nuxt-typo3'
 
-export function useUserState() {
-    const api = useApi()
+export function useT3UserState() {
+    const api = useT3Api()
 
     const { currentInitialData, clearData, setCurrentInitialData } =
-        useApiData()
+        useT3ApiData()
 
     const logoutLink = computed(() => currentInitialData.value?.logoutLink)
 
@@ -26,14 +26,14 @@ export function useUserState() {
             body.set(key, data[key])
         })
 
-        const result = await api.post<Api.PageData>(url, {
+        const result = await api.post<T3Api.PageData>(url, {
             body,
         })
 
         await changeUserState(result)
     }
 
-    async function changeUserState(newPageData: Api.PageData) {
+    async function changeUserState(newPageData: T3Api.PageData) {
         // Clear cached data and get new initialData in case logged out user has reduced access
         const initialData = await api.getInitialData({
             fetchOptions: { cache: 'no-cache' },

@@ -1,11 +1,11 @@
 import { computed } from 'vue'
-import { Api, useConfig, useBreakpoints } from '#nuxt-typo3'
+import { T3Api, useT3Config, useT3Breakpoints } from '#nuxt-typo3'
 
-export function useCeImage(
-    contentElement: Api.ContentElement<Api.Content.Image>
+export function useT3CeImage(
+    contentElement: T3Api.ContentElement<T3Api.Content.Image>
 ) {
-    const { breakpointsAsc } = useBreakpoints()
-    const config = useConfig().images.ceImage
+    const { breakpointsAsc } = useT3Breakpoints()
+    const config = useT3Config().images.ceImage
 
     const image = computed(() => contentElement.content.images.at(0))
 

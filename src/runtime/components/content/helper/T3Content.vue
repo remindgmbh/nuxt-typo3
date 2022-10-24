@@ -29,17 +29,17 @@
 </template>
 
 <script setup lang="ts">
-import { Api, useContentUtil, useDynamicComponent } from '#nuxt-typo3'
+import { T3Api, useT3ContentUtil, useT3DynamicComponent } from '#nuxt-typo3'
 
 const props = defineProps<{
-    contentElement: Api.ContentElement
+    contentElement: T3Api.ContentElement
 }>()
 
-const { cookieAccepted, ignoreCookies, isFullWidth } = useContentUtil(
+const { cookieAccepted, ignoreCookies, isFullWidth } = useT3ContentUtil(
     props.contentElement
 )
 
-const component = useDynamicComponent('T3Ce', props.contentElement.type)
+const component = useT3DynamicComponent('T3Ce', props.contentElement.type)
 </script>
 
 <style lang="scss">

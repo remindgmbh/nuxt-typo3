@@ -1,9 +1,9 @@
 import { addRouteMiddleware, defineNuxtPlugin } from '#app'
 import { i18n } from './i18n'
-import { Api, useApiData } from '#nuxt-typo3'
+import { T3Api, useT3ApiData } from '#nuxt-typo3'
 
 export default defineNuxtPlugin(() => {
-    const apiData = useApiData()
+    const apiData = useT3ApiData()
     const { locale } = i18n.global
 
     addRouteMiddleware(
@@ -22,7 +22,7 @@ export default defineNuxtPlugin(() => {
         { global: true }
     )
 
-    function setLocale(languages: Api.Language[] = []) {
+    function setLocale(languages: T3Api.Language[] = []) {
         const language = languages.find((language) => language.active)
 
         if (language?.twoLetterIsoCode) {

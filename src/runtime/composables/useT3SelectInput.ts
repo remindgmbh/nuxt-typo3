@@ -1,6 +1,6 @@
 import { computed, Ref, ref, toRaw } from 'vue'
 
-export function useSelectInput<T>(
+export function useT3SelectInput<T>(
     select: (hoverOption: T) => void,
     options: Ref<T[]>
 ) {

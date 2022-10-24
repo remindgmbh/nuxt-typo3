@@ -31,17 +31,17 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { Model, useUtil } from '#nuxt-typo3'
+import { T3Model, useT3Util } from '#nuxt-typo3'
 
 const props = defineProps<{
     activeIndex: number
     header?: string
     subheader?: string
-    images: Model.Image[]
+    images: T3Model.Image[]
 }>()
 
 const { t } = useI18n()
-const { padNumber } = useUtil()
+const { padNumber } = useT3Util()
 
 const emit = defineEmits<{
     (e: 'close'): void

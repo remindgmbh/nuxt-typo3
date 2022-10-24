@@ -20,12 +20,12 @@
 </template>
 
 <script setup lang="ts">
-import { Api, useCeFormFormframework } from '#nuxt-typo3'
+import { T3Api, useT3CeFormFormframework } from '#nuxt-typo3'
 
 const props = defineProps<{
-    contentElement: Api.ContentElement<Api.Content.Formframework>
+    contentElement: T3Api.ContentElement<T3Api.Content.Formframework>
 }>()
 
 const { formElements, loading, loadingLabel, submitLabel, submit } =
-    useCeFormFormframework(props.contentElement)
+    useT3CeFormFormframework(props.contentElement)
 </script>

@@ -1,8 +1,8 @@
 import { computed } from 'vue'
-import { useApiData } from '#nuxt-typo3'
+import { useT3ApiData } from '#nuxt-typo3'
 
-export function useNavigation() {
-    const { currentInitialData } = useApiData()
+export function useT3Navigation() {
+    const { currentInitialData } = useT3ApiData()
 
     const rootPageNavigation = computed(() =>
         currentInitialData.value?.navigation.at(0)

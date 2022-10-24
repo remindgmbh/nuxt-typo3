@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { computed } from '@vue/reactivity'
-import { useLinkReplacer, useTableEnhancer } from '#nuxt-typo3'
+import { useT3LinkReplacer, useT3TableEnhancer } from '#nuxt-typo3'
 
 const props = defineProps<{
     content: string
@@ -16,8 +16,8 @@ const el = ref<HTMLDivElement>()
 
 const content = computed(() => props.content)
 
-useTableEnhancer(el, content)
-useLinkReplacer(el, content)
+useT3TableEnhancer(el, content)
+useT3LinkReplacer(el, content)
 </script>
 
 <style lang="scss">

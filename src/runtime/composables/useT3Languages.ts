@@ -1,8 +1,8 @@
 import { computed } from 'vue'
-import { useApiData } from '#nuxt-typo3'
+import { useT3ApiData } from '#nuxt-typo3'
 
-export function useLanguages() {
-    const { currentInitialData, currentPageData } = useApiData()
+export function useT3Languages() {
+    const { currentInitialData, currentPageData } = useT3ApiData()
 
     const initialDataLanguages = computed(
         () => currentInitialData.value?.i18n ?? []

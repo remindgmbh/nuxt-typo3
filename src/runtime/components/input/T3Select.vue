@@ -69,7 +69,7 @@
 <script setup lang="ts">
 import { RuleExpression, useField } from 'vee-validate'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import { useSelectInput } from '#nuxt-typo3'
+import { useT3SelectInput } from '#nuxt-typo3'
 
 const props = defineProps<{
     name: string
@@ -122,7 +122,7 @@ function select(hoverOption: { value: string; label: string }) {
     close()
 }
 
-const { hoverOption, supportKeyboardNavigation } = useSelectInput(
+const { hoverOption, supportKeyboardNavigation } = useT3SelectInput(
     select,
     options
 )

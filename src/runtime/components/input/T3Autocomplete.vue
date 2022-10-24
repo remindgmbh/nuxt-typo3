@@ -86,12 +86,12 @@
 import { RuleExpression, useField } from 'vee-validate'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { navigateTo } from '#app'
-import { Model, useSelectInput } from '#nuxt-typo3'
+import { T3Model, useT3SelectInput } from '#nuxt-typo3'
 
 const props = defineProps<{
     name: string
     label?: string
-    optionGroups: Model.AutocompleteOptionGroup[]
+    optionGroups: T3Model.AutocompleteOptionGroup[]
     defaultValue?: string
     validation?: RuleExpression<any>
     emptyLabel?: string
@@ -117,14 +117,14 @@ const emit = defineEmits<{
 const wrapper = ref<HTMLDivElement>()
 const input = ref<HTMLInputElement>()
 const isOpen = ref(false)
-const optionGroups = ref<Model.AutocompleteOptionGroup[]>([])
+const optionGroups = ref<T3Model.AutocompleteOptionGroup[]>([])
 
 const options = computed(() =>
     props.optionGroups.flatMap((optionGroup) => optionGroup.options)
 )
 const name = computed(() => props.name)
 
-function onKeyboardSelect(hoverOption: Model.AutocompleteOption) {
+function onKeyboardSelect(hoverOption: T3Model.AutocompleteOption) {
     if (hoverOption.value.link) {
         return navigateTo(hoverOption.value.link)
     } else {
@@ -132,7 +132,7 @@ function onKeyboardSelect(hoverOption: Model.AutocompleteOption) {
     }
 }
 
-const { hoverOption, supportKeyboardNavigation } = useSelectInput(
+const { hoverOption, supportKeyboardNavigation } = useT3SelectInput(
     onKeyboardSelect,
     options
 )
@@ -146,7 +146,7 @@ const { errorMessage, value, setValue } = useField<string>(
     }
 )
 
-function onOptionsChanged(value: Model.AutocompleteOptionGroup[]) {
+function onOptionsChanged(value: T3Model.AutocompleteOptionGroup[]) {
     if (value.length) {
         optionGroups.value = value
         open()
@@ -171,7 +171,7 @@ function closeOnOutsideClick(e: MouseEvent) {
     }
 }
 
-function onSelect(option: Model.AutocompleteOption) {
+function onSelect(option: T3Model.AutocompleteOption) {
     setValue(option.key)
     close()
 }

@@ -2,7 +2,7 @@ import { defineNuxtPlugin } from '#app'
 import { createI18n } from 'vue-i18n'
 import de from '#nuxt-typo3/locales/de'
 import en from '#nuxt-typo3/locales/en'
-import { useConfig } from '#nuxt-typo3'
+import { useT3Config } from '#nuxt-typo3'
 
 export interface MessageContext {
     named: (value: string) => string
@@ -20,7 +20,7 @@ export const i18n = createI18n({
 })
 
 export default defineNuxtPlugin((nuxt) => {
-    const config = useConfig()
+    const config = useT3Config()
     const { vueApp } = nuxt
     const { mergeLocaleMessage } = i18n.global
 

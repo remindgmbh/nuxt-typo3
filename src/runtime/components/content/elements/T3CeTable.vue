@@ -19,13 +19,13 @@
 </template>
 
 <script setup lang="ts">
-import { Api, useCeTable } from '#nuxt-typo3'
+import { T3Api, useT3CeTable } from '#nuxt-typo3'
 
 const props = defineProps<{
-    contentElement: Api.ContentElement<Api.Content.Table>
+    contentElement: T3Api.ContentElement<T3Api.Content.Table>
 }>()
 
-const { headerLeft, headerTop, tbody, tfoot, thead } = useCeTable(
+const { headerLeft, headerTop, tbody, tfoot, thead } = useT3CeTable(
     props.contentElement.content
 )
 </script>

@@ -81,10 +81,10 @@
 </template>
 
 <script setup lang="ts">
-import { Model } from '#nuxt-typo3'
+import { T3Model } from '#nuxt-typo3'
 
 defineProps<{
-    formElement: Model.FormElement
+    formElement: T3Model.FormElement
     loading?: boolean
 }>()
 </script>

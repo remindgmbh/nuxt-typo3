@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { Model } from '#nuxt-typo3'
+import { T3Model } from '#nuxt-typo3'
 
-defineProps<{ error: Model.PageError }>()
+defineProps<{ error: T3Model.PageError }>()
 </script>

@@ -1,7 +1,7 @@
-import { Api } from '#nuxt-typo3'
+import { T3Api } from '#nuxt-typo3'
 
 export class PageError {
-    data?: Api.PageData
+    data?: T3Api.PageData
     message?: string
     url?: string
     status?: number

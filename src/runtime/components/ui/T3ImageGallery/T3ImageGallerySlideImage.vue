@@ -44,10 +44,10 @@
 <script setup lang="ts">
 import { Navigation, Swiper as SwiperClass, Thumbs } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Model } from '#nuxt-typo3'
+import { T3Model } from '#nuxt-typo3'
 
 defineProps<{
-    images: Model.Image[]
+    images: T3Model.Image[]
     activeIndex: number
     thumbsSwiper?: SwiperClass
 }>()

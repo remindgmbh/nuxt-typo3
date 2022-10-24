@@ -10,7 +10,7 @@ const ROOT_MARGINS = {
     left: '0px -100% 0px 100%',
 }
 
-export function useUtil() {
+export function useT3Util() {
     function capitalize(value: string) {
         return value.charAt(0).toUpperCase() + value.slice(1)
     }

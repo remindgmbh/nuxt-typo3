@@ -19,16 +19,16 @@
 </template>
 
 <script setup lang="ts">
-import { Api } from '#nuxt-typo3'
+import { T3Api } from '#nuxt-typo3'
 import BaseT3CeTextmedia from '#nuxt-typo3/components/content/elements/T3CeTextmedia.vue'
 
 const props = defineProps<{
-    contentElement: Api.ContentElement<Api.Content.Textmedia>
+    contentElement: T3Api.ContentElement<T3Api.Content.Textmedia>
 }>()
 
-const { cookieAccepted } = useContentUtil(props.contentElement)
+const { cookieAccepted } = useT3ContentUtil(props.contentElement)
 
-const { imageAttrs } = useCeTextmedia(props.contentElement)
+const { imageAttrs } = useT3CeTextmedia(props.contentElement)
 </script>
 
 <style lang="scss">

@@ -29,10 +29,10 @@
 </template>
 
 <script setup lang="ts">
-import { Api, useCeFeloginLogin } from '#nuxt-typo3'
+import { T3Api, useT3CeFeloginLogin } from '#nuxt-typo3'
 
 const props = defineProps<{
-    contentElement: Api.ContentElement<Api.Content.Felogin>
+    contentElement: T3Api.ContentElement<T3Api.Content.Felogin>
 }>()
 
 const {
@@ -44,5 +44,5 @@ const {
     submitLabel,
     showMessage,
     submit,
-} = useCeFeloginLogin(props.contentElement)
+} = useT3CeFeloginLogin(props.contentElement)
 </script>

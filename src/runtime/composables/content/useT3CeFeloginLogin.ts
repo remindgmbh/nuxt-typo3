@@ -2,10 +2,10 @@ import { string, Schema } from 'yup'
 import { GenericValidateFunction } from 'vee-validate'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { Api, Model, useUserState, useYupUtil } from '#nuxt-typo3'
+import { T3Api, T3Model, useT3UserState, useT3YupUtil } from '#nuxt-typo3'
 
 type FormElementTypeMapping = {
-    [Property in Api.Content.Login.FormElementType]: Model.FormElementType
+    [Property in T3Api.Content.Login.FormElementType]: T3Model.FormElementType
 }
 
 const formElementTypeMapping: FormElementTypeMapping = {
@@ -14,12 +14,12 @@ const formElementTypeMapping: FormElementTypeMapping = {
     submit: 'submit',
 }
 
-export function useCeFeloginLogin(
-    contentElement: Api.ContentElement<Api.Content.Felogin>
+export function useT3CeFeloginLogin(
+    contentElement: T3Api.ContentElement<T3Api.Content.Felogin>
 ) {
     const { t } = useI18n()
-    const { login } = useUserState()
-    const { schemaToValidateFunction } = useYupUtil()
+    const { login } = useT3UserState()
+    const { schemaToValidateFunction } = useT3YupUtil()
 
     const loading = ref(false)
 
@@ -64,7 +64,7 @@ export function useCeFeloginLogin(
             : []
     )
 
-    function getValidation(formElement: Api.Content.Login.FormElement) {
+    function getValidation(formElement: T3Api.Content.Login.FormElement) {
         const result: GenericValidateFunction[] = []
 
         if (formElement.validate) {
@@ -95,9 +95,9 @@ export function useCeFeloginLogin(
     }
 
     function convert(
-        formElement: Api.Content.Login.FormElement
-    ): Model.FormElement {
-        return new Model.FormElement({
+        formElement: T3Api.Content.Login.FormElement
+    ): T3Model.FormElement {
+        return new T3Model.FormElement({
             type: formElementTypeMapping[formElement.type] ?? 'hidden',
             label: formElement.label,
             name: formElement.name,

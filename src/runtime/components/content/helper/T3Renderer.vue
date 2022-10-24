@@ -14,11 +14,11 @@
 </template>
 
 <script setup lang="ts">
-import { Api } from '#nuxt-typo3'
+import { T3Api } from '#nuxt-typo3'
 
 withDefaults(
     defineProps<{
-        contentElements?: Api.ContentElement[]
+        contentElements?: T3Api.ContentElement[]
     }>(),
     { contentElements: () => [] }
 )

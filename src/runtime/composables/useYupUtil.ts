@@ -1,6 +1,6 @@
 import { Schema, ValidationError } from 'yup'
 
-export function useYupUtil() {
+export function useT3YupUtil() {
     function parseDateString(value: any, _originalValue: any) {
         if (value instanceof Date && !isNaN(value.getTime())) {
             return value

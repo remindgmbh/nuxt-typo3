@@ -24,10 +24,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRuntimeConfig } from '#app'
-import { Api } from '#nuxt-typo3'
+import { T3Api } from '#nuxt-typo3'
 const runtimeConfig = useRuntimeConfig()
 
-const props = defineProps<{ breadcrumbs: Api.Breadcrumb[] }>()
+const props = defineProps<{ breadcrumbs: T3Api.Breadcrumb[] }>()
 
 const container = computed(
     () => !runtimeConfig.public.typo3.layout.breadcrumbs.fullWidth

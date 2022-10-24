@@ -21,11 +21,11 @@
 </template>
 
 <script setup lang="ts">
-import { Api, useCeTextmedia } from '#nuxt-typo3'
+import { T3Api, useT3CeTextmedia } from '#nuxt-typo3'
 
 const props = defineProps<{
-    contentElement: Api.ContentElement<Api.Content.Textmedia>
+    contentElement: T3Api.ContentElement<T3Api.Content.Textmedia>
 }>()
 
-const { imageAttrs } = useCeTextmedia(props.contentElement)
+const { imageAttrs } = useT3CeTextmedia(props.contentElement)
 </script>

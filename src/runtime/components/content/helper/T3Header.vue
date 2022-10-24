@@ -25,13 +25,13 @@
 </template>
 
 <script setup lang="ts">
-import { Api, useHeader } from '#nuxt-typo3'
+import { T3Api, useT3Header } from '#nuxt-typo3'
 
 const props = defineProps<{
-    contentElement: Api.ContentElement<Api.Content.Base>
+    contentElement: T3Api.ContentElement<T3Api.Content.Base>
 }>()
 
-const { visible, tag } = useHeader(props.contentElement.content)
+const { visible, tag } = useT3Header(props.contentElement.content)
 </script>
 
 <style lang="scss">

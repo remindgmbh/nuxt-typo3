@@ -1,11 +1,11 @@
 import { onMounted, Ref, watch } from 'vue'
-import { useUtil } from '#nuxt-typo3'
+import { useT3Util } from '#nuxt-typo3'
 
-export function useTableEnhancer(
+export function useT3TableEnhancer(
     el: Ref<HTMLElement | undefined>,
     content: Ref<string>
 ) {
-    const { detectScrollEnd } = useUtil()
+    const { detectScrollEnd } = useT3Util()
 
     onMounted(() => {
         addOverlays()

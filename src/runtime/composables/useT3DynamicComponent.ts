@@ -1,7 +1,10 @@
 import { resolveComponent } from 'vue'
 import { pascalCase } from 'scule'
 
-export function useDynamicComponent(prefix: string, name: string = 'Default') {
+export function useT3DynamicComponent(
+    prefix: string,
+    name: string = 'Default'
+) {
     const componentName = prefix + pascalCase(name)
 
     const component = resolveComponent(componentName)

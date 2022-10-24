@@ -1,5 +1,5 @@
 import { defineNuxtPlugin, useCookie, useHead } from '#app'
-import { useConfig, useCookiebot } from '#nuxt-typo3'
+import { useT3Config, useT3Cookiebot } from '#nuxt-typo3'
 
 interface CookieConsent {
     stamp: string
@@ -13,13 +13,13 @@ interface CookieConsent {
 }
 
 export default defineNuxtPlugin((nuxt) => {
-    const config = useConfig()
+    const config = useT3Config()
 
     if (!config.cookiebotUid) {
         return
     }
 
-    const { cookieCategories } = useCookiebot()
+    const { cookieCategories } = useT3Cookiebot()
 
     setCookieCategories()
 

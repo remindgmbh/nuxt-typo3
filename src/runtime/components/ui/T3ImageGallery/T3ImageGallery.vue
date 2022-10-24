@@ -63,15 +63,15 @@
 import { FreeMode, Navigation, Scrollbar } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { ref } from 'vue'
-import { Model } from '#nuxt-typo3'
+import { T3Model } from '#nuxt-typo3'
 
 withDefaults(
     defineProps<{
         header?: string
         subheader?: string
-        images: Model.Image[]
-        navigationImages?: Model.Image[]
-        previewImages: Model.Image[]
+        images: T3Model.Image[]
+        navigationImages?: T3Model.Image[]
+        previewImages: T3Model.Image[]
         type?: 'scroll' | 'slide'
     }>(),
     {

@@ -34,10 +34,10 @@
 </template>
 
 <script setup lang="ts">
-import { Model } from '#nuxt-typo3'
+import { T3Model } from '#nuxt-typo3'
 
 defineProps<{
-    pagination: Model.Pagination
+    pagination: T3Model.Pagination
 }>()
 </script>
 

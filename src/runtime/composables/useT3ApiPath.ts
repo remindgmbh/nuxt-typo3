@@ -1,9 +1,9 @@
 import { computed } from 'vue'
 import { useRoute } from '#app'
-import { useConfig } from '#nuxt-typo3'
+import { useT3Config } from '#nuxt-typo3'
 
-export function useApiPath() {
-    const config = useConfig()
+export function useT3ApiPath() {
+    const config = useT3Config()
 
     function getInitialDataPath(path: string) {
         return (

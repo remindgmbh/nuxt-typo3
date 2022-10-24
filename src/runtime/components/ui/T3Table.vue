@@ -47,9 +47,9 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { useUtil } from '#nuxt-typo3'
+import { useT3Util } from '#nuxt-typo3'
 
-const { detectScrollEnd } = useUtil()
+const { detectScrollEnd } = useT3Util()
 
 defineProps<{
     caption?: string

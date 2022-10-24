@@ -19,12 +19,12 @@
 </template>
 
 <script setup lang="ts">
-import { Api, useCeImageGallery } from '#nuxt-typo3'
+import { T3Api, useT3CeImageGallery } from '#nuxt-typo3'
 
 const props = defineProps<{
-    contentElement: Api.ContentElement<Api.Content.ImageGallery>
+    contentElement: T3Api.ContentElement<T3Api.Content.ImageGallery>
 }>()
 
 const { header, images, navigationImages, previewImages, type, subheader } =
-    useCeImageGallery(props.contentElement.content)
+    useT3CeImageGallery(props.contentElement.content)
 </script>

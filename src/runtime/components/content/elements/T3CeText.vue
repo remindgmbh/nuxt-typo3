@@ -11,9 +11,9 @@
 </template>
 
 <script setup lang="ts">
-import { Api } from '#nuxt-typo3'
+import { T3Api } from '#nuxt-typo3'
 
 defineProps<{
-    contentElement: Api.ContentElement<Api.Content.Text>
+    contentElement: T3Api.ContentElement<T3Api.Content.Text>
 }>()
 </script>

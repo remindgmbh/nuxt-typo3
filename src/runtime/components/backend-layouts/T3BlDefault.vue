@@ -14,11 +14,11 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Api } from '#nuxt-typo3'
+import { T3Api } from '#nuxt-typo3'
 
 const props = defineProps<{
-    content: { [colPos: string]: Api.ContentElement[] }
-    breadcrumbs: Api.Breadcrumb[]
+    content: { [colPos: string]: T3Api.ContentElement[] }
+    breadcrumbs: T3Api.Breadcrumb[]
 }>()
 
 const breadcrumbsVisible = computed(() => props.breadcrumbs.length > 1)

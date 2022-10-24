@@ -1,9 +1,9 @@
 import { useState } from '#app'
-import { Api } from '#nuxt-typo3'
+import { T3Api } from '#nuxt-typo3'
 
-export function useCookiebot() {
+export function useT3Cookiebot() {
     const cookieCategories = useState<
-        Omit<{ [key in Api.Cookie['category']]: boolean }, 'none'>
+        Omit<{ [key in T3Api.Cookie['category']]: boolean }, 'none'>
     >(() => ({
         necessary: false,
         marketing: false,
@@ -11,7 +11,7 @@ export function useCookiebot() {
         statistics: false,
     }))
 
-    function isAccepted(category: Api.Cookie['category']) {
+    function isAccepted(category: T3Api.Cookie['category']) {
         return category === 'none' || cookieCategories.value[category]
     }
 
@@ -19,7 +19,7 @@ export function useCookiebot() {
         window.Cookiebot?.renew()
     }
 
-    function acceptCookies(category: Omit<Api.Cookie['category'], 'none'>) {
+    function acceptCookies(category: Omit<T3Api.Cookie['category'], 'none'>) {
         window.Cookiebot?.submitCustomConsent(
             category === 'preferences' || window.Cookiebot.consent.preferences,
             category === 'statistics' || window.Cookiebot.consent.statistics,

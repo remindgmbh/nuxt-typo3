@@ -85,12 +85,12 @@
 </template>
 
 <script setup lang="ts">
-const { showBanner } = useCookiebot()
-const { currentFooterContent } = useApiData()
-const { availableLanguages } = useLanguages()
-const { navItemsWithChildren, rootPageNavigation } = useNavigation()
-const { isLoggedIn, logout } = useUserState()
-const { detectScrollEnd } = useUtil()
+const { showBanner } = useT3Cookiebot()
+const { currentFooterContent } = useT3ApiData()
+const { availableLanguages } = useT3Languages()
+const { navItemsWithChildren, rootPageNavigation } = useT3Navigation()
+const { isLoggedIn, logout } = useT3UserState()
+const { detectScrollEnd } = useT3Util()
 
 const sidebarVisible = ref(false)
 const scrollbarDisabled = ref(false)

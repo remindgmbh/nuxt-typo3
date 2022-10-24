@@ -14,13 +14,13 @@
 </template>
 
 <script setup lang="ts">
-import { Api, useCeTextpic } from '#nuxt-typo3'
+import { T3Api, useT3CeTextpic } from '#nuxt-typo3'
 
 const props = defineProps<{
-    contentElement: Api.ContentElement<Api.Content.Textpic>
+    contentElement: T3Api.ContentElement<T3Api.Content.Textpic>
 }>()
 
-const { imageAttrs, textmediaContentElement: contentElement } = useCeTextpic(
+const { imageAttrs, textmediaContentElement: contentElement } = useT3CeTextpic(
     props.contentElement
 )
 </script>

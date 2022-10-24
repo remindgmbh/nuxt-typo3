@@ -57,18 +57,18 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { ComponentPublicInstance, onMounted, ref } from 'vue'
-import { Model, useUtil } from '#nuxt-typo3'
+import { T3Model, useT3Util } from '#nuxt-typo3'
 
 const props = defineProps<{
     header?: string
     subheader?: string
-    images: Model.Image[]
+    images: T3Model.Image[]
     scrollToIndex: number
 }>()
 
 const { t } = useI18n()
 
-const { padNumber } = useUtil()
+const { padNumber } = useT3Util()
 
 const emit = defineEmits<{
     (e: 'close'): void

@@ -4,12 +4,12 @@ import { navigateTo } from '#app'
 import { useI18n } from 'vue-i18n'
 import { GenericValidateFunction, RuleExpression } from 'vee-validate'
 import { useLogger } from '#nuxt-logger'
-import { Api, Model, useApi, useYupUtil } from '#nuxt-typo3'
+import { T3Api, T3Model, useT3Api, useT3YupUtil } from '#nuxt-typo3'
 
 const REGEX_ALPHANUMERIC = /^(\w*)$/
 
 type FormElementTypeMapping = {
-    [Property in Api.Content.Form.FormElementType]: Model.FormElementType
+    [Property in T3Api.Content.Form.FormElementType]: T3Model.FormElementType
 }
 
 const formElementTypeMapping: FormElementTypeMapping = {
@@ -30,14 +30,14 @@ const formElementTypeMapping: FormElementTypeMapping = {
     Url: 'url',
 }
 
-export function useCeFormFormframework(
-    contentElement: Api.ContentElement<Api.Content.Formframework>
+export function useT3CeFormFormframework(
+    contentElement: T3Api.ContentElement<T3Api.Content.Formframework>
 ) {
     const logger = useLogger()
-    const api = useApi()
+    const api = useT3Api()
     const { t } = useI18n()
     const { parseDateString, parseNumber, schemaToValidateFunction } =
-        useYupUtil()
+        useT3YupUtil()
 
     const i18n = computed(() => contentElement.content.form.i18n)
 
@@ -53,7 +53,7 @@ export function useCeFormFormframework(
     const loading = ref(false)
 
     function getValidation(
-        formElement: Api.Content.Form.FormElement
+        formElement: T3Api.Content.Form.FormElement
     ): RuleExpression<any> {
         const result: GenericValidateFunction[] = []
         const label = formElement.label
@@ -183,9 +183,9 @@ export function useCeFormFormframework(
     }
 
     function convert(
-        formElement: Api.Content.Form.FormElement
-    ): Model.FormElement {
-        const f: Model.IFormElement = {
+        formElement: T3Api.Content.Form.FormElement
+    ): T3Model.FormElement {
+        const f: T3Model.IFormElement = {
             type: formElementTypeMapping[formElement.type] ?? 'hidden',
             label: formElement.label,
             name: formElement.name,
@@ -205,29 +205,29 @@ export function useCeFormFormframework(
                     ? formElement.elements.map(convert)
                     : []
 
-                return new Model.FormElementRow({ ...f, formElements })
+                return new T3Model.FormElementRow({ ...f, formElements })
             }
             case 'Checkbox':
-                return new Model.FormElement({ ...f, defaultValue: false })
+                return new T3Model.FormElement({ ...f, defaultValue: false })
             case 'MultiCheckbox':
-                return new Model.FormElementWithOptions({
+                return new T3Model.FormElementWithOptions({
                     ...f,
                     options: formElement.properties?.options ?? {},
                     defaultValue: formElement.defaultValue || [],
                 })
             case 'RadioButton':
-                return new Model.FormElementWithOptions({
+                return new T3Model.FormElementWithOptions({
                     ...f,
                     options: formElement.properties?.options ?? {},
                 })
             case 'SingleSelect':
-                return new Model.FormElementSelect({
+                return new T3Model.FormElementSelect({
                     ...f,
                     emptyLabel: formElement.properties?.prependOptionLabel,
                     options: formElement.properties?.options ?? {},
                 })
             case 'Number':
-                return new Model.FormElementNumber({
+                return new T3Model.FormElementNumber({
                     ...f,
                     step:
                         Number.parseInt(
@@ -244,12 +244,12 @@ export function useCeFormFormframework(
                     ),
                 })
             case 'StaticText':
-                return new Model.FormElementStaticText({
+                return new T3Model.FormElementStaticText({
                     ...f,
                     text: formElement.properties?.text ?? '',
                 })
             default:
-                return new Model.FormElement(f)
+                return new T3Model.FormElement(f)
         }
     }
 
@@ -264,7 +264,7 @@ export function useCeFormFormframework(
 
         try {
             const result = await api.post<
-                Api.ContentElement<Api.Content.Formframework>
+                T3Api.ContentElement<T3Api.Content.Formframework>
             >(contentElement.content.link.href, { body })
 
             if (typeof result.content.form === 'string') {

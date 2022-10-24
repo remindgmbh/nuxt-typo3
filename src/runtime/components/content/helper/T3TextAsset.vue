@@ -39,14 +39,14 @@
 </template>
 
 <script setup lang="ts">
-import { Api, useTextAsset } from '#nuxt-typo3'
+import { T3Api, useT3TextAsset } from '#nuxt-typo3'
 
 const props = defineProps<{
-    contentElement: Api.ContentElement<Api.Content.Textmedia>
+    contentElement: T3Api.ContentElement<T3Api.Content.Textmedia>
     assetAttrs?: { [key: string]: any }
 }>()
 
-const { asset, assetIsRight, assetIsSmall, type } = useTextAsset(
+const { asset, assetIsRight, assetIsSmall, type } = useT3TextAsset(
     props.contentElement.content
 )
 </script>

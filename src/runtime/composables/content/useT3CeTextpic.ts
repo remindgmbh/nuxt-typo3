@@ -1,11 +1,11 @@
 import { computed } from 'vue'
-import { Api, useConfig, useCeTextmedia } from '#nuxt-typo3'
+import { T3Api, useT3Config, useT3CeTextmedia } from '#nuxt-typo3'
 
-export function useCeTextpic(
-    contentElement: Api.ContentElement<Api.Content.Textpic>
+export function useT3CeTextpic(
+    contentElement: T3Api.ContentElement<T3Api.Content.Textpic>
 ) {
     const textmediaContentElement = computed<
-        Api.ContentElement<Api.Content.Textmedia>
+        T3Api.ContentElement<T3Api.Content.Textmedia>
     >(() => ({
         ...contentElement,
         content: {
@@ -15,9 +15,9 @@ export function useCeTextpic(
         },
     }))
 
-    const { imageAttrs } = useCeTextmedia(
+    const { imageAttrs } = useT3CeTextmedia(
         textmediaContentElement.value,
-        useConfig().images.ceTextpic
+        useT3Config().images.ceTextpic
     )
 
     return { imageAttrs, textmediaContentElement }

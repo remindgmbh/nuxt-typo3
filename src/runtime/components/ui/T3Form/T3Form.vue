@@ -30,12 +30,12 @@
 
 <script setup lang="ts">
 import { useForm } from 'vee-validate'
-import { Model } from '#nuxt-typo3'
+import { T3Model } from '#nuxt-typo3'
 
 const { handleSubmit } = useForm()
 
 defineProps<{
-    formElements: Model.FormElement[]
+    formElements: T3Model.FormElement[]
     loading?: boolean
     loadingLabel?: string
     submitLabel: string

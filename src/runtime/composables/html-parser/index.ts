@@ -1,2 +1,2 @@
-export { useLinkReplacer } from './useLinkReplacer'
-export { useTableEnhancer } from './useTableEnhancer'
+export { useT3LinkReplacer } from './useT3LinkReplacer'
+export { useT3TableEnhancer } from './useT3TableEnhancer'

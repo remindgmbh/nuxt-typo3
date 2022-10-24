@@ -1,5 +1,5 @@
 import { useRuntimeConfig } from '#app'
 
-export function useConfig() {
+export function useT3Config() {
     return useRuntimeConfig().public.typo3
 }

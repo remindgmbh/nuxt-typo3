@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
-import { useBreakpoints, useConfig } from '#nuxt-typo3'
+import { useT3Breakpoints, useT3Config } from '#nuxt-typo3'
 
 const props = defineProps<{
     uid?: number
@@ -16,8 +16,8 @@ const props = defineProps<{
 
 const attrs = useAttrs()
 
-const { breakpointsDesc } = useBreakpoints()
-const config = useConfig()
+const { breakpointsDesc } = useT3Breakpoints()
+const config = useT3Config()
 
 const src = computed(() =>
     props.uid && !props.sizes

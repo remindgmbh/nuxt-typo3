@@ -1,12 +1,17 @@
 import { computed } from 'vue'
-import { Api, useConfig, useBreakpoints, useTextAsset } from '#nuxt-typo3'
+import {
+    T3Api,
+    useT3Config,
+    useT3Breakpoints,
+    useT3TextAsset,
+} from '#nuxt-typo3'
 
-export function useCeTextmedia(
-    contentElement: Api.ContentElement<Api.Content.Textmedia>,
-    config = useConfig().images.ceTextmedia
+export function useT3CeTextmedia(
+    contentElement: T3Api.ContentElement<T3Api.Content.Textmedia>,
+    config = useT3Config().images.ceTextmedia
 ) {
-    const { breakpointsAsc, getCeBreakpoint } = useBreakpoints()
-    const { assetIsSmall, type } = useTextAsset(contentElement.content)
+    const { breakpointsAsc, getCeBreakpoint } = useT3Breakpoints()
+    const { assetIsSmall, type } = useT3TextAsset(contentElement.content)
 
     const imageAttrs = computed(() => {
         if (type.value === 'image') {

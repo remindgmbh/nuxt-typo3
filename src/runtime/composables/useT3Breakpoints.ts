@@ -9,7 +9,7 @@ interface Breakpoint {
     containerMaxWidth: number
 }
 
-export function useBreakpoints() {
+export function useT3Breakpoints() {
     function getCeBreakpoint(type: string, name: string) {
         return ceBreakpointsModule[`${type}-${name}`]
     }

@@ -2,11 +2,11 @@ import { computed } from 'vue'
 import { NitroFetchRequest } from 'nitropack'
 import { FetchError, FetchOptions } from 'ohmyfetch'
 import { useRequestHeaders } from '#app'
-import { Api, Model, useApiPath, useConfig } from '#nuxt-typo3'
+import { T3Api, T3Model, useT3ApiPath, useT3Config } from '#nuxt-typo3'
 
-export function useApi() {
-    const config = useConfig()
-    const apiPath = useApiPath()
+export function useT3Api() {
+    const config = useT3Config()
+    const apiPath = useT3ApiPath()
 
     const defaultOptions = computed<FetchOptions>(() => {
         // remove undefined header values
@@ -30,7 +30,7 @@ export function useApi() {
         const type = config.api.initialDataType
         const path = options?.path ?? apiPath.currentInitialDataPath.value
         const fetchOptions = options?.fetchOptions ?? {}
-        return await get<Api.InitialData>(path, {
+        return await get<T3Api.InitialData>(path, {
             ...fetchOptions,
             params: { type },
         })
@@ -42,10 +42,10 @@ export function useApi() {
     }) {
         const path = options?.path ?? apiPath.currentPagePath.value
         try {
-            return await get<Api.PageData>(path, options?.fetchOptions)
+            return await get<T3Api.PageData>(path, options?.fetchOptions)
         } catch (error) {
             if (error instanceof FetchError) {
-                const pageError = new Model.PageError()
+                const pageError = new T3Model.PageError()
                 pageError.message = error.message
                 pageError.status = error.response?.status
                 pageError.statusText = error.response?.statusText
@@ -67,7 +67,7 @@ export function useApi() {
         const type = config.api.footerContentType
         const path = options?.path ?? apiPath.currentInitialDataPath.value
         const fetchOptions = options?.fetchOptions ?? {}
-        return await get<Api.ContentElement<any>>(path, {
+        return await get<T3Api.ContentElement<any>>(path, {
             ...fetchOptions,
             params: { type },
         })

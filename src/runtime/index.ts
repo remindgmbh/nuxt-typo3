@@ -1,3 +1,3 @@
 export * from './composables'
-export * as Api from './api'
-export * as Model from './model'
+export * as T3Api from './api'
+export * as T3Model from './model'

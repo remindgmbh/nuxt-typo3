@@ -1,8 +1,8 @@
 import { MessageContext } from '../plugins/i18n'
 // import from #nuxt-typo3 leads to error in i18n-ally vscode extension
-import { useUtil } from '../composables/useUtil'
+import { useT3Util } from '../composables/useUtil'
 
-const { capitalize } = useUtil()
+const { capitalize } = useT3Util()
 
 export default {
     cookie: {

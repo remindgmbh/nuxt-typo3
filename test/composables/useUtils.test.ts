@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { useUtil } from '../../src/runtime/composables/useUtil'
+import { useT3Util } from '../../src/runtime/composables/useUtil'
 
-const util = useUtil()
+const util = useT3Util()
 
 describe('capitalize', () => {
     it('should capitalize the first character in a string', () => {

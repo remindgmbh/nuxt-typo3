@@ -12,13 +12,13 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Api, useContentUtil } from '#nuxt-typo3'
+import { T3Api, useT3ContentUtil } from '#nuxt-typo3'
 
 const props = defineProps<{
-    contentElement: Api.ContentElement
+    contentElement: T3Api.ContentElement
 }>()
 
-const { isFullWidth } = useContentUtil(props.contentElement)
+const { isFullWidth } = useT3ContentUtil(props.contentElement)
 
 const container = computed(
     () =>

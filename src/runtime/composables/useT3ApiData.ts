@@ -1,11 +1,11 @@
 import { useState } from '#app'
 import { computed } from 'vue'
 import { useLogger } from '#nuxt-logger'
-import { Api, Model, useApi, useApiPath } from '#nuxt-typo3'
+import { T3Api, T3Model, useT3Api, useT3ApiPath } from '#nuxt-typo3'
 
-export function useApiData() {
-    const api = useApi()
-    const apiPath = useApiPath()
+export function useT3ApiData() {
+    const api = useT3Api()
+    const apiPath = useT3ApiPath()
     const logger = useLogger()
 
     // Remove loading once NuxtLoadingIndicator supports middleware
@@ -29,18 +29,18 @@ export function useApiData() {
     )
 
     const initialData = useState<{
-        [path: string]: Api.InitialData | undefined
+        [path: string]: T3Api.InitialData | undefined
     }>('initialData', () => ({}))
 
     const footerContent = useState<{
-        [path: string]: Api.ContentElement<any> | undefined
+        [path: string]: T3Api.ContentElement<any> | undefined
     }>('footerContent', () => ({}))
 
     const pageData = useState<{
-        [path: string]: Api.PageData | undefined
+        [path: string]: T3Api.PageData | undefined
     }>('pageData', () => ({}))
 
-    const pageError = useState<Model.PageError | undefined>('pageError')
+    const pageError = useState<T3Model.PageError | undefined>('pageError')
 
     const currentInitialData = computed(
         () => initialData.value[apiPath.currentInitialDataPath.value]
@@ -106,7 +106,7 @@ export function useApiData() {
                 pageData.value[path] = result
                 return result
             } catch (error) {
-                if (error instanceof Model.PageError) {
+                if (error instanceof T3Model.PageError) {
                     // assigning error directly leads to "Cannot stringify arbitrary non-POJOs PageError"
                     pageError.value = { ...error }
                 } else {
@@ -120,11 +120,11 @@ export function useApiData() {
         return pageData.value[path]
     }
 
-    function setCurrentPage(data: Api.PageData) {
+    function setCurrentPage(data: T3Api.PageData) {
         pageData.value[apiPath.currentPagePath.value] = data
     }
 
-    function setCurrentInitialData(data: Api.InitialData) {
+    function setCurrentInitialData(data: T3Api.InitialData) {
         initialData.value[apiPath.currentInitialDataPath.value] = data
     }
 

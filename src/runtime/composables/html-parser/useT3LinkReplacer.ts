@@ -1,7 +1,7 @@
 import { onBeforeUnmount, onMounted, Ref, watch } from 'vue'
 import { navigateTo } from '#app'
 
-export function useLinkReplacer(
+export function useT3LinkReplacer(
     el: Ref<HTMLElement | undefined>,
     content: Ref<string>
 ) {

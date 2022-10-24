@@ -1,7 +1,7 @@
 import { computed } from 'vue'
-import { Api } from '#nuxt-typo3'
+import { T3Api } from '#nuxt-typo3'
 
-export function useCeTable(content: Api.Content.Table) {
+export function useT3CeTable(content: T3Api.Content.Table) {
     const headerTop = computed(() =>
         [1, 3].includes(content.tableHeaderPosition)
     )

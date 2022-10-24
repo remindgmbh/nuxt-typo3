@@ -34,13 +34,13 @@
 import { Swiper } from 'swiper'
 import { ref, onMounted } from 'vue'
 import { debounce } from 'perfect-debounce'
-import { Model } from '#nuxt-typo3'
+import { T3Model } from '#nuxt-typo3'
 
 const props = defineProps<{
     header?: string
     subheader?: string
-    images: Model.Image[]
-    navigationImages: Model.Image[]
+    images: T3Model.Image[]
+    navigationImages: T3Model.Image[]
     scrollToIndex: number
 }>()
 
