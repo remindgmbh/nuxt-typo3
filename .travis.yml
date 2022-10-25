@@ -13,5 +13,6 @@ notifications:
 
 script:
   - yarn
+  - yarn dev:prepare
   - yarn lint
   - yarn test
