@@ -1,13 +1,12 @@
 # REMIND - Nuxt TYPO3
 
-This nuxt3 module is the frontend part of the [TYPO3 headless extension](https://github.com/TYPO3-Headless/headless) and [remind/typo3-headless](https://github.com/remindgmbh/typo3-headless).
+This nuxt3 module is the frontend part of the [TYPO3 headless extension](https://github.com/TYPO3-Headless/headless) and [remind/headless](https://github.com/remindgmbh/headless).
 
 ## Requirements
 
 TYPO3 Instance with the following extensions:
 - [friendsoftypo3/headless](https://github.com/TYPO3-Headless/headless)
-- [remind/typo3-content](https://github.com/remindgmbh/typo3-content)
-- [remind/typo3-headless](https://github.com/remindgmbh/typo3-headless)
+- [remind/headless](https://github.com/remindgmbh/headless)
 
 ## Installation
 
