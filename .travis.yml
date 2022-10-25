@@ -12,5 +12,6 @@ notifications:
         on_success: never
 
 script:
-  - npm i
-  - npm test
+  - yarn
+  - yarn lint
+  - yarn test
