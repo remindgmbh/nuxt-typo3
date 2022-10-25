@@ -22,12 +22,12 @@
   "scripts": {
     "prepack": "nuxt-module-build",
     "dev": "nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
     "dev:test": "vitest",
-    "build": "nuxi build playground",
     "lint:script": "eslint --ext \".js,.ts,.vue\" .",
     "lint:style": "stylelint \"**/*.{vue,[s]css}\"",
     "lint": "yarn lint:script && yarn lint:style",
-    "prepare": "nuxt-module-build --stub && nuxi prepare playground",
     "preview": "nuxi preview playground",
     "test": "vitest run"
   },
