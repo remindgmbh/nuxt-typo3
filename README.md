@@ -29,7 +29,7 @@ TYPO3 Instance with the following extensions:
 
 ## Configuration
 
-Module options are described in `ModuleOptions` Interface in [module.ts](src/modules.ts) and can be set using the config key `typo3`. Public runtimeConfig can be used as well to set module options.
+Module options are described in `ModuleOptions` Interface in [module.ts](src/module.ts) and can be set using the config key `typo3`. Public runtimeConfig can be used as well to set module options.
 
 ## Customization
 
