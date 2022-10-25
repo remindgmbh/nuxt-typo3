@@ -1,0 +1,91 @@
+<template>
+    <div
+        class="t3-checkbox"
+        :class="{
+            't3-checkbox--required': required,
+            't3-checkbox--disabled': disabled,
+        }"
+    >
+        <div class="t3-checkbox__wrapper">
+            <input
+                :id="key"
+                v-model="value"
+                class="t3-checkbox__input"
+                type="checkbox"
+                :name="name"
+                :value="key"
+                :disabled="disabled"
+            />
+            <label class="t3-checkbox__label" :for="key">{{ label }}</label>
+        </div>
+        <T3CollapseTransition>
+            <div v-if="!multi && errorMessage" class="t3-checkbox__error">
+                {{ errorMessage }}
+            </div>
+        </T3CollapseTransition>
+    </div>
+</template>
+
+<script setup lang="ts">
+import { RuleExpression, useField } from 'vee-validate'
+import { computed } from 'vue'
+
+const props = defineProps<{
+    name: string
+    label: string
+    value?: string
+    defaultValue?: string[] | boolean
+    multi?: boolean
+    validation?: RuleExpression<any>
+    groupLabel?: string
+    required?: boolean
+    disabled?: boolean
+}>()
+
+const name = computed(() => props.name)
+const key = computed(() => props.value ?? props.name)
+
+// computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
+const { errorMessage, value } = useField<string[] | boolean | undefined>(
+    name,
+    props.validation,
+    {
+        type: 'checkbox',
+        initialValue: props.defaultValue ?? (props.multi ? [] : false),
+    }
+)
+</script>
+
+<style lang="scss">
+@use '#nuxt-typo3/assets/styles/variables' as *;
+
+.t3-checkbox {
+    &__wrapper {
+        display: flex;
+        align-items: center;
+    }
+
+    &__label {
+        position: relative;
+    }
+
+    &__error {
+        color: $color-error;
+    }
+
+    &--required & {
+        &__label {
+            &::after {
+                content: '*';
+            }
+        }
+    }
+
+    .collapse-transition {
+        &-enter-active,
+        &-leave-active {
+            transition: height $transition-duration-input-error;
+        }
+    }
+}
+</style>

@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "@remindgmbh/eslint-config-nuxt"
+  ],
+  "settings": {
+    "import/ignore": [
+      "vee-validate"
+    ]
+  }
+}

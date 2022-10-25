@@ -1,0 +1,10 @@
+// Export container-max-widths to use in JavaScript
+
+@use "../variables";
+
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+:export {
+    @each $name, $value in variables.$container-max-widths {
+        #{$name}: $value;
+    }
+}

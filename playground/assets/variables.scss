@@ -1,0 +1,17 @@
+@forward "../../src/runtime/assets/styles/variables.scss" with (
+    $container-max-widths: (
+        xs: calc(100% - 2rem),
+        sm: 560px,
+        md: 752px,
+        lg: 920px,
+        xl: 1080px,
+    ),
+    $breakpoints: (
+        xs: 0,
+        sm: 576px,
+        md: 790px,
+        lg: 992px,
+        xl: 1200px,
+    ),
+    $color-accent: #00a9eb
+);

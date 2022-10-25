@@ -1,0 +1,36 @@
+@use "sass:list";
+@use "sass:map";
+@use "variables";
+
+@mixin up($name) {
+    @media only screen and (min-width: map.get(variables.$breakpoints, $name)) {
+        @content;
+    }
+}
+
+@mixin down($name) {
+    @media only screen and (max-width: map.get(variables.$breakpoints, $name)) {
+        @content;
+    }
+}
+
+@mixin loop {
+    /* stylelint-disable-next-line scss/operator-no-newline-after */
+    @if list.length(variables.$breakpoints) !=
+        list.length(variables.$container-max-widths)
+    {
+        @error '$breakpoints and $container-max-widths differ in length';
+    }
+
+    @each $breakpoint, $container-max-width in variables.$container-max-widths {
+        $min-width: map.get(variables.$breakpoints, $breakpoint);
+
+        @if not $min-width {
+            @error '"#{$breakpoint}" defined in $container-max-widths but not in $breakpoints';
+        }
+
+        @media (min-width: $min-width) {
+            @content (("container-max-width": $container-max-width, "breakpoint": $breakpoint));
+        }
+    }
+}
