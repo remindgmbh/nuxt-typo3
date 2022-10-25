@@ -13,7 +13,7 @@ import { CSSOptions } from 'vite'
 import { I18nOptions } from 'vue-i18n'
 import { name, version } from '../package.json'
 
-const CONFIG_KEY = 'typo3'
+export const CONFIG_KEY = 'typo3'
 
 export interface ModuleOptions {
     // TYPO3 Headless Backend information
@@ -150,8 +150,8 @@ export default defineNuxtModule<ModuleOptions>({
     setup(options, nuxt) {
         const resolver = createResolver(import.meta.url)
 
-        options = nuxt.options.runtimeConfig.public.typo3 = defu(
-            nuxt.options.runtimeConfig.public.typo3,
+        options = nuxt.options.runtimeConfig.public[CONFIG_KEY] = defu(
+            nuxt.options.runtimeConfig.public[CONFIG_KEY],
             options
         )
 
