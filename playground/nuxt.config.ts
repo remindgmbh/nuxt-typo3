@@ -2,10 +2,6 @@ import de from './locales/de.json'
 import en from './locales/en.json'
 
 export default defineNuxtConfig({
-    head: {
-        charset: 'utf-8',
-        viewport: 'width=device-width, initial-scale=1',
-    },
     runtimeConfig: {
         public: {
             typo3: {
