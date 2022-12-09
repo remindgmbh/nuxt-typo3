@@ -4,8 +4,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { computed } from '@vue/reactivity'
+import { computed, ref } from 'vue'
 import { useT3LinkReplacer, useT3TableEnhancer } from '#nuxt-typo3'
 
 const props = defineProps<{
