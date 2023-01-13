@@ -20,10 +20,9 @@
     "dist"
   ],
   "scripts": {
-    "prepack": "nuxt-module-build",
-    "dev": "nuxi dev playground",
+    "prepare": "nuxt-module-build --stub && nuxi prepare playground && nuxt-module-build",
+    "dev": "nuxt-module-build --stub && nuxi prepare playground && nuxi dev playground",
     "dev:build": "nuxi build playground",
-    "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
     "dev:test": "vitest",
     "lint:script": "eslint --ext \".js,.ts,.vue\" .",
     "lint:style": "stylelint \"**/*.{vue,[s]css}\"",
