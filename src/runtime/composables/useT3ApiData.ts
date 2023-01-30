@@ -90,7 +90,7 @@ export function useT3ApiData() {
                 // log error and do nothing so undefined is returned
                 logger.error(error)
             } finally {
-                footerContentLoading.value = true
+                footerContentLoading.value = false
             }
         }
 
@@ -114,7 +114,7 @@ export function useT3ApiData() {
                     logger.error(error)
                 }
             } finally {
-                pageDataLoading.value = true
+                pageDataLoading.value = false
             }
         }
         return pageData.value[path]
