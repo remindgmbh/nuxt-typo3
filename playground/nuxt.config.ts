@@ -51,4 +51,13 @@ export default defineNuxtConfig({
         languages: ['/de/'],
     },
     modules: ['@remindgmbh/nuxt-typo3'],
+    vite: {
+        server: {
+            hmr: {
+                protocol: 'wss',
+                clientPort: 443,
+                path: 'hmr/',
+            },
+        },
+    },
 })
