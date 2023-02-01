@@ -3,7 +3,7 @@ export { default } from '#nuxt-typo3/components/input/T3Checkbox.vue'
 </script>
 
 <style lang="scss">
-@use '@/assets/variables' as *;
+@use '@/assets/colors';
 
 .t3-checkbox {
     &__input {
@@ -16,7 +16,7 @@ export { default } from '#nuxt-typo3/components/input/T3Checkbox.vue'
         &::before {
             width: 100%;
             height: 100%;
-            border: solid 1px $color-accent;
+            border: solid 1px colors.$accent;
             content: '';
             position: absolute;
             box-sizing: border-box;
@@ -24,7 +24,7 @@ export { default } from '#nuxt-typo3/components/input/T3Checkbox.vue'
 
         &:checked {
             &::before {
-                background-color: $color-primary;
+                background-color: colors.$primary;
             }
         }
     }

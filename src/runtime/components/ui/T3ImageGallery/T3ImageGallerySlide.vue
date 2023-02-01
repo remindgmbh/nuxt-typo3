@@ -85,7 +85,7 @@ function resize() {
 </script>
 
 <style lang="scss">
-@use '#nuxt-typo3/assets/styles/variables' as *;
+@use '#nuxt-typo3/assets/styles/sizes' as sizes;
 
 .t3-image-gallery-slide {
     width: 100%;
@@ -94,7 +94,7 @@ function resize() {
     flex-direction: column;
 
     &__navigation {
-        height: $image-gallery-slide-navigation-height;
+        height: sizes.$image-gallery-slide-navigation-height;
     }
 }
 </style>

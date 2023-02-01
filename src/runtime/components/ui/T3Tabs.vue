@@ -41,11 +41,11 @@ const activeItem = computed(() => props.items.at(activeItemIndex.value))
 </script>
 
 <style lang="scss">
-@use '#nuxt-typo3/assets/styles/variables' as *;
+@use '#nuxt-typo3/assets/styles/transition-durations' as transition-durations;
 
 .t3-tabs {
     &__contents {
-        transition: height $transition-duration-tabs;
+        transition: height transition-durations.$tabs;
     }
 }
 </style>

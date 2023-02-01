@@ -42,9 +42,6 @@ export interface ModuleOptions {
     }
     // UID from cookiebot, required if cookie consent banner should be shown
     cookiebotUid?: string
-    // Path to SCSS Variables to override default values defined in runtime/assets/style/variables.scss
-    // See playground assets/variables.scss for example
-    customScssVariables?: string
     // options from https://github.com/intlify/vue-i18n-next
     i18n: I18nOptions
     // image options for content elements
@@ -86,6 +83,9 @@ export interface ModuleOptions {
             position: 'top' | 'bottom' | 'both'
         }
     }
+    // Path to SCSS Variables to override default values defined in runtime/assets/style/*.scss
+    // See playground assets/breakpoints.scss or assets/colors.scss for example
+    scssForwards?: string | string[]
     solr: {
         pagination: {
             // Position of the pagination for solr search results
@@ -155,15 +155,20 @@ export default defineNuxtModule<ModuleOptions>({
             options
         )
 
-        if (options.customScssVariables) {
+        if (options.scssForwards) {
+            const scssForwards =
+                typeof options.scssForwards === 'string'
+                    ? [options.scssForwards]
+                    : options.scssForwards
             const cssOptions: CSSOptions = {
                 preprocessorOptions: {
                     scss: {
-                        additionalData:
-                            `@forward "${options.customScssVariables}";`.concat(
-                                nuxt.options.vite.css?.preprocessorOptions?.scss
-                                    .additionalData ?? ''
-                            ),
+                        additionalData: `${scssForwards
+                            .map((value) => `@forward "${value}"`)
+                            .join(';')};`.concat(
+                            nuxt.options.vite.css?.preprocessorOptions?.scss
+                                .additionalData ?? ''
+                        ),
                     },
                 },
             }

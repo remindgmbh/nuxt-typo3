@@ -53,7 +53,7 @@ const { asset, assetIsRight, assetIsSmall, type } = useT3TextAsset(
 
 <style lang="scss">
 @use 'sass:map';
-@use '#nuxt-typo3/assets/styles/variables' as variables;
+@use '#nuxt-typo3/assets/styles/ce-breakpoints' as ce-breakpoints;
 @use '#nuxt-typo3/assets/styles/breakpoints' as breakpoints;
 
 @mixin width($small-asset, $large-asset) {
@@ -134,15 +134,21 @@ const { asset, assetIsRight, assetIsSmall, type } = useT3TextAsset(
 
 .t3-ce-textpic {
     @include width(
-        map.get(variables.$ce-breakpoints, 'textpic-two-columns-small-asset'),
-        map.get(variables.$ce-breakpoints, 'textpic-two-columns-large-asset')
+        map.get(ce-breakpoints.$breakpoints, 'textpic-two-columns-small-asset'),
+        map.get(ce-breakpoints.$breakpoints, 'textpic-two-columns-large-asset')
     );
 }
 
 .t3-ce-textmedia {
     @include width(
-        map.get(variables.$ce-breakpoints, 'textmedia-two-columns-small-asset'),
-        map.get(variables.$ce-breakpoints, 'textmedia-two-columns-large-asset')
+        map.get(
+            ce-breakpoints.$breakpoints,
+            'textmedia-two-columns-small-asset'
+        ),
+        map.get(
+            ce-breakpoints.$breakpoints,
+            'textmedia-two-columns-large-asset'
+        )
     );
 }
 </style>

@@ -3,7 +3,7 @@ export { default } from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallery
 </script>
 
 <style lang="scss">
-@use '@/assets/variables' as *;
+@use '@/assets/colors';
 
 .t3-image-gallery-slide-navigation {
     padding: 1rem;
@@ -34,7 +34,7 @@ export { default } from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallery
 
     &__slide {
         overflow: hidden;
-        background-color: $color-black;
+        background-color: colors.$black;
 
         &:not(&:last-child) {
             margin-right: 1rem;

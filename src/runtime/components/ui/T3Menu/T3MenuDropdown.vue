@@ -79,7 +79,7 @@ watch(activeItem, (value, oldValue) => {
 </script>
 
 <style lang="scss">
-@use '#nuxt-typo3/assets/styles/variables' as *;
+@use '#nuxt-typo3/assets/styles/transition-durations' as transition-durations;
 
 .t3-menu-dropdown {
     position: absolute;
@@ -87,13 +87,13 @@ watch(activeItem, (value, oldValue) => {
     width: 100%;
 
     &__content {
-        transition: height $transition-duration-menu-change;
+        transition: height transition-durations.$menu-change;
     }
 
     .menu-collapse-transition {
         &-enter-active,
         &-leave-active {
-            transition: height $transition-duration-menu-collapse;
+            transition: height transition-durations.$menu-collapse;
         }
     }
 }

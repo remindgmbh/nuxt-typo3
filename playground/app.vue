@@ -113,11 +113,11 @@ onMounted(() => {
 })
 </script>
 <style lang="scss">
-@use '@/assets/variables.scss' as *;
+@use '@/assets/colors.scss';
 
 .app {
     &__header {
-        background-color: $color-background;
+        background-color: colors.$background;
         height: 5rem;
         transition: height 0.5s;
         display: flex;
@@ -128,22 +128,22 @@ onMounted(() => {
     }
 
     &__footer {
-        background-color: $color-secondary;
-        color: $color-white;
+        background-color: colors.$secondary;
+        color: colors.$white;
     }
 
     &__nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 0.125rem $color-secondary solid;
+        border-bottom: 0.125rem colors.$secondary solid;
         width: 100%;
     }
 
     &__sidebar {
-        background-color: $color-primary;
+        background-color: colors.$primary;
         width: 100%;
-        border-bottom: solid 1rem $color-accent;
+        border-bottom: solid 1rem colors.$accent;
         box-sizing: border-box;
         overflow: auto;
     }
@@ -163,12 +163,12 @@ onMounted(() => {
         }
 
         .router-link-active {
-            color: $color-primary;
+            color: colors.$primary;
         }
     }
 
     &__nav-dropdown {
-        background-color: $color-accent;
+        background-color: colors.$accent;
 
         .menu-change-transition {
             &-enter-active,

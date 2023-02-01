@@ -1,10 +1,10 @@
 // Export breakpoints to use in JavaScript
 
-@use "../variables";
+@use "../breakpoints";
 
 /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :export {
-    @each $name, $value in variables.$breakpoints {
+    @each $name, $value in breakpoints.$breakpoints {
         #{$name}: $value;
     }
 }

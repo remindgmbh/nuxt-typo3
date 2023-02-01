@@ -28,7 +28,6 @@ export default defineNuxtConfig({
     },
     css: ['@/assets/base.scss'],
     typo3: {
-        customScssVariables: '@/assets/variables.scss',
         contentElements: {
             header: {
                 fullWidth: false,
@@ -49,6 +48,7 @@ export default defineNuxtConfig({
             },
         },
         languages: ['/de/'],
+        scssForwards: ['@/assets/breakpoints.scss', '@/assets/colors.scss'],
     },
     modules: ['@remindgmbh/nuxt-typo3'],
     vite: {

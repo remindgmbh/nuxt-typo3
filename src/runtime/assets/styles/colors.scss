@@ -1,0 +1,30 @@
+// default app background
+$background: #fff !default;
+
+// colors used for T3Background
+$primary: #607d8b !default;
+$secondary: #009688 !default;
+$accent: #fdd835 !default;
+$white: #fff !default;
+$black: #000 !default;
+
+// font colors for background colors
+$font-primary: #fff !default;
+$font-secondary: #000 !default;
+$font-accent: #000 !default;
+$font-white: #000 !default;
+$font-black: #fff !default;
+
+// color used for input errors
+$error: #b3261e !default;
+
+// background colors for modals
+$modal-background: rgba(0 0 0 / 50%) !default;
+
+// colors for image gallery
+$image-gallery-background: rgba(0 0 0 / 90%) !default;
+$image-gallery-scrollbar: rgba(0 0 0 / 80%) !default;
+$image-gallery-scrollbar-background: rgba(0 0 0 / 20%) !default;
+
+// color for table overlay
+$table-overlay: $background !default;

@@ -3,7 +3,7 @@ export { default } from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallery
 </script>
 
 <style lang="scss">
-@use '@/assets/variables' as *;
+@use '@/assets/colors';
 
 .t3-image-gallery-slide-header {
     background-color: rgba(0 0 0 / 50%);
@@ -38,7 +38,7 @@ export { default } from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallery
         background-color: transparent;
         cursor: pointer;
         border: none;
-        color: $color-white;
+        color: colors.$white;
         font-weight: 700;
         font-size: 1.5rem;
 

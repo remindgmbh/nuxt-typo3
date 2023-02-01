@@ -24,11 +24,11 @@ if (register && currentInstance && currentInstance.proxy) {
 </script>
 
 <style lang="scss">
-@use '#nuxt-typo3/assets/styles/variables' as *;
+@use '#nuxt-typo3/assets/styles/z-indexes' as z-indexes;
 
 .t3-topbar-layout-header {
     position: sticky;
     top: 0;
-    z-index: $z-index-header;
+    z-index: z-indexes.$header;
 }
 </style>

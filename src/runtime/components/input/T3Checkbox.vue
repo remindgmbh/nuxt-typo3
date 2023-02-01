@@ -57,7 +57,8 @@ const { errorMessage, value } = useField<string[] | boolean | undefined>(
 </script>
 
 <style lang="scss">
-@use '#nuxt-typo3/assets/styles/variables' as *;
+@use '#nuxt-typo3/assets/styles/colors' as colors;
+@use '#nuxt-typo3/assets/styles/transition-durations' as transition-durations;
 
 .t3-checkbox {
     &__wrapper {
@@ -70,7 +71,7 @@ const { errorMessage, value } = useField<string[] | boolean | undefined>(
     }
 
     &__error {
-        color: $color-error;
+        color: colors.$error;
     }
 
     &--required & {
@@ -84,7 +85,7 @@ const { errorMessage, value } = useField<string[] | boolean | undefined>(
     .collapse-transition {
         &-enter-active,
         &-leave-active {
-            transition: height $transition-duration-input-error;
+            transition: height transition-durations.$input-error;
         }
     }
 }

@@ -86,7 +86,9 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-@use '#nuxt-typo3/assets/styles/variables' as *;
+@use '#nuxt-typo3/assets/styles/colors' as colors;
+@use '#nuxt-typo3/assets/styles/sizes' as sizes;
+@use '#nuxt-typo3/assets/styles/transition-durations' as transition-durations;
 
 .t3-table {
     $viewport-z-index: 0;
@@ -103,7 +105,7 @@ onMounted(() => {
         background: linear-gradient(
             to $side,
             rgb(255 255 255 / 0%) 0%,
-            $color-table-overlay 100%
+            colors.$table-overlay 100%
         );
     }
 
@@ -114,12 +116,12 @@ onMounted(() => {
         position: absolute;
         width: 0;
         height: 100%;
-        transition: width $transition-duration-table-overlay;
+        transition: width transition-durations.$table-overlay;
         z-index: $viewport-z-index + 1;
         pointer-events: none;
 
         &--visible {
-            width: $table-overlay-width;
+            width: sizes.$table-overlay-width;
         }
     }
 

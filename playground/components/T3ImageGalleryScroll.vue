@@ -3,7 +3,7 @@ export { default } from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallery
 </script>
 
 <style lang="scss">
-@use '@/assets/variables' as *;
+@use '@/assets/colors';
 
 .t3-image-gallery-scroll {
     $divider-margin: 2rem;
@@ -22,7 +22,7 @@ export { default } from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallery
 
     &__close {
         background-color: transparent;
-        color: $color-white;
+        color: colors.$white;
         border: none;
         font-size: 1.5rem;
         font-weight: 700;
@@ -46,7 +46,7 @@ export { default } from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallery
     &__divider {
         margin: $divider-margin 0;
         height: 0.125rem;
-        background-color: $color-white;
+        background-color: colors.$white;
     }
 }
 </style>

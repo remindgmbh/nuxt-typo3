@@ -1,4 +1,4 @@
-@forward "../../src/runtime/assets/styles/variables.scss" with (
+@forward "../../src/runtime/assets/styles/breakpoints.scss" with (
     $container-max-widths: (
         xs: calc(100% - 2rem),
         sm: 560px,
@@ -12,6 +12,5 @@
         md: 790px,
         lg: 992px,
         xl: 1200px,
-    ),
-    $color-accent: #00a9eb
+    )
 );

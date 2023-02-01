@@ -43,12 +43,12 @@ const component = useT3DynamicComponent('T3Ce', props.contentElement.type)
 </script>
 
 <style lang="scss">
-@use '#nuxt-typo3/assets/styles/variables' as *;
+@use '#nuxt-typo3/assets/styles/sizes' as sizes;
 
 .t3-content {
     box-sizing: border-box;
 
-    @each $name, $value in $frame-spaces {
+    @each $name, $value in sizes.$frame-spaces {
         &--space-before-#{$name} {
             margin-top: $value;
         }

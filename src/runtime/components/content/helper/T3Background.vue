@@ -28,32 +28,32 @@ const container = computed(
 </script>
 
 <style lang="scss">
-@use '#nuxt-typo3/assets/styles/variables' as *;
+@use '#nuxt-typo3/assets/styles/colors' as colors;
 
 .t3-background {
     &--primary {
-        background-color: $color-primary;
-        color: $color-font-primary;
+        background-color: colors.$primary;
+        color: colors.$font-primary;
     }
 
     &--secondary {
-        background-color: $color-secondary;
-        color: $color-font-secondary;
+        background-color: colors.$secondary;
+        color: colors.$font-secondary;
     }
 
     &--accent {
-        background-color: $color-accent;
-        color: $color-font-accent;
+        background-color: colors.$accent;
+        color: colors.$font-accent;
     }
 
     &--white {
-        background-color: $color-white;
-        color: $color-font-white;
+        background-color: colors.$white;
+        color: colors.$font-white;
     }
 
     &--black {
-        background-color: $color-black;
-        color: $color-font-black;
+        background-color: colors.$black;
+        color: colors.$font-black;
     }
 }
 </style>

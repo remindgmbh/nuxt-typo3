@@ -66,10 +66,10 @@ function afterLeave(): void {
 </script>
 
 <style lang="scss">
-@use '#nuxt-typo3/assets/styles/variables' as *;
+@use '#nuxt-typo3/assets/styles/z-indexes' as z-indexes;
 
 .t3-topbar-layout-sidebar {
-    z-index: $z-index-sidebar;
+    z-index: z-indexes.$sidebar;
     position: fixed;
 }
 </style>
