@@ -1,6 +1,6 @@
 import { computed } from 'vue'
 import { NitroFetchRequest } from 'nitropack'
-import { FetchError, FetchOptions } from 'ohmyfetch'
+import { FetchError, FetchOptions } from 'ofetch'
 import { useRequestHeaders } from '#app'
 import { T3Api, T3Model, useT3ApiPath, useT3Config } from '#nuxt-typo3'
 
@@ -79,8 +79,8 @@ export function useT3Api() {
     ) {
         return await $fetch<T>(request, {
             ...defaultOptions.value,
-            method: 'GET',
             ...options,
+            method: 'GET',
         })
     }
 
@@ -90,8 +90,8 @@ export function useT3Api() {
     ) {
         return await $fetch<T>(request, {
             ...defaultOptions.value,
-            method: 'POST',
             ...options,
+            method: 'POST',
         })
     }
 

@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import defu from 'defu'
+import { defu } from 'defu'
 import { describe, expect, it } from 'vitest'
 import { fireEvent, render, RenderOptions } from '@testing-library/vue'
 import T3Accordion from '../../src/runtime/components/ui/T3Accordion.vue'

@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { describe, expect, it } from 'vitest'
 import { fireEvent, render, RenderOptions } from '@testing-library/vue'
-import defu from 'defu'
+import { defu } from 'defu'
 import { h } from 'vue'
 import T3Menu from '../../src/runtime/components/ui/T3Menu/T3Menu.vue'
 import T3MenuDropdown from '../../src/runtime/components/ui/T3Menu/T3MenuDropdown.vue'

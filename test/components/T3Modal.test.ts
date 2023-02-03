@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { describe, expect, it } from 'vitest'
 import { fireEvent, render, RenderOptions } from '@testing-library/vue'
-import defu from 'defu'
+import { defu } from 'defu'
 import T3Modal from '../../src/runtime/components/ui/T3Modal.vue'
 
 const modalContent = 'Modal Content'
