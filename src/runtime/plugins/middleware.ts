@@ -9,15 +9,24 @@ export default defineNuxtPlugin(() => {
     addRouteMiddleware(
         'global',
         async (to) => {
-            const initialData = await apiData.loadInitialData(to.fullPath)
-            await apiData.loadFooterContent(to.fullPath)
+            const promises: Array<Promise<any>> = [
+                apiData.loadInitialData(to.fullPath),
+                apiData.loadFooterContent(to.fullPath),
+            ]
 
             if (to.name === 'T3Page') {
-                const pageData = await apiData.loadPageData(to.fullPath)
-                setLocale(pageData?.i18n)
-            } else {
-                setLocale(initialData?.i18n)
+                promises.push(apiData.loadPageData(to.fullPath))
             }
+
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const [initialData, footerContent, pageData]: [
+                T3Api.InitialData?,
+                T3Api.ContentElement<any>?,
+                T3Api.PageData?,
+                ...unknown[]
+            ] = await Promise.all(promises)
+
+            setLocale(to.name === 'T3Page' ? pageData?.i18n : initialData?.i18n)
         },
         { global: true }
     )
