@@ -1,14 +1,20 @@
 import { addRouteMiddleware, defineNuxtPlugin } from '#app'
 import { i18n } from './i18n'
-import { T3Api, useT3ApiData } from '#nuxt-typo3'
+import { T3Api, useT3ApiData, useT3LoadingState } from '#nuxt-typo3'
 
 export default defineNuxtPlugin(() => {
     const apiData = useT3ApiData()
+    const { loadingData, loadingPage } = useT3LoadingState()
     const { locale } = i18n.global
 
     addRouteMiddleware(
         'global',
-        async (to) => {
+        async (to, from) => {
+            if (from.path === to.path) {
+                loadingData.value = true
+            } else {
+                loadingPage.value = true
+            }
             const promises: Array<Promise<any>> = [
                 apiData.loadInitialData(to.fullPath),
                 apiData.loadFooterContent(to.fullPath),
@@ -18,15 +24,22 @@ export default defineNuxtPlugin(() => {
                 promises.push(apiData.loadPageData(to.fullPath))
             }
 
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const [initialData, footerContent, pageData]: [
-                T3Api.InitialData?,
-                T3Api.ContentElement<any>?,
-                T3Api.PageData?,
-                ...unknown[]
-            ] = await Promise.all(promises)
+            try {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                const [initialData, footerContent, pageData]: [
+                    T3Api.InitialData?,
+                    T3Api.ContentElement<any>?,
+                    T3Api.PageData?,
+                    ...unknown[]
+                ] = await Promise.all(promises)
 
-            setLocale(to.name === 'T3Page' ? pageData?.i18n : initialData?.i18n)
+                setLocale(
+                    to.name === 'T3Page' ? pageData?.i18n : initialData?.i18n
+                )
+            } finally {
+                loadingData.value = false
+                loadingPage.value = false
+            }
         },
         { global: true }
     )

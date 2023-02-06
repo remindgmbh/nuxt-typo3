@@ -8,26 +8,6 @@ export function useT3ApiData() {
     const apiPath = useT3ApiPath()
     const logger = useLogger()
 
-    // Remove loading once NuxtLoadingIndicator supports middleware
-    // https://github.com/nuxt/framework/pull/5121
-    // https://github.com/nuxt/framework/issues/6837
-    const initialDataLoading = useState<boolean>(
-        'initialDataLoading',
-        () => false
-    )
-    const pageDataLoading = useState<boolean>('pageDataLoading', () => false)
-    const footerContentLoading = useState<boolean>(
-        'footerContentLoading',
-        () => false
-    )
-
-    const loading = computed(
-        () =>
-            initialDataLoading.value ||
-            pageDataLoading.value ||
-            footerContentLoading.value
-    )
-
     const initialData = useState<{
         [path: string]: T3Api.InitialData | undefined
     }>('initialData', () => ({}))
@@ -59,7 +39,6 @@ export function useT3ApiData() {
 
         if (!initialData.value[initialDataPath]) {
             try {
-                initialDataLoading.value = true
                 const result = await api.getInitialData({
                     path: initialDataPath,
                 })
@@ -68,8 +47,6 @@ export function useT3ApiData() {
             } catch (error) {
                 // log error and do nothing so undefined is returned
                 logger.error(error)
-            } finally {
-                initialDataLoading.value = false
             }
         }
         return initialData.value[initialDataPath]
@@ -80,7 +57,6 @@ export function useT3ApiData() {
 
         if (!footerContent.value[initialDataPath]) {
             try {
-                footerContentLoading.value = true
                 const result = await api.getFooterContent({
                     path: initialDataPath,
                 })
@@ -89,8 +65,6 @@ export function useT3ApiData() {
             } catch (error) {
                 // log error and do nothing so undefined is returned
                 logger.error(error)
-            } finally {
-                footerContentLoading.value = false
             }
         }
 
@@ -101,7 +75,6 @@ export function useT3ApiData() {
         pageError.value = {}
         if (!pageData.value[path]) {
             try {
-                pageDataLoading.value = true
                 const result = await api.getPageData({ path })
                 pageData.value[path] = result
                 return result
@@ -113,8 +86,6 @@ export function useT3ApiData() {
                     // log error and do nothing so undefined is returned
                     logger.error(error)
                 }
-            } finally {
-                pageDataLoading.value = false
             }
         }
         return pageData.value[path]
@@ -145,7 +116,6 @@ export function useT3ApiData() {
         currentFooterContent,
         currentInitialData,
         currentPageData,
-        loading,
         pageData,
         pageError,
         clearData,

@@ -73,6 +73,12 @@
             <div>bottom</div>
         </T3TopbarLayoutSidebar>
         <T3TopbarLayoutContent class="app__content">
+            <div
+                class="app__loading-bar"
+                :class="{ 'app__loading-bar--visible': loadingPage }"
+            >
+                <div class="app__loading-progress"></div>
+            </div>
             <NuxtPage
                 :transition="{ name: 'page-transition', mode: 'in-out' }"
             />
@@ -87,6 +93,7 @@
 <script setup lang="ts">
 const { showBanner } = useT3Cookiebot()
 const { currentFooterContent } = useT3ApiData()
+const { loadingPage } = useT3LoadingState()
 const { availableLanguages } = useT3Languages()
 const { navItemsWithChildren, rootPageNavigation } = useT3Navigation()
 const { isLoggedIn, logout } = useT3UserState()
@@ -116,6 +123,29 @@ onMounted(() => {
 @use '@/assets/colors.scss';
 
 .app {
+    position: relative;
+
+    &__loading-bar {
+        position: absolute;
+        background-color: colors.$primary;
+        height: 0;
+        width: 100%;
+
+        &--visible {
+            height: 0.125rem;
+        }
+    }
+
+    &__loading-progress {
+        position: absolute;
+        top: 0;
+        right: 100%;
+        bottom: 0;
+        left: 0;
+        background-color: colors.$secondary;
+        animation: loading 2s linear infinite;
+    }
+
     &__header {
         background-color: colors.$background;
         height: 5rem;
