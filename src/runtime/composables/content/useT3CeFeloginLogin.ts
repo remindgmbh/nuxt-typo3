@@ -1,8 +1,15 @@
+import { navigateTo } from '#app'
 import { string, Schema } from 'yup'
 import { GenericValidateFunction } from 'vee-validate'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { T3Api, T3Model, useT3UserState, useT3YupUtil } from '#nuxt-typo3'
+import {
+    T3Api,
+    T3Model,
+    useT3Api,
+    useT3ApiData,
+    useT3YupUtil,
+} from '#nuxt-typo3'
 
 type FormElementTypeMapping = {
     [Property in T3Api.Content.Login.FormElementType]: T3Model.FormElementType
@@ -18,59 +25,53 @@ export function useT3CeFeloginLogin(
     contentElement: T3Api.ContentElement<T3Api.Content.Felogin>
 ) {
     const { t } = useI18n()
-    const { login } = useT3UserState()
     const { schemaToValidateFunction } = useT3YupUtil()
+    const api = useT3Api()
+    const { clearData, setCurrentInitialData, currentPageData } = useT3ApiData()
+
+    const message = ref({
+        header: contentElement.content.data.message.header,
+        body: contentElement.content.data.message.message,
+    })
 
     const loading = ref(false)
 
-    const showMessage = computed(() =>
-        typeof contentElement.content.data !== 'string'
-            ? !!contentElement.content.data.message.header ||
-              !!contentElement.content.data.message.message
-            : !!loginMessage.value
-    )
-
-    const messageHeader = computed(() =>
-        typeof contentElement.content.data !== 'string'
-            ? contentElement.content.data.message.header
-            : undefined
-    )
-
-    const messageBody = computed(() =>
-        typeof contentElement.content.data !== 'string'
-            ? contentElement.content.data.message.message
-            : undefined
-    )
-
-    const loginMessage = computed(() =>
-        typeof contentElement.content.data === 'string'
-            ? contentElement.content.data
-            : undefined
-    )
-
-    const submitLabel = computed(() =>
-        typeof contentElement.content.data !== 'string'
-            ? contentElement.content.data.form.fields.pages.find(
-                  (field) => field.name === 'submit'
-              )?.value ?? ''
-            : ''
+    // TODO: default value
+    const submitLabel = computed(
+        () =>
+            contentElement.content.data.form.elements.find(
+                (element) => element.name === 'submit'
+            )?.value ?? ''
     )
 
     const formElements = computed(() =>
-        typeof contentElement.content.data !== 'string'
-            ? contentElement.content.data.form.fields.pages
-                  .filter((field) => field.name !== 'submit')
-                  .map(convert)
-            : []
+        contentElement.content.data.form.elements
+            .filter((element) => element.name !== 'submit')
+            .map(convert)
     )
+
+    function convert(
+        formElement: T3Api.Content.Login.FormElement
+    ): T3Model.FormElement {
+        return new T3Model.FormElement({
+            type: formElementTypeMapping[formElement.type] ?? 'hidden',
+            label: formElement.label,
+            name: formElement.name,
+            defaultValue: formElement.value,
+            required: formElement.validators?.some(
+                (validator) => validator.identifier === 'required'
+            ),
+            validation: getValidation(formElement),
+        })
+    }
 
     function getValidation(formElement: T3Api.Content.Login.FormElement) {
         const result: GenericValidateFunction[] = []
 
-        if (formElement.validate) {
-            Object.keys(formElement.validate).forEach((identifier) => {
+        if (formElement.validators) {
+            formElement.validators.forEach((validator) => {
                 let schema: Schema | undefined
-                switch (identifier) {
+                switch (validator.identifier) {
                     case 'email':
                         schema = string()
                         break
@@ -94,28 +95,58 @@ export function useT3CeFeloginLogin(
         return result
     }
 
-    function convert(
-        formElement: T3Api.Content.Login.FormElement
-    ): T3Model.FormElement {
-        return new T3Model.FormElement({
-            type: formElementTypeMapping[formElement.type] ?? 'hidden',
-            label: formElement.label,
-            name: formElement.name,
-            defaultValue: formElement.value,
-            required: !!formElement.validate?.required,
-            validation: getValidation(formElement),
-        })
-    }
-
     async function submit(data: Record<string, any>) {
-        if (typeof contentElement.content.data === 'string') {
-            return
-        }
-
         loading.value = true
 
+        const loginType = contentElement.content.data.form.elements.find(
+            (element) => element.name === 'logintype'
+        )?.value as 'login' | 'logout' | undefined
+
         try {
-            await login(contentElement.content.data.form.action, data)
+            const body = new FormData()
+            body.set('responseElementId', contentElement.id.toString())
+
+            Object.keys(data).forEach((key) => {
+                body.set(key, data[key])
+            })
+
+            const result = await api.post<
+                T3Api.ContentElement<T3Api.Content.FeloginActionResponse>
+            >(contentElement.content.data.form.action, {
+                body,
+            })
+
+            let redirectUrl = result.content.data.redirectUrl
+
+            if (
+                loginType === 'logout' ||
+                result.content.data.status === 'success'
+            ) {
+                // Login Status changed => clearData in case logged in user has extended permissions
+                const initialData = await api.getInitialData({
+                    fetchOptions: { cache: 'no-cache' },
+                })
+                const currentPath = currentPageData.value?.slug
+                clearData()
+                setCurrentInitialData(initialData)
+
+                // If no redirect is set up use current path so page reloads and fetches API data
+                if (!redirectUrl) {
+                    redirectUrl = currentPath
+                }
+            } else if (result.content.data.message) {
+                // Login was unsuccessful and no redirect is set up => error message is shown
+                message.value.header = result.content.data.message.header
+                message.value.body = result.content.data.message.message
+            }
+
+            if (redirectUrl) {
+                await navigateTo({
+                    path: redirectUrl,
+                    force: true,
+                    replace: true,
+                })
+            }
         } finally {
             loading.value = false
         }
@@ -124,10 +155,7 @@ export function useT3CeFeloginLogin(
     return {
         formElements,
         loading,
-        loginMessage,
-        messageBody,
-        messageHeader,
-        showMessage,
+        message,
         submitLabel,
         submit,
     }

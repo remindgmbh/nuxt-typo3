@@ -7,17 +7,15 @@
         }"
     >
         <T3Header :content-element="contentElement" />
-        <div v-if="showMessage" class="t3-ce-login__message">
-            <div v-if="messageHeader" class="t3-ce-login__message-header">
-                {{ messageHeader }}
+        <div class="t3-ce-login__message">
+            <div class="t3-ce-login__message-header">
+                {{ message.header }}
             </div>
-            <div v-if="messageBody" class="t3-ce-login__message-body">
-                {{ messageBody }}
+            <div class="t3-ce-login__message-body">
+                {{ message.body }}
             </div>
-            <T3HtmlParser v-if="loginMessage" :content="loginMessage" />
         </div>
         <T3Form
-            v-if="!loginMessage"
             class="t3-ce-login__form"
             :form-elements="formElements"
             :loading="loading"
@@ -35,14 +33,6 @@ const props = defineProps<{
     contentElement: T3Api.ContentElement<T3Api.Content.Felogin>
 }>()
 
-const {
-    formElements,
-    loading,
-    loginMessage,
-    messageBody,
-    messageHeader,
-    submitLabel,
-    showMessage,
-    submit,
-} = useT3CeFeloginLogin(props.contentElement)
+const { formElements, loading, message, submitLabel, submit } =
+    useT3CeFeloginLogin(props.contentElement)
 </script>

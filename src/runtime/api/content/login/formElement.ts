@@ -7,5 +7,9 @@ export interface FormElement {
     label?: string
     name: string
     value?: string
-    validate?: { [Property in ValidationType]: 1 }
+    placeholder?: string
+    validators?: Array<{
+        identifier: string
+        message: string
+    }>
 }
