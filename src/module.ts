@@ -152,7 +152,7 @@ export default defineNuxtModule<ModuleOptions>({
 
         options = nuxt.options.runtimeConfig.public[CONFIG_KEY] = defu(
             nuxt.options.runtimeConfig.public[CONFIG_KEY],
-            options
+            JSON.parse(JSON.stringify(options))
         )
 
         if (options.scssForwards) {
