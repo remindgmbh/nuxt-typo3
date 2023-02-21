@@ -1,6 +1,8 @@
 import { navigateTo } from '#app'
 import { computed } from 'vue'
-import { T3Api, useT3Api, useT3ApiData } from '#nuxt-typo3'
+import { T3Api } from '#nuxt-typo3'
+import { useT3Api } from '#nuxt-typo3/composables/useT3Api'
+import { useT3ApiData } from '#nuxt-typo3/composables/useT3ApiData'
 
 export function useT3UserState() {
     const api = useT3Api()

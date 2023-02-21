@@ -4,7 +4,9 @@ import { navigateTo } from '#app'
 import { useI18n } from 'vue-i18n'
 import { GenericValidateFunction, RuleExpression } from 'vee-validate'
 import { useLogger } from '#nuxt-logger'
-import { T3Api, T3Model, useT3Api, useT3YupUtil } from '#nuxt-typo3'
+import { T3Api, T3Model } from '#nuxt-typo3'
+import { useT3Api } from '#nuxt-typo3/composables/useT3Api'
+import { useT3YupUtil } from '#nuxt-typo3/composables/useT3YupUtil'
 
 const REGEX_ALPHANUMERIC = /^(\w*)$/
 

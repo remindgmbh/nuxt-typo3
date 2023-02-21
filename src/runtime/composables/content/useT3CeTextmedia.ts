@@ -1,10 +1,8 @@
 import { computed } from 'vue'
-import {
-    T3Api,
-    useT3Config,
-    useT3Breakpoints,
-    useT3TextAsset,
-} from '#nuxt-typo3'
+import { T3Api } from '#nuxt-typo3'
+import { useT3Breakpoints } from '#nuxt-typo3/composables/useT3Breakpoints'
+import { useT3Config } from '#nuxt-typo3/composables/useT3Config'
+import { useT3TextAsset } from '#nuxt-typo3/composables/content/useT3TextAsset'
 
 export function useT3CeTextmedia(
     contentElement: T3Api.ContentElement<T3Api.Content.Textmedia>,

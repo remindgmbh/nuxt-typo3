@@ -5,7 +5,8 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useT3LinkReplacer, useT3TableEnhancer } from '#nuxt-typo3'
+import { useT3LinkReplacer } from '#nuxt-typo3/composables/html-parser/useT3LinkReplacer'
+import { useT3TableEnhancer } from '#nuxt-typo3/composables/html-parser/useT3TableEnhancer'
 
 const props = defineProps<{
     content: string

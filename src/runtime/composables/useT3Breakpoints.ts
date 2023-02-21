@@ -1,7 +1,7 @@
 import { computed } from 'vue'
-import breakpointsModule from '../assets/styles/js/breakpoints.module.scss'
-import ceBreakpointsModule from '../assets/styles/js/ce-breakpoints.module.scss'
-import containerMaxWidthsModule from '../assets/styles/js/containerMaxWidths.module.scss'
+import breakpointsModule from '#nuxt-typo3/assets/styles/js/breakpoints.module.scss'
+import ceBreakpointsModule from '#nuxt-typo3/assets/styles/js/ce-breakpoints.module.scss'
+import containerMaxWidthsModule from '#nuxt-typo3/assets/styles/js/containerMaxWidths.module.scss'
 
 interface Breakpoint {
     name: string

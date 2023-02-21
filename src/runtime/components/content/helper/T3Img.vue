@@ -4,7 +4,8 @@
 
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
-import { useT3Breakpoints, useT3Config } from '#nuxt-typo3'
+import { useT3Breakpoints } from '#nuxt-typo3/composables/useT3Breakpoints'
+import { useT3Config } from '#nuxt-typo3/composables/useT3Config'
 
 const props = defineProps<{
     uid?: number

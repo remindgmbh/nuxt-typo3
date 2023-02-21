@@ -8,7 +8,9 @@
     <component :is="component" v-else :file="file" :asset-attrs="assetAttrs" />
 </template>
 <script setup lang="ts">
-import { T3Api, useT3Asset, useT3DynamicComponent } from '#nuxt-typo3'
+import { T3Api } from '#nuxt-typo3'
+import { useT3Asset } from '#nuxt-typo3/composables/useT3Asset'
+import { useT3DynamicComponent } from '#nuxt-typo3/composables/useT3DynamicComponent'
 
 const props = defineProps<{
     file: T3Api.Asset

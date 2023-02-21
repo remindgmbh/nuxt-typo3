@@ -21,7 +21,8 @@
 </template>
 
 <script setup lang="ts">
-import { T3Api, useT3CeTextmedia } from '#nuxt-typo3'
+import { T3Api } from '#nuxt-typo3'
+import { useT3CeTextmedia } from '#nuxt-typo3/composables/content/useT3CeTextmedia'
 
 const props = defineProps<{
     contentElement: T3Api.ContentElement<T3Api.Content.Textmedia>

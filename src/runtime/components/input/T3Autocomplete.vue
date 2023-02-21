@@ -86,7 +86,8 @@
 import { RuleExpression, useField } from 'vee-validate'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { navigateTo } from '#app'
-import { T3Model, useT3SelectInput } from '#nuxt-typo3'
+import { T3Model } from '#nuxt-typo3'
+import { useT3SelectInput } from '#nuxt-typo3/composables/useT3SelectInput'
 
 const props = defineProps<{
     name: string

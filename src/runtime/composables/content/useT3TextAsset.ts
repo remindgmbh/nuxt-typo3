@@ -1,5 +1,6 @@
 import { computed } from 'vue'
-import { T3Api, useT3Asset } from '#nuxt-typo3'
+import { T3Api } from '#nuxt-typo3'
+import { useT3Asset } from '#nuxt-typo3/composables/useT3Asset'
 
 export function useT3TextAsset(content: T3Api.Content.Textmedia) {
     const asset = computed(() => content.assets.at(0))

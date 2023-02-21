@@ -1,6 +1,8 @@
 import { addRouteMiddleware, defineNuxtPlugin } from '#app'
 import { i18n } from './i18n'
-import { T3Api, useT3ApiData, useT3LoadingState } from '#nuxt-typo3'
+import { T3Api } from '#nuxt-typo3'
+import { useT3ApiData } from '#nuxt-typo3/composables/useT3ApiData'
+import { useT3LoadingState } from '#nuxt-typo3/composables/useT3LoadingState'
 
 export default defineNuxtPlugin(() => {
     const apiData = useT3ApiData()

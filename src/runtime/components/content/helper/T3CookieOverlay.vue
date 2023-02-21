@@ -19,7 +19,8 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { T3Api, useT3Cookiebot } from '#nuxt-typo3'
+import { T3Api } from '#nuxt-typo3'
+import { useT3Cookiebot } from '#nuxt-typo3/composables/useT3Cookiebot'
 
 const { t } = useI18n()
 

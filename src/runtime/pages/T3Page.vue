@@ -17,12 +17,10 @@
 import { computed, ref, watch } from 'vue'
 import { useRoute } from '#app'
 import { useI18n } from 'vue-i18n'
-import {
-    useT3ApiData,
-    useT3ApiPath,
-    useT3DynamicComponent,
-    useT3PageHead,
-} from '#nuxt-typo3'
+import { useT3ApiData } from '#nuxt-typo3/composables/useT3ApiData'
+import { useT3ApiPath } from '#nuxt-typo3/composables/useT3ApiPath'
+import { useT3DynamicComponent } from '#nuxt-typo3/composables/useT3DynamicComponent'
+import { useT3PageHead } from '#nuxt-typo3/composables/useT3PageHead'
 
 const { t } = useI18n()
 

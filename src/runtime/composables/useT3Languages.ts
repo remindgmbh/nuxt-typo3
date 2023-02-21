@@ -1,5 +1,5 @@
 import { computed } from 'vue'
-import { useT3ApiData } from '#nuxt-typo3'
+import { useT3ApiData } from '#nuxt-typo3/composables/useT3ApiData'
 
 export function useT3Languages() {
     const { currentInitialData, currentPageData } = useT3ApiData()

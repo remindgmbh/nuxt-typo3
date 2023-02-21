@@ -1,5 +1,7 @@
 import { computed } from 'vue'
-import { T3Api, useT3Config, useT3Breakpoints } from '#nuxt-typo3'
+import { T3Api } from '#nuxt-typo3'
+import { useT3Breakpoints } from '#nuxt-typo3/composables/useT3Breakpoints'
+import { useT3Config } from '#nuxt-typo3/composables/useT3Config'
 
 export function useT3CeImage(
     contentElement: T3Api.ContentElement<T3Api.Content.Image>
