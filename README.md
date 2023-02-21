@@ -5,8 +5,9 @@ This nuxt3 module is the frontend part of the [TYPO3 headless extension](https:/
 ## Requirements
 
 TYPO3 Instance with the following extensions:
-- [friendsoftypo3/headless](https://github.com/TYPO3-Headless/headless)
-- [remind/headless](https://github.com/remindgmbh/headless)
+
+-   [friendsoftypo3/headless](https://github.com/TYPO3-Headless/headless)
+-   [remind/headless](https://github.com/remindgmbh/headless)
 
 ## Installation
 
@@ -14,18 +15,17 @@ TYPO3 Instance with the following extensions:
 
 2. add module in nuxt.config.js
 
-   ```javascript
-   export default defineNuxtConfig({
-       ...
-       modules: [
-           ...
-           '@remindgmbh/nuxt-typo3',
-           ...
-       ]
-       ...
-   })
-   ```
-
+    ```javascript
+    export default defineNuxtConfig({
+        ...
+        modules: [
+            ...
+            '@remindgmbh/nuxt-typo3',
+            ...
+        ]
+        ...
+    })
+    ```
 
 ## Configuration
 

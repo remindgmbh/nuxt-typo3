@@ -1,5 +1,5 @@
-@use "sass:map";
-@use "breakpoints";
+@use 'sass:map';
+@use 'breakpoints';
 
 .container {
     width: 100%;
@@ -9,6 +9,6 @@
 
 @include breakpoints.loop using ($args) {
     .container {
-        max-width: map.get($args, "container-max-width");
+        max-width: map.get($args, 'container-max-width');
     }
 }

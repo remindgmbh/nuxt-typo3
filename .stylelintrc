@@ -1,5 +1,3 @@
 {
-    "extends": [
-        "@remindgmbh/stylelint-config"
-    ]
+    "extends": ["@remindgmbh/stylelint-config"]
 }
