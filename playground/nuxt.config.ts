@@ -42,11 +42,6 @@ export default defineNuxtConfig({
                 en,
             },
         },
-        images: {
-            ceTextpic: {
-                fullWidthBreakpoint: 'sm',
-            },
-        },
         languages: ['/de/'],
         scssForwards: ['@/assets/breakpoints.scss', '@/assets/colors.scss'],
     },

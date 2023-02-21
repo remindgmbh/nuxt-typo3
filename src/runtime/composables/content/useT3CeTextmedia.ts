@@ -25,7 +25,7 @@ export function useT3CeTextmedia(
     const sizes = computed(() => {
         const twoColumnsBreakpoint = getCeBreakpoint(
             contentElement.type,
-            `two-columns-${assetIsSmall ? 'small-asset' : 'large-asset'}`
+            `two-columns-${assetIsSmall.value ? 'small-asset' : 'large-asset'}`
         )
         let twoColumns = false
 
