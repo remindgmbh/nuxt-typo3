@@ -29,15 +29,11 @@ interface CeOptions {
 }
 
 interface CeWithImagesOptions extends CeOptions {
-    // lazy: load images only when in viewport
-    lazy: boolean
-    // responsive: load image with dimensions according to windows size
+    // load image with dimensions according to windows size
     responsive: boolean
 }
 
 interface CeImageGalleryOptions extends CeOptions {
-    // lazy doesn't work for navigation and preview images
-    lazy: boolean
     // max height for images used in navigation
     navigationHeight: number
     // max height for images used in preview
@@ -112,20 +108,16 @@ export default defineNuxtModule<ModuleOptions>({
         baseUrl: '',
         contentElements: {
             image: {
-                lazy: true,
                 responsive: true,
             },
             imageGallery: {
-                lazy: true,
                 navigationHeight: 256,
                 previewHeight: 256,
             },
             textmedia: {
-                lazy: true,
                 responsive: true,
             },
             textpic: {
-                lazy: true,
                 responsive: true,
             },
         },

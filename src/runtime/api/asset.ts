@@ -37,5 +37,6 @@ export interface Asset {
         }
         autoplay?: 0 | 1
         extension: string
+        lazyLoading: boolean
     }
 }

@@ -12,7 +12,6 @@ export function useT3CeImageGallery(content: T3Api.Content.ImageGallery) {
     const images = computed<T3Model.Image[]>(() =>
         content.images.map((asset) => {
             const { imageAttrs } = useT3Asset(asset, {
-                loading: config.lazy ? 'lazy' : undefined,
                 fileExtension: config.imageFileExtension,
             })
             return imageAttrs.value

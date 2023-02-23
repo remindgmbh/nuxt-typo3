@@ -2,6 +2,7 @@
     <video
         :src="file.publicUrl"
         :autoplay="!!file.properties.autoplay"
+        :preload="file.properties.lazyLoading ? 'none' : undefined"
         controls
     ></video>
 </template>

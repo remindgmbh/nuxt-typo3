@@ -13,7 +13,6 @@ export function useT3CeImage(
 
     const imageAttrs = computed(() => ({
         sizes: config.responsive ? sizes.value : undefined,
-        loading: config.lazy ? 'lazy' : undefined,
         fileExtension: config.imageFileExtension,
     }))
 

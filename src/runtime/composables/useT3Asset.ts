@@ -13,6 +13,7 @@ export function useT3Asset(
         width: asset.properties.dimensions.width,
         title: asset.properties.title,
         description: asset.properties.description,
+        loading: asset.properties.lazyLoading ? 'lazy' : undefined,
         ...assetAttrs,
     }))
 
