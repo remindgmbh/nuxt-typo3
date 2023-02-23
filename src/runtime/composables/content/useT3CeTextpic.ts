@@ -19,7 +19,7 @@ export function useT3CeTextpic(
 
     const { imageAttrs } = useT3CeTextmedia(
         textmediaContentElement.value,
-        useT3Config().images.ceTextpic
+        useT3Config().contentElements.textpic
     )
 
     return { imageAttrs, textmediaContentElement }

@@ -4,7 +4,7 @@ import { useT3Asset } from '#nuxt-typo3/composables/useT3Asset'
 import { useT3Config } from '#nuxt-typo3/composables/useT3Config'
 
 export function useT3CeImageGallery(content: T3Api.Content.ImageGallery) {
-    const config = useT3Config().images.ceImageGallery
+    const config = useT3Config().contentElements.imageGallery
     const header = computed(() => content.header)
     const subheader = computed(() => content.subheader)
     const type = computed(() => content.settings.type)

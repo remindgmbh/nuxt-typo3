@@ -7,7 +7,7 @@ export function useT3CeImage(
     contentElement: T3Api.ContentElement<T3Api.Content.Image>
 ) {
     const { breakpointsAsc } = useT3Breakpoints()
-    const config = useT3Config().images.ceImage
+    const config = useT3Config().contentElements.image
 
     const image = computed(() => contentElement.content.images.at(0))
 

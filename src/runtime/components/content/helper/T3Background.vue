@@ -15,7 +15,6 @@ import { computed } from 'vue'
 import { T3Api } from '#nuxt-typo3'
 import { useT3ContentUtil } from '#nuxt-typo3/composables/useT3ContentUtil'
 
-
 const props = defineProps<{
     contentElement: T3Api.ContentElement
 }>()

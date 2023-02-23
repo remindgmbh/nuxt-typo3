@@ -15,6 +15,33 @@ import { name, version } from '../package.json'
 
 export const CONFIG_KEY = 'typo3'
 
+interface CeOptions {
+    // if set to true, content element ignores container width
+    fullWidth?: boolean
+    // if set to true, content element is shown even if cookie should block it
+    // required if not the whole content element should be blocked by cookie,
+    // but only one part, for example a video in a textmedia element.
+    // in that case cookie behaviour has to be implemented in custom component,
+    // see T3CeTextmedia in playground for example
+    ignoreCookies?: boolean
+}
+
+interface CeWithImagesOptions extends CeOptions {
+    // lazy: load images only when in viewport
+    lazy: boolean
+    // responsive: load image with dimensions according to windows size
+    responsive: boolean
+}
+
+interface CeImageGalleryOptions extends CeOptions {
+    // lazy doesn't work for navigation and preview images
+    lazy: boolean
+    // max height for images used in navigation
+    navigationHeight: number
+    // max height for images used in preview
+    previewHeight: number
+}
+
 export interface ModuleOptions {
     // TYPO3 Headless Backend information
     api: {
@@ -29,46 +56,17 @@ export interface ModuleOptions {
     baseUrl: string
     // config for content elements, type key has to match CType
     contentElements: {
-        [type: string]: {
-            // if set to true, content element ignores container width
-            fullWidth?: boolean
-            // if set to true, content element is shown even if cookie should block it
-            // required if not the whole content element should be blocked by cookie,
-            // but only one part, for example a video in a textmedia element.
-            // in that case cookie behaviour has to be implemented in custom component,
-            // see T3CeTextmedia in playground for example
-            ignoreCookies?: boolean
-        }
+        image: CeWithImagesOptions
+        imageGallery: CeImageGalleryOptions
+        textmedia: CeWithImagesOptions
+        textpic: CeWithImagesOptions
+        // Union type required due to this issue: https://github.com/microsoft/TypeScript/issues/17867
+        [type: string]: CeOptions | CeWithImagesOptions | CeImageGalleryOptions
     }
     // UID from cookiebot, required if cookie consent banner should be shown
     cookiebotUid?: string
     // options from https://github.com/intlify/vue-i18n-next
     i18n: I18nOptions
-    // image options for content elements
-    // lazy: load images only when in viewport
-    // responsive: load image with dimensions according to windows size
-    images: {
-        ceImageGallery: {
-            // lazy doesn't work for navigation and preview images
-            lazy: boolean
-            // max height for images used in navigation
-            navigationHeight: number
-            // max height for images used in preview
-            previewHeight: number
-        }
-        ceImage: {
-            lazy: boolean
-            responsive: boolean
-        }
-        ceTextmedia: {
-            lazy: boolean
-            responsive: boolean
-        }
-        ceTextpic: {
-            lazy: boolean
-            responsive: boolean
-        }
-    }
     // language paths in addition to default language
     languages: string[]
     layout: {
@@ -107,28 +105,27 @@ export default defineNuxtModule<ModuleOptions>({
             initialDataType: 834,
         },
         baseUrl: '',
-        contentElements: {},
-        i18n: {
-            locale: 'de',
-        },
-        images: {
-            ceImage: {
+        contentElements: {
+            image: {
                 lazy: true,
                 responsive: true,
             },
-            ceImageGallery: {
+            imageGallery: {
                 lazy: true,
                 navigationHeight: 256,
                 previewHeight: 256,
             },
-            ceTextmedia: {
+            textmedia: {
                 lazy: true,
                 responsive: true,
             },
-            ceTextpic: {
+            textpic: {
                 lazy: true,
                 responsive: true,
             },
+        },
+        i18n: {
+            locale: 'de',
         },
         languages: [],
         layout: {

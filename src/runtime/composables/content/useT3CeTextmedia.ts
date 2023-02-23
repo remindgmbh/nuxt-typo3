@@ -6,7 +6,7 @@ import { useT3TextAsset } from '#nuxt-typo3/composables/content/useT3TextAsset'
 
 export function useT3CeTextmedia(
     contentElement: T3Api.ContentElement<T3Api.Content.Textmedia>,
-    config = useT3Config().images.ceTextmedia
+    config = useT3Config().contentElements.textmedia
 ) {
     const { breakpointsAsc, getCeBreakpoint } = useT3Breakpoints()
     const { assetIsSmall, type } = useT3TextAsset(contentElement.content)
