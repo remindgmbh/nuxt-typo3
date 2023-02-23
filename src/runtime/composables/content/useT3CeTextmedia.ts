@@ -16,6 +16,7 @@ export function useT3CeTextmedia(
             return {
                 sizes: config.responsive ? sizes.value : undefined,
                 loading: config.lazy ? 'lazy' : undefined,
+                fileExtension: config.imageFileExtension,
             }
         } else {
             return undefined

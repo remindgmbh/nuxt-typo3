@@ -13,6 +13,7 @@ const props = defineProps<{
     maxHeight?: number
     maxWidth?: number
     sizes?: { [breakpoint: string]: string }
+    fileExtension?: string
 }>()
 
 const attrs = useAttrs()
@@ -65,6 +66,10 @@ const srcset = computed(() => {
 function getUrl(uid: number, maxWidth?: number, maxHeight?: number) {
     const url = new URL('image', config.api.baseUrl)
     url.searchParams.append('uid', uid.toString())
+    url.searchParams.append(
+        'fileExtension',
+        props.fileExtension ?? config.imageFileExtension
+    )
 
     if (maxWidth) {
         url.searchParams.append('maxWidth', maxWidth.toString())

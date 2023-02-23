@@ -24,6 +24,8 @@ interface CeOptions {
     // in that case cookie behaviour has to be implemented in custom component,
     // see T3CeTextmedia in playground for example
     ignoreCookies?: boolean
+    // overwrite global image file extension for only this component
+    imageFileExtension?: string
 }
 
 interface CeWithImagesOptions extends CeOptions {
@@ -67,6 +69,9 @@ export interface ModuleOptions {
     cookiebotUid?: string
     // options from https://github.com/intlify/vue-i18n-next
     i18n: I18nOptions
+    // global file extension for images coming from typo3
+    // can be overwritten for specific content elements
+    imageFileExtension: string
     // language paths in addition to default language
     languages: string[]
     layout: {
@@ -127,6 +132,7 @@ export default defineNuxtModule<ModuleOptions>({
         i18n: {
             locale: 'de',
         },
+        imageFileExtension: 'webp',
         languages: [],
         layout: {
             breadcrumbs: {

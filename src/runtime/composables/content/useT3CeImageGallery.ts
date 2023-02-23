@@ -13,6 +13,7 @@ export function useT3CeImageGallery(content: T3Api.Content.ImageGallery) {
         content.images.map((asset) => {
             const { imageAttrs } = useT3Asset(asset, {
                 loading: config.lazy ? 'lazy' : undefined,
+                fileExtension: config.imageFileExtension,
             })
             return imageAttrs.value
         })
@@ -22,6 +23,7 @@ export function useT3CeImageGallery(content: T3Api.Content.ImageGallery) {
         content.images.map((asset) => {
             const { imageAttrs } = useT3Asset(asset, {
                 maxHeight: config.previewHeight,
+                fileExtension: config.imageFileExtension,
             })
             return imageAttrs.value
         })
@@ -31,6 +33,7 @@ export function useT3CeImageGallery(content: T3Api.Content.ImageGallery) {
         content.images.map((asset) => {
             const { imageAttrs } = useT3Asset(asset, {
                 maxHeight: config.navigationHeight,
+                fileExtension: config.imageFileExtension,
             })
             return imageAttrs.value
         })
