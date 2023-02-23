@@ -2,7 +2,3 @@ dist
 node_modules
 .nuxt
 .output
-
-# vue and scss files are handled by eslint and stylelint
-*.vue
-*.scss
