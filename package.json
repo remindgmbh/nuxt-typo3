@@ -48,7 +48,7 @@
     },
     "devDependencies": {
         "@nuxt/module-builder": "0.2.0",
-        "@remindgmbh/eslint-config-nuxt": "^1.0.3",
+        "@remindgmbh/eslint-config-nuxt": "^1.0.4",
         "@remindgmbh/stylelint-config": "^1.0.1",
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/vue": "^6.6.1",

@@ -919,13 +919,13 @@
   resolved "https://registry.yarnpkg.com/@planetscale/database/-/database-1.5.0.tgz#073d9ca9841ad62896a6e31f610e89112e6264ef"
   integrity sha512-Qwh7Or1W5dB5mZ9EQqDkgvkDKhBBmQe58KIVUy0SGocNtr5fP4JAWtvZ6EdLAV6C6hVpzNlCA2xIg9lKTswm1Q==
 
-"@remindgmbh/eslint-config-nuxt@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@remindgmbh/eslint-config-nuxt/-/eslint-config-nuxt-1.0.3.tgz#921d8b06c8b9f8d06aa7d32c705a6972b4a7921d"
-  integrity sha512-WFnGYoQxXNhxbO6WKMNO+srwI5wf7RFqH97cmyozLRsumE79kMml3/avmO2m1lYnZgjUxD941STZ/8EIATz3dg==
+"@remindgmbh/eslint-config-nuxt@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@remindgmbh/eslint-config-nuxt/-/eslint-config-nuxt-1.0.4.tgz#e6ab7414b1f0bba757bdb77cbef509b4fbf59c3b"
+  integrity sha512-PkAcrL7LaeR1DRiCHAKUDEwSKvP6rluKvhBR+et02KgZI41pHgxaTKPpEpPCNqq32eZaNV6DzUAxOw2KAssehg==
   dependencies:
     "@nuxtjs/eslint-config-typescript" "^12.0.0"
-    eslint-config-prettier "^8.5.0"
+    eslint-config-prettier "^8.6.0"
     eslint-plugin-nuxt "^4.0.0"
     eslint-plugin-prettier "^4.2.1"
 
@@ -3244,7 +3244,7 @@ escodegen@^2.0.0:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-config-prettier@^8.5.0:
+eslint-config-prettier@^8.6.0:
   version "8.6.0"
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.6.0.tgz#dec1d29ab728f4fa63061774e1672ac4e363d207"
   integrity sha512-bAF0eLpLVqP5oEVUFKpMA+NnRFICwn9X8B5jrR9FcqnYBuPbqWEjTEspPWMj5ye6czoSLDweCzSo3Ko7gGrZaA==
