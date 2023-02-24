@@ -18,7 +18,7 @@ const props = defineProps<{
 
 const attrs = useAttrs()
 
-const { breakpointsDesc } = useT3Breakpoints()
+const { breakpointsAsc, breakpointsDesc } = useT3Breakpoints()
 const config = useT3Config()
 
 const src = computed(() =>
@@ -30,13 +30,14 @@ const src = computed(() =>
 const sizes = computed(() => {
     if (props.sizes && props.uid) {
         const result: string[] = []
-        breakpointsDesc.value.forEach((breakpoint) => {
+        breakpointsAsc.value.forEach((breakpoint) => {
             const size = props.sizes?.[breakpoint.name]
-            if (size && breakpoint.screenWidth) {
-                const minWidth = breakpoint.screenWidth
-                    ? `(min-width: ${breakpoint.screenWidth}px) `
-                    : ''
-                result.push(`${minWidth}${size}`)
+            if (size) {
+                if (result.length === 0) {
+                    result.push(size)
+                }
+                const minWidth = `(min-width: ${breakpoint.screenWidth}px)`
+                result.unshift(`${minWidth} ${size}`)
             }
         })
         return result.join(', ')
@@ -49,12 +50,12 @@ const srcset = computed(() => {
         const result: string[] = []
         breakpointsDesc.value.forEach((breakpoint) => {
             const size = props.sizes?.[breakpoint.name]
-            if (size && breakpoint.screenWidth && props.uid) {
+            if (size && props.uid) {
                 const parsedSize = Number.parseInt(size)
                 const width = size.endsWith('vw')
                     ? Math.ceil(parsedSize / 100) * breakpoint.screenWidth
                     : parsedSize
-                const url = getUrl(props.uid, width)
+                const url = getUrl(props.uid, width, undefined, breakpoint.name)
                 result.push(`${url} ${width}w`)
             }
         })
@@ -63,7 +64,12 @@ const srcset = computed(() => {
     return undefined
 })
 
-function getUrl(uid: number, maxWidth?: number, maxHeight?: number) {
+function getUrl(
+    uid: number,
+    maxWidth?: number,
+    maxHeight?: number,
+    breakpoint?: string
+) {
     const url = new URL('image', config.api.baseUrl)
     url.searchParams.append('uid', uid.toString())
     url.searchParams.append(
@@ -77,6 +83,10 @@ function getUrl(uid: number, maxWidth?: number, maxHeight?: number) {
 
     if (maxHeight) {
         url.searchParams.append('maxHeight', maxHeight.toString())
+    }
+
+    if (breakpoint) {
+        url.searchParams.append('breakpoint', breakpoint)
     }
 
     return url.toString()
