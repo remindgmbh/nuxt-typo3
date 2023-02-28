@@ -76,21 +76,9 @@ export interface ModuleOptions {
             fullWidth: boolean
         }
     }
-    news: {
-        pagination: {
-            // Position of the pagination for news list
-            position: 'top' | 'bottom' | 'both'
-        }
-    }
     // Path to SCSS Variables to override default values defined in runtime/assets/style/*.scss
     // See playground assets/breakpoints.scss or assets/colors.scss for example
     scssForwards?: string | string[]
-    solr: {
-        pagination: {
-            // Position of the pagination for solr search results
-            position: 'top' | 'bottom' | 'both'
-        }
-    }
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -129,16 +117,6 @@ export default defineNuxtModule<ModuleOptions>({
         layout: {
             breadcrumbs: {
                 fullWidth: false,
-            },
-        },
-        news: {
-            pagination: {
-                position: 'bottom',
-            },
-        },
-        solr: {
-            pagination: {
-                position: 'bottom',
             },
         },
     },
