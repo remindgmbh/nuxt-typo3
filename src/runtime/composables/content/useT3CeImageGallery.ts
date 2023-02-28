@@ -12,7 +12,7 @@ export function useT3CeImageGallery(content: T3Api.Content.ImageGallery) {
     const images = computed<T3Model.Image[]>(() =>
         content.images.map((asset) => {
             const { imageAttrs } = useT3Asset(asset, {
-                fileExtension: config.imageFileExtension,
+                fileExtension: config?.images?.fileExtension,
             })
             return imageAttrs.value
         })
@@ -21,8 +21,8 @@ export function useT3CeImageGallery(content: T3Api.Content.ImageGallery) {
     const previewImages = computed<T3Model.Image[]>(() =>
         content.images.map((asset) => {
             const { imageAttrs } = useT3Asset(asset, {
-                maxHeight: config.previewHeight,
-                fileExtension: config.imageFileExtension,
+                maxHeight: config?.gallery?.previewHeight,
+                fileExtension: config?.images?.fileExtension,
             })
             return imageAttrs.value
         })
@@ -31,8 +31,8 @@ export function useT3CeImageGallery(content: T3Api.Content.ImageGallery) {
     const navigationImages = computed<T3Model.Image[]>(() =>
         content.images.map((asset) => {
             const { imageAttrs } = useT3Asset(asset, {
-                maxHeight: config.navigationHeight,
-                fileExtension: config.imageFileExtension,
+                maxHeight: config?.gallery?.navigationHeight,
+                fileExtension: config?.images?.fileExtension,
             })
             return imageAttrs.value
         })

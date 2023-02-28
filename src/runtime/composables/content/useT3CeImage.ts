@@ -12,8 +12,8 @@ export function useT3CeImage(
     const image = computed(() => contentElement.content.images.at(0))
 
     const imageAttrs = computed(() => ({
-        sizes: config.responsive ? sizes.value : undefined,
-        fileExtension: config.imageFileExtension,
+        sizes: config?.images?.responsive === false ? undefined : sizes.value,
+        fileExtension: config?.images?.fileExtension,
     }))
 
     const sizes = computed(() =>

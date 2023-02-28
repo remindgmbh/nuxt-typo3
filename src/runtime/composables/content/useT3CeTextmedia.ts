@@ -14,8 +14,11 @@ export function useT3CeTextmedia(
     const imageAttrs = computed(() => {
         if (type.value === 'image') {
             return {
-                sizes: config.responsive ? sizes.value : undefined,
-                fileExtension: config.imageFileExtension,
+                sizes:
+                    config?.images?.responsive === false
+                        ? undefined
+                        : sizes.value,
+                fileExtension: config?.images?.fileExtension,
             }
         } else {
             return undefined

@@ -15,6 +15,19 @@ import { name, version } from '../package.json'
 
 export const CONFIG_KEY = 'typo3'
 
+interface ImageOptions {
+    // overwrite global image file extension for only this component
+    fileExtension?: string
+    // load image with dimensions according to windows size
+    responsive?: boolean
+}
+
+// Options used for content elements with image gallery, currently used in CeImageGallery
+interface GalleryOptions {
+    navigationHeight?: number
+    previewHeight?: number
+}
+
 interface CeOptions {
     // if set to true, content element ignores container width
     fullWidth?: boolean
@@ -24,42 +37,25 @@ interface CeOptions {
     // in that case cookie behaviour has to be implemented in custom component,
     // see T3CeTextmedia in playground for example
     ignoreCookies?: boolean
-    // overwrite global image file extension for only this component
-    imageFileExtension?: string
-}
-
-interface CeWithImagesOptions extends CeOptions {
-    // load image with dimensions according to windows size
-    responsive: boolean
-}
-
-interface CeImageGalleryOptions extends CeOptions {
-    // max height for images used in navigation
-    navigationHeight: number
-    // max height for images used in preview
-    previewHeight: number
+    images?: ImageOptions
+    gallery?: GalleryOptions
 }
 
 export interface ModuleOptions {
     // TYPO3 Headless Backend information
     api: {
         // URL of the TYPO3 Backend
-        baseUrl: string
+        baseUrl?: string
         // Type number of the footer content, only required if changed in backend
-        footerContentType: number
+        footerContentType?: number
         // Type number of the initial data, only required if changed in backend
-        initialDataType: number
+        initialDataType?: number
     }
     // URL of the frontend project, used for page meta data
     baseUrl: string
     // config for content elements, type key has to match CType
     contentElements: {
-        image: CeWithImagesOptions
-        imageGallery: CeImageGalleryOptions
-        textmedia: CeWithImagesOptions
-        textpic: CeWithImagesOptions
-        // Union type required due to this issue: https://github.com/microsoft/TypeScript/issues/17867
-        [type: string]: CeOptions | CeWithImagesOptions | CeImageGalleryOptions
+        [type: string]: CeOptions
     }
     // UID from cookiebot, required if cookie consent banner should be shown
     cookiebotUid?: string
@@ -95,18 +91,11 @@ export default defineNuxtModule<ModuleOptions>({
         },
         baseUrl: '',
         contentElements: {
-            image: {
-                responsive: true,
-            },
             imageGallery: {
-                navigationHeight: 256,
-                previewHeight: 256,
-            },
-            textmedia: {
-                responsive: true,
-            },
-            textpic: {
-                responsive: true,
+                gallery: {
+                    navigationHeight: 256,
+                    previewHeight: 256,
+                },
             },
         },
         i18n: {
