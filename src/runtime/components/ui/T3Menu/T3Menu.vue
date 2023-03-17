@@ -1,6 +1,6 @@
 <template>
     <component :is="tag" class="t3-menu">
-        <slot />
+        <slot :active-item-id="activeItemId" />
     </component>
 </template>
 
