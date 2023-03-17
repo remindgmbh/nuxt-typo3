@@ -5,13 +5,13 @@
         class="t3-menu-trigger"
         @click="toggle"
     >
-        <slot />
+        <slot :active="activeItemId === id" />
     </component>
 </template>
 
 <script setup lang="ts">
 import { inject } from 'vue'
-import { setActiveItemIdSymbol } from './shared'
+import { activeItemIdSymbol, setActiveItemIdSymbol } from './shared'
 
 const props = withDefaults(
     defineProps<{
@@ -23,6 +23,7 @@ const props = withDefaults(
 )
 
 const setActiveItemId = inject(setActiveItemIdSymbol)
+const activeItemId = inject(activeItemIdSymbol)
 
 function toggle(e: MouseEvent): void {
     e.stopPropagation()
