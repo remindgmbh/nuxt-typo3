@@ -5,28 +5,39 @@
 </template>
 
 <script setup lang="ts">
-import { provide, readonly, ref, watch } from 'vue'
+import { computed, provide, readonly, watch } from 'vue'
 import { useRoute } from '#app'
 import { activeItemIdSymbol, setActiveItemIdSymbol } from './shared'
 
-withDefaults(
+const props = withDefaults(
     defineProps<{
         tag?: keyof HTMLElementTagNameMap
+        activeItemId: string | null
     }>(),
     { tag: 'nav' }
 )
 
-const activeItemId = ref<string | undefined>()
+const emit = defineEmits(['update:activeItemId'])
+
+const activeItemId = computed({
+    get() {
+        return props.activeItemId
+    },
+    set(value) {
+        emit('update:activeItemId', value)
+    },
+})
+
 const route = useRoute()
 
 provide(activeItemIdSymbol, readonly(activeItemId))
 provide(
     setActiveItemIdSymbol,
-    (id?: string) =>
-        (activeItemId.value = activeItemId.value === id ? undefined : id)
+    (id: string | null) =>
+        (activeItemId.value = activeItemId.value === id ? null : id)
 )
 
-watch(route, () => (activeItemId.value = undefined))
+watch(route, () => (activeItemId.value = null))
 </script>
 
 <style lang="scss">

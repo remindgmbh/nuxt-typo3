@@ -64,7 +64,7 @@ function closeOnOutsideClick(e: MouseEvent) {
         e.target instanceof Node &&
         !dropdown.value.contains(e.target)
     ) {
-        setActiveItemId?.(undefined)
+        setActiveItemId?.(null)
     }
 }
 

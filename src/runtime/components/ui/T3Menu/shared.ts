@@ -6,8 +6,8 @@ export const registerContentSymbol = Symbol('registerTrigger') as InjectionKey<
 
 export const setActiveItemIdSymbol = Symbol(
     't3-menu:setActiveItemId'
-) as InjectionKey<(key?: string) => void>
+) as InjectionKey<(key: string | null) => void>
 
 export const activeItemIdSymbol = Symbol(
     't3-menu:activeItemId'
-) as InjectionKey<Readonly<Ref<string | undefined>>>
+) as InjectionKey<Readonly<Ref<string | null>>>

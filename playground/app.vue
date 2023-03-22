@@ -4,7 +4,10 @@
             class="app__header"
             :class="{ 'app__header--dense': !top }"
         >
-            <T3Menu class="app__nav">
+            <T3Menu
+                v-model:active-item-id="activeDropdownItem"
+                class="app__nav"
+            >
                 <div class="app__nav-items">
                     <template v-if="rootPageNavigation">
                         <NuxtLink
@@ -42,6 +45,7 @@
                     <button @click="toggleSidebar">Toggle Sidebar</button>
                     <button @click="toggleScrollbar">Toggle Scrollbar</button>
                     <button v-if="isLoggedIn" @click="logout">Logout</button>
+                    <button @click="closeDropdown">Close Dropdown</button>
                 </div>
                 <T3MenuDropdown
                     v-slot="{ item }"
@@ -102,6 +106,7 @@ const { detectScrollEnd } = useT3Util()
 const sidebarVisible = ref(false)
 const scrollbarDisabled = ref(false)
 const top = ref(true)
+const activeDropdownItem = ref<string | null>(null)
 
 function toggleSidebar(): void {
     sidebarVisible.value = !sidebarVisible.value
@@ -109,6 +114,10 @@ function toggleSidebar(): void {
 
 function toggleScrollbar(): void {
     scrollbarDisabled.value = !scrollbarDisabled.value
+}
+
+function closeDropdown(): void {
+    activeDropdownItem.value = null
 }
 
 onMounted(() => {
