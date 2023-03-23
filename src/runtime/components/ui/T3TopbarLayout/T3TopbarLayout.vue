@@ -1,6 +1,6 @@
 <template>
     <div ref="el" class="t3-topbar-layout">
-        <slot />
+        <slot :header-height="headerHeight" />
     </div>
 </template>
 

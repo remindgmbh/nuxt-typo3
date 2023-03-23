@@ -1,5 +1,9 @@
 <template>
-    <T3TopbarLayout v-model:scrollbar-disabled="scrollbarDisabled" class="app">
+    <T3TopbarLayout
+        v-slot="{ headerHeight }"
+        v-model:scrollbar-disabled="scrollbarDisabled"
+        class="app"
+    >
         <T3TopbarLayoutHeader
             class="app__header"
             :class="{ 'app__header--dense': !top }"
@@ -71,7 +75,15 @@
                 </T3MenuDropdown>
             </T3Menu>
         </T3TopbarLayoutHeader>
-        <T3TopbarLayoutSidebar v-model="sidebarVisible" class="app__sidebar">
+        <T3TopbarLayoutSidebar
+            v-model="sidebarVisible"
+            class="app__sidebar"
+            :transition="{
+                name: 'sidebar-transition',
+                onEnter: (el) => sidebarOnEnter(el, headerHeight),
+                onLeave: sidebarOnLeave,
+            }"
+        >
             <div>top</div>
             <div v-for="i in 100" :key="i">{{ i }}</div>
             <div>bottom</div>
@@ -118,6 +130,27 @@ function toggleScrollbar(): void {
 
 function closeDropdown(): void {
     activeDropdownItem.value = null
+}
+
+function sidebarOnEnter(element: HTMLElement, headerHeight: string) {
+    element.style.height = 'auto'
+    element.style.maxHeight = `calc(100% - ${headerHeight})`
+
+    const height = getComputedStyle(element).height
+
+    element.style.height = '0'
+    element.style.maxHeight = ''
+
+    // Force repaint to make sure the
+    // animation is triggered correctly.
+    // eslint-disable-next-line no-unused-expressions
+    getComputedStyle(element).height
+
+    element.style.height = height
+}
+
+function sidebarOnLeave(element: HTMLElement): void {
+    element.style.height = '0'
 }
 
 onMounted(() => {
@@ -229,21 +262,11 @@ onMounted(() => {
 
     .sidebar-transition {
         &-enter-active {
-            transition: transform 0.5s;
+            transition: height 0.5s;
         }
 
         &-leave-active {
-            transition: transform 0.25s;
-        }
-
-        &-enter-from,
-        &-leave-to {
-            transform: translateX(-100%);
-        }
-
-        &-enter-to,
-        &-leave-from {
-            transform: translateX(0);
+            transition: height 0.25s;
         }
     }
 
