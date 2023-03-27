@@ -10,19 +10,11 @@
                     contentElement.appearance.backgroundColor,
             }"
         >
-            <template v-if="asset">
-                <div
-                    v-if="type === 'video'"
-                    class="t3-text-asset__video-container"
-                >
-                    <slot name="asset" :asset="asset">
-                        <T3Asset :file="asset" :asset-attrs="assetAttrs" />
-                    </slot>
-                </div>
-                <slot v-else name="asset" :asset="asset">
+            <div v-if="asset" class="t3-text-asset__asset-wrapper">
+                <slot name="asset" :asset="asset">
                     <T3Asset :file="asset" :asset-attrs="assetAttrs" />
                 </slot>
-            </template>
+            </div>
         </div>
         <div
             class="t3-text-asset__text"
@@ -47,7 +39,7 @@ const props = defineProps<{
     assetAttrs?: { [key: string]: any }
 }>()
 
-const { asset, assetIsRight, assetIsSmall, type } = useT3TextAsset(
+const { asset, assetIsRight, assetIsSmall } = useT3TextAsset(
     props.contentElement.content
 )
 </script>
@@ -105,26 +97,6 @@ const { asset, assetIsRight, assetIsSmall, type } = useT3TextAsset(
             width: 100%;
             object-fit: contain;
             object-position: top;
-        }
-    }
-
-    &__video-container {
-        width: 100%;
-        position: relative;
-        overflow: hidden;
-
-        // Aspect Ratio 16 / 9
-        padding-top: calc(9 / 16 * 100%);
-
-        video,
-        iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
         }
     }
 
