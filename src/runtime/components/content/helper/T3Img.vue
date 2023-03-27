@@ -1,5 +1,13 @@
 <template>
-    <img :src="src" :srcset="srcset" :sizes="sizes" v-bind="attrs" />
+    <picture>
+        <source
+            v-for="(source, index) in sources"
+            :key="index"
+            :media="source.media"
+            :srcset="source.srcset"
+        />
+        <img :src="src" v-bind="attrs" />
+    </picture>
 </template>
 
 <script setup lang="ts">
@@ -19,50 +27,54 @@ const props = defineProps<{
 
 const attrs = useAttrs()
 
-const { breakpointsAsc, breakpointsDesc } = useT3Breakpoints()
+const { breakpointsDesc } = useT3Breakpoints()
 const config = useT3Config()
 
 const src = computed(() =>
-    props.uid && !props.sizes
-        ? getUrl(props.uid, props.maxWidth, props.maxHeight)
-        : props.src
+    props.uid ? getUrl(props.uid, props.maxWidth, props.maxHeight) : props.src
 )
 
-const sizes = computed(() => {
-    if (props.sizes && props.uid) {
-        const result: string[] = []
-        breakpointsAsc.value.forEach((breakpoint) => {
-            const size = props.sizes?.[breakpoint.name]
-            if (size) {
-                if (result.length === 0) {
-                    result.push(size)
-                }
-                const minWidth = `(min-width: ${breakpoint.screenWidth}px)`
-                result.unshift(`${minWidth} ${size}`)
-            }
-        })
-        return result.join(', ')
-    }
-    return undefined
-})
+const sources = computed(() => {
+    const result: any[] = []
+    if (props.uid) {
+        for (let i = 0; i < breakpointsDesc.value.length; i++) {
+            const breakpoint = breakpointsDesc.value[i]
+            let width: number | undefined
+            if (props.sizes) {
+                const size = props.sizes?.[breakpoint.name]
+                if (size) {
+                    let containerMaxWidth = breakpoint.containerMaxWidth
 
-const srcset = computed(() => {
-    if (props.sizes && props.uid) {
-        const result: string[] = []
-        breakpointsDesc.value.forEach((breakpoint) => {
-            const size = props.sizes?.[breakpoint.name]
-            if (size && props.uid) {
-                const parsedSize = Number.parseInt(size)
-                const width = size.endsWith('vw')
-                    ? Math.ceil(parsedSize / 100) * breakpoint.screenWidth
-                    : parsedSize
-                const url = getUrl(props.uid, width, undefined, breakpoint.name)
-                result.push(`${url} ${width}w`)
+                    // If max container width of current breakpoint is not a number (for example 100% for xs breakpoint)
+                    // use the max container width of the next larger breakpoint
+                    if (Number.isNaN(containerMaxWidth)) {
+                        for (let j = i - 1; j >= 0; j--) {
+                            const previousBreakpoint = breakpointsDesc.value[j]
+                            if (
+                                !Number.isNaN(
+                                    previousBreakpoint.containerMaxWidth
+                                )
+                            ) {
+                                containerMaxWidth =
+                                    previousBreakpoint.containerMaxWidth
+                                break
+                            }
+                        }
+                    }
+                    const parsedSize = Number.parseInt(size)
+                    width = size.endsWith('vw')
+                        ? Math.ceil(parsedSize / 100) * containerMaxWidth
+                        : parsedSize
+                }
             }
-        })
-        return result.join(', ')
+
+            result.push({
+                media: `(min-width: ${breakpoint.screenWidth}px)`,
+                srcset: getUrl(props.uid, width, undefined, breakpoint.name),
+            })
+        }
     }
-    return undefined
+    return result
 })
 
 function getUrl(
