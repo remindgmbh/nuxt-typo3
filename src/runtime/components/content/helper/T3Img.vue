@@ -4,6 +4,7 @@
 
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue'
+import { T3Model } from '#nuxt-typo3'
 import { useT3Breakpoints } from '#nuxt-typo3/composables/useT3Breakpoints'
 import { useT3Config } from '#nuxt-typo3/composables/useT3Config'
 
@@ -12,7 +13,7 @@ const props = defineProps<{
     src?: string
     maxHeight?: number
     maxWidth?: number
-    sizes?: { [breakpoint: string]: string }
+    sizes?: T3Model.ImageSizes
     fileExtension?: string
 }>()
 

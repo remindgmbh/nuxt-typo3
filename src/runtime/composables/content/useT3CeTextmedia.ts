@@ -1,5 +1,5 @@
 import { computed } from 'vue'
-import { T3Api } from '#nuxt-typo3'
+import { T3Api, T3Model } from '#nuxt-typo3'
 import { useT3Breakpoints } from '#nuxt-typo3/composables/useT3Breakpoints'
 import { useT3Config } from '#nuxt-typo3/composables/useT3Config'
 import { useT3TextAsset } from '#nuxt-typo3/composables/content/useT3TextAsset'
@@ -41,7 +41,7 @@ export function useT3CeTextmedia(
                 ? `${Math.ceil(breakpoint.containerMaxWidth / divider)}px`
                 : `${Math.ceil(100 / divider)}vw`
             return result
-        }, {} as { [breakpoint: string]: string })
+        }, {} as T3Model.ImageSizes)
     })
 
     return { imageAttrs }

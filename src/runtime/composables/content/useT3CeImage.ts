@@ -1,5 +1,5 @@
 import { computed } from 'vue'
-import { T3Api } from '#nuxt-typo3'
+import { T3Api, T3Model } from '#nuxt-typo3'
 import { useT3Breakpoints } from '#nuxt-typo3/composables/useT3Breakpoints'
 import { useT3Config } from '#nuxt-typo3/composables/useT3Config'
 
@@ -22,7 +22,7 @@ export function useT3CeImage(
                 ? `${breakpoint.containerMaxWidth}px`
                 : '100vw'
             return result
-        }, {} as { [breakpoint: string]: string })
+        }, {} as T3Model.ImageSizes)
     )
 
     return { image, imageAttrs }
