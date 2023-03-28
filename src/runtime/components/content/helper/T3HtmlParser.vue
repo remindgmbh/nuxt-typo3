@@ -1,6 +1,11 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
-    <!-- eslint-disable-next-line vue/no-v-html -->
-    <div ref="el" class="t3-html" v-html="props.content"></div>
+    <div
+        v-if="props.content"
+        ref="el"
+        class="t3-html"
+        v-html="props.content"
+    ></div>
 </template>
 
 <script setup lang="ts">
