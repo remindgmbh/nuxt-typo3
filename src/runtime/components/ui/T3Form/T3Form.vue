@@ -15,16 +15,18 @@
                 :loading="loading"
             />
         </template>
-        <button
-            class="t3-form__submit"
-            :class="{ 't3-form__submit--loading': loading }"
-            type="submit"
-            :disabled="loading"
-        >
-            <span class="t3-form__submit-label">{{
-                loading && loadingLabel ? loadingLabel : submitLabel
-            }}</span>
-        </button>
+        <div class="t3-form__submit-wrapper">
+            <button
+                class="t3-form__submit"
+                :class="{ 't3-form__submit--loading': loading }"
+                type="submit"
+                :disabled="loading"
+            >
+                <span class="t3-form__submit-label">{{
+                    loading && loadingLabel ? loadingLabel : submitLabel
+                }}</span>
+            </button>
+        </div>
     </form>
 </template>
 
