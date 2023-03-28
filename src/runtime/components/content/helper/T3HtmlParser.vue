@@ -34,5 +34,17 @@ useT3LinkReplacer(el, content)
     :last-child {
         margin-bottom: 0;
     }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-right {
+        text-align: end;
+    }
+
+    .text-justify {
+        text-align: justify;
+    }
 }
 </style>
