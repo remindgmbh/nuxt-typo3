@@ -91,6 +91,10 @@ defineProps<{
 
 <style lang="scss">
 .t3-form-element {
+    &--hidden {
+        display: none;
+    }
+
     &--size-25 {
         width: 25%;
     }
