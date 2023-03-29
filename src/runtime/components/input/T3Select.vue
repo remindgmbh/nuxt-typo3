@@ -1,12 +1,16 @@
 <template>
     <div
-        class="t3-select"
+        class="t3-select t3-input"
         :class="{
             't3-select--required': required,
             't3-select--disabled': disabled,
+            't3-input--required': required,
+            't3-input--disabled': disabled,
         }"
     >
-        <span :id="name" class="t3-select__label">{{ label }}</span>
+        <span :id="name" class="t3-select__label t3-input__label">{{
+            label
+        }}</span>
         <div class="t3-select__wrapper">
             <select
                 :id="name"
@@ -59,7 +63,7 @@
             </div>
         </div>
         <T3CollapseTransition transition-name="error-transition">
-            <div v-if="errorMessage" class="t3-select__error">
+            <div v-if="errorMessage" class="t3-select__error t3-input__error">
                 {{ errorMessage }}
             </div>
         </T3CollapseTransition>

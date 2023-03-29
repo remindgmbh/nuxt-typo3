@@ -1,9 +1,11 @@
 <template>
     <div
-        class="t3-checkbox"
+        class="t3-checkbox t3-input"
         :class="{
             't3-checkbox--required': required,
             't3-checkbox--disabled': disabled,
+            't3-input--required': required,
+            't3-input--disabled': disabled,
         }"
     >
         <div class="t3-checkbox__wrapper">
@@ -16,10 +18,18 @@
                 :value="key"
                 :disabled="disabled"
             />
-            <label class="t3-checkbox__label" :for="key">{{ label }}</label>
+            <label
+                class="t3-checkbox__label"
+                :class="{ 't3-input__label': !multi }"
+                :for="key"
+                >{{ label }}</label
+            >
         </div>
         <T3CollapseTransition>
-            <div v-if="!multi && errorMessage" class="t3-checkbox__error">
+            <div
+                v-if="!multi && errorMessage"
+                class="t3-checkbox__error t3-input__error"
+            >
                 {{ errorMessage }}
             </div>
         </T3CollapseTransition>

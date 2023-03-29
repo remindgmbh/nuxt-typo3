@@ -1,14 +1,19 @@
 <template>
     <div
-        class="t3-autocomplete"
+        class="t3-autocomplete t3-input"
         :class="{
             't3-autocomplete--required': required,
             't3-autocomplete--disabled': disabled,
+            't3-input--required': required,
+            't3-input--disabled': disabled,
         }"
     >
-        <label v-if="label" :for="name" class="t3-autocomplete__label">{{
-            label
-        }}</label>
+        <label
+            v-if="label"
+            :for="name"
+            class="t3-autocomplete__label t3-input__label"
+            >{{ label }}</label
+        >
         <div ref="wrapper" class="t3-autocomplete__wrapper">
             <input
                 :id="name"
@@ -75,7 +80,10 @@
             </T3CollapseTransition>
         </div>
         <T3CollapseTransition transition-name="error-transition">
-            <div v-if="errorMessage" class="t3-autocomplete__error">
+            <div
+                v-if="errorMessage"
+                class="t3-autocomplete__error t3-input__error"
+            >
                 {{ errorMessage }}
             </div>
         </T3CollapseTransition>

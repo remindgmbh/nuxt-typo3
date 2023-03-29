@@ -1,12 +1,16 @@
 <template>
     <div
-        class="t3-textarea"
+        class="t3-textarea t3-input"
         :class="{
             't3-textarea--required': required,
             't3-textarea--disabled': disabled,
+            't3-input--required': required,
+            't3-input--disabled': disabled,
         }"
     >
-        <label class="t3-textarea__label" :for="name">{{ label }}</label>
+        <label class="t3-textarea__label t3-input__label" :for="name">{{
+            label
+        }}</label>
         <textarea
             :id="name"
             v-model="value"
@@ -16,7 +20,7 @@
             :disabled="disabled"
         />
         <T3CollapseTransition>
-            <div v-if="errorMessage" class="t3-textarea__error">
+            <div v-if="errorMessage" class="t3-textarea__error t3-input__error">
                 {{ errorMessage }}
             </div>
         </T3CollapseTransition>
