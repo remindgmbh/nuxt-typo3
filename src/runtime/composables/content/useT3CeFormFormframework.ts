@@ -267,7 +267,7 @@ export function useT3CeFormFormframework(
         try {
             const result = await api.post<
                 T3Api.ContentElement<T3Api.Content.Formframework>
-            >(contentElement.content.link.href, { body })
+            >(contentElement.content.link, { body })
 
             if (typeof result.content.form === 'string') {
                 logger.error(result.content.form)

@@ -6,7 +6,7 @@
                 contentElement.appearance.backgroundColor,
         }"
     >
-        <T3Header :content-element="contentElement" />
+        <T3Text class="t3-ce-form__text" :content-element="contentElement" />
         <div :class="`t3-ce-form__form`">
             <T3Form
                 :form-elements="formElements"
