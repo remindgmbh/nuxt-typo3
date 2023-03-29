@@ -12,6 +12,7 @@
                 :form-elements="formElements"
                 :loading="loading"
                 :loading-label="loadingLabel"
+                :required-hint="requiredHint"
                 :submit-label="submitLabel"
                 @submit="submit"
             />
@@ -27,6 +28,12 @@ const props = defineProps<{
     contentElement: T3Api.ContentElement<T3Api.Content.Formframework>
 }>()
 
-const { formElements, loading, loadingLabel, submitLabel, submit } =
-    useT3CeFormFormframework(props.contentElement)
+const {
+    formElements,
+    loading,
+    loadingLabel,
+    requiredHint,
+    submitLabel,
+    submit,
+} = useT3CeFormFormframework(props.contentElement)
 </script>

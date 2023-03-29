@@ -27,6 +27,7 @@ export default {
     form: {
         submit: 'Submit',
         loading: 'Loading',
+        required: 'Required field',
         success: 'Success',
     },
     imageGallery: {

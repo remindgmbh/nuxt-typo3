@@ -49,6 +49,10 @@ export function useT3CeFormFormframework(
 
     const successLabel = computed(() => i18n.value.success || t('form.success'))
 
+    const requiredHint = computed(
+        () => i18n.value.required || t('form.required')
+    )
+
     const formElements = computed(() =>
         contentElement.content.form.elements.map(convert)
     )
@@ -289,6 +293,7 @@ export function useT3CeFormFormframework(
         formElements,
         loading,
         loadingLabel,
+        requiredHint,
         submitLabel,
         successLabel,
         submit,

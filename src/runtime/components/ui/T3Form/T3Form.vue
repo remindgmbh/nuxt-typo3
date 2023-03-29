@@ -1,20 +1,25 @@
 <template>
     <form class="t3-form" @submit="submit">
-        <template
-            v-for="formElement in formElements"
-            :key="formElement.identifier"
-        >
-            <T3FormGroup
-                v-if="formElement.isRow()"
-                :form-elements="formElement.formElements"
-                :loading="loading"
-            />
-            <T3FormElement
-                v-else
-                :form-element="formElement"
-                :loading="loading"
-            />
-        </template>
+        <div class="t3-form__elements">
+            <template
+                v-for="formElement in formElements"
+                :key="formElement.identifier"
+            >
+                <T3FormGroup
+                    v-if="formElement.isRow()"
+                    :form-elements="formElement.formElements"
+                    :loading="loading"
+                />
+                <T3FormElement
+                    v-else
+                    :form-element="formElement"
+                    :loading="loading"
+                />
+            </template>
+        </div>
+        <div v-if="showRequiredHint" class="t3-form__required-hint">
+            {{ requiredHint }}
+        </div>
         <div class="t3-form__submit-wrapper">
             <button
                 class="t3-form__submit"
@@ -31,17 +36,23 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useForm } from 'vee-validate'
 import { T3Model } from '#nuxt-typo3'
 
 const { handleSubmit } = useForm()
 
-defineProps<{
+const props = defineProps<{
     formElements: T3Model.FormElement[]
     loading?: boolean
     loadingLabel?: string
     submitLabel: string
+    requiredHint?: string
 }>()
+
+const showRequiredHint = computed(() =>
+    props.formElements.some((element) => element.required)
+)
 
 const emit = defineEmits<{
     (e: 'submit', data: { [key: string]: string }): void

@@ -22,6 +22,7 @@ export default {
     form: {
         submit: 'Absenden',
         loading: 'Lädt',
+        required: 'Pflichtfeld',
         success: 'Erfolgreich',
     },
     imageGallery: {

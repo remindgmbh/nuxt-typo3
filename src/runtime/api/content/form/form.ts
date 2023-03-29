@@ -18,6 +18,7 @@ export interface Form {
     }
     i18n: {
         loading: string
+        required: string
         submit: string
         success: string
     }
