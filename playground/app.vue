@@ -48,6 +48,9 @@
                     >
                     <button @click="toggleSidebar">Toggle Sidebar</button>
                     <button @click="toggleScrollbar">Toggle Scrollbar</button>
+                    <button @click="toggleTheme">
+                        {{ selectedTheme }}
+                    </button>
                     <button v-if="isLoggedIn" @click="logout">Logout</button>
                     <button @click="closeDropdown">Close Dropdown</button>
                 </div>
@@ -114,6 +117,7 @@ const { availableLanguages } = useT3Languages()
 const { navItemsWithChildren, rootPageNavigation } = useT3Navigation()
 const { isLoggedIn, logout } = useT3UserState()
 const { detectScrollEnd } = useT3Util()
+const { colors, selectedTheme } = useT3Theme()
 
 const sidebarVisible = ref(false)
 const scrollbarDisabled = ref(false)
@@ -130,6 +134,10 @@ function toggleScrollbar(): void {
 
 function closeDropdown(): void {
     activeDropdownItem.value = null
+}
+
+function toggleTheme(): void {
+    selectedTheme.value = selectedTheme.value === 'dark' ? 'light' : 'dark'
 }
 
 function sidebarOnEnter(element: HTMLElement, headerHeight: string) {
@@ -162,14 +170,13 @@ onMounted(() => {
 })
 </script>
 <style lang="scss">
-@use '@/assets/colors.scss';
-
 .app {
     position: relative;
+    color: v-bind('colors.default.contrast');
 
     &__loading-bar {
         position: absolute;
-        background-color: colors.$primary;
+        background-color: v-bind('colors.primary.value');
         height: 0;
         width: 100%;
 
@@ -184,12 +191,12 @@ onMounted(() => {
         right: 100%;
         bottom: 0;
         left: 0;
-        background-color: colors.$secondary;
+        background-color: v-bind('colors.secondary.value');
         animation: loading 2s linear infinite;
     }
 
     &__header {
-        background-color: colors.$background;
+        background-color: v-bind('colors.default.value');
         height: 5rem;
         transition: height 0.5s;
         display: flex;
@@ -200,22 +207,22 @@ onMounted(() => {
     }
 
     &__footer {
-        background-color: colors.$secondary;
-        color: colors.$white;
+        background-color: v-bind('colors.secondary.value');
+        color: v-bind('colors.white.value');
     }
 
     &__nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 0.125rem colors.$secondary solid;
+        border-bottom: 0.125rem v-bind('colors.secondary.value') solid;
         width: 100%;
     }
 
     &__sidebar {
-        background-color: colors.$primary;
+        background-color: v-bind('colors.primary.value');
         width: 100%;
-        border-bottom: solid 1rem colors.$accent;
+        border-bottom: solid 1rem v-bind('colors.accent.value');
         box-sizing: border-box;
         overflow: auto;
     }
@@ -223,6 +230,7 @@ onMounted(() => {
     &__content {
         overflow-x: hidden;
         position: relative;
+        background-color: v-bind('colors.default.value');
     }
 
     &__nav-items {
@@ -235,12 +243,25 @@ onMounted(() => {
         }
 
         .router-link-active {
-            color: colors.$primary;
+            color: v-bind('colors.primary.value');
         }
     }
 
     &__nav-dropdown {
-        background-color: colors.$accent;
+        background-color: v-bind('colors.accent.value');
+
+        .t3-menu-dropdown {
+            &__content {
+                transition: height 0.25s;
+            }
+        }
+
+        .menu-collapse-transition {
+            &-enter-active,
+            &-leave-active {
+                transition: height 0.5s;
+            }
+        }
 
         .menu-change-transition {
             &-enter-active,

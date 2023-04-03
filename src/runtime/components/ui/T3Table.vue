@@ -86,10 +86,6 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-@use '#nuxt-typo3/assets/styles/colors' as colors;
-@use '#nuxt-typo3/assets/styles/sizes' as sizes;
-@use '#nuxt-typo3/assets/styles/transition-durations' as transition-durations;
-
 .t3-table {
     $viewport-z-index: 0;
 
@@ -101,14 +97,6 @@ onMounted(() => {
         z-index: $viewport-z-index;
     }
 
-    @mixin table-overlay-background($side) {
-        background: linear-gradient(
-            to $side,
-            rgb(255 255 255 / 0%) 0%,
-            colors.$table-overlay 100%
-        );
-    }
-
     &__overlay-left,
     &__overlay-right {
         content: '';
@@ -116,24 +104,32 @@ onMounted(() => {
         position: absolute;
         width: 0;
         height: 100%;
-        transition: width transition-durations.$table-overlay;
+        transition: width 0;
         z-index: $viewport-z-index + 1;
         pointer-events: none;
 
         &--visible {
-            width: sizes.$table-overlay-width;
+            width: 0;
         }
     }
 
     &__overlay-left {
-        @include table-overlay-background(left);
-
+        // define background, for example:
+        // background: linear-gradient(
+        //     to left,
+        //     rgb(255 255 255 / 0%) 0%,
+        //     white 100%
+        // );
         left: 0;
     }
 
     &__overlay-right {
-        @include table-overlay-background(right);
-
+        // define background, for example:
+        // background: linear-gradient(
+        //     to right,
+        //     rgb(255 255 255 / 0%) 0%,
+        //     white 100%
+        // );
         right: 0;
     }
 }

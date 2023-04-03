@@ -24,7 +24,7 @@
                 :disabled="disabled"
             />
         </div>
-        <T3CollapseTransition>
+        <T3CollapseTransition transition-name="error-transition">
             <div
                 v-if="errorMessage"
                 class="t3-radio-group__error t3-input__error"
@@ -52,9 +52,6 @@ const errorMessage = useFieldError(props.name)
 </script>
 
 <style lang="scss">
-@use '#nuxt-typo3/assets/styles/colors' as colors;
-@use '#nuxt-typo3/assets/styles/transition-durations' as transition-durations;
-
 .t3-radio-group {
     margin: 0;
 
@@ -62,22 +59,11 @@ const errorMessage = useFieldError(props.name)
         display: flex;
     }
 
-    &__error {
-        color: colors.$error;
-    }
-
     &--required & {
         &__label {
             &::after {
                 content: '*';
             }
-        }
-    }
-
-    .collapse-transition {
-        &-enter-active,
-        &-leave-active {
-            transition: height transition-durations.$input-error;
         }
     }
 }

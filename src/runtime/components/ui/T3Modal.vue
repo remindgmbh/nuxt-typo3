@@ -99,7 +99,6 @@ function onBackgroundClick() {
 </script>
 
 <style lang="scss">
-@use '#nuxt-typo3/assets/styles/colors' as colors;
 @use '#nuxt-typo3/assets/styles/z-indexes' as z-indexes;
 
 .t3-modal {
@@ -128,7 +127,8 @@ function onBackgroundClick() {
         height: 100%;
         width: 100%;
         z-index: -1;
-        background-color: colors.$modal-background;
+
+        // Set background color
     }
 }
 </style>

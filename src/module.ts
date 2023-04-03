@@ -41,6 +41,25 @@ interface CeOptions {
     gallery?: GalleryOptions
 }
 
+interface Color {
+    value: string
+    contrast: string
+}
+
+interface ThemeOptions {
+    colors: {
+        [name: string]: Color
+    }
+    spacing: {
+        'extra-small': string
+        small: string
+        medium: string
+        large: string
+        'extra-large': string
+        [other: string]: string
+    }
+}
+
 export interface ModuleOptions {
     // TYPO3 Headless Backend information
     api: {
@@ -75,6 +94,12 @@ export interface ModuleOptions {
     // Path to SCSS Variables to override default values defined in runtime/assets/style/*.scss
     // See playground assets/breakpoints.scss or assets/colors.scss for example
     scssForwards?: string | string[]
+    theme: {
+        default: 'default'
+        themes: {
+            [name: string]: ThemeOptions
+        }
+    }
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -108,9 +133,35 @@ export default defineNuxtModule<ModuleOptions>({
                 fullWidth: false,
             },
         },
+        theme: {
+            default: 'default',
+            themes: {
+                default: {
+                    colors: {},
+                    spacing: {
+                        'extra-small': '0.5rem',
+                        small: '1rem',
+                        medium: '2rem',
+                        large: '4rem',
+                        'extra-large': '8rem',
+                    },
+                },
+            },
+        },
     },
     setup(options, nuxt) {
         const resolver = createResolver(import.meta.url)
+
+        // Use values from default theme for missing values in themes
+        Object.keys(options.theme.themes)
+            .filter((name) => name !== 'default')
+            .forEach((name) => {
+                options.theme.themes[name] = defu(
+                    options.theme.themes[name],
+                    options.theme.themes[options.theme.default],
+                    options.theme.themes.default
+                )
+            })
 
         options = nuxt.options.runtimeConfig.public[CONFIG_KEY] = defu(
             nuxt.options.runtimeConfig.public[CONFIG_KEY],

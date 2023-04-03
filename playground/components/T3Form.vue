@@ -11,5 +11,14 @@ export { default } from '#nuxt-typo3/components/ui/T3Form/T3Form.vue'
             }
         }
     }
+
+    .t3-input {
+        .error-transition {
+            &-enter-active,
+            &-leave-active {
+                transition: height 0.5s;
+            }
+        }
+    }
 }
 </style>

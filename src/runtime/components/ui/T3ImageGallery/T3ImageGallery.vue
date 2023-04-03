@@ -98,11 +98,10 @@ function hideModal() {
 
 <style lang="scss">
 @use 'swiper/scss';
-@use '#nuxt-typo3/assets/styles/colors' as colors;
-@use '#nuxt-typo3/assets/styles/sizes' as sizes;
 
 .t3-image-gallery {
-    height: sizes.$image-gallery-height;
+    // Set gallery height:
+    // height: ...
 
     &__swiper {
         height: 100%;
@@ -152,24 +151,14 @@ function hideModal() {
         bottom: 0;
         left: 0;
         width: 100%;
-        height: sizes.$image-gallery-scrollbar-height;
-        background-color: colors.$image-gallery-scrollbar-background;
         z-index: 1;
+
+        // set scrollbar height:
+        // height: ...
     }
 
     &__scrollbar-drag {
         height: 100%;
-        background-color: colors.$image-gallery-scrollbar;
-    }
-
-    &__modal {
-        color: colors.$white;
-
-        & .t3-modal {
-            &__background {
-                background-color: colors.$image-gallery-background;
-            }
-        }
     }
 }
 </style>

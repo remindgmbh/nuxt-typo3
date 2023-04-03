@@ -1,10 +1,16 @@
-<script lang="ts">
-export { default } from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallerySlideNavigation.vue'
+<template>
+    <BaseT3ImageGallerySlideNavigation v-bind="attrs" />
+</template>
+
+<script setup lang="ts">
+import BaseT3ImageGallerySlideNavigation from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallerySlideNavigation.vue'
+
+const attrs: any = useAttrs()
+
+const { colors } = useT3Theme()
 </script>
 
 <style lang="scss">
-@use '@/assets/colors';
-
 .t3-image-gallery-slide-navigation {
     padding: 1rem;
     background-color: rgba(0 0 0 / 50%);
@@ -34,7 +40,7 @@ export { default } from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallery
 
     &__slide {
         overflow: hidden;
-        background-color: colors.$black;
+        background-color: v-bind('colors.black.value');
 
         &:not(&:last-child) {
             margin-right: 1rem;

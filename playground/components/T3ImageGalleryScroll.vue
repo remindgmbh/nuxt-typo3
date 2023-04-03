@@ -1,10 +1,16 @@
-<script lang="ts">
-export { default } from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGalleryScroll.vue'
+<template>
+    <BaseT3ImageGalleryScroll v-bind="attrs" />
+</template>
+
+<script setup lang="ts">
+import BaseT3ImageGalleryScroll from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGalleryScroll.vue'
+
+const attrs: any = useAttrs()
+
+const { colors } = useT3Theme()
 </script>
 
 <style lang="scss">
-@use '@/assets/colors';
-
 .t3-image-gallery-scroll {
     $divider-margin: 2rem;
 
@@ -22,7 +28,7 @@ export { default } from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallery
 
     &__close {
         background-color: transparent;
-        color: colors.$white;
+        color: v-bind('colors.white.value');
         border: none;
         font-size: 1.5rem;
         font-weight: 700;
@@ -46,7 +52,7 @@ export { default } from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallery
     &__divider {
         margin: $divider-margin 0;
         height: 0.125rem;
-        background-color: colors.$white;
+        background-color: v-bind('colors.white.value');
     }
 }
 </style>

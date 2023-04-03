@@ -178,9 +178,6 @@ function closeOnOutsideClick(e: MouseEvent) {
 </script>
 
 <style lang="scss">
-@use '#nuxt-typo3/assets/styles/colors' as colors;
-@use '#nuxt-typo3/assets/styles/transition-durations' as transition-durations;
-
 .t3-select {
     $color-background: #fff;
     $color-border: #8f8f9d;
@@ -212,12 +209,13 @@ function closeOnOutsideClick(e: MouseEvent) {
             pointer-events: auto;
         }
 
-        .options-transition {
-            &-enter-active,
-            &-leave-active {
-                transition: height transition-durations.$select;
-            }
-        }
+        // set transition for opening options
+        // .options-transition {
+        //     &-enter-active,
+        //     &-leave-active {
+        //         transition: height ...;
+        //     }
+        // }
     }
 
     &__trigger {
@@ -259,17 +257,6 @@ function closeOnOutsideClick(e: MouseEvent) {
 
         &--hover {
             background-color: $color-hover;
-        }
-    }
-
-    &__error {
-        color: colors.$error;
-    }
-
-    .error-transition {
-        &-enter-active,
-        &-leave-active {
-            transition: height transition-durations.$input-error;
         }
     }
 

@@ -59,9 +59,6 @@ function setSwiper(swiper: SwiperClass) {
 </script>
 
 <style lang="scss">
-@use '#nuxt-typo3/assets/styles/colors' as colors;
-@use '#nuxt-typo3/assets/styles/sizes' as sizes;
-
 .t3-image-gallery-slide-navigation {
     height: 100%;
     box-sizing: border-box;
@@ -87,14 +84,14 @@ function setSwiper(swiper: SwiperClass) {
         bottom: 0;
         left: 0;
         width: 100%;
-        height: sizes.$image-gallery-scrollbar-height;
-        background-color: colors.$image-gallery-scrollbar-background;
         z-index: 1;
+
+        // set scrollbar height:
+        // height: ...
     }
 
     &__scrollbar-drag {
         height: 100%;
-        background-color: colors.$image-gallery-scrollbar;
     }
 }
 </style>

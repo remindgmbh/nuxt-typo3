@@ -19,7 +19,7 @@
             :placeholder="placeholder"
             :disabled="disabled"
         />
-        <T3CollapseTransition>
+        <T3CollapseTransition transition-name="error-transition">
             <div v-if="errorMessage" class="t3-textarea__error t3-input__error">
                 {{ errorMessage }}
             </div>
@@ -50,14 +50,7 @@ const { value, errorMessage } = useField(name, props.validation, {
 </script>
 
 <style lang="scss">
-@use '#nuxt-typo3/assets/styles/colors' as colors;
-@use '#nuxt-typo3/assets/styles/transition-durations' as transition-durations;
-
 .t3-textarea {
-    &__error {
-        color: colors.$error;
-    }
-
     &__input {
         width: 100%;
         box-sizing: border-box;
@@ -68,13 +61,6 @@ const { value, errorMessage } = useField(name, props.validation, {
             &::after {
                 content: '*';
             }
-        }
-    }
-
-    .collapse-transition {
-        &-enter-active,
-        &-leave-active {
-            transition: height transition-durations.$input-error;
         }
     }
 }

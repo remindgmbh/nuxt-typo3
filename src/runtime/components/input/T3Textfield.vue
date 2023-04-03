@@ -23,7 +23,7 @@
             :placeholder="placeholder"
             :disabled="disabled"
         />
-        <T3CollapseTransition>
+        <T3CollapseTransition transition-name="error-transition">
             <div
                 v-if="errorMessage"
                 class="t3-textfield__error t3-input__error"
@@ -67,14 +67,7 @@ if (props.type === 'hidden') {
 </script>
 
 <style lang="scss">
-@use '#nuxt-typo3/assets/styles/colors' as colors;
-@use '#nuxt-typo3/assets/styles/transition-durations' as transition-durations;
-
 .t3-textfield {
-    &__error {
-        color: colors.$error;
-    }
-
     &__input {
         width: 100%;
         box-sizing: border-box;
@@ -85,13 +78,6 @@ if (props.type === 'hidden') {
             &::after {
                 content: '*';
             }
-        }
-    }
-
-    .collapse-transition {
-        &-enter-active,
-        &-leave-active {
-            transition: height transition-durations.$input-error;
         }
     }
 }

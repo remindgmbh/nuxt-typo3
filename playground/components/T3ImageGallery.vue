@@ -1,12 +1,21 @@
-<script lang="ts">
-export { default } from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallery.vue'
-</script>
+<template>
+    <BaseT3ImageGallery v-bind="attrs" />
+</template>
 
+<script setup lang="ts">
+import BaseT3ImageGallery from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallery.vue'
+
+const attrs: any = useAttrs()
+
+const { colors } = useT3Theme()
+</script>
 <style lang="scss">
 .t3-image-gallery {
+    height: 12rem;
+
     &__navigation {
         padding: 1rem;
-        background-color: white;
+        background-color: v-bind('colors.white.value');
 
         &--disabled {
             color: lightgrey;
@@ -17,6 +26,12 @@ export { default } from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallery
         bottom: 0.5rem;
         left: 1rem;
         width: calc(100% - 2rem);
+        background-color: v-bind('colors.black.value');
+        height: 0.25rem;
+    }
+
+    &__scrollbar-drag {
+        background-color: v-bind('colors.primary.value');
     }
 
     &__slide {
@@ -34,6 +49,16 @@ export { default } from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallery
 
         &:not(&:last-child) {
             margin-right: 0.5rem;
+        }
+    }
+
+    &__modal {
+        color: v-bind('colors.white.value');
+
+        & .t3-modal {
+            &__background {
+                background-color: rgba(0 0 0 / 95%);
+            }
         }
     }
 }

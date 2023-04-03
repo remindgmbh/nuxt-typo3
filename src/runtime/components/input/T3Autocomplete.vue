@@ -205,9 +205,6 @@ function close() {
 </script>
 
 <style lang="scss">
-@use '#nuxt-typo3/assets/styles/colors' as colors;
-@use '#nuxt-typo3/assets/styles/transition-durations' as transition-durations;
-
 .t3-autocomplete {
     $color-background: #fff;
     $color-border-active: #676774;
@@ -255,23 +252,13 @@ function close() {
         }
     }
 
-    &__error {
-        color: colors.$error;
-    }
-
-    .error-transition {
-        &-enter-active,
-        &-leave-active {
-            transition: height transition-durations.$input-error;
-        }
-    }
-
-    .options-transition {
-        &-enter-active,
-        &-leave-active {
-            transition: height transition-durations.$select;
-        }
-    }
+    // set transition for opening options
+    // .options-transition {
+    //     &-enter-active,
+    //     &-leave-active {
+    //         transition: height ...;
+    //     }
+    // }
 
     &--required & {
         &__label {

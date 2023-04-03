@@ -19,7 +19,7 @@ const props = defineProps<{
     contentElement: T3Api.ContentElement
 }>()
 
-const { isFullWidth } = useT3ContentUtil(props.contentElement)
+const { color, isFullWidth } = useT3ContentUtil(props.contentElement)
 
 const container = computed(
     () =>
@@ -29,32 +29,8 @@ const container = computed(
 </script>
 
 <style lang="scss">
-@use '#nuxt-typo3/assets/styles/colors' as colors;
-
 .t3-background {
-    &--primary {
-        background-color: colors.$primary;
-        color: colors.$font-primary;
-    }
-
-    &--secondary {
-        background-color: colors.$secondary;
-        color: colors.$font-secondary;
-    }
-
-    &--accent {
-        background-color: colors.$accent;
-        color: colors.$font-accent;
-    }
-
-    &--white {
-        background-color: colors.$white;
-        color: colors.$font-white;
-    }
-
-    &--black {
-        background-color: colors.$black;
-        color: colors.$font-black;
-    }
+    background-color: v-bind('color.value');
+    color: v-bind('color.contrast');
 }
 </style>
