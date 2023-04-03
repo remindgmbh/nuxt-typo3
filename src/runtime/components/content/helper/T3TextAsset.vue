@@ -45,42 +45,6 @@ const { asset, assetIsRight, assetIsSmall } = useT3TextAsset(
 </script>
 
 <style lang="scss">
-@use 'sass:map';
-@use '#nuxt-typo3/assets/styles/ce-breakpoints' as ce-breakpoints;
-@use '#nuxt-typo3/assets/styles/breakpoints' as breakpoints;
-
-@mixin width($small-asset, $large-asset) {
-    .t3-text-asset {
-        &__asset {
-            &--large {
-                @include breakpoints.up($large-asset) {
-                    width: 50%;
-                }
-            }
-
-            &--small {
-                @include breakpoints.up($small-asset) {
-                    width: calc(1 / 3 * 100%);
-                }
-            }
-        }
-
-        &__text {
-            &--small {
-                @include breakpoints.up($large-asset) {
-                    width: 50%;
-                }
-            }
-
-            &--large {
-                @include breakpoints.up($small-asset) {
-                    width: calc(2 / 3 * 100%);
-                }
-            }
-        }
-    }
-}
-
 .t3-text-asset {
     display: flex;
     flex-wrap: wrap;
@@ -103,25 +67,5 @@ const { asset, assetIsRight, assetIsSmall } = useT3TextAsset(
     &__text {
         width: 100%;
     }
-}
-
-.t3-ce-textpic {
-    @include width(
-        map.get(ce-breakpoints.$breakpoints, 'textpic-two-columns-small-asset'),
-        map.get(ce-breakpoints.$breakpoints, 'textpic-two-columns-large-asset')
-    );
-}
-
-.t3-ce-textmedia {
-    @include width(
-        map.get(
-            ce-breakpoints.$breakpoints,
-            'textmedia-two-columns-small-asset'
-        ),
-        map.get(
-            ce-breakpoints.$breakpoints,
-            'textmedia-two-columns-large-asset'
-        )
-    );
 }
 </style>

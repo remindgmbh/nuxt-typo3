@@ -8,7 +8,7 @@
     >
         <T3TextAsset
             :content-element="contentElement"
-            :asset-attrs="imageAttrs"
+            :asset-attrs="assetAttrs"
         >
             <template #asset="{ asset }">
                 <slot name="asset" :asset="asset" />
@@ -22,11 +22,9 @@
 
 <script setup lang="ts">
 import { T3Api } from '#nuxt-typo3'
-import { useT3CeTextmedia } from '#nuxt-typo3/composables/content/useT3CeTextmedia'
 
-const props = defineProps<{
+defineProps<{
     contentElement: T3Api.ContentElement<T3Api.Content.Textmedia>
+    assetAttrs?: { [key: string]: any }
 }>()
-
-const { imageAttrs } = useT3CeTextmedia(props.contentElement)
 </script>

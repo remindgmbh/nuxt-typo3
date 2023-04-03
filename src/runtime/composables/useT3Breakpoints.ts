@@ -1,6 +1,5 @@
 import { computed } from 'vue'
 import breakpointsModule from '#nuxt-typo3/assets/styles/js/breakpoints.module.scss'
-import ceBreakpointsModule from '#nuxt-typo3/assets/styles/js/ce-breakpoints.module.scss'
 import containerMaxWidthsModule from '#nuxt-typo3/assets/styles/js/containerMaxWidths.module.scss'
 
 interface Breakpoint {
@@ -10,10 +9,6 @@ interface Breakpoint {
 }
 
 export function useT3Breakpoints() {
-    function getCeBreakpoint(type: string, name: string) {
-        return ceBreakpointsModule[`${type}-${name}`]
-    }
-
     const screenWidths = computed(() =>
         Object.entries(breakpointsModule).reduce((result, [key, value]) => {
             result[key] = Number.parseInt(value)
@@ -61,6 +56,5 @@ export function useT3Breakpoints() {
         breakpointsDesc,
         containerMaxWidths,
         screenWidths,
-        getCeBreakpoint,
     }
 }

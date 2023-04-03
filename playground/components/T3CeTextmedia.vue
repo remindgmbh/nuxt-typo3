@@ -2,11 +2,7 @@
     <div class="pg-ce-textmedia">
         <BaseT3CeTextmedia :content-element="contentElement">
             <template #asset="{ asset }">
-                <T3Asset
-                    v-if="cookieAccepted"
-                    :file="asset"
-                    :asset-attrs="imageAttrs"
-                />
+                <T3Asset v-if="cookieAccepted" :file="asset" />
                 <T3CookieOverlay
                     v-else
                     class="pg-ce-textmedia__cookie-overlay"
@@ -27,8 +23,6 @@ const props = defineProps<{
 }>()
 
 const { cookieAccepted } = useT3ContentUtil(props.contentElement)
-
-const { imageAttrs } = useT3CeTextmedia(props.contentElement)
 </script>
 
 <style lang="scss">
