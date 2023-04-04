@@ -9,7 +9,9 @@
             :class="{ 'app__header--dense': !top }"
         >
             <T3Menu
-                v-model:active-item-id="activeDropdownItem"
+                v-slot="{ activeItem, toggle, close }"
+                :items="navItemsWithChildren"
+                id-field="link"
                 class="app__nav"
             >
                 <div class="app__nav-items">
@@ -29,9 +31,14 @@
                                 :to="navItem.link"
                                 >{{ navItem.title }}</NuxtLink
                             >
-                            <T3MenuTrigger v-else :id="navItem.link">
+                            <button
+                                v-else
+                                :id="navItem.link"
+                                ref="menuTriggers"
+                                @click="() => toggle(navItem.link)"
+                            >
                                 {{ navItem.title }} ↓
-                            </T3MenuTrigger>
+                            </button>
                         </template>
                         <NuxtLink class="app__nav-item" to="/static"
                             >Static</NuxtLink
@@ -52,30 +59,35 @@
                         {{ selectedTheme }}
                     </button>
                     <button v-if="isLoggedIn" @click="logout">Logout</button>
-                    <button @click="closeDropdown">Close Dropdown</button>
                 </div>
-                <T3MenuDropdown
-                    v-slot="{ item }"
-                    class="app__nav-dropdown"
-                    id-field="link"
-                    :items="navItemsWithChildren"
+                <T3CollapseTransition
+                    transition-name="menu-collapse-transition"
                 >
-                    <div class="app__nav-items app__nav-items--column">
-                        <NuxtLink
-                            :key="item.link"
-                            class="app__nav-item"
-                            :to="item.link"
-                            >{{ item.title }}</NuxtLink
+                    <T3AutoHeightContainer
+                        ref="dropdown"
+                        v-on-click-outside="[close, { ignore: menuTriggers }]"
+                        class="app__nav-dropdown"
+                    >
+                        <div
+                            v-if="activeItem"
+                            class="app__nav-items app__nav-items--column"
                         >
-                        <NuxtLink
-                            v-for="navItem in item.children"
-                            :key="navItem.link"
-                            class="app__nav-item"
-                            :to="navItem.link"
-                            >{{ navItem.title }}</NuxtLink
-                        >
-                    </div>
-                </T3MenuDropdown>
+                            <NuxtLink
+                                :key="activeItem.link"
+                                class="app__nav-item"
+                                :to="activeItem.link"
+                                >{{ activeItem.title }}</NuxtLink
+                            >
+                            <NuxtLink
+                                v-for="navItem in activeItem.children"
+                                :key="navItem.link"
+                                class="app__nav-item"
+                                :to="navItem.link"
+                                >{{ navItem.title }}</NuxtLink
+                            >
+                        </div>
+                    </T3AutoHeightContainer>
+                </T3CollapseTransition>
             </T3Menu>
         </T3TopbarLayoutHeader>
         <T3TopbarLayoutSidebar
@@ -110,6 +122,8 @@
 </template>
 
 <script setup lang="ts">
+import { vOnClickOutside } from '@vueuse/components'
+
 const { showBanner } = useT3Cookiebot()
 const { currentFooterContent } = useT3ApiData()
 const { loadingPage } = useT3LoadingState()
@@ -122,7 +136,7 @@ const { colors, selectedTheme } = useT3Theme()
 const sidebarVisible = ref(false)
 const scrollbarDisabled = ref(false)
 const top = ref(true)
-const activeDropdownItem = ref<string | null>(null)
+const menuTriggers = ref([])
 
 function toggleSidebar(): void {
     sidebarVisible.value = !sidebarVisible.value
@@ -130,10 +144,6 @@ function toggleSidebar(): void {
 
 function toggleScrollbar(): void {
     scrollbarDisabled.value = !scrollbarDisabled.value
-}
-
-function closeDropdown(): void {
-    activeDropdownItem.value = null
 }
 
 function toggleTheme(): void {
@@ -217,6 +227,13 @@ onMounted(() => {
         align-items: center;
         border-bottom: 0.125rem v-bind('colors.secondary.value') solid;
         width: 100%;
+
+        .menu-collapse-transition {
+            &-enter-active,
+            &-leave-active {
+                transition: height 0.5s;
+            }
+        }
     }
 
     &__sidebar {
@@ -249,19 +266,10 @@ onMounted(() => {
 
     &__nav-dropdown {
         background-color: v-bind('colors.accent.value');
-
-        .t3-menu-dropdown {
-            &__content {
-                transition: height 0.25s;
-            }
-        }
-
-        .menu-collapse-transition {
-            &-enter-active,
-            &-leave-active {
-                transition: height 0.5s;
-            }
-        }
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        transition: height 0.5s;
 
         .menu-change-transition {
             &-enter-active,
