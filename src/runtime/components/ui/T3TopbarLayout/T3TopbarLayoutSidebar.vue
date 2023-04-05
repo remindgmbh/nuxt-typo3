@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { ref, inject } from 'vue'
-import { headerHeightSymbol, toggleScrollbarSymbol } from './shared'
+import { headerHeightSymbol, scrollbarDisabledSymbol } from './shared'
 
 enum Status {
     Entering,
@@ -49,7 +49,7 @@ const props = withDefaults(
     }
 )
 
-const toggleScrollbar = inject(toggleScrollbarSymbol)
+const scrollbarDisabled = inject(scrollbarDisabledSymbol)
 const headerHeight = props.ignoreHeaderHeight ? '0' : inject(headerHeightSymbol)
 
 const emit = defineEmits<{
@@ -60,7 +60,7 @@ const status = ref(Status.Entering)
 
 function onBeforeEnter(element: HTMLElement): void {
     if (status.value !== Status.Leaving) {
-        toggleScrollbar?.(true)
+        if (scrollbarDisabled) scrollbarDisabled.value = true
     }
     status.value = Status.Entering
     props.transition.onBeforeEnter?.(element)
@@ -73,7 +73,7 @@ function onBeforeLeave(element: HTMLElement): void {
 
 function onAfterLeave(element: HTMLElement): void {
     if (status.value === Status.Leaving) {
-        toggleScrollbar?.(false)
+        if (scrollbarDisabled) scrollbarDisabled.value = false
         status.value = Status.Entering
     }
     props.transition.onAfterLeave?.(element)

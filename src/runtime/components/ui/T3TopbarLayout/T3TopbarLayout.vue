@@ -7,14 +7,11 @@
 <script setup lang="ts">
 import {
     ComponentPublicInstance,
-    computed,
-    nextTick,
     onMounted,
     provide,
     readonly,
     ref,
     watch,
-    WatchStopHandle,
 } from 'vue'
 import { debounce } from 'perfect-debounce'
 import { useLogger } from '#nuxt-logger'
@@ -22,18 +19,8 @@ import {
     headerHeightSymbol,
     registerContentSymbol,
     registerHeaderSymbol,
-    toggleScrollbarSymbol,
+    scrollbarDisabledSymbol,
 } from './shared'
-
-const logger = useLogger()
-const content = ref<ComponentPublicInstance>()
-const header = ref<ComponentPublicInstance>()
-const headerHeight = ref('0px')
-
-provide(registerHeaderSymbol, (instance) => (header.value = instance))
-provide(registerContentSymbol, (instance) => (content.value = instance))
-provide(toggleScrollbarSymbol, toggleScrollbar)
-provide(headerHeightSymbol, readonly(headerHeight))
 
 const props = withDefaults(
     defineProps<{
@@ -42,21 +29,20 @@ const props = withDefaults(
     { scrollbarDisabled: false }
 )
 
+const logger = useLogger()
+const content = ref<ComponentPublicInstance>()
+const header = ref<ComponentPublicInstance>()
+const headerHeight = ref('0px')
+const scrollbarDisabled = ref(false)
+
+provide(registerHeaderSymbol, (instance) => (header.value = instance))
+provide(registerContentSymbol, (instance) => (content.value = instance))
+provide(scrollbarDisabledSymbol, scrollbarDisabled)
+provide(headerHeightSymbol, readonly(headerHeight))
+
 const emit = defineEmits<{
     (e: 'update:scrollbarDisabled', value: boolean): void
-    (e: 'update:sidebarVisible', value: boolean): void
 }>()
-
-const scrollbarDisabled = computed({
-    get() {
-        return props.scrollbarDisabled
-    },
-    set(value: boolean) {
-        emit('update:scrollbarDisabled', value)
-    },
-})
-
-let unwatchScrollbarDisabled: WatchStopHandle | undefined
 
 onMounted(() => {
     if (!header.value) {
@@ -76,21 +62,19 @@ onMounted(() => {
     if (!content.value) {
         logger.warn('T3TopbarLayoutContent component missing')
     }
-    unwatchScrollbarDisabled = watch(scrollbarDisabled, toggleScrollbar)
+    // Do assigment in mounted hook to trigger watch
+    scrollbarDisabled.value = props.scrollbarDisabled
 })
 
-function toggleScrollbar(disabled: boolean): void {
-    // If toggleScrollbar is called from outside, scrollbarDisabled has to be synced
-    if (scrollbarDisabled.value !== disabled) {
-        unwatchScrollbarDisabled?.()
-        scrollbarDisabled.value = disabled
-        nextTick(() => {
-            unwatchScrollbarDisabled = watch(scrollbarDisabled, toggleScrollbar)
-        })
-    }
+watch(
+    () => props.scrollbarDisabled,
+    (value) => (scrollbarDisabled.value = value)
+)
 
-    document.documentElement.style.overflowY = disabled ? 'hidden' : 'initial'
-}
+watch(scrollbarDisabled, (value) => {
+    document.documentElement.style.overflowY = value ? 'hidden' : 'initial'
+    emit('update:scrollbarDisabled', value)
+})
 </script>
 
 <style lang="scss">

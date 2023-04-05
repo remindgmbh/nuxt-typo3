@@ -8,9 +8,9 @@ export const registerHeaderSymbol = Symbol(
     't3-topbar-layout:registerHeader'
 ) as InjectionKey<(instance: ComponentPublicInstance) => void>
 
-export const toggleScrollbarSymbol = Symbol(
-    't3-topbar-layout:toggleScrollbar'
-) as InjectionKey<(disabled: boolean) => void>
+export const scrollbarDisabledSymbol = Symbol(
+    't3-topbar-layout:scrollbarDisabled'
+) as InjectionKey<Ref<boolean>>
 
 export const headerHeightSymbol = Symbol(
     't3-topbar-layout:headerHeight'
