@@ -39,7 +39,7 @@
 
 <script setup lang="ts">
 import { computed, inject, ref, watch } from 'vue'
-import { toggleScrollbarSymbol } from './T3TopbarLayout/shared'
+import { scrollbarDisabledSymbol } from './T3TopbarLayout/shared'
 
 const props = withDefaults(
     defineProps<{
@@ -57,7 +57,7 @@ const props = withDefaults(
     }
 )
 
-const toggleScrollbar = inject(toggleScrollbarSymbol, undefined)
+const scrollbarDisabled = inject(scrollbarDisabledSymbol, undefined)
 
 const emit = defineEmits<{
     (e: 'update:modelValue', value: boolean): void
@@ -73,7 +73,7 @@ const visible = computed({
 })
 
 watch(visible, (value) => {
-    toggleScrollbar?.(value)
+    if (scrollbarDisabled) scrollbarDisabled.value = value
 })
 
 const backgroundTransitioning = ref(false)
