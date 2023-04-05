@@ -1,87 +1,12 @@
 <template>
     <T3TopbarLayout v-model:scrollbar-disabled="scrollbarDisabled" class="app">
         <T3TopbarLayoutHeader class="app__header">
-            <T3Menu
-                v-slot="{ activeItem, toggle, close }"
-                v-model="activeItemId"
-                :items="navItemsWithChildren"
-                id-field="link"
-                class="app__nav"
-            >
-                <div class="app__nav-items">
-                    <template v-if="rootPageNavigation">
-                        <NuxtLink
-                            class="app__nav-item"
-                            :to="rootPageNavigation.link"
-                            >{{ rootPageNavigation.title }}</NuxtLink
-                        >
-                        <template
-                            v-for="navItem in rootPageNavigation.children"
-                            :key="navItem.link"
-                        >
-                            <NuxtLink
-                                v-if="!navItem.children"
-                                class="app__nav-item"
-                                :to="navItem.link"
-                                >{{ navItem.title }}</NuxtLink
-                            >
-                            <button
-                                v-else
-                                :id="navItem.link"
-                                ref="menuTriggers"
-                                @click="() => toggle(navItem.link)"
-                            >
-                                {{ navItem.title }} ↓
-                            </button>
-                        </template>
-                        <NuxtLink class="app__nav-item" to="/static"
-                            >Static</NuxtLink
-                        >
-                    </template>
-                </div>
-                <div class="app__nav-items">
-                    <NuxtLink
-                        v-for="language in availableLanguages"
-                        :key="language.link"
-                        class="app__nav-item"
-                        :to="language.link"
-                        >{{ language.navigationTitle }}</NuxtLink
-                    >
-                    <button @click="toggleSidebar">Toggle Sidebar</button>
-                    <button @click="toggleScrollbar">Toggle Scrollbar</button>
-                    <button @click="toggleTheme">
-                        {{ selectedTheme }}
-                    </button>
-                    <button v-if="isLoggedIn" @click="logout">Logout</button>
-                </div>
-                <T3CollapseTransition
-                    transition-name="menu-collapse-transition"
-                >
-                    <div
-                        v-if="activeItem"
-                        v-on-click-outside="[close, { ignore: menuTriggers }]"
-                        class="app__nav-dropdown"
-                    >
-                        <T3AutoHeightContainer class="app__nav-items-wrapper">
-                            <div class="app__nav-items app__nav-items--column">
-                                <NuxtLink
-                                    :key="activeItem.link"
-                                    class="app__nav-item"
-                                    :to="activeItem.link"
-                                    >{{ activeItem.title }}</NuxtLink
-                                >
-                                <NuxtLink
-                                    v-for="navItem in activeItem.children"
-                                    :key="navItem.link"
-                                    class="app__nav-item"
-                                    :to="navItem.link"
-                                    >{{ navItem.title }}</NuxtLink
-                                >
-                            </div>
-                        </T3AutoHeightContainer>
-                    </div>
-                </T3CollapseTransition>
-            </T3Menu>
+            <PgMainNav />
+            <PgMetaNav
+                v-model:scrollbar-disabled="scrollbarDisabled"
+                v-model:sidebar-visible="sidebarVisible"
+            />
+            <PgDropdown />
         </T3TopbarLayoutHeader>
         <T3TopbarLayoutSidebar
             v-model="sidebarVisible"
@@ -117,7 +42,6 @@
 </template>
 
 <script setup lang="ts">
-import { vOnClickOutside } from '@vueuse/components'
 import { gsap } from 'gsap'
 
 const HEADER_HEIGHT = '5rem'
@@ -126,29 +50,12 @@ const HEADER_HEIGHT_DENSE = '3rem'
 const { showBanner } = useT3Cookiebot()
 const { currentFooterContent } = useT3ApiData()
 const { loadingPage } = useT3LoadingState()
-const { availableLanguages } = useT3Languages()
-const { navItemsWithChildren, rootPageNavigation } = useT3Navigation()
-const { isLoggedIn, logout } = useT3UserState()
 const { detectScrollEnd } = useT3Util()
-const { colors, selectedTheme } = useT3Theme()
+const { colors } = useT3Theme()
 
 const sidebarVisible = ref(false)
 const scrollbarDisabled = ref(false)
-const menuTriggers = ref([])
-const activeItemId = ref<string>()
 const headerHeight = ref(HEADER_HEIGHT)
-
-function toggleSidebar(): void {
-    sidebarVisible.value = !sidebarVisible.value
-}
-
-function toggleScrollbar(): void {
-    scrollbarDisabled.value = !scrollbarDisabled.value
-}
-
-function toggleTheme(): void {
-    selectedTheme.value = selectedTheme.value === 'dark' ? 'light' : 'dark'
-}
 
 function sidebarOnEnter(element: Element, done: () => void) {
     if (!(element instanceof HTMLElement)) {
@@ -225,26 +132,15 @@ onMounted(() => {
         height: v-bind(headerHeight);
         transition: height 0.5s;
         display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 0.125rem v-bind('colors.secondary.value') solid;
+        width: 100%;
     }
 
     &__footer {
         background-color: v-bind('colors.secondary.value');
         color: v-bind('colors.white.value');
-    }
-
-    &__nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 0.125rem v-bind('colors.secondary.value') solid;
-        width: 100%;
-
-        .menu-collapse-transition {
-            &-enter-active,
-            &-leave-active {
-                transition: height 0.5s;
-            }
-        }
     }
 
     &__sidebar {
@@ -264,48 +160,6 @@ onMounted(() => {
         overflow-x: hidden;
         position: relative;
         background-color: v-bind('colors.default.value');
-    }
-
-    &__nav-items-wrapper {
-        transition: height 0.5s;
-    }
-
-    &__nav-items {
-        display: flex;
-        gap: 1rem;
-        padding: 1rem;
-
-        &--column {
-            flex-direction: column;
-        }
-
-        .router-link-active {
-            color: v-bind('colors.primary.value');
-        }
-    }
-
-    &__nav-dropdown {
-        background-color: v-bind('colors.accent.value');
-        position: absolute;
-        top: 100%;
-        width: 100%;
-
-        .menu-change-transition {
-            &-enter-active,
-            &-leave-active {
-                transition: opacity 0.5s;
-            }
-
-            &-enter-from,
-            &-leave-to {
-                opacity: 0;
-            }
-
-            &-enter-to,
-            &-leave-from {
-                opacity: 1;
-            }
-        }
     }
 
     .page-transition {
