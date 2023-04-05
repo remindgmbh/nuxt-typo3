@@ -1,13 +1,9 @@
 <template>
     <transition
-        :name="transition.name"
+        v-bind="transition"
         @before-enter="onBeforeEnter"
-        @enter="transition.onEnter"
-        @enter-cancelled="transition.onEnterCancelled"
         @before-leave="onBeforeLeave"
-        @leave="transition.onLeave"
         @after-leave="onAfterLeave"
-        @leave-cancelled="transition.onLeaveCancelled"
     >
         <component :is="tag" v-if="modelValue" class="t3-topbar-layout-sidebar">
             <slot :close="() => emit('update:modelValue', false)" />
@@ -16,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, inject } from 'vue'
+import { ref, inject, TransitionProps } from 'vue'
 import { scrollbarDisabledSymbol } from './shared'
 
 enum Status {
@@ -24,21 +20,11 @@ enum Status {
     Leaving,
 }
 
-const props = withDefaults(
+withDefaults(
     defineProps<{
         modelValue: boolean
         tag?: keyof HTMLElementTagNameMap
-        transition?: {
-            name: string
-            onBeforeEnter?: (el: HTMLElement) => void
-            onEnter?: (el: HTMLElement, done: () => void) => void
-            onAfterEnter?: (el: HTMLElement) => void
-            onEnterCancelled?: (el: HTMLElement) => void
-            onBeforeLeave?: (el: HTMLElement) => void
-            onLeave?: (el: HTMLElement, done: () => void) => void
-            onAfterLeave?: (el: HTMLElement) => void
-            onLeaveCancelled?: (el: HTMLElement) => void
-        }
+        transition?: TransitionProps
     }>(),
     {
         transition: () => ({
@@ -56,25 +42,22 @@ const emit = defineEmits<{
 
 const status = ref(Status.Entering)
 
-function onBeforeEnter(element: HTMLElement): void {
+function onBeforeEnter(): void {
     if (status.value !== Status.Leaving) {
         if (scrollbarDisabled) scrollbarDisabled.value = true
     }
     status.value = Status.Entering
-    props.transition.onBeforeEnter?.(element)
 }
 
-function onBeforeLeave(element: HTMLElement): void {
+function onBeforeLeave(): void {
     status.value = Status.Leaving
-    props.transition.onBeforeLeave?.(element)
 }
 
-function onAfterLeave(element: HTMLElement): void {
+function onAfterLeave(): void {
     if (status.value === Status.Leaving) {
         if (scrollbarDisabled) scrollbarDisabled.value = false
         status.value = Status.Entering
     }
-    props.transition.onAfterLeave?.(element)
 }
 </script>
 

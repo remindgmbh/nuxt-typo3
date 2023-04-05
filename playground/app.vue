@@ -151,7 +151,10 @@ function toggleTheme(): void {
     selectedTheme.value = selectedTheme.value === 'dark' ? 'light' : 'dark'
 }
 
-function sidebarOnEnter(element: HTMLElement, done: () => void) {
+function sidebarOnEnter(element: Element, done: () => void) {
+    if (!(element instanceof HTMLElement)) {
+        return
+    }
     const initialHeight = element.style.height
     gsap.fromTo(
         element,
@@ -167,7 +170,10 @@ function sidebarOnEnter(element: HTMLElement, done: () => void) {
     )
 }
 
-function sidebarOnLeave(element: HTMLElement, done: () => void): void {
+function sidebarOnLeave(element: Element, done: () => void): void {
+    if (!(element instanceof HTMLElement)) {
+        return
+    }
     const initialHeight = element.style.height
     gsap.fromTo(
         element,
