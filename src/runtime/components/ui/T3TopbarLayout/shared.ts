@@ -11,7 +11,3 @@ export const registerHeaderSymbol = Symbol(
 export const scrollbarDisabledSymbol = Symbol(
     't3-topbar-layout:scrollbarDisabled'
 ) as InjectionKey<Ref<boolean>>
-
-export const headerHeightSymbol = Symbol(
-    't3-topbar-layout:headerHeight'
-) as InjectionKey<Readonly<Ref<string>>>

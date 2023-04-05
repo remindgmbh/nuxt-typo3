@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { ref, inject } from 'vue'
-import { headerHeightSymbol, scrollbarDisabledSymbol } from './shared'
+import { scrollbarDisabledSymbol } from './shared'
 
 enum Status {
     Entering,
@@ -26,7 +26,6 @@ enum Status {
 
 const props = withDefaults(
     defineProps<{
-        ignoreHeaderHeight?: boolean
         modelValue: boolean
         tag?: keyof HTMLElementTagNameMap
         transition?: {
@@ -50,7 +49,6 @@ const props = withDefaults(
 )
 
 const scrollbarDisabled = inject(scrollbarDisabledSymbol)
-const headerHeight = props.ignoreHeaderHeight ? '0' : inject(headerHeightSymbol)
 
 const emit = defineEmits<{
     (e: 'update:modelValue', value: boolean): void
@@ -86,7 +84,6 @@ function onAfterLeave(element: HTMLElement): void {
 .t3-topbar-layout-sidebar {
     z-index: z-indexes.$sidebar;
     position: fixed;
-    height: calc(100% - v-bind(headerHeight));
-    top: v-bind(headerHeight);
+    height: 100%;
 }
 </style>

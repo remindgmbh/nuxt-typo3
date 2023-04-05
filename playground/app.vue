@@ -1,15 +1,9 @@
 <template>
-    <T3TopbarLayout
-        v-slot="{ headerHeight }"
-        v-model:scrollbar-disabled="scrollbarDisabled"
-        class="app"
-    >
-        <T3TopbarLayoutHeader
-            class="app__header"
-            :class="{ 'app__header--dense': !top }"
-        >
+    <T3TopbarLayout v-model:scrollbar-disabled="scrollbarDisabled" class="app">
+        <T3TopbarLayoutHeader class="app__header">
             <T3Menu
                 v-slot="{ activeItem, toggle, close }"
+                v-model="activeItemId"
                 :items="navItemsWithChildren"
                 id-field="link"
                 class="app__nav"
@@ -63,30 +57,30 @@
                 <T3CollapseTransition
                     transition-name="menu-collapse-transition"
                 >
-                    <T3AutoHeightContainer
+                    <div
+                        v-if="activeItem"
                         ref="dropdown"
                         v-on-click-outside="[close, { ignore: menuTriggers }]"
                         class="app__nav-dropdown"
                     >
-                        <div
-                            v-if="activeItem"
-                            class="app__nav-items app__nav-items--column"
-                        >
-                            <NuxtLink
-                                :key="activeItem.link"
-                                class="app__nav-item"
-                                :to="activeItem.link"
-                                >{{ activeItem.title }}</NuxtLink
-                            >
-                            <NuxtLink
-                                v-for="navItem in activeItem.children"
-                                :key="navItem.link"
-                                class="app__nav-item"
-                                :to="navItem.link"
-                                >{{ navItem.title }}</NuxtLink
-                            >
-                        </div>
-                    </T3AutoHeightContainer>
+                        <T3AutoHeightContainer class="app__nav-items-wrapper">
+                            <div class="app__nav-items app__nav-items--column">
+                                <NuxtLink
+                                    :key="activeItem.link"
+                                    class="app__nav-item"
+                                    :to="activeItem.link"
+                                    >{{ activeItem.title }}</NuxtLink
+                                >
+                                <NuxtLink
+                                    v-for="navItem in activeItem.children"
+                                    :key="navItem.link"
+                                    class="app__nav-item"
+                                    :to="navItem.link"
+                                    >{{ navItem.title }}</NuxtLink
+                                >
+                            </div>
+                        </T3AutoHeightContainer>
+                    </div>
                 </T3CollapseTransition>
             </T3Menu>
         </T3TopbarLayoutHeader>
@@ -95,13 +89,15 @@
             class="app__sidebar"
             :transition="{
                 name: 'sidebar-transition',
-                onEnter: (el) => sidebarOnEnter(el, headerHeight),
+                onEnter: sidebarOnEnter,
                 onLeave: sidebarOnLeave,
             }"
         >
-            <div>top</div>
-            <div v-for="i in 100" :key="i">{{ i }}</div>
-            <div>bottom</div>
+            <div class="app__sidebar-content">
+                <div>top</div>
+                <div v-for="i in 100" :key="i">{{ i }}</div>
+                <div>bottom</div>
+            </div>
         </T3TopbarLayoutSidebar>
         <T3TopbarLayoutContent class="app__content">
             <div
@@ -123,6 +119,10 @@
 
 <script setup lang="ts">
 import { vOnClickOutside } from '@vueuse/components'
+import { gsap } from 'gsap'
+
+const HEADER_HEIGHT = '5rem'
+const HEADER_HEIGHT_DENSE = '3rem'
 
 const { showBanner } = useT3Cookiebot()
 const { currentFooterContent } = useT3ApiData()
@@ -135,8 +135,9 @@ const { colors, selectedTheme } = useT3Theme()
 
 const sidebarVisible = ref(false)
 const scrollbarDisabled = ref(false)
-const top = ref(true)
 const menuTriggers = ref([])
+const activeItemId = ref<string>()
+const headerHeight = ref(HEADER_HEIGHT)
 
 function toggleSidebar(): void {
     sidebarVisible.value = !sidebarVisible.value
@@ -150,32 +151,41 @@ function toggleTheme(): void {
     selectedTheme.value = selectedTheme.value === 'dark' ? 'light' : 'dark'
 }
 
-function sidebarOnEnter(element: HTMLElement, headerHeight: string) {
-    element.style.height = 'auto'
-    element.style.maxHeight = `calc(100% - ${headerHeight})`
-
-    const height = getComputedStyle(element).height
-
-    element.style.height = '0'
-    element.style.maxHeight = ''
-
-    // Force repaint to make sure the
-    // animation is triggered correctly.
-    // eslint-disable-next-line no-unused-expressions
-    getComputedStyle(element).height
-
-    element.style.height = height
+function sidebarOnEnter(element: HTMLElement, done: () => void) {
+    const initialHeight = element.style.height
+    gsap.fromTo(
+        element,
+        { height: 0 },
+        {
+            height: element.clientHeight,
+            duration: 1,
+            onComplete: () => {
+                done()
+                element.style.height = initialHeight
+            },
+        }
+    )
 }
 
-function sidebarOnLeave(element: HTMLElement): void {
-    element.style.height = '0'
+function sidebarOnLeave(element: HTMLElement, done: () => void): void {
+    const initialHeight = element.style.height
+    gsap.fromTo(
+        element,
+        { height: element.clientHeight },
+        {
+            height: 0,
+            duration: 1,
+            onComplete: () => {
+                done()
+                element.style.height = initialHeight
+            },
+        }
+    )
 }
 
 onMounted(() => {
     detectScrollEnd(document.body, 'top', (detached) => {
-        if (!scrollbarDisabled.value) {
-            top.value = !detached
-        }
+        headerHeight.value = detached ? HEADER_HEIGHT_DENSE : HEADER_HEIGHT
     })
 })
 </script>
@@ -207,13 +217,9 @@ onMounted(() => {
 
     &__header {
         background-color: v-bind('colors.default.value');
-        height: 5rem;
+        height: v-bind(headerHeight);
         transition: height 0.5s;
         display: flex;
-
-        &--dense {
-            height: 3rem;
-        }
     }
 
     &__footer {
@@ -237,17 +243,26 @@ onMounted(() => {
     }
 
     &__sidebar {
-        background-color: v-bind('colors.primary.value');
+        margin-top: v-bind(headerHeight);
         width: 100%;
+        height: calc(100% - v-bind(headerHeight));
+        overflow: auto;
+    }
+
+    &__sidebar-content {
+        background-color: v-bind('colors.primary.value');
         border-bottom: solid 1rem v-bind('colors.accent.value');
         box-sizing: border-box;
-        overflow: auto;
     }
 
     &__content {
         overflow-x: hidden;
         position: relative;
         background-color: v-bind('colors.default.value');
+    }
+
+    &__nav-items-wrapper {
+        transition: height 0.5s;
     }
 
     &__nav-items {
@@ -269,7 +284,6 @@ onMounted(() => {
         position: absolute;
         top: 100%;
         width: 100%;
-        transition: height 0.5s;
 
         .menu-change-transition {
             &-enter-active,
@@ -286,16 +300,6 @@ onMounted(() => {
             &-leave-from {
                 opacity: 1;
             }
-        }
-    }
-
-    .sidebar-transition {
-        &-enter-active {
-            transition: height 0.5s;
-        }
-
-        &-leave-active {
-            transition: height 0.25s;
         }
     }
 

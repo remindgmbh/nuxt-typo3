@@ -1,22 +1,13 @@
 <template>
     <div ref="el" class="t3-topbar-layout">
-        <slot :header-height="headerHeight" />
+        <slot />
     </div>
 </template>
 
 <script setup lang="ts">
-import {
-    ComponentPublicInstance,
-    onMounted,
-    provide,
-    readonly,
-    ref,
-    watch,
-} from 'vue'
-import { debounce } from 'perfect-debounce'
+import { ComponentPublicInstance, onMounted, provide, ref, watch } from 'vue'
 import { useLogger } from '#nuxt-logger'
 import {
-    headerHeightSymbol,
     registerContentSymbol,
     registerHeaderSymbol,
     scrollbarDisabledSymbol,
@@ -32,13 +23,11 @@ const props = withDefaults(
 const logger = useLogger()
 const content = ref<ComponentPublicInstance>()
 const header = ref<ComponentPublicInstance>()
-const headerHeight = ref('0px')
 const scrollbarDisabled = ref(false)
 
 provide(registerHeaderSymbol, (instance) => (header.value = instance))
 provide(registerContentSymbol, (instance) => (content.value = instance))
 provide(scrollbarDisabledSymbol, scrollbarDisabled)
-provide(headerHeightSymbol, readonly(headerHeight))
 
 const emit = defineEmits<{
     (e: 'update:scrollbarDisabled', value: boolean): void
@@ -47,17 +36,6 @@ const emit = defineEmits<{
 onMounted(() => {
     if (!header.value) {
         logger.warn('T3TopbarLayoutHeader component missing')
-    } else {
-        const headerDivElement = header.value?.$el as HTMLDivElement
-        const resizeObserver = new ResizeObserver(
-            debounce((entries: ResizeObserverEntry[]) => {
-                const entry = entries.at(0)
-                if (entry) {
-                    headerHeight.value = `${entry.contentRect.height}px`
-                }
-            }, 50)
-        )
-        resizeObserver.observe(headerDivElement)
     }
     if (!content.value) {
         logger.warn('T3TopbarLayoutContent component missing')

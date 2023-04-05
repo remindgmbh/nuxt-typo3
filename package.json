@@ -56,6 +56,7 @@
         "@vueuse/components": "^9.13.0",
         "@vueuse/core": "^9.13.0",
         "eslint": "^8.34.0",
+        "gsap": "^3.11.5",
         "jsdom": "^21.1.0",
         "nuxt": "^3.2.2",
         "postcss": "^8.4.21",
