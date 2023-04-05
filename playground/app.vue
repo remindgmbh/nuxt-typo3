@@ -59,7 +59,6 @@
                 >
                     <div
                         v-if="activeItem"
-                        ref="dropdown"
                         v-on-click-outside="[close, { ignore: menuTriggers }]"
                         class="app__nav-dropdown"
                     >
