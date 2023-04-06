@@ -119,10 +119,7 @@ onMounted(() => {
 
     &__loading-progress {
         position: absolute;
-        top: 0;
-        right: 100%;
-        bottom: 0;
-        left: 0;
+        inset: 0 100% 0 0;
         background-color: v-bind('colors.secondary.value');
         animation: loading 2s linear infinite;
     }
