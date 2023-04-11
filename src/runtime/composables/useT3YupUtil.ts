@@ -1,19 +1,24 @@
 import { Schema, ValidationError } from 'yup'
 
 export function useT3YupUtil() {
-    function parseDateString(value: any, _originalValue: any) {
+    function parseDateString(
+        value: any,
+        _originalValue: any
+    ): Date | undefined {
         if (value instanceof Date && !isNaN(value.getTime())) {
             return value
         }
     }
 
-    function parseNumber(value: any, originalValue: any) {
+    function parseNumber(value: unknown, originalValue: unknown): unknown {
         if (originalValue) {
             return value
         }
     }
 
-    function schemaToValidateFunction(schema: Schema) {
+    function schemaToValidateFunction(
+        schema: Schema
+    ): (value: any) => Promise<string | true> {
         return async (value: any) => {
             try {
                 await schema.validate(value)

@@ -26,22 +26,25 @@ export function useT3CeFeloginLogin(
     const api = useT3Api()
     const { clearData, setCurrentInitialData, currentPageData } = useT3ApiData()
 
-    const message = ref({
+    const message = ref<{
+        header: string
+        body: string
+    }>({
         header: contentElement.content.data.message.header,
         body: contentElement.content.data.message.message,
     })
 
-    const loading = ref(false)
+    const loading = ref<boolean>(false)
 
     // TODO: default value
-    const submitLabel = computed(
+    const submitLabel = computed<string>(
         () =>
             contentElement.content.data.form.elements.find(
                 (element) => element.name === 'submit'
             )?.value ?? ''
     )
 
-    const formElements = computed(() =>
+    const formElements = computed<T3Model.FormElement[]>(() =>
         contentElement.content.data.form.elements
             .filter((element) => element.name !== 'submit')
             .map(convert)
@@ -62,7 +65,9 @@ export function useT3CeFeloginLogin(
         })
     }
 
-    function getValidation(formElement: T3Api.Content.Login.FormElement) {
+    function getValidation(
+        formElement: T3Api.Content.Login.FormElement
+    ): GenericValidateFunction[] {
         const result: GenericValidateFunction[] = []
 
         if (formElement.validators) {
@@ -92,7 +97,7 @@ export function useT3CeFeloginLogin(
         return result
     }
 
-    async function submit(data: Record<string, any>) {
+    async function submit(data: Record<string, any>): Promise<void> {
         loading.value = true
 
         const loginType = contentElement.content.data.form.elements.find(

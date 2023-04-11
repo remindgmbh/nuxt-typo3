@@ -11,11 +11,11 @@ const ROOT_MARGINS = {
 }
 
 export function useT3Util() {
-    function capitalize(value: string) {
+    function capitalize(value: string): string {
         return value.charAt(0).toUpperCase() + value.slice(1)
     }
 
-    function padNumber(value: number, maxValue: number) {
+    function padNumber(value: number, maxValue: number): string {
         return value.toString().padStart(maxValue.toString().length, '0')
     }
 
@@ -24,7 +24,7 @@ export function useT3Util() {
         direction: keyof typeof ROOT_MARGINS,
         callback: (detached: boolean) => void,
         viewport?: HTMLElement
-    ) {
+    ): void {
         const io = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) =>

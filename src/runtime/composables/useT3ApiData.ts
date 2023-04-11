@@ -24,19 +24,21 @@ export function useT3ApiData() {
 
     const pageError = useState<T3Model.PageError | undefined>('pageError')
 
-    const currentInitialData = computed(
+    const currentInitialData = computed<T3Api.InitialData | undefined>(
         () => initialData.value[apiPath.currentInitialDataPath.value]
     )
 
-    const currentFooterContent = computed(
-        () => footerContent.value[apiPath.currentInitialDataPath.value]
-    )
+    const currentFooterContent = computed<
+        T3Api.ContentElement<any> | undefined
+    >(() => footerContent.value[apiPath.currentInitialDataPath.value])
 
-    const currentPageData = computed(
+    const currentPageData = computed<T3Api.PageData | undefined>(
         () => pageData.value[apiPath.currentPagePath.value]
     )
 
-    async function loadInitialData(path: string) {
+    async function loadInitialData(
+        path: string
+    ): Promise<T3Api.InitialData | undefined> {
         const initialDataPath = apiPath.getInitialDataPath(path)
 
         if (!initialData.value[initialDataPath]) {
@@ -54,7 +56,9 @@ export function useT3ApiData() {
         return initialData.value[initialDataPath]
     }
 
-    async function loadFooterContent(path: string) {
+    async function loadFooterContent(
+        path: string
+    ): Promise<T3Api.ContentElement<any> | undefined> {
         const initialDataPath = apiPath.getInitialDataPath(path)
 
         if (!footerContent.value[initialDataPath]) {
@@ -73,7 +77,9 @@ export function useT3ApiData() {
         return footerContent.value[initialDataPath]
     }
 
-    async function loadPageData(path: string) {
+    async function loadPageData(
+        path: string
+    ): Promise<T3Api.PageData | undefined> {
         pageError.value = {}
         if (!pageData.value[path]) {
             try {
@@ -93,24 +99,24 @@ export function useT3ApiData() {
         return pageData.value[path]
     }
 
-    function setCurrentPage(data: T3Api.PageData) {
+    function setCurrentPage(data: T3Api.PageData): void {
         pageData.value[apiPath.currentPagePath.value] = data
     }
 
-    function setCurrentInitialData(data: T3Api.InitialData) {
+    function setCurrentInitialData(data: T3Api.InitialData): void {
         initialData.value[apiPath.currentInitialDataPath.value] = data
     }
 
-    function clearData() {
+    function clearData(): void {
         clearInitialData()
         clearPageData()
     }
 
-    function clearInitialData() {
+    function clearInitialData(): void {
         initialData.value = {}
     }
 
-    function clearPageData() {
+    function clearPageData(): void {
         pageData.value = {}
     }
 

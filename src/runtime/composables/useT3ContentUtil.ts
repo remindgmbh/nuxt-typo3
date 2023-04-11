@@ -13,30 +13,31 @@ export function useT3ContentUtil(contentElement: T3Api.ContentElement) {
         () => colors.value[contentElement.appearance.backgroundColor]
     )
 
-    const cookieAccepted = computed(() =>
+    const cookieAccepted = computed<boolean>(() =>
         isAccepted(contentElement.cookie.category)
     )
 
-    const ignoreCookies = computed(
-        () => config.contentElements[contentElement.type]?.ignoreCookies
+    const ignoreCookies = computed<boolean>(
+        () =>
+            config.contentElements[contentElement.type]?.ignoreCookies ?? false
     )
 
-    const isFullWidth = computed(
-        () => config.contentElements[contentElement.type]?.fullWidth
+    const isFullWidth = computed<boolean>(
+        () => config.contentElements[contentElement.type]?.fullWidth ?? false
     )
 
-    const spaceBefore = computed(
+    const spaceBefore = computed<string>(
         () => spacing.value[contentElement.appearance.spaceBefore]
     )
-    const spaceAfter = computed(
+    const spaceAfter = computed<string>(
         () => spacing.value[contentElement.appearance.spaceAfter]
     )
-    const spaceBeforeInside = computed(
+    const spaceBeforeInside = computed<string>(
         () =>
             contentElement.appearance.backgroundColor &&
             spacing.value[contentElement.appearance.spaceBeforeInside]
     )
-    const spaceAfterInside = computed(
+    const spaceAfterInside = computed<string>(
         () =>
             contentElement.appearance.backgroundColor &&
             spacing.value[contentElement.appearance.spaceAfterInside]

@@ -43,20 +43,26 @@ export function useT3CeFormFormframework(
 
     const i18n = computed(() => contentElement.content.form.i18n)
 
-    const submitLabel = computed(() => i18n.value.submit || t('form.submit'))
+    const submitLabel = computed<string>(
+        () => i18n.value.submit || t('form.submit')
+    )
 
-    const loadingLabel = computed(() => i18n.value.loading || t('form.loading'))
+    const loadingLabel = computed<string>(
+        () => i18n.value.loading || t('form.loading')
+    )
 
-    const successLabel = computed(() => i18n.value.success || t('form.success'))
+    const successLabel = computed<string>(
+        () => i18n.value.success || t('form.success')
+    )
 
-    const requiredHint = computed(
+    const requiredHint = computed<string>(
         () => i18n.value.required || t('form.required')
     )
 
-    const formElements = computed(() =>
+    const formElements = computed<T3Model.FormElement[]>(() =>
         contentElement.content.form.elements.map(convert)
     )
-    const loading = ref(false)
+    const loading = ref<boolean>(false)
 
     function getValidation(
         formElement: T3Api.Content.Form.FormElement
@@ -259,7 +265,7 @@ export function useT3CeFormFormframework(
         }
     }
 
-    async function submit(data: Record<string, any>) {
+    async function submit(data: Record<string, any>): Promise<void> {
         loading.value = true
         const body = new FormData()
         body.set('responseElementId', contentElement.id.toString())

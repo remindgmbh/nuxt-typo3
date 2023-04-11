@@ -5,7 +5,7 @@ import { useT3Config } from '#nuxt-typo3/composables/useT3Config'
 export function useT3ApiPath() {
     const config = useT3Config()
 
-    function getInitialDataPath(path: string) {
+    function getInitialDataPath(path: string): string {
         return (
             config.languages.find(
                 (languagePath) =>
@@ -15,9 +15,9 @@ export function useT3ApiPath() {
         )
     }
 
-    const currentPagePath = computed(() => useRoute().fullPath)
+    const currentPagePath = computed<string>(() => useRoute().fullPath)
 
-    const currentInitialDataPath = computed(() =>
+    const currentInitialDataPath = computed<string>(() =>
         getInitialDataPath(currentPagePath.value)
     )
 

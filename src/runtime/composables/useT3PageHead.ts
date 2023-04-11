@@ -1,5 +1,5 @@
 import { MetaObject } from '@nuxt/schema'
-import { useHead } from '#head'
+import { useHead } from '#imports'
 import { T3Api } from '#nuxt-typo3'
 import { useT3Config } from '#nuxt-typo3/composables/useT3Config'
 

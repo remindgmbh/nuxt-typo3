@@ -5,13 +5,13 @@ export function useT3SelectInput<T>(
     options: Ref<T[]>
 ) {
     const hoverOption = ref<T>()
-    const hoverOptionIndex = computed(() =>
+    const hoverOptionIndex = computed<number>(() =>
         options.value.findIndex(
             (value) => toRaw(hoverOption.value) === toRaw(value)
         )
     )
 
-    function supportKeyboardNavigation(e: KeyboardEvent) {
+    function supportKeyboardNavigation(e: KeyboardEvent): void {
         // press down -> go next
         if (
             e.key === 'ArrowDown' &&

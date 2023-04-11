@@ -11,15 +11,17 @@ export function useT3Cookiebot() {
         statistics: false,
     }))
 
-    function isAccepted(category: T3Api.Cookie['category']) {
+    function isAccepted(category: T3Api.Cookie['category']): boolean {
         return category === 'none' || cookieCategories.value[category]
     }
 
-    function showBanner() {
+    function showBanner(): void {
         window.Cookiebot?.renew()
     }
 
-    function acceptCookies(category: Omit<T3Api.Cookie['category'], 'none'>) {
+    function acceptCookies(
+        category: Omit<T3Api.Cookie['category'], 'none'>
+    ): void {
         window.Cookiebot?.submitCustomConsent(
             category === 'preferences' || window.Cookiebot.consent.preferences,
             category === 'statistics' || window.Cookiebot.consent.statistics,

@@ -28,7 +28,7 @@ export function useT3Api() {
     async function getInitialData(options?: {
         path?: string
         fetchOptions?: FetchOptions
-    }) {
+    }): Promise<T3Api.InitialData> {
         const type = config.api.initialDataType
         const path = options?.path ?? apiPath.currentInitialDataPath.value
         const fetchOptions = options?.fetchOptions ?? {}
@@ -41,7 +41,7 @@ export function useT3Api() {
     async function getPageData(options?: {
         path?: string
         fetchOptions?: FetchOptions
-    }) {
+    }): Promise<T3Api.PageData> {
         const path = options?.path ?? apiPath.currentPagePath.value
         try {
             return await get<T3Api.PageData>(path, options?.fetchOptions)
@@ -65,7 +65,7 @@ export function useT3Api() {
     async function getFooterContent(options?: {
         path?: string
         fetchOptions?: FetchOptions
-    }) {
+    }): Promise<T3Api.ContentElement<any>> {
         const type = config.api.footerContentType
         const path = options?.path ?? apiPath.currentInitialDataPath.value
         const fetchOptions = options?.fetchOptions ?? {}

@@ -14,11 +14,11 @@ export default function useT3Menu(statePrefix: string = 't3-menu') {
         () => []
     )
 
-    function close() {
+    function close(): void {
         active.value = undefined
     }
 
-    function toggle(id: string) {
+    function toggle(id: string): void {
         active.value = active.value === id ? undefined : id
     }
 

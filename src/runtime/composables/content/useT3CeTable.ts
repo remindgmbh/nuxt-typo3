@@ -2,18 +2,18 @@ import { computed } from 'vue'
 import { T3Api } from '#nuxt-typo3'
 
 export function useT3CeTable(content: T3Api.Content.Table) {
-    const headerTop = computed(() =>
+    const headerTop = computed<boolean>(() =>
         [1, 3].includes(content.tableHeaderPosition)
     )
-    const headerLeft = computed(() =>
+    const headerLeft = computed<boolean>(() =>
         [2, 3].includes(content.tableHeaderPosition)
     )
 
-    const thead = computed(() =>
+    const thead = computed<string[] | undefined>(() =>
         headerTop.value ? [...content.bodytext].shift() : undefined
     )
 
-    const tbody = computed(() => {
+    const tbody = computed<string[][]>(() => {
         const tbody = [...content.bodytext]
         if (thead.value) {
             tbody.shift()
@@ -24,7 +24,7 @@ export function useT3CeTable(content: T3Api.Content.Table) {
         return tbody
     })
 
-    const tfoot = computed(() =>
+    const tfoot = computed<string[] | undefined>(() =>
         content.tableTfoot === 1 ? [...content.bodytext].pop() : undefined
     )
 

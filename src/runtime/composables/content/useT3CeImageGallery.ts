@@ -5,8 +5,8 @@ import { useT3Config } from '#nuxt-typo3/composables/useT3Config'
 
 export function useT3CeImageGallery(content: T3Api.Content.ImageGallery) {
     const config = useT3Config().contentElements.imageGallery
-    const header = computed(() => content.header)
-    const subheader = computed(() => content.subheader)
+    const header = computed<string | undefined>(() => content.header)
+    const subheader = computed<string | undefined>(() => content.subheader)
     const type = computed(() => content.settings.type)
 
     const images = computed<T3Model.Image[]>(() =>

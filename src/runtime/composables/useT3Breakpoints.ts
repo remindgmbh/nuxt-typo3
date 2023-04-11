@@ -9,14 +9,14 @@ interface Breakpoint {
 }
 
 export function useT3Breakpoints() {
-    const screenWidths = computed(() =>
+    const screenWidths = computed<{ [key: string]: number }>(() =>
         Object.entries(breakpointsModule).reduce((result, [key, value]) => {
             result[key] = Number.parseInt(value)
             return result
         }, {} as { [key: string]: number })
     )
 
-    const containerMaxWidths = computed(() =>
+    const containerMaxWidths = computed<{ [key: string]: number }>(() =>
         Object.entries(containerMaxWidthsModule).reduce(
             (result, [key, value]) => {
                 result[key] = Number.parseInt(value)
@@ -26,7 +26,7 @@ export function useT3Breakpoints() {
         )
     )
 
-    const breakpoints = computed(() =>
+    const breakpoints = computed<{ [name: string]: Breakpoint }>(() =>
         Object.entries(screenWidths.value).reduce(
             (result, [name, screenWidth]) => {
                 result[name] = {
