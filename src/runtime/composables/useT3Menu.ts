@@ -1,7 +1,7 @@
 import { ComponentPublicInstance, readonly, watch } from 'vue'
 import { useRoute, useState } from '#app'
 
-export default function useT3Menu(statePrefix: string = 't3-menu') {
+export function useT3Menu(statePrefix: string = 't3-menu') {
     const route = useRoute()
 
     const active = useState<string | undefined>(
