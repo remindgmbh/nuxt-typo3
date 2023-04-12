@@ -1,19 +1,19 @@
 import { computed } from 'vue'
-import * as T3Api from '../api'
+import * as T3Model from '../models'
 import { useT3ApiData } from '#imports'
 
 export function useT3Languages() {
     const { currentInitialData, currentPageData } = useT3ApiData()
 
-    const initialDataLanguages = computed<T3Api.Language[]>(
+    const initialDataLanguages = computed<T3Model.Typo3.Language[]>(
         () => currentInitialData.value?.i18n ?? []
     )
 
-    const pageDataLanguages = computed<T3Api.Language[]>(
+    const pageDataLanguages = computed<T3Model.Typo3.Language[]>(
         () => currentPageData.value?.i18n ?? []
     )
 
-    const availableLanguages = computed<T3Api.Language[]>(() =>
+    const availableLanguages = computed<T3Model.Typo3.Language[]>(() =>
         // page languages may be empty if error occured
         pageDataLanguages.value.length > 0
             ? pageDataLanguages.value.map((pageDataLanguage) => {
@@ -33,7 +33,7 @@ export function useT3Languages() {
             : initialDataLanguages.value
     )
 
-    const activeLanguage = computed<T3Api.Language | undefined>(() =>
+    const activeLanguage = computed<T3Model.Typo3.Language | undefined>(() =>
         availableLanguages.value.find((language) => language.active)
     )
 

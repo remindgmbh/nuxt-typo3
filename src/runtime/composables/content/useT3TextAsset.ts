@@ -1,9 +1,11 @@
 import { computed } from 'vue'
-import * as T3Api from '../../api'
+import * as T3Model from '../../models'
 import { useT3Asset } from '#imports'
 
-export function useT3TextAsset(content: T3Api.Content.Textmedia) {
-    const asset = computed<T3Api.Asset | undefined>(() => content.assets.at(0))
+export function useT3TextAsset(content: T3Model.Typo3.Content.Data.Textmedia) {
+    const asset = computed<T3Model.Typo3.Asset | undefined>(() =>
+        content.assets.at(0)
+    )
     const assetIsSmall = computed<boolean>(() => content.ratio === 2)
     const assetIsRight = computed<boolean>(
         () => content.assetPosition === 'right'

@@ -24,7 +24,7 @@ const props = defineProps<{
     src?: string
     maxHeight?: number
     maxWidth?: number
-    sizes?: T3Model.ImageSizes
+    sizes?: T3Model.Image.Sizes
     fileExtension?: string
 }>()
 

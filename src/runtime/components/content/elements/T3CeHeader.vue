@@ -11,9 +11,9 @@
 </template>
 
 <script setup lang="ts">
-import { T3Api } from '#imports'
+import { T3Model } from '#imports'
 
 defineProps<{
-    contentElement: T3Api.ContentElement<T3Api.Content.Base>
+    contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Base>
 }>()
 </script>

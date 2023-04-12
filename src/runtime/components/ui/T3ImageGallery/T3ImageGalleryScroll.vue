@@ -62,7 +62,7 @@ import { onMounted, ref, T3Model, useT3Util } from '#imports'
 const props = defineProps<{
     header?: string
     subheader?: string
-    images: T3Model.Image[]
+    images: T3Model.Image.Attributes[]
     scrollToIndex: number
 }>()
 

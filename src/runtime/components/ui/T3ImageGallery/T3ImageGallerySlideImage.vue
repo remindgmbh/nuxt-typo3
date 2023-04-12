@@ -47,7 +47,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import { T3Model } from '#imports'
 
 defineProps<{
-    images: T3Model.Image[]
+    images: T3Model.Image.Attributes[]
     activeIndex: number
     thumbsSwiper?: SwiperClass
 }>()

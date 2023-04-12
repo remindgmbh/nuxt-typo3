@@ -1,4 +1,5 @@
 {
     "extends": "./playground/.nuxt/tsconfig.json",
-    "include": ["./playground/.nuxt/components.d.ts", "src", "test"]
+    "include": ["./playground/.nuxt/components.d.ts", "src", "test"],
+    "exclude": ["./playground"]
 }

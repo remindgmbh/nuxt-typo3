@@ -1,11 +1,11 @@
 import { computed } from 'vue'
-import * as T3Api from '../../api'
+import * as T3Model from '../../models'
 
 export function useT3CeTextpic(
-    contentElement: T3Api.ContentElement<T3Api.Content.Textpic>
+    contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Textpic>
 ) {
     const textmediaContentElement = computed<
-        T3Api.ContentElement<T3Api.Content.Textmedia>
+        T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Textmedia>
     >(() => ({
         ...contentElement,
         content: {

@@ -2,14 +2,13 @@ import { array, boolean, date, number, string, Schema } from 'yup'
 import { useI18n } from 'vue-i18n'
 import { GenericValidateFunction, RuleExpression } from 'vee-validate'
 import { computed, ref } from 'vue'
-import * as T3Api from '../../api'
-import * as T3Model from '../../model'
+import * as T3Model from '../../models'
 import { navigateTo, useLogger, useT3Api, useT3YupUtil } from '#imports'
 
 const REGEX_ALPHANUMERIC = /^(\w*)$/
 
 type FormElementTypeMapping = {
-    [Property in T3Api.Content.Form.FormElementType]: T3Model.FormElementType
+    [Property in T3Model.Typo3.Content.Data.Form.FormElementType]: T3Model.FormElement.Type
 }
 
 const formElementTypeMapping: FormElementTypeMapping = {
@@ -31,7 +30,7 @@ const formElementTypeMapping: FormElementTypeMapping = {
 }
 
 export function useT3CeFormFormframework(
-    contentElement: T3Api.ContentElement<T3Api.Content.Formframework>
+    contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Formframework>
 ) {
     const logger = useLogger()
     const api = useT3Api()
@@ -57,13 +56,13 @@ export function useT3CeFormFormframework(
         () => i18n.value.required || t('form.required')
     )
 
-    const formElements = computed<T3Model.FormElement[]>(() =>
+    const formElements = computed<T3Model.FormElement.Base[]>(() =>
         contentElement.content.form.elements.map(convert)
     )
     const loading = ref<boolean>(false)
 
     function getValidation(
-        formElement: T3Api.Content.Form.FormElement
+        formElement: T3Model.Typo3.Content.Data.Form.FormElement
     ): RuleExpression<any> {
         const result: GenericValidateFunction[] = []
         const label = formElement.label
@@ -193,9 +192,9 @@ export function useT3CeFormFormframework(
     }
 
     function convert(
-        formElement: T3Api.Content.Form.FormElement
-    ): T3Model.FormElement {
-        const f: T3Model.IFormElement = {
+        formElement: T3Model.Typo3.Content.Data.Form.FormElement
+    ): T3Model.FormElement.Base {
+        const f: T3Model.FormElement.IBase = {
             type: formElementTypeMapping[formElement.type] ?? 'hidden',
             label: formElement.label,
             name: formElement.name,
@@ -215,29 +214,32 @@ export function useT3CeFormFormframework(
                     ? formElement.elements.map(convert)
                     : []
 
-                return new T3Model.FormElementRow({ ...f, formElements })
+                return new T3Model.FormElement.Row({ ...f, formElements })
             }
             case 'Checkbox':
-                return new T3Model.FormElement({ ...f, defaultValue: false })
+                return new T3Model.FormElement.Base({
+                    ...f,
+                    defaultValue: false,
+                })
             case 'MultiCheckbox':
-                return new T3Model.FormElementWithOptions({
+                return new T3Model.FormElement.WithOptions({
                     ...f,
                     options: formElement.properties?.options ?? {},
                     defaultValue: formElement.defaultValue || [],
                 })
             case 'RadioButton':
-                return new T3Model.FormElementWithOptions({
+                return new T3Model.FormElement.WithOptions({
                     ...f,
                     options: formElement.properties?.options ?? {},
                 })
             case 'SingleSelect':
-                return new T3Model.FormElementSelect({
+                return new T3Model.FormElement.Select({
                     ...f,
                     emptyLabel: formElement.properties?.prependOptionLabel,
                     options: formElement.properties?.options ?? {},
                 })
             case 'Number':
-                return new T3Model.FormElementNumber({
+                return new T3Model.FormElement.Number({
                     ...f,
                     step:
                         Number.parseInt(
@@ -254,12 +256,12 @@ export function useT3CeFormFormframework(
                     ),
                 })
             case 'StaticText':
-                return new T3Model.FormElementStaticText({
+                return new T3Model.FormElement.StaticText({
                     ...f,
                     text: formElement.properties?.text ?? '',
                 })
             default:
-                return new T3Model.FormElement(f)
+                return new T3Model.FormElement.Base(f)
         }
     }
 
@@ -274,7 +276,7 @@ export function useT3CeFormFormframework(
 
         try {
             const result = await api.post<
-                T3Api.ContentElement<T3Api.Content.Formframework>
+                T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Formframework>
             >(contentElement.content.link, { body })
 
             if (typeof result.content.form === 'string') {

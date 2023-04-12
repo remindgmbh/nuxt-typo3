@@ -14,10 +14,10 @@
 </template>
 
 <script setup lang="ts">
-import { T3Api, useT3DynamicComponent, useT3ContentUtil } from '#imports'
+import { T3Model, useT3DynamicComponent, useT3ContentUtil } from '#imports'
 
 const props = defineProps<{
-    contentElement: T3Api.ContentElement
+    contentElement: T3Model.Typo3.Content.Element
 }>()
 
 const {

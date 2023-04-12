@@ -31,10 +31,10 @@
 </template>
 
 <script setup lang="ts">
-import { T3Api, useT3TextAsset } from '#imports'
+import { T3Model, useT3TextAsset } from '#imports'
 
 const props = defineProps<{
-    contentElement: T3Api.ContentElement<T3Api.Content.Textmedia>
+    contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Textmedia>
     assetAttrs?: { [key: string]: any }
 }>()
 

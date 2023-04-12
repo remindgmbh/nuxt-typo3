@@ -19,10 +19,10 @@
 </template>
 
 <script setup lang="ts">
-import { T3Api, useT3CeTable } from '#imports'
+import { T3Model, useT3CeTable } from '#imports'
 
 const props = defineProps<{
-    contentElement: T3Api.ContentElement<T3Api.Content.Table>
+    contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Table>
 }>()
 
 const { headerLeft, headerTop, tbody, tfoot, thead } = useT3CeTable(

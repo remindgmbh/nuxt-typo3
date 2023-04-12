@@ -42,7 +42,7 @@ import { computed, T3Model } from '#imports'
 const { handleSubmit } = useForm()
 
 const props = defineProps<{
-    formElements: T3Model.FormElement[]
+    formElements: T3Model.FormElement.Base[]
     loading?: boolean
     loadingLabel?: string
     submitLabel: string

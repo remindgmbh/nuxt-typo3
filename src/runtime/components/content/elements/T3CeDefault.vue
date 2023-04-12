@@ -3,10 +3,10 @@
 </template>
 
 <script setup lang="ts">
-import { T3Api } from '#imports'
+import { T3Model } from '#imports'
 
 defineProps<{
-    contentElement: T3Api.ContentElement
+    contentElement: T3Model.Typo3.Content.Element
 }>()
 </script>
 

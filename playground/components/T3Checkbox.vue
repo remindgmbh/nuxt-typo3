@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import BaseT3Checkbox from '#nuxt-typo3/components/input/T3Checkbox.vue'
+import BaseT3Checkbox from '#nuxt-typo3/components/ui/input/T3Checkbox.vue'
 
 const attrs: any = useAttrs()
 

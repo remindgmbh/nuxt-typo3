@@ -12,10 +12,10 @@
 </template>
 
 <script setup lang="ts">
-import { T3Api, useT3CeImage } from '#imports'
+import { T3Model, useT3CeImage } from '#imports'
 
 const props = defineProps<{
-    contentElement: T3Api.ContentElement<T3Api.Content.Image>
+    contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Image>
 }>()
 
 const { image, imageAttrs } = useT3CeImage(props.contentElement)

@@ -19,14 +19,14 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { T3Api, useT3Cookiebot } from '#imports'
+import { T3Model, useT3Cookiebot } from '#imports'
 
 const { t } = useI18n()
 
 const { acceptCookies } = useT3Cookiebot()
 
 defineProps<{
-    category: T3Api.Cookie['category']
+    category: T3Model.Typo3.Content.Cookie['category']
     message?: string
 }>()
 </script>

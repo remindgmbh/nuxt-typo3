@@ -2,12 +2,11 @@ import { string, Schema } from 'yup'
 import { GenericValidateFunction } from 'vee-validate'
 import { useI18n } from 'vue-i18n'
 import { computed, ref } from 'vue'
-import * as T3Api from '../../api'
-import * as T3Model from '../../model'
+import * as T3Model from '../../models'
 import { navigateTo, useT3Api, useT3ApiData, useT3YupUtil } from '#imports'
 
 type FormElementTypeMapping = {
-    [Property in T3Api.Content.Login.FormElementType]: T3Model.FormElementType
+    [Property in T3Model.Typo3.Content.Data.Login.FormElementType]: T3Model.FormElement.Type
 }
 
 const formElementTypeMapping: FormElementTypeMapping = {
@@ -17,7 +16,7 @@ const formElementTypeMapping: FormElementTypeMapping = {
 }
 
 export function useT3CeFeloginLogin(
-    contentElement: T3Api.ContentElement<T3Api.Content.Felogin>
+    contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Felogin>
 ) {
     const { t } = useI18n()
     const { schemaToValidateFunction } = useT3YupUtil()
@@ -42,16 +41,16 @@ export function useT3CeFeloginLogin(
             )?.value ?? ''
     )
 
-    const formElements = computed<T3Model.FormElement[]>(() =>
+    const formElements = computed<T3Model.FormElement.Base[]>(() =>
         contentElement.content.data.form.elements
             .filter((element) => element.name !== 'submit')
             .map(convert)
     )
 
     function convert(
-        formElement: T3Api.Content.Login.FormElement
-    ): T3Model.FormElement {
-        return new T3Model.FormElement({
+        formElement: T3Model.Typo3.Content.Data.Login.FormElement
+    ): T3Model.FormElement.Base {
+        return new T3Model.FormElement.Base({
             type: formElementTypeMapping[formElement.type] ?? 'hidden',
             label: formElement.label,
             name: formElement.name,
@@ -64,7 +63,7 @@ export function useT3CeFeloginLogin(
     }
 
     function getValidation(
-        formElement: T3Api.Content.Login.FormElement
+        formElement: T3Model.Typo3.Content.Data.Login.FormElement
     ): GenericValidateFunction[] {
         const result: GenericValidateFunction[] = []
 
@@ -111,7 +110,7 @@ export function useT3CeFeloginLogin(
             })
 
             const result = await api.post<
-                T3Api.ContentElement<T3Api.Content.FeloginActionResponse>
+                T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.FeloginActionResponse>
             >(contentElement.content.data.form.action, {
                 body,
             })

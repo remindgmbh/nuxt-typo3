@@ -14,11 +14,11 @@
 </template>
 
 <script setup lang="ts">
-import { T3Api } from '#imports'
+import { T3Model } from '#imports'
 
 withDefaults(
     defineProps<{
-        contentElements?: T3Api.ContentElement[]
+        contentElements?: T3Model.Typo3.Content.Element[]
     }>(),
     { contentElements: () => [] }
 )

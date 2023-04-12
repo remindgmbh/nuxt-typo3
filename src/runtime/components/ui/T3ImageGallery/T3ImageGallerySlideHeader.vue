@@ -36,7 +36,7 @@ const props = defineProps<{
     activeIndex: number
     header?: string
     subheader?: string
-    images: T3Model.Image[]
+    images: T3Model.Image.Attributes[]
 }>()
 
 const { t } = useI18n()

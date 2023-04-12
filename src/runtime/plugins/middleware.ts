@@ -2,7 +2,7 @@ import { i18n } from './i18n'
 import {
     addRouteMiddleware,
     defineNuxtPlugin,
-    T3Api,
+    T3Model,
     useT3ApiData,
     useT3LoadingState,
 } from '#imports'
@@ -32,9 +32,9 @@ export default defineNuxtPlugin(() => {
             try {
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 const [initialData, footerContent, pageData]: [
-                    T3Api.InitialData?,
-                    T3Api.ContentElement<any>?,
-                    T3Api.PageData?,
+                    T3Model.Typo3.InitialData?,
+                    T3Model.Typo3.Content.Element<any>?,
+                    T3Model.Typo3.Page.Data?,
                     ...unknown[]
                 ] = await Promise.all(promises)
 
@@ -49,7 +49,7 @@ export default defineNuxtPlugin(() => {
         { global: true }
     )
 
-    function setLocale(languages: T3Api.Language[] = []) {
+    function setLocale(languages: T3Model.Typo3.Language[] = []) {
         const language = languages.find((language) => language.active)
 
         if (language?.twoLetterIsoCode) {

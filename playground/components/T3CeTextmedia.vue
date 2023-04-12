@@ -15,11 +15,11 @@
 </template>
 
 <script setup lang="ts">
-import { T3Api } from '#nuxt-typo3'
 import BaseT3CeTextmedia from '#nuxt-typo3/components/content/elements/T3CeTextmedia.vue'
+import { T3Model } from '#imports'
 
 const props = defineProps<{
-    contentElement: T3Api.ContentElement<T3Api.Content.Textmedia>
+    contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Textmedia>
 }>()
 
 const { cookieAccepted } = useT3ContentUtil(props.contentElement)

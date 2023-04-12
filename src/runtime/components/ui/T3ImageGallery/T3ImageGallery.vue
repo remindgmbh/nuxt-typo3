@@ -68,9 +68,9 @@ withDefaults(
     defineProps<{
         header?: string
         subheader?: string
-        images: T3Model.Image[]
-        navigationImages?: T3Model.Image[]
-        previewImages: T3Model.Image[]
+        images: T3Model.Image.Attributes[]
+        navigationImages?: T3Model.Image.Attributes[]
+        previewImages: T3Model.Image.Attributes[]
         type?: 'scroll' | 'slide'
     }>(),
     {

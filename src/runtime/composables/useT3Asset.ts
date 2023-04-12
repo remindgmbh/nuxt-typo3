@@ -1,12 +1,11 @@
 import { computed } from 'vue'
-import * as T3Api from '../api'
-import * as T3Model from '../model'
+import * as T3Model from '../models'
 
 export function useT3Asset(
-    asset: T3Api.Asset,
+    asset: T3Model.Typo3.Asset,
     assetAttrs: { [key: string]: any } = {}
 ) {
-    const imageAttrs = computed<T3Model.Image>(() => ({
+    const imageAttrs = computed<T3Model.Image.Attributes>(() => ({
         src: asset.publicUrl,
         uid: asset.properties.fileReferenceUid,
         alt: asset.properties.alternative,

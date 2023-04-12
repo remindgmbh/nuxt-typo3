@@ -14,10 +14,10 @@
 </template>
 
 <script setup lang="ts">
-import { T3Api, useT3CeTextpic } from '#imports'
+import { T3Model, useT3CeTextpic } from '#imports'
 
 const props = defineProps<{
-    contentElement: T3Api.ContentElement<T3Api.Content.Textpic>
+    contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Textpic>
     assetAttrs?: { [key: string]: any }
 }>()
 

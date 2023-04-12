@@ -1,9 +1,12 @@
-import * as T3Api from '../api'
+import * as T3Model from '../models'
 import { useState } from '#imports'
 
 export function useT3Cookiebot() {
     const cookieCategories = useState<
-        Omit<{ [key in T3Api.Cookie['category']]: boolean }, 'none'>
+        Omit<
+            { [key in T3Model.Typo3.Content.Cookie['category']]: boolean },
+            'none'
+        >
     >(() => ({
         necessary: false,
         marketing: false,
@@ -11,7 +14,9 @@ export function useT3Cookiebot() {
         statistics: false,
     }))
 
-    function isAccepted(category: T3Api.Cookie['category']): boolean {
+    function isAccepted(
+        category: T3Model.Typo3.Content.Cookie['category']
+    ): boolean {
         return category === 'none' || cookieCategories.value[category]
     }
 
@@ -20,7 +25,7 @@ export function useT3Cookiebot() {
     }
 
     function acceptCookies(
-        category: Omit<T3Api.Cookie['category'], 'none'>
+        category: Omit<T3Model.Typo3.Content.Cookie['category'], 'none'>
     ): void {
         window.Cookiebot?.submitCustomConsent(
             category === 'preferences' || window.Cookiebot.consent.preferences,

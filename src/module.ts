@@ -214,12 +214,7 @@ export default defineNuxtModule<ModuleOptions>({
 
         addImportsDir(resolver.resolve('runtime/composables/**/*'))
         addImports({
-            from: resolver.resolve('runtime/api'),
-            name: '*',
-            as: 'T3Api',
-        })
-        addImports({
-            from: resolver.resolve('runtime/model'),
+            from: resolver.resolve('runtime/models'),
             name: '*',
             as: 'T3Model',
         })

@@ -1,7 +1,7 @@
 import { computed } from 'vue'
-import * as T3Api from '../../api'
+import * as T3Model from '../../models'
 
-export function useT3CeTable(content: T3Api.Content.Table) {
+export function useT3CeTable(content: T3Model.Typo3.Content.Data.Table) {
     const headerTop = computed<boolean>(() =>
         [1, 3].includes(content.tableHeaderPosition)
     )

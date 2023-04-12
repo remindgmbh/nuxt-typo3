@@ -1,9 +1,11 @@
 import { computed } from 'vue'
-import * as T3Api from '../api'
+import * as T3Model from '../models'
 import { Color } from '../../module'
 import { useT3Config, useT3Cookiebot, useT3Theme } from '#imports'
 
-export function useT3ContentUtil(contentElement: T3Api.ContentElement) {
+export function useT3ContentUtil(
+    contentElement: T3Model.Typo3.Content.Element
+) {
     const config = useT3Config()
     const { isAccepted } = useT3Cookiebot()
     const { colors } = useT3Theme()

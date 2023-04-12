@@ -34,10 +34,10 @@
 </template>
 
 <script setup lang="ts">
-import { T3Api } from '#imports'
+import { T3Model } from '#imports'
 
 defineProps<{
-    pagination: T3Api.Pagination
+    pagination: T3Model.Typo3.Extbase.Pagination
 }>()
 </script>
 

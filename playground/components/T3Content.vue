@@ -3,11 +3,11 @@
 </template>
 
 <script setup lang="ts">
-import { T3Api } from '#nuxt-typo3'
 import BaseT3Content from '#nuxt-typo3/components/content/helper/T3Content.vue'
+import { T3Model } from '#imports'
 
 const props = defineProps<{
-    contentElement: T3Api.ContentElement
+    contentElement: T3Model.Typo3.Content.Element
 }>()
 
 const { spaceBefore, spaceAfter, spaceBeforeInside, spaceAfterInside } =

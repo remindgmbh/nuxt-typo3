@@ -11,10 +11,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, T3Api, useT3ContentUtil } from '#imports'
+import { computed, T3Model, useT3ContentUtil } from '#imports'
 
 const props = defineProps<{
-    contentElement: T3Api.ContentElement
+    contentElement: T3Model.Typo3.Content.Element
 }>()
 
 const { color, isFullWidth } = useT3ContentUtil(props.contentElement)

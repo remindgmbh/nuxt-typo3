@@ -6,11 +6,11 @@
 </template>
 
 <script setup lang="ts">
-import { T3Api, T3Model } from '#nuxt-typo3'
 import BaseT3CeTextpic from '#nuxt-typo3/components/content/elements/T3CeTextpic.vue'
+import { T3Model } from '#imports'
 
 const props = defineProps<{
-    contentElement: T3Api.ContentElement<T3Api.Content.Textpic>
+    contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Textpic>
 }>()
 
 const { breakpoints } = useT3Breakpoints()
@@ -19,7 +19,7 @@ const { textmediaContentElement } = useT3CeTextpic(props.contentElement)
 
 const { assetIsSmall } = useT3TextAsset(textmediaContentElement.value.content)
 
-const imageSizes = computed<T3Model.ImageSizes>(() => {
+const imageSizes = computed<T3Model.Image.Sizes>(() => {
     if (assetIsSmall) {
         return {
             xs: '100vw',

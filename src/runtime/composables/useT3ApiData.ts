@@ -1,6 +1,5 @@
 import { computed } from 'vue'
-import * as T3Api from '../api'
-import * as T3Model from '../model'
+import * as T3Model from '../models'
 import { useLogger, useState, useT3Api, useT3ApiPath } from '#imports'
 
 export function useT3ApiData() {
@@ -9,34 +8,36 @@ export function useT3ApiData() {
     const logger = useLogger()
 
     const initialData = useState<{
-        [path: string]: T3Api.InitialData | undefined
+        [path: string]: T3Model.Typo3.InitialData | undefined
     }>('initialData', () => ({}))
 
     const footerContent = useState<{
-        [path: string]: T3Api.ContentElement<any> | undefined
+        [path: string]: T3Model.Typo3.Content.Element<any> | undefined
     }>('footerContent', () => ({}))
 
     const pageData = useState<{
-        [path: string]: T3Api.PageData | undefined
+        [path: string]: T3Model.Typo3.Page.Data | undefined
     }>('pageData', () => ({}))
 
-    const pageError = useState<T3Model.PageError | undefined>('pageError')
+    const pageError = useState<T3Model.Typo3.Page.Error | undefined>(
+        'pageError'
+    )
 
-    const currentInitialData = computed<T3Api.InitialData | undefined>(
+    const currentInitialData = computed<T3Model.Typo3.InitialData | undefined>(
         () => initialData.value[apiPath.currentInitialDataPath.value]
     )
 
     const currentFooterContent = computed<
-        T3Api.ContentElement<any> | undefined
+        T3Model.Typo3.Content.Element<any> | undefined
     >(() => footerContent.value[apiPath.currentInitialDataPath.value])
 
-    const currentPageData = computed<T3Api.PageData | undefined>(
+    const currentPageData = computed<T3Model.Typo3.Page.Data | undefined>(
         () => pageData.value[apiPath.currentPagePath.value]
     )
 
     async function loadInitialData(
         path: string
-    ): Promise<T3Api.InitialData | undefined> {
+    ): Promise<T3Model.Typo3.InitialData | undefined> {
         const initialDataPath = apiPath.getInitialDataPath(path)
 
         if (!initialData.value[initialDataPath]) {
@@ -56,7 +57,7 @@ export function useT3ApiData() {
 
     async function loadFooterContent(
         path: string
-    ): Promise<T3Api.ContentElement<any> | undefined> {
+    ): Promise<T3Model.Typo3.Content.Element<any> | undefined> {
         const initialDataPath = apiPath.getInitialDataPath(path)
 
         if (!footerContent.value[initialDataPath]) {
@@ -77,7 +78,7 @@ export function useT3ApiData() {
 
     async function loadPageData(
         path: string
-    ): Promise<T3Api.PageData | undefined> {
+    ): Promise<T3Model.Typo3.Page.Data | undefined> {
         pageError.value = {}
         if (!pageData.value[path]) {
             try {
@@ -85,7 +86,7 @@ export function useT3ApiData() {
                 pageData.value[path] = result
                 return result
             } catch (error) {
-                if (error instanceof T3Model.PageError) {
+                if (error instanceof T3Model.Typo3.Page.Error) {
                     // assigning error directly leads to "Cannot stringify arbitrary non-POJOs PageError"
                     pageError.value = { ...error }
                 } else {
@@ -97,11 +98,11 @@ export function useT3ApiData() {
         return pageData.value[path]
     }
 
-    function setCurrentPage(data: T3Api.PageData): void {
+    function setCurrentPage(data: T3Model.Typo3.Page.Data): void {
         pageData.value[apiPath.currentPagePath.value] = data
     }
 
-    function setCurrentInitialData(data: T3Api.InitialData): void {
+    function setCurrentInitialData(data: T3Model.Typo3.InitialData): void {
         initialData.value[apiPath.currentInitialDataPath.value] = data
     }
 

@@ -8,10 +8,10 @@
     <component :is="component" v-else :file="file" :asset-attrs="assetAttrs" />
 </template>
 <script setup lang="ts">
-import { T3Api, useT3DynamicComponent, useT3Asset } from '#imports'
+import { T3Model, useT3DynamicComponent, useT3Asset } from '#imports'
 
 const props = defineProps<{
-    file: T3Api.Asset
+    file: T3Model.Typo3.Asset
     assetAttrs?: { [key: string]: any }
 }>()
 

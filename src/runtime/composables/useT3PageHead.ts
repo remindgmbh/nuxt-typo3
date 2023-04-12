@@ -1,8 +1,8 @@
 import { MetaObject } from '@nuxt/schema'
-import * as T3Api from '../api'
+import * as T3Model from '../models'
 import { useHead, useT3Config } from '#imports'
 
-export function useT3PageHead(pageData: T3Api.PageData) {
+export function useT3PageHead(pageData: T3Model.Typo3.Page.Data) {
     const title = pageData.breadcrumbs.find((bc) => bc.current)?.title
     const meta = pageData.meta
 

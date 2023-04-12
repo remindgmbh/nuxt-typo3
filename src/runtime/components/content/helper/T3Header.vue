@@ -25,10 +25,10 @@
 </template>
 
 <script setup lang="ts">
-import { T3Api, useT3Header } from '#imports'
+import { T3Model, useT3Header } from '#imports'
 
 const props = defineProps<{
-    contentElement: T3Api.ContentElement<T3Api.Content.Base>
+    contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Base>
 }>()
 
 const { visible, tag } = useT3Header(props.contentElement.content)

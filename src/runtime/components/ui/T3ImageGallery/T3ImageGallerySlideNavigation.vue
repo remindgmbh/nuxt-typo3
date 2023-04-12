@@ -46,7 +46,7 @@ import { T3Model } from '#imports'
 
 defineProps<{
     activeIndex: number
-    images: T3Model.Image[]
+    images: T3Model.Image.Attributes[]
 }>()
 
 const emit = defineEmits<{

@@ -13,11 +13,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, T3Api } from '#imports'
+import { computed, T3Model } from '#imports'
 
 const props = defineProps<{
-    content: { [colPos: string]: T3Api.ContentElement[] }
-    breadcrumbs: T3Api.Breadcrumb[]
+    content: { [colPos: string]: T3Model.Typo3.Content.Element[] }
+    breadcrumbs: T3Model.Typo3.Breadcrumb[]
 }>()
 
 const breadcrumbsVisible = computed(() => props.breadcrumbs.length > 1)

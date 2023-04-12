@@ -22,11 +22,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, T3Api, useRuntimeConfig } from '#imports'
+import { computed, T3Model, useRuntimeConfig } from '#imports'
 
 const runtimeConfig = useRuntimeConfig()
 
-const props = defineProps<{ breadcrumbs: T3Api.Breadcrumb[] }>()
+const props = defineProps<{ breadcrumbs: T3Model.Typo3.Breadcrumb[] }>()
 
 const container = computed(
     () => !runtimeConfig.public.typo3.layout.breadcrumbs.fullWidth

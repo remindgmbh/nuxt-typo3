@@ -1,15 +1,14 @@
 import { computed } from 'vue'
-import * as T3Api from '../../api'
-import * as T3Model from '../../model'
+import * as T3Model from '../../models'
 import { useT3Breakpoints, useT3Config } from '#imports'
 
 export function useT3CeImage(
-    contentElement: T3Api.ContentElement<T3Api.Content.Image>
+    contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Image>
 ) {
     const { breakpointsAsc } = useT3Breakpoints()
     const config = useT3Config().contentElements.image
 
-    const image = computed<T3Api.Asset | undefined>(() =>
+    const image = computed<T3Model.Typo3.Asset | undefined>(() =>
         contentElement.content.images.at(0)
     )
 
@@ -18,13 +17,13 @@ export function useT3CeImage(
         fileExtension: config?.images?.fileExtension,
     }))
 
-    const sizes = computed<T3Model.ImageSizes>(() =>
+    const sizes = computed<T3Model.Image.Sizes>(() =>
         breakpointsAsc.value.reduce((result, breakpoint) => {
             result[breakpoint.name] = breakpoint.containerMaxWidth
                 ? `${breakpoint.containerMaxWidth}px`
                 : '100vw'
             return result
-        }, {} as T3Model.ImageSizes)
+        }, {} as T3Model.Image.Sizes)
     )
 
     return { image, imageAttrs }

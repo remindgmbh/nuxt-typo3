@@ -84,7 +84,7 @@
 import { T3Model } from '#imports'
 
 defineProps<{
-    formElement: T3Model.FormElement
+    formElement: T3Model.FormElement.Base
     loading?: boolean
 }>()
 </script>
