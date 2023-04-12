@@ -1,18 +1,19 @@
-import { ComponentPublicInstance, readonly, watch } from 'vue'
-import { useRoute, useState } from '#app'
+import { ComponentPublicInstance, Ref } from 'vue'
+import { readonly, watch, useRoute, useState } from '#imports'
 
 export function useT3Menu(statePrefix: string = 't3-menu') {
     const route = useRoute()
 
-    const active = useState<string | undefined>(
+    const active: Ref<string | undefined> = useState<string | undefined>(
         `${statePrefix}-active`,
         () => undefined
     )
 
-    const triggers = useState<Array<HTMLElement | ComponentPublicInstance>>(
-        `${statePrefix}-triggers`,
-        () => []
-    )
+    const triggers: Ref<Array<HTMLElement | ComponentPublicInstance>> =
+        useState<Array<HTMLElement | ComponentPublicInstance>>(
+            `${statePrefix}-triggers`,
+            () => []
+        )
 
     function close(): void {
         active.value = undefined

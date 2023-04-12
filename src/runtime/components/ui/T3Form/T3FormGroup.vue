@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { T3Model } from '#nuxt-typo3'
+import { T3Model } from '#imports'
 
 defineProps<{ formElements: T3Model.FormElement[]; loading?: boolean }>()
 </script>

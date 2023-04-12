@@ -5,8 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import { getCurrentInstance, inject } from 'vue'
 import { registerHeaderSymbol } from './shared'
+import { getCurrentInstance, inject } from '#imports'
 
 withDefaults(
     defineProps<{
@@ -24,11 +24,9 @@ if (register && currentInstance && currentInstance.proxy) {
 </script>
 
 <style lang="scss">
-@use '#nuxt-typo3/assets/styles/z-indexes' as z-indexes;
-
 .t3-topbar-layout-header {
     position: sticky;
     top: 0;
-    z-index: z-indexes.$header;
+    z-index: 10;
 }
 </style>

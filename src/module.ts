@@ -6,6 +6,7 @@ import {
     defineNuxtModule,
     extendPages,
     installModule,
+    addImports,
 } from '@nuxt/kit'
 import { ViteConfig } from '@nuxt/schema'
 import { defu } from 'defu'
@@ -211,7 +212,17 @@ export default defineNuxtModule<ModuleOptions>({
         // needed to prevent error: https://github.com/nuxt/framework/issues/2542#issuecomment-1008211886
         nuxt.options.modules.push('@remindgmbh/nuxt-logger')
 
-        addImportsDir([resolver.resolve('runtime/composables/**/use*.*')])
+        addImportsDir(resolver.resolve('runtime/composables/**/*'))
+        addImports({
+            from: resolver.resolve('runtime/api'),
+            name: '*',
+            as: 'T3Api',
+        })
+        addImports({
+            from: resolver.resolve('runtime/model'),
+            name: '*',
+            as: 'T3Model',
+        })
         addComponentsDir({
             path: resolver.resolve('runtime/components'),
             pathPrefix: false,

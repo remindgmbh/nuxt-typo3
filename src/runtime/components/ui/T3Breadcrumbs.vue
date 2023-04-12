@@ -22,9 +22,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRuntimeConfig } from '#app'
-import { T3Api } from '#nuxt-typo3'
+import { computed, T3Api, useRuntimeConfig } from '#imports'
+
 const runtimeConfig = useRuntimeConfig()
 
 const props = defineProps<{ breadcrumbs: T3Api.Breadcrumb[] }>()

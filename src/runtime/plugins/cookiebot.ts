@@ -1,6 +1,10 @@
-import { defineNuxtPlugin, useCookie, useHead } from '#app'
-import { useT3Config } from '#nuxt-typo3/composables/useT3Config'
-import { useT3Cookiebot } from '#nuxt-typo3/composables/useT3Cookiebot'
+import {
+    defineNuxtPlugin,
+    useCookie,
+    useHead,
+    useT3Config,
+    useT3Cookiebot,
+} from '#imports'
 
 interface CookieConsent {
     stamp: string

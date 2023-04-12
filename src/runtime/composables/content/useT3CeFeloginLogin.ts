@@ -1,12 +1,10 @@
-import { navigateTo } from '#app'
 import { string, Schema } from 'yup'
 import { GenericValidateFunction } from 'vee-validate'
-import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { T3Api, T3Model } from '#nuxt-typo3'
-import { useT3Api } from '#nuxt-typo3/composables/useT3Api'
-import { useT3ApiData } from '#nuxt-typo3/composables/useT3ApiData'
-import { useT3YupUtil } from '#nuxt-typo3/composables/useT3YupUtil'
+import { computed, ref } from 'vue'
+import * as T3Api from '../../api'
+import * as T3Model from '../../model'
+import { navigateTo, useT3Api, useT3ApiData, useT3YupUtil } from '#imports'
 
 type FormElementTypeMapping = {
     [Property in T3Api.Content.Login.FormElementType]: T3Model.FormElementType

@@ -1,5 +1,5 @@
-import { useState } from '#app'
-import { T3Api } from '#nuxt-typo3'
+import * as T3Api from '../api'
+import { useState } from '#imports'
 
 export function useT3Cookiebot() {
     const cookieCategories = useState<

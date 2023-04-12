@@ -1,7 +1,7 @@
 import { computed } from 'vue'
-import { T3Api, T3Model } from '#nuxt-typo3'
-import { useT3Asset } from '#nuxt-typo3/composables/useT3Asset'
-import { useT3Config } from '#nuxt-typo3/composables/useT3Config'
+import * as T3Api from '../../api'
+import * as T3Model from '../../model'
+import { useT3Asset, useT3Config } from '#imports'
 
 export function useT3CeImageGallery(content: T3Api.Content.ImageGallery) {
     const config = useT3Config().contentElements.imageGallery

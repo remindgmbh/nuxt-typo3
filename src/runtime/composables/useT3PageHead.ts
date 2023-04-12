@@ -1,7 +1,6 @@
 import { MetaObject } from '@nuxt/schema'
-import { useHead } from '#imports'
-import { T3Api } from '#nuxt-typo3'
-import { useT3Config } from '#nuxt-typo3/composables/useT3Config'
+import * as T3Api from '../api'
+import { useHead, useT3Config } from '#imports'
 
 export function useT3PageHead(pageData: T3Api.PageData) {
     const title = pageData.breadcrumbs.find((bc) => bc.current)?.title

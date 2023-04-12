@@ -1,5 +1,5 @@
 import { computed } from 'vue'
-import { T3Api } from '#nuxt-typo3'
+import * as T3Api from '../../api'
 
 export function useT3CeTable(content: T3Api.Content.Table) {
     const headerTop = computed<boolean>(() =>

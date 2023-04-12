@@ -14,13 +14,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
-import { useRoute } from '#app'
 import { useI18n } from 'vue-i18n'
-import { useT3ApiData } from '#nuxt-typo3/composables/useT3ApiData'
-import { useT3ApiPath } from '#nuxt-typo3/composables/useT3ApiPath'
-import { useT3DynamicComponent } from '#nuxt-typo3/composables/useT3DynamicComponent'
-import { useT3PageHead } from '#nuxt-typo3/composables/useT3PageHead'
+import {
+    computed,
+    ref,
+    useRoute,
+    useT3ApiData,
+    useT3ApiPath,
+    useT3DynamicComponent,
+    useT3PageHead,
+    watch,
+} from '#imports'
 
 const { t } = useI18n()
 

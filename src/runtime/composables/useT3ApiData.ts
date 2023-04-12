@@ -1,9 +1,7 @@
-import { useState } from '#app'
 import { computed } from 'vue'
-import { useLogger } from '#nuxt-logger'
-import { T3Api, T3Model } from '#nuxt-typo3'
-import { useT3Api } from '#nuxt-typo3/composables/useT3Api'
-import { useT3ApiPath } from '#nuxt-typo3/composables/useT3ApiPath'
+import * as T3Api from '../api'
+import * as T3Model from '../model'
+import { useLogger, useState, useT3Api, useT3ApiPath } from '#imports'
 
 export function useT3ApiData() {
     const api = useT3Api()

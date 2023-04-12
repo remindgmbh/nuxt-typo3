@@ -11,9 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { T3Api } from '#nuxt-typo3'
-import { useT3ContentUtil } from '#nuxt-typo3/composables/useT3ContentUtil'
+import { computed, T3Api, useT3ContentUtil } from '#imports'
 
 const props = defineProps<{
     contentElement: T3Api.ContentElement

@@ -1,4 +1,4 @@
-import { T3Api } from '#nuxt-typo3'
+import * as T3Api from '../api'
 
 export class PageError {
     data?: T3Api.PageData

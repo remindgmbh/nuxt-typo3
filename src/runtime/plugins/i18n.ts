@@ -1,8 +1,7 @@
-import { defineNuxtPlugin } from '#app'
 import { createI18n } from 'vue-i18n'
-import de from '#nuxt-typo3/locales/de'
-import en from '#nuxt-typo3/locales/en'
-import { useT3Config } from '#nuxt-typo3/composables/useT3Config'
+import de from '../locales/de'
+import en from '../locales/en'
+import { defineNuxtPlugin, useT3Config } from '#imports'
 
 export interface MessageContext {
     named: (value: string) => string

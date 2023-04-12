@@ -1,6 +1,5 @@
 import { computed } from 'vue'
-import { useRoute } from '#app'
-import { useT3Config } from '#nuxt-typo3/composables/useT3Config'
+import { useRoute, useT3Config } from '#imports'
 
 export function useT3ApiPath() {
     const config = useT3Config()

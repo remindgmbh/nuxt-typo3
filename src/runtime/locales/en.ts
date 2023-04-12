@@ -1,5 +1,4 @@
 import { MessageContext } from '../plugins/i18n'
-// import from #nuxt-typo3 leads to error in i18n-ally vscode extension
 import { useT3Util } from '../composables/useT3Util'
 
 const { capitalize } = useT3Util()

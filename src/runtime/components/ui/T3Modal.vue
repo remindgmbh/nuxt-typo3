@@ -38,8 +38,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, ref, watch } from 'vue'
 import { scrollbarDisabledSymbol } from './T3TopbarLayout/shared'
+import { computed, inject, ref, watch } from '#imports'
 
 const props = withDefaults(
     defineProps<{
@@ -99,8 +99,6 @@ function onBackgroundClick() {
 </script>
 
 <style lang="scss">
-@use '#nuxt-typo3/assets/styles/z-indexes' as z-indexes;
-
 .t3-modal {
     top: 0;
     left: 0;
@@ -109,7 +107,7 @@ function onBackgroundClick() {
     height: 0;
     overflow: hidden;
     display: flex;
-    z-index: z-indexes.$modal;
+    z-index: 30;
 
     &--visible {
         height: 100%;

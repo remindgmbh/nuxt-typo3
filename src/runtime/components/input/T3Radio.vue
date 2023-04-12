@@ -14,8 +14,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { RuleExpression, useField } from 'vee-validate'
+import { computed } from '#imports'
 
 const props = defineProps<{
     name: string

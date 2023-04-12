@@ -9,9 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { useT3LinkReplacer } from '#nuxt-typo3/composables/html-parser/useT3LinkReplacer'
-import { useT3TableEnhancer } from '#nuxt-typo3/composables/html-parser/useT3TableEnhancer'
+import { computed, ref, useT3LinkReplacer, useT3TableEnhancer } from '#imports'
 
 const props = defineProps<{
     content: string

@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import { FreeMode, Scrollbar, Swiper as SwiperClass } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { T3Model } from '#nuxt-typo3'
+import { T3Model } from '#imports'
 
 defineProps<{
     activeIndex: number

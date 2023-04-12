@@ -1,5 +1,5 @@
 import { computed } from 'vue'
-import { T3Api } from '#nuxt-typo3'
+import * as T3Api from '../../api'
 
 export function useT3Header(content: T3Api.Content.Base) {
     const visible = computed<boolean>(

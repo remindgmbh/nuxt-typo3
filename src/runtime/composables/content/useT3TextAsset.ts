@@ -1,6 +1,6 @@
 import { computed } from 'vue'
-import { T3Api } from '#nuxt-typo3'
-import { useT3Asset } from '#nuxt-typo3/composables/useT3Asset'
+import * as T3Api from '../../api'
+import { useT3Asset } from '#imports'
 
 export function useT3TextAsset(content: T3Api.Content.Textmedia) {
     const asset = computed<T3Api.Asset | undefined>(() => content.assets.at(0))
@@ -8,7 +8,7 @@ export function useT3TextAsset(content: T3Api.Content.Textmedia) {
     const assetIsRight = computed<boolean>(
         () => content.assetPosition === 'right'
     )
-    const type = computed(() => {
+    const type = computed<string | undefined>(() => {
         if (asset.value) {
             const { type } = useT3Asset(asset.value)
             return type.value

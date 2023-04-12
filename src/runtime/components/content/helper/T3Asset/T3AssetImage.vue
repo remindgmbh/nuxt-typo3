@@ -2,8 +2,7 @@
     <T3Img v-bind="imageAttrs" />
 </template>
 <script setup lang="ts">
-import { T3Api } from '#nuxt-typo3'
-import { useT3Asset } from '#nuxt-typo3/composables/useT3Asset'
+import { T3Api, useT3Asset } from '#imports'
 
 const props = defineProps<{
     file: T3Api.Asset

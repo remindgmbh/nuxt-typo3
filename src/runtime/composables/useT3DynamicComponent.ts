@@ -1,5 +1,5 @@
-import { resolveComponent } from 'vue'
 import { pascalCase } from 'scule'
+import { resolveComponent } from '#imports'
 
 export function useT3DynamicComponent(
     prefix: string,

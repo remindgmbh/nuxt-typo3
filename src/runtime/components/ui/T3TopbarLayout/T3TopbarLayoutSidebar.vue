@@ -12,8 +12,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, inject, TransitionProps } from 'vue'
+import { TransitionProps } from 'vue'
 import { scrollbarDisabledSymbol } from './shared'
+import { ref, inject } from '#imports'
 
 enum Status {
     Entering,
@@ -62,10 +63,8 @@ function onAfterLeave(): void {
 </script>
 
 <style lang="scss">
-@use '#nuxt-typo3/assets/styles/z-indexes' as z-indexes;
-
 .t3-topbar-layout-sidebar {
-    z-index: z-indexes.$sidebar;
+    z-index: 20;
     position: fixed;
     height: 100%;
 }

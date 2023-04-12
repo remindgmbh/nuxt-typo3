@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { T3Api } from '#nuxt-typo3'
+import { T3Api } from '#imports'
 
 defineProps<{
     to: T3Api.TypoLink

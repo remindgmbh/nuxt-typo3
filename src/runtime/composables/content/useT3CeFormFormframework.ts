@@ -1,12 +1,10 @@
 import { array, boolean, date, number, string, Schema } from 'yup'
-import { computed, ref } from 'vue'
-import { navigateTo } from '#app'
 import { useI18n } from 'vue-i18n'
 import { GenericValidateFunction, RuleExpression } from 'vee-validate'
-import { useLogger } from '#nuxt-logger'
-import { T3Api, T3Model } from '#nuxt-typo3'
-import { useT3Api } from '#nuxt-typo3/composables/useT3Api'
-import { useT3YupUtil } from '#nuxt-typo3/composables/useT3YupUtil'
+import { computed, ref } from 'vue'
+import * as T3Api from '../../api'
+import * as T3Model from '../../model'
+import { navigateTo, useLogger, useT3Api, useT3YupUtil } from '#imports'
 
 const REGEX_ALPHANUMERIC = /^(\w*)$/
 

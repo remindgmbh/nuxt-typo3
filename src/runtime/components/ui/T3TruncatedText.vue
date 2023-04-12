@@ -10,8 +10,8 @@
     </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
 import { debounce } from 'perfect-debounce'
+import { onMounted, ref } from '#imports'
 
 const root = ref<HTMLDivElement>()
 const content = ref<HTMLDivElement>()

@@ -44,7 +44,7 @@
 <script setup lang="ts">
 import { Navigation, Swiper as SwiperClass, Thumbs } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { T3Model } from '#nuxt-typo3'
+import { T3Model } from '#imports'
 
 defineProps<{
     images: T3Model.Image[]

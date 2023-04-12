@@ -32,9 +32,8 @@
 
 <script setup lang="ts">
 import { Swiper } from 'swiper'
-import { ref, onMounted } from 'vue'
 import { debounce } from 'perfect-debounce'
-import { T3Model } from '#nuxt-typo3'
+import { ref, onMounted, T3Model } from '#imports'
 
 const props = defineProps<{
     header?: string

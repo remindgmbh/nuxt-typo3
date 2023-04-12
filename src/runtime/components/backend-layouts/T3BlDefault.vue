@@ -13,8 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { T3Api } from '#nuxt-typo3'
+import { computed, T3Api } from '#imports'
 
 const props = defineProps<{
     content: { [colPos: string]: T3Api.ContentElement[] }

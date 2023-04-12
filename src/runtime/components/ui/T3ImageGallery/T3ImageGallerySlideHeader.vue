@@ -29,10 +29,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { T3Model } from '#nuxt-typo3'
-import { useT3Util } from '#nuxt-typo3/composables/useT3Util'
+import { computed, T3Model, useT3Util } from '#imports'
 
 const props = defineProps<{
     activeIndex: number

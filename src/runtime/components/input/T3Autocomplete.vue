@@ -92,10 +92,16 @@
 
 <script setup lang="ts">
 import { RuleExpression, useField } from 'vee-validate'
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
-import { navigateTo } from '#app'
-import { T3Model } from '#nuxt-typo3'
-import { useT3SelectInput } from '#nuxt-typo3/composables/useT3SelectInput'
+import {
+    computed,
+    navigateTo,
+    onMounted,
+    onUnmounted,
+    ref,
+    T3Model,
+    useT3SelectInput,
+    watch,
+} from '#imports'
 
 const props = defineProps<{
     name: string

@@ -5,8 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import { getCurrentInstance, inject } from 'vue'
 import { registerContentSymbol } from './shared'
+import { getCurrentInstance, inject } from '#imports'
 
 withDefaults(
     defineProps<{

@@ -21,8 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { T3Api } from '#nuxt-typo3'
-import { useT3CeFormFormframework } from '#nuxt-typo3/composables/content/useT3CeFormFormframework'
+import { T3Api, useT3CeFormFormframework } from '#imports'
 
 const props = defineProps<{
     contentElement: T3Api.ContentElement<T3Api.Content.Formframework>

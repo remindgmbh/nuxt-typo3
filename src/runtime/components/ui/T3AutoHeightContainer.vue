@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, Ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from '#imports'
 
 withDefaults(
     defineProps<{
@@ -16,16 +16,18 @@ withDefaults(
     { tag: 'div' }
 )
 
-const container = ref<HTMLElement>() as Ref<HTMLElement>
-const content = ref<HTMLElement>() as Ref<HTMLElement>
+const container = ref<HTMLElement>()
+const content = ref<HTMLElement>()
 
 let resizeObserver: ResizeObserver | undefined
 
 onMounted(() => {
     resizeObserver = new ResizeObserver(() => {
-        container.value.style.height = `${content.value.scrollHeight}px`
+        if (container.value && content.value) {
+            container.value.style.height = `${content.value.scrollHeight}px`
+        }
     })
-    resizeObserver.observe(content.value)
+    if (content.value) resizeObserver.observe(content.value)
 })
 
 onBeforeUnmount(() => {

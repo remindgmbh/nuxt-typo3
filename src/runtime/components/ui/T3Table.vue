@@ -46,8 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { useT3Util } from '#nuxt-typo3/composables/useT3Util'
+import { onMounted, ref, useT3Util } from '#imports'
 
 const { detectScrollEnd } = useT3Util()
 

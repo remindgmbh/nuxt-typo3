@@ -7,7 +7,7 @@
     ></video>
 </template>
 <script setup lang="ts">
-import { T3Api } from '#nuxt-typo3'
+import { T3Api } from '#imports'
 
 defineProps<{ file: T3Api.Asset }>()
 </script>

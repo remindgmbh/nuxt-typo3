@@ -56,9 +56,8 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { ComponentPublicInstance, onMounted, ref } from 'vue'
-import { T3Model } from '#nuxt-typo3'
-import { useT3Util } from '#nuxt-typo3/composables/useT3Util'
+import { ComponentPublicInstance } from 'vue'
+import { onMounted, ref, T3Model, useT3Util } from '#imports'
 
 const props = defineProps<{
     header?: string

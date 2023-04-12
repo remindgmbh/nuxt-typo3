@@ -1,5 +1,6 @@
 import { computed } from 'vue'
-import { T3Api, T3Model } from '#nuxt-typo3'
+import * as T3Api from '../api'
+import * as T3Model from '../model'
 
 export function useT3Asset(
     asset: T3Api.Asset,
@@ -17,7 +18,7 @@ export function useT3Asset(
         ...assetAttrs,
     }))
 
-    const type = computed(() => {
+    const type = computed<string>(() => {
         switch (asset.properties.type) {
             case 'video': {
                 if (['youtube', 'vimeo'].includes(asset.properties.extension)) {

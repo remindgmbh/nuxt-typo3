@@ -5,13 +5,13 @@
 </template>
 
 <script setup lang="ts">
-import { ComponentPublicInstance, onMounted, provide, ref, watch } from 'vue'
-import { useLogger } from '#nuxt-logger'
+import { ComponentPublicInstance } from 'vue'
 import {
     registerContentSymbol,
     registerHeaderSymbol,
     scrollbarDisabledSymbol,
 } from './shared'
+import { onMounted, provide, ref, useLogger, watch } from '#imports'
 
 const props = withDefaults(
     defineProps<{

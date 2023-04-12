@@ -1,4 +1,4 @@
-import { useState } from '#app'
+import { useState } from '#imports'
 
 export function useT3LoadingState() {
     const loadingData = useState<boolean>('loadingData', () => false)

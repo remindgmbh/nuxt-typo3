@@ -1,5 +1,5 @@
 import { computed } from 'vue'
-import { T3Api } from '#nuxt-typo3'
+import * as T3Api from '../../api'
 
 export function useT3CeTextpic(
     contentElement: T3Api.ContentElement<T3Api.Content.Textpic>

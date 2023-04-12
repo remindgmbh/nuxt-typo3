@@ -1,10 +1,9 @@
-import { computed } from 'vue'
 import { NitroFetchRequest } from 'nitropack'
 import { FetchError, FetchOptions } from 'ofetch'
-import { useRequestHeaders } from '#app'
-import { T3Api, T3Model } from '#nuxt-typo3'
-import { useT3ApiPath } from '#nuxt-typo3/composables/useT3ApiPath'
-import { useT3Config } from '#nuxt-typo3/composables/useT3Config'
+import { computed } from 'vue'
+import * as T3Api from '../api'
+import * as T3Model from '../model'
+import { useRequestHeaders, useT3ApiPath, useT3Config } from '#imports'
 
 export function useT3Api() {
     const config = useT3Config()

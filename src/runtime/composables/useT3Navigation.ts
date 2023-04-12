@@ -1,6 +1,6 @@
 import { computed } from 'vue'
-import { T3Api } from '#nuxt-typo3'
-import { useT3ApiData } from '#nuxt-typo3/composables/useT3ApiData'
+import * as T3Api from '../api'
+import { useT3ApiData } from '#imports'
 
 export function useT3Navigation() {
     const { currentInitialData } = useT3ApiData()

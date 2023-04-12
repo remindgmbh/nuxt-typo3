@@ -1,5 +1,5 @@
-import { onMounted, Ref, watch } from 'vue'
-import { useT3Util } from '#nuxt-typo3/composables/useT3Util'
+import { Ref } from 'vue'
+import { onMounted, useT3Util, watch } from '#imports'
 
 export function useT3TableEnhancer(
     el: Ref<HTMLElement | undefined>,

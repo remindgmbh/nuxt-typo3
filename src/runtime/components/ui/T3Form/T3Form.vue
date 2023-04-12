@@ -36,9 +36,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { useForm } from 'vee-validate'
-import { T3Model } from '#nuxt-typo3'
+import { computed, T3Model } from '#imports'
 
 const { handleSubmit } = useForm()
 

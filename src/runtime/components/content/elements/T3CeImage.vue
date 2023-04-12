@@ -12,8 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { T3Api } from '#nuxt-typo3'
-import { useT3CeImage } from '#nuxt-typo3/composables/content/useT3CeImage'
+import { T3Api, useT3CeImage } from '#imports'
 
 const props = defineProps<{
     contentElement: T3Api.ContentElement<T3Api.Content.Image>
