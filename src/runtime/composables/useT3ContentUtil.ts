@@ -1,15 +1,14 @@
 import { computed } from 'vue'
-import { T3Api } from '#nuxt-typo3'
-import { useT3Config } from '#nuxt-typo3/composables/useT3Config'
-import { useT3Cookiebot } from '#nuxt-typo3/composables/useT3Cookiebot'
-import { useT3Theme } from '#nuxt-typo3/composables/useT3Theme'
+import * as T3Api from '../api'
+import { Color } from '../../module'
+import { useT3Config, useT3Cookiebot, useT3Theme } from '#imports'
 
 export function useT3ContentUtil(contentElement: T3Api.ContentElement) {
     const config = useT3Config()
     const { isAccepted } = useT3Cookiebot()
-    const { colors, spacing } = useT3Theme()
+    const { colors } = useT3Theme()
 
-    const color = computed(
+    const color = computed<Color>(
         () => colors.value[contentElement.appearance.backgroundColor]
     )
 
@@ -27,20 +26,20 @@ export function useT3ContentUtil(contentElement: T3Api.ContentElement) {
     )
 
     const spaceBefore = computed<string>(
-        () => spacing.value[contentElement.appearance.spaceBefore]
+        () => config.spacing[contentElement.appearance.spaceBefore]
     )
     const spaceAfter = computed<string>(
-        () => spacing.value[contentElement.appearance.spaceAfter]
+        () => config.spacing[contentElement.appearance.spaceAfter]
     )
     const spaceBeforeInside = computed<string>(
         () =>
             contentElement.appearance.backgroundColor &&
-            spacing.value[contentElement.appearance.spaceBeforeInside]
+            config.spacing[contentElement.appearance.spaceBeforeInside]
     )
     const spaceAfterInside = computed<string>(
         () =>
             contentElement.appearance.backgroundColor &&
-            spacing.value[contentElement.appearance.spaceAfterInside]
+            config.spacing[contentElement.appearance.spaceAfterInside]
     )
 
     return {

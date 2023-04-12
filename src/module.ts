@@ -41,23 +41,9 @@ interface CeOptions {
     gallery?: GalleryOptions
 }
 
-interface Color {
+export interface Color {
     value: string
     contrast: string
-}
-
-interface ThemeOptions {
-    colors: {
-        [name: string]: Color
-    }
-    spacing: {
-        'extra-small': string
-        small: string
-        medium: string
-        large: string
-        'extra-large': string
-        [other: string]: string
-    }
 }
 
 export interface ModuleOptions {
@@ -94,10 +80,20 @@ export interface ModuleOptions {
     // Path to SCSS Variables to override default values defined in runtime/assets/style/*.scss
     // See playground assets/breakpoints.scss or assets/colors.scss for example
     scssForwards?: string | string[]
+    spacing: {
+        'extra-small': string
+        small: string
+        medium: string
+        large: string
+        'extra-large': string
+        [other: string]: string
+    }
     theme: {
-        default: 'default'
+        default: string
         themes: {
-            [name: string]: ThemeOptions
+            [themeName: string]: {
+                [colorName: string]: Color
+            }
         }
     }
 }
@@ -133,19 +129,17 @@ export default defineNuxtModule<ModuleOptions>({
                 fullWidth: false,
             },
         },
+        spacing: {
+            'extra-small': '0.5rem',
+            small: '1rem',
+            medium: '2rem',
+            large: '4rem',
+            'extra-large': '8rem',
+        },
         theme: {
             default: 'default',
             themes: {
-                default: {
-                    colors: {},
-                    spacing: {
-                        'extra-small': '0.5rem',
-                        small: '1rem',
-                        medium: '2rem',
-                        large: '4rem',
-                        'extra-large': '8rem',
-                    },
-                },
+                default: {},
             },
         },
     },
@@ -158,8 +152,7 @@ export default defineNuxtModule<ModuleOptions>({
             .forEach((name) => {
                 options.theme.themes[name] = defu(
                     options.theme.themes[name],
-                    options.theme.themes[options.theme.default],
-                    options.theme.themes.default
+                    options.theme.themes[options.theme.default]
                 )
             })
 
