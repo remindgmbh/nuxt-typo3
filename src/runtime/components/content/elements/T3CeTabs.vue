@@ -6,7 +6,7 @@
                 contentElement.appearance.backgroundColor,
         }"
     >
-        <T3Header :content-element="contentElement" />
+        <T3Header :content="contentElement.content" />
         <T3Tabs :items="contentElement.content.items">
             <template #title="{ item, index }">
                 <slot name="title" :item="item" :index="index">

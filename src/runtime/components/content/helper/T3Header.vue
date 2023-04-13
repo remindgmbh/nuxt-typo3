@@ -4,23 +4,22 @@
         v-if="visible"
         class="t3-header"
         :class="{
-            [`t3-header--${contentElement.content.headerPosition}`]:
-                contentElement.content.headerPosition,
-            [`t3-header--${contentElement.appearance.backgroundColor}`]:
-                contentElement.appearance.backgroundColor,
+            [`t3-header--${content.headerPosition}`]: content.headerPosition,
         }"
     >
-        <div v-if="contentElement.content.subheader" class="t3-header__sub">
-            {{ contentElement.content.subheader }}
-        </div>
-        <div class="t3-header__main">
-            <template v-if="!contentElement.content.headerLink">{{
-                contentElement.content.header
-            }}</template>
-            <T3Link v-else :to="contentElement.content.headerLink">
-                {{ contentElement.content.header }}
-            </T3Link>
-        </div>
+        <slot>
+            <div v-if="content.subheader" class="t3-header__sub">
+                {{ content.subheader }}
+            </div>
+            <div class="t3-header__main">
+                <template v-if="!content.headerLink">{{
+                    content.header
+                }}</template>
+                <T3Link v-else :to="content.headerLink">
+                    {{ content.header }}
+                </T3Link>
+            </div>
+        </slot>
     </component>
 </template>
 
@@ -28,10 +27,10 @@
 import { T3Model, useT3Header } from '#imports'
 
 const props = defineProps<{
-    contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Base>
+    content: T3Model.Typo3.Content.Data.Base
 }>()
 
-const { visible, tag } = useT3Header(props.contentElement.content)
+const { visible, tag } = useT3Header(props.content)
 </script>
 
 <style lang="scss">

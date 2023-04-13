@@ -6,7 +6,7 @@
                 contentElement.appearance.backgroundColor,
         }"
     >
-        <T3Header :content-element="contentElement" />
+        <T3Header :content="contentElement.content" />
         <T3ImageGallery
             :header="header"
             :images="images"

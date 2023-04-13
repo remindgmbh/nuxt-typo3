@@ -6,7 +6,7 @@
                 contentElement.appearance.backgroundColor,
         }"
     >
-        <T3Header :content-element="contentElement" />
+        <T3Header :content="contentElement.content" />
         <div class="t3-ce-login__message">
             <div class="t3-ce-login__message-header">
                 {{ message.header }}
