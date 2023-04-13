@@ -2,7 +2,7 @@ import { computed } from 'vue'
 import * as T3Model from '../../models'
 import { useT3Asset } from '#imports'
 
-export function useT3TextAsset(content: T3Model.Typo3.Content.Data.Textmedia) {
+export function useT3TextAsset(content: T3Model.Typo3.Content.Data.TextAsset) {
     const asset = computed<T3Model.Typo3.Asset | undefined>(() =>
         content.assets.at(0)
     )

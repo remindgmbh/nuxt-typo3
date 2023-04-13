@@ -7,7 +7,7 @@
         }"
     >
         <T3TextAsset
-            :content-element="contentElement"
+            :content="contentElement.content"
             :asset-attrs="assetAttrs"
         >
             <template #asset="{ asset }">

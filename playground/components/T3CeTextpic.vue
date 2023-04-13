@@ -15,9 +15,7 @@ const props = defineProps<{
 
 const { breakpoints } = useT3Breakpoints()
 
-const { textmediaContentElement } = useT3CeTextpic(props.contentElement)
-
-const { assetIsSmall } = useT3TextAsset(textmediaContentElement.value.content)
+const { assetIsSmall } = useT3TextAsset(props.contentElement.content)
 
 const imageSizes = computed<T3Model.Image.Sizes>(() => {
     if (assetIsSmall) {

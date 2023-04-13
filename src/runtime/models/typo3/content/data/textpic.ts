@@ -1,8 +1,3 @@
-import { Asset } from '../..'
-import { Text } from '.'
+import { TextAsset } from '.'
 
-export interface Textpic extends Text {
-    images: Asset[]
-    imagePosition: 'right' | 'left'
-    ratio: number
-}
+export interface Textpic extends TextAsset {}

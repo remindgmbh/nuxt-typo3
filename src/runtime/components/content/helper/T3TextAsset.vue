@@ -6,8 +6,6 @@
                 't3-text-asset__asset--small': assetIsSmall,
                 't3-text-asset__asset--large': !assetIsSmall,
                 't3-text-asset__asset--right': assetIsRight,
-                [`t3-text-asset--${contentElement.appearance.backgroundColor}`]:
-                    contentElement.appearance.backgroundColor,
             }"
         >
             <div v-if="asset" class="t3-text-asset__asset-wrapper">
@@ -34,13 +32,11 @@
 import { T3Model, useT3TextAsset } from '#imports'
 
 const props = defineProps<{
-    contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Textmedia>
+    content: T3Model.Typo3.Content.Data.TextAsset
     assetAttrs?: { [key: string]: any }
 }>()
 
-const { asset, assetIsRight, assetIsSmall } = useT3TextAsset(
-    props.contentElement.content
-)
+const { asset, assetIsRight, assetIsSmall } = useT3TextAsset(props.content)
 </script>
 
 <style lang="scss">

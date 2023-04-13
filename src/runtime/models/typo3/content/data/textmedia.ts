@@ -1,8 +1,3 @@
-import { Asset } from '../..'
-import { Text } from '.'
+import { TextAsset } from '.'
 
-export interface Textmedia extends Text {
-    assets: Asset[]
-    assetPosition: 'right' | 'left'
-    ratio: number
-}
+export interface Textmedia extends TextAsset {}
