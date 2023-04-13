@@ -6,7 +6,7 @@
                 contentElement.appearance.backgroundColor,
         }"
     >
-        <T3Text :content-element="contentElement" />
+        <T3Text :content="contentElement.content" />
     </div>
 </template>
 

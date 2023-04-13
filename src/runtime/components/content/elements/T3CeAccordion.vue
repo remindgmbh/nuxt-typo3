@@ -15,9 +15,7 @@
             </template>
             <template #content="{ item, index }">
                 <slot name="content" :item="item" :index="index">
-                    <T3Text
-                        :content-element="{ ...contentElement, content: item }"
-                    />
+                    <T3Text :content="item" />
                 </slot>
             </template>
         </T3Accordion>

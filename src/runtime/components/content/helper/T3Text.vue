@@ -1,13 +1,7 @@
 <template>
-    <div
-        class="t3-text"
-        :class="{
-            [`t3-text--${contentElement.appearance.backgroundColor}`]:
-                contentElement.appearance.backgroundColor,
-        }"
-    >
-        <T3Header :content="contentElement.content" />
-        <T3HtmlParser :content="contentElement.content.bodytext" />
+    <div class="t3-text">
+        <T3Header :content="content" />
+        <T3HtmlParser :content="content.bodytext" />
     </div>
 </template>
 
@@ -15,6 +9,6 @@
 import { T3Model } from '#imports'
 
 defineProps<{
-    contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Text>
+    content: T3Model.Typo3.Content.Data.Text
 }>()
 </script>

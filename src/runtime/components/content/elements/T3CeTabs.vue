@@ -15,9 +15,7 @@
             </template>
             <template #content="{ item }">
                 <slot name="content" :item="item">
-                    <T3Text
-                        :content-element="{ ...contentElement, content: item }"
-                    />
+                    <T3Text :content="item" />
                 </slot>
             </template>
         </T3Tabs>

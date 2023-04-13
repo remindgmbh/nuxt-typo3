@@ -24,7 +24,7 @@
             }"
         >
             <slot name="text">
-                <T3Text :content-element="contentElement" />
+                <T3Text :content="content" />
             </slot>
         </div>
     </div>
