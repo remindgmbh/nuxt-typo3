@@ -36,6 +36,7 @@ export default defineNuxtConfig({
                 ignoreCookies: true,
             },
         },
+        defaultTheme: 'light',
         i18n: {
             messages: {
                 de,
@@ -44,40 +45,37 @@ export default defineNuxtConfig({
         },
         languages: ['/de/'],
         scssForwards: ['@/assets/breakpoints.scss'],
-        theme: {
-            default: 'light',
-            themes: {
-                light: {
-                    default: {
-                        value: '#ffffff',
-                        contrast: '#000000',
-                    },
-                    white: {
-                        value: '#ffffff',
-                        contrast: '#000000',
-                    },
-                    black: {
-                        value: '#000000',
-                        contrast: '#ffffff',
-                    },
-                    primary: {
-                        value: '#607d8b',
-                        contrast: '#ffffff',
-                    },
-                    secondary: {
-                        value: '#009688',
-                        contrast: '#000000',
-                    },
-                    accent: {
-                        value: '#fdd835',
-                        contrast: '#000000',
-                    },
+        themes: {
+            light: {
+                default: {
+                    value: '#ffffff',
+                    contrast: '#000000',
                 },
-                dark: {
-                    default: {
-                        value: '#000000',
-                        contrast: '#ffffff',
-                    },
+                white: {
+                    value: '#ffffff',
+                    contrast: '#000000',
+                },
+                black: {
+                    value: '#000000',
+                    contrast: '#ffffff',
+                },
+                primary: {
+                    value: '#607d8b',
+                    contrast: '#ffffff',
+                },
+                secondary: {
+                    value: '#009688',
+                    contrast: '#000000',
+                },
+                accent: {
+                    value: '#fdd835',
+                    contrast: '#000000',
+                },
+            },
+            dark: {
+                default: {
+                    value: '#000000',
+                    contrast: '#ffffff',
                 },
             },
         },

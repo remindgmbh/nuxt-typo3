@@ -31,6 +31,14 @@
 </template>
 
 <script setup lang="ts">
+import {
+    ref,
+    onMounted,
+    useT3Menu,
+    useT3Theme,
+    useT3Navigation,
+} from '#imports'
+
 const { rootPageNavigation } = useT3Navigation()
 const { triggers, toggle } = useT3Menu()
 const { colors } = useT3Theme()

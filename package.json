@@ -28,10 +28,11 @@
         "lint:script": "eslint --ext \".js,.ts,.vue\" .",
         "lint:style": "stylelint \"**/*.{vue,[s]css}\"",
         "prepare": "yarn stub && nuxt-module-build",
-        "prepublish": "yarn lint",
+        "prepublish": "yarn typecheck && yarn lint",
         "preview": "nuxi preview playground",
         "stub": "nuxt-module-build --stub && nuxi prepare playground",
-        "test": "vitest run"
+        "test": "vitest run",
+        "typecheck": "nuxi typecheck"
     },
     "dependencies": {
         "@nuxt/kit": "^3.4.0",
@@ -67,7 +68,7 @@
         "vue-tsc": "^1.2.0"
     },
     "volta": {
-        "node": "16.17.0",
+        "node": "18.16.0",
         "yarn": "1.22.19"
     }
 }

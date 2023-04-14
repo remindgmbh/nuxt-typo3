@@ -4,6 +4,7 @@
 
 <script setup lang="ts">
 import BaseT3Checkbox from '#nuxt-typo3/components/ui/input/T3Checkbox.vue'
+import { useAttrs, useT3Theme } from '#imports'
 
 const attrs: any = useAttrs()
 

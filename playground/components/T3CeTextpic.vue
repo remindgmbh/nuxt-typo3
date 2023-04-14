@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import BaseT3CeTextpic from '#nuxt-typo3/components/content/elements/T3CeTextpic.vue'
-import { T3Model } from '#imports'
+import { computed, T3Model, useT3Breakpoints, useT3TextAsset } from '#imports'
 
 const props = defineProps<{
     contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Textpic>

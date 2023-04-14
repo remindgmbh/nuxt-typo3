@@ -28,6 +28,7 @@
 
 <script setup lang="ts">
 import { vOnClickOutside } from '@vueuse/components'
+import { computed, useT3Menu, useT3Theme, useT3Navigation } from '#imports'
 
 const { active, triggers, close } = useT3Menu()
 const { navItemsWithChildren } = useT3Navigation()

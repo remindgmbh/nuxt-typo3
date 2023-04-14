@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import BaseT3CeTextmedia from '#nuxt-typo3/components/content/elements/T3CeTextmedia.vue'
-import { T3Model } from '#imports'
+import { useT3ContentUtil, T3Model } from '#imports'
 
 const props = defineProps<{
     contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Textmedia>

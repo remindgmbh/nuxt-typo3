@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import BaseT3Content from '#nuxt-typo3/components/content/helper/T3Content.vue'
-import { T3Model } from '#imports'
+import { T3Model, useT3ContentUtil } from '#imports'
 
 const props = defineProps<{
     contentElement: T3Model.Typo3.Content.Element

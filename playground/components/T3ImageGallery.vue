@@ -4,6 +4,7 @@
 
 <script setup lang="ts">
 import BaseT3ImageGallery from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallery.vue'
+import { useAttrs, useT3Theme } from '#imports'
 
 const attrs: any = useAttrs()
 
