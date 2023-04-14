@@ -1,5 +1,5 @@
-import { ComponentPublicInstance, Ref } from 'vue'
-import { readonly, watch, useRoute, useState } from '#imports'
+import { ComponentPublicInstance, Ref, readonly } from 'vue'
+import { watch, useRoute, useState } from '#imports'
 
 export function useT3Menu(statePrefix: string = 't3-menu') {
     const route = useRoute()
