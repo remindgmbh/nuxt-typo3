@@ -44,7 +44,7 @@ interface CeOptions {
 
 export interface Color {
     value: string
-    contrast: string
+    contrast?: string
 }
 
 export interface ModuleOptions {
@@ -64,7 +64,8 @@ export interface ModuleOptions {
         [type: string]: CeOptions
     }
     // UID from cookiebot, required if cookie consent banner should be shown
-    cookiebotUid?: string
+    cookiebotUid: string
+    defaultTheme: string
     // options from https://github.com/intlify/vue-i18n-next
     i18n: I18nOptions
     // global file extension for images coming from typo3
@@ -89,12 +90,9 @@ export interface ModuleOptions {
         'extra-large': string
         [other: string]: string
     }
-    theme: {
-        default: string
-        themes: {
-            [themeName: string]: {
-                [colorName: string]: Color
-            }
+    themes: {
+        [themeName: string]: {
+            [colorName: string]: Color
         }
     }
 }
@@ -120,6 +118,8 @@ export default defineNuxtModule<ModuleOptions>({
                 },
             },
         },
+        cookiebotUid: '',
+        defaultTheme: 'default',
         i18n: {
             locale: 'de',
         },
@@ -137,25 +137,20 @@ export default defineNuxtModule<ModuleOptions>({
             large: '4rem',
             'extra-large': '8rem',
         },
-        theme: {
-            default: 'default',
-            themes: {
-                default: {},
-            },
+        themes: {
+            default: {},
         },
     },
     setup(options, nuxt) {
         const resolver = createResolver(import.meta.url)
 
         // Use values from default theme for missing values in themes
-        Object.keys(options.theme.themes)
-            .filter((name) => name !== 'default')
-            .forEach((name) => {
-                options.theme.themes[name] = defu(
-                    options.theme.themes[name],
-                    options.theme.themes[options.theme.default]
-                )
-            })
+        Object.keys(options.themes).forEach((name) => {
+            options.themes[name] = defu(
+                options.themes[name],
+                options.themes[options.defaultTheme]
+            )
+        })
 
         options = nuxt.options.runtimeConfig.public[CONFIG_KEY] = defu(
             nuxt.options.runtimeConfig.public[CONFIG_KEY],
