@@ -47,7 +47,7 @@
         "yup": "^1.0.0"
     },
     "devDependencies": {
-        "@nuxt/module-builder": "0.2.0",
+        "@nuxt/module-builder": "0.3.0",
         "@remindgmbh/eslint-config-nuxt": "^1.0.3",
         "@remindgmbh/stylelint-config": "^1.0.1",
         "@testing-library/jest-dom": "^5.16.5",
