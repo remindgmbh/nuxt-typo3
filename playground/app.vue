@@ -43,6 +43,15 @@
 
 <script setup lang="ts">
 import { gsap } from 'gsap'
+import {
+    onMounted,
+    ref,
+    useT3Cookiebot,
+    useT3ApiData,
+    useT3LoadingState,
+    useT3Util,
+    useT3Theme,
+} from '#imports'
 
 const HEADER_HEIGHT = '5rem'
 const HEADER_HEIGHT_DENSE = '3rem'

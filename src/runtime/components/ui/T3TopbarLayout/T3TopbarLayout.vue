@@ -6,12 +6,13 @@
 
 <script setup lang="ts">
 import { ComponentPublicInstance } from 'vue'
+import { useLogger } from '#nuxt-logger'
 import {
     registerContentSymbol,
     registerHeaderSymbol,
     scrollbarDisabledSymbol,
 } from './shared'
-import { onMounted, provide, ref, useLogger, watch } from '#imports'
+import { onMounted, provide, ref, watch } from '#imports'
 
 const props = withDefaults(
     defineProps<{
