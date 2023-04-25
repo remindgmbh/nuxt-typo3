@@ -11,13 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import {
-    computed,
-    T3Model,
-    useAttrs,
-    useT3Breakpoints,
-    useT3Config,
-} from '#imports'
+import { computed } from 'vue'
+import { T3Model, useAttrs, useT3Breakpoints, useT3Config } from '#imports'
 
 const props = defineProps<{
     uid?: number

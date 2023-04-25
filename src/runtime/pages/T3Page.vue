@@ -15,15 +15,13 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { computed, ref, watch } from 'vue'
 import {
-    computed,
-    ref,
     useRoute,
     useT3ApiData,
     useT3ApiPath,
     useT3DynamicComponent,
     useT3PageHead,
-    watch,
 } from '#imports'
 
 const { t } = useI18n()

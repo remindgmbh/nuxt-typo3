@@ -12,9 +12,8 @@
 </template>
 
 <script setup lang="ts">
-import { TransitionProps } from 'vue'
+import { TransitionProps, ref, inject } from 'vue'
 import { scrollbarDisabledSymbol } from './shared'
-import { ref, inject } from '#imports'
 
 enum Status {
     Entering,

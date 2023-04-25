@@ -9,7 +9,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, useT3LinkReplacer, useT3TableEnhancer } from '#imports'
+import { computed, ref } from 'vue'
+import { useT3LinkReplacer, useT3TableEnhancer } from '#imports'
 
 const props = defineProps<{
     content: string

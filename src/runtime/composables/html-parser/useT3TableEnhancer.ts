@@ -1,5 +1,5 @@
-import { Ref } from 'vue'
-import { onMounted, useT3Util, watch } from '#imports'
+import { Ref, onMounted, watch } from 'vue'
+import { useT3Util } from '#imports'
 
 export function useT3TableEnhancer(
     el: Ref<HTMLElement | undefined>,

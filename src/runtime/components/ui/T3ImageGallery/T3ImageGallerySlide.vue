@@ -33,7 +33,8 @@
 <script setup lang="ts">
 import { Swiper } from 'swiper'
 import { debounce } from 'perfect-debounce'
-import { ref, onMounted, T3Model } from '#imports'
+import { ref, onMounted } from 'vue'
+import { T3Model } from '#imports'
 
 const props = defineProps<{
     header?: string

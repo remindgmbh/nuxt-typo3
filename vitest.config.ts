@@ -1,15 +1,10 @@
 import { defineConfig } from 'vitest/config'
-import Vue from '@vitejs/plugin-vue'
-import tsconfigPaths from 'vite-tsconfig-paths'
+import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
-    plugins: [Vue(), tsconfigPaths()],
+    plugins: [vue()],
     test: {
-        environment: 'jsdom',
+        environment: 'happy-dom',
         globals: true,
-        setupFiles: [
-            './test/setup-files/app',
-            './test/setup-files/resize-observer',
-        ],
     },
 })

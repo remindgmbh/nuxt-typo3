@@ -37,7 +37,8 @@
 
 <script setup lang="ts">
 import { useForm } from 'vee-validate'
-import { computed, T3Model } from '#imports'
+import { computed } from 'vue'
+import { T3Model } from '#imports'
 
 const { handleSubmit } = useForm()
 

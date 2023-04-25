@@ -13,7 +13,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, T3Model } from '#imports'
+import { computed } from 'vue'
+import { T3Model } from '#imports'
 
 const props = defineProps<{
     content: { [colPos: string]: T3Model.Typo3.Content.Element[] }

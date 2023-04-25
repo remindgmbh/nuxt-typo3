@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from '#imports'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 
 withDefaults(
     defineProps<{

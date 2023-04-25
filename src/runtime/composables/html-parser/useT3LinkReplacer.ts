@@ -1,5 +1,5 @@
-import { Ref } from 'vue'
-import { onBeforeUnmount, onMounted, watch, navigateTo } from '#imports'
+import { Ref, onBeforeUnmount, onMounted, watch } from 'vue'
+import { navigateTo } from '#imports'
 
 export function useT3LinkReplacer(
     el: Ref<HTMLElement | undefined>,

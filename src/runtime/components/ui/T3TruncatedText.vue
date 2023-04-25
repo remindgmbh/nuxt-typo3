@@ -11,7 +11,7 @@
 </template>
 <script setup lang="ts">
 import { debounce } from 'perfect-debounce'
-import { onMounted, ref } from '#imports'
+import { onMounted, ref } from 'vue'
 
 const root = ref<HTMLDivElement>()
 const content = ref<HTMLDivElement>()

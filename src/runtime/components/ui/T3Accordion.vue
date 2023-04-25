@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from '#imports'
+import { ref } from 'vue'
 
 const props = withDefaults(
     defineProps<{

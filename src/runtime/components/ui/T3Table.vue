@@ -46,7 +46,8 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, useT3Util } from '#imports'
+import { onMounted, ref } from 'vue'
+import { useT3Util } from '#imports'
 
 const { detectScrollEnd } = useT3Util()
 

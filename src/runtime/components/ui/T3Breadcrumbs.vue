@@ -22,7 +22,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, T3Model, useRuntimeConfig } from '#imports'
+import { computed } from 'vue'
+import { T3Model, useRuntimeConfig } from '#imports'
 
 const runtimeConfig = useRuntimeConfig()
 

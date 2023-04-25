@@ -11,7 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, T3Model, useT3ContentUtil } from '#imports'
+import { computed } from 'vue'
+import { T3Model, useT3ContentUtil } from '#imports'
 
 const props = defineProps<{
     contentElement: T3Model.Typo3.Content.Element

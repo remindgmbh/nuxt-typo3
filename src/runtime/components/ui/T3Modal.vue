@@ -38,8 +38,8 @@
 </template>
 
 <script setup lang="ts">
+import { computed, inject, ref, watch } from 'vue'
 import { scrollbarDisabledSymbol } from './T3TopbarLayout/shared'
-import { computed, inject, ref, watch } from '#imports'
 
 const props = withDefaults(
     defineProps<{

@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import { RuleExpression, useField } from 'vee-validate'
-import { computed } from '#imports'
+import { computed } from 'vue'
 
 const props = defineProps<{
     name: string

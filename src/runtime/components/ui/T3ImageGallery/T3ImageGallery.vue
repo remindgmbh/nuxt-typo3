@@ -62,7 +62,8 @@
 <script setup lang="ts">
 import { FreeMode, Navigation, Scrollbar } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { ref, T3Model } from '#imports'
+import { ref } from 'vue'
+import { T3Model } from '#imports'
 
 withDefaults(
     defineProps<{

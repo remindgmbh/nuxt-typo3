@@ -30,7 +30,8 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { computed, T3Model, useT3Util } from '#imports'
+import { computed } from 'vue'
+import { T3Model, useT3Util } from '#imports'
 
 const props = defineProps<{
     activeIndex: number
