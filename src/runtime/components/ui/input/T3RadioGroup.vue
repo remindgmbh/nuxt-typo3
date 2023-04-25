@@ -24,14 +24,12 @@
                 :disabled="disabled"
             />
         </div>
-        <T3CollapseTransition transition-name="error-transition">
-            <div
-                v-if="errorMessage"
+        <slot name="error" :error-message="errorMessage">
+            <T3InputError
+                :error-message="errorMessage"
                 class="t3-radio-group__error t3-input__error"
-            >
-                {{ errorMessage }}
-            </div>
-        </T3CollapseTransition>
+            />
+        </slot>
     </fieldset>
 </template>
 

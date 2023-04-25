@@ -19,11 +19,12 @@
             :placeholder="placeholder"
             :disabled="disabled"
         />
-        <T3CollapseTransition transition-name="error-transition">
-            <div v-if="errorMessage" class="t3-textarea__error t3-input__error">
-                {{ errorMessage }}
-            </div>
-        </T3CollapseTransition>
+        <slot name="error" :error-message="errorMessage">
+            <T3InputError
+                :error-message="errorMessage"
+                class="t3-textarea__error t3-input__error"
+            />
+        </slot>
     </div>
 </template>
 
