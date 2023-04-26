@@ -60,6 +60,7 @@
 </template>
 
 <script setup lang="ts">
+import 'swiper/scss'
 import { FreeMode, Navigation, Scrollbar } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { ref } from 'vue'
@@ -97,8 +98,6 @@ function hideModal() {
 </script>
 
 <style lang="scss">
-@use 'swiper/scss';
-
 .t3-image-gallery {
     // Set gallery height:
     // height: ...
