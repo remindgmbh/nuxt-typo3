@@ -27,6 +27,7 @@
         "lint:prettier": "prettier --check .",
         "lint:script": "eslint --ext \".js,.ts,.vue\" .",
         "lint:style": "stylelint \"**/*.{vue,[s]css}\"",
+        "postinstall": "yarn --cwd playground",
         "prepare": "yarn stub && nuxt-module-build",
         "prepublishOnly": "yarn typecheck && yarn lint && yarn test",
         "preview": "nuxi preview playground",
