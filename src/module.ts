@@ -204,8 +204,6 @@ export default defineNuxtModule<ModuleOptions>({
         )
 
         installModule('@remindgmbh/nuxt-logger')
-        // needed to prevent error: https://github.com/nuxt/framework/issues/2542#issuecomment-1008211886
-        nuxt.options.modules.push('@remindgmbh/nuxt-logger')
 
         addImportsDir(resolver.resolve('runtime/composables/**/*'))
         addImports({
