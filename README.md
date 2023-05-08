@@ -46,4 +46,4 @@ To customize a components template and script just create a component with the s
 
 ## Development
 
-Use `npm install` or `yarn` to install dependencies. Add `.env` file to playground directory and set `NUXT_PUBLIC_TYPO3_BASE_URL` and `NUXT_PUBLIC_TYPO3_API_BASE_URL`. Then use `npm run dev` or `yarn dev` to start a dev server.
+Use `npm install` or `yarn` to install dependencies. Change to `./playground` directory and install dependencies as well. Add `.env` file to playground directory and set `NUXT_PUBLIC_TYPO3_BASE_URL` and `NUXT_PUBLIC_TYPO3_API_BASE_URL`. Then use `npm run dev` or `yarn dev` to start a dev server.
