@@ -34,7 +34,7 @@
         "test": "vitest run"
     },
     "dependencies": {
-        "@nuxt/kit": "^3.2.2",
+        "@nuxt/kit": "^3.4.3",
         "@remindgmbh/nuxt-logger": "^1.0.1",
         "defu": "^6.1.2",
         "perfect-debounce": "^0.1.3",
