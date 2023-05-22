@@ -23,29 +23,35 @@ withDefaults(
 let initialHeight = ''
 let initialOverflowY = ''
 
-function beforeEnter(el: HTMLElement) {
+function beforeEnter(el: Element) {
+    if (!(el instanceof HTMLElement)) return
     initialHeight = el.style.height
     initialOverflowY = el.style.overflowY
     el.style.height = '0'
 }
-function enter(el: HTMLElement) {
+function enter(el: Element) {
+    if (!(el instanceof HTMLElement)) return
     el.style.overflowY = 'hidden'
     el.style.height = `${el.scrollHeight}px`
 }
-function afterEnter(el: HTMLElement) {
+function afterEnter(el: Element) {
+    if (!(el instanceof HTMLElement)) return
     el.style.height = initialHeight
     el.style.overflowY = initialOverflowY
 }
-function beforeLeave(el: HTMLElement) {
+function beforeLeave(el: Element) {
+    if (!(el instanceof HTMLElement)) return
     el.style.height = `${el.scrollHeight}px`
 }
-function leave(el: HTMLElement) {
+function leave(el: Element) {
+    if (!(el instanceof HTMLElement)) return
     if (el.scrollHeight !== 0) {
         el.style.overflowY = 'hidden'
         el.style.height = '0'
     }
 }
-function afterLeave(el: HTMLElement) {
+function afterLeave(el: Element) {
+    if (!(el instanceof HTMLElement)) return
     el.style.height = initialHeight
     el.style.overflowY = initialOverflowY
 }
