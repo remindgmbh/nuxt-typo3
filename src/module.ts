@@ -92,7 +92,10 @@ export interface ModuleOptions {
     }
     themes: {
         [themeName: string]: {
-            [colorName: string]: Color
+            [colorName: string]: {
+                base: Color
+                [variant: string]: Color
+            }
         }
     }
 }

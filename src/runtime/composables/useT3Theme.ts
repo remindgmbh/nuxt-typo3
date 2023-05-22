@@ -10,9 +10,9 @@ export function useT3Theme() {
         () => defaultTheme
     )
 
-    const colors = computed<{ [colorName: string]: Color }>(
-        () => themes[selectedTheme.value]
-    )
+    const colors = computed<{
+        [colorName: string]: { [variant: string]: Color }
+    }>(() => themes[selectedTheme.value])
 
     return {
         colors,

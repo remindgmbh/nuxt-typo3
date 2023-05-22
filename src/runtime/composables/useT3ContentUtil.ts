@@ -10,9 +10,11 @@ export function useT3ContentUtil(
     const { isAccepted } = useT3Cookiebot()
     const { colors } = useT3Theme()
 
-    const color = computed<Color>(
-        () => colors.value[contentElement.appearance.backgroundColor]
-    )
+    const color = computed<Color>(() => {
+        const [colorName, variant] =
+            contentElement.appearance.backgroundColor.split('.')
+        return colors.value[colorName][variant ?? 'base']
+    })
 
     const cookieAccepted = computed<boolean>(() =>
         isAccepted(contentElement.cookie.category)
