@@ -1,5 +1,6 @@
 import de from './locales/de.json'
 import en from './locales/en.json'
+import { themes } from './themes'
 
 export default defineNuxtConfig({
     runtimeConfig: {
@@ -45,40 +46,7 @@ export default defineNuxtConfig({
         },
         languages: ['/de/'],
         scssForwards: ['@/assets/breakpoints.scss'],
-        themes: {
-            light: {
-                default: {
-                    value: '#ffffff',
-                    contrast: '#000000',
-                },
-                white: {
-                    value: '#ffffff',
-                    contrast: '#000000',
-                },
-                black: {
-                    value: '#000000',
-                    contrast: '#ffffff',
-                },
-                primary: {
-                    value: '#607d8b',
-                    contrast: '#ffffff',
-                },
-                secondary: {
-                    value: '#009688',
-                    contrast: '#000000',
-                },
-                accent: {
-                    value: '#fdd835',
-                    contrast: '#000000',
-                },
-            },
-            dark: {
-                default: {
-                    value: '#000000',
-                    contrast: '#ffffff',
-                },
-            },
-        },
+        themes,
     },
     modules: ['@remindgmbh/nuxt-typo3'],
     vite: {

@@ -4,11 +4,13 @@
 
 <script setup lang="ts">
 import BaseT3ImageGallerySlideNavigation from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallerySlideNavigation.vue'
-import { useAttrs, useT3Theme } from '#imports'
+import { computed, useAttrs, useT3Theme } from '#imports'
 
 const attrs: any = useAttrs()
 
-const { colors } = useT3Theme()
+const { themeOptions } = useT3Theme()
+
+const colors = computed(() => themeOptions.value.general)
 </script>
 
 <style lang="scss">
@@ -41,7 +43,7 @@ const { colors } = useT3Theme()
 
     &__slide {
         overflow: hidden;
-        background-color: v-bind('colors.black.value');
+        background-color: v-bind('colors.black');
 
         &:not(&:last-child) {
             margin-right: 1rem;

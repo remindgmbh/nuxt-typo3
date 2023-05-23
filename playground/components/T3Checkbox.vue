@@ -4,11 +4,13 @@
 
 <script setup lang="ts">
 import BaseT3Checkbox from '#nuxt-typo3/components/ui/input/T3Checkbox.vue'
-import { useAttrs, useT3Theme } from '#imports'
+import { computed, useAttrs, useT3Theme } from '#imports'
 
 const attrs: any = useAttrs()
 
-const { colors } = useT3Theme()
+const { themeOptions } = useT3Theme()
+
+const colors = computed(() => themeOptions.value.general)
 </script>
 
 <style lang="scss">
@@ -23,7 +25,7 @@ const { colors } = useT3Theme()
         &::before {
             width: 100%;
             height: 100%;
-            border: solid 1px v-bind('colors.accent.value');
+            border: solid 1px v-bind('colors.accent');
             content: '';
             position: absolute;
             box-sizing: border-box;
@@ -31,7 +33,7 @@ const { colors } = useT3Theme()
 
         &:checked {
             &::before {
-                background-color: v-bind('colors.primary.value');
+                background-color: v-bind('colors.primary');
             }
         }
     }

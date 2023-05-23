@@ -4,11 +4,13 @@
 
 <script setup lang="ts">
 import BaseT3ImageGallerySlideHeader from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallerySlideHeader.vue'
-import { useAttrs, useT3Theme } from '#imports'
+import { computed, useAttrs, useT3Theme } from '#imports'
 
 const attrs: any = useAttrs()
 
-const { colors } = useT3Theme()
+const { themeOptions } = useT3Theme()
+
+const colors = computed(() => themeOptions.value.general)
 </script>
 
 <style lang="scss">
@@ -45,7 +47,7 @@ const { colors } = useT3Theme()
         background-color: transparent;
         cursor: pointer;
         border: none;
-        color: v-bind('colors.white.value');
+        color: v-bind('colors.white');
         font-weight: 700;
         font-size: 1.5rem;
 

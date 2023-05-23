@@ -44,6 +44,7 @@
 <script setup lang="ts">
 import { gsap } from 'gsap'
 import {
+    computed,
     onMounted,
     ref,
     useT3Cookiebot,
@@ -60,7 +61,9 @@ const { showBanner } = useT3Cookiebot()
 const { currentFooterContent } = useT3ApiData()
 const { loadingPage } = useT3LoadingState()
 const { detectScrollEnd } = useT3Util()
-const { colors } = useT3Theme()
+const { themeOptions } = useT3Theme()
+
+const colors = computed(() => themeOptions.value.general)
 
 const sidebarVisible = ref(false)
 const scrollbarDisabled = ref(false)
@@ -113,11 +116,11 @@ onMounted(() => {
 <style lang="scss">
 .app {
     position: relative;
-    color: v-bind('colors.default.contrast');
+    color: v-bind('colors.font');
 
     &__loading-bar {
         position: absolute;
-        background-color: v-bind('colors.primary.value');
+        background-color: v-bind('colors.background');
         height: 0;
         width: 100%;
 
@@ -129,24 +132,24 @@ onMounted(() => {
     &__loading-progress {
         position: absolute;
         inset: 0 100% 0 0;
-        background-color: v-bind('colors.secondary.value');
+        background-color: v-bind('colors.secondary');
         animation: loading 2s linear infinite;
     }
 
     &__header {
-        background-color: v-bind('colors.default.value');
+        background-color: v-bind('colors.background');
         height: v-bind(headerHeight);
         transition: height 0.5s;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 0.125rem v-bind('colors.secondary.value') solid;
+        border-bottom: 0.125rem v-bind('colors.secondary') solid;
         width: 100%;
     }
 
     &__footer {
-        background-color: v-bind('colors.secondary.value');
-        color: v-bind('colors.white.value');
+        background-color: v-bind('colors.secondary');
+        color: v-bind('colors.background');
     }
 
     &__sidebar {
@@ -157,15 +160,15 @@ onMounted(() => {
     }
 
     &__sidebar-content {
-        background-color: v-bind('colors.primary.value');
-        border-bottom: solid 1rem v-bind('colors.accent.value');
+        background-color: v-bind('colors.primary');
+        border-bottom: solid 1rem v-bind('colors.accent');
         box-sizing: border-box;
     }
 
     &__content {
         overflow-x: hidden;
         position: relative;
-        background-color: v-bind('colors.default.value');
+        background-color: v-bind('colors.background');
     }
 
     .page-transition {

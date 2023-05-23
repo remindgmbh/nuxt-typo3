@@ -4,11 +4,13 @@
 
 <script setup lang="ts">
 import BaseT3ImageGallery from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallery.vue'
-import { useAttrs, useT3Theme } from '#imports'
+import { computed, useAttrs, useT3Theme } from '#imports'
 
 const attrs: any = useAttrs()
 
-const { colors } = useT3Theme()
+const { themeOptions } = useT3Theme()
+
+const colors = computed(() => themeOptions.value.general)
 </script>
 <style lang="scss">
 .t3-image-gallery {
@@ -16,7 +18,7 @@ const { colors } = useT3Theme()
 
     &__navigation {
         padding: 1rem;
-        background-color: v-bind('colors.white.value');
+        background-color: v-bind('colors.white');
 
         &--disabled {
             color: lightgrey;
@@ -27,12 +29,12 @@ const { colors } = useT3Theme()
         bottom: 0.5rem;
         left: 1rem;
         width: calc(100% - 2rem);
-        background-color: v-bind('colors.black.value');
+        background-color: v-bind('colors.black');
         height: 0.25rem;
     }
 
     &__scrollbar-drag {
-        background-color: v-bind('colors.primary.value');
+        background-color: v-bind('colors.primary');
     }
 
     &__slide {
@@ -54,7 +56,7 @@ const { colors } = useT3Theme()
     }
 
     &__modal {
-        color: v-bind('colors.white.value');
+        color: v-bind('colors.white');
 
         & .t3-modal {
             &__background {

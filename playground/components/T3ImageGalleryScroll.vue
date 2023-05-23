@@ -4,11 +4,13 @@
 
 <script setup lang="ts">
 import BaseT3ImageGalleryScroll from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGalleryScroll.vue'
-import { useAttrs, useT3Theme } from '#imports'
+import { computed, useAttrs, useT3Theme } from '#imports'
 
 const attrs: any = useAttrs()
 
-const { colors } = useT3Theme()
+const { themeOptions } = useT3Theme()
+
+const colors = computed(() => themeOptions.value.general)
 </script>
 
 <style lang="scss">
@@ -29,7 +31,7 @@ const { colors } = useT3Theme()
 
     &__close {
         background-color: transparent;
-        color: v-bind('colors.white.value');
+        color: v-bind('colors.white');
         border: none;
         font-size: 1.5rem;
         font-weight: 700;
@@ -53,7 +55,7 @@ const { colors } = useT3Theme()
     &__divider {
         margin: $divider-margin 0;
         height: 0.125rem;
-        background-color: v-bind('colors.white.value');
+        background-color: v-bind('colors.white');
     }
 }
 </style>

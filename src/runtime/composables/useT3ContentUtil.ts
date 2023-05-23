@@ -1,6 +1,6 @@
 import { computed } from 'vue'
+import { defu } from 'defu'
 import * as T3Model from '../models'
-import { Color } from '../../module'
 import { useT3Config, useT3Cookiebot, useT3Theme } from '#imports'
 
 export function useT3ContentUtil(
@@ -8,17 +8,28 @@ export function useT3ContentUtil(
 ) {
     const config = useT3Config()
     const { isAccepted } = useT3Cookiebot()
-    const { colors } = useT3Theme()
+    const { themeOptions } = useT3Theme()
 
-    const backgroundColor = computed<Color | undefined>(() => {
-        const [colorName, variant] =
-            contentElement.appearance.backgroundColor.split('.')
-        return colors.value[colorName]?.[variant ?? 'base']
+    const backgroundColor = computed<string | undefined>(() => {
+        return themeOptions.value.backgroundColors[
+            contentElement.appearance.backgroundColor
+        ]
     })
 
-    const ceColors = computed<{ [color: string]: string } | undefined>(
-        () => backgroundColor.value?.contentElements?.[contentElement.type]
-    )
+    const colors = computed<{ [color: string]: string } | undefined>(() => {
+        const defaultColors =
+            themeOptions.value.contentElements[contentElement.type].default
+
+        if (backgroundColor.value) {
+            return defu(
+                themeOptions.value.contentElements[contentElement.type]
+                    .backgroundColors[backgroundColor.value],
+                defaultColors
+            )
+        } else {
+            return defaultColors
+        }
+    })
 
     const cookieAccepted = computed<boolean>(() =>
         isAccepted(contentElement.cookie.category)
@@ -52,7 +63,7 @@ export function useT3ContentUtil(
 
     return {
         backgroundColor,
-        colors: ceColors,
+        colors,
         cookieAccepted,
         ignoreCookies,
         isFullWidth,

@@ -23,6 +23,6 @@ const container = computed(
 
 <style lang="scss">
 .t3-background {
-    background-color: v-bind('backgroundColor?.value');
+    background-color: v-bind('backgroundColor');
 }
 </style>

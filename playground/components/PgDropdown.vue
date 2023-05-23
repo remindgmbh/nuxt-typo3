@@ -32,7 +32,9 @@ import { computed, useT3Menu, useT3Theme, useT3Navigation } from '#imports'
 
 const { active, triggers, close } = useT3Menu()
 const { navItemsWithChildren } = useT3Navigation()
-const { colors } = useT3Theme()
+const { themeOptions } = useT3Theme()
+
+const colors = computed(() => themeOptions.value.general)
 
 const activeNavItem = computed(() =>
     navItemsWithChildren.value.find((item) => item.link === active.value)
@@ -48,7 +50,7 @@ const activeNavItem = computed(() =>
 }
 
 .pg-dropdown {
-    background-color: v-bind('colors.accent.value');
+    background-color: v-bind('colors.accent');
     position: absolute;
     top: 100%;
     width: 100%;
@@ -64,7 +66,7 @@ const activeNavItem = computed(() =>
         flex-direction: column;
 
         .router-link-active {
-            color: v-bind('colors.primary.value');
+            color: v-bind('colors.primary');
         }
     }
 }

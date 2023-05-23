@@ -42,21 +42,29 @@ interface CeOptions {
     gallery?: GalleryOptions
 }
 
-export interface Color {
-    value: string
-    contentElements?: {
-        [element: string]: {
-            [color: string]: string
+export interface ThemeOptions {
+    backgroundColors: {
+        [color: string]: string
+    }
+    contentElements: {
+        [contentElement: string]: {
+            default: {
+                [color: string]: string
+            }
+            backgroundColors: {
+                [backgroundColor: string]: {
+                    [color: string]: string
+                }
+            }
         }
+    }
+    general: {
+        [color: string]: string
     }
 }
+
 export interface ThemesOptions {
-    [themeName: string]: {
-        [colorName: string]: {
-            base: Color
-            [variant: string]: Color
-        }
-    }
+    [themeName: string]: ThemeOptions
 }
 
 export interface ModuleOptions {
@@ -146,7 +154,11 @@ export default defineNuxtModule<ModuleOptions>({
             'extra-large': '8rem',
         },
         themes: {
-            default: {},
+            default: {
+                backgroundColors: {},
+                contentElements: {},
+                general: {},
+            },
         },
     },
     setup(options, nuxt) {
