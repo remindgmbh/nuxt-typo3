@@ -16,6 +16,10 @@ export function useT3ContentUtil(
         return colors.value[colorName]?.[variant ?? 'base']
     })
 
+    const ceColors = computed<{ [color: string]: string } | undefined>(
+        () => backgroundColor.value?.contentElements?.[contentElement.type]
+    )
+
     const cookieAccepted = computed<boolean>(() =>
         isAccepted(contentElement.cookie.category)
     )
@@ -47,8 +51,9 @@ export function useT3ContentUtil(
     )
 
     return {
-        cookieAccepted,
         backgroundColor,
+        colors: ceColors,
+        cookieAccepted,
         ignoreCookies,
         isFullWidth,
         spaceBefore,
