@@ -18,7 +18,7 @@ export const themes: ThemesOptions = {
                 backgroundColors: {},
             },
         },
-        general: {
+        additionalData: {
             background: colors.white,
             font: colors.black,
             primary: colors.primary,
@@ -29,7 +29,7 @@ export const themes: ThemesOptions = {
     dark: {
         backgroundColors: {},
         contentElements: {},
-        general: {
+        additionalData: {
             background: colors.black,
             font: colors.white,
         },

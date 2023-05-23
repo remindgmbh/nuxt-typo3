@@ -45,7 +45,7 @@ const { triggers, toggle } = useT3Menu()
 const { themeOptions } = useT3Theme()
 const menuTriggers = ref<HTMLButtonElement[]>([])
 
-const colors = computed(() => themeOptions.value.general)
+const colors = computed(() => themeOptions.value.additionalData)
 
 onMounted(() => {
     triggers.value = menuTriggers.value

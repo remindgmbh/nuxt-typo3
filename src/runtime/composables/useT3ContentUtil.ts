@@ -11,19 +11,22 @@ export function useT3ContentUtil(
     const { themeOptions } = useT3Theme()
 
     const backgroundColor = computed<string | undefined>(() => {
-        return themeOptions.value.backgroundColors[
+        return themeOptions.value.backgroundColors?.[
             contentElement.appearance.backgroundColor
         ]
     })
 
     const colors = computed<{ [color: string]: string } | undefined>(() => {
         const defaultColors =
-            themeOptions.value.contentElements[contentElement.type].default
+            themeOptions.value.contentElements?.[contentElement.type].default ??
+            {}
 
         if (backgroundColor.value) {
             return defu(
-                themeOptions.value.contentElements[contentElement.type]
-                    .backgroundColors[backgroundColor.value],
+                themeOptions.value.contentElements?.[contentElement.type]
+                    .backgroundColors?.[
+                    contentElement.appearance.backgroundColor
+                ] ?? {},
                 defaultColors
             )
         } else {

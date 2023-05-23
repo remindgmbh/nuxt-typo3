@@ -10,7 +10,7 @@ const attrs: any = useAttrs()
 
 const { themeOptions } = useT3Theme()
 
-const colors = computed(() => themeOptions.value.general)
+const colors = computed(() => themeOptions.value.additionalData)
 </script>
 
 <style lang="scss">

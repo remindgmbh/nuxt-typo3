@@ -63,7 +63,7 @@ const { loadingPage } = useT3LoadingState()
 const { detectScrollEnd } = useT3Util()
 const { themeOptions } = useT3Theme()
 
-const colors = computed(() => themeOptions.value.general)
+const colors = computed(() => themeOptions.value.additionalData)
 
 const sidebarVisible = ref(false)
 const scrollbarDisabled = ref(false)

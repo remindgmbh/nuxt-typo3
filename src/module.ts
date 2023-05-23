@@ -43,24 +43,18 @@ interface CeOptions {
 }
 
 export interface ThemeOptions {
-    backgroundColors: {
+    backgroundColors?: {
         [color: string]: string
     }
-    contentElements: {
+    contentElements?: {
         [contentElement: string]: {
-            default: {
-                [color: string]: string
-            }
-            backgroundColors: {
-                [backgroundColor: string]: {
-                    [color: string]: string
-                }
+            default?: any
+            backgroundColors?: {
+                [backgroundColor: string]: any
             }
         }
     }
-    general: {
-        [color: string]: string
-    }
+    additionalData: any
 }
 
 export interface ThemesOptions {
@@ -157,7 +151,7 @@ export default defineNuxtModule<ModuleOptions>({
             default: {
                 backgroundColors: {},
                 contentElements: {},
-                general: {},
+                additionalData: {},
             },
         },
     },
