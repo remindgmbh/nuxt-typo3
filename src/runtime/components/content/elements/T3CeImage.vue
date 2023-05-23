@@ -1,11 +1,5 @@
 <template>
-    <div
-        class="t3-ce-image"
-        :class="{
-            [`t3-ce-image--${contentElement.appearance.backgroundColor}`]:
-                contentElement.appearance.backgroundColor,
-        }"
-    >
+    <div class="t3-ce-image">
         <T3Header :content="contentElement.content" />
         <T3Asset v-if="image" :file="image" :asset-attrs="imageAttrs" />
     </div>

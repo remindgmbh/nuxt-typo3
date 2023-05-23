@@ -1,11 +1,5 @@
 <template>
-    <div
-        class="t3-ce-accordion"
-        :class="{
-            [`t3-ce-accordion--${contentElement.appearance.backgroundColor}`]:
-                contentElement.appearance.backgroundColor,
-        }"
-    >
+    <div class="t3-ce-accordion">
         <T3Header :content="contentElement.content" />
         <T3Accordion :items="contentElement.content.items">
             <template #title="{ item, index }">

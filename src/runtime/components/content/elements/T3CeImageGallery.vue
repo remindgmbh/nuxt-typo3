@@ -1,11 +1,5 @@
 <template>
-    <div
-        class="t3-ce-image-gallery"
-        :class="{
-            [`t3-ce-image-gallery--${contentElement.appearance.backgroundColor}`]:
-                contentElement.appearance.backgroundColor,
-        }"
-    >
+    <div class="t3-ce-image-gallery">
         <T3Header :content="contentElement.content" />
         <T3ImageGallery
             :header="header"

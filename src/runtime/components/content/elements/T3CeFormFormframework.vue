@@ -1,11 +1,5 @@
 <template>
-    <div
-        class="t3-ce-form"
-        :class="{
-            [`t3-ce-form--${contentElement.appearance.backgroundColor}`]:
-                contentElement.appearance.backgroundColor,
-        }"
-    >
+    <div class="t3-ce-form">
         <T3Text class="t3-ce-form__text" :content="contentElement.content" />
         <div :class="`t3-ce-form__form`">
             <T3Form

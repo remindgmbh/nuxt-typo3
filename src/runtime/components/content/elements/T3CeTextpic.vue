@@ -1,11 +1,5 @@
 <template>
-    <div
-        class="t3-ce-textpic"
-        :class="{
-            [`t3-ce-textpic--${contentElement.appearance.backgroundColor}`]:
-                contentElement.appearance.backgroundColor,
-        }"
-    >
+    <div class="t3-ce-textpic">
         <T3TextAsset
             :content="contentElement.content"
             :asset-attrs="assetAttrs"

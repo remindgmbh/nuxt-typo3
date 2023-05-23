@@ -44,7 +44,11 @@ interface CeOptions {
 
 export interface Color {
     value: string
-    contrast?: string
+    contentElements?: {
+        [element: string]: {
+            [color: string]: string
+        }
+    }
 }
 
 export interface ModuleOptions {

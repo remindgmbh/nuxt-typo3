@@ -1,11 +1,5 @@
 <template>
-    <div
-        class="t3-ce-header"
-        :class="{
-            [`t3-ce-header--${contentElement.appearance.backgroundColor}`]:
-                contentElement.appearance.backgroundColor,
-        }"
-    >
+    <div class="t3-ce-header">
         <T3Header :content="contentElement.content" />
     </div>
 </template>

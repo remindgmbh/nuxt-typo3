@@ -1,11 +1,5 @@
 <template>
-    <div
-        class="t3-ce-tabs"
-        :class="{
-            [`t3-ce-tabs--${contentElement.appearance.backgroundColor}`]:
-                contentElement.appearance.backgroundColor,
-        }"
-    >
+    <div class="t3-ce-tabs">
         <T3Header :content="contentElement.content" />
         <T3Tabs :items="contentElement.content.items">
             <template #title="{ item, index }">
