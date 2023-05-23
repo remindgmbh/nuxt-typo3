@@ -50,6 +50,14 @@ export interface Color {
         }
     }
 }
+export interface ThemesOptions {
+    [themeName: string]: {
+        [colorName: string]: {
+            base: Color
+            [variant: string]: Color
+        }
+    }
+}
 
 export interface ModuleOptions {
     // TYPO3 Headless Backend information
@@ -94,14 +102,7 @@ export interface ModuleOptions {
         'extra-large': string
         [other: string]: string
     }
-    themes: {
-        [themeName: string]: {
-            [colorName: string]: {
-                base: Color
-                [variant: string]: Color
-            }
-        }
-    }
+    themes: ThemesOptions
 }
 
 export default defineNuxtModule<ModuleOptions>({
