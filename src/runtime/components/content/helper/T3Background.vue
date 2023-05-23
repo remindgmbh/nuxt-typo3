@@ -29,7 +29,7 @@ const container = computed(
 
 <style lang="scss">
 .t3-background {
-    background-color: v-bind('color.value');
-    color: v-bind('color.contrast');
+    background-color: v-bind('color?.value');
+    color: v-bind('color?.contrast');
 }
 </style>
