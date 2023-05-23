@@ -16,7 +16,7 @@ export function useT3ContentUtil(
         ]
     })
 
-    const colors = computed<{ [color: string]: string } | undefined>(() => {
+    const colors = computed<any | undefined>(() => {
         const defaultColors =
             themeOptions.value.contentElements?.[contentElement.type].default ??
             {}
