@@ -1,7 +1,7 @@
 @use 'sass:list';
 @use 'sass:map';
 
-$breakpoints: (
+$widths: (
     xs: 0,
     sm: 576px,
     md: 768px,
@@ -19,32 +19,32 @@ $container-max-widths: (
 ) !default;
 
 @mixin up($name) {
-    @media only screen and (min-width: map.get($breakpoints, $name)) {
+    @media only screen and (min-width: map.get($widths, $name)) {
         @content;
     }
 }
 
 @mixin down($name) {
-    @media only screen and (max-width: map.get($breakpoints, $name)) {
+    @media only screen and (max-width: map.get($widths, $name)) {
         @content;
     }
 }
 
 @mixin loop {
     /* stylelint-disable-next-line scss/operator-no-newline-after */
-    @if list.length($breakpoints) != list.length($container-max-widths) {
-        @error '$breakpoints and $container-max-widths differ in length';
+    @if list.length($widths) != list.length($container-max-widths) {
+        @error '$widths and $container-max-widths differ in length';
     }
 
-    @each $breakpoint, $container-max-width in $container-max-widths {
-        $min-width: map.get($breakpoints, $breakpoint);
+    @each $name, $container-max-width in $container-max-widths {
+        $width: map.get($widths, $name);
 
-        @if not $min-width {
-            @error '"#{$breakpoint}" defined in $container-max-widths but not in $breakpoints';
+        @if not $width {
+            @error '"#{$name}" defined in $container-max-widths but not in $widths';
         }
 
-        @media (min-width: $min-width) {
-            @content (("container-max-width": $container-max-width, "breakpoint": $breakpoint));
+        @media (min-width: $width) {
+            @content (("container-max-width": $container-max-width, "name": $name, "width": $width));
         }
     }
 }
