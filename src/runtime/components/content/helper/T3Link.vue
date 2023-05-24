@@ -1,11 +1,12 @@
 <template>
     <NuxtLink
         class="t3-link"
-        :to="to.href"
-        :target="to.target"
-        :title="to.title"
+        :to="to?.href"
+        :target="to?.target"
+        :title="to?.title"
+        v-bind="$attrs"
     >
-        <slot>{{ to.title }}</slot>
+        <slot>{{ to?.title }}</slot>
     </NuxtLink>
 </template>
 
@@ -13,6 +14,6 @@
 import { T3Model } from '#imports'
 
 defineProps<{
-    to: T3Model.Typo3.TypoLink
+    to?: T3Model.Typo3.TypoLink
 }>()
 </script>
