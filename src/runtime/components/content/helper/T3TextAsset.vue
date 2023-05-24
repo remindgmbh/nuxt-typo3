@@ -8,11 +8,9 @@
                 't3-text-asset__asset--right': assetIsRight,
             }"
         >
-            <div v-if="asset" class="t3-text-asset__asset-wrapper">
-                <slot name="asset" :asset="asset">
-                    <T3Asset :file="asset" :asset-attrs="assetAttrs" />
-                </slot>
-            </div>
+            <slot v-if="asset" name="asset" :asset="asset">
+                <T3Asset :file="asset" :asset-attrs="assetAttrs" />
+            </slot>
         </div>
         <div
             class="t3-text-asset__text"
