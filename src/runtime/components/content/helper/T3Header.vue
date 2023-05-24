@@ -9,15 +9,19 @@
     >
         <slot>
             <div v-if="content.subheader" class="t3-header__sub">
-                {{ content.subheader }}
+                <slot name="sub">
+                    {{ content.subheader }}
+                </slot>
             </div>
             <div class="t3-header__main">
-                <template v-if="!content.headerLink">{{
-                    content.header
-                }}</template>
-                <T3Link v-else :to="content.headerLink">
-                    {{ content.header }}
-                </T3Link>
+                <slot name="main">
+                    <template v-if="!content.headerLink">{{
+                        content.header
+                    }}</template>
+                    <T3Link v-else :to="content.headerLink">
+                        {{ content.header }}
+                    </T3Link>
+                </slot>
             </div>
         </slot>
     </component>
