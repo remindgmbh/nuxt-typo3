@@ -1,16 +1,16 @@
 @forward '../../src/runtime/assets/styles/breakpoints.scss' with (
-    $container-max-widths: (
+    $container-widths: (
         xs: calc(100% - 2rem),
-        sm: 560px,
-        md: 752px,
-        lg: 920px,
-        xl: 1080px,
+        sm: 35rem,
+        md: 47rem,
+        lg: 58rem,
+        xl: 68rem,
     ),
-    $breakpoints: (
+    $screen-widths: (
         xs: 0,
-        sm: 576px,
-        md: 790px,
-        lg: 992px,
-        xl: 1200px,
+        sm: 36rem,
+        md: 50rem,
+        lg: 62rem,
+        xl: 75rem,
     )
 );

@@ -13,26 +13,26 @@ const props = defineProps<{
     contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Textpic>
 }>()
 
-const { breakpoints } = useT3Breakpoints()
+const { containerWidthsInPx } = useT3Breakpoints()
 
 const { assetIsSmall } = useT3TextAsset(props.contentElement.content)
 
 const imageSizes = computed<T3Model.Image.Sizes>(() => {
     if (assetIsSmall) {
         return {
-            xs: '100vw',
-            sm: `${breakpoints.value.sm.containerMaxWidth}px`,
-            md: `${Math.ceil(breakpoints.value.md.containerMaxWidth / 3)}px`,
-            lg: `${Math.ceil(breakpoints.value.lg.containerMaxWidth / 3)}px`,
-            xl: `${Math.ceil(breakpoints.value.xl.containerMaxWidth / 3)}px`,
+            xs: containerWidthsInPx.value.sm,
+            sm: Math.ceil(containerWidthsInPx.value.sm / 2),
+            md: Math.ceil(containerWidthsInPx.value.md / 3),
+            lg: Math.ceil(containerWidthsInPx.value.lg / 3),
+            xl: Math.ceil(containerWidthsInPx.value.xl / 3),
         }
     } else {
         return {
-            xs: '100vw',
-            sm: `${breakpoints.value.sm.containerMaxWidth}px`,
-            md: `${breakpoints.value.md.containerMaxWidth}px`,
-            lg: `${Math.ceil(breakpoints.value.lg.containerMaxWidth / 2)}px`,
-            xl: `${Math.ceil(breakpoints.value.xl.containerMaxWidth / 2)}px`,
+            xs: containerWidthsInPx.value.sm,
+            sm: containerWidthsInPx.value.sm,
+            md: containerWidthsInPx.value.md,
+            lg: Math.ceil(containerWidthsInPx.value.lg / 2),
+            xl: Math.ceil(containerWidthsInPx.value.xl / 2),
         }
     }
 })

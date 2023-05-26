@@ -25,7 +25,7 @@ const props = defineProps<{
 
 const attrs = useAttrs()
 
-const { breakpointsDesc } = useT3Breakpoints()
+const { breakpointsDesc, screenWidths } = useT3Breakpoints()
 const config = useT3Config()
 
 const src = computed(() =>
@@ -39,36 +39,12 @@ const sources = computed(() => {
             const breakpoint = breakpointsDesc.value[i]
             let width: number | undefined
             if (props.sizes) {
-                const size = props.sizes?.[breakpoint.name]
-                if (size) {
-                    let containerMaxWidth = breakpoint.containerMaxWidth
-
-                    // If max container width of current breakpoint is not a number (for example 100% for xs breakpoint)
-                    // use the max container width of the next larger breakpoint
-                    if (Number.isNaN(containerMaxWidth)) {
-                        for (let j = i - 1; j >= 0; j--) {
-                            const previousBreakpoint = breakpointsDesc.value[j]
-                            if (
-                                !Number.isNaN(
-                                    previousBreakpoint.containerMaxWidth
-                                )
-                            ) {
-                                containerMaxWidth =
-                                    previousBreakpoint.containerMaxWidth
-                                break
-                            }
-                        }
-                    }
-                    const parsedSize = Number.parseInt(size)
-                    width = size.endsWith('vw')
-                        ? Math.ceil(parsedSize / 100) * containerMaxWidth
-                        : parsedSize
-                }
+                width = props.sizes?.[breakpoint]
             }
 
             result.push({
-                media: `(min-width: ${breakpoint.screenWidth}px)`,
-                srcset: getUrl(props.uid, width, undefined, breakpoint.name),
+                media: `(min-width: ${screenWidths[breakpoint]})`,
+                srcset: getUrl(props.uid, width, undefined, breakpoint),
             })
         }
     }

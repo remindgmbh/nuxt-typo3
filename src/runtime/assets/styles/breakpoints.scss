@@ -1,7 +1,7 @@
 @use 'sass:list';
 @use 'sass:map';
 
-$widths: (
+$screen-widths: (
     xs: 0,
     sm: 576px,
     md: 768px,
@@ -9,7 +9,7 @@ $widths: (
     xl: 1200px,
     xxl: 1400px,
 ) !default;
-$container-max-widths: (
+$container-widths: (
     xs: 100%,
     sm: 540px,
     md: 720px,
@@ -19,32 +19,31 @@ $container-max-widths: (
 ) !default;
 
 @mixin up($name) {
-    @media only screen and (min-width: map.get($widths, $name)) {
+    @media only screen and (min-width: map.get($screen-widths, $name)) {
         @content;
     }
 }
 
 @mixin down($name) {
-    @media only screen and (max-width: map.get($widths, $name)) {
+    @media only screen and (max-width: map.get($screen-widths, $name)) {
         @content;
     }
 }
 
 @mixin loop {
-    /* stylelint-disable-next-line scss/operator-no-newline-after */
-    @if list.length($widths) != list.length($container-max-widths) {
-        @error '$widths and $container-max-widths differ in length';
+    @if list.length($screen-widths) != list.length($container-widths) {
+        @error '$screen-widths and $container-widths differ in length';
     }
 
-    @each $name, $container-max-width in $container-max-widths {
-        $width: map.get($widths, $name);
+    @each $name, $container-width in $container-widths {
+        $screen-width: map.get($screen-widths, $name);
 
-        @if not $width {
-            @error '"#{$name}" defined in $container-max-widths but not in $widths';
+        @if not $screen-width {
+            @error '"#{$name}" defined in $container-widths but not in $screen-widths';
         }
 
-        @media (min-width: $width) {
-            @content (("container-max-width": $container-max-width, "name": $name, "width": $width));
+        @media (min-width: $screen-width) {
+            @content (("container-width": $container-width, "name": $name, "screen-width": $screen-width));
         }
     }
 }

@@ -1,3 +1,3 @@
 export interface Sizes {
-    [breakpoint: string]: string
+    [breakpoint: string]: number
 }

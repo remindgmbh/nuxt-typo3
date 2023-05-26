@@ -4,7 +4,7 @@
 
 /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :export {
-    @each $name, $value in breakpoints.$widths {
+    @each $name, $value in breakpoints.$screen-widths {
         #{$name}: $value;
     }
 }

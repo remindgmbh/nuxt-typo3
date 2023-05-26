@@ -9,6 +9,6 @@
 
 @include breakpoints.loop using ($args) {
     .container {
-        max-width: map.get($args, 'container-max-width');
+        max-width: map.get($args, 'container-width');
     }
 }
