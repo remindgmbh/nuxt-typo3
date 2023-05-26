@@ -9,8 +9,12 @@
     @include breakpoints.loop using ($args) {
         max-width: map.get($args, 'container-width');
 
-        &--large {
-            max-width: map.get($args, 'screen-width');
+        $screen-width: map.get($args, 'screen-width');
+
+        @if $screen-width != 0 {
+            &--large {
+                max-width: $screen-width;
+            }
         }
     }
 }
