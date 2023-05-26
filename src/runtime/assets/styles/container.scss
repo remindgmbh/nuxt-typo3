@@ -5,10 +5,12 @@
     width: 100%;
     margin-right: auto;
     margin-left: auto;
-}
 
-@include breakpoints.loop using ($args) {
-    .container {
+    @include breakpoints.loop using ($args) {
         max-width: map.get($args, 'container-width');
+
+        &--large {
+            max-width: map.get($args, 'screen-width');
+        }
     }
 }

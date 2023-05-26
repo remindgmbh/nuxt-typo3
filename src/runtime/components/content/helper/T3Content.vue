@@ -1,5 +1,11 @@
 <template>
-    <article class="t3-content" :class="{ container: !isFullWidth }">
+    <article
+        class="t3-content"
+        :class="{
+            container: size !== 'full-width',
+            'container--large': size === 'large',
+        }"
+    >
         <component
             :is="component"
             v-if="cookieAccepted || ignoreCookies"
@@ -23,7 +29,7 @@ const props = defineProps<{
 const {
     cookieAccepted,
     ignoreCookies,
-    isFullWidth,
+    size,
     spaceBefore,
     spaceAfter,
     spaceBeforeInside,

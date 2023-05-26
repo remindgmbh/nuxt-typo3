@@ -31,7 +31,7 @@ export default defineNuxtConfig({
     typo3: {
         contentElements: {
             header: {
-                fullWidth: false,
+                size: 'large',
             },
             textmedia: {
                 ignoreCookies: true,

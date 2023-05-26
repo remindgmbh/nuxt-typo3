@@ -43,8 +43,8 @@ export function useT3ContentUtil(
             config.contentElements[contentElement.type]?.ignoreCookies ?? false
     )
 
-    const isFullWidth = computed<boolean>(
-        () => config.contentElements[contentElement.type]?.fullWidth ?? false
+    const size = computed<'large' | 'full-width' | undefined>(
+        () => config.contentElements[contentElement.type]?.size
     )
 
     const spaceBefore = computed<string>(
@@ -69,7 +69,7 @@ export function useT3ContentUtil(
         colors,
         cookieAccepted,
         ignoreCookies,
-        isFullWidth,
+        size,
         spaceBefore,
         spaceAfter,
         spaceBeforeInside,

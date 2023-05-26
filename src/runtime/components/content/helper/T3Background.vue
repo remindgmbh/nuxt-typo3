@@ -1,5 +1,11 @@
 <template>
-    <div class="t3-background" :class="{ container }">
+    <div
+        class="t3-background"
+        :class="{
+            container: size !== 'full-width' && !backgroundFullWidth,
+            'container--large': size === 'large' && !backgroundFullWidth,
+        }"
+    >
         <slot />
     </div>
 </template>
@@ -12,12 +18,10 @@ const props = defineProps<{
     contentElement: T3Model.Typo3.Content.Element
 }>()
 
-const { backgroundColor, isFullWidth } = useT3ContentUtil(props.contentElement)
+const { backgroundColor, size } = useT3ContentUtil(props.contentElement)
 
-const container = computed(
-    () =>
-        !isFullWidth.value &&
-        !props.contentElement.appearance.backgroundFullWidth
+const backgroundFullWidth = computed(
+    () => props.contentElement.appearance.backgroundFullWidth
 )
 </script>
 

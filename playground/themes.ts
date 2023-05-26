@@ -11,7 +11,12 @@ const colors = {
 
 export const themes: ThemesOptions = {
     light: {
-        backgroundColors: {},
+        backgroundColors: {
+            black: colors.black,
+            primary: colors.primary,
+            secondary: colors.secondary,
+            accent: colors.accent,
+        },
         contentElements: {
             teaser_logo: {
                 default: {},

@@ -30,8 +30,6 @@ interface GalleryOptions {
 }
 
 interface CeOptions {
-    // if set to true, content element ignores container width
-    fullWidth?: boolean
     // if set to true, content element is shown even if cookie should block it
     // required if not the whole content element should be blocked by cookie,
     // but only one part, for example a video in a textmedia element.
@@ -40,6 +38,10 @@ interface CeOptions {
     ignoreCookies?: boolean
     images?: ImageOptions
     gallery?: GalleryOptions
+    // full-width ignores container width
+    // large uses screen size instead of container width
+    // set to undefined for default
+    size?: 'large' | 'full-width'
 }
 
 export interface ThemeOptions {
