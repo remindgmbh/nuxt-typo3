@@ -31,9 +31,14 @@ export default defineNuxtConfig({
     typo3: {
         contentElements: {
             header: {
-                size: 'large',
+                maxWidth: 'md',
+                width: 'large',
+            },
+            text: {
+                maxWidth: 'md',
             },
             textmedia: {
+                maxWidth: 'lg',
                 ignoreCookies: true,
             },
         },

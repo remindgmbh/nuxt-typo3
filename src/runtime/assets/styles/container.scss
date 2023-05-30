@@ -19,4 +19,16 @@
             max-width: $max-width;
         }
     }
+
+    @each $name, $container-width in breakpoints.$container-widths {
+        @include breakpoints.up($name) {
+            &--max-width-#{$name} {
+                max-width: $container-width;
+            }
+
+            &--max-width-#{$name}#{&}--large {
+                max-width: map.get(breakpoints.$screen-widths, $name);
+            }
+        }
+    }
 }

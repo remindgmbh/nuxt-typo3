@@ -38,10 +38,12 @@ interface CeOptions {
     ignoreCookies?: boolean
     images?: ImageOptions
     gallery?: GalleryOptions
-    // full-width ignores container width
-    // large uses screen size instead of container width
-    // set to undefined for default
-    size?: 'large' | 'full-width'
+    // max width used for container specified by breakpoint name
+    maxWidth?: string
+    // default uses container-width for container
+    // large uses screen-width instead of container-width for container
+    // full ignores container completely
+    width?: 'default' | 'large' | 'full'
 }
 
 export interface ThemeOptions {

@@ -2,8 +2,9 @@
     <article
         class="t3-content"
         :class="{
-            container: size !== 'full-width',
-            'container--large': size === 'large',
+            [containerClass]: containerClass,
+            [containerLargeClass]: containerLargeClass,
+            [containerMaxWidthClass]: containerMaxWidthClass,
         }"
     >
         <component
@@ -27,9 +28,11 @@ const props = defineProps<{
 }>()
 
 const {
+    containerClass,
+    containerLargeClass,
+    containerMaxWidthClass,
     cookieAccepted,
     ignoreCookies,
-    size,
     spaceBefore,
     spaceAfter,
     spaceBeforeInside,

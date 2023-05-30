@@ -10,6 +10,10 @@ export function useT3ContentUtil(
     const { isAccepted } = useT3Cookiebot()
     const { themeOptions } = useT3Theme()
 
+    const ceOptions = computed(
+        () => config.contentElements[contentElement.type]
+    )
+
     const backgroundColor = computed<string | undefined>(() => {
         return themeOptions.value.backgroundColors?.[
             contentElement.appearance.backgroundColor
@@ -34,17 +38,28 @@ export function useT3ContentUtil(
         }
     })
 
+    const containerClass = computed<string>(() =>
+        width.value !== 'full' ? 'container' : ''
+    )
+
+    const containerLargeClass = computed<string>(() =>
+        width.value === 'large' ? 'container--large' : ''
+    )
+
+    const containerMaxWidthClass = computed<string>(() =>
+        maxWidth.value ? `container--max-width-${maxWidth.value}` : ''
+    )
+
     const cookieAccepted = computed<boolean>(() =>
         isAccepted(contentElement.cookie.category)
     )
 
     const ignoreCookies = computed<boolean>(
-        () =>
-            config.contentElements[contentElement.type]?.ignoreCookies ?? false
+        () => ceOptions.value?.ignoreCookies ?? false
     )
 
-    const size = computed<'large' | 'full-width' | undefined>(
-        () => config.contentElements[contentElement.type]?.size
+    const maxWidth = computed<string | undefined>(
+        () => ceOptions.value?.maxWidth
     )
 
     const spaceBefore = computed<string>(
@@ -64,15 +79,23 @@ export function useT3ContentUtil(
             config.spacing[contentElement.appearance.spaceAfterInside]
     )
 
+    const width = computed<'default' | 'large' | 'full'>(
+        () => ceOptions.value?.width ?? 'default'
+    )
+
     return {
         backgroundColor,
         colors,
+        containerClass,
+        containerLargeClass,
+        containerMaxWidthClass,
         cookieAccepted,
         ignoreCookies,
-        size,
+        maxWidth,
         spaceBefore,
         spaceAfter,
         spaceBeforeInside,
         spaceAfterInside,
+        width,
     }
 }
