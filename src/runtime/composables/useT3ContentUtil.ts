@@ -14,21 +14,26 @@ export function useT3ContentUtil(
         () => config.contentElements[contentElement.type]
     )
 
-    const backgroundColor = computed<string | undefined>(() => {
-        return themeOptions.value.backgroundColors?.[
-            contentElement.appearance.backgroundColor
-        ]
-    })
+    const backgroundColor = computed<string | undefined>(
+        () =>
+            themeOptions.value.backgroundColors?.[
+                contentElement.appearance.backgroundColor
+            ]
+    )
+
+    const backgroundFullWidth = computed<boolean>(
+        () => !!contentElement.appearance.backgroundFullWidth
+    )
 
     const colors = computed<any | undefined>(() => {
         const defaultColors =
-            themeOptions.value.contentElements?.[contentElement.type].default ??
-            {}
+            themeOptions.value.contentElements?.[contentElement.type]
+                ?.default ?? {}
 
         if (backgroundColor.value) {
             return defu(
                 themeOptions.value.contentElements?.[contentElement.type]
-                    .backgroundColors?.[
+                    ?.backgroundColors?.[
                     contentElement.appearance.backgroundColor
                 ] ?? {},
                 defaultColors
@@ -38,17 +43,11 @@ export function useT3ContentUtil(
         }
     })
 
-    const containerClass = computed<string>(() =>
-        width.value !== 'full' ? 'container' : ''
-    )
-
-    const containerLargeClass = computed<string>(() =>
-        width.value === 'large' ? 'container--large' : ''
-    )
-
-    const containerMaxWidthClass = computed<string>(() =>
-        maxWidth.value ? `container--max-width-${maxWidth.value}` : ''
-    )
+    const containerClasses = computed(() => ({
+        container: width.value !== 'full',
+        'container--large': width.value === 'large',
+        [`container--max-width-${maxWidth.value}`]: !!maxWidth.value,
+    }))
 
     const cookieAccepted = computed<boolean>(() =>
         isAccepted(contentElement.cookie.category)
@@ -61,6 +60,8 @@ export function useT3ContentUtil(
     const maxWidth = computed<string | undefined>(
         () => ceOptions.value?.maxWidth
     )
+
+    const padding = computed<boolean>(() => ceOptions.value?.padding ?? true)
 
     const spaceBefore = computed<string>(
         () => config.spacing[contentElement.appearance.spaceBefore]
@@ -85,13 +86,13 @@ export function useT3ContentUtil(
 
     return {
         backgroundColor,
+        backgroundFullWidth,
         colors,
-        containerClass,
-        containerLargeClass,
-        containerMaxWidthClass,
+        containerClasses,
         cookieAccepted,
         ignoreCookies,
         maxWidth,
+        padding,
         spaceBefore,
         spaceAfter,
         spaceBeforeInside,

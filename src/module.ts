@@ -40,6 +40,8 @@ interface CeOptions {
     gallery?: GalleryOptions
     // max width used for container specified by breakpoint name
     maxWidth?: string
+    // enable or disable padding left and right for content element
+    padding?: boolean
     // default uses container-width for container
     // large uses screen-width instead of container-width for container
     // full ignores container completely
@@ -51,18 +53,20 @@ export interface ThemeOptions {
         [color: string]: string
     }
     contentElements?: {
-        [contentElement: string]: {
-            default?: any
-            backgroundColors?: {
-                [backgroundColor: string]: any
-            }
-        }
+        [contentElement: string]:
+            | {
+                  default?: any
+                  backgroundColors?: {
+                      [backgroundColor: string]: any
+                  }
+              }
+            | undefined
     }
     additionalData: any
 }
 
 export interface ThemesOptions {
-    [themeName: string]: ThemeOptions
+    [themeName: string]: ThemeOptions | undefined
 }
 
 export interface ModuleOptions {
@@ -79,7 +83,7 @@ export interface ModuleOptions {
     baseUrl: string
     // config for content elements, type key has to match CType
     contentElements: {
-        [type: string]: CeOptions
+        [type: string]: CeOptions | undefined
     }
     // UID from cookiebot, required if cookie consent banner should be shown
     cookiebotUid: string

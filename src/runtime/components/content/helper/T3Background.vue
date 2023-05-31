@@ -1,35 +1,21 @@
 <template>
     <div
         class="t3-background"
-        :class="{
-            [containerClass]: containerClass && !backgroundFullWidth,
-            [containerLargeClass]: containerLargeClass && !backgroundFullWidth,
-            [containerMaxWidthClass]:
-                containerMaxWidthClass && !backgroundFullWidth,
-        }"
+        :class="!backgroundFullWidth && containerClasses"
     >
         <slot />
     </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { T3Model, useT3ContentUtil } from '#imports'
 
 const props = defineProps<{
     contentElement: T3Model.Typo3.Content.Element
 }>()
 
-const {
-    backgroundColor,
-    containerClass,
-    containerLargeClass,
-    containerMaxWidthClass,
-} = useT3ContentUtil(props.contentElement)
-
-const backgroundFullWidth = computed(
-    () => props.contentElement.appearance.backgroundFullWidth
-)
+const { backgroundColor, backgroundFullWidth, containerClasses } =
+    useT3ContentUtil(props.contentElement)
 </script>
 
 <style lang="scss">

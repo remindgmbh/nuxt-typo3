@@ -17,6 +17,14 @@ $container-widths: (
     xl: 1140px,
     xxl: 1320px,
 ) !default;
+$content-paddings: (
+    xs: 1rem,
+    sm: 1rem,
+    md: 1rem,
+    lg: 1rem,
+    xl: 1rem,
+    xxl: 1rem,
+) !default;
 
 @mixin up($name) {
     @media only screen and (min-width: map.get($screen-widths, $name)) {
@@ -37,13 +45,14 @@ $container-widths: (
 
     @each $name, $container-width in $container-widths {
         $screen-width: map.get($screen-widths, $name);
+        $content-padding: map.get($content-paddings, $name);
 
         @if not $screen-width {
             @error '"#{$name}" defined in $container-widths but not in $screen-widths';
         }
 
         @media (min-width: $screen-width) {
-            @content (("container-width": $container-width, "name": $name, "screen-width": $screen-width));
+            @content (("content-padding": $content-padding, "container-width": $container-width, "name": $name, "screen-width": $screen-width));
         }
     }
 }

@@ -2,9 +2,8 @@
     <article
         class="t3-content"
         :class="{
-            [containerClass]: containerClass,
-            [containerLargeClass]: containerLargeClass,
-            [containerMaxWidthClass]: containerMaxWidthClass,
+            ...{ 't3-content--padded': padding },
+            ...((!backgroundColor || backgroundFullWidth) && containerClasses),
         }"
     >
         <component
@@ -28,11 +27,12 @@ const props = defineProps<{
 }>()
 
 const {
-    containerClass,
-    containerLargeClass,
-    containerMaxWidthClass,
+    backgroundFullWidth,
+    backgroundColor,
+    containerClasses,
     cookieAccepted,
     ignoreCookies,
+    padding,
     spaceBefore,
     spaceAfter,
     spaceBeforeInside,
@@ -43,11 +43,25 @@ const component = useT3DynamicComponent('T3Ce', props.contentElement.type)
 </script>
 
 <style lang="scss">
+@use 'sass:map';
+@use '#nuxt-typo3/assets/styles/breakpoints.scss' as breakpoints;
+@use '#nuxt-typo3/assets/styles/util.scss' as util;
+
 .t3-content {
     box-sizing: border-box;
     margin-top: v-bind(spaceBefore);
     margin-bottom: v-bind(spaceAfter);
     padding-top: v-bind(spaceBeforeInside);
     padding-bottom: v-bind(spaceAfterInside);
+
+    &--padded {
+        @include breakpoints.loop using ($args) {
+            $padding: map.get($args, 'content-padding');
+
+            @if $padding {
+                @include util.padding-x($padding);
+            }
+        }
+    }
 }
 </style>

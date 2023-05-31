@@ -40,6 +40,7 @@ export default defineNuxtConfig({
             textmedia: {
                 maxWidth: 'lg',
                 ignoreCookies: true,
+                padding: false,
             },
         },
         defaultTheme: 'light',
