@@ -1,10 +1,10 @@
-// Export container-widths to use in JavaScript
+// Export content-paddings to use in JavaScript
 
 @use '../breakpoints';
 
 /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :export {
-    @each $name, $value in breakpoints.$container-widths {
+    @each $name, $value in breakpoints.$content-paddings {
         #{$name}: $value;
     }
 }

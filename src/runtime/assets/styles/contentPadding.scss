@@ -1,0 +1,13 @@
+@use 'sass:map';
+@use 'breakpoints';
+@use 'util';
+
+.content-padding {
+    @include breakpoints.loop using ($args) {
+        $padding: map.get($args, 'content-padding');
+
+        @if $padding {
+            @include util.padding-x($padding);
+        }
+    }
+}

@@ -2,7 +2,7 @@
     <article
         class="t3-content"
         :class="{
-            ...{ 't3-content--padded': padding },
+            'content-padding': padding,
             ...((!backgroundColor || backgroundFullWidth) && containerClasses),
         }"
     >
@@ -43,25 +43,11 @@ const component = useT3DynamicComponent('T3Ce', props.contentElement.type)
 </script>
 
 <style lang="scss">
-@use 'sass:map';
-@use '../../../assets/styles/breakpoints.scss';
-@use '../../../assets/styles/util.scss';
-
 .t3-content {
     box-sizing: border-box;
     margin-top: v-bind(spaceBefore);
     margin-bottom: v-bind(spaceAfter);
     padding-top: v-bind(spaceBeforeInside);
     padding-bottom: v-bind(spaceAfterInside);
-
-    &--padded {
-        @include breakpoints.loop using ($args) {
-            $padding: map.get($args, 'content-padding');
-
-            @if $padding {
-                @include util.padding-x($padding);
-            }
-        }
-    }
 }
 </style>
