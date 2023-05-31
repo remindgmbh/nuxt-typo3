@@ -1,0 +1,18 @@
+@mixin hover($show-hover-none: false) {
+    @media (hover: hover) {
+        &:hover {
+            @content;
+        }
+    }
+
+    @if $show-hover-none {
+        @media (hover: none) {
+            @content;
+        }
+    }
+}
+
+@mixin padding-x($value) {
+    padding-left: $value;
+    padding-right: $value;
+}
