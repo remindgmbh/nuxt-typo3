@@ -44,8 +44,8 @@ const component = useT3DynamicComponent('T3Ce', props.contentElement.type)
 
 <style lang="scss">
 @use 'sass:map';
-@use '#nuxt-typo3/assets/styles/breakpoints.scss' as breakpoints;
-@use '#nuxt-typo3/assets/styles/util.scss' as util;
+@use '../../../assets/styles/breakpoints.scss';
+@use '../../../assets/styles/util.scss';
 
 .t3-content {
     box-sizing: border-box;
