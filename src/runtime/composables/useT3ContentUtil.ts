@@ -16,7 +16,7 @@ export function useT3ContentUtil(
 
     const backgroundColor = computed<string | undefined>(
         () =>
-            themeOptions.value.backgroundColors?.[
+            themeOptions.value?.backgroundColors?.[
                 contentElement.appearance.backgroundColor
             ]
     )
@@ -27,12 +27,12 @@ export function useT3ContentUtil(
 
     const colors = computed<any | undefined>(() => {
         const defaultColors =
-            themeOptions.value.contentElements?.[contentElement.type]
+            themeOptions.value?.contentElements?.[contentElement.type]
                 ?.default ?? {}
 
         if (backgroundColor.value) {
             return defu(
-                themeOptions.value.contentElements?.[contentElement.type]
+                themeOptions.value?.contentElements?.[contentElement.type]
                     ?.backgroundColors?.[
                     contentElement.appearance.backgroundColor
                 ] ?? {},

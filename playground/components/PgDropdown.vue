@@ -34,7 +34,7 @@ const { active, triggers, close } = useT3Menu()
 const { navItemsWithChildren } = useT3Navigation()
 const { themeOptions } = useT3Theme()
 
-const colors = computed(() => themeOptions.value.additionalData)
+const colors = computed(() => themeOptions.value?.additionalData)
 
 const activeNavItem = computed(() =>
     navItemsWithChildren.value.find((item) => item.link === active.value)

@@ -10,7 +10,7 @@ export function useT3Theme() {
         () => defaultTheme
     )
 
-    const themeOptions = computed<ThemeOptions>(
+    const themeOptions = computed<ThemeOptions | undefined>(
         () => themes[selectedTheme.value]
     )
 

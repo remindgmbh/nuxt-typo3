@@ -10,7 +10,7 @@ const attrs: any = useAttrs()
 
 const { themeOptions } = useT3Theme()
 
-const colors = computed(() => themeOptions.value.additionalData)
+const colors = computed(() => themeOptions.value?.additionalData)
 </script>
 <style lang="scss">
 .t3-image-gallery {
