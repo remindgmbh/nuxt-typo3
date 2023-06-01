@@ -1,6 +1,5 @@
 import { Typo3 } from '..'
 import { GalleryOptions, ImageOptions } from '.'
-
 export interface CeOptions {
     // if set to true, content element is shown even if cookie should block it
     // required if not the whole content element should be blocked by cookie,
@@ -9,13 +8,17 @@ export interface CeOptions {
     // see T3CeTextmedia in playground for example
     ignoreCookies?:
         | boolean
-        | ((contentElement: Typo3.Content.Element) => boolean)
+        | ((contentElement: Typo3.Content.Element<any>) => boolean)
     images?: ImageOptions
     gallery?: GalleryOptions
     // max width used for container specified by breakpoint name
-    maxWidth?: string | ((contentElement: Typo3.Content.Element) => string)
+    maxWidth?:
+        | string
+        | ((contentElement: Typo3.Content.Element<any>) => string | undefined)
     // enable or disable padding left and right for content element
-    padding?: boolean | ((contentElement: Typo3.Content.Element) => boolean)
+    padding?:
+        | boolean
+        | ((contentElement: Typo3.Content.Element<any>) => boolean)
     // default uses container-width for container
     // large uses screen-width instead of container-width for container
     // full ignores container completely
@@ -24,6 +27,6 @@ export interface CeOptions {
         | 'large'
         | 'full'
         | ((
-              contentElement: Typo3.Content.Element
+              contentElement: Typo3.Content.Element<any>
           ) => 'default' | 'large' | 'full')
 }
