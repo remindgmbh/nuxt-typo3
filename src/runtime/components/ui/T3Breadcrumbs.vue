@@ -23,13 +23,11 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { T3Model, useRuntimeConfig } from '#imports'
+import { T3Model, useT3Config } from '#imports'
 
-const runtimeConfig = useRuntimeConfig()
+const config = useT3Config()
 
 const props = defineProps<{ breadcrumbs: T3Model.Typo3.Breadcrumb[] }>()
 
-const container = computed(
-    () => !runtimeConfig.public.typo3.layout.breadcrumbs.fullWidth
-)
+const container = computed(() => !config.layout.breadcrumbs.fullWidth)
 </script>

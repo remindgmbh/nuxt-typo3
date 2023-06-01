@@ -1,4 +1,4 @@
-import type { ThemesOptions } from '../src/module'
+import { Config } from '../src/runtime/models'
 
 const colors = {
     default: '#ffffff',
@@ -9,7 +9,7 @@ const colors = {
     accent: '#fdd835',
 }
 
-export const themes: ThemesOptions = {
+export const themes: Config.ThemesOptions = {
     light: {
         backgroundColors: {
             black: colors.black,

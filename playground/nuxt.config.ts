@@ -1,7 +1,3 @@
-import de from './locales/de.json'
-import en from './locales/en.json'
-import { themes } from './themes'
-
 export default defineNuxtConfig({
     runtimeConfig: {
         public: {
@@ -29,30 +25,7 @@ export default defineNuxtConfig({
     },
     css: ['@/assets/base.scss'],
     typo3: {
-        contentElements: {
-            header: {
-                maxWidth: 'md',
-                width: 'large',
-            },
-            text: {
-                maxWidth: 'md',
-            },
-            textmedia: {
-                maxWidth: 'lg',
-                ignoreCookies: true,
-                padding: false,
-            },
-        },
-        defaultTheme: 'light',
-        i18n: {
-            messages: {
-                de,
-                en,
-            },
-        },
-        languages: ['/de/'],
         scssForwards: ['@/assets/breakpoints.scss'],
-        themes,
     },
     modules: ['@remindgmbh/nuxt-typo3'],
     vite: {

@@ -1,6 +1,5 @@
 import { computed, Ref } from 'vue'
-import { ThemeOptions } from '../../module'
-import { useState, useT3Config } from '#imports'
+import { T3Model, useState, useT3Config } from '#imports'
 
 export function useT3Theme() {
     const { themes, defaultTheme } = useT3Config()
@@ -10,7 +9,7 @@ export function useT3Theme() {
         () => defaultTheme
     )
 
-    const themeOptions = computed<ThemeOptions | undefined>(
+    const themeOptions = computed<T3Model.Config.ThemeOptions | undefined>(
         () => themes[selectedTheme.value]
     )
 

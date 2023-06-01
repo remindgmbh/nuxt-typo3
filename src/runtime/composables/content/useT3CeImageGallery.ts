@@ -5,7 +5,7 @@ import { useT3Asset, useT3Config } from '#imports'
 export function useT3CeImageGallery(
     content: T3Model.Typo3.Content.Data.ImageGallery
 ) {
-    const config = useT3Config().contentElements.imageGallery
+    const config = useT3Config().contentElements?.imageGallery
     const header = computed<string | undefined>(() => content.header)
     const subheader = computed<string | undefined>(() => content.subheader)
     const type = computed(() => content.settings.type)

@@ -53,15 +53,23 @@ export function useT3ContentUtil(
         isAccepted(contentElement.cookie.category)
     )
 
-    const ignoreCookies = computed<boolean>(
-        () => ceOptions.value?.ignoreCookies ?? false
+    const ignoreCookies = computed<boolean>(() =>
+        ceOptions.value?.ignoreCookies instanceof Function
+            ? ceOptions.value.ignoreCookies(contentElement)
+            : ceOptions.value?.ignoreCookies ?? false
     )
 
-    const maxWidth = computed<string | undefined>(
-        () => ceOptions.value?.maxWidth
-    )
+    const maxWidth = computed<string | undefined>(() => {
+        return ceOptions.value?.maxWidth instanceof Function
+            ? ceOptions.value.maxWidth(contentElement)
+            : ceOptions.value?.maxWidth
+    })
 
-    const padding = computed<boolean>(() => ceOptions.value?.padding ?? true)
+    const padding = computed<boolean>(() =>
+        ceOptions.value?.padding instanceof Function
+            ? ceOptions.value?.padding(contentElement)
+            : ceOptions.value?.padding ?? true
+    )
 
     const spaceBefore = computed<string>(
         () => config.spacing[contentElement.appearance.spaceBefore]
@@ -80,8 +88,10 @@ export function useT3ContentUtil(
             config.spacing[contentElement.appearance.spaceAfterInside]
     )
 
-    const width = computed<'default' | 'large' | 'full'>(
-        () => ceOptions.value?.width ?? 'default'
+    const width = computed<'default' | 'large' | 'full'>(() =>
+        ceOptions.value?.width instanceof Function
+            ? ceOptions.value?.width(contentElement)
+            : ceOptions.value?.width ?? 'default'
     )
 
     return {
