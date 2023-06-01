@@ -2,7 +2,7 @@
 @use 'breakpoints';
 @use 'util';
 
-.content-padding {
+.padded-content {
     @include breakpoints.loop using ($args) {
         $padding: map.get($args, 'content-padding');
 

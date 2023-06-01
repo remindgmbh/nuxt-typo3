@@ -101,7 +101,7 @@ export default defineNuxtModule<ModuleOptions>({
 
         nuxt.options.css.unshift(
             resolver.resolve('runtime/assets/styles/container.scss'),
-            resolver.resolve('runtime/assets/styles/contentPadding.scss')
+            resolver.resolve('runtime/assets/styles/paddedContent.scss')
         )
 
         installModule('@remindgmbh/nuxt-logger')

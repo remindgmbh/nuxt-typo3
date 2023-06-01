@@ -2,7 +2,7 @@
     <article
         class="t3-content"
         :class="{
-            'content-padding': padding,
+            'padded-content': padding,
             ...((!backgroundColor || backgroundFullWidth) && containerClasses),
         }"
     >
