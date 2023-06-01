@@ -16,3 +16,8 @@
     padding-left: $value;
     padding-right: $value;
 }
+
+@mixin padding-y($value) {
+    padding-top: $value;
+    padding-bottom: $value;
+}
