@@ -1,5 +1,6 @@
 import { computed, Ref } from 'vue'
-import { T3Model, useState, useT3Config } from '#imports'
+import * as T3Model from '../models'
+import { useState, useT3Config } from '#imports'
 
 export function useT3Theme() {
     const { themes, defaultTheme } = useT3Config()

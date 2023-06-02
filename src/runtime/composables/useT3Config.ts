@@ -1,10 +1,14 @@
 import { defu } from 'defu'
+import * as T3Model from '../models'
 import { ModuleOptions } from '../../module'
-import { T3Model, useAppConfig, useRuntimeConfig } from '#imports'
+import { useAppConfig, useRuntimeConfig } from '#imports'
 
-export function useT3Config(): T3Model.Config.AppConfigWithDefaults &
-    ModuleOptions {
-    const appConfigDefaults: T3Model.Config.AppConfigWithDefaults = {
+type Config = ModuleOptions &
+    T3Model.Config.AppConfigInput &
+    T3Model.Config.AppConfigDefaults
+
+export function useT3Config(): Config {
+    const appConfigDefaults: T3Model.Config.AppConfigDefaults = {
         contentElements: {
             imageGallery: {
                 gallery: {
@@ -47,5 +51,6 @@ export function useT3Config(): T3Model.Config.AppConfigWithDefaults &
         ...defu(appConfig.typo3, appConfigDefaults),
         ...runtimeConfig.public.typo3,
     }
+
     return config
 }

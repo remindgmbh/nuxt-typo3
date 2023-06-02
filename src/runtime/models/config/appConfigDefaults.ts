@@ -1,6 +1,6 @@
 import { AppConfigInput } from '.'
 
-export interface AppConfigWithDefaults extends AppConfigInput {
+export interface AppConfigDefaults {
     contentElements: NonNullable<AppConfigInput['contentElements']>
     defaultTheme: NonNullable<AppConfigInput['defaultTheme']>
     i18n: NonNullable<AppConfigInput['i18n']>
