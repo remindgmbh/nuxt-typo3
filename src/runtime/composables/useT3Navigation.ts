@@ -1,8 +1,9 @@
 import { computed } from 'vue'
 import * as T3Model from '../models'
-import { useT3ApiData } from '#imports'
+import { useRoute, useT3ApiData } from '#imports'
 
 export function useT3Navigation() {
+    const route = useRoute()
     const { currentInitialData } = useT3ApiData()
 
     const rootPageNavigation = computed<T3Model.Typo3.NavItem | undefined>(() =>
@@ -15,5 +16,38 @@ export function useT3Navigation() {
         )
     )
 
-    return { rootPageNavigation, navItemsWithChildren }
+    const activeNavItems = computed<T3Model.Typo3.NavItem[]>(() =>
+        rootPageNavigation.value
+            ? getActiveNavItems(route.path, rootPageNavigation.value) ?? []
+            : []
+    )
+
+    function getActiveNavItems(
+        path: string,
+        navItem: T3Model.Typo3.NavItem,
+        result: T3Model.Typo3.NavItem[] = [],
+        deleteCount = 0
+    ): T3Model.Typo3.NavItem[] | undefined {
+        result.push(navItem)
+        if (navItem.link === path) {
+            return result
+        } else if (navItem.children) {
+            deleteCount++
+            for (const childNavItem of navItem.children) {
+                const childResult = getActiveNavItems(
+                    path,
+                    childNavItem,
+                    result,
+                    deleteCount
+                )
+                if (childResult) {
+                    return childResult
+                }
+            }
+        } else {
+            result.splice(1, deleteCount)
+        }
+    }
+
+    return { activeNavItems, navItemsWithChildren, rootPageNavigation }
 }
