@@ -42,7 +42,7 @@
         "sass-loader": "^13.2.0",
         "scule": "^1.0.0",
         "swiper": "^9.0.5",
-        "vee-validate": "^4.7.4",
+        "vee-validate": "^4.9.6",
         "vue-i18n": "^9.2.2",
         "yup": "^1.0.0"
     },
