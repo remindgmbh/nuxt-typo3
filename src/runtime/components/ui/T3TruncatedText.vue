@@ -1,10 +1,6 @@
 <template>
     <div ref="root" class="t3-truncated-text">
-        <div
-            ref="content"
-            class="t3-truncated-text__content"
-            :style="{ '-webkit-line-clamp': lines }"
-        >
+        <div ref="content" class="t3-truncated-text__content">
             <slot />
         </div>
     </div>
@@ -63,6 +59,7 @@ function getLineHeight(element: HTMLElement) {
         display: -webkit-box;
         -webkit-box-orient: vertical;
         overflow: hidden;
+        -webkit-line-clamp: v-bind(lines);
     }
 }
 </style>
