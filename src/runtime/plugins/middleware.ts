@@ -9,17 +9,15 @@ import {
 
 export default defineNuxtPlugin(() => {
     const apiData = useT3ApiData()
-    const { loadingData, loadingPage } = useT3LoadingState()
+    const loadingState = useT3LoadingState()
     const { locale } = i18n.global
 
     addRouteMiddleware(
         'global',
         async (to, from) => {
-            if (from.path === to.path) {
-                loadingData.value = true
-            } else {
-                loadingPage.value = true
-            }
+            loadingState.value.type = from.path === to.path ? 'data' : 'page'
+            loadingState.value.from = from
+            loadingState.value.to = to
             const promises: Array<Promise<any>> = [
                 apiData.loadInitialData(to.fullPath),
                 apiData.loadFooterContent(to.fullPath),
@@ -42,8 +40,7 @@ export default defineNuxtPlugin(() => {
                     to.name === 'T3Page' ? pageData?.i18n : initialData?.i18n
                 )
             } finally {
-                loadingData.value = false
-                loadingPage.value = false
+                loadingState.value = {}
             }
         },
         { global: true }
