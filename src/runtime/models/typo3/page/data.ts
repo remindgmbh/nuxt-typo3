@@ -12,6 +12,7 @@ export interface Data {
     appearance: {
         layout: string
         backendLayout: string
+        breadcrumbsBackgroundColor: string
     }
     content: {
         [colPos: string]: Content.Element[]

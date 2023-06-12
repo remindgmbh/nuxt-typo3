@@ -1,13 +1,18 @@
 <template>
     <div class="t3-bl-default">
         <div class="t3-bl-default__before-breadcrumbs">
-            <T3Renderer :content-elements="props.content.colPos1" />
+            <T3Renderer :content-elements="pageData.content.colPos1" />
         </div>
         <nav v-if="breadcrumbsVisible" class="t3-bl-default__breadcrumbs">
-            <T3Breadcrumbs :breadcrumbs="props.breadcrumbs" />
+            <T3Breadcrumbs
+                :breadcrumbs="pageData.breadcrumbs"
+                :background-color="
+                    pageData.appearance.breadcrumbsBackgroundColor
+                "
+            />
         </nav>
         <div class="t3-bl-default__main">
-            <T3Renderer :content-elements="props.content.colPos0" />
+            <T3Renderer :content-elements="pageData.content.colPos0" />
         </div>
     </div>
 </template>
@@ -17,9 +22,8 @@ import { computed } from 'vue'
 import { T3Model } from '#imports'
 
 const props = defineProps<{
-    content: { [colPos: string]: T3Model.Typo3.Content.Element[] }
-    breadcrumbs: T3Model.Typo3.Breadcrumb[]
+    pageData: T3Model.Typo3.Page.Data
 }>()
 
-const breadcrumbsVisible = computed(() => props.breadcrumbs.length > 1)
+const breadcrumbsVisible = computed(() => props.pageData.breadcrumbs.length > 1)
 </script>

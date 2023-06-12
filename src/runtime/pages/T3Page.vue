@@ -3,8 +3,7 @@
         <component
             :is="component"
             v-if="currentPageData"
-            :content="currentPageData.content"
-            :breadcrumbs="currentPageData.breadcrumbs"
+            :page-data="currentPageData"
         />
         <T3PageError
             v-else
