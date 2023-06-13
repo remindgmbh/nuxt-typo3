@@ -1,4 +1,4 @@
-import { computed } from 'vue'
+import { computed, Ref } from 'vue'
 import { useLogger } from '#nuxt-logger'
 import * as T3Model from '../models'
 import { useState, useT3Api, useT3ApiPath } from '#imports'
@@ -8,21 +8,20 @@ export function useT3ApiData() {
     const apiPath = useT3ApiPath()
     const logger = useLogger()
 
-    const initialData = useState<{
+    const initialData: Ref<{
         [path: string]: T3Model.Typo3.InitialData | undefined
-    }>('initialData', () => ({}))
+    }> = useState('initialData', () => ({}))
 
-    const footerContent = useState<{
+    const footerContent: Ref<{
         [path: string]: T3Model.Typo3.Content.Element<any> | undefined
-    }>('footerContent', () => ({}))
+    }> = useState('footerContent', () => ({}))
 
-    const pageData = useState<{
+    const pageData: Ref<{
         [path: string]: T3Model.Typo3.Page.Data | undefined
-    }>('pageData', () => ({}))
+    }> = useState('pageData', () => ({}))
 
-    const pageError = useState<T3Model.Typo3.Page.Error | undefined>(
-        'pageError'
-    )
+    const pageError: Ref<T3Model.Typo3.Page.Error | undefined> =
+        useState('pageError')
 
     const currentInitialData = computed<T3Model.Typo3.InitialData | undefined>(
         () => initialData.value[apiPath.currentInitialDataPath.value]
