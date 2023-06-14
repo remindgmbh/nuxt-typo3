@@ -119,6 +119,14 @@ export function useT3ApiData() {
         pageData.value = {}
     }
 
+    function getContentElementById(
+        id: number
+    ): T3Model.Typo3.Content.Element | undefined {
+        return Object.values(currentPageData.value?.content ?? {})
+            .flat()
+            .find((element) => element.id === id)
+    }
+
     return {
         currentFooterContent,
         currentInitialData,
@@ -128,6 +136,7 @@ export function useT3ApiData() {
         clearData,
         clearInitialData,
         clearPageData,
+        getContentElementById,
         loadFooterContent,
         loadInitialData,
         loadPageData,
