@@ -3,6 +3,7 @@ import type { Type } from '.'
 import { Row, WithOptions, Select, Number, StaticText } from '.'
 
 export interface IBase {
+    identifier: string
     type: Type
     defaultValue?: any
     name: string
@@ -14,6 +15,7 @@ export interface IBase {
 }
 
 export class Base implements IBase {
+    identifier: string
     type: Type
     defaultValue?: any
     name: string
@@ -24,6 +26,7 @@ export class Base implements IBase {
     placeholder?: string
 
     constructor(formElement: IBase) {
+        this.identifier = formElement.identifier
         this.type = formElement.type
         this.label = formElement.label
         this.name = formElement.name

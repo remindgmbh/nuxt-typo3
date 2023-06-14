@@ -196,6 +196,7 @@ export function useT3CeFormFormframework(
         formElement: T3Model.Typo3.Content.Data.Form.FormElement
     ): T3Model.FormElement.Base {
         const f: T3Model.FormElement.IBase = {
+            identifier: formElement.identifier,
             type: formElementTypeMapping[formElement.type] ?? 'hidden',
             label: formElement.label,
             name: formElement.name,
