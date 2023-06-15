@@ -3,7 +3,7 @@
         <div class="t3-form__elements">
             <template
                 v-for="formElement in formElements"
-                :key="JSON.stringify(formElement)"
+                :key="formElement.identifier"
             >
                 <T3FormGroup
                     v-if="formElement.isRow()"
