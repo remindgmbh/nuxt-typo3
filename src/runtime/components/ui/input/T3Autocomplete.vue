@@ -81,12 +81,7 @@
                 </div>
             </T3CollapseTransition>
         </div>
-        <slot name="error" :error-message="errorMessage">
-            <T3InputError
-                :error-message="errorMessage"
-                class="t3-autocomplete__error t3-input__error"
-            />
-        </slot>
+        <slot name="error" :error-message="errorMessage"></slot>
     </div>
 </template>
 

@@ -9,7 +9,11 @@
                 :required-hint="requiredHint"
                 :submit-label="submitLabel"
                 @submit="submit"
-            />
+            >
+                <template #error="{ errorMessage }">
+                    <T3InputError :error-message="errorMessage" />
+                </template>
+            </T3Form>
         </div>
     </div>
 </template>

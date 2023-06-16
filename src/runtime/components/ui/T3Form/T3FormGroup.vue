@@ -5,7 +5,11 @@
             :key="formElement.name"
             :form-element="formElement"
             :loading="loading"
-        />
+        >
+            <template #error="{ errorMessage }">
+                <slot name="error" :error-message="errorMessage"></slot>
+            </template>
+        </T3FormElement>
     </div>
 </template>
 

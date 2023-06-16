@@ -6,7 +6,7 @@
             {
                 [`t3-form-element--size-${formElement.size}`]: formElement.size,
             },
-            { 't3-form-element--error': errorMessage },
+            { 't3-form-element--error': error },
         ]"
     >
         <T3FormStaticText
@@ -77,7 +77,11 @@
             :step="formElement.isNumber() ? formElement.step : undefined"
             :min="formElement.isNumber() ? formElement.min : undefined"
             :max="formElement.isNumber() ? formElement.max : undefined"
-        />
+        >
+            <template #error="{ errorMessage }">
+                <slot name="error" :error-message="errorMessage"></slot>
+            </template>
+        </T3Textfield>
     </div>
 </template>
 
@@ -90,7 +94,7 @@ const props = defineProps<{
     loading?: boolean
 }>()
 
-const errorMessage = useFieldError(props.formElement.name)
+const error = useFieldError(props.formElement.name)
 </script>
 
 <style lang="scss">

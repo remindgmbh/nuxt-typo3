@@ -27,13 +27,7 @@
                 >{{ label }}</label
             >
         </div>
-        <slot name="error" :error-message="errorMessage">
-            <T3InputError
-                v-if="!multi"
-                :error-message="errorMessage"
-                class="t3-checkbox__error t3-input__error"
-            />
-        </slot>
+        <slot name="error" :error-message="errorMessage"></slot>
     </div>
 </template>
 

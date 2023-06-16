@@ -9,12 +9,20 @@
                     v-if="formElement.isRow()"
                     :form-elements="formElement.formElements"
                     :loading="loading"
-                />
+                >
+                    <template #error="{ errorMessage }">
+                        <slot name="error" :error-message="errorMessage"></slot>
+                    </template>
+                </T3FormGroup>
                 <T3FormElement
                     v-else
                     :form-element="formElement"
                     :loading="loading"
-                />
+                >
+                    <template #error="{ errorMessage }">
+                        <slot name="error" :error-message="errorMessage"></slot>
+                    </template>
+                </T3FormElement>
             </template>
         </div>
         <div v-if="showRequiredHint" class="t3-form__required-hint">
