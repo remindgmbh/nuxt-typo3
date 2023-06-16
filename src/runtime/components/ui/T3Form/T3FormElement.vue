@@ -6,6 +6,7 @@
             {
                 [`t3-form-element--size-${formElement.size}`]: formElement.size,
             },
+            { 't3-form-element--error': errorMessage },
         ]"
     >
         <T3FormStaticText
@@ -81,12 +82,15 @@
 </template>
 
 <script setup lang="ts">
+import { useFieldError } from 'vee-validate'
 import { T3Model } from '#imports'
 
-defineProps<{
+const props = defineProps<{
     formElement: T3Model.FormElement.Base
     loading?: boolean
 }>()
+
+const errorMessage = useFieldError(props.formElement.name)
 </script>
 
 <style lang="scss">

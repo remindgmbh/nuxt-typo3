@@ -4,8 +4,10 @@
         :class="{
             't3-checkbox-group--required': required,
             't3-checkbox-group--disabled': disabled,
+            't3-checkbox-group--error': errorMessage,
             't3-input--required': required,
             't3-input--disabled': disabled,
+            't3-input--error': errorMessage,
         }"
     >
         <legend class="t3-checkbox-group__label t3-input__label">

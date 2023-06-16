@@ -4,8 +4,10 @@
         :class="{
             't3-radio-group--required': required,
             't3-radio-group--disabled': disabled,
+            't3-radio-group--error': errorMessage,
             't3-input--required': required,
             't3-input--disabled': disabled,
+            't3-input--error': errorMessage,
         }"
     >
         <legend class="t3-radio-group__label t3-input__label">

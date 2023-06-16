@@ -4,8 +4,10 @@
         :class="{
             't3-textarea--required': required,
             't3-textarea--disabled': disabled,
+            't3-textarea--error': errorMessage,
             't3-input--required': required,
             't3-input--disabled': disabled,
+            't3-input--error': errorMessage,
         }"
     >
         <label class="t3-textarea__label t3-input__label" :for="name">{{

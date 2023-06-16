@@ -4,8 +4,10 @@
         :class="{
             't3-checkbox--required': required,
             't3-checkbox--disabled': disabled,
+            't3-checkbox--error': errorMessage,
             't3-input--required': required,
             't3-input--disabled': disabled,
+            't3-input--error': errorMessage,
         }"
     >
         <div class="t3-checkbox__wrapper">

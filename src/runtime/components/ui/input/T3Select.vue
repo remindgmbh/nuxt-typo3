@@ -4,8 +4,10 @@
         :class="{
             't3-select--required': required,
             't3-select--disabled': disabled,
+            't3-select--error': errorMessage,
             't3-input--required': required,
             't3-input--disabled': disabled,
+            't3-input--error': errorMessage,
         }"
     >
         <span :id="name" class="t3-select__label t3-input__label">{{

@@ -4,8 +4,10 @@
         :class="{
             't3-autocomplete--required': required,
             't3-autocomplete--disabled': disabled,
+            't3-autocomplete--error': errorMessage,
             't3-input--required': required,
             't3-input--disabled': disabled,
+            't3-input--error': errorMessage,
         }"
     >
         <label
