@@ -31,23 +31,25 @@ export interface Validator {
     options: { [key: string]: string }
 }
 
+export interface Properties {
+    size?: number
+    options?: { [key: string]: string }
+    prependOptionLabel?: string
+    text?: string
+    fluidAdditionalAttributes?: {
+        max?: string
+        min?: string
+        placeholder?: string
+        step?: string
+    }
+}
+
 export interface FormElement {
     identifier: string
     type: FormElementType
     label: string
     name: string
-    properties?: {
-        size?: number
-        options?: { [key: string]: string }
-        prependOptionLabel?: string
-        text?: string
-        fluidAdditionalAttributes?: {
-            max?: string
-            min?: string
-            placeholder?: string
-            step?: string
-        }
-    }
+    properties?: Properties
     defaultValue?: any
     elements?: FormElement[]
     validators?: Validator[]
