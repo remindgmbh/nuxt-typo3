@@ -282,7 +282,7 @@ export function useT3CeFormFormframework(
             >(contentElement.content.link, { body })
 
             if (typeof result.content.form === 'string') {
-                logger.error(result.content.form)
+                logger.error('TYPO3 Error:', result.content.form)
             } else if (
                 result.content.form.api.status === 'success' &&
                 result.content.form.api.actionAfterSuccess

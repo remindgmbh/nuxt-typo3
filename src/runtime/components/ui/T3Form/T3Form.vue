@@ -27,9 +27,9 @@
                 type="submit"
                 :disabled="loading"
             >
-                <span class="t3-form__submit-label">{{
-                    loading && loadingLabel ? loadingLabel : submitLabel
-                }}</span>
+                <slot name="submit">
+                    {{ loading && loadingLabel ? loadingLabel : submitLabel }}
+                </slot>
             </button>
         </div>
     </form>
