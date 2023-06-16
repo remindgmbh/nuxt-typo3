@@ -13,14 +13,16 @@
         <label class="t3-textarea__label t3-input__label" :for="name">{{
             label
         }}</label>
-        <textarea
-            :id="name"
-            v-model="value"
-            class="t3-textarea__input"
-            :name="name"
-            :placeholder="placeholder"
-            :disabled="disabled"
-        />
+        <div class="t3-textarea__wrapper">
+            <textarea
+                :id="name"
+                v-model="value"
+                class="t3-textarea__input"
+                :name="name"
+                :placeholder="placeholder"
+                :disabled="disabled"
+            />
+        </div>
         <slot name="error" :error-message="errorMessage">
             <T3InputError
                 :error-message="errorMessage"

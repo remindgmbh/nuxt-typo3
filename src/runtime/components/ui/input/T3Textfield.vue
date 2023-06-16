@@ -13,18 +13,20 @@
         <label class="t3-textfield__label t3-input__label" :for="name">{{
             label
         }}</label>
-        <input
-            :id="name"
-            v-model="value"
-            class="t3-textfield__input"
-            :type="type"
-            :name="name"
-            :min="min"
-            :max="max"
-            :step="step"
-            :placeholder="placeholder"
-            :disabled="disabled"
-        />
+        <div class="t3-textfield__wrapper">
+            <input
+                :id="name"
+                v-model="value"
+                class="t3-textfield__input"
+                :type="type"
+                :name="name"
+                :min="min"
+                :max="max"
+                :step="step"
+                :placeholder="placeholder"
+                :disabled="disabled"
+            />
+        </div>
         <slot name="error" :error-message="errorMessage">
             <T3InputError
                 :error-message="errorMessage"
