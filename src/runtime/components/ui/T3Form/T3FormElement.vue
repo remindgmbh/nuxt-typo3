@@ -7,8 +7,8 @@
                 [`t3-form-element--size-${formElement.size}`]: formElement.size,
             },
             { 't3-form-element--required': formElement.required },
-            { 't3-form-element--success': touched && valid },
-            { 't3-form-element--error': touched && !valid },
+            { 't3-form-element--success': touched?.value && valid?.value },
+            { 't3-form-element--error': touched?.value && !valid?.value },
         ]"
     >
         <T3FormStaticText
