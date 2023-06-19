@@ -1,15 +1,5 @@
 <template>
-    <div
-        class="t3-checkbox t3-input"
-        :class="{
-            't3-checkbox--required': required,
-            't3-checkbox--disabled': disabled,
-            't3-checkbox--error': errorMessage,
-            't3-input--required': required,
-            't3-input--disabled': disabled,
-            't3-input--error': errorMessage,
-        }"
-    >
+    <div class="t3-checkbox t3-input">
         <div class="t3-checkbox__wrapper">
             <input
                 :id="key"
@@ -19,6 +9,7 @@
                 :name="name"
                 :value="key"
                 :disabled="disabled"
+                @blur="handleBlur"
             />
             <label
                 class="t3-checkbox__label"
@@ -43,22 +34,19 @@ const props = defineProps<{
     multi?: boolean
     validation?: RuleExpression<any>
     groupLabel?: string
-    required?: boolean
     disabled?: boolean
 }>()
 
 const name = computed(() => props.name)
-const key = computed(() => props.value ?? props.name)
+const key = computed(() => (props.value ? props.value : props.name))
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
-const { errorMessage, value } = useField<string[] | boolean | undefined>(
-    name,
-    props.validation,
-    {
-        type: 'checkbox',
-        initialValue: props.defaultValue ?? (props.multi ? [] : false),
-    }
-)
+const { errorMessage, value, handleBlur } = useField<
+    string[] | boolean | undefined
+>(name, props.validation, {
+    type: 'checkbox',
+    initialValue: props.defaultValue ?? (props.multi ? [] : false),
+})
 </script>
 
 <style lang="scss">
@@ -70,14 +58,6 @@ const { errorMessage, value } = useField<string[] | boolean | undefined>(
 
     &__label {
         position: relative;
-    }
-
-    &--required & {
-        &__label {
-            &::after {
-                content: '*';
-            }
-        }
     }
 }
 </style>

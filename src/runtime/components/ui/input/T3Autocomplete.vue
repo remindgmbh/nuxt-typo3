@@ -1,15 +1,5 @@
 <template>
-    <div
-        class="t3-autocomplete t3-input"
-        :class="{
-            't3-autocomplete--required': required,
-            't3-autocomplete--disabled': disabled,
-            't3-autocomplete--error': errorMessage,
-            't3-input--required': required,
-            't3-input--disabled': disabled,
-            't3-input--error': errorMessage,
-        }"
-    >
+    <div class="t3-autocomplete t3-input">
         <label
             v-if="label"
             :for="name"
@@ -28,6 +18,7 @@
                 :disabled="disabled"
                 autocomplete="off"
                 @input="onInput"
+                @blur="handleBlur"
             />
             <T3CollapseTransition transition-name="options-transition">
                 <div v-show="isOpen" class="t3-autocomplete__option-groups">
@@ -97,7 +88,6 @@ const props = defineProps<{
     defaultValue?: string
     validation?: RuleExpression<any>
     emptyLabel?: string
-    required?: boolean
     placeholder?: string
     disabled?: boolean
 }>()
@@ -140,7 +130,7 @@ const { hoverOption, supportKeyboardNavigation } = useT3SelectInput(
 )
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
-const { errorMessage, value, setValue } = useField<string>(
+const { errorMessage, value, handleBlur, setValue } = useField<string>(
     name,
     props.validation,
     {
@@ -174,6 +164,7 @@ function closeOnOutsideClick(e: MouseEvent) {
 }
 
 function onSelect(option: T3Model.Autocomplete.Option) {
+    handleBlur()
     setValue(option.key)
     close()
 }
@@ -252,13 +243,5 @@ function close() {
     //         transition: height ...;
     //     }
     // }
-
-    &--required & {
-        &__label {
-            &::after {
-                content: '*';
-            }
-        }
-    }
 }
 </style>

@@ -1,15 +1,5 @@
 <template>
-    <div
-        class="t3-select t3-input"
-        :class="{
-            't3-select--required': required,
-            't3-select--disabled': disabled,
-            't3-select--error': errorMessage,
-            't3-input--required': required,
-            't3-input--disabled': disabled,
-            't3-input--error': errorMessage,
-        }"
-    >
+    <div class="t3-select t3-input">
         <span :id="name" class="t3-select__label t3-input__label">{{
             label
         }}</span>
@@ -22,6 +12,7 @@
                 :aria-labelledby="name"
                 :name="name"
                 :disabled="disabled"
+                @blur="handleBlur"
             >
                 <option
                     v-for="option in options"
@@ -54,7 +45,7 @@
                                 't3-select__option--hover':
                                     option.value === hoverOption?.value,
                             }"
-                            @click="setValue(option.value)"
+                            @click="handleBlurAndSetValue(option.value)"
                             @mouseover="hoverOption = option"
                             @mouseleave="hoverOption = undefined"
                         >
@@ -80,7 +71,6 @@ const props = defineProps<{
     defaultValue?: string
     validation?: RuleExpression<any>
     emptyLabel?: string
-    required?: boolean
     disabled?: boolean
 }>()
 
@@ -97,7 +87,7 @@ onUnmounted(() => {
 const name = computed(() => props.name)
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
-const { errorMessage, value, setValue } = useField<string>(
+const { errorMessage, value, handleBlur, setValue } = useField<string>(
     name,
     props.validation,
     {
@@ -119,8 +109,13 @@ const options = computed(() =>
     )
 )
 
+function handleBlurAndSetValue(value: string) {
+    handleBlur()
+    setValue(value)
+}
+
 function select(hoverOption: { value: string; label: string }) {
-    setValue(hoverOption.value)
+    handleBlurAndSetValue(hoverOption.value)
     close()
 }
 
@@ -255,14 +250,6 @@ function closeOnOutsideClick(e: MouseEvent) {
 
         &--hover {
             background-color: $color-hover;
-        }
-    }
-
-    &--required & {
-        &__label {
-            &::after {
-                content: '*';
-            }
         }
     }
 }

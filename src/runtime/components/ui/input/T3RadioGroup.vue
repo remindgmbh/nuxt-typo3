@@ -1,15 +1,5 @@
 <template>
-    <fieldset
-        class="t3-radio-group t3-input"
-        :class="{
-            't3-radio-group--required': required,
-            't3-radio-group--disabled': disabled,
-            't3-radio-group--error': errorMessage,
-            't3-input--required': required,
-            't3-input--disabled': disabled,
-            't3-input--error': errorMessage,
-        }"
-    >
+    <fieldset class="t3-radio-group t3-input">
         <legend class="t3-radio-group__label t3-input__label">
             {{ label }}
         </legend>
@@ -39,7 +29,6 @@ const props = defineProps<{
     options: { [key: string]: string }
     defaultValue?: string
     validation?: RuleExpression<any>
-    required?: boolean
     disabled?: boolean
 }>()
 
@@ -52,14 +41,6 @@ const errorMessage = useFieldError(props.name)
 
     &__values {
         display: flex;
-    }
-
-    &--required & {
-        &__label {
-            &::after {
-                content: '*';
-            }
-        }
     }
 }
 </style>

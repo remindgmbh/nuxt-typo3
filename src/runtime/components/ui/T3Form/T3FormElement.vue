@@ -6,7 +6,9 @@
             {
                 [`t3-form-element--size-${formElement.size}`]: formElement.size,
             },
-            { 't3-form-element--error': error },
+            { 't3-form-element--required': formElement.required },
+            { 't3-form-element--success': touched && valid },
+            { 't3-form-element--error': touched && !valid },
         ]"
     >
         <T3FormStaticText
@@ -21,9 +23,12 @@
             :label="formElement.label"
             :default-value="formElement.defaultValue"
             :validation="formElement.validation"
-            :required="formElement.required"
             :disabled="loading"
-        />
+        >
+            <template #error="{ errorMessage }">
+                <slot name="error" :error-message="errorMessage"></slot>
+            </template>
+        </T3RadioGroup>
         <T3CheckboxGroup
             v-else-if="formElement.isCheckboxGroup()"
             :name="formElement.name"
@@ -31,18 +36,26 @@
             :label="formElement.label"
             :default-value="formElement.defaultValue"
             :validation="formElement.validation"
-            :required="formElement.required"
             :disabled="loading"
-        />
+        >
+            <template #error="{ errorMessage }">
+                <slot
+                    name="error"
+                    :error-message="errorMessage"
+                ></slot> </template
+        ></T3CheckboxGroup>
         <T3Checkbox
             v-else-if="formElement.type === 'checkbox'"
             :name="formElement.name"
             :label="formElement.label ?? formElement.name"
             :default-value="formElement.defaultValue"
             :validation="formElement.validation"
-            :required="formElement.required"
             :disabled="loading"
-        />
+        >
+            <template #error="{ errorMessage }">
+                <slot name="error" :error-message="errorMessage"></slot>
+            </template>
+        </T3Checkbox>
         <T3Select
             v-else-if="formElement.isSelect()"
             :name="formElement.name"
@@ -51,19 +64,29 @@
             :default-value="formElement.defaultValue"
             :validation="formElement.validation"
             :empty-label="formElement.emptyLabel"
-            :required="formElement.required"
             :disabled="loading"
-        />
+        >
+            <template #error="{ errorMessage }">
+                <slot
+                    name="error"
+                    :error-message="errorMessage"
+                ></slot> </template
+        ></T3Select>
         <T3Textarea
             v-else-if="formElement.type === 'textarea'"
             :name="formElement.name"
             :label="formElement.label"
             :default-value="formElement.defaultValue"
             :validation="formElement.validation"
-            :required="formElement.required"
             :placeholder="formElement.placeholder"
             :disabled="loading"
-        />
+        >
+            <template #error="{ errorMessage }">
+                <slot
+                    name="error"
+                    :error-message="errorMessage"
+                ></slot> </template
+        ></T3Textarea>
         <T3Textfield
             v-else
             :name="formElement.name"
@@ -71,7 +94,6 @@
             :default-value="formElement.defaultValue"
             :validation="formElement.validation"
             :type="formElement.type"
-            :required="formElement.required"
             :placeholder="formElement.placeholder"
             :disabled="loading"
             :step="formElement.isNumber() ? formElement.step : undefined"
@@ -86,7 +108,8 @@
 </template>
 
 <script setup lang="ts">
-import { useFieldError } from 'vee-validate'
+import { useIsFieldTouched, useIsFieldValid } from 'vee-validate'
+import { computed, onMounted, ref, Ref } from 'vue'
 import { T3Model } from '#imports'
 
 const props = defineProps<{
@@ -94,7 +117,15 @@ const props = defineProps<{
     loading?: boolean
 }>()
 
-const error = useFieldError(props.formElement.name)
+const name = computed(() => props.formElement.name)
+
+const touched = ref<Ref<boolean>>()
+const valid = ref<Ref<boolean>>()
+
+onMounted(() => {
+    touched.value = useIsFieldTouched(name)
+    valid.value = useIsFieldValid(name)
+})
 </script>
 
 <style lang="scss">
@@ -121,6 +152,16 @@ const error = useFieldError(props.formElement.name)
 
     &--size-75 {
         width: 75%;
+    }
+
+    &--required {
+        .t3-input {
+            &__label {
+                &::after {
+                    content: '*';
+                }
+            }
+        }
     }
 }
 </style>

@@ -8,6 +8,7 @@
             type="radio"
             :name="name"
             :disabled="disabled"
+            @blur="handleBlur"
         />
         <label class="t3-radio__label" :for="value">{{ label }}</label>
     </div>
@@ -30,7 +31,7 @@ const props = defineProps<{
 const name = computed(() => props.name)
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
-const { value: modelValue } = useField<string | undefined>(
+const { value: modelValue, handleBlur } = useField<string | undefined>(
     name,
     props.validation,
     {

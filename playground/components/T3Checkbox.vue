@@ -1,5 +1,9 @@
 <template>
-    <BaseT3Checkbox v-bind="attrs" />
+    <BaseT3Checkbox v-bind="attrs">
+        <template #error="{ errorMessage }">
+            <slot name="error" :error-message="errorMessage"></slot>
+        </template>
+    </BaseT3Checkbox>
 </template>
 
 <script setup lang="ts">

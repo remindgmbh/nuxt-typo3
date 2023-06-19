@@ -1,15 +1,5 @@
 <template>
-    <div
-        class="t3-textarea t3-input"
-        :class="{
-            't3-textarea--required': required,
-            't3-textarea--disabled': disabled,
-            't3-textarea--error': errorMessage,
-            't3-input--required': required,
-            't3-input--disabled': disabled,
-            't3-input--error': errorMessage,
-        }"
-    >
+    <div class="t3-textarea t3-input">
         <label class="t3-textarea__label t3-input__label" :for="name">{{
             label
         }}</label>
@@ -21,6 +11,7 @@
                 :name="name"
                 :placeholder="placeholder"
                 :disabled="disabled"
+                @blur="handleBlur"
             />
         </div>
         <slot name="error" :error-message="errorMessage">
@@ -41,7 +32,6 @@ const props = defineProps<{
     label?: string
     validation?: RuleExpression<any>
     defaultValue?: string | number
-    required?: boolean
     placeholder?: string
     disabled?: boolean
 }>()
@@ -49,7 +39,7 @@ const props = defineProps<{
 const name = computed(() => props.name)
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
-const { value, errorMessage } = useField(name, props.validation, {
+const { value, errorMessage, handleBlur } = useField(name, props.validation, {
     initialValue: props.defaultValue,
 })
 </script>
@@ -59,14 +49,6 @@ const { value, errorMessage } = useField(name, props.validation, {
     &__input {
         width: 100%;
         box-sizing: border-box;
-    }
-
-    &--required & {
-        &__label {
-            &::after {
-                content: '*';
-            }
-        }
     }
 }
 </style>
