@@ -15,6 +15,8 @@ export type FormElementType =
     | 'Email'
     | 'FileUpload'
     | 'GridRow'
+    | 'Hidden'
+    | 'Honeypot'
     | 'MultiCheckbox'
     | 'Number'
     | 'Password'

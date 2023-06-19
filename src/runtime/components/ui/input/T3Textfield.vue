@@ -1,5 +1,17 @@
 <template>
-    <div class="t3-textfield">
+    <div
+        class="t3-textfield t3-input"
+        :class="{
+            't3-textfield--required': required,
+            't3-textfield--disabled': disabled,
+            't3-textfield--error': meta.touched && !meta.valid,
+            't3-textfield--success': meta.touched && meta.valid,
+            't3-input--required': required,
+            't3-input--disabled': disabled,
+            't3-input--error': meta.touched && !meta.valid,
+            't3-input--success': meta.touched && meta.valid,
+        }"
+    >
         <label class="t3-textfield__label t3-input__label" :for="name">{{
             label
         }}</label>
@@ -7,7 +19,7 @@
             <input
                 :id="name"
                 v-model="value"
-                class="t3-textfield__input"
+                class="t3-textfield__input t3-input__input"
                 :type="type"
                 :name="name"
                 :min="min"
@@ -24,12 +36,12 @@
 
 <script setup lang="ts">
 import { RuleExpression, useField } from 'vee-validate'
-import { computed, watch } from 'vue'
+import { computed } from 'vue'
 
 const props = defineProps<{
     name: string
     label?: string
-    type: string
+    type: 'text' | 'email' | 'number' | 'password' | 'date' | 'time' | 'tel'
     validation?: RuleExpression<any>
     defaultValue?: string | number | boolean
     placeholder?: string
@@ -37,20 +49,17 @@ const props = defineProps<{
     step?: number
     min?: number
     max?: number
+    required?: boolean
 }>()
 
 const name = computed(() => props.name)
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
-const { value, errorMessage, handleBlur, setValue } = useField<
+const { value, errorMessage, meta, handleBlur } = useField<
     string | number | boolean | undefined
 >(name, props.validation, {
     initialValue: props.defaultValue,
 })
-
-if (props.type === 'hidden') {
-    watch(() => props.defaultValue, setValue)
-}
 </script>
 
 <style lang="scss">

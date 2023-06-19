@@ -5,16 +5,6 @@ import { computed, ref } from 'vue'
 import * as T3Model from '../../models'
 import { navigateTo, useT3Api, useT3ApiData, useT3YupUtil } from '#imports'
 
-type FormElementTypeMapping = {
-    [Property in T3Model.Typo3.Content.Data.Login.FormElementType]: T3Model.FormElement.Type
-}
-
-const formElementTypeMapping: FormElementTypeMapping = {
-    text: 'text',
-    password: 'password',
-    submit: 'submit',
-}
-
 export function useT3CeFeloginLogin(
     contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Felogin>
 ) {
@@ -41,26 +31,26 @@ export function useT3CeFeloginLogin(
             )?.value ?? ''
     )
 
-    const formElements = computed<T3Model.FormElement.Base[]>(() =>
-        contentElement.content.data.form.elements
-            .filter((element) => element.name !== 'submit')
-            .map(convert)
+    const formElements = computed<T3Model.Typo3.Content.Data.Form.FormElement[]>(() => []
+        // contentElement.content.data.form.elements
+        //     .filter((element) => element.name !== 'submit')
+        //     .map(convert)
     )
 
-    function convert(
-        formElement: T3Model.Typo3.Content.Data.Login.FormElement
-    ): T3Model.FormElement.Base {
-        return new T3Model.FormElement.Base({
-            type: formElementTypeMapping[formElement.type] ?? 'hidden',
-            label: formElement.label,
-            name: formElement.name,
-            defaultValue: formElement.value,
-            required: formElement.validators?.some(
-                (validator) => validator.identifier === 'required'
-            ),
-            validation: getValidation(formElement),
-        })
-    }
+    // function convert(
+    //     formElement: T3Model.Typo3.Content.Data.Login.FormElement
+    // ): T3Model.FormElement.Base {
+    //     return new T3Model.FormElement.Base({
+    //         type: formElementTypeMapping[formElement.type] ?? 'hidden',
+    //         label: formElement.label,
+    //         name: formElement.name,
+    //         defaultValue: formElement.value,
+    //         required: formElement.validators?.some(
+    //             (validator) => validator.identifier === 'required'
+    //         ),
+    //         validation: getValidation(formElement),
+    //     })
+    // }
 
     function getValidation(
         formElement: T3Model.Typo3.Content.Data.Login.FormElement

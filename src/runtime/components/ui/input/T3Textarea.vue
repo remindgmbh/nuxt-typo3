@@ -1,5 +1,17 @@
 <template>
-    <div class="t3-textarea t3-input">
+    <div
+        class="t3-textarea t3-input"
+        :class="{
+            't3-textarea--required': required,
+            't3-textarea--disabled': disabled,
+            't3-textarea--error': meta.touched && !meta.valid,
+            't3-textarea--success': meta.touched && meta.valid,
+            't3-input--required': required,
+            't3-input--disabled': disabled,
+            't3-input--error': meta.touched && !meta.valid,
+            't3-input--success': meta.touched && meta.valid,
+        }"
+    >
         <label class="t3-textarea__label t3-input__label" :for="name">{{
             label
         }}</label>
@@ -34,14 +46,19 @@ const props = defineProps<{
     defaultValue?: string | number
     placeholder?: string
     disabled?: boolean
+    required?: boolean
 }>()
 
 const name = computed(() => props.name)
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
-const { value, errorMessage, handleBlur } = useField(name, props.validation, {
-    initialValue: props.defaultValue,
-})
+const { value, errorMessage, meta, handleBlur } = useField(
+    name,
+    props.validation,
+    {
+        initialValue: props.defaultValue,
+    }
+)
 </script>
 
 <style lang="scss">

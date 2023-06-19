@@ -3,10 +3,9 @@
         <T3Text class="t3-ce-form__text" :content="contentElement.content" />
         <div :class="`t3-ce-form__form`">
             <T3Form
-                :form-elements="formElements"
+                :form-elements="contentElement.content.form.elements"
                 :loading="loading"
                 :loading-label="loadingLabel"
-                :required-hint="requiredHint"
                 :submit-label="submitLabel"
                 @submit="submit"
             >
@@ -25,12 +24,7 @@ const props = defineProps<{
     contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Formframework>
 }>()
 
-const {
-    formElements,
-    loading,
-    loadingLabel,
-    requiredHint,
-    submitLabel,
-    submit,
-} = useT3CeFormFormframework(props.contentElement)
+const { loading, loadingLabel, submitLabel, submit } = useT3CeFormFormframework(
+    props.contentElement
+)
 </script>

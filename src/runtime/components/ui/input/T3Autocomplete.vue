@@ -1,5 +1,17 @@
 <template>
-    <div class="t3-autocomplete t3-input">
+    <div
+        class="t3-autocomplete t3-input"
+        :class="{
+            't3-autocomplete--required': required,
+            't3-autocomplete--disabled': disabled,
+            't3-autocomplete--error': meta.touched && !meta.valid,
+            't3-autocomplete--success': meta.touched && meta.valid,
+            't3-input--required': required,
+            't3-input--disabled': disabled,
+            't3-input--error': meta.touched && !meta.valid,
+            't3-input--success': meta.touched && meta.valid,
+        }"
+    >
         <label
             v-if="label"
             :for="name"
@@ -90,6 +102,7 @@ const props = defineProps<{
     emptyLabel?: string
     placeholder?: string
     disabled?: boolean
+    required?: boolean
 }>()
 
 onMounted(() => {
@@ -130,7 +143,7 @@ const { hoverOption, supportKeyboardNavigation } = useT3SelectInput(
 )
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
-const { errorMessage, value, handleBlur, setValue } = useField<string>(
+const { errorMessage, meta, value, handleBlur, setValue } = useField<string>(
     name,
     props.validation,
     {

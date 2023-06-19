@@ -1,22 +1,31 @@
 <template>
-    <div class="t3-checkbox t3-input">
+    <div
+        class="t3-checkbox t3-input"
+        :class="{
+            't3-checkbox--required': required,
+            't3-checkbox--disabled': disabled,
+            't3-checkbox--error': meta.touched && !meta.valid,
+            't3-checkbox--success': meta.touched && meta.valid,
+            't3-input--required': required,
+            't3-input--disabled': disabled,
+            't3-input--error': meta.touched && !meta.valid,
+            't3-input--success': meta.touched && meta.valid,
+        }"
+    >
         <div class="t3-checkbox__wrapper">
             <input
-                :id="key"
+                :id="name"
                 v-model="value"
                 class="t3-checkbox__input"
                 type="checkbox"
                 :name="name"
-                :value="key"
+                :value="value"
                 :disabled="disabled"
                 @blur="handleBlur"
             />
-            <label
-                class="t3-checkbox__label"
-                :class="{ 't3-input__label': !multi }"
-                :for="key"
-                >{{ label }}</label
-            >
+            <label class="t3-checkbox__label t3-input__label" :for="name">{{
+                label
+            }}</label>
         </div>
         <slot name="error" :error-message="errorMessage"></slot>
     </div>
@@ -29,23 +38,20 @@ import { computed } from 'vue'
 const props = defineProps<{
     name: string
     label: string
-    value?: string
-    defaultValue?: string[] | boolean
-    multi?: boolean
+    defaultValue?: boolean
     validation?: RuleExpression<any>
-    groupLabel?: string
     disabled?: boolean
+    required?: boolean
 }>()
 
 const name = computed(() => props.name)
-const key = computed(() => (props.value ? props.value : props.name))
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
-const { errorMessage, value, handleBlur } = useField<
+const { errorMessage, meta, value, handleBlur } = useField<
     string[] | boolean | undefined
 >(name, props.validation, {
     type: 'checkbox',
-    initialValue: props.defaultValue ?? (props.multi ? [] : false),
+    initialValue: props.defaultValue ?? false,
 })
 </script>
 
