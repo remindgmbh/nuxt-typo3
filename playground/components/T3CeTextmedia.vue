@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import BaseT3CeTextmedia from '#nuxt-typo3/components/content/elements/T3CeTextmedia.vue'
+import BaseT3CeTextmedia from '#nuxt-typo3/components/typo3/content/T3CeTextmedia.vue'
 import { useT3ContentUtil, T3Model } from '#imports'
 
 const props = defineProps<{

@@ -1,5 +1,5 @@
 <script lang="ts">
-export { default } from '#nuxt-typo3/components/content/helper/T3Form/T3Form.vue'
+export { default } from '#nuxt-typo3/components/typo3/content/helper/T3Form/T3Form.vue'
 </script>
 
 <style lang="scss">

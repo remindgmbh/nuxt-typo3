@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import BaseT3ImageGallerySlideNavigation from '#nuxt-typo3/components/ui/T3ImageGallery/T3ImageGallerySlideNavigation.vue'
+import BaseT3ImageGallerySlideNavigation from '#nuxt-typo3/components/typo3/content/helper/T3ImageGallery/T3ImageGallerySlideNavigation.vue'
 import { computed, useAttrs, useT3Theme } from '#imports'
 
 const attrs: any = useAttrs()

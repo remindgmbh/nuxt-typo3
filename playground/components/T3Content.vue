@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import BaseT3Content from '#nuxt-typo3/components/content/helper/T3Content.vue'
+import BaseT3Content from '#nuxt-typo3/components/typo3/backend-layouts/helper/T3Content.vue'
 import { T3Model, useT3ContentUtil } from '#imports'
 
 const props = defineProps<{
