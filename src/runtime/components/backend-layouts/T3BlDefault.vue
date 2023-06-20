@@ -1,7 +1,7 @@
 <template>
     <div class="t3-bl-default">
         <div class="t3-bl-default__before-breadcrumbs">
-            <T3Renderer :content-elements="pageData.content.colPos1" />
+            <T3Renderer :content-elements="pageData.content.colPos1687238554" />
         </div>
         <nav v-if="breadcrumbsVisible" class="t3-bl-default__breadcrumbs">
             <T3Breadcrumbs

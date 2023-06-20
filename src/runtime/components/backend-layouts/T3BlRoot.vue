@@ -1,5 +1,7 @@
 <template>
-    <T3BlDefault :page-data="pageData" />
+    <div class="t3-bl-root">
+        <T3Renderer :content-elements="pageData.content.colPos0" />
+    </div>
 </template>
 
 <script setup lang="ts">
