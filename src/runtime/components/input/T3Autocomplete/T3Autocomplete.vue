@@ -27,54 +27,15 @@
                 @blur="handleBlur"
             />
             <T3CollapseTransition transition-name="options-transition">
-                <div v-show="isOpen" class="t3-autocomplete__option-groups">
-                    <div
-                        v-for="optionGroup in _optionGroups"
+                <div v-show="isOpen" class="t3-autocomplete__options">
+                    <T3AutocompleteOptionGroup
+                        v-for="optionGroup in optionGroups"
                         :key="optionGroup.name"
-                        class="t3-autocomplete__option-group"
-                        :class="`t3-autocomplete__option-group--${optionGroup.name}`"
-                    >
-                        <div
-                            v-if="optionGroup.label"
-                            class="t3-autocomplete__option-group-label"
-                        >
-                            {{ optionGroup.label }}
-                        </div>
-                        <div class="t3-autocomplete__options">
-                            <template
-                                v-for="option in optionGroup.options"
-                                :key="option.key"
-                            >
-                                <NuxtLink
-                                    v-if="option.link"
-                                    :to="option.link"
-                                    class="t3-autocomplete__option"
-                                    :class="{
-                                        't3-autocomplete__option--hover':
-                                            hoverOption === option,
-                                    }"
-                                    @mouseover="hoverOption = option"
-                                    @mouseleave="hoverOption = undefined"
-                                    >{{ option.label }}</NuxtLink
-                                >
-                                <div
-                                    v-else
-                                    class="t3-autocomplete__option"
-                                    :class="{
-                                        't3-autocomplete__option--selected':
-                                            value === option.key,
-                                        't3-autocomplete__option--hover':
-                                            hoverOption === option,
-                                    }"
-                                    @click="onSelect(option)"
-                                    @mouseover="hoverOption = option"
-                                    @mouseleave="hoverOption = undefined"
-                                >
-                                    {{ option.label }}
-                                </div>
-                            </template>
-                        </div>
-                    </div>
+                        v-model:hover-option="hoverOption"
+                        :option-group="optionGroup"
+                        :value="value"
+                        @select="onSelect"
+                    />
                 </div>
             </T3CollapseTransition>
         </div>
@@ -198,12 +159,6 @@ function close() {
 
 <style lang="scss">
 .t3-autocomplete {
-    $color-background: #fff;
-    $color-border-active: #676774;
-    $color-hover: #e0e0e6;
-    $border-radius: 0.125rem;
-    $border-width: 0.0625rem;
-
     position: relative;
 
     &__input {
@@ -223,25 +178,13 @@ function close() {
         position: relative;
     }
 
-    &__option-groups {
+    &__options {
         position: absolute;
         top: 100%;
         left: 0;
         width: 100%;
-        border: $border-width solid $color-border-active;
-        border-radius: $border-radius;
-        background-color: $color-background;
         z-index: 1;
         box-sizing: border-box;
-    }
-
-    &__option {
-        display: block;
-        cursor: pointer;
-
-        &--hover {
-            background-color: $color-hover;
-        }
     }
 
     // set transition for opening options
