@@ -35,7 +35,7 @@
             <T3CollapseTransition transition-name="options-transition">
                 <div v-show="isOpen" class="t3-autocomplete__option-groups">
                     <div
-                        v-for="optionGroup in optionGroups"
+                        v-for="optionGroup in _optionGroups"
                         :key="optionGroup.name"
                         class="t3-autocomplete__option-group"
                         :class="`t3-autocomplete__option-group--${optionGroup.name}`"
@@ -122,7 +122,7 @@ const emit = defineEmits<{
 const wrapper = ref<HTMLDivElement>()
 const input = ref<HTMLInputElement>()
 const isOpen = ref(false)
-const optionGroups = ref<T3Model.Autocomplete.OptionGroup[]>([])
+const _optionGroups = ref<T3Model.Autocomplete.OptionGroup[]>([])
 
 const options = computed(() =>
     props.optionGroups.flatMap((optionGroup) => optionGroup.options)
@@ -153,7 +153,7 @@ const { errorMessage, meta, value, handleBlur, setValue } = useField<string>(
 
 function onOptionsChanged(value: T3Model.Autocomplete.OptionGroup[]) {
     if (value.length) {
-        optionGroups.value = value
+        _optionGroups.value = value
         open()
     } else {
         close()

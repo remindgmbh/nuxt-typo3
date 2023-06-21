@@ -31,7 +31,10 @@ export function useT3CeFeloginLogin(
             )?.value ?? ''
     )
 
-    const formElements = computed<T3Model.Typo3.Content.Data.Form.FormElement[]>(() => []
+    const formElements = computed<
+        T3Model.Typo3.Content.Data.Form.FormElement[]
+    >(
+        () => []
         // contentElement.content.data.form.elements
         //     .filter((element) => element.name !== 'submit')
         //     .map(convert)
@@ -52,6 +55,7 @@ export function useT3CeFeloginLogin(
     //     })
     // }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     function getValidation(
         formElement: T3Model.Typo3.Content.Data.Login.FormElement
     ): GenericValidateFunction[] {

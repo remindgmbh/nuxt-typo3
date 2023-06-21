@@ -14,7 +14,9 @@ export function useT3FormElement(
     const { parseDateString, parseNumber, schemaToValidateFunction } =
         useT3YupUtil()
 
-    const options = computed<{[key: string]: string}>(() => formElement.properties?.options ?? {})
+    const options = computed<{ [key: string]: string }>(
+        () => formElement.properties?.options ?? {}
+    )
 
     const placeholder = computed<string | undefined>(
         () => formElement.properties?.fluidAdditionalAttributes?.placeholder
@@ -22,10 +24,11 @@ export function useT3FormElement(
 
     const validation = computed<RuleExpression<any>>(() => getValidation())
 
-    const required = computed<boolean>(() =>
-        formElement.validators?.some(
-            (validator) => validator.identifier === 'NotEmpty'
-        ) ?? false
+    const required = computed<boolean>(
+        () =>
+            formElement.validators?.some(
+                (validator) => validator.identifier === 'NotEmpty'
+            ) ?? false
     )
 
     function getValidation(): RuleExpression<any> {

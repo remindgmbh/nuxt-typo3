@@ -23,11 +23,11 @@ const props = withDefaults(
 const logger = useLogger()
 const content = ref<ComponentPublicInstance>()
 const header = ref<ComponentPublicInstance>()
-const scrollbarDisabled = ref(false)
+const _scrollbarDisabled = ref(false)
 
 provide(registerHeaderSymbol, (instance) => (header.value = instance))
 provide(registerContentSymbol, (instance) => (content.value = instance))
-provide(scrollbarDisabledSymbol, scrollbarDisabled)
+provide(scrollbarDisabledSymbol, _scrollbarDisabled)
 
 const emit = defineEmits<{
     (e: 'update:scrollbarDisabled', value: boolean): void
@@ -41,15 +41,15 @@ onMounted(() => {
         logger.warn('T3TopbarLayoutContent component missing')
     }
     // Do assigment in mounted hook to trigger watch
-    scrollbarDisabled.value = props.scrollbarDisabled
+    _scrollbarDisabled.value = props.scrollbarDisabled
 })
 
 watch(
     () => props.scrollbarDisabled,
-    (value) => (scrollbarDisabled.value = value)
+    (value) => (_scrollbarDisabled.value = value)
 )
 
-watch(scrollbarDisabled, (value) => {
+watch(_scrollbarDisabled, (value) => {
     document.documentElement.style.overflowY = value ? 'hidden' : 'initial'
     emit('update:scrollbarDisabled', value)
 })
