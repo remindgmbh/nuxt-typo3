@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { defu } from 'defu'
 import { describe, expect, it } from 'vitest'
 import { fireEvent, render, RenderOptions } from '@testing-library/vue'
-import T3Accordion from '../../src/runtime/components/ui/T3Accordion.vue'
+import T3Accordion from '../../src/runtime/components/typo3/content/helper/T3Accordion.vue'
 import T3CollapseTransition from '../../src/runtime/components/transition/T3CollapseTransition.vue'
 
 const items = [

@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { defu } from 'defu'
 import { describe, expect, it } from 'vitest'
 import { fireEvent, render, RenderOptions } from '@testing-library/vue'
-import T3Tabs from '../../src/runtime/components/ui/T3Tabs.vue'
+import T3Tabs from '../../src/runtime/components/typo3/content/helper/T3Tabs.vue'
 import T3AutoHeightContainer from '../../src/runtime/components/ui/T3AutoHeightContainer.vue'
 
 const items = [

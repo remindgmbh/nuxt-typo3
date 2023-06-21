@@ -125,10 +125,10 @@ const options = computed(() =>
 const name = computed(() => props.name)
 
 function onKeyboardSelect(hoverOption: T3Model.Autocomplete.Option) {
-    if (hoverOption.value.link) {
-        return navigateTo(hoverOption.value.link)
+    if (hoverOption.link) {
+        return navigateTo(hoverOption.link)
     } else {
-        onSelect(hoverOption.value)
+        onSelect(hoverOption)
     }
 }
 
