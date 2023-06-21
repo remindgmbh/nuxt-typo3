@@ -28,10 +28,13 @@ export function useT3Api() {
         fetchOptions?: FetchOptions
     }): Promise<T3Model.Typo3.InitialData> {
         const type = config.api.initialDataType
-        const path = options?.path ?? apiPath.currentInitialDataPath.value
-        const fetchOptions = options?.fetchOptions ?? {}
-        return await get<T3Model.Typo3.InitialData>(path, {
-            ...fetchOptions,
+
+        // .d.ts file becomes empty if _path or _fetchOptions are named identical to options param property
+        // doesn't happen with new project, needs to be investigated further
+        const _path = options?.path ?? apiPath.currentInitialDataPath.value
+        const _fetchOptions = options?.fetchOptions ?? {}
+        return await get<T3Model.Typo3.InitialData>(_path, {
+            ..._fetchOptions,
             params: { type },
         })
     }
@@ -40,10 +43,10 @@ export function useT3Api() {
         path?: string
         fetchOptions?: FetchOptions
     }): Promise<T3Model.Typo3.Page.Data> {
-        const path = options?.path ?? apiPath.currentPagePath.value
+        const _path = options?.path ?? apiPath.currentPagePath.value
         try {
             return await get<T3Model.Typo3.Page.Data>(
-                path,
+                _path,
                 options?.fetchOptions
             )
         } catch (error) {
@@ -68,10 +71,10 @@ export function useT3Api() {
         fetchOptions?: FetchOptions
     }): Promise<T3Model.Typo3.Content.Element<any>> {
         const type = config.api.footerContentType
-        const path = options?.path ?? apiPath.currentInitialDataPath.value
-        const fetchOptions = options?.fetchOptions ?? {}
-        return await get<T3Model.Typo3.Content.Element<any>>(path, {
-            ...fetchOptions,
+        const _path = options?.path ?? apiPath.currentInitialDataPath.value
+        const _fetchOptions = options?.fetchOptions ?? {}
+        return await get<T3Model.Typo3.Content.Element<any>>(_path, {
+            ..._fetchOptions,
             params: { type },
         })
     }
