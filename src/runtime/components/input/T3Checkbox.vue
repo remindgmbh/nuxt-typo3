@@ -1,6 +1,6 @@
 <template>
     <div
-        class="t3-checkbox t3-input"
+        class="t3-checkbox"
         :class="{
             't3-checkbox--required': required,
             't3-checkbox--disabled': disabled,

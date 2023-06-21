@@ -1,22 +1,18 @@
 <template>
     <div
-        class="t3-textfield t3-input"
+        class="t3-textfield"
         :class="{
             't3-textfield--required': required,
             't3-textfield--disabled': disabled,
             't3-textfield--error': meta.touched && !meta.valid,
             't3-textfield--success': meta.touched && meta.valid,
-            't3-input--required': required,
-            't3-input--disabled': disabled,
-            't3-input--error': meta.touched && !meta.valid,
-            't3-input--success': meta.touched && meta.valid,
         }"
     >
         <T3InputLabel class="t3-textfield__label" :label="label" :for="name" />
         <div class="t3-textfield__wrapper">
             <T3Input
                 v-model="value"
-                class="t3-textfield__input t3-input__input"
+                class="t3-textfield__input"
                 :type="type"
                 :name="name"
                 :min="min"

@@ -1,6 +1,6 @@
 <template>
     <fieldset
-        class="t3-checkbox-group t3-input"
+        class="t3-checkbox-group"
         :class="{
             't3-checkbox-group--required': required,
             't3-checkbox-group--disabled': disabled,

@@ -1,6 +1,6 @@
 <template>
     <div
-        class="t3-autocomplete t3-input"
+        class="t3-autocomplete"
         :class="{
             't3-autocomplete--required': required,
             't3-autocomplete--disabled': disabled,

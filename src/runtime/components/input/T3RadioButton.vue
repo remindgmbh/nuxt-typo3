@@ -1,6 +1,6 @@
 <template>
     <fieldset
-        class="t3-radio-button t3-input"
+        class="t3-radio-button"
         :class="{
             't3-radio-button--required': required,
             't3-radio-button--disabled': disabled,

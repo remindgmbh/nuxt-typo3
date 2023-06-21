@@ -1,6 +1,6 @@
 <template>
     <div
-        class="t3-textarea t3-input"
+        class="t3-textarea"
         :class="{
             't3-textarea--required': required,
             't3-textarea--disabled': disabled,
@@ -20,12 +20,7 @@
                 @blur="handleBlur"
             />
         </div>
-        <slot name="error" :error-message="errorMessage">
-            <T3InputError
-                :error-message="errorMessage"
-                class="t3-textarea__error t3-input__error"
-            />
-        </slot>
+        <slot name="error" :error-message="errorMessage"></slot>
     </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
     <div
-        class="t3-select t3-input"
+        class="t3-select"
         :class="{
             't3-select--required': required,
             't3-select--disabled': disabled,
