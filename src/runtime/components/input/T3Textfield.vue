@@ -12,12 +12,9 @@
             't3-input--success': meta.touched && meta.valid,
         }"
     >
-        <label class="t3-textfield__label t3-input__label" :for="name">{{
-            label
-        }}</label>
+        <T3InputLabel class="t3-textfield__label" :label="label" :for="name" />
         <div class="t3-textfield__wrapper">
-            <input
-                :id="name"
+            <T3Input
                 v-model="value"
                 class="t3-textfield__input t3-input__input"
                 :type="type"

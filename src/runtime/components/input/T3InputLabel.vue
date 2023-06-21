@@ -1,0 +1,20 @@
+<template>
+    <component :is="tag" class="t3-input-label">
+        <slot>
+            {{ label }}
+        </slot>
+    </component>
+</template>
+
+<script setup lang="ts">
+withDefaults(
+    defineProps<{
+        label?: string
+        tag?: keyof HTMLElementTagNameMap
+    }>(),
+    {
+        tag: 'label',
+        label: undefined,
+    }
+)
+</script>

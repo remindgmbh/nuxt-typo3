@@ -26,7 +26,9 @@
         <T3TopbarLayoutContent class="app__content">
             <div
                 class="app__loading-bar"
-                :class="{ 'app__loading-bar--visible': loadingPage }"
+                :class="{
+                    'app__loading-bar--visible': loading.type === 'page',
+                }"
             >
                 <div class="app__loading-progress"></div>
             </div>
@@ -59,7 +61,7 @@ const HEADER_HEIGHT_DENSE = '3rem'
 
 const { showBanner } = useT3Cookiebot()
 const { currentFooterContent } = useT3ApiData()
-const { loadingPage } = useT3LoadingState()
+const loading = useT3LoadingState()
 const { detectScrollEnd } = useT3Util()
 const { themeOptions } = useT3Theme()
 

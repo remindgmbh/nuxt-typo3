@@ -6,10 +6,6 @@
             't3-checkbox--disabled': disabled,
             't3-checkbox--error': meta.touched && !meta.valid,
             't3-checkbox--success': meta.touched && meta.valid,
-            't3-input--required': required,
-            't3-input--disabled': disabled,
-            't3-input--error': meta.touched && !meta.valid,
-            't3-input--success': meta.touched && meta.valid,
         }"
     >
         <div class="t3-checkbox__wrapper">
@@ -23,9 +19,11 @@
                 :disabled="disabled"
                 @blur="handleBlur"
             />
-            <label class="t3-checkbox__label t3-input__label" :for="name">{{
-                label
-            }}</label>
+            <T3InputLabel
+                class="t3-checkbox__label"
+                :label="label"
+                :for="name"
+            />
         </div>
         <slot name="error" :error-message="errorMessage"></slot>
     </div>

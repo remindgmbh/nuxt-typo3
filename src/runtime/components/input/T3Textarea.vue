@@ -6,15 +6,9 @@
             't3-textarea--disabled': disabled,
             't3-textarea--error': meta.touched && !meta.valid,
             't3-textarea--success': meta.touched && meta.valid,
-            't3-input--required': required,
-            't3-input--disabled': disabled,
-            't3-input--error': meta.touched && !meta.valid,
-            't3-input--success': meta.touched && meta.valid,
         }"
     >
-        <label class="t3-textarea__label t3-input__label" :for="name">{{
-            label
-        }}</label>
+        <T3InputLabel class="t3-textarea__label" :label="label" :for="name" />
         <div class="t3-textarea__wrapper">
             <textarea
                 :id="name"

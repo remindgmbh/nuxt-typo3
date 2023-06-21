@@ -6,15 +6,13 @@
             't3-checkbox-group--disabled': disabled,
             't3-checkbox-group--error': meta.touched && !meta.valid,
             't3-checkbox-group--success': meta.touched && meta.valid,
-            't3-input--required': required,
-            't3-input--disabled': disabled,
-            't3-input--error': meta.touched && !meta.valid,
-            't3-input--success': meta.touched && meta.valid,
         }"
     >
-        <legend class="t3-checkbox-group__label t3-input__label">
-            {{ label }}
-        </legend>
+        <T3InputLabel
+            class="t3-checkbox-group__label"
+            :label="label"
+            tag="legend"
+        />
         <div class="t3-checkbox-group__options">
             <div
                 v-for="(optionLabel, optionValue) in options"

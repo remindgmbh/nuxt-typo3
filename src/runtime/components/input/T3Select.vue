@@ -6,15 +6,9 @@
             't3-select--disabled': disabled,
             't3-select--error': meta.touched && !meta.valid,
             't3-select--success': meta.touched && meta.valid,
-            't3-input--required': required,
-            't3-input--disabled': disabled,
-            't3-input--error': meta.touched && !meta.valid,
-            't3-input--success': meta.touched && meta.valid,
         }"
     >
-        <span :id="name" class="t3-select__label t3-input__label">{{
-            label
-        }}</span>
+        <T3InputLabel class="t3-select__label" :label="label" tag="span" />
         <div class="t3-select__wrapper">
             <select
                 :id="name"

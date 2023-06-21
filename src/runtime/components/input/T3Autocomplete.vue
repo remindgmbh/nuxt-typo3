@@ -6,28 +6,22 @@
             't3-autocomplete--disabled': disabled,
             't3-autocomplete--error': meta.touched && !meta.valid,
             't3-autocomplete--success': meta.touched && meta.valid,
-            't3-input--required': required,
-            't3-input--disabled': disabled,
-            't3-input--error': meta.touched && !meta.valid,
-            't3-input--success': meta.touched && meta.valid,
         }"
     >
-        <label
+        <T3InputLabel
             v-if="label"
+            class="t3-autocomplete__label"
+            :label="label"
             :for="name"
-            class="t3-autocomplete__label t3-input__label"
-            >{{ label }}</label
-        >
+        />
         <div ref="wrapper" class="t3-autocomplete__wrapper">
-            <input
-                :id="name"
+            <T3Input
                 ref="input"
                 v-model="value"
-                type="text"
-                class="t3-autocomplete__input"
                 :name="name"
-                :placeholder="placeholder"
+                class="t3-autocomplete__input"
                 :disabled="disabled"
+                :placeholder="placeholder"
                 autocomplete="off"
                 @input="onInput"
                 @blur="handleBlur"
@@ -92,6 +86,7 @@
 import { RuleExpression, useField } from 'vee-validate'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { navigateTo, T3Model, useT3SelectInput } from '#imports'
+import { T3Input } from '#components'
 
 const props = defineProps<{
     name: string
@@ -106,12 +101,12 @@ const props = defineProps<{
 }>()
 
 onMounted(() => {
-    input.value?.addEventListener('focus', open)
+    input.value?.$el.addEventListener('focus', open)
 })
 
 onUnmounted(() => {
-    input.value?.removeEventListener('keydown', supportKeyboardNavigation)
-    input.value?.removeEventListener('focus', open)
+    input.value?.$el.removeEventListener('keydown', supportKeyboardNavigation)
+    input.value?.$el.removeEventListener('focus', open)
     document.removeEventListener('click', closeOnOutsideClick)
 })
 
@@ -120,7 +115,7 @@ const emit = defineEmits<{
 }>()
 
 const wrapper = ref<HTMLDivElement>()
-const input = ref<HTMLInputElement>()
+const input = ref<InstanceType<typeof T3Input>>()
 const isOpen = ref(false)
 const _optionGroups = ref<T3Model.Autocomplete.OptionGroup[]>([])
 
@@ -187,7 +182,7 @@ function open() {
         return
     }
     isOpen.value = true
-    input.value?.addEventListener('keydown', supportKeyboardNavigation)
+    input.value?.$el.addEventListener('keydown', supportKeyboardNavigation)
     document.addEventListener('click', closeOnOutsideClick)
 }
 
@@ -196,7 +191,7 @@ function close() {
         return
     }
     isOpen.value = false
-    input.value?.removeEventListener('keydown', supportKeyboardNavigation)
+    input.value?.$el.removeEventListener('keydown', supportKeyboardNavigation)
     document.removeEventListener('click', closeOnOutsideClick)
 }
 </script>

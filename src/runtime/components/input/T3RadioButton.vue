@@ -1,30 +1,28 @@
 <template>
     <fieldset
-        class="t3-radio-group t3-input"
+        class="t3-radio-button t3-input"
         :class="{
-            't3-radio-group--required': required,
-            't3-radio-group--disabled': disabled,
-            't3-radio-group--error': meta.touched && !meta.valid,
-            't3-radio-group--success': meta.touched && meta.valid,
-            't3-input--required': required,
-            't3-input--disabled': disabled,
-            't3-input--error': meta.touched && !meta.valid,
-            't3-input--success': meta.touched && meta.valid,
+            't3-radio-button--required': required,
+            't3-radio-button--disabled': disabled,
+            't3-radio-button--error': meta.touched && !meta.valid,
+            't3-radio-button--success': meta.touched && meta.valid,
         }"
     >
-        <legend class="t3-radio-group__label t3-input__label">
-            {{ label }}
-        </legend>
-        <div class="t3-radio-group__options">
+        <T3InputLabel
+            class="t3-radio-button__label"
+            :label="label"
+            tag="legend"
+        />
+        <div class="t3-radio-button__options">
             <div
                 v-for="(optionLabel, optionValue) in options"
                 :key="optionValue"
-                class="t3-radio-group__option"
+                class="t3-radio-button__option"
             >
                 <input
                     :id="optionValue.toString()"
                     v-model="value"
-                    class="t3-radio-group__option-value"
+                    class="t3-radio-button__option-value"
                     :value="optionValue.toString()"
                     type="radio"
                     :name="name"
@@ -32,7 +30,7 @@
                     @blur="handleBlur"
                 />
                 <label
-                    class="t3-radio-group__option-label"
+                    class="t3-radio-button__option-label"
                     :for="optionValue.toString()"
                     >{{ optionLabel }}</label
                 >
@@ -69,7 +67,7 @@ const { errorMessage, meta, value, handleBlur } = useField<string | undefined>(
 </script>
 
 <style lang="scss">
-.t3-radio-group {
+.t3-radio-button {
     margin: 0;
 
     &__options {
