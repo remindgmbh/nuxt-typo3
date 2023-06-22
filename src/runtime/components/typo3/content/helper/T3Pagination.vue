@@ -12,7 +12,7 @@
         <div class="t3-pagination__pages">
             <template v-for="page in pagination.pages" :key="page.link">
                 <span
-                    v-if="page.current"
+                    v-if="page.active"
                     class="t3-pagination__link t3-pagination__link--disabled"
                     >{{ page.pageNumber }}</span
                 >
@@ -40,24 +40,3 @@ defineProps<{
     pagination: T3Model.Typo3.Extbase.Pagination
 }>()
 </script>
-
-<style lang="scss">
-.t3-pagination {
-    display: flex;
-    justify-content: space-between;
-
-    &__link {
-        &--prev {
-            &::before {
-                content: '<';
-            }
-        }
-
-        &--next {
-            &::before {
-                content: '>';
-            }
-        }
-    }
-}
-</style>

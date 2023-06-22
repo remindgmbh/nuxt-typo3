@@ -6,6 +6,6 @@ export interface Pagination {
     pages: Array<{
         pageNumber: number
         link: string
-        current: boolean
+        active: boolean
     }>
 }
