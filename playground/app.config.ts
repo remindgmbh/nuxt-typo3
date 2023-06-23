@@ -10,7 +10,7 @@ export default defineAppConfig({
             header: {
                 maxWidth: (contentElement: Typo3.Content.Element) =>
                     !contentElement.appearance.backgroundColor ? 'lg' : 'md',
-                width: 'large',
+                width: 'extended',
             },
             text: {
                 maxWidth: 'md',

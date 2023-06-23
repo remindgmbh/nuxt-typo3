@@ -45,8 +45,8 @@ export function useT3ContentUtil(
 
     const containerClasses = computed(() => ({
         container: width.value !== 'full',
-        'container--large': width.value === 'large',
-        [`container--max-width-${maxWidth.value}`]: !!maxWidth.value,
+        'container--extended': width.value === 'extended',
+        [`container--${maxWidth.value}`]: !!maxWidth.value,
     }))
 
     const cookieAccepted = computed<boolean>(() =>
@@ -88,7 +88,7 @@ export function useT3ContentUtil(
             config.spacing[contentElement.appearance.spaceAfterInside]
     )
 
-    const width = computed<'default' | 'large' | 'full'>(() =>
+    const width = computed<'default' | 'extended' | 'full'>(() =>
         ceOptions.value?.width instanceof Function
             ? ceOptions.value?.width(contentElement)
             : ceOptions.value?.width ?? 'default'

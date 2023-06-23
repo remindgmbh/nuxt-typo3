@@ -20,13 +20,13 @@ export interface CeOptions {
         | boolean
         | ((contentElement: Typo3.Content.Element<any>) => boolean)
     // default uses container-width for container
-    // large uses screen-width instead of container-width for container
+    // extended uses screen-width instead of container-width for container
     // full ignores container completely
     width?:
         | 'default'
-        | 'large'
+        | 'extended'
         | 'full'
         | ((
               contentElement: Typo3.Content.Element<any>
-          ) => 'default' | 'large' | 'full')
+          ) => 'default' | 'extended' | 'full')
 }

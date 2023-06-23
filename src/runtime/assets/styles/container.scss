@@ -9,7 +9,7 @@
     @include breakpoints.loop using ($args) {
         max-width: map.get($args, 'container-width');
 
-        &--large {
+        &--extended {
             $max-width: map.get($args, 'screen-width');
 
             @if $max-width == 0 {
@@ -22,11 +22,11 @@
 
     @each $name, $container-width in breakpoints.$container-widths {
         @include breakpoints.up($name) {
-            &--max-width-#{$name} {
+            &--#{$name} {
                 max-width: $container-width;
             }
 
-            &--max-width-#{$name}#{&}--large {
+            &--#{$name}#{&}--extended {
                 max-width: map.get(breakpoints.$screen-widths, $name);
             }
         }
