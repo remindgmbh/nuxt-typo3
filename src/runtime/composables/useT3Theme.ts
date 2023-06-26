@@ -6,7 +6,7 @@ export function useT3Theme() {
     const { themes, defaultTheme } = useT3Config()
 
     const selectedTheme: Ref<string> = useState<string>(
-        'theme',
+        't3-theme',
         () => defaultTheme
     )
 

@@ -11,5 +11,5 @@ export function useT3LoadingState(): Ref<{
         type?: 'data' | 'page'
         from?: RouteLocationNormalized
         to?: RouteLocationNormalized
-    }>('loading', () => ({}))
+    }>('t3-loading', () => ({}))
 }

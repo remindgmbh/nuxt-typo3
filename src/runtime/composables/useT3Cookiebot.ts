@@ -7,7 +7,7 @@ export function useT3Cookiebot() {
             { [key in T3Model.Typo3.Content.Cookie['category']]: boolean },
             'none'
         >
-    >(() => ({
+    >('t3-cookies', () => ({
         necessary: false,
         marketing: false,
         preferences: false,

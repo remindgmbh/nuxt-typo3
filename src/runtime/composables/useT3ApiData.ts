@@ -10,18 +10,18 @@ export function useT3ApiData() {
 
     const initialData: Ref<{
         [path: string]: T3Model.Typo3.InitialData | undefined
-    }> = useState('initialData', () => ({}))
+    }> = useState('t3-initialData', () => ({}))
 
     const footerContent: Ref<{
         [path: string]: T3Model.Typo3.Content.Element<any> | undefined
-    }> = useState('footerContent', () => ({}))
+    }> = useState('t3-footerContent', () => ({}))
 
     const pageData: Ref<{
         [path: string]: T3Model.Typo3.Page.Data | undefined
-    }> = useState('pageData', () => ({}))
+    }> = useState('t3-pageData', () => ({}))
 
     const pageError: Ref<T3Model.Typo3.Page.Error | undefined> =
-        useState('pageError')
+        useState('t3-pageError')
 
     const currentInitialData = computed<T3Model.Typo3.InitialData | undefined>(
         () => initialData.value[apiPath.currentInitialDataPath.value]
