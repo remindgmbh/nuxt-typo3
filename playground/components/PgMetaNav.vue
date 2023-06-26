@@ -6,7 +6,7 @@
             :to="language.link"
             >{{ language.navigationTitle }}</NuxtLink
         >
-        <button @click="toggleSidebar">Toggle Sidebar</button>
+        <button @click="toggleMenu">Toggle Menu</button>
         <button @click="toggleScrollbar">Toggle Scrollbar</button>
         <button @click="toggleTheme">
             {{ selectedTheme }}
@@ -19,12 +19,12 @@
 import { computed, useT3Languages, useT3Theme, useT3UserState } from '#imports'
 
 const props = defineProps<{
-    sidebarVisible: boolean
+    menuVisible: boolean
     scrollbarDisabled: boolean
 }>()
 
 const emit = defineEmits<{
-    (e: 'update:sidebarVisible', value?: boolean): void
+    (e: 'update:menuVisible', value?: boolean): void
     (e: 'update:scrollbarDisabled', value?: boolean): void
 }>()
 
@@ -32,12 +32,12 @@ const { availableLanguages } = useT3Languages()
 const { isLoggedIn, logout } = useT3UserState()
 const { selectedTheme } = useT3Theme()
 
-const sidebarVisible = computed({
+const menuVisible = computed({
     get() {
-        return props.sidebarVisible
+        return props.menuVisible
     },
     set(value: boolean) {
-        emit('update:sidebarVisible', value)
+        emit('update:menuVisible', value)
     },
 })
 
@@ -50,8 +50,8 @@ const scrollbarDisabled = computed({
     },
 })
 
-function toggleSidebar(): void {
-    sidebarVisible.value = !sidebarVisible.value
+function toggleMenu(): void {
+    menuVisible.value = !menuVisible.value
 }
 
 function toggleScrollbar(): void {

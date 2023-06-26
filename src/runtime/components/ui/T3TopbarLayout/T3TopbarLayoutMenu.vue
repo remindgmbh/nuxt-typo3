@@ -5,7 +5,7 @@
         @before-leave="onBeforeLeave"
         @after-leave="onAfterLeave"
     >
-        <component :is="tag" v-if="modelValue" class="t3-topbar-layout-sidebar">
+        <component :is="tag" v-if="modelValue" class="t3-topbar-layout-menu">
             <slot :close="() => emit('update:modelValue', false)" />
         </component>
     </transition>
@@ -28,7 +28,7 @@ withDefaults(
     }>(),
     {
         transition: () => ({
-            name: 'sidebar-transition',
+            name: 'menu-transition',
         }),
         tag: 'nav',
     }
@@ -62,7 +62,7 @@ function onAfterLeave(): void {
 </script>
 
 <style lang="scss">
-.t3-topbar-layout-sidebar {
+.t3-topbar-layout-menu {
     z-index: 20;
     position: fixed;
     height: 100%;

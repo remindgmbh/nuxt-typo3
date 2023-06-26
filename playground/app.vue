@@ -4,25 +4,25 @@
             <PgMainNav />
             <PgMetaNav
                 v-model:scrollbar-disabled="scrollbarDisabled"
-                v-model:sidebar-visible="sidebarVisible"
+                v-model:menu-visible="menuVisible"
             />
             <PgDropdown />
         </T3TopbarLayoutHeader>
-        <T3TopbarLayoutSidebar
-            v-model="sidebarVisible"
-            class="app__sidebar"
+        <T3TopbarLayoutMenu
+            v-model="menuVisible"
+            class="app__menu"
             :transition="{
-                name: 'sidebar-transition',
-                onEnter: sidebarOnEnter,
-                onLeave: sidebarOnLeave,
+                name: 'menu-transition',
+                onEnter: menuOnEnter,
+                onLeave: menuOnLeave,
             }"
         >
-            <div class="app__sidebar-content">
+            <div class="app__menu-content">
                 <div>top</div>
                 <div v-for="i in 100" :key="i">{{ i }}</div>
                 <div>bottom</div>
             </div>
-        </T3TopbarLayoutSidebar>
+        </T3TopbarLayoutMenu>
         <T3TopbarLayoutContent class="app__content">
             <div
                 class="app__loading-bar"
@@ -67,11 +67,11 @@ const { themeOptions } = useT3Theme()
 
 const colors = computed(() => themeOptions.value?.additionalData)
 
-const sidebarVisible = ref(false)
+const menuVisible = ref(false)
 const scrollbarDisabled = ref(false)
 const headerHeight = ref(HEADER_HEIGHT)
 
-function sidebarOnEnter(element: Element, done: () => void) {
+function menuOnEnter(element: Element, done: () => void) {
     if (!(element instanceof HTMLElement)) {
         return
     }
@@ -90,7 +90,7 @@ function sidebarOnEnter(element: Element, done: () => void) {
     )
 }
 
-function sidebarOnLeave(element: Element, done: () => void): void {
+function menuOnLeave(element: Element, done: () => void): void {
     if (!(element instanceof HTMLElement)) {
         return
     }
@@ -154,14 +154,14 @@ onMounted(() => {
         color: v-bind('colors.background');
     }
 
-    &__sidebar {
+    &__menu {
         margin-top: v-bind(headerHeight);
         width: 100%;
         height: calc(100% - v-bind(headerHeight));
         overflow: auto;
     }
 
-    &__sidebar-content {
+    &__menu-content {
         background-color: v-bind('colors.primary');
         border-bottom: solid 1rem v-bind('colors.accent');
         box-sizing: border-box;
