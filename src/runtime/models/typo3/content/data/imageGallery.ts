@@ -1,7 +1,7 @@
 import { Asset } from '../..'
-import { Base } from '.'
+import { Header } from '.'
 
-export interface ImageGallery extends Base {
+export interface ImageGallery extends Header {
     images: Asset[]
     settings: {
         type: 'scroll' | 'slide'

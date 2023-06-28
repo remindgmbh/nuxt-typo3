@@ -1,6 +1,6 @@
 import { Asset } from '../..'
-import { Base } from '.'
+import { Header } from '.'
 
-export interface Image extends Base {
+export interface Image extends Header {
     images: Asset[]
 }

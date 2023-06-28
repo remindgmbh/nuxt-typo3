@@ -1,7 +1,7 @@
 import { computed } from 'vue'
 import * as T3Model from '../../models'
 
-export function useT3Header(content: T3Model.Typo3.Content.Data.Base) {
+export function useT3Header(content: T3Model.Typo3.Content.Data.Header) {
     const visible = computed<boolean>(
         () => !!content.header && content.headerLayout !== 100
     )

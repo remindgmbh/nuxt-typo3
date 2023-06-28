@@ -1,5 +1,5 @@
 import { Form } from './login'
-import { Base } from '.'
+import { Header } from '.'
 
 interface Message {
     header: string
@@ -13,7 +13,7 @@ interface FlashMessage {
     className: string
 }
 
-export interface Felogin extends Base {
+export interface Felogin extends Header {
     data: {
         form: Form
         message: Message
@@ -23,7 +23,7 @@ export interface Felogin extends Base {
     }
 }
 
-export interface FeloginActionResponse extends Base {
+export interface FeloginActionResponse extends Header {
     data: {
         form?: Form
         message?: Message

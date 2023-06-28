@@ -1,6 +1,6 @@
 import { Item } from '..'
-import { Base } from '.'
+import { Header } from '.'
 
-export interface Accordion extends Base {
+export interface Accordion extends Header {
     items: Item[]
 }

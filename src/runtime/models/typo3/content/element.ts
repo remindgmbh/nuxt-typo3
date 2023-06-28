@@ -1,6 +1,6 @@
-import { Appearance, Data, Cookie } from '.'
+import { Appearance, Cookie } from '.'
 
-export interface Element<T extends Data.Base = Data.Base> {
+export interface Element<T = {}> {
     id: number
     type: string
     colPos: number

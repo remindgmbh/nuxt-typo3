@@ -1,6 +1,6 @@
-import { Base } from '.'
+import { Header } from '.'
 
-export interface Table extends Base {
+export interface Table extends Header {
     bodytext: string[][]
     tableCaption: string
     tableHeaderPosition: number

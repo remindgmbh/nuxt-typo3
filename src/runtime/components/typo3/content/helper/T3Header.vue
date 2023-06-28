@@ -31,7 +31,7 @@
 import { T3Model, useT3Header } from '#imports'
 
 const props = defineProps<{
-    content: T3Model.Typo3.Content.Data.Base
+    content: T3Model.Typo3.Content.Data.Header
 }>()
 
 const { visible, tag } = useT3Header(props.content)

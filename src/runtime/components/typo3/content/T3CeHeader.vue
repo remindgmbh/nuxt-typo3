@@ -8,6 +8,6 @@
 import { T3Model } from '#imports'
 
 defineProps<{
-    contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Base>
+    contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Header>
 }>()
 </script>

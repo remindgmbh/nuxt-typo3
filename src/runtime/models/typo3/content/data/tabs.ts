@@ -1,6 +1,6 @@
 import { Item } from '..'
-import { Base } from '.'
+import { Header } from '.'
 
-export interface Tabs extends Base {
+export interface Tabs extends Header {
     items: Item[]
 }

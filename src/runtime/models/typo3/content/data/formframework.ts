@@ -1,7 +1,7 @@
 import { Form } from './form'
-import { Base } from '.'
+import { Header } from '.'
 
-export interface Formframework extends Base {
+export interface Formframework extends Header {
     link: string
     form: Form
     bodytext: string
