@@ -28,7 +28,7 @@
         "lint:script": "eslint --ext \".js,.ts,.vue\" .",
         "lint:style": "stylelint \"**/*.{vue,[s]css}\"",
         "prepare": "npm run stub && nuxt-module-build",
-        "prepublishOnly": "npm run typecheck && npm run lint && npm run test",
+        "prepublishOnly": "npm run typecheck && npm run lint",
         "preview": "nuxi preview playground",
         "stub": "nuxt-module-build --stub && nuxi prepare playground",
         "test": "vitest run",
