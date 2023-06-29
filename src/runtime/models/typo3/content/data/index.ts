@@ -1,6 +1,7 @@
 export * as Form from './form'
 export * as Login from './login'
 export type { Accordion } from './accordion'
+export type { Bullets } from './bullets'
 export type { Formframework } from './formframework'
 export type { Header } from './header'
 export type { Image } from './image'
