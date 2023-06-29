@@ -11,7 +11,7 @@ TYPO3 Instance with the following extensions:
 
 ## Installation
 
-1. install using `npm install @remindgmbh/nuxt-typo3` or `yarn add @remindgmbh/nuxt-typo3`
+1. install using `npm install @remindgmbh/nuxt-typo3`
 
 2. add module in nuxt.config.js
 
@@ -48,4 +48,4 @@ To customize a components template and script just create a component with the s
 
 ## Development
 
-Use `npm install` or `yarn` to install dependencies. Change to `./playground` directory and install dependencies as well. Add `.env` file to playground directory and set `NUXT_PUBLIC_TYPO3_BASE_URL` and `NUXT_PUBLIC_TYPO3_API_BASE_URL`. Then use `npm run dev` or `yarn dev` to start a dev server.
+Use `npm install` to install dependencies. Change to `./playground` directory and install dependencies as well. Add `.env` file to playground directory and set `NUXT_PUBLIC_TYPO3_BASE_URL` and `NUXT_PUBLIC_TYPO3_API_BASE_URL`. Then use `npm run dev` to start a dev server.
