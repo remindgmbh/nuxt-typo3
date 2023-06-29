@@ -1,6 +1,9 @@
 <template>
     <div class="t3-ce-tabs">
-        <T3Header :content="contentElement.content" />
+        <T3Header
+            class="t3-ce-tabs__header"
+            :content="contentElement.content"
+        />
         <T3Tabs :items="contentElement.content.items">
             <template #title="{ item, index }">
                 <slot name="title" :item="item" :index="index">

@@ -1,6 +1,9 @@
 <template>
     <div class="t3-ce-image-gallery">
-        <T3Header :content="contentElement.content" />
+        <T3Header
+            class="t3-ce-image-gallery__header"
+            :content="contentElement.content"
+        />
         <T3ImageGallery
             :header="header"
             :images="images"

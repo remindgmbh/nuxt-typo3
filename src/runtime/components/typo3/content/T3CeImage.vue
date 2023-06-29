@@ -1,6 +1,9 @@
 <template>
     <div class="t3-ce-image">
-        <T3Header :content="contentElement.content" />
+        <T3Header
+            class="t3-ce-image__header"
+            :content="contentElement.content"
+        />
         <T3Asset v-if="image" :file="image" :asset-attrs="imageAttrs" />
     </div>
 </template>

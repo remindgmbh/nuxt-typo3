@@ -1,6 +1,9 @@
 <template>
     <div class="t3-ce-table">
-        <T3Header :content="contentElement.content" />
+        <T3Header
+            class="t3-ce-table__header"
+            :content="contentElement.content"
+        />
         <T3Table
             :caption="contentElement.content.tableCaption"
             :header-left="headerLeft"

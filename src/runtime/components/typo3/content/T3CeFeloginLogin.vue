@@ -1,6 +1,9 @@
 <template>
     <div class="t3-ce-login">
-        <T3Header :content="contentElement.content" />
+        <T3Header
+            class="t3-ce-login__header"
+            :content="contentElement.content"
+        />
         <div class="t3-ce-login__message">
             <div class="t3-ce-login__message-header">
                 {{ message.header }}
