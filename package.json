@@ -20,15 +20,15 @@
         "dist"
     ],
     "scripts": {
-        "dev": "yarn stub && nuxi dev playground",
+        "dev": "npm run stub && nuxi dev playground",
         "dev:build": "nuxi build playground",
         "dev:test": "vitest",
-        "lint": "yarn lint:prettier && yarn lint:script && yarn lint:style",
+        "lint": "npm run lint:prettier && npm run lint:script && npm run lint:style",
         "lint:prettier": "prettier --check .",
         "lint:script": "eslint --ext \".js,.ts,.vue\" .",
         "lint:style": "stylelint \"**/*.{vue,[s]css}\"",
-        "prepare": "yarn stub && nuxt-module-build",
-        "prepublishOnly": "yarn typecheck && yarn lint && yarn test",
+        "prepare": "npm run stub && nuxt-module-build",
+        "prepublishOnly": "npm run typecheck && npm run lint && npm run test",
         "preview": "nuxi preview playground",
         "stub": "nuxt-module-build --stub && nuxi prepare playground",
         "test": "vitest run",
@@ -63,12 +63,11 @@
         "prettier": "^2.8.8",
         "rollup-plugin-copy": "^3.4.0",
         "stylelint": "^15.9.0",
-        "typescript": "^5.1.5",
+        "typescript": "^5.1.6",
         "vitest": "^0.32.2",
         "vue-tsc": "^1.8.3"
     },
     "volta": {
-        "node": "18.16.0",
-        "yarn": "1.22.19"
+        "node": "18.16.1"
     }
 }
