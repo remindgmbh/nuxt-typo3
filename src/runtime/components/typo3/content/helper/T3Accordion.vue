@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { useT3Accordion } from '#imports'
 
 const props = withDefaults(
     defineProps<{
@@ -42,20 +42,9 @@ const props = withDefaults(
     { initialActiveItems: () => [], disabledItems: () => [] }
 )
 
-const activeItems = ref<number[]>([])
-
-activeItems.value.push(...props.initialActiveItems)
-
-function toggle(index: number): void {
-    if (props.disabledItems.includes(index)) {
-        return
-    }
-    if (activeItems.value.includes(index)) {
-        activeItems.value.splice(activeItems.value.indexOf(index), 1)
-    } else if (props.multiple) {
-        activeItems.value.push(index)
-    } else {
-        activeItems.value = [index]
-    }
-}
+const { activeItems, toggle } = useT3Accordion(
+    props.initialActiveItems,
+    props.disabledItems,
+    props.multiple
+)
 </script>

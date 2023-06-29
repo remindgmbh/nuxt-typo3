@@ -12,7 +12,7 @@
             </button>
         </div>
         <T3AutoHeightContainer class="t3-tabs__contents">
-            <transition :name="transitionName" mode="out-in">
+            <transition v-bind="transition">
                 <section :key="activeItemIndex" class="t3-tabs__content">
                     <slot name="content" :item="activeItem" />
                 </section>
@@ -22,20 +22,21 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { TransitionProps } from 'vue'
+import { useT3Tabs } from '#imports'
 
 const props = withDefaults(
     defineProps<{
         items: any[]
-        transitionName?: string
+        transition?: TransitionProps
     }>(),
-    { transitionName: 'tab-change-transition' }
+    {
+        transition: () => ({
+            name: 'tab-change-transition',
+            mode: 'out-in',
+        }),
+    }
 )
 
-const activeItemIndex = ref(0)
-
-function toggle(index: number): void {
-    activeItemIndex.value = index
-}
-const activeItem = computed(() => props.items.at(activeItemIndex.value))
+const { activeItem, activeItemIndex, toggle } = useT3Tabs(props.items)
 </script>
