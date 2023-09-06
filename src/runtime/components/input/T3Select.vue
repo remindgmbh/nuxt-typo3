@@ -67,7 +67,7 @@
 
 <script setup lang="ts">
 import { RuleExpression, useField } from 'vee-validate'
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useT3SelectInput } from '#imports'
 
 const props = defineProps<{
@@ -79,6 +79,11 @@ const props = defineProps<{
     emptyLabel?: string
     disabled?: boolean
     required?: boolean
+    omitEmptyValue?: boolean
+}>()
+
+const emit = defineEmits<{
+    (e: 'change', value: string): void
 }>()
 
 onMounted(() => {
@@ -108,7 +113,15 @@ const isOpen = ref(false)
 
 // Add empty option to options, use nbsp (160) for label if none is defined
 const options = computed(() =>
-    [{ value: '', label: props.emptyLabel ?? String.fromCharCode(160) }].concat(
+    (props.omitEmptyValue
+        ? []
+        : [
+              {
+                  value: '',
+                  label: props.emptyLabel ?? String.fromCharCode(160),
+              },
+          ]
+    ).concat(
         Object.entries(props.options).map(([value, label]) => ({
             value,
             label,
@@ -175,6 +188,8 @@ function closeOnOutsideClick(e: MouseEvent) {
         close()
     }
 }
+
+watch(value, () => emit('change', value.value))
 </script>
 
 <style lang="scss">
