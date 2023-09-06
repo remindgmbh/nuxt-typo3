@@ -28,13 +28,13 @@
 import { T3Model } from '#imports'
 
 defineProps<{
-    optionGroup: T3Model.Autocomplete.OptionGroup
+    optionGroup: T3Model.Input.Autocomplete.OptionGroup
     value: string
-    hoverOption?: T3Model.Autocomplete.Option
+    hoverOption?: T3Model.Input.Autocomplete.Option
 }>()
 
 const emit = defineEmits<{
-    (e: 'select', option: T3Model.Autocomplete.Option): void
-    (e: 'update:hoverOption', option?: T3Model.Autocomplete.Option): void
+    (e: 'select', option: T3Model.Input.Autocomplete.Option): void
+    (e: 'update:hoverOption', option?: T3Model.Input.Autocomplete.Option): void
 }>()
 </script>

@@ -29,7 +29,7 @@
 import { T3Model } from '#imports'
 
 defineProps<{
-    option: T3Model.Autocomplete.Option
+    option: T3Model.Input.Autocomplete.Option
     selected: boolean
     hovered: boolean
 }>()

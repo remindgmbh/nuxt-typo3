@@ -52,7 +52,7 @@ import { T3Input } from '#components'
 const props = defineProps<{
     name: string
     label?: string
-    optionGroups: T3Model.Autocomplete.OptionGroup[]
+    optionGroups: T3Model.Input.Autocomplete.OptionGroup[]
     defaultValue?: string
     validation?: RuleExpression<any>
     emptyLabel?: string
@@ -78,14 +78,14 @@ const emit = defineEmits<{
 const wrapper = ref<HTMLDivElement>()
 const input = ref<InstanceType<typeof T3Input>>()
 const isOpen = ref(false)
-const _optionGroups = ref<T3Model.Autocomplete.OptionGroup[]>([])
+const _optionGroups = ref<T3Model.Input.Autocomplete.OptionGroup[]>([])
 
 const options = computed(() =>
     props.optionGroups.flatMap((optionGroup) => optionGroup.options)
 )
 const name = computed(() => props.name)
 
-function onKeyboardSelect(hoverOption: T3Model.Autocomplete.Option) {
+function onKeyboardSelect(hoverOption: T3Model.Input.Autocomplete.Option) {
     if (hoverOption.link) {
         return navigateTo(hoverOption.link)
     } else {
@@ -107,7 +107,7 @@ const { errorMessage, meta, value, handleBlur, setValue } = useField<string>(
     }
 )
 
-function onOptionsChanged(value: T3Model.Autocomplete.OptionGroup[]) {
+function onOptionsChanged(value: T3Model.Input.Autocomplete.OptionGroup[]) {
     if (value.length) {
         _optionGroups.value = value
         open()
@@ -132,7 +132,7 @@ function closeOnOutsideClick(e: MouseEvent) {
     }
 }
 
-function onSelect(option: T3Model.Autocomplete.Option) {
+function onSelect(option: T3Model.Input.Autocomplete.Option) {
     handleBlur()
     setValue(option.key)
     close()
