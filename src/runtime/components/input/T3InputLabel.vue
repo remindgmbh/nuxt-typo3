@@ -1,5 +1,5 @@
 <template>
-    <component :is="tag" class="t3-input-label">
+    <component :is="tag" v-if="label" class="t3-input-label">
         <slot>
             {{ label }}
         </slot>
