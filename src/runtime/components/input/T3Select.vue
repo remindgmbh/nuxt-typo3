@@ -81,7 +81,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-    (e: 'change', value: string): void
+    (e: 'change', option?: T3Model.Input.Select.Option): void
 }>()
 
 onMounted(() => {
@@ -173,7 +173,7 @@ function closeOnOutsideClick(e: MouseEvent) {
     }
 }
 
-watch(value, () => emit('change', value.value))
+watch(value, () => emit('change', selectedOption.value))
 </script>
 
 <style lang="scss">
