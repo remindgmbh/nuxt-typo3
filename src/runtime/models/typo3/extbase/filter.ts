@@ -4,5 +4,8 @@ export interface Filter {
     name: string
     label: string
     values: FilterValue[]
-    allValuesLink: string
+    allValues: {
+        link: string
+        label: string
+    }
 }
