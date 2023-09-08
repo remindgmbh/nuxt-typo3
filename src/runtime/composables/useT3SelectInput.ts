@@ -1,12 +1,12 @@
-import { Ref, computed, ref, toRaw } from 'vue'
+import { MaybeRef, computed, ref, toRaw, toValue } from 'vue'
 
 export function useT3SelectInput<T>(
     select: (hoverOption: T) => void,
-    options: Ref<T[]>
+    options: MaybeRef<T[]>
 ) {
     const hoverOption = ref<T>()
     const hoverOptionIndex = computed<number>(() =>
-        options.value.findIndex(
+        toValue(options).findIndex(
             (value) => toRaw(hoverOption.value) === toRaw(value)
         )
     )
@@ -15,16 +15,16 @@ export function useT3SelectInput<T>(
         // press down -> go next
         if (
             e.key === 'ArrowDown' &&
-            hoverOptionIndex.value < options.value.length - 1
+            hoverOptionIndex.value < toValue(options).length - 1
         ) {
             e.preventDefault() // prevent page scrolling
-            hoverOption.value = options.value.at(hoverOptionIndex.value + 1)
+            hoverOption.value = toValue(options).at(hoverOptionIndex.value + 1)
         }
 
         // press up -> go previous
         if (e.key === 'ArrowUp' && hoverOptionIndex.value > 0) {
             e.preventDefault() // prevent page scrolling
-            hoverOption.value = options.value.at(hoverOptionIndex.value - 1)
+            hoverOption.value = toValue(options).at(hoverOptionIndex.value - 1)
         }
 
         // press Enter or space -> select the option

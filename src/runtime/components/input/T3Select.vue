@@ -68,18 +68,16 @@
 <script setup lang="ts">
 import { RuleExpression, useField } from 'vee-validate'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
-import { useT3SelectInput } from '#imports'
+import { T3Model, useT3SelectInput } from '#imports'
 
 const props = defineProps<{
     name: string
     label?: string
-    options: { [key: string]: string }
+    options: T3Model.Input.Select.Option[]
     defaultValue?: string
     validation?: RuleExpression<any>
-    emptyLabel?: string
     disabled?: boolean
     required?: boolean
-    omitEmptyValue?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -103,7 +101,11 @@ const { errorMessage, meta, value, handleBlur, setValue } = useField<string>(
     name,
     props.validation,
     {
-        initialValue: props.defaultValue,
+        initialValue:
+            props.options.find((value) => value.value === props.defaultValue)
+                ?.value ??
+            props.options.at(0)?.value ??
+            '',
     }
 )
 
@@ -111,41 +113,23 @@ const customSelect = ref<HTMLDivElement>()
 const nativeSelect = ref<HTMLSelectElement>()
 const isOpen = ref(false)
 
-// Add empty option to options, use nbsp (160) for label if none is defined
-const options = computed(() =>
-    (props.omitEmptyValue
-        ? []
-        : [
-              {
-                  value: '',
-                  label: props.emptyLabel ?? String.fromCharCode(160),
-              },
-          ]
-    ).concat(
-        Object.entries(props.options).map(([value, label]) => ({
-            value,
-            label,
-        }))
-    )
-)
-
 function handleBlurAndSetValue(value: string) {
     handleBlur()
     setValue(value)
 }
 
-function select(hoverOption: { value: string; label: string }) {
+function select(hoverOption: T3Model.Input.Select.Option) {
     handleBlurAndSetValue(hoverOption.value)
     close()
 }
 
 const { hoverOption, supportKeyboardNavigation } = useT3SelectInput(
     select,
-    options
+    props.options
 )
 
 const selectedOption = computed(() =>
-    options.value.find((option) => option.value === value.value)
+    props.options.find((option) => option.value === value.value)
 )
 
 const canHover = computed(() => window.matchMedia('(hover: hover)').matches)

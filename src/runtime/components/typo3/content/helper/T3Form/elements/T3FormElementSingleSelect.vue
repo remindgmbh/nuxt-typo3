@@ -1,11 +1,10 @@
 <template>
     <T3Select
         :name="formElement.name"
-        :options="options"
+        :options="selectOptions"
         :label="formElement.label"
         :default-value="formElement.defaultValue"
         :validation="validation"
-        :empty-label="emptyLabel"
         :disabled="loading"
         :required="required"
     >
@@ -25,7 +24,18 @@ const props = defineProps<{
 
 const { required, options, validation } = useT3FormElement(props.formElement)
 
-const emptyLabel = computed(
-    () => props.formElement.properties?.prependOptionLabel
-)
+const selectOptions = computed<T3Model.Input.Select.Option[]>(() => {
+    const result = Object.entries(options.value).map(([key, value]) => ({
+        label: value,
+        value: key,
+    }))
+
+    const emptyLabel = props.formElement.properties?.prependOptionLabel
+
+    if (emptyLabel) {
+        result.unshift({ label: emptyLabel, value: '' })
+    }
+
+    return result
+})
 </script>
