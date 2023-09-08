@@ -44,24 +44,26 @@
                     </slot>
                 </div>
                 <T3CollapseTransition transition-name="options-transition">
-                    <div v-show="isOpen" class="t3-select__options">
-                        <div
-                            v-for="option in options"
-                            :key="option.value"
-                            class="t3-select__option"
-                            :class="{
-                                't3-select__option--selected':
-                                    option.value === value,
-                                't3-select__option--hover':
-                                    option.value === hoverOption?.value,
-                            }"
-                            @click="handleBlurAndSetValue(option.value)"
-                            @mouseover="hoverOption = option"
-                            @mouseleave="hoverOption = undefined"
-                        >
-                            <slot name="option" :option="option">
-                                {{ option.label }}
-                            </slot>
+                    <div v-show="isOpen" class="t3-select__options-wrapper">
+                        <div class="t3-select__options">
+                            <div
+                                v-for="option in options"
+                                :key="option.value"
+                                class="t3-select__option"
+                                :class="{
+                                    't3-select__option--selected':
+                                        option.value === value,
+                                    't3-select__option--hover':
+                                        option.value === hoverOption?.value,
+                                }"
+                                @click="handleBlurAndSetValue(option.value)"
+                                @mouseover="hoverOption = option"
+                                @mouseleave="hoverOption = undefined"
+                            >
+                                <slot name="option" :option="option">
+                                    {{ option.label }}
+                                </slot>
+                            </div>
                         </div>
                     </div>
                 </T3CollapseTransition>
@@ -221,7 +223,7 @@ watch(value, () => emit('change', selectedOption.value))
         cursor: pointer;
     }
 
-    &__options {
+    &__options-wrapper {
         position: absolute;
         top: 100%;
         left: 0;
