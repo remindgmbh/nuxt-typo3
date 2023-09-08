@@ -25,7 +25,9 @@
                     :key="option.value"
                     :value="option.value"
                 >
-                    {{ option.label }}
+                    <slot name="option" :option="option">
+                        {{ option.label }}
+                    </slot>
                 </option>
             </select>
 
@@ -37,7 +39,9 @@
                 @click="toggle"
             >
                 <div class="t3-select__trigger">
-                    {{ selectedOption?.label }}
+                    <slot name="trigger" :selected-option="selectedOption">
+                        {{ selectedOption?.label }}
+                    </slot>
                 </div>
                 <T3CollapseTransition transition-name="options-transition">
                     <div v-show="isOpen" class="t3-select__options">
@@ -55,7 +59,9 @@
                             @mouseover="hoverOption = option"
                             @mouseleave="hoverOption = undefined"
                         >
-                            {{ option.label }}
+                            <slot name="option" :option="option">
+                                {{ option.label }}
+                            </slot>
                         </div>
                     </div>
                 </T3CollapseTransition>
