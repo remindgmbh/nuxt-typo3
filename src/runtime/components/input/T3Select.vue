@@ -178,14 +178,6 @@ watch(value, () => emit('change', selectedOption.value))
 
 <style lang="scss">
 .t3-select {
-    $color-background: #fff;
-    $color-border: #8f8f9d;
-    $color-border-active: #676774;
-    $color-hover: #e0e0e6;
-    $border-radius: 0.125rem;
-    $border-width: 0.0625rem;
-    $trigger-padding: 0.0625rem;
-
     position: relative;
 
     &__wrapper {
@@ -219,24 +211,8 @@ watch(value, () => emit('change', selectedOption.value))
 
     &__trigger {
         position: relative;
-        background-color: $color-background;
-        border: $color-border $border-width solid;
-        border-radius: $border-radius;
-        padding: $trigger-padding;
         box-sizing: border-box;
         cursor: pointer;
-
-        &::after {
-            content: '▾';
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        &:hover {
-            border-color: $color-border-active;
-        }
     }
 
     &__options {
@@ -244,19 +220,12 @@ watch(value, () => emit('change', selectedOption.value))
         top: 100%;
         left: 0;
         width: 100%;
-        border: $border-width solid $color-border-active;
-        border-radius: $border-radius;
-        background-color: $color-background;
         z-index: 1;
         box-sizing: border-box;
     }
 
     &__option {
         cursor: pointer;
-
-        &--hover {
-            background-color: $color-hover;
-        }
     }
 }
 </style>
