@@ -6,4 +6,5 @@ export interface Item extends Text {
     pid: number
     title: string
     images: Asset[]
+    items: Item[]
 }
