@@ -3,7 +3,7 @@ import { defu } from 'defu'
 import * as T3Model from '../models'
 import { useT3Config, useT3Cookiebot, useT3Theme } from '#imports'
 
-export function useT3ContentUtil(
+export function useT3ContentUtil<T = any>(
     contentElement: T3Model.Typo3.Content.Element
 ) {
     const config = useT3Config()
@@ -25,7 +25,7 @@ export function useT3ContentUtil(
         () => !!contentElement.appearance.backgroundFullWidth
     )
 
-    const colors = computed<any | undefined>(() => {
+    const colors = computed<T | undefined>(() => {
         const defaultColors =
             themeOptions.value?.contentElements?.[contentElement.type]
                 ?.default ?? {}
