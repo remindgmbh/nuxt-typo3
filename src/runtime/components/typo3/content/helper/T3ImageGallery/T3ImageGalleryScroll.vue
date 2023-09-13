@@ -29,7 +29,9 @@
                         class="t3-image-gallery-scroll__item"
                     >
                         <div class="t3-image-gallery-scroll__image">
-                            <T3Img v-bind="image" />
+                            <slot name="scrollImage" :image="image">
+                                <T3Asset :file="image" />
+                            </slot>
                         </div>
                         <div class="t3-image-gallery-scroll__text">
                             <div class="t3-image-gallery-scroll__number">
@@ -37,10 +39,10 @@
                                 {{ images.length }}
                             </div>
                             <div class="t3-image-gallery-scroll__title">
-                                {{ image.title }}
+                                {{ image.properties.title }}
                             </div>
                             <div class="t3-image-gallery-scroll__description">
-                                {{ image.description }}
+                                {{ image.properties.description }}
                             </div>
                         </div>
                     </div>
@@ -62,7 +64,7 @@ import { T3Model, useT3Util } from '#imports'
 const props = defineProps<{
     header?: string
     subheader?: string
-    images: T3Model.Image.Attributes[]
+    images: T3Model.Typo3.Asset[]
     scrollToIndex: number
 }>()
 

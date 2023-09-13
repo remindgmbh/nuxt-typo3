@@ -3,16 +3,22 @@
         v-if="props.file.properties.linkData"
         :to="props.file.properties.linkData"
     >
-        <component :is="component" :file="file" :asset-attrs="assetAttrs" />
+        <component :is="component" v-bind="props" />
     </T3Link>
-    <component :is="component" v-else :file="file" :asset-attrs="assetAttrs" />
+    <component :is="component" v-else v-bind="props" />
 </template>
 <script setup lang="ts">
 import { T3Model, useT3DynamicComponent, useT3Asset } from '#imports'
 
 const props = defineProps<{
     file: T3Model.Typo3.Asset
-    assetAttrs?: { [key: string]: any }
+    fileExtension?: string
+    maxHeight?: number
+    maxWidth?: number
+    sizes?: { [breakpoint: string]: number }
+    loop?: boolean
+    muted?: boolean
+    controls?: boolean
 }>()
 
 const { type } = useT3Asset(props.file)

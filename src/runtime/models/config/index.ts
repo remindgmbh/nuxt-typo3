@@ -1,8 +1,6 @@
 export type { AppConfigDefaults } from './appConfigDefaults'
 export type { AppConfigInput } from './appConfigInput'
 export type { CeOptions } from './ceOptions'
-export type { GalleryOptions } from './galleryOptions'
-export type { ImageOptions } from './imageOptions'
 export type { Spacing } from './spacing'
 export type { ThemeOptions } from './themeOptions'
 export type { ThemesOptions } from './themesOptions'

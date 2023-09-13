@@ -1,5 +1,4 @@
 import { Typo3 } from '..'
-import { GalleryOptions, ImageOptions } from '.'
 export interface CeOptions {
     // if set to true, content element is shown even if cookie should block it
     // required if not the whole content element should be blocked by cookie,
@@ -9,8 +8,6 @@ export interface CeOptions {
     ignoreCookies?:
         | boolean
         | ((contentElement: Typo3.Content.Element<any>) => boolean)
-    images?: ImageOptions
-    gallery?: GalleryOptions
     // max width used for container specified by breakpoint name
     maxWidth?:
         | string

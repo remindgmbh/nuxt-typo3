@@ -25,14 +25,17 @@
                 :key="index"
                 class="t3-image-gallery-slide-navigation__slide"
             >
-                <T3Img
-                    v-bind="image"
+                <div
                     class="t3-image-gallery-slide-navigation__image"
                     :class="{
                         't3-image-gallery-slide-navigation__image--active':
                             index === activeIndex,
                     }"
-                />
+                >
+                    <slot name="image" :image="image">
+                        <T3Asset :file="image" />
+                    </slot>
+                </div>
             </SwiperSlide>
             <div class="t3-image-gallery-slide-navigation__scrollbar"></div>
         </Swiper>
@@ -46,7 +49,7 @@ import { T3Model } from '#imports'
 
 defineProps<{
     activeIndex: number
-    images: T3Model.Image.Attributes[]
+    images: T3Model.Typo3.Asset[]
 }>()
 
 const emit = defineEmits<{

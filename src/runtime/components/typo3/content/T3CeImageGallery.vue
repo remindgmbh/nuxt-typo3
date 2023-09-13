@@ -5,23 +5,18 @@
             :content="contentElement.content"
         />
         <T3ImageGallery
-            :header="header"
-            :images="images"
-            :navigation-images="navigationImages"
-            :preview-images="previewImages"
-            :subheader="subheader"
-            :type="type"
+            :header="contentElement.content.header"
+            :images="contentElement.content.images"
+            :subheader="contentElement.content.subheader"
+            :type="contentElement.content.settings.type"
         />
     </div>
 </template>
 
 <script setup lang="ts">
-import { T3Model, useT3CeImageGallery } from '#imports'
+import { T3Model } from '#imports'
 
-const props = defineProps<{
+defineProps<{
     contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.ImageGallery>
 }>()
-
-const { header, images, navigationImages, previewImages, type, subheader } =
-    useT3CeImageGallery(props.contentElement.content)
 </script>

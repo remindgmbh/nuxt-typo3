@@ -9,14 +9,7 @@ type Config = ModuleOptions &
 
 export function useT3Config(): Config {
     const appConfigDefaults: T3Model.Config.AppConfigDefaults = {
-        contentElements: {
-            imageGallery: {
-                gallery: {
-                    navigationHeight: 256,
-                    previewHeight: 256,
-                },
-            },
-        },
+        contentElements: {},
         defaultTheme: 'default',
         i18n: {
             locale: 'de',

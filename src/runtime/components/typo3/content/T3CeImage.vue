@@ -4,7 +4,7 @@
             class="t3-ce-image__header"
             :content="contentElement.content"
         />
-        <T3Asset v-if="image" :file="image" :asset-attrs="imageAttrs" />
+        <T3Asset v-if="image" :file="image" />
     </div>
 </template>
 
@@ -15,7 +15,7 @@ const props = defineProps<{
     contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Image>
 }>()
 
-const { image, imageAttrs } = useT3CeImage(props.contentElement)
+const { image } = useT3CeImage(props.contentElement)
 </script>
 
 <style lang="scss">

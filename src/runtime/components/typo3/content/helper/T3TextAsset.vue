@@ -9,7 +9,7 @@
             }"
         >
             <slot v-if="asset" name="asset" :asset="asset">
-                <T3Asset :file="asset" :asset-attrs="assetAttrs" />
+                <T3Asset :file="asset" />
             </slot>
         </div>
         <div
@@ -31,7 +31,6 @@ import { T3Model, useT3TextAsset } from '#imports'
 
 const props = defineProps<{
     content: T3Model.Typo3.Content.Data.TextAsset
-    assetAttrs?: { [key: string]: any }
 }>()
 
 const { asset, assetIsRight, assetIsSmall } = useT3TextAsset(props.content)

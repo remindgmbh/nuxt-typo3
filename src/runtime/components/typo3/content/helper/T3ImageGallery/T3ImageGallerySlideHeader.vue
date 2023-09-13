@@ -37,7 +37,7 @@ const props = defineProps<{
     activeIndex: number
     header?: string
     subheader?: string
-    images: T3Model.Image.Attributes[]
+    images: T3Model.Typo3.Asset[]
 }>()
 
 const { t } = useI18n()
@@ -49,5 +49,5 @@ const emit = defineEmits<{
 
 const activeImage = computed(() => props.images.at(props.activeIndex))
 
-const title = computed(() => activeImage.value?.title)
+const title = computed(() => activeImage.value?.properties.title)
 </script>

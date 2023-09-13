@@ -1,8 +1,9 @@
 <template>
-    <BaseT3CeTextpic
-        :content-element="contentElement"
-        :asset-attrs="{ sizes: imageSizes }"
-    />
+    <BaseT3CeTextpic :content-element="contentElement">
+        <template #asset="{ asset }">
+            <T3Asset :file="asset" :sizes="imageSizes" />
+        </template>
+    </BaseT3CeTextpic>
 </template>
 
 <script setup lang="ts">

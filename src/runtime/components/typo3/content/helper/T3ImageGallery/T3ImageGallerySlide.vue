@@ -18,14 +18,22 @@
                 :images="images"
                 :thumbs-swiper="thumbsSwiper"
                 @set-swiper="setImageSwiper"
-            />
+            >
+                <template #image="{ image }">
+                    <slot name="slideImage" :image="image"></slot>
+                </template>
+            </T3ImageGallerySlideImage>
         </div>
         <div ref="navigationDiv" class="t3-image-gallery-slide__navigation">
             <T3ImageGallerySlideNavigation
                 :active-index="activeIndex"
-                :images="navigationImages"
+                :images="images"
                 @set-swiper="setThumbsSwiper"
-            />
+            >
+                <template #image="{ image }">
+                    <slot name="slideImageNavigation" :image="image"></slot>
+                </template>
+            </T3ImageGallerySlideNavigation>
         </div>
     </div>
 </template>
@@ -39,8 +47,7 @@ import { T3Model } from '#imports'
 const props = defineProps<{
     header?: string
     subheader?: string
-    images: T3Model.Image.Attributes[]
-    navigationImages: T3Model.Image.Attributes[]
+    images: T3Model.Typo3.Asset[]
     scrollToIndex: number
 }>()
 

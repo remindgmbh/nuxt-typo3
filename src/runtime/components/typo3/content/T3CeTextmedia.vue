@@ -1,9 +1,6 @@
 <template>
     <div class="t3-ce-textmedia">
-        <T3TextAsset
-            :content="contentElement.content"
-            :asset-attrs="assetAttrs"
-        >
+        <T3TextAsset :content="contentElement.content">
             <template #asset="{ asset }">
                 <slot name="asset" :asset="asset" />
             </template>
@@ -19,6 +16,5 @@ import { T3Model } from '#imports'
 
 defineProps<{
     contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Textmedia>
-    assetAttrs?: { [key: string]: any }
 }>()
 </script>

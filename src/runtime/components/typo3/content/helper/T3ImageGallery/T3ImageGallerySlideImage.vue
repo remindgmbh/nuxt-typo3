@@ -23,13 +23,16 @@
                 :key="index"
                 class="t3-image-gallery-slide-image__slide"
             >
-                <T3Img
+                <div
                     class="t3-image-gallery-slide-image__image"
                     :class="{
                         't3-image-gallery-slide-image__image--active': isActive,
                     }"
-                    v-bind="image"
-                />
+                >
+                    <slot name="image" :image="image">
+                        <T3Asset :file="image" />
+                    </slot>
+                </div>
             </SwiperSlide>
             <div
                 class="t3-image-gallery-slide-image__navigation t3-image-gallery-slide-image__navigation--prev"
@@ -47,7 +50,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import { T3Model } from '#imports'
 
 defineProps<{
-    images: T3Model.Image.Attributes[]
+    images: T3Model.Typo3.Asset[]
     activeIndex: number
     thumbsSwiper?: SwiperClass
 }>()

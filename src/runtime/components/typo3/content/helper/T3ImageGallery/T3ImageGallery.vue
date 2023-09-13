@@ -23,11 +23,13 @@
             }"
         >
             <SwiperSlide
-                v-for="(image, index) in previewImages"
+                v-for="(image, index) in images"
                 :key="index"
                 class="t3-image-gallery__slide"
             >
-                <T3Img v-bind="image" @click="showModal(index)" />
+                <slot name="previewImage" :image="image">
+                    <T3Asset :file="image" @click="showModal(index)" />
+                </slot>
             </SwiperSlide>
             <div class="t3-image-gallery__scrollbar"></div>
             <div
@@ -45,16 +47,25 @@
             <component
                 :is="
                     type === 'scroll'
-                        ? 'T3ImageGalleryScroll'
-                        : 'T3ImageGallerySlide'
+                        ? T3ImageGalleryScroll
+                        : T3ImageGallerySlide
                 "
                 :header="header"
                 :images="images"
-                :navigation-images="navigationImages"
                 :subheader="subheader"
                 :scroll-to-index="scrollToIndex"
                 @close="hideModal"
-            />
+            >
+                <template #slideImage="{ image }">
+                    <slot name="slideImage" :image="image"></slot>
+                </template>
+                <template #slideImageNavigation="{ image }">
+                    <slot name="slideImageNavigation" :image="image"></slot>
+                </template>
+                <template #scrollImage="{ image }">
+                    <slot name="scrollImage" :image="image"></slot>
+                </template>
+            </component>
         </T3Modal>
     </div>
 </template>
@@ -65,21 +76,19 @@ import { FreeMode, Navigation, Scrollbar } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { ref } from 'vue'
 import { T3Model } from '#imports'
+import { T3ImageGalleryScroll, T3ImageGallerySlide } from '#components'
 
 withDefaults(
     defineProps<{
         header?: string
         subheader?: string
-        images: T3Model.Image.Attributes[]
-        navigationImages?: T3Model.Image.Attributes[]
-        previewImages: T3Model.Image.Attributes[]
+        images: T3Model.Typo3.Asset[]
         type?: 'scroll' | 'slide'
     }>(),
     {
         header: undefined,
         subheader: undefined,
         type: 'scroll',
-        navigationImages: () => [],
     }
 )
 
