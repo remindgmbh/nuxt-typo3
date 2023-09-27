@@ -1,8 +1,10 @@
 export interface Detail<T> {
     item: T
     properties: Array<{
-        value: string
+        name: string
         label: string
+        prefix: string
+        suffix: string
     }>
     additionalData: any
 }
