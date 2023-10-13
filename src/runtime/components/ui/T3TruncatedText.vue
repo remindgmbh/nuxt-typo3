@@ -17,9 +17,10 @@ const lines = ref<number>(0)
 onMounted(() => {
     const resizeObserver = new ResizeObserver(
         debounce(() => {
-            if (content.value && root.value) {
-                const lineHeight = getLineHeight(content.value)
-                lines.value = Math.floor(root.value.clientHeight / lineHeight)
+            const lineHeight = getLineHeight()
+            const contentHeight = getContentHeight()
+            if (lineHeight && contentHeight) {
+                lines.value = Math.floor(contentHeight / lineHeight)
             }
         }, 50)
     )
@@ -29,23 +30,32 @@ onMounted(() => {
     }
 })
 
-function getLineHeight(element: HTMLElement) {
-    if (element.parentNode) {
-        const temp = document.createElement(element.nodeName)
+function getContentHeight() {
+    if (content.value && root.value) {
+        const temp = document.createElement(content.value!.nodeName)
+        temp.innerHTML = content.value!.innerHTML
+        root.value!.appendChild(temp)
+        const result = root.value!.clientHeight
+        root.value!.removeChild(temp)
+        return result
+    }
+}
+
+function getLineHeight() {
+    if (content.value && root.value) {
+        const temp = document.createElement(content.value!.nodeName)
 
         temp.style.margin = '0px'
         temp.style.padding = '0px'
-        temp.style.fontFamily = element.style.fontFamily
-        temp.style.fontSize = element.style.fontSize
+        temp.style.fontFamily = content.value!.style.fontFamily
+        temp.style.fontSize = content.value!.style.fontSize
 
         // Add nbsp as html
         temp.innerHTML = String.fromCharCode(160)
-        element.parentNode.appendChild(temp)
+        root.value!.appendChild(temp)
         const result = temp.clientHeight
-        element.parentNode.removeChild(temp)
+        root.value!.removeChild(temp)
         return result
-    } else {
-        return 0
     }
 }
 </script>
