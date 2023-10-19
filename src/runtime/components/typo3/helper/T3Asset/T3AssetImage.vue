@@ -32,9 +32,13 @@ const props = defineProps<{
 const { breakpointsDesc, screenWidths } = useT3Breakpoints()
 const { getImageUrl } = useT3Asset(props.file)
 
+const fileExtension = computed(() =>
+    props.file.properties.extension === 'svg' ? 'svg' : props.fileExtension
+)
+
 const src = computed(() =>
     props.file.properties.fileReferenceUid
-        ? getImageUrl(props.fileExtension, props.maxWidth, props.maxHeight)
+        ? getImageUrl(fileExtension.value, props.maxWidth, props.maxHeight)
         : props.file.publicUrl
 )
 
@@ -51,7 +55,7 @@ const sources = computed(() => {
             result.push({
                 media: `(min-width: ${screenWidths[breakpoint]})`,
                 srcset: getImageUrl(
-                    props.fileExtension,
+                    fileExtension.value,
                     width,
                     undefined,
                     breakpoint
