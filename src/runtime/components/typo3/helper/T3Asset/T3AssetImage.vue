@@ -43,8 +43,11 @@ const src = computed(() =>
 )
 
 const sources = computed(() => {
-    const result: any[] = []
-    if (props.file.properties.fileReferenceUid) {
+    const result: Array<{ media: string; srcset: string }> = []
+    if (
+        props.file.properties.fileReferenceUid &&
+        props.file.properties.extension !== 'svg'
+    ) {
         for (let i = 0; i < breakpointsDesc.value.length; i++) {
             const breakpoint = breakpointsDesc.value[i]
             let width: number | undefined
