@@ -1,9 +1,5 @@
-import { Filter, Pagination } from '.'
+import { Filter, List } from '.'
 
-export interface FilterableList<T> {
-    count: number
-    countWithoutLimit: number
-    items: T[]
-    pagination: Pagination
+export interface FilterableList<T> extends List<T> {
     filters: Filter[]
 }
