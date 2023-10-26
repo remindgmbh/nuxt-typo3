@@ -6,8 +6,5 @@ export interface Filter {
     prefix: string
     suffix: string
     values: FilterValue[]
-    allValues: {
-        link: string
-        label: string
-    }
+    resetFilter: FilterValue
 }
