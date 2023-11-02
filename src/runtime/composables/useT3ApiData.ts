@@ -106,6 +106,17 @@ export function useT3ApiData() {
         initialData.value[apiPath.currentInitialDataPath.value] = data
     }
 
+    function setCurrentBreadcrumbTitle(title: string): void {
+        if (currentPageData.value) {
+            const currentIndex = currentPageData.value.breadcrumbs.findIndex(
+                (breadcrumb) => breadcrumb.current
+            )
+            if (currentIndex >= 0) {
+                currentPageData.value.breadcrumbs[currentIndex].title = title
+            }
+        }
+    }
+
     function clearData(): void {
         clearInitialData()
         clearPageData()
@@ -140,6 +151,7 @@ export function useT3ApiData() {
         loadFooterContent,
         loadInitialData,
         loadPageData,
+        setCurrentBreadcrumbTitle,
         setCurrentInitialData,
         setCurrentPage,
     }
