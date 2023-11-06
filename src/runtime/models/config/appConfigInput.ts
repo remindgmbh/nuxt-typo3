@@ -1,12 +1,11 @@
 import { I18nOptions } from 'vue-i18n'
-import { CeOptions, Spacing, ThemesOptions } from '.'
+import { CeOptions, Spacing } from '.'
 
 export interface AppConfigInput {
     // config for content elements, type key has to match CType
     contentElements?: {
         [type: string]: CeOptions | undefined
     }
-    defaultTheme?: string
     // options from https://github.com/intlify/vue-i18n-next
     i18n?: I18nOptions
     // global file extension for images coming from typo3
@@ -21,5 +20,12 @@ export interface AppConfigInput {
         }
     }
     spacing?: Spacing
-    themes?: ThemesOptions
+    theme?: {
+        backgroundColors: {
+            [theme: string]: {
+                [backgroundColorName: string]: string
+            }
+        }
+        default: string
+    }
 }

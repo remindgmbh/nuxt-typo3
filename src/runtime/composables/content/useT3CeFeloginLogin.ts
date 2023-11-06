@@ -1,12 +1,14 @@
 import { string, Schema } from 'yup'
 import { GenericValidateFunction } from 'vee-validate'
 import { useI18n } from 'vue-i18n'
-import { computed, ref } from 'vue'
+import { computed, ref, Ref } from 'vue'
 import * as T3Model from '../../models'
 import { navigateTo, useT3Api, useT3ApiData, useT3YupUtil } from '#imports'
 
 export function useT3CeFeloginLogin(
-    contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Felogin>
+    contentElement: Ref<
+        T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Felogin>
+    >
 ) {
     const { t } = useI18n()
     const { schemaToValidateFunction } = useT3YupUtil()
@@ -17,8 +19,8 @@ export function useT3CeFeloginLogin(
         header: string
         body: string
     }>({
-        header: contentElement.content.data.message.header,
-        body: contentElement.content.data.message.message,
+        header: contentElement.value.content.data.message.header,
+        body: contentElement.value.content.data.message.message,
     })
 
     const loading = ref<boolean>(false)
@@ -26,7 +28,7 @@ export function useT3CeFeloginLogin(
     // TODO: default value
     const submitLabel = computed<string>(
         () =>
-            contentElement.content.data.form.elements.find(
+            contentElement.value.content.data.form.elements.find(
                 (element) => element.name === 'submit'
             )?.value ?? ''
     )
@@ -35,7 +37,7 @@ export function useT3CeFeloginLogin(
         T3Model.Typo3.Content.Data.Form.FormElement[]
     >(
         () => []
-        // contentElement.content.data.form.elements
+        // contentElement.value.content.data.form.elements
         //     .filter((element) => element.name !== 'submit')
         //     .map(convert)
     )
@@ -91,13 +93,13 @@ export function useT3CeFeloginLogin(
     async function submit(data: Record<string, any>): Promise<void> {
         loading.value = true
 
-        const loginType = contentElement.content.data.form.elements.find(
+        const loginType = contentElement.value.content.data.form.elements.find(
             (element) => element.name === 'logintype'
         )?.value as 'login' | 'logout' | undefined
 
         try {
             const body = new FormData()
-            body.set('responseElementId', contentElement.id.toString())
+            body.set('responseElementId', contentElement.value.id.toString())
 
             Object.keys(data).forEach((key) => {
                 body.set(key, data[key])
@@ -105,7 +107,7 @@ export function useT3CeFeloginLogin(
 
             const result = await api.post<
                 T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.FeloginActionResponse>
-            >(contentElement.content.data.form.action, {
+            >(contentElement.value.content.data.form.action, {
                 body,
             })
 

@@ -3,14 +3,11 @@
         class="t3-content"
         :class="{
             'padded-content': padding,
-            ...((!backgroundColor || backgroundFullWidth) && containerClasses),
+            ...((!backgroundColorValue || backgroundFullWidth) &&
+                containerClasses),
         }"
     >
-        <component
-            :is="component"
-            v-if="cookieAccepted || ignoreCookies"
-            :content-element="contentElement"
-        />
+        <component :is="component" v-if="cookieAccepted || ignoreCookies" />
         <T3CookieOverlay
             v-else
             :message="contentElement.cookie.message"
@@ -20,15 +17,15 @@
 </template>
 
 <script setup lang="ts">
-import { T3Model, useT3DynamicComponent, useT3ContentUtil } from '#imports'
+import { useT3DynamicComponent, useT3ContentUtil, useT3Content } from '#imports'
 
-const props = defineProps<{
-    contentElement: T3Model.Typo3.Content.Element
-}>()
+const { injectContentElement } = useT3Content()
+
+const contentElement = injectContentElement()
 
 const {
     backgroundFullWidth,
-    backgroundColor,
+    backgroundColorValue,
     containerClasses,
     cookieAccepted,
     ignoreCookies,
@@ -37,9 +34,9 @@ const {
     spaceAfter,
     spaceBeforeInside,
     spaceAfterInside,
-} = useT3ContentUtil(props.contentElement)
+} = useT3ContentUtil()
 
-const component = useT3DynamicComponent('T3Ce', props.contentElement.type)
+const component = useT3DynamicComponent('T3Ce', contentElement.value.type)
 </script>
 
 <style lang="scss">

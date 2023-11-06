@@ -1,47 +1,28 @@
 import { computed } from 'vue'
-import { defu } from 'defu'
-import * as T3Model from '../models'
-import { useT3Config, useT3Cookiebot, useT3Theme } from '#imports'
+import { useT3Config, useT3Cookiebot, useT3Content, useT3Theme } from '#imports'
 
-export function useT3ContentUtil<T = any>(
-    contentElement: T3Model.Typo3.Content.Element
-) {
+export function useT3ContentUtil() {
+    const { injectContentElement } = useT3Content()
+    const contentElement = injectContentElement()
     const config = useT3Config()
     const { isAccepted } = useT3Cookiebot()
-    const { themeOptions } = useT3Theme()
+    const { backgroundColors } = useT3Theme()
 
     const ceOptions = computed(
-        () => config.contentElements[contentElement.type]
+        () => config.contentElements[contentElement.value.type]
     )
 
-    const backgroundColor = computed<string | undefined>(
-        () =>
-            themeOptions.value?.backgroundColors?.[
-                contentElement.appearance.backgroundColor
-            ]
+    const backgroundColorName = computed<string>(
+        () => contentElement.value.appearance.backgroundColor
+    )
+
+    const backgroundColorValue = computed<string | undefined>(
+        () => backgroundColors.value?.[backgroundColorName.value]
     )
 
     const backgroundFullWidth = computed<boolean>(
-        () => !!contentElement.appearance.backgroundFullWidth
+        () => !!contentElement.value.appearance.backgroundFullWidth
     )
-
-    const colors = computed<T | undefined>(() => {
-        const defaultColors =
-            themeOptions.value?.contentElements?.[contentElement.type]
-                ?.default ?? {}
-
-        if (backgroundColor.value) {
-            return defu(
-                themeOptions.value?.contentElements?.[contentElement.type]
-                    ?.backgroundColors?.[
-                    contentElement.appearance.backgroundColor
-                ] ?? {},
-                defaultColors
-            )
-        } else {
-            return defaultColors
-        }
-    })
 
     const containerClasses = computed(() => ({
         container: width.value !== 'full',
@@ -50,63 +31,61 @@ export function useT3ContentUtil<T = any>(
     }))
 
     const cookieAccepted = computed<boolean>(() =>
-        isAccepted(contentElement.cookie.category)
+        isAccepted(contentElement.value.cookie.category)
     )
 
     const ignoreCookies = computed<boolean>(() =>
         ceOptions.value?.ignoreCookies instanceof Function
-            ? ceOptions.value.ignoreCookies(contentElement)
+            ? ceOptions.value.ignoreCookies(contentElement.value)
             : ceOptions.value?.ignoreCookies ?? false
     )
 
     const maxWidth = computed<string | undefined>(() => {
         return ceOptions.value?.maxWidth instanceof Function
-            ? ceOptions.value.maxWidth(contentElement)
+            ? ceOptions.value.maxWidth(contentElement.value)
             : ceOptions.value?.maxWidth
     })
 
     const padding = computed<boolean>(() =>
         ceOptions.value?.padding instanceof Function
-            ? ceOptions.value?.padding(contentElement)
+            ? ceOptions.value?.padding(contentElement.value)
             : ceOptions.value?.padding ?? true
     )
 
     const spaceBefore = computed<string>(
-        () => config.spacing[contentElement.appearance.spaceBefore]
+        () => config.spacing[contentElement.value.appearance.spaceBefore]
     )
     const spaceAfter = computed<string>(
-        () => config.spacing[contentElement.appearance.spaceAfter]
+        () => config.spacing[contentElement.value.appearance.spaceAfter]
     )
     const spaceBeforeInside = computed<string>(
         () =>
-            contentElement.appearance.backgroundColor &&
-            config.spacing[contentElement.appearance.spaceBeforeInside]
+            backgroundColorName.value &&
+            config.spacing[contentElement.value.appearance.spaceBeforeInside]
     )
     const spaceAfterInside = computed<string>(
         () =>
-            contentElement.appearance.backgroundColor &&
-            config.spacing[contentElement.appearance.spaceAfterInside]
+            backgroundColorName.value &&
+            config.spacing[contentElement.value.appearance.spaceAfterInside]
     )
 
     const width = computed<'default' | 'extended' | 'full'>(() =>
         ceOptions.value?.width instanceof Function
-            ? ceOptions.value?.width(contentElement)
+            ? ceOptions.value?.width(contentElement.value)
             : ceOptions.value?.width ?? 'default'
     )
 
     return {
-        backgroundColor,
+        backgroundColorName,
+        backgroundColorValue,
         backgroundFullWidth,
-        colors,
         containerClasses,
         cookieAccepted,
         ignoreCookies,
-        maxWidth,
         padding,
         spaceBefore,
         spaceAfter,
         spaceBeforeInside,
         spaceAfterInside,
-        width,
     }
 }

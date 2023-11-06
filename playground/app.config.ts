@@ -1,8 +1,20 @@
 import { Typo3 } from '../src/runtime/models'
 import de from './locales/de.json'
 import en from './locales/en.json'
-import { themes } from './themes'
+import colors from './colors'
 import { defineAppConfig } from '#imports'
+
+const backgroundColors = {
+    light: {
+        black: colors.black,
+        primary: colors.primary,
+        secondary: colors.secondary,
+        accent: colors.accent,
+    },
+    dark: {
+        black: colors.blackLight,
+    },
+}
 
 export default defineAppConfig({
     typo3: {
@@ -21,7 +33,6 @@ export default defineAppConfig({
                 padding: false,
             },
         },
-        defaultTheme: 'light',
         i18n: {
             messages: {
                 de,
@@ -29,6 +40,9 @@ export default defineAppConfig({
             },
         },
         languages: ['/de/'],
-        themes,
+        theme: {
+            backgroundColors,
+            default: 'light',
+        },
     },
 })

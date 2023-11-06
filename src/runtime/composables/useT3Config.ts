@@ -1,16 +1,10 @@
 import { defu } from 'defu'
 import * as T3Model from '../models'
-import { ModuleOptions } from '../../module'
 import { useAppConfig, useRuntimeConfig } from '#imports'
 
-type Config = ModuleOptions &
-    T3Model.Config.AppConfigInput &
-    T3Model.Config.AppConfigDefaults
-
-export function useT3Config(): Config {
+export function useT3Config() {
     const appConfigDefaults: T3Model.Config.AppConfigDefaults = {
         contentElements: {},
-        defaultTheme: 'default',
         i18n: {
             locale: 'de',
         },
@@ -28,12 +22,9 @@ export function useT3Config(): Config {
             large: '4rem',
             'extra-large': '8rem',
         },
-        themes: {
-            default: {
-                backgroundColors: {},
-                contentElements: {},
-                additionalData: {},
-            },
+        theme: {
+            backgroundColors: {},
+            default: 'default',
         },
     }
 

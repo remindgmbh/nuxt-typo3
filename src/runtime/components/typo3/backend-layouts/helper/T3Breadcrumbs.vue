@@ -31,7 +31,7 @@ import { computed } from 'vue'
 import { T3Model, useT3Config, useT3Theme } from '#imports'
 
 const config = useT3Config()
-const { themeOptions } = useT3Theme()
+const { backgroundColors } = useT3Theme()
 
 const props = defineProps<{
     breadcrumbs: T3Model.Typo3.Breadcrumb[]
@@ -41,7 +41,7 @@ const props = defineProps<{
 const container = computed(() => !config.layout.breadcrumbs.fullWidth)
 
 const backgroundColor = computed<string | undefined>(
-    () => themeOptions.value?.backgroundColors?.[props.backgroundColor]
+    () => backgroundColors.value?.[props.backgroundColor]
 )
 </script>
 

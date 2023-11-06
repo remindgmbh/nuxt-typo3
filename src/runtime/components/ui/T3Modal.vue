@@ -38,8 +38,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, ref, watch } from 'vue'
-import { scrollbarDisabledSymbol } from './T3TopbarLayout/shared'
+import { computed, ref, watch } from 'vue'
+import { useT3TopbarLayout } from '#imports'
 
 const props = withDefaults(
     defineProps<{
@@ -57,7 +57,9 @@ const props = withDefaults(
     }
 )
 
-const scrollbarDisabled = inject(scrollbarDisabledSymbol, undefined)
+const { injectScrollbarDisabled } = useT3TopbarLayout()
+
+const scrollbarDisabled = injectScrollbarDisabled()
 
 const emit = defineEmits<{
     (e: 'update:modelValue', value: boolean): void

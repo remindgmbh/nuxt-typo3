@@ -20,9 +20,9 @@
 </template>
 
 <script setup lang="ts">
-import { T3Model } from '#imports'
+import { T3Model, useT3Content } from '#imports'
 
-defineProps<{
-    contentElement: T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Tabs>
-}>()
+const { injectContentElement } = useT3Content()
+
+const contentElement = injectContentElement<T3Model.Typo3.Content.Data.Tabs>()
 </script>

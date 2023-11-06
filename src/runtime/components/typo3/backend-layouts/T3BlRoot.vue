@@ -1,6 +1,6 @@
 <template>
     <div class="t3-bl-root">
-        <T3Renderer :content-elements="pageData.content.colPos0" />
+        <T3Col :content-elements="pageData.content.colPos0" />
     </div>
 </template>
 

@@ -1,21 +1,25 @@
+import { defu } from 'defu'
 import { computed, Ref } from 'vue'
-import * as T3Model from '../models'
 import { useState, useT3Config } from '#imports'
 
 export function useT3Theme() {
-    const { themes, defaultTheme } = useT3Config()
+    const { theme } = useT3Config()
 
     const selectedTheme: Ref<string> = useState<string>(
         't3-theme',
-        () => defaultTheme
+        () => theme.default
     )
 
-    const themeOptions = computed<T3Model.Config.ThemeOptions | undefined>(
-        () => themes[selectedTheme.value]
+    const backgroundColors = computed<{ [name: string]: string }>(() =>
+        defu(
+            theme.backgroundColors[selectedTheme.value],
+            theme.backgroundColors[theme.default] ?? {}
+        )
     )
 
     return {
+        backgroundColors,
+        defaultTheme: theme.default,
         selectedTheme,
-        themeOptions,
     }
 }

@@ -8,18 +8,14 @@
 </template>
 
 <script setup lang="ts">
-import { T3Model, useT3ContentUtil } from '#imports'
+import { useT3ContentUtil } from '#imports'
 
-const props = defineProps<{
-    contentElement: T3Model.Typo3.Content.Element
-}>()
-
-const { backgroundColor, backgroundFullWidth, containerClasses } =
-    useT3ContentUtil(props.contentElement)
+const { backgroundColorValue, backgroundFullWidth, containerClasses } =
+    useT3ContentUtil()
 </script>
 
 <style lang="scss">
 .t3-background {
-    background-color: v-bind('backgroundColor');
+    background-color: v-bind('backgroundColorValue');
 }
 </style>

@@ -1,6 +1,6 @@
 import { Appearance, Cookie } from '.'
 
-export interface Element<T = {}> {
+export interface Element<T = unknown> {
     id: number
     type: string
     colPos: number

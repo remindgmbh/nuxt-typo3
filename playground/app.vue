@@ -46,15 +46,15 @@
 <script setup lang="ts">
 import { gsap } from 'gsap'
 import {
-    computed,
     onMounted,
     ref,
     useT3Cookiebot,
     useT3ApiData,
     useT3LoadingState,
     useT3Util,
-    useT3Theme,
+    useT3ColorScheme,
 } from '#imports'
+import colors from '@/colors'
 
 const HEADER_HEIGHT = '5rem'
 const HEADER_HEIGHT_DENSE = '3rem'
@@ -63,9 +63,28 @@ const { showBanner } = useT3Cookiebot()
 const { currentFooterContent } = useT3ApiData()
 const loading = useT3LoadingState()
 const { detectScrollEnd } = useT3Util()
-const { themeOptions } = useT3Theme()
 
-const colors = computed(() => themeOptions.value?.additionalData)
+const colorScheme = useT3ColorScheme({
+    light: {
+        background: colors.white,
+        font: colors.black,
+        footer: {
+            background: colors.secondary,
+        },
+        header: {
+            border: colors.secondary,
+        },
+        loadingBar: colors.secondary,
+        menu: {
+            background: colors.primary,
+            border: colors.accent,
+        },
+    },
+    dark: {
+        background: colors.black,
+        font: colors.white,
+    },
+})
 
 const menuVisible = ref(false)
 const scrollbarDisabled = ref(false)
@@ -118,11 +137,13 @@ onMounted(() => {
 <style lang="scss">
 .app {
     position: relative;
-    color: v-bind('colors.font');
+    color: v-bind('colorScheme.font');
+    display: flex;
+    flex-direction: column;
 
     &__loading-bar {
         position: absolute;
-        background-color: v-bind('colors.background');
+        background-color: v-bind('colorScheme.background');
         height: 0;
         width: 100%;
 
@@ -134,24 +155,24 @@ onMounted(() => {
     &__loading-progress {
         position: absolute;
         inset: 0 100% 0 0;
-        background-color: v-bind('colors.secondary');
+        background-color: v-bind('colorScheme.loadingBar');
         animation: loading 2s linear infinite;
     }
 
     &__header {
-        background-color: v-bind('colors.background');
+        background-color: v-bind('colorScheme.background');
         height: v-bind(headerHeight);
         transition: height 0.5s;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 0.125rem v-bind('colors.secondary') solid;
+        border-bottom: 0.125rem v-bind('colorScheme.header?.border') solid;
         width: 100%;
     }
 
     &__footer {
-        background-color: v-bind('colors.secondary');
-        color: v-bind('colors.background');
+        background-color: v-bind('colorScheme.footer?.background');
+        color: v-bind('colorScheme.background');
     }
 
     &__menu {
@@ -162,15 +183,16 @@ onMounted(() => {
     }
 
     &__menu-content {
-        background-color: v-bind('colors.primary');
-        border-bottom: solid 1rem v-bind('colors.accent');
+        background-color: v-bind('colorScheme.menu?.background');
+        border-bottom: solid 1rem v-bind('colorScheme.menu?.border');
         box-sizing: border-box;
     }
 
     &__content {
         overflow-x: hidden;
         position: relative;
-        background-color: v-bind('colors.background');
+        background-color: v-bind('colorScheme.background');
+        flex-grow: 1;
     }
 
     .page-transition {

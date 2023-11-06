@@ -3,11 +3,11 @@
 </template>
 
 <script setup lang="ts">
-import { T3Model } from '#imports'
+import { useT3Content } from '#imports'
 
-defineProps<{
-    contentElement: T3Model.Typo3.Content.Element
-}>()
+const { injectContentElement } = useT3Content()
+
+const contentElement = injectContentElement()
 </script>
 
 <style lang="scss">

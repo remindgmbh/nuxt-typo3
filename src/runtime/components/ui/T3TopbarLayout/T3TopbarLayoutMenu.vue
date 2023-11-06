@@ -12,8 +12,8 @@
 </template>
 
 <script setup lang="ts">
-import { TransitionProps, ref, inject } from 'vue'
-import { scrollbarDisabledSymbol } from './shared'
+import { TransitionProps, ref } from 'vue'
+import { useT3TopbarLayout } from '#imports'
 
 enum Status {
     Entering,
@@ -34,7 +34,9 @@ withDefaults(
     }
 )
 
-const scrollbarDisabled = inject(scrollbarDisabledSymbol)
+const { injectScrollbarDisabled } = useT3TopbarLayout()
+
+const scrollbarDisabled = injectScrollbarDisabled()
 
 const emit = defineEmits<{
     (e: 'update:modelValue', value: boolean): void

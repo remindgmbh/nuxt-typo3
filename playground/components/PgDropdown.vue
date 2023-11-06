@@ -28,13 +28,23 @@
 
 <script setup lang="ts">
 import { vOnClickOutside } from '@vueuse/components'
-import { computed, useT3Menu, useT3Theme, useT3Navigation } from '#imports'
+import {
+    computed,
+    useT3Menu,
+    useT3Navigation,
+    useT3ColorScheme,
+} from '#imports'
+import colors from '@/colors'
 
 const { active, triggers, close } = useT3Menu()
 const { navItemsWithChildren } = useT3Navigation()
-const { themeOptions } = useT3Theme()
 
-const colors = computed(() => themeOptions.value?.additionalData)
+const colorScheme = useT3ColorScheme({
+    light: {
+        background: colors.accent,
+        link: colors.primary,
+    },
+})
 
 const activeNavItem = computed(() =>
     navItemsWithChildren.value.find((item) => item.link === active.value)
@@ -50,7 +60,7 @@ const activeNavItem = computed(() =>
 }
 
 .pg-dropdown {
-    background-color: v-bind('colors.accent');
+    background-color: v-bind('colorScheme.background');
     position: absolute;
     top: 100%;
     width: 100%;
@@ -66,7 +76,7 @@ const activeNavItem = computed(() =>
         flex-direction: column;
 
         .router-link-active {
-            color: v-bind('colors.primary');
+            color: v-bind('colorScheme.link');
         }
     }
 }

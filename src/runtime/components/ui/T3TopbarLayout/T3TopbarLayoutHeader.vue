@@ -5,8 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import { getCurrentInstance, inject } from 'vue'
-import { registerHeaderSymbol } from './shared'
+import { getCurrentInstance } from 'vue'
+import { useT3TopbarLayout } from '#imports'
 
 withDefaults(
     defineProps<{
@@ -15,7 +15,9 @@ withDefaults(
     { tag: 'header' }
 )
 
-const register = inject(registerHeaderSymbol)
+const { injectRegisterHeader } = useT3TopbarLayout()
+
+const register = injectRegisterHeader()
 const currentInstance = getCurrentInstance()
 
 if (register && currentInstance && currentInstance.proxy) {

@@ -5,13 +5,9 @@
 </template>
 
 <script setup lang="ts">
-import { ComponentPublicInstance, onMounted, provide, ref, watch } from 'vue'
+import { ComponentPublicInstance, onMounted, ref, watch } from 'vue'
 import { useLogger } from '#nuxt-logger'
-import {
-    registerContentSymbol,
-    registerHeaderSymbol,
-    scrollbarDisabledSymbol,
-} from './shared'
+import { useT3TopbarLayout } from '#imports'
 
 const props = withDefaults(
     defineProps<{
@@ -20,14 +16,20 @@ const props = withDefaults(
     { scrollbarDisabled: false }
 )
 
+const {
+    provideRegisterContent,
+    provideRegisterHeader,
+    provideScrollbarDisabled,
+} = useT3TopbarLayout()
+
 const logger = useLogger()
 const content = ref<ComponentPublicInstance>()
 const header = ref<ComponentPublicInstance>()
 const _scrollbarDisabled = ref(false)
 
-provide(registerHeaderSymbol, (instance) => (header.value = instance))
-provide(registerContentSymbol, (instance) => (content.value = instance))
-provide(scrollbarDisabledSymbol, _scrollbarDisabled)
+provideRegisterContent((instance) => (header.value = instance))
+provideRegisterHeader((instance) => (content.value = instance))
+provideScrollbarDisabled(_scrollbarDisabled)
 
 const emit = defineEmits<{
     (e: 'update:scrollbarDisabled', value: boolean): void

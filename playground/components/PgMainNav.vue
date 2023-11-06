@@ -32,20 +32,25 @@
 
 <script setup lang="ts">
 import {
-    computed,
     ref,
     onMounted,
     useT3Menu,
-    useT3Theme,
     useT3Navigation,
+    useT3ColorScheme,
 } from '#imports'
+import colors from '@/colors'
 
 const { rootPageNavigation } = useT3Navigation()
 const { triggers, toggle } = useT3Menu()
-const { themeOptions } = useT3Theme()
 const menuTriggers = ref<HTMLButtonElement[]>([])
 
-const colors = computed(() => themeOptions.value?.additionalData)
+const colorScheme = useT3ColorScheme({
+    light: {
+        link: {
+            active: colors.primary,
+        },
+    },
+})
 
 onMounted(() => {
     triggers.value = menuTriggers.value
@@ -63,7 +68,7 @@ onMounted(() => {
     }
 
     .router-link-active {
-        color: v-bind('colors.primary');
+        color: v-bind('colorScheme.link?.active');
     }
 }
 </style>
