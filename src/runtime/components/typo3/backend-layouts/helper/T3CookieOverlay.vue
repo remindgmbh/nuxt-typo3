@@ -1,17 +1,15 @@
 <template>
-    <div class="t3-cookie-overlay">
-        <T3HtmlParser
+    <div class="cookie-overlay">
+        <component
+            :is="HtmlParser"
             v-if="message"
-            class="t3-cookie-overlay__message"
+            class="cookie-overlay__message"
             :content="message"
         />
-        <div v-else class="t3-cookie-overlay__message">
+        <div v-else class="cookie-overlay__message">
             {{ t('cookie.message', { category }) }}
         </div>
-        <button
-            class="t3-cookie-overlay__accept"
-            @click="acceptCookies(category)"
-        >
+        <button class="cookie-overlay__accept" @click="acceptCookies(category)">
             {{ t('cookie.accept', { category }) }}
         </button>
     </div>
@@ -19,7 +17,8 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { T3Model, useT3Cookiebot } from '#imports'
+import { T3Model, useT3Cookiebot, useT3DynamicComponent } from '#imports'
+import { T3HtmlParser } from '#components'
 
 const { t } = useI18n()
 
@@ -29,4 +28,6 @@ defineProps<{
     category: T3Model.Typo3.Content.Cookie['category']
     message?: string
 }>()
+
+const HtmlParser = useT3DynamicComponent<typeof T3HtmlParser>('HtmlParser')
 </script>

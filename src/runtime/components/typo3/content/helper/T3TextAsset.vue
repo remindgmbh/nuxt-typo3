@@ -1,11 +1,11 @@
 <template>
-    <div class="t3-text-asset">
+    <div class="text-asset">
         <div
-            class="t3-text-asset__asset"
+            class="text-asset__asset"
             :class="{
-                't3-text-asset__asset--small': assetIsSmall,
-                't3-text-asset__asset--large': !assetIsSmall,
-                't3-text-asset__asset--right': assetIsRight,
+                'text-asset__asset--small': assetIsSmall,
+                'text-asset__asset--large': !assetIsSmall,
+                'text-asset__asset--right': assetIsRight,
             }"
         >
             <slot v-if="asset" name="asset" :asset="asset">
@@ -13,31 +13,34 @@
             </slot>
         </div>
         <div
-            class="t3-text-asset__text"
+            class="text-asset__text"
             :class="{
-                't3-text-asset__text--large': assetIsSmall,
-                't3-text-asset__text--small': !assetIsSmall,
+                'text-asset__text--large': assetIsSmall,
+                'text-asset__text--small': !assetIsSmall,
             }"
         >
             <slot name="text">
-                <T3Text :content="content" />
+                <component :is="Text" :content="content" />
             </slot>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { T3Model, useT3TextAsset } from '#imports'
+import { T3Model, useT3DynamicComponent, useT3TextAsset } from '#imports'
+import { T3Text } from '#components'
 
 const props = defineProps<{
     content: T3Model.Typo3.Content.Data.TextAsset
 }>()
 
+const Text = useT3DynamicComponent<typeof T3Text>('Text')
+
 const { asset, assetIsRight, assetIsSmall } = useT3TextAsset(props.content)
 </script>
 
 <style lang="scss">
-.t3-text-asset {
+.text-asset {
     display: flex;
     flex-wrap: wrap;
 

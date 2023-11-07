@@ -1,10 +1,10 @@
 <template>
     <div
-        class="t3-form-element"
+        class="form-element"
         :class="[
-            `t3-form-element--${formElement.type}`,
+            `form-element--${formElement.type}`,
             {
-                [`t3-form-element--size-${size}`]: size,
+                [`form-element--size-${size}`]: size,
             },
         ]"
     >
@@ -31,11 +31,11 @@ const props = defineProps<{
 
 const size = computed(() => props.formElement.properties?.size)
 
-const component = useT3DynamicComponent('T3FormElement', props.formElement.type)
+const component = useT3DynamicComponent(props.formElement.type, 'FormElement')
 </script>
 
 <style lang="scss">
-.t3-form-element {
+.form-element {
     &--Honeypot,
     &--Hidden {
         display: none;

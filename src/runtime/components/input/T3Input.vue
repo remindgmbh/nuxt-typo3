@@ -2,7 +2,7 @@
     <input
         :id="name"
         v-model="value"
-        class="t3-input"
+        class="input"
         :name="name"
         @blur="onBlur"
         @input="onInput"

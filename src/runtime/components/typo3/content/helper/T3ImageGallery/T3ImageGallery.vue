@@ -1,55 +1,52 @@
 <template>
-    <div class="t3-image-gallery">
+    <div class="image-gallery">
         <Swiper
-            class="t3-image-gallery__swiper"
+            class="image-gallery__swiper"
             free-mode
             slides-per-view="auto"
             :modules="[FreeMode, Navigation, Scrollbar]"
             :navigation="{
-                nextEl: '.t3-image-gallery__navigation.t3-image-gallery__navigation--next',
-                prevEl: '.t3-image-gallery__navigation.t3-image-gallery__navigation--prev',
-                disabledClass: 't3-image-gallery__navigation--disabled',
-                lockClass: 't3-image-gallery__navigation--lock',
-                hiddenClass: 't3-image-gallery__navigation--hidden',
+                nextEl: '.image-gallery__navigation.image-gallery__navigation--next',
+                prevEl: '.image-gallery__navigation.image-gallery__navigation--prev',
+                disabledClass: 'image-gallery__navigation--disabled',
+                lockClass: 'image-gallery__navigation--lock',
+                hiddenClass: 'image-gallery__navigation--hidden',
             }"
             :scrollbar="{
                 draggable: true,
-                el: '.t3-image-gallery__scrollbar',
-                horizontalClass: 't3-image-gallery__scrollbar--horizontal',
-                verticalClass: 't3-image-gallery__scrollbar--vertical',
-                lockClass: 't3-image-gallery__scrollbar--lock',
-                scrollbarDisabledClass: 't3-image-gallery__scrollbar--disabled',
-                dragClass: 't3-image-gallery__scrollbar-drag',
+                el: '.image-gallery__scrollbar',
+                horizontalClass: 'image-gallery__scrollbar--horizontal',
+                verticalClass: 'image-gallery__scrollbar--vertical',
+                lockClass: 'image-gallery__scrollbar--lock',
+                scrollbarDisabledClass: 'image-gallery__scrollbar--disabled',
+                dragClass: 'image-gallery__scrollbar-drag',
             }"
         >
             <SwiperSlide
                 v-for="(image, index) in images"
                 :key="index"
-                class="t3-image-gallery__slide"
+                class="image-gallery__slide"
             >
                 <slot name="previewImage" :image="image">
                     <T3Asset :file="image" @click="showModal(index)" />
                 </slot>
             </SwiperSlide>
-            <div class="t3-image-gallery__scrollbar"></div>
+            <div class="image-gallery__scrollbar"></div>
             <div
-                class="t3-image-gallery__navigation t3-image-gallery__navigation--prev"
+                class="image-gallery__navigation image-gallery__navigation--prev"
             ></div>
             <div
-                class="t3-image-gallery__navigation t3-image-gallery__navigation--next"
+                class="image-gallery__navigation image-gallery__navigation--next"
             ></div>
         </Swiper>
-        <T3Modal
+        <component
+            :is="Modal"
             v-model="modalVisible"
             close-on-outside-click
-            class="t3-image-gallery__modal"
+            class="image-gallery__modal"
         >
             <component
-                :is="
-                    type === 'scroll'
-                        ? T3ImageGalleryScroll
-                        : T3ImageGallerySlide
-                "
+                :is="type === 'scroll' ? ImageGalleryScroll : ImageGallerySlide"
                 :header="header"
                 :images="images"
                 :subheader="subheader"
@@ -66,7 +63,7 @@
                     <slot name="scrollImage" :image="image"></slot>
                 </template>
             </component>
-        </T3Modal>
+        </component>
     </div>
 </template>
 
@@ -75,8 +72,8 @@ import 'swiper/scss'
 import { FreeMode, Navigation, Scrollbar } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { ref } from 'vue'
-import { T3Model } from '#imports'
-import { T3ImageGalleryScroll, T3ImageGallerySlide } from '#components'
+import { T3Model, useT3DynamicComponent } from '#imports'
+import { T3ImageGalleryScroll, T3ImageGallerySlide, T3Modal } from '#components'
 
 withDefaults(
     defineProps<{
@@ -91,6 +88,12 @@ withDefaults(
         type: 'scroll',
     }
 )
+
+const Modal = useT3DynamicComponent<typeof T3Modal>('Modal')
+const ImageGalleryScroll =
+    useT3DynamicComponent<typeof T3ImageGalleryScroll>('ImageGalleryScroll')
+const ImageGallerySlide =
+    useT3DynamicComponent<typeof T3ImageGallerySlide>('ImageGallerySlide')
 
 const modalVisible = ref(false)
 const scrollToIndex = ref(-1)
@@ -107,7 +110,7 @@ function hideModal() {
 </script>
 
 <style lang="scss">
-.t3-image-gallery {
+.image-gallery {
     // Set gallery height:
     // height: ...
 

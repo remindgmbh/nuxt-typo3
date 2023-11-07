@@ -1,25 +1,27 @@
 <template>
     <div
-        class="t3-autocomplete"
+        class="autocomplete"
         :class="{
-            't3-autocomplete--required': required,
-            't3-autocomplete--disabled': disabled,
-            't3-autocomplete--error': meta.touched && !meta.valid,
-            't3-autocomplete--success': meta.touched && meta.valid,
+            'autocomplete--required': required,
+            'autocomplete--disabled': disabled,
+            'autocomplete--error': meta.touched && !meta.valid,
+            'autocomplete--success': meta.touched && meta.valid,
         }"
     >
-        <T3InputLabel
+        <component
+            :is="InputLabel"
             v-if="label"
-            class="t3-autocomplete__label"
+            class="autocomplete__label"
             :label="label"
             :for="name"
         />
-        <div ref="wrapper" class="t3-autocomplete__wrapper">
-            <T3Input
+        <div ref="wrapper" class="autocomplete__wrapper">
+            <component
+                :is="Input"
                 ref="input"
                 v-model="value"
                 :name="name"
-                class="t3-autocomplete__input"
+                class="autocomplete__input"
                 :disabled="disabled"
                 :placeholder="placeholder"
                 autocomplete="off"
@@ -27,8 +29,9 @@
                 @blur="handleBlur"
             />
             <T3CollapseTransition transition-name="options-transition">
-                <div v-show="isOpen" class="t3-autocomplete__options">
-                    <T3AutocompleteOptionGroup
+                <div v-show="isOpen" class="autocomplete__options">
+                    <component
+                        :is="AutocompleteOptionGroup"
                         v-for="optionGroup in optionGroups"
                         :key="optionGroup.name"
                         v-model:hover-option="hoverOption"
@@ -46,8 +49,13 @@
 <script setup lang="ts">
 import { RuleExpression, useField } from 'vee-validate'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
-import { navigateTo, T3Model, useT3SelectInput } from '#imports'
-import { T3Input } from '#components'
+import {
+    navigateTo,
+    T3Model,
+    useT3DynamicComponent,
+    useT3SelectInput,
+} from '#imports'
+import { T3Input, T3InputLabel, T3AutocompleteOptionGroup } from '#components'
 
 const props = defineProps<{
     name: string
@@ -60,6 +68,14 @@ const props = defineProps<{
     disabled?: boolean
     required?: boolean
 }>()
+
+const AutocompleteOptionGroup = useT3DynamicComponent<
+    typeof T3AutocompleteOptionGroup
+>('AutocompleteOptionGroup')
+
+const Input = useT3DynamicComponent<typeof T3Input>('Input')
+
+const InputLabel = useT3DynamicComponent<typeof T3InputLabel>('InputLabel')
 
 onMounted(() => {
     input.value?.$el.addEventListener('focus', open)
@@ -158,7 +174,7 @@ function close() {
 </script>
 
 <style lang="scss">
-.t3-autocomplete {
+.autocomplete {
     position: relative;
 
     &__input {

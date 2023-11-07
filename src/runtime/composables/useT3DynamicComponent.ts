@@ -1,15 +1,30 @@
 import { pascalCase } from 'scule'
-import { resolveComponent } from 'vue'
+import { resolveComponent, getCurrentInstance } from 'vue'
+import { useT3Config } from '#imports'
 
-export function useT3DynamicComponent(
-    prefix: string,
-    name: string = 'Default'
-) {
-    const componentName = prefix + pascalCase(name)
+export function useT3DynamicComponent<T>(
+    name: string = 'Default',
+    prefix: string = ''
+): T {
+    const { componentPrefix: globalPrefix } = useT3Config()
 
-    const component = resolveComponent(componentName)
+    const instance = getCurrentInstance()
 
-    return typeof component === 'string'
-        ? resolveComponent(`${prefix}Default`)
-        : component
+    const componentNames = []
+
+    if (globalPrefix) {
+        componentNames.push(globalPrefix + prefix + pascalCase(name))
+        componentNames.push(globalPrefix + prefix + 'Default')
+    }
+
+    componentNames.push('T3' + prefix + pascalCase(name))
+    componentNames.push('T3' + prefix + 'Default')
+
+    for (const componentName of componentNames) {
+        if (instance?.appContext.components[componentName]) {
+            return resolveComponent(componentName) as T
+        }
+    }
+
+    throw new Error(`Component '${componentNames[0]}' not found`)
 }

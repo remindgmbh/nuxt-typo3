@@ -1,18 +1,24 @@
 <template>
     <div
-        class="t3-textfield"
+        class="textfield"
         :class="{
-            't3-textfield--required': required,
-            't3-textfield--disabled': disabled,
-            't3-textfield--error': meta.touched && !meta.valid,
-            't3-textfield--success': meta.touched && meta.valid,
+            'textfield--required': required,
+            'textfield--disabled': disabled,
+            'textfield--error': meta.touched && !meta.valid,
+            'textfield--success': meta.touched && meta.valid,
         }"
     >
-        <T3InputLabel class="t3-textfield__label" :label="label" :for="name" />
-        <div class="t3-textfield__wrapper">
-            <T3Input
+        <component
+            :is="InputLabel"
+            class="textfield__label"
+            :label="label"
+            :for="name"
+        />
+        <div class="textfield__wrapper">
+            <component
+                :is="Input"
                 v-model="value"
-                class="t3-textfield__input"
+                class="textfield__input"
                 :type="type"
                 :name="name"
                 :min="min"
@@ -30,6 +36,8 @@
 <script setup lang="ts">
 import { RuleExpression, useField } from 'vee-validate'
 import { computed } from 'vue'
+import { useT3DynamicComponent } from '#imports'
+import { T3Input, T3InputLabel } from '#components'
 
 const props = defineProps<{
     name: string
@@ -45,6 +53,10 @@ const props = defineProps<{
     required?: boolean
 }>()
 
+const Input = useT3DynamicComponent<typeof T3Input>('Input')
+
+const InputLabel = useT3DynamicComponent<typeof T3InputLabel>('InputLabel')
+
 const name = computed(() => props.name)
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
@@ -56,7 +68,7 @@ const { value, errorMessage, meta, handleBlur } = useField<
 </script>
 
 <style lang="scss">
-.t3-textfield {
+.textfield {
     &__input {
         width: 100%;
         box-sizing: border-box;

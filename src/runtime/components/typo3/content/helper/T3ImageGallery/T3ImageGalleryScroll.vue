@@ -1,54 +1,51 @@
 <template>
-    <div class="t3-image-gallery-scroll">
+    <div class="image-gallery-scroll">
         <div class="container">
-            <div class="t3-image-gallery-scroll__close-wrapper">
+            <div class="image-gallery-scroll__close-wrapper">
                 <button
-                    class="t3-image-gallery-scroll__close"
+                    class="image-gallery-scroll__close"
                     @click="emit('close')"
                 >
-                    <span class="t3-image-gallery-scroll__close-label">{{
+                    <span class="image-gallery-scroll__close-label">{{
                         t('imageGallery.close')
                     }}</span>
                 </button>
             </div>
-            <h2 v-if="header" class="t3-image-gallery-scroll__header">
-                <div
-                    v-if="subheader"
-                    class="t3-image-gallery-scroll__header-sub"
-                >
+            <h2 v-if="header" class="image-gallery-scroll__header">
+                <div v-if="subheader" class="image-gallery-scroll__header-sub">
                     {{ subheader }}
                 </div>
-                <div class="t3-image-gallery-scroll__header-main">
+                <div class="image-gallery-scroll__header-main">
                     {{ header }}
                 </div>
             </h2>
-            <div class="t3-image-gallery-scroll__items">
+            <div class="image-gallery-scroll__items">
                 <template v-for="(image, index) in images" :key="index">
                     <div
                         :ref="(el) => setItem(el, index)"
-                        class="t3-image-gallery-scroll__item"
+                        class="image-gallery-scroll__item"
                     >
-                        <div class="t3-image-gallery-scroll__image">
+                        <div class="image-gallery-scroll__image">
                             <slot name="scrollImage" :image="image">
                                 <T3Asset :file="image" />
                             </slot>
                         </div>
-                        <div class="t3-image-gallery-scroll__text">
-                            <div class="t3-image-gallery-scroll__number">
+                        <div class="image-gallery-scroll__text">
+                            <div class="image-gallery-scroll__number">
                                 {{ padNumber(index + 1, images.length) }} /
                                 {{ images.length }}
                             </div>
-                            <div class="t3-image-gallery-scroll__title">
+                            <div class="image-gallery-scroll__title">
                                 {{ image.properties.title }}
                             </div>
-                            <div class="t3-image-gallery-scroll__description">
+                            <div class="image-gallery-scroll__description">
                                 {{ image.properties.description }}
                             </div>
                         </div>
                     </div>
                     <div
                         v-if="index < images.length - 1"
-                        class="t3-image-gallery-scroll__divider"
+                        class="image-gallery-scroll__divider"
                     ></div>
                 </template>
             </div>
@@ -93,7 +90,7 @@ function setItem(el: Element | ComponentPublicInstance | null, index: number) {
 </script>
 
 <style lang="scss">
-.t3-image-gallery-scroll {
+.image-gallery-scroll {
     width: 100%;
     height: 100%;
     overflow: auto;

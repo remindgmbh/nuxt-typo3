@@ -1,6 +1,6 @@
 <template>
     <article
-        class="t3-content"
+        class="content"
         :class="{
             'padded-content': padding,
             ...((!backgroundColorValue || backgroundFullWidth) &&
@@ -36,11 +36,11 @@ const {
     spaceAfterInside,
 } = useT3ContentUtil()
 
-const component = useT3DynamicComponent('T3Ce', contentElement.value.type)
+const component = useT3DynamicComponent(contentElement.value.type, 'Ce')
 </script>
 
 <style lang="scss">
-.t3-content {
+.content {
     box-sizing: border-box;
     margin-top: v-bind(spaceBefore);
     margin-bottom: v-bind(spaceAfter);

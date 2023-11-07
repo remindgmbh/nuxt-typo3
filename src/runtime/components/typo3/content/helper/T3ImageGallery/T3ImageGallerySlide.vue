@@ -1,7 +1,8 @@
 <template>
-    <div ref="rootDiv" class="t3-image-gallery-slide">
-        <div ref="headerDiv" class="t3-image-gallery-slide__header">
-            <T3ImageGallerySlideHeader
+    <div ref="rootDiv" class="image-gallery-slide">
+        <div ref="headerDiv" class="image-gallery-slide__header">
+            <component
+                :is="ImageGallerySlideHeader"
                 :active-index="activeIndex"
                 :header="header"
                 :images="images"
@@ -10,10 +11,11 @@
             />
         </div>
         <div
-            class="t3-image-gallery-slide__image"
+            class="image-gallery-slide__image"
             :style="{ height: imageHeight }"
         >
-            <T3ImageGallerySlideImage
+            <component
+                :is="ImageGallerySlideImage"
                 v-model:active-index="activeIndex"
                 :images="images"
                 :thumbs-swiper="thumbsSwiper"
@@ -22,10 +24,11 @@
                 <template #image="{ image }">
                     <slot name="slideImage" :image="image"></slot>
                 </template>
-            </T3ImageGallerySlideImage>
+            </component>
         </div>
-        <div ref="navigationDiv" class="t3-image-gallery-slide__navigation">
-            <T3ImageGallerySlideNavigation
+        <div ref="navigationDiv" class="image-gallery-slide__navigation">
+            <component
+                :is="ImageGallerySlideNavigation"
                 :active-index="activeIndex"
                 :images="images"
                 @set-swiper="setThumbsSwiper"
@@ -33,7 +36,7 @@
                 <template #image="{ image }">
                     <slot name="slideImageNavigation" :image="image"></slot>
                 </template>
-            </T3ImageGallerySlideNavigation>
+            </component>
         </div>
     </div>
 </template>
@@ -42,7 +45,12 @@
 import { Swiper } from 'swiper'
 import { debounce } from 'perfect-debounce'
 import { ref, onMounted } from 'vue'
-import { T3Model } from '#imports'
+import { T3Model, useT3DynamicComponent } from '#imports'
+import {
+    T3ImageGallerySlideHeader,
+    T3ImageGallerySlideImage,
+    T3ImageGallerySlideNavigation,
+} from '#components'
 
 const props = defineProps<{
     header?: string
@@ -50,6 +58,16 @@ const props = defineProps<{
     images: T3Model.Typo3.Asset[]
     scrollToIndex: number
 }>()
+
+const ImageGallerySlideHeader = useT3DynamicComponent<
+    typeof T3ImageGallerySlideHeader
+>('ImageGallerySlideHeader')
+const ImageGallerySlideImage = useT3DynamicComponent<
+    typeof T3ImageGallerySlideImage
+>('ImageGallerySlideImage')
+const ImageGallerySlideNavigation = useT3DynamicComponent<
+    typeof T3ImageGallerySlideNavigation
+>('ImageGallerySlideNavigation')
 
 const headerDiv = ref<HTMLDivElement>()
 const rootDiv = ref<HTMLDivElement>()
@@ -72,7 +90,7 @@ const setImageSwiper = (swiper: Swiper) => {
 }
 
 onMounted(() => {
-    // needed because it is not possible to set t3-image-gallery-slide__image to fill remaining space
+    // needed because it is not possible to set image-gallery-slide__image to fill remaining space
     // alternative approach is to set header to fixed height and use calc(100% - headerHeight - navigationHeight) in css
     // but header, subheader and title might lead to overflow
     resize()
@@ -92,7 +110,7 @@ function resize() {
 </script>
 
 <style lang="scss">
-.t3-image-gallery-slide {
+.image-gallery-slide {
     width: 100%;
     height: 100%;
     display: flex;

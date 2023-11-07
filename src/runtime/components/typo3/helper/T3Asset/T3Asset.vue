@@ -23,5 +23,5 @@ const props = defineProps<{
 
 const { type } = useT3Asset(props.file)
 
-const component = useT3DynamicComponent('T3Asset', type.value)
+const component = useT3DynamicComponent(type.value, 'Asset')
 </script>

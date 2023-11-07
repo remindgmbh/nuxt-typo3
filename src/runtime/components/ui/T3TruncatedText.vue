@@ -1,6 +1,6 @@
 <template>
-    <div ref="root" class="t3-truncated-text">
-        <div ref="content" class="t3-truncated-text__content">
+    <div ref="root" class="truncated-text">
+        <div ref="content" class="truncated-text__content">
             <slot />
         </div>
     </div>
@@ -61,7 +61,7 @@ function getLineHeight() {
 </script>
 
 <style lang="scss">
-.t3-truncated-text {
+.truncated-text {
     overflow: hidden;
 
     &__content {

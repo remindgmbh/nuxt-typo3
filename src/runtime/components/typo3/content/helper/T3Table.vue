@@ -1,14 +1,14 @@
 <template>
-    <div class="t3-table">
+    <div class="table">
         <div
-            class="t3-table__overlay-left"
-            :class="{ 't3-table__overlay-left--visible': !left }"
+            class="table__overlay-left"
+            :class="{ 'table__overlay-left--visible': !left }"
         />
         <div
-            class="t3-table__overlay-right"
-            :class="{ 't3-table__overlay-right--visible': !right }"
+            class="table__overlay-right"
+            :class="{ 'table__overlay-right--visible': !right }"
         />
-        <div ref="viewport" class="t3-table__viewport">
+        <div ref="viewport" class="table__viewport">
             <table ref="table">
                 <caption v-if="caption">
                     {{
@@ -86,7 +86,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-.t3-table {
+.table {
     $viewport-z-index: 0;
 
     position: relative;

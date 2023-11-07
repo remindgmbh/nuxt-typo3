@@ -1,25 +1,25 @@
 <template>
-    <div class="t3-breadcrumbs">
-        <div class="t3-breadcrumbs__container" :class="{ container }">
+    <div class="breadcrumbs">
+        <div class="breadcrumbs__container" :class="{ container }">
             <template
                 v-for="breadcrumb in props.breadcrumbs"
                 :key="breadcrumb.link"
             >
                 <span
                     v-if="breadcrumb.current"
-                    class="t3-breadcrumbs__link t3-breadcrumbs__link--disabled"
+                    class="breadcrumbs__link breadcrumbs__link--disabled"
                     >{{ breadcrumb.title }}</span
                 >
                 <NuxtLink
                     v-else
-                    class="t3-breadcrumbs__link"
+                    class="breadcrumbs__link"
                     :to="breadcrumb.link"
                     :target="breadcrumb.target"
                     >{{ breadcrumb.title }}</NuxtLink
                 >
                 <span
                     v-if="!breadcrumb.current"
-                    class="t3-breadcrumbs__divider"
+                    class="breadcrumbs__divider"
                 ></span>
             </template>
         </div>
@@ -46,7 +46,7 @@ const backgroundColor = computed<string | undefined>(
 </script>
 
 <style lang="scss">
-.t3-breadcrumbs {
+.breadcrumbs {
     background-color: v-bind(backgroundColor);
 }
 </style>

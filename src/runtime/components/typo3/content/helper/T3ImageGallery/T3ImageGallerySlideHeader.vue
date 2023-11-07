@@ -1,26 +1,26 @@
 <template>
-    <div class="t3-image-gallery-slide-header">
-        <h2 v-if="header" class="t3-image-gallery-slide-header__header">
-            <div class="t3-image-gallery-slide-header__main">{{ header }}</div>
-            <div v-if="subheader" class="t3-image-gallery-slide-header__sub">
+    <div class="image-gallery-slide-header">
+        <h2 v-if="header" class="image-gallery-slide-header__header">
+            <div class="image-gallery-slide-header__main">{{ header }}</div>
+            <div v-if="subheader" class="image-gallery-slide-header__sub">
                 {{ subheader }}
             </div>
         </h2>
-        <div class="t3-image-gallery-slide-header__active-image">
-            <div class="t3-image-gallery-slide-header__number">
+        <div class="image-gallery-slide-header__active-image">
+            <div class="image-gallery-slide-header__number">
                 {{ padNumber(activeIndex + 1, images.length) }} /
                 {{ images.length }}
             </div>
-            <div v-if="title" class="t3-image-gallery-slide-header__title">
+            <div v-if="title" class="image-gallery-slide-header__title">
                 {{ title }}
             </div>
         </div>
-        <div class="t3-image-gallery-slide-header__close-wrapper">
+        <div class="image-gallery-slide-header__close-wrapper">
             <button
-                class="t3-image-gallery-slide-header__close"
+                class="image-gallery-slide-header__close"
                 @click="emit('close')"
             >
-                <span class="t3-image-gallery-slide-header__close-label">{{
+                <span class="image-gallery-slide-header__close-label">{{
                     t('imageGallery.close')
                 }}</span>
             </button>

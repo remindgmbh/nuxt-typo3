@@ -1,20 +1,20 @@
 <template>
-    <div class="t3-image-gallery-slide-navigation">
+    <div class="image-gallery-slide-navigation">
         <Swiper
-            class="t3-image-gallery-slide-navigation__swiper"
+            class="image-gallery-slide-navigation__swiper"
             free-mode
             :modules="[FreeMode, Scrollbar]"
             :scrollbar="{
                 draggable: true,
-                el: '.t3-image-gallery-slide-navigation__scrollbar',
+                el: '.image-gallery-slide-navigation__scrollbar',
                 horizontalClass:
-                    't3-image-gallery-slide-navigation__scrollbar--horizontal',
+                    'image-gallery-slide-navigation__scrollbar--horizontal',
                 verticalClass:
-                    't3-image-gallery-slide-navigation__scrollbar--vertical',
-                lockClass: 't3-image-gallery-slide-navigation__scrollbar--lock',
+                    'image-gallery-slide-navigation__scrollbar--vertical',
+                lockClass: 'image-gallery-slide-navigation__scrollbar--lock',
                 scrollbarDisabledClass:
-                    't3-image-gallery-slide-navigation__scrollbar--disabled',
-                dragClass: 't3-image-gallery-slide-navigation__scrollbar-drag',
+                    'image-gallery-slide-navigation__scrollbar--disabled',
+                dragClass: 'image-gallery-slide-navigation__scrollbar-drag',
             }"
             slides-per-view="auto"
             :watch-slides-progress="true"
@@ -23,12 +23,12 @@
             <SwiperSlide
                 v-for="(image, index) in images"
                 :key="index"
-                class="t3-image-gallery-slide-navigation__slide"
+                class="image-gallery-slide-navigation__slide"
             >
                 <div
-                    class="t3-image-gallery-slide-navigation__image"
+                    class="image-gallery-slide-navigation__image"
                     :class="{
-                        't3-image-gallery-slide-navigation__image--active':
+                        'image-gallery-slide-navigation__image--active':
                             index === activeIndex,
                     }"
                 >
@@ -37,7 +37,7 @@
                     </slot>
                 </div>
             </SwiperSlide>
-            <div class="t3-image-gallery-slide-navigation__scrollbar"></div>
+            <div class="image-gallery-slide-navigation__scrollbar"></div>
         </Swiper>
     </div>
 </template>
@@ -62,7 +62,7 @@ function setSwiper(swiper: SwiperClass) {
 </script>
 
 <style lang="scss">
-.t3-image-gallery-slide-navigation {
+.image-gallery-slide-navigation {
     height: 100%;
     box-sizing: border-box;
 

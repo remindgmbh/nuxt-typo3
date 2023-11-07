@@ -1,10 +1,10 @@
 <template>
     <component
         :is="tag"
-        class="t3-modal"
+        class="modal"
         :class="{
-            't3-modal--visible': visible || transitioning,
-            't3-modal--transitioning': transitioning,
+            'modal--visible': visible || transitioning,
+            'modal--transitioning': transitioning,
         }"
     >
         <transition
@@ -18,7 +18,7 @@
         >
             <div
                 v-if="visible"
-                class="t3-modal__background"
+                class="modal__background"
                 data-testid="background"
                 @click="onBackgroundClick"
             ></div>
@@ -101,7 +101,7 @@ function onBackgroundClick() {
 </script>
 
 <style lang="scss">
-.t3-modal {
+.modal {
     top: 0;
     left: 0;
     position: fixed;

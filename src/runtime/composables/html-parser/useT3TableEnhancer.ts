@@ -18,18 +18,18 @@ export function useT3TableEnhancer(
             const tables = el.value.getElementsByTagName('table')
             for (const table of tables) {
                 const container = document.createElement('div')
-                container.classList.add('t3-table')
+                container.classList.add('table')
 
                 table.replaceWith(container)
 
                 const viewport = document.createElement('div')
-                viewport.classList.add('t3-table__viewport')
+                viewport.classList.add('table__viewport')
 
                 const overlayLeft = document.createElement('div')
-                overlayLeft.classList.add('t3-table__overlay-left')
+                overlayLeft.classList.add('table__overlay-left')
 
                 const overlayRight = document.createElement('div')
-                overlayRight.classList.add('t3-table__overlay-right')
+                overlayRight.classList.add('table__overlay-right')
 
                 container.appendChild(overlayLeft)
                 container.appendChild(overlayRight)
@@ -54,11 +54,11 @@ export function useT3TableEnhancer(
             (detached) => {
                 if (detached) {
                     overlay.classList.add(
-                        `t3-table__overlay-${direction}--visible`
+                        `table__overlay-${direction}--visible`
                     )
                 } else {
                     overlay.classList.remove(
-                        `t3-table__overlay-${direction}--visible`
+                        `table__overlay-${direction}--visible`
                     )
                 }
             },

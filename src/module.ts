@@ -27,6 +27,7 @@ export interface ModuleOptions {
     }
     // URL of the frontend project, used for page meta data
     baseUrl: string
+    componentPrefix?: string
     // UID from cookiebot, required if cookie consent banner should be shown
     cookiebotUid?: string
     // Path to SCSS Variables to override default values defined in runtime/assets/style/*.scss

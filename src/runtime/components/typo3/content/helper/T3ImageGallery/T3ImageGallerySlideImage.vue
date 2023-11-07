@@ -1,16 +1,16 @@
 <template>
-    <div class="t3-image-gallery-slide-image">
+    <div class="image-gallery-slide-image">
         <Swiper
-            class="t3-image-gallery-slide-image__swiper"
+            class="image-gallery-slide-image__swiper"
             :initial-slide="activeIndex"
             :modules="[Navigation, Thumbs]"
             :navigation="{
-                nextEl: '.t3-image-gallery-slide-image__navigation.t3-image-gallery-slide-image__navigation--next',
-                prevEl: '.t3-image-gallery-slide-image__navigation.t3-image-gallery-slide-image__navigation--prev',
+                nextEl: '.image-gallery-slide-image__navigation.image-gallery-slide-image__navigation--next',
+                prevEl: '.image-gallery-slide-image__navigation.image-gallery-slide-image__navigation--prev',
                 disabledClass:
-                    't3-image-gallery-slide-image__navigation--disabled',
-                lockClass: 't3-image-gallery-slide-image__navigation--lock',
-                hiddenClass: 't3-image-gallery-slide-image__navigation--hidden',
+                    'image-gallery-slide-image__navigation--disabled',
+                lockClass: 'image-gallery-slide-image__navigation--lock',
+                hiddenClass: 'image-gallery-slide-image__navigation--hidden',
             }"
             :slides-per-view="1"
             :thumbs="{ swiper: thumbsSwiper }"
@@ -21,12 +21,12 @@
                 v-for="(image, index) in images"
                 v-slot="{ isActive }"
                 :key="index"
-                class="t3-image-gallery-slide-image__slide"
+                class="image-gallery-slide-image__slide"
             >
                 <div
-                    class="t3-image-gallery-slide-image__image"
+                    class="image-gallery-slide-image__image"
                     :class="{
-                        't3-image-gallery-slide-image__image--active': isActive,
+                        'image-gallery-slide-image__image--active': isActive,
                     }"
                 >
                     <slot name="image" :image="image">
@@ -35,10 +35,10 @@
                 </div>
             </SwiperSlide>
             <div
-                class="t3-image-gallery-slide-image__navigation t3-image-gallery-slide-image__navigation--prev"
+                class="image-gallery-slide-image__navigation image-gallery-slide-image__navigation--prev"
             ></div>
             <div
-                class="t3-image-gallery-slide-image__navigation t3-image-gallery-slide-image__navigation--next"
+                class="image-gallery-slide-image__navigation image-gallery-slide-image__navigation--next"
             ></div>
         </Swiper>
     </div>
@@ -70,7 +70,7 @@ function setSwiper(swiper: SwiperClass) {
 </script>
 
 <style lang="scss">
-.t3-image-gallery-slide-image {
+.image-gallery-slide-image {
     height: 100%;
 
     &__swiper {

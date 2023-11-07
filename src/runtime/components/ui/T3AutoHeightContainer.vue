@@ -1,6 +1,6 @@
 <template>
-    <component :is="tag" ref="container" class="t3-auto-height-container">
-        <div ref="content" class="t3-auto-height-container__content">
+    <component :is="tag" ref="container" class="auto-height-container">
+        <div ref="content" class="auto-height-container__content">
             <slot />
         </div>
     </component>
@@ -36,7 +36,7 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss">
-.t3-auto-height-container {
+.auto-height-container {
     overflow: hidden;
 }
 </style>

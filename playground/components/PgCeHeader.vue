@@ -1,16 +1,11 @@
 <template>
-    <div class="t3-ce-header">
-        <T3Header :content="contentElement.content" />
-    </div>
+    <T3CeHeader />
 </template>
 
 <script setup lang="ts">
-import { T3Model, useT3ColorScheme, useT3Content } from '#imports'
+import { useT3ColorScheme } from '#imports'
+import { T3CeHeader } from '#components'
 import colors from '@/colors'
-
-const { injectContentElement } = useT3Content()
-
-const contentElement = injectContentElement<T3Model.Typo3.Content.Data.Header>()
 
 const colorScheme = useT3ColorScheme({
     light: {
@@ -29,7 +24,7 @@ const colorScheme = useT3ColorScheme({
 </script>
 
 <style lang="scss">
-.t3-ce-header {
+.ce-header {
     color: v-bind('colorScheme.font');
 }
 </style>

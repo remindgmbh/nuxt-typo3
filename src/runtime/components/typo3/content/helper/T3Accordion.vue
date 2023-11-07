@@ -1,14 +1,14 @@
 <template>
-    <div class="t3-accordion">
+    <div class="accordion">
         <section
             v-for="(item, index) in items"
             :key="index"
-            class="t3-accordion__item"
+            class="accordion__item"
         >
             <button
-                class="t3-accordion__link"
+                class="accordion__link"
                 :class="{
-                    't3-accordion__link--active': activeItems.includes(index),
+                    'accordion__link--active': activeItems.includes(index),
                 }"
                 type="button"
                 @click="toggle(index)"
@@ -18,9 +18,9 @@
             <T3CollapseTransition v-if="!disabledItems.includes(index)">
                 <section
                     v-show="activeItems.includes(index)"
-                    class="t3-accordion__content-wrapper"
+                    class="accordion__content-wrapper"
                 >
-                    <div class="t3-accordion__content">
+                    <div class="accordion__content">
                         <slot name="content" :item="item" :index="index" />
                     </div>
                 </section>

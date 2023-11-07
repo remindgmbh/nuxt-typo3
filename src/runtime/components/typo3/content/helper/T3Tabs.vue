@@ -1,19 +1,19 @@
 <template>
-    <section class="t3-tabs">
-        <div class="t3-tabs__links">
+    <section class="tabs">
+        <div class="tabs__links">
             <button
                 v-for="(item, index) in props.items"
                 :key="index"
-                class="t3-tabs__link"
-                :class="{ 't3-tabs__link--active': activeItemIndex === index }"
+                class="tabs__link"
+                :class="{ 'tabs__link--active': activeItemIndex === index }"
                 @click="toggle(index)"
             >
                 <slot name="title" :item="item" :index="index" />
             </button>
         </div>
-        <T3AutoHeightContainer class="t3-tabs__contents">
+        <T3AutoHeightContainer class="tabs__contents">
             <transition v-bind="transition">
-                <section :key="activeItemIndex" class="t3-tabs__content">
+                <section :key="activeItemIndex" class="tabs__content">
                     <slot name="content" :item="activeItem" />
                 </section>
             </transition>

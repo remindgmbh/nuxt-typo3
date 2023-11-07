@@ -25,6 +25,7 @@ export default defineNuxtConfig({
     },
     css: ['@/assets/base.scss'],
     typo3: {
+        componentPrefix: 'Pg',
         scssForwards: ['@/assets/breakpoints.scss'],
     },
     modules: ['@remindgmbh/nuxt-typo3'],
