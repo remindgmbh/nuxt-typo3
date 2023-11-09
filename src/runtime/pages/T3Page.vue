@@ -15,9 +15,9 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
+import { onBeforeRouteUpdate } from 'vue-router'
 import {
-    useRoute,
     useT3ApiData,
     useT3ApiPath,
     useT3DynamicComponent,
@@ -33,7 +33,6 @@ const { t } = useI18n()
 // params (e.g. for solr) change
 const currentPagePath = ref<string>(useT3ApiPath().currentPagePath.value)
 const { pageData, pageError } = useT3ApiData()
-const route = useRoute()
 
 const currentPageData = computed(
     () => pageData.value[currentPagePath.value] ?? pageError.value?.data,
@@ -50,12 +49,9 @@ const BackendLayout = useT3DynamicComponent(
 
 const PageError = useT3DynamicComponent<typeof T3PageError>('PageError')
 
-watch(
-    () => ({ ...route }),
-    (value, oldValue) => {
-        if (value.path === oldValue.path) {
-            currentPagePath.value = value.fullPath
-        }
-    },
-)
+onBeforeRouteUpdate((to, from) => {
+    if (from.path === to.path) {
+        currentPagePath.value = to.fullPath
+    }
+})
 </script>
