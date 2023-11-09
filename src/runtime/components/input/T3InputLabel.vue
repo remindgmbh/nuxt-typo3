@@ -15,6 +15,6 @@ withDefaults(
     {
         tag: 'label',
         label: undefined,
-    }
+    },
 )
 </script>

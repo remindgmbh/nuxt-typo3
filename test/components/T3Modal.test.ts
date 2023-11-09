@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { describe, expect, it } from 'vitest'
-import { fireEvent, render, RenderOptions } from '@testing-library/vue'
+import { fireEvent, render, type RenderOptions } from '@testing-library/vue'
 import { defu } from 'defu'
 import T3Modal from '../../src/runtime/components/ui/T3Modal.vue'
 
@@ -13,7 +13,7 @@ describe('T3Modal', () => {
             defu(options, {
                 props: { modelValue: false },
                 slots: { default: modalContent },
-            } as RenderOptions)
+            } as RenderOptions),
         )
 
     it('should not show modal initially', () => {
@@ -72,7 +72,7 @@ describe('T3Modal', () => {
         const { emitted, getByTestId, queryByText, rerender } = renderComponent(
             {
                 props: { modelValue: true, closeOnOutsideClick: true },
-            }
+            },
         )
 
         const background = getByTestId('background')

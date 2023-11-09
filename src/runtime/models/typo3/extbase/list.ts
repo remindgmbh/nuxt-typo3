@@ -1,4 +1,4 @@
-import { Pagination, Property } from '.'
+import type { Pagination, Property } from '.'
 
 export interface List<T> {
     count: number

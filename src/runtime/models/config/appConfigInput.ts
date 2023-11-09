@@ -1,5 +1,5 @@
-import { I18nOptions } from 'vue-i18n'
-import { CeOptions, Spacing } from '.'
+import type { I18nOptions } from 'vue-i18n'
+import type { CeOptions, Spacing } from '.'
 
 export interface AppConfigInput {
     // config for content elements, type key has to match CType

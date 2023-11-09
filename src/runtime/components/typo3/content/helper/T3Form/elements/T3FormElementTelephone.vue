@@ -28,6 +28,6 @@ const props = defineProps<{
 const Textfield = useT3DynamicComponent<typeof T3Textfield>('Textfield')
 
 const { required, placeholder, validation } = useT3FormElement(
-    props.formElement
+    props.formElement,
 )
 </script>

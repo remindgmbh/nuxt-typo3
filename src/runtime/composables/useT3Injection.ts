@@ -1,4 +1,4 @@
-import { InjectionKey, inject } from 'vue'
+import { type InjectionKey, inject } from 'vue'
 
 export function useT3Injection() {
     function injectStrict<T>(key: InjectionKey<T>, fallback?: T) {

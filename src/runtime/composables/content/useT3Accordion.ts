@@ -1,9 +1,9 @@
-import { ref, toValue, MaybeRefOrGetter } from 'vue'
+import { ref, toValue, type MaybeRefOrGetter } from 'vue'
 
 export function useT3Accordion(
     initialActiveItems: MaybeRefOrGetter<any[]>,
     disabledItems: MaybeRefOrGetter<any[]>,
-    multiple: MaybeRefOrGetter<boolean>
+    multiple: MaybeRefOrGetter<boolean>,
 ) {
     const activeItems = ref<number[]>([])
 

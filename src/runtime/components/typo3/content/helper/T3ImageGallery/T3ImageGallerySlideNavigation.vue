@@ -43,7 +43,8 @@
 </template>
 
 <script setup lang="ts">
-import { FreeMode, Scrollbar, Swiper as SwiperClass } from 'swiper'
+import { FreeMode, Scrollbar } from 'swiper/modules'
+import { Swiper as SwiperClass } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { T3Model } from '#imports'
 

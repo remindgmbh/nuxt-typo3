@@ -72,14 +72,14 @@ onMounted(() => {
             table.value,
             'left',
             (detached) => (left.value = !detached),
-            viewport.value
+            viewport.value,
         )
 
         detectScrollEnd(
             table.value,
             'right',
             (detached) => (right.value = !detached),
-            viewport.value
+            viewport.value,
         )
     }
 })

@@ -6,27 +6,27 @@ export function useT3Navigation() {
     const route = useRoute()
     const { currentInitialData } = useT3ApiData()
 
-    const rootPageNavigation = computed<T3Model.Typo3.NavItem | undefined>(() =>
-        currentInitialData.value?.navigation.at(0)
+    const rootPageNavigation = computed<T3Model.Typo3.NavItem | undefined>(
+        () => currentInitialData.value?.navigation.at(0),
     )
 
     const navItemsWithChildren = computed<T3Model.Typo3.NavItem[]>(() =>
         (rootPageNavigation.value?.children ?? []).filter(
-            (child) => child.children
-        )
+            (child) => child.children,
+        ),
     )
 
     const activeNavItems = computed<T3Model.Typo3.NavItem[]>(() =>
         rootPageNavigation.value
             ? getActiveNavItems(route.path, rootPageNavigation.value) ?? []
-            : []
+            : [],
     )
 
     function getActiveNavItems(
         path: string,
         navItem: T3Model.Typo3.NavItem,
         result: T3Model.Typo3.NavItem[] = [],
-        deleteCount = 0
+        deleteCount = 0,
     ): T3Model.Typo3.NavItem[] | undefined {
         result.push(navItem)
         if (navItem.link === path) {
@@ -38,7 +38,7 @@ export function useT3Navigation() {
                     path,
                     childNavItem,
                     result,
-                    deleteCount
+                    deleteCount,
                 )
                 if (childResult) {
                     return childResult

@@ -54,7 +54,7 @@ const props = withDefaults(
         contentTransitionName: 'modal-content-transition',
         closeOnOutsideClick: false,
         tag: 'div',
-    }
+    },
 )
 
 const { injectScrollbarDisabled } = useT3TopbarLayout()
@@ -82,7 +82,7 @@ const backgroundTransitioning = ref(false)
 const contentTransitioning = ref(false)
 
 const transitioning = computed(
-    () => backgroundTransitioning.value || contentTransitioning.value
+    () => backgroundTransitioning.value || contentTransitioning.value,
 )
 
 function setBackgroundTransitioning(value: boolean) {

@@ -9,19 +9,19 @@ export function useT3ContentUtil() {
     const { backgroundColors } = useT3Theme()
 
     const ceOptions = computed(
-        () => config.contentElements[contentElement.value.type]
+        () => config.contentElements[contentElement.value.type],
     )
 
     const backgroundColorName = computed<string>(
-        () => contentElement.value.appearance.backgroundColor
+        () => contentElement.value.appearance.backgroundColor,
     )
 
     const backgroundColorValue = computed<string | undefined>(
-        () => backgroundColors.value?.[backgroundColorName.value]
+        () => backgroundColors.value?.[backgroundColorName.value],
     )
 
     const backgroundFullWidth = computed<boolean>(
-        () => !!contentElement.value.appearance.backgroundFullWidth
+        () => !!contentElement.value.appearance.backgroundFullWidth,
     )
 
     const containerClasses = computed(() => ({
@@ -31,13 +31,13 @@ export function useT3ContentUtil() {
     }))
 
     const cookieAccepted = computed<boolean>(() =>
-        isAccepted(contentElement.value.cookie.category)
+        isAccepted(contentElement.value.cookie.category),
     )
 
     const ignoreCookies = computed<boolean>(() =>
         ceOptions.value?.ignoreCookies instanceof Function
             ? ceOptions.value.ignoreCookies(contentElement.value)
-            : ceOptions.value?.ignoreCookies ?? false
+            : ceOptions.value?.ignoreCookies ?? false,
     )
 
     const maxWidth = computed<string | undefined>(() => {
@@ -49,30 +49,30 @@ export function useT3ContentUtil() {
     const padding = computed<boolean>(() =>
         ceOptions.value?.padding instanceof Function
             ? ceOptions.value?.padding(contentElement.value)
-            : ceOptions.value?.padding ?? true
+            : ceOptions.value?.padding ?? true,
     )
 
     const spaceBefore = computed<string>(
-        () => config.spacing[contentElement.value.appearance.spaceBefore]
+        () => config.spacing[contentElement.value.appearance.spaceBefore],
     )
     const spaceAfter = computed<string>(
-        () => config.spacing[contentElement.value.appearance.spaceAfter]
+        () => config.spacing[contentElement.value.appearance.spaceAfter],
     )
     const spaceBeforeInside = computed<string>(
         () =>
             backgroundColorName.value &&
-            config.spacing[contentElement.value.appearance.spaceBeforeInside]
+            config.spacing[contentElement.value.appearance.spaceBeforeInside],
     )
     const spaceAfterInside = computed<string>(
         () =>
             backgroundColorName.value &&
-            config.spacing[contentElement.value.appearance.spaceAfterInside]
+            config.spacing[contentElement.value.appearance.spaceAfterInside],
     )
 
     const width = computed<'default' | 'extended' | 'full'>(() =>
         ceOptions.value?.width instanceof Function
             ? ceOptions.value?.width(contentElement.value)
-            : ceOptions.value?.width ?? 'default'
+            : ceOptions.value?.width ?? 'default',
     )
 
     return {

@@ -1,4 +1,4 @@
-import { Asset, TypoLink } from '..'
+import type { Asset, TypoLink } from '..'
 
 export interface Meta {
     title: string

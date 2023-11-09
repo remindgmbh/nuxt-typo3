@@ -1,4 +1,4 @@
-import { MessageContext } from '../plugins/i18n'
+import { type MessageContext } from '../plugins/i18n'
 import { useT3Util } from '../composables/useT3Util'
 
 const { capitalize } = useT3Util()

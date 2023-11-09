@@ -1,5 +1,5 @@
-import { Form } from './form'
-import { Header } from '.'
+import type { Form } from './form'
+import type { Header } from '.'
 
 export interface Formframework extends Header {
     link: string

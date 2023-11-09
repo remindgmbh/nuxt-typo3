@@ -1,4 +1,4 @@
-import { computed, Ref } from 'vue'
+import { computed, type Ref } from 'vue'
 import { useLogger } from '#nuxt-logger'
 import * as T3Model from '../models'
 import { useState, useT3Api, useT3ApiPath } from '#imports'
@@ -24,7 +24,7 @@ export function useT3ApiData() {
         useState('t3-pageError')
 
     const currentInitialData = computed<T3Model.Typo3.InitialData | undefined>(
-        () => initialData.value[apiPath.currentInitialDataPath.value]
+        () => initialData.value[apiPath.currentInitialDataPath.value],
     )
 
     const currentFooterContent = computed<
@@ -32,11 +32,11 @@ export function useT3ApiData() {
     >(() => footerContent.value[apiPath.currentInitialDataPath.value])
 
     const currentPageData = computed<T3Model.Typo3.Page.Data | undefined>(
-        () => pageData.value[apiPath.currentPagePath.value]
+        () => pageData.value[apiPath.currentPagePath.value],
     )
 
     async function loadInitialData(
-        path: string
+        path: string,
     ): Promise<T3Model.Typo3.InitialData | undefined> {
         const initialDataPath = apiPath.getInitialDataPath(path)
 
@@ -56,7 +56,7 @@ export function useT3ApiData() {
     }
 
     async function loadFooterContent(
-        path: string
+        path: string,
     ): Promise<T3Model.Typo3.Content.Element<any> | undefined> {
         const initialDataPath = apiPath.getInitialDataPath(path)
 
@@ -77,7 +77,7 @@ export function useT3ApiData() {
     }
 
     async function loadPageData(
-        path: string
+        path: string,
     ): Promise<T3Model.Typo3.Page.Data | undefined> {
         pageError.value = {}
         if (!pageData.value[path]) {
@@ -109,7 +109,7 @@ export function useT3ApiData() {
     function setCurrentBreadcrumbTitle(title: string): void {
         if (currentPageData.value) {
             const currentIndex = currentPageData.value.breadcrumbs.findIndex(
-                (breadcrumb) => breadcrumb.current
+                (breadcrumb) => breadcrumb.current,
             )
             if (currentIndex >= 0) {
                 currentPageData.value.breadcrumbs[currentIndex].title = title
@@ -131,7 +131,7 @@ export function useT3ApiData() {
     }
 
     function getContentElementById(
-        id: number
+        id: number,
     ): T3Model.Typo3.Content.Element | undefined {
         return Object.values(currentPageData.value?.content ?? {})
             .flat()

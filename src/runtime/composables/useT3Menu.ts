@@ -1,4 +1,4 @@
-import { ComponentPublicInstance, Ref, readonly, watch } from 'vue'
+import { type ComponentPublicInstance, type Ref, readonly, watch } from 'vue'
 import { useRoute, useState } from '#imports'
 
 export function useT3Menu(statePrefix: string = 't3-menu') {
@@ -6,13 +6,13 @@ export function useT3Menu(statePrefix: string = 't3-menu') {
 
     const active: Ref<string | undefined> = useState<string | undefined>(
         `${statePrefix}-active`,
-        () => undefined
+        () => undefined,
     )
 
     const triggers: Ref<Array<HTMLElement | ComponentPublicInstance>> =
         useState<Array<HTMLElement | ComponentPublicInstance>>(
             `${statePrefix}-triggers`,
-            () => []
+            () => [],
         )
 
     function close(): void {

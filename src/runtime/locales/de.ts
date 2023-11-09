@@ -1,4 +1,4 @@
-import { MessageContext } from '../plugins/i18n'
+import { type MessageContext } from '../plugins/i18n'
 
 export default {
     cookie: {

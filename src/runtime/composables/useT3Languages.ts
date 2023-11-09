@@ -6,11 +6,11 @@ export function useT3Languages() {
     const { currentInitialData, currentPageData } = useT3ApiData()
 
     const initialDataLanguages = computed<T3Model.Typo3.Language[]>(
-        () => currentInitialData.value?.i18n ?? []
+        () => currentInitialData.value?.i18n ?? [],
     )
 
     const pageDataLanguages = computed<T3Model.Typo3.Language[]>(
-        () => currentPageData.value?.i18n ?? []
+        () => currentPageData.value?.i18n ?? [],
     )
 
     const availableLanguages = computed<T3Model.Typo3.Language[]>(() =>
@@ -25,16 +25,16 @@ export function useT3Languages() {
                           initialDataLanguages.value.find(
                               (initialDataLanguage) =>
                                   initialDataLanguage.languageId ===
-                                  pageDataLanguage.languageId
+                                  pageDataLanguage.languageId,
                           ) ?? pageDataLanguage
                       )
                   }
               })
-            : initialDataLanguages.value
+            : initialDataLanguages.value,
     )
 
     const activeLanguage = computed<T3Model.Typo3.Language | undefined>(() =>
-        availableLanguages.value.find((language) => language.active)
+        availableLanguages.value.find((language) => language.active),
     )
 
     return {

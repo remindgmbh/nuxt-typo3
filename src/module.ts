@@ -8,9 +8,9 @@ import {
     installModule,
     addImports,
 } from '@nuxt/kit'
-import { ViteConfig } from '@nuxt/schema'
+import type { ViteConfig } from '@nuxt/schema'
 import { defu } from 'defu'
-import { CSSOptions } from 'vite'
+import type { CSSOptions } from 'vite'
 import { name, version } from '../package.json'
 
 export const CONFIG_KEY = 'typo3'
@@ -55,7 +55,7 @@ export default defineNuxtModule<ModuleOptions>({
 
         options = nuxt.options.runtimeConfig.public[CONFIG_KEY] = defu(
             nuxt.options.runtimeConfig.public[CONFIG_KEY],
-            options
+            options,
         )
 
         if (options.scssForwards) {
@@ -70,7 +70,7 @@ export default defineNuxtModule<ModuleOptions>({
                             .map((value) => `@forward "${value}"`)
                             .join(';')};`.concat(
                             nuxt.options.vite.css?.preprocessorOptions?.scss
-                                .additionalData ?? ''
+                                .additionalData ?? '',
                         ),
                     },
                 },
@@ -78,7 +78,7 @@ export default defineNuxtModule<ModuleOptions>({
 
             nuxt.options.vite.css = defu(
                 cssOptions,
-                nuxt.options.vite.css ?? {}
+                nuxt.options.vite.css ?? {},
             )
         }
 
@@ -102,7 +102,7 @@ export default defineNuxtModule<ModuleOptions>({
 
         nuxt.options.css.unshift(
             resolver.resolve('runtime/assets/styles/container.scss'),
-            resolver.resolve('runtime/assets/styles/paddedContent.scss')
+            resolver.resolve('runtime/assets/styles/paddedContent.scss'),
         )
 
         installModule('@remindgmbh/nuxt-logger')

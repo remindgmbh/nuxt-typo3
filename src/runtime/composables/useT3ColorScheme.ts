@@ -23,7 +23,7 @@ export function useT3ColorScheme<T>(colorSchemes: { [theme: string]: T }) {
             colorSchemes[selectedThemeAndBackground] as any,
             colorSchemes[selectedTheme.value] as any,
             colorSchemes[defaultThemeAndBackground] as any,
-            colorSchemes[defaultTheme] as any
+            colorSchemes[defaultTheme] as any,
         ) as T
     })
 

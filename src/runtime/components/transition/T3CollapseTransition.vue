@@ -17,7 +17,7 @@ withDefaults(
     defineProps<{
         transitionName?: string
     }>(),
-    { transitionName: 'collapse-transition' }
+    { transitionName: 'collapse-transition' },
 )
 
 let initialHeight = ''

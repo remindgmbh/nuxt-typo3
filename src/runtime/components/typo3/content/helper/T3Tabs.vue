@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { TransitionProps } from 'vue'
+import { type TransitionProps } from 'vue'
 import { useT3Tabs } from '#imports'
 
 const props = withDefaults(
@@ -35,7 +35,7 @@ const props = withDefaults(
             name: 'tab-change-transition',
             mode: 'out-in',
         }),
-    }
+    },
 )
 
 const { activeItem, activeItemIndex, toggle } = useT3Tabs(props.items)

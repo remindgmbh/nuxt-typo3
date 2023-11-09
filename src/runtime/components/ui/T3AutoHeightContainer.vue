@@ -13,7 +13,7 @@ withDefaults(
     defineProps<{
         tag?: keyof HTMLElementTagNameMap
     }>(),
-    { tag: 'div' }
+    { tag: 'div' },
 )
 
 const container = ref<HTMLElement>()

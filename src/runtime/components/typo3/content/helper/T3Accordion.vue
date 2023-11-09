@@ -39,12 +39,12 @@ const props = withDefaults(
         initialActiveItems?: number[]
         disabledItems?: number[]
     }>(),
-    { initialActiveItems: () => [], disabledItems: () => [] }
+    { initialActiveItems: () => [], disabledItems: () => [] },
 )
 
 const { activeItems, toggle } = useT3Accordion(
     props.initialActiveItems,
     props.disabledItems,
-    props.multiple
+    props.multiple,
 )
 </script>

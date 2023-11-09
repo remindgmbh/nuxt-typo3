@@ -1,14 +1,14 @@
-import { MaybeRef, computed, ref, toRaw, toValue } from 'vue'
+import { type MaybeRef, computed, ref, toRaw, toValue } from 'vue'
 
 export function useT3SelectInput<T>(
     select: (hoverOption: T) => void,
-    options: MaybeRef<T[]>
+    options: MaybeRef<T[]>,
 ) {
     const hoverOption = ref<T>()
     const hoverOptionIndex = computed<number>(() =>
         toValue(options).findIndex(
-            (value) => toRaw(hoverOption.value) === toRaw(value)
-        )
+            (value) => toRaw(hoverOption.value) === toRaw(value),
+        ),
     )
 
     function supportKeyboardNavigation(e: KeyboardEvent): void {

@@ -41,7 +41,7 @@ const props = defineProps<{
 const container = computed(() => !config.layout.breadcrumbs.fullWidth)
 
 const backgroundColor = computed<string | undefined>(
-    () => backgroundColors.value?.[props.backgroundColor]
+    () => backgroundColors.value?.[props.backgroundColor],
 )
 </script>
 

@@ -1,4 +1,4 @@
-import { Property } from '.'
+import type { Property } from '.'
 
 export interface Detail<T> {
     item: T

@@ -43,7 +43,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { RuleExpression, useField } from 'vee-validate'
+import { type RuleExpression, useField } from 'vee-validate'
 import { useT3DynamicComponent } from '#imports'
 import { T3InputLabel } from '#components'
 
@@ -67,7 +67,7 @@ const { errorMessage, meta, value, handleBlur } = useField<string | undefined>(
     props.validation,
     {
         initialValue: props.defaultValue,
-    }
+    },
 )
 </script>
 

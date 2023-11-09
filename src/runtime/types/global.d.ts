@@ -23,7 +23,7 @@ interface Cookiebot {
     submitCustomConsent: (
         optinPreferences: boolean,
         optinStatistics: boolean,
-        optinMarketing: boolean
+        optinMarketing: boolean,
     ) => void
 }
 

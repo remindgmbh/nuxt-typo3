@@ -1,4 +1,4 @@
-import { AppConfigInput } from '.'
+import type { AppConfigInput } from '.'
 
 export interface AppConfigDefaults {
     contentElements: NonNullable<AppConfigInput['contentElements']>

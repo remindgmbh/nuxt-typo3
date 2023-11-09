@@ -1,5 +1,5 @@
-import { Breadcrumb, Content, Language } from '..'
-import { Meta } from '.'
+import type { Breadcrumb, Content, Language } from '..'
+import type { Meta } from '.'
 
 export interface Data {
     id: number

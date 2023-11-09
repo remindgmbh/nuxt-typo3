@@ -1,5 +1,5 @@
-import { Asset } from '../..'
-import { Text } from '.'
+import type { Asset } from '../..'
+import type { Text } from '.'
 
 export interface TextAsset extends Text {
     assets: Asset[]

@@ -1,4 +1,4 @@
-import { FormElement } from './formElement'
+import type { FormElement } from './formElement'
 
 export interface Form {
     id: string

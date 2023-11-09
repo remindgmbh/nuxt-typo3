@@ -1,4 +1,4 @@
-import { TypoLink } from '.'
+import type { TypoLink } from '.'
 
 export interface Asset {
     publicUrl: string

@@ -1,22 +1,22 @@
-import { computed, Ref } from 'vue'
+import { computed, type Ref } from 'vue'
 import * as T3Model from '../../models'
 
 export function useT3CeTable(
     contentElement: Ref<
         T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Table>
-    >
+    >,
 ) {
     const headerTop = computed<boolean>(() =>
-        [1, 3].includes(contentElement.value.content.tableHeaderPosition)
+        [1, 3].includes(contentElement.value.content.tableHeaderPosition),
     )
     const headerLeft = computed<boolean>(() =>
-        [2, 3].includes(contentElement.value.content.tableHeaderPosition)
+        [2, 3].includes(contentElement.value.content.tableHeaderPosition),
     )
 
     const thead = computed<string[] | undefined>(() =>
         headerTop.value
             ? [...contentElement.value.content.bodytext].shift()
-            : undefined
+            : undefined,
     )
 
     const tbody = computed<string[][]>(() => {
@@ -33,7 +33,7 @@ export function useT3CeTable(
     const tfoot = computed<string[] | undefined>(() =>
         contentElement.value.content.tableTfoot === 1
             ? [...contentElement.value.content.bodytext].pop()
-            : undefined
+            : undefined,
     )
 
     return {

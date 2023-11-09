@@ -12,7 +12,7 @@ withDefaults(
     defineProps<{
         tag?: keyof HTMLElementTagNameMap
     }>(),
-    { tag: 'main' }
+    { tag: 'main' },
 )
 
 const { injectRegisterContent } = useT3TopbarLayout()

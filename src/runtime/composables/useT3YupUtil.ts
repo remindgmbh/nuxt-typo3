@@ -3,7 +3,7 @@ import { Schema, ValidationError } from 'yup'
 export function useT3YupUtil() {
     function parseDateString(
         value: any,
-        _originalValue: any
+        _originalValue: any,
     ): Date | undefined {
         if (value instanceof Date && !isNaN(value.getTime())) {
             return value
@@ -17,7 +17,7 @@ export function useT3YupUtil() {
     }
 
     function schemaToValidateFunction(
-        schema: Schema
+        schema: Schema,
     ): (value: any) => Promise<string | true> {
         return async (value: any) => {
             try {

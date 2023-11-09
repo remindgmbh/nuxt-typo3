@@ -10,6 +10,7 @@
     "type": "module",
     "exports": {
         ".": {
+            "types": "./dist/types.d.ts",
             "import": "./dist/module.mjs",
             "require": "./dist/module.cjs"
         }
@@ -23,51 +24,50 @@
         "dev": "npm run stub && nuxi dev playground",
         "dev:build": "nuxi build playground",
         "dev:test": "vitest",
-        "lint": "npm run lint:prettier && npm run lint:script && npm run lint:style",
-        "lint:prettier": "prettier --check .",
+        "lint": "npm run lint:script && npm run lint:style",
         "lint:script": "eslint --ext \".js,.ts,.vue\" .",
         "lint:style": "stylelint \"**/*.{vue,[s]css}\"",
-        "prepare": "npm run stub && nuxt-module-build",
+        "prepare": "npm run stub && nuxt-module-build build",
         "prepublishOnly": "npm run typecheck && npm run lint",
         "preview": "nuxi preview playground",
-        "stub": "nuxt-module-build --stub && nuxi prepare playground",
+        "stub": "nuxt-module-build build --stub && nuxi prepare playground",
         "test": "vitest run",
         "typecheck": "nuxi typecheck"
     },
     "dependencies": {
-        "@nuxt/kit": "^3.6.1",
+        "@nuxt/kit": "^3.8.1",
         "@remindgmbh/nuxt-logger": "^1.0.1",
-        "defu": "^6.1.2",
+        "defu": "^6.1.3",
         "perfect-debounce": "^1.0.0",
-        "sass": "^1.63.6",
+        "sass": "^1.69.5",
         "sass-loader": "^13.3.2",
         "scule": "^1.0.0",
-        "swiper": "^9.4.1",
-        "vee-validate": "^4.10.2",
-        "vue-i18n": "^9.2.2",
-        "yup": "^1.2.0"
+        "swiper": "^11.0.3",
+        "vee-validate": "^4.11.8",
+        "vue-i18n": "^9.6.5",
+        "yup": "^1.3.2"
     },
     "devDependencies": {
-        "@nuxt/module-builder": "^0.4.0",
-        "@remindgmbh/eslint-config-nuxt": "^1.0.4",
-        "@remindgmbh/stylelint-config": "^1.0.1",
-        "@testing-library/jest-dom": "^5.16.5",
-        "@testing-library/vue": "^7.0.0",
-        "@types/node": "^20.3.2",
-        "eslint": "^8.43.0",
-        "happy-dom": "^9.20.3",
-        "nuxt": "^3.6.1",
-        "postcss": "^8.4.24",
+        "@nuxt/module-builder": "^0.5.4",
+        "@remindgmbh/eslint-config-nuxt": "github:remindgmbh/eslint-config-nuxt#main",
+        "@remindgmbh/stylelint-config": "github:remindgmbh/stylelint-config#main",
+        "@testing-library/jest-dom": "^6.1.4",
+        "@testing-library/vue": "^8.0.0",
+        "@types/node": "^20.9.0",
+        "eslint": "^8.53.0",
+        "happy-dom": "^12.10.3",
+        "nuxt": "^3.8.1",
+        "postcss": "^8.4.31",
         "postcss-html": "^1.5.0",
-        "postcss-scss": "^4.0.6",
-        "prettier": "^2.8.8",
-        "rollup-plugin-copy": "^3.4.0",
-        "stylelint": "^15.9.0",
-        "typescript": "^5.1.6",
-        "vitest": "^0.32.2",
-        "vue-tsc": "^1.8.3"
+        "postcss-scss": "^4.0.9",
+        "prettier": "^3.0.3",
+        "rollup-plugin-copy": "^3.5.0",
+        "stylelint": "^15.11.0",
+        "typescript": "^5.2.2",
+        "vitest": "^0.34.6",
+        "vue-tsc": "^1.8.22"
     },
     "volta": {
-        "node": "18.16.1"
+        "node": "20.9.0"
     }
 }

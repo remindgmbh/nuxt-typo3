@@ -1,4 +1,4 @@
-import { Option } from '.'
+import type { Option } from '.'
 
 export interface OptionGroup {
     label?: string

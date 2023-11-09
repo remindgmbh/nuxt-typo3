@@ -9,6 +9,6 @@ withDefaults(
     defineProps<{
         tag?: keyof HTMLElementTagNameMap
     }>(),
-    { tag: 'footer' }
+    { tag: 'footer' },
 )
 </script>

@@ -9,7 +9,7 @@ export function useT3ApiPath() {
             config.languages.find(
                 (languagePath) =>
                     path.startsWith(languagePath) ||
-                    path === languagePath.slice(0, -1)
+                    path === languagePath.slice(0, -1),
             ) ?? '/'
         )
     }
@@ -17,7 +17,7 @@ export function useT3ApiPath() {
     const currentPagePath = computed<string>(() => useRoute().fullPath)
 
     const currentInitialDataPath = computed<string>(() =>
-        getInitialDataPath(currentPagePath.value)
+        getInitialDataPath(currentPagePath.value),
     )
 
     return {

@@ -14,6 +14,6 @@ withDefaults(
     defineProps<{
         contentElements?: T3Model.Typo3.Content.Element[]
     }>(),
-    { contentElements: () => [] }
+    { contentElements: () => [] },
 )
 </script>

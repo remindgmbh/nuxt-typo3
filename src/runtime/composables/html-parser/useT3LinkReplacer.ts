@@ -1,9 +1,9 @@
-import { Ref, onBeforeUnmount, onMounted, watch } from 'vue'
+import { type Ref, onBeforeUnmount, onMounted, watch } from 'vue'
 import { navigateTo } from '#imports'
 
 export function useT3LinkReplacer(
     el: Ref<HTMLElement | undefined>,
-    content: Ref<string>
+    content: Ref<string>,
 ) {
     let links: HTMLCollectionOf<HTMLAnchorElement> | undefined
 

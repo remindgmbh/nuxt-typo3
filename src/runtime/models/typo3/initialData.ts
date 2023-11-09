@@ -1,4 +1,4 @@
-import { Language, NavItem } from '.'
+import type { Language, NavItem } from '.'
 
 export interface InitialData {
     navigation: NavItem[]

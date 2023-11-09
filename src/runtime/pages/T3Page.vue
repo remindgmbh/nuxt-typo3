@@ -36,7 +36,7 @@ const { pageData, pageError } = useT3ApiData()
 const route = useRoute()
 
 const currentPageData = computed(
-    () => pageData.value[currentPagePath.value] ?? pageError.value?.data
+    () => pageData.value[currentPagePath.value] ?? pageError.value?.data,
 )
 
 if (currentPageData.value) {
@@ -45,7 +45,7 @@ if (currentPageData.value) {
 
 const BackendLayout = useT3DynamicComponent(
     currentPageData.value?.appearance.backendLayout,
-    'Bl'
+    'Bl',
 )
 
 const PageError = useT3DynamicComponent<typeof T3PageError>('PageError')
@@ -56,6 +56,6 @@ watch(
         if (value.path === oldValue.path) {
             currentPagePath.value = value.fullPath
         }
-    }
+    },
 )
 </script>

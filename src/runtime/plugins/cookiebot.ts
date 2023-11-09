@@ -51,7 +51,7 @@ export default defineNuxtPlugin((nuxt) => {
                 JSON.parse(
                     decodeURIComponent(value)
                         .replaceAll("'", '"')
-                        .replaceAll(/([{[,])\s*([a-zA-Z0-9_]+?):/g, '$1"$2":')
+                        .replaceAll(/([{[,])\s*([a-zA-Z0-9_]+?):/g, '$1"$2":'),
                 ),
         })
 

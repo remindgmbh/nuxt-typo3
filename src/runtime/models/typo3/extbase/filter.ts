@@ -1,4 +1,4 @@
-import { FilterValue } from '.'
+import type { FilterValue } from '.'
 
 export interface Filter {
     name: string

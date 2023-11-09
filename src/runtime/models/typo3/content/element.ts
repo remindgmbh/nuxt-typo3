@@ -1,4 +1,4 @@
-import { Appearance, Cookie } from '.'
+import type { Appearance, Cookie } from '.'
 
 export interface Element<T = unknown> {
     id: number

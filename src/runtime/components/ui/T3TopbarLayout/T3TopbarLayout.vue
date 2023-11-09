@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { ComponentPublicInstance, onMounted, ref, watch } from 'vue'
+import { type ComponentPublicInstance, onMounted, ref, watch } from 'vue'
 import { useLogger } from '#nuxt-logger'
 import { useT3TopbarLayout } from '#imports'
 
@@ -13,7 +13,7 @@ const props = withDefaults(
     defineProps<{
         scrollbarDisabled?: boolean
     }>(),
-    { scrollbarDisabled: false }
+    { scrollbarDisabled: false },
 )
 
 const {
@@ -48,7 +48,7 @@ onMounted(() => {
 
 watch(
     () => props.scrollbarDisabled,
-    (value) => (_scrollbarDisabled.value = value)
+    (value) => (_scrollbarDisabled.value = value),
 )
 
 watch(_scrollbarDisabled, (value) => {

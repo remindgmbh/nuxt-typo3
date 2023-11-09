@@ -22,7 +22,7 @@ onMounted(() => {
             if (lineHeight && contentHeight) {
                 lines.value = Math.floor(contentHeight / lineHeight)
             }
-        }, 50)
+        }, 50),
     )
 
     if (root.value) {

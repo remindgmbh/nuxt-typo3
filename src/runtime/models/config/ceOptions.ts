@@ -1,4 +1,4 @@
-import { Typo3 } from '..'
+import type { Typo3 } from '..'
 export interface CeOptions {
     // if set to true, content element is shown even if cookie should block it
     // required if not the whole content element should be blocked by cookie,
@@ -24,6 +24,6 @@ export interface CeOptions {
         | 'extended'
         | 'full'
         | ((
-              contentElement: Typo3.Content.Element<any>
+              contentElement: Typo3.Content.Element<any>,
           ) => 'default' | 'extended' | 'full')
 }

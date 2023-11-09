@@ -1,5 +1,5 @@
-import { Ref } from 'vue'
-import { RouteLocationNormalized } from 'vue-router'
+import { type Ref } from 'vue'
+import { type RouteLocationNormalized } from 'vue-router'
 import { useState } from '#imports'
 
 export function useT3LoadingState(): Ref<{

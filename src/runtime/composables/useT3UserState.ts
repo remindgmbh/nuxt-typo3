@@ -13,7 +13,7 @@ export function useT3UserState() {
     } = useT3ApiData()
 
     const logoutLink = computed<string | undefined>(
-        () => currentInitialData.value?.user.logoutLink
+        () => currentInitialData.value?.user.logoutLink,
     )
 
     const isLoggedIn = computed<boolean>(() => !!logoutLink.value)
@@ -24,7 +24,7 @@ export function useT3UserState() {
 
             const contentElements = Object.values(pageData.content).flat()
             const contentElement = contentElements.find(
-                (contentElement) => contentElement.type === 'felogin_login'
+                (contentElement) => contentElement.type === 'felogin_login',
             ) as
                 | T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.FeloginActionResponse>
                 | undefined

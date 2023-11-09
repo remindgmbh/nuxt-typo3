@@ -13,7 +13,7 @@ export default defineBuildConfig({
                             { src: 'src/runtime/**/*.scss', dest: 'dist' },
                         ],
                         flatten: false,
-                    })
+                    }),
                 )
             }
         },

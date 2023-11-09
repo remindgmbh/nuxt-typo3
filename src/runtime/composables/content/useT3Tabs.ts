@@ -1,4 +1,4 @@
-import { computed, ref, toValue, MaybeRefOrGetter } from 'vue'
+import { computed, ref, toValue, type MaybeRefOrGetter } from 'vue'
 
 export function useT3Tabs(items: MaybeRefOrGetter<any[]>) {
     const activeItemIndex = ref(0)

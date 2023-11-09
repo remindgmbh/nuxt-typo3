@@ -1,9 +1,9 @@
-import { Ref, onMounted, watch } from 'vue'
+import { type Ref, onMounted, watch } from 'vue'
 import { useT3Util } from '#imports'
 
 export function useT3TableEnhancer(
     el: Ref<HTMLElement | undefined>,
-    content: Ref<string>
+    content: Ref<string>,
 ) {
     const { detectScrollEnd } = useT3Util()
 
@@ -46,7 +46,7 @@ export function useT3TableEnhancer(
         direction: 'left' | 'right',
         overlay: HTMLDivElement,
         table: HTMLTableElement,
-        viewport: HTMLDivElement
+        viewport: HTMLDivElement,
     ) {
         detectScrollEnd(
             table,
@@ -54,15 +54,15 @@ export function useT3TableEnhancer(
             (detached) => {
                 if (detached) {
                     overlay.classList.add(
-                        `table__overlay-${direction}--visible`
+                        `table__overlay-${direction}--visible`,
                     )
                 } else {
                     overlay.classList.remove(
-                        `table__overlay-${direction}--visible`
+                        `table__overlay-${direction}--visible`,
                     )
                 }
             },
-            viewport
+            viewport,
         )
     }
 }

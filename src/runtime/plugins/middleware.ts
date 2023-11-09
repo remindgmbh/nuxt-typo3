@@ -33,17 +33,17 @@ export default defineNuxtPlugin(() => {
                     T3Model.Typo3.InitialData?,
                     T3Model.Typo3.Content.Element<any>?,
                     T3Model.Typo3.Page.Data?,
-                    ...unknown[]
+                    ...unknown[],
                 ] = await Promise.all(promises)
 
                 setLocale(
-                    to.name === 'T3Page' ? pageData?.i18n : initialData?.i18n
+                    to.name === 'T3Page' ? pageData?.i18n : initialData?.i18n,
                 )
             } finally {
                 loadingState.value = {}
             }
         },
-        { global: true }
+        { global: true },
     )
 
     function setLocale(languages: T3Model.Typo3.Language[] = []) {

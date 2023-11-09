@@ -105,7 +105,7 @@ function menuOnEnter(element: Element, done: () => void) {
                 done()
                 element.style.height = initialHeight
             },
-        }
+        },
     )
 }
 
@@ -124,7 +124,7 @@ function menuOnLeave(element: Element, done: () => void): void {
                 done()
                 element.style.height = initialHeight
             },
-        }
+        },
     )
 }
 

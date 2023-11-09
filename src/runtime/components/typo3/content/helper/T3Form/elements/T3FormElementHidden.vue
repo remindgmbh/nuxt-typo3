@@ -18,5 +18,8 @@ const { value, setValue } = useField<string | undefined>(name, undefined, {
     initialValue: props.formElement.defaultValue,
 })
 
-watch(() => props.formElement.defaultValue, setValue)
+watch(
+    () => props.formElement.defaultValue,
+    (value) => setValue(value),
+)
 </script>

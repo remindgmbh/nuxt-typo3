@@ -1,14 +1,14 @@
 import { string, Schema } from 'yup'
-import { GenericValidateFunction } from 'vee-validate'
+import { type GenericValidateFunction } from 'vee-validate'
 import { useI18n } from 'vue-i18n'
-import { computed, ref, Ref } from 'vue'
+import { computed, ref, type Ref } from 'vue'
 import * as T3Model from '../../models'
 import { navigateTo, useT3Api, useT3ApiData, useT3YupUtil } from '#imports'
 
 export function useT3CeFeloginLogin(
     contentElement: Ref<
         T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Felogin>
-    >
+    >,
 ) {
     const { t } = useI18n()
     const { schemaToValidateFunction } = useT3YupUtil()
@@ -29,14 +29,14 @@ export function useT3CeFeloginLogin(
     const submitLabel = computed<string>(
         () =>
             contentElement.value.content.data.form.elements.find(
-                (element) => element.name === 'submit'
-            )?.value ?? ''
+                (element) => element.name === 'submit',
+            )?.value ?? '',
     )
 
     const formElements = computed<
         T3Model.Typo3.Content.Data.Form.FormElement[]
     >(
-        () => []
+        () => [],
         // contentElement.value.content.data.form.elements
         //     .filter((element) => element.name !== 'submit')
         //     .map(convert)
@@ -59,7 +59,7 @@ export function useT3CeFeloginLogin(
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     function getValidation(
-        formElement: T3Model.Typo3.Content.Data.Login.FormElement
+        formElement: T3Model.Typo3.Content.Data.Login.FormElement,
     ): GenericValidateFunction[] {
         const result: GenericValidateFunction[] = []
 
@@ -74,7 +74,7 @@ export function useT3CeFeloginLogin(
                         schema = string().required(
                             t('validation.required', {
                                 label: formElement.label,
-                            })
+                            }),
                         )
                         break
                     case 'password':
@@ -94,7 +94,7 @@ export function useT3CeFeloginLogin(
         loading.value = true
 
         const loginType = contentElement.value.content.data.form.elements.find(
-            (element) => element.name === 'logintype'
+            (element) => element.name === 'logintype',
         )?.value as 'login' | 'logout' | undefined
 
         try {

@@ -4,7 +4,7 @@ import { useT3Config } from '#imports'
 
 export function useT3DynamicComponent<T>(
     name: string = 'Default',
-    prefix: string = ''
+    prefix: string = '',
 ): T {
     const { componentPrefix: globalPrefix } = useT3Config()
 

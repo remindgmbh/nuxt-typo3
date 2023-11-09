@@ -69,7 +69,7 @@
 
 <script setup lang="ts">
 import 'swiper/scss'
-import { FreeMode, Navigation, Scrollbar } from 'swiper'
+import { FreeMode, Navigation, Scrollbar } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { ref } from 'vue'
 import { T3Model, useT3DynamicComponent } from '#imports'
@@ -86,7 +86,7 @@ withDefaults(
         header: undefined,
         subheader: undefined,
         type: 'scroll',
-    }
+    },
 )
 
 const Modal = useT3DynamicComponent<typeof T3Modal>('Modal')

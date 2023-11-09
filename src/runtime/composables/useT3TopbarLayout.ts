@@ -1,21 +1,21 @@
 import {
-    ComponentPublicInstance,
-    InjectionKey,
-    Ref,
+    type ComponentPublicInstance,
+    type InjectionKey,
+    type Ref,
     inject,
     provide,
 } from 'vue'
 
 const registerContentInjectionKey = Symbol(
-    't3-topbar-layout:registerContent'
+    't3-topbar-layout:registerContent',
 ) as InjectionKey<(instance: ComponentPublicInstance) => void>
 
 const registerHeaderInjectionKey = Symbol(
-    't3-topbar-layout:registerHeader'
+    't3-topbar-layout:registerHeader',
 ) as InjectionKey<(instance: ComponentPublicInstance) => void>
 
 const scrollbarDisabledInjectionKey = Symbol(
-    't3-topbar-layout:scrollbarDisabled'
+    't3-topbar-layout:scrollbarDisabled',
 ) as InjectionKey<Ref<boolean>>
 
 export function useT3TopbarLayout() {
@@ -32,13 +32,13 @@ export function useT3TopbarLayout() {
     }
 
     function provideRegisterContent(
-        registerContent: (instance: ComponentPublicInstance) => void
+        registerContent: (instance: ComponentPublicInstance) => void,
     ) {
         provide(registerContentInjectionKey, registerContent)
     }
 
     function provideRegisterHeader(
-        registerHeader: (instance: ComponentPublicInstance) => void
+        registerHeader: (instance: ComponentPublicInstance) => void,
     ) {
         provide(registerHeaderInjectionKey, registerHeader)
     }

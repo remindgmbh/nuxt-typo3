@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { TransitionProps, ref } from 'vue'
+import { type TransitionProps, ref } from 'vue'
 import { useT3TopbarLayout } from '#imports'
 
 enum Status {
@@ -31,7 +31,7 @@ withDefaults(
             name: 'menu-transition',
         }),
         tag: 'nav',
-    }
+    },
 )
 
 const { injectScrollbarDisabled } = useT3TopbarLayout()

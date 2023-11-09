@@ -10,28 +10,34 @@ export function useT3Breakpoints() {
     }
 
     const screenWidthsInPx = computed<{ [key: string]: number }>(() =>
-        Object.entries(screenWidths).reduce((result, [key, value]) => {
-            result[key] = getPxValue(value)
-            return result
-        }, {} as { [key: string]: number })
+        Object.entries(screenWidths).reduce(
+            (result, [key, value]) => {
+                result[key] = getPxValue(value)
+                return result
+            },
+            {} as { [key: string]: number },
+        ),
     )
 
     const containerWidthsInPx = computed<{ [key: string]: number }>(() =>
-        Object.entries(containerWidths).reduce((result, [key, value]) => {
-            result[key] = getPxValue(value)
-            return result
-        }, {} as { [key: string]: number })
+        Object.entries(containerWidths).reduce(
+            (result, [key, value]) => {
+                result[key] = getPxValue(value)
+                return result
+            },
+            {} as { [key: string]: number },
+        ),
     )
 
     const breakpointsAsc = computed<string[]>(() =>
         Object.keys(screenWidthsInPx.value).sort(
             (a, b) =>
-                containerWidthsInPx.value[a] - containerWidthsInPx.value[b]
-        )
+                containerWidthsInPx.value[a] - containerWidthsInPx.value[b],
+        ),
     )
 
     const breakpointsDesc = computed<string[]>(() =>
-        [...breakpointsAsc.value].reverse()
+        [...breakpointsAsc.value].reverse(),
     )
 
     return {

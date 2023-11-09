@@ -47,7 +47,7 @@ const colorScheme = useT3ColorScheme({
 })
 
 const activeNavItem = computed(() =>
-    navItemsWithChildren.value.find((item) => item.link === active.value)
+    navItemsWithChildren.value.find((item) => item.link === active.value),
 )
 </script>
 

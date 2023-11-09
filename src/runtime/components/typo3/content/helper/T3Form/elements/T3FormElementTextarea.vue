@@ -26,6 +26,6 @@ const props = defineProps<{
 const Textarea = useT3DynamicComponent<typeof T3Textarea>('Textarea')
 
 const { required, placeholder, validation } = useT3FormElement(
-    props.formElement
+    props.formElement,
 )
 </script>

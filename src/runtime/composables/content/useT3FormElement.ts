@@ -1,6 +1,6 @@
 import { array, boolean, date, number, string, Schema } from 'yup'
 import { useI18n } from 'vue-i18n'
-import { GenericValidateFunction, RuleExpression } from 'vee-validate'
+import { type GenericValidateFunction, type RuleExpression } from 'vee-validate'
 import { computed } from 'vue'
 import * as T3Model from '../../models'
 import { useT3YupUtil } from '#imports'
@@ -8,18 +8,18 @@ import { useT3YupUtil } from '#imports'
 const REGEX_ALPHANUMERIC = /^(\w*)$/
 
 export function useT3FormElement(
-    formElement: T3Model.Typo3.Content.Data.Form.FormElement
+    formElement: T3Model.Typo3.Content.Data.Form.FormElement,
 ) {
     const { t } = useI18n()
     const { parseDateString, parseNumber, schemaToValidateFunction } =
         useT3YupUtil()
 
     const options = computed<{ [key: string]: string }>(
-        () => formElement.properties?.options ?? {}
+        () => formElement.properties?.options ?? {},
     )
 
     const placeholder = computed<string | undefined>(
-        () => formElement.properties?.fluidAdditionalAttributes?.placeholder
+        () => formElement.properties?.fluidAdditionalAttributes?.placeholder,
     )
 
     const validation = computed<RuleExpression<any>>(() => getValidation())
@@ -27,8 +27,8 @@ export function useT3FormElement(
     const required = computed<boolean>(
         () =>
             formElement.validators?.some(
-                (validator) => validator.identifier === 'NotEmpty'
-            ) ?? false
+                (validator) => validator.identifier === 'NotEmpty',
+            ) ?? false,
     )
 
     function getValidation(): RuleExpression<any> {
@@ -53,7 +53,7 @@ export function useT3FormElement(
                     }
                     case 'EmailAddress':
                         schema = string().email(
-                            t('validation.email', { label })
+                            t('validation.email', { label }),
                         )
                         break
 
@@ -86,7 +86,7 @@ export function useT3FormElement(
                     case 'Alphanumeric':
                         schema = string().matches(
                             REGEX_ALPHANUMERIC,
-                            t('validation.alphanumeric', { label })
+                            t('validation.alphanumeric', { label }),
                         )
                         break
                     case 'Integer': {
@@ -117,11 +117,11 @@ export function useT3FormElement(
                     }
                     case 'RegularExpression': {
                         const regex = new RegExp(
-                            validator.options.regularExpression
+                            validator.options.regularExpression,
                         )
                         schema = string().matches(
                             regex,
-                            t('validation.regex', { label })
+                            t('validation.regex', { label }),
                         )
                         break
                     }
@@ -136,14 +136,14 @@ export function useT3FormElement(
                         if (min) {
                             dateSchema = dateSchema.min(
                                 min,
-                                t('validation.min', { label })
+                                t('validation.min', { label }),
                             )
                         }
 
                         if (max) {
                             dateSchema = dateSchema.max(
                                 max,
-                                t('validation.max', { label })
+                                t('validation.max', { label }),
                             )
                         }
 

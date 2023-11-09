@@ -33,13 +33,13 @@ const { breakpointsDesc, screenWidths } = useT3Breakpoints()
 const { getImageUrl } = useT3Asset(props.file)
 
 const fileExtension = computed(() =>
-    props.file.properties.extension === 'svg' ? 'svg' : props.fileExtension
+    props.file.properties.extension === 'svg' ? 'svg' : props.fileExtension,
 )
 
 const src = computed(() =>
     props.file.properties.fileReferenceUid
         ? getImageUrl(fileExtension.value, props.maxWidth, props.maxHeight)
-        : props.file.publicUrl
+        : props.file.publicUrl,
 )
 
 const sources = computed(() => {
@@ -61,7 +61,7 @@ const sources = computed(() => {
                     fileExtension.value,
                     width,
                     undefined,
-                    breakpoint
+                    breakpoint,
                 ),
             })
         }

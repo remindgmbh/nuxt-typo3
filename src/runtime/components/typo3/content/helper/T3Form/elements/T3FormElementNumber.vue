@@ -32,24 +32,24 @@ const props = defineProps<{
 const Textfield = useT3DynamicComponent<typeof T3Textfield>('Textfield')
 
 const { required, placeholder, validation } = useT3FormElement(
-    props.formElement
+    props.formElement,
 )
 
 const step = computed(
     () =>
         Number.parseInt(
-            props.formElement.properties?.fluidAdditionalAttributes?.step ?? ''
-        ) || 1
+            props.formElement.properties?.fluidAdditionalAttributes?.step ?? '',
+        ) || 1,
 )
 
 const min = computed(() =>
     Number.parseInt(
-        props.formElement.properties?.fluidAdditionalAttributes?.min ?? ''
-    )
+        props.formElement.properties?.fluidAdditionalAttributes?.min ?? '',
+    ),
 )
 const max = computed(() =>
     Number.parseInt(
-        props.formElement.properties?.fluidAdditionalAttributes?.max ?? ''
-    )
+        props.formElement.properties?.fluidAdditionalAttributes?.max ?? '',
+    ),
 )
 </script>

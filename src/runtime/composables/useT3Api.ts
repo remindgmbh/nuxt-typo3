@@ -1,5 +1,5 @@
-import { NitroFetchRequest } from 'nitropack'
-import { FetchError, FetchOptions } from 'ofetch'
+import { type NitroFetchRequest } from 'nitropack'
+import { FetchError, type FetchOptions } from 'ofetch'
 import { computed } from 'vue'
 import * as T3Model from '../models'
 import { useRequestHeaders, useT3ApiPath, useT3Config } from '#imports'
@@ -12,8 +12,8 @@ export function useT3Api() {
         // remove undefined header values
         const headers = Object.fromEntries(
             Object.entries(useRequestHeaders(['cookie'])).filter(
-                ([_key, value]) => !!value
-            )
+                ([_key, value]) => !!value,
+            ),
         ) as HeadersInit
 
         return {
@@ -47,7 +47,7 @@ export function useT3Api() {
         try {
             return await get<T3Model.Typo3.Page.Data>(
                 _path,
-                options?.fetchOptions
+                options?.fetchOptions,
             )
         } catch (error) {
             if (error instanceof FetchError) {
@@ -81,7 +81,7 @@ export function useT3Api() {
 
     async function get<T = unknown>(
         request: NitroFetchRequest,
-        options?: FetchOptions
+        options?: FetchOptions,
     ) {
         return await $fetch<T>(request, {
             ...defaultOptions.value,
@@ -92,7 +92,7 @@ export function useT3Api() {
 
     async function post<T = unknown>(
         request: NitroFetchRequest,
-        options?: FetchOptions
+        options?: FetchOptions,
     ) {
         return await $fetch<T>(request, {
             ...defaultOptions.value,

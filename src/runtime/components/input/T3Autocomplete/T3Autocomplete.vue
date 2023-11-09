@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-import { RuleExpression, useField } from 'vee-validate'
+import { type RuleExpression, useField } from 'vee-validate'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import {
     navigateTo,
@@ -97,7 +97,7 @@ const isOpen = ref(false)
 const _optionGroups = ref<T3Model.Input.Autocomplete.OptionGroup[]>([])
 
 const options = computed(() =>
-    props.optionGroups.flatMap((optionGroup) => optionGroup.options)
+    props.optionGroups.flatMap((optionGroup) => optionGroup.options),
 )
 const name = computed(() => props.name)
 
@@ -111,7 +111,7 @@ function onKeyboardSelect(hoverOption: T3Model.Input.Autocomplete.Option) {
 
 const { hoverOption, supportKeyboardNavigation } = useT3SelectInput(
     onKeyboardSelect,
-    options
+    options,
 )
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
@@ -120,7 +120,7 @@ const { errorMessage, meta, value, handleBlur, setValue } = useField<string>(
     props.validation,
     {
         initialValue: props.defaultValue,
-    }
+    },
 )
 
 function onOptionsChanged(value: T3Model.Input.Autocomplete.OptionGroup[]) {

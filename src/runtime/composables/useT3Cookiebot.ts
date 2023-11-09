@@ -15,7 +15,7 @@ export function useT3Cookiebot() {
     }))
 
     function isAccepted(
-        category: T3Model.Typo3.Content.Cookie['category']
+        category: T3Model.Typo3.Content.Cookie['category'],
     ): boolean {
         return category === 'none' || cookieCategories.value[category]
     }
@@ -25,12 +25,12 @@ export function useT3Cookiebot() {
     }
 
     function acceptCookies(
-        category: Omit<T3Model.Typo3.Content.Cookie['category'], 'none'>
+        category: Omit<T3Model.Typo3.Content.Cookie['category'], 'none'>,
     ): void {
         window.Cookiebot?.submitCustomConsent(
             category === 'preferences' || window.Cookiebot.consent.preferences,
             category === 'statistics' || window.Cookiebot.consent.statistics,
-            category === 'marketing' || window.Cookiebot.consent.marketing
+            category === 'marketing' || window.Cookiebot.consent.marketing,
         )
     }
 

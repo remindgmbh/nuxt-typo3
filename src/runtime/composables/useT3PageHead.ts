@@ -1,4 +1,4 @@
-import { MetaObject } from '@nuxt/schema'
+import { type MetaObject } from '@nuxt/schema'
 import * as T3Model from '../models'
 import { useHead, useT3Config } from '#imports'
 
@@ -23,7 +23,7 @@ export function useT3PageHead(pageData: T3Model.Typo3.Page.Data) {
                 name: 'robots',
                 content: Object.keys(meta.robots)
                     .filter(
-                        (key) => meta.robots[key as keyof typeof meta.robots]
+                        (key) => meta.robots[key as keyof typeof meta.robots],
                     )
                     .join(', '),
             },

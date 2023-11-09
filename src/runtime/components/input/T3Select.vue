@@ -79,7 +79,7 @@
 </template>
 
 <script setup lang="ts">
-import { RuleExpression, useField } from 'vee-validate'
+import { type RuleExpression, useField } from 'vee-validate'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { T3Model, useT3SelectInput, useT3DynamicComponent } from '#imports'
 import { T3InputLabel } from '#components'
@@ -122,7 +122,7 @@ const { errorMessage, meta, value, handleBlur, setValue } = useField<string>(
                 ?.value ??
             props.options.at(0)?.value ??
             '',
-    }
+    },
 )
 
 const customSelect = ref<HTMLDivElement>()
@@ -141,11 +141,11 @@ function select(hoverOption: T3Model.Input.Select.Option) {
 
 const { hoverOption, supportKeyboardNavigation } = useT3SelectInput(
     select,
-    props.options
+    props.options,
 )
 
 const selectedOption = computed(() =>
-    props.options.find((option) => option.value === value.value)
+    props.options.find((option) => option.value === value.value),
 )
 
 const canHover = computed(() => window.matchMedia('(hover: hover)').matches)

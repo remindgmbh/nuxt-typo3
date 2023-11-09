@@ -23,20 +23,19 @@ export function useT3Util() {
         content: HTMLElement,
         direction: keyof typeof ROOT_MARGINS,
         callback: (detached: boolean) => void,
-        viewport?: HTMLElement
+        viewport?: HTMLElement,
     ): void {
         const io = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) =>
-                    // eslint-disable-next-line n/no-callback-literal
-                    callback(entry.intersectionRatio !== 0)
+                    callback(entry.intersectionRatio !== 0),
                 )
             },
             {
                 root: viewport,
                 rootMargin: ROOT_MARGINS[direction],
                 threshold: [0, 1e-12],
-            }
+            },
         )
         io.observe(content)
     }

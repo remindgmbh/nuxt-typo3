@@ -9,16 +9,16 @@ export function useT3Asset(asset: T3Model.Typo3.Asset) {
         fileExtension?: string,
         maxWidth?: number,
         maxHeight?: number,
-        breakpoint?: string
+        breakpoint?: string,
     ) {
         const url = new URL('image', config.api.baseUrl)
         url.searchParams.append(
             'uid',
-            asset.properties.fileReferenceUid.toString()
+            asset.properties.fileReferenceUid.toString(),
         )
         url.searchParams.append(
             'fileExtension',
-            fileExtension ?? config.imageFileExtension
+            fileExtension ?? config.imageFileExtension,
         )
 
         if (maxWidth) {

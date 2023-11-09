@@ -1,5 +1,5 @@
 import { useI18n } from 'vue-i18n'
-import { computed, ref, Ref } from 'vue'
+import { computed, ref, type Ref } from 'vue'
 import { useLogger } from '#nuxt-logger'
 import * as T3Model from '../../models'
 import { navigateTo, useT3Api } from '#imports'
@@ -7,7 +7,7 @@ import { navigateTo, useT3Api } from '#imports'
 export function useT3CeFormFormframework(
     contentElement: Ref<
         T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Formframework>
-    >
+    >,
 ) {
     const logger = useLogger()
     const api = useT3Api()
@@ -16,19 +16,19 @@ export function useT3CeFormFormframework(
     const i18n = computed(() => contentElement.value.content.form.i18n)
 
     const submitLabel = computed<string>(
-        () => i18n.value.submit || t('form.submit')
+        () => i18n.value.submit || t('form.submit'),
     )
 
     const loadingLabel = computed<string>(
-        () => i18n.value.loading || t('form.loading')
+        () => i18n.value.loading || t('form.loading'),
     )
 
     const successLabel = computed<string>(
-        () => i18n.value.success || t('form.success')
+        () => i18n.value.success || t('form.success'),
     )
 
     const requiredHint = computed<string>(
-        () => i18n.value.required || t('form.required')
+        () => i18n.value.required || t('form.required'),
     )
 
     const loading = ref<boolean>(false)

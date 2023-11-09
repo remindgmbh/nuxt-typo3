@@ -1,5 +1,5 @@
-import { Form } from './login'
-import { Header } from '.'
+import type { Form } from './login'
+import type { Header } from '.'
 
 interface Message {
     header: string
