@@ -1,9 +1,7 @@
-import { type ComponentPublicInstance, type Ref, readonly, watch } from 'vue'
-import { useRoute, useState } from '#imports'
+import { type ComponentPublicInstance, type Ref, readonly } from 'vue'
+import { useState } from '#imports'
 
 export function useT3Menu(statePrefix: string = 't3-menu') {
-    const route = useRoute()
-
     const active: Ref<string | undefined> = useState<string | undefined>(
         `${statePrefix}-active`,
         () => undefined,
@@ -22,8 +20,6 @@ export function useT3Menu(statePrefix: string = 't3-menu') {
     function toggle(id: string): void {
         active.value = active.value === id ? undefined : id
     }
-
-    watch(route, () => (active.value = undefined))
 
     return {
         active: readonly(active),
