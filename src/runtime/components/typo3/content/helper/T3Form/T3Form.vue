@@ -3,7 +3,7 @@
         <div class="form__elements">
             <template
                 v-for="formElement in formElements"
-                :key="formElement.identifier"
+                :key="formElement.name"
             >
                 <component
                     :is="FormGroup"
