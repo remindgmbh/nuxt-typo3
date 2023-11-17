@@ -3,5 +3,5 @@ export interface Property {
     label: string
     prefix: string
     suffix: string
-    valueOverrides: { [key: string]: any }
+    overrides: { [key: string]: any }
 }
