@@ -19,6 +19,17 @@ export function useT3Util() {
         return value.toString().padStart(maxValue.toString().length, '0')
     }
 
+    function hexToRgb(hex: string) {
+        return hex
+            .replace(
+                /^#?([a-f\d])([a-f\d])([a-f\d])$/i,
+                (_m, r, g, b) => '#' + r + r + g + g + b + b,
+            )
+            .substring(1)
+            .match(/.{2}/g)
+            ?.map((x) => parseInt(x, 16))
+    }
+
     function detectScrollEnd(
         content: HTMLElement,
         direction: keyof typeof ROOT_MARGINS,
@@ -43,6 +54,7 @@ export function useT3Util() {
     return {
         capitalize,
         detectScrollEnd,
+        hexToRgb,
         padNumber,
     }
 }
