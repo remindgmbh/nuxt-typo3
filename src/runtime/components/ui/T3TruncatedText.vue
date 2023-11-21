@@ -1,3 +1,4 @@
+<!-- HTML in slot must not contain multiple font sizes or margin/padding in order to work -->
 <template>
     <div ref="root" class="truncated-text">
         <div ref="content" class="truncated-text__content">
