@@ -16,8 +16,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed, useT3Languages, useT3Theme, useT3UserState } from '#imports'
-
 const props = defineProps<{
     menuVisible: boolean
     scrollbarDisabled: boolean

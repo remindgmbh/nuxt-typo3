@@ -1,5 +1,6 @@
 import { computed } from 'vue'
 import { useT3Config, useT3Cookiebot, useT3Content, useT3Theme } from '#imports'
+import { Config } from '../models'
 
 export function useT3ContentUtil() {
     const { injectContentElement } = useT3Content()
@@ -8,8 +9,11 @@ export function useT3ContentUtil() {
     const { isAccepted } = useT3Cookiebot()
     const { backgroundColors } = useT3Theme()
 
-    const ceOptions = computed(
-        () => config.contentElements[contentElement.value.type],
+    const ceOptions = computed<Config.CeOptions | undefined>(
+        () =>
+            config.contentElements[
+                contentElement.value.type as keyof typeof config.contentElements
+            ],
     )
 
     const backgroundColorName = computed<string>(

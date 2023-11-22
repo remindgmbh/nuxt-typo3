@@ -28,12 +28,6 @@
 
 <script setup lang="ts">
 import { vOnClickOutside } from '@vueuse/components'
-import {
-    computed,
-    useT3Menu,
-    useT3Navigation,
-    useT3ColorScheme,
-} from '#imports'
 import colors from '@/colors'
 
 const { active, triggers, close } = useT3Menu()

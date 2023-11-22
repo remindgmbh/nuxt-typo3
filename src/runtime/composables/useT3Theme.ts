@@ -12,8 +12,12 @@ export function useT3Theme() {
 
     const backgroundColors = computed<{ [name: string]: string }>(() =>
         defu(
-            theme.backgroundColors[selectedTheme.value],
-            theme.backgroundColors[theme.default] ?? {},
+            theme.backgroundColors[
+                selectedTheme.value as keyof typeof theme.backgroundColors
+            ],
+            theme.backgroundColors[
+                theme.default as keyof typeof theme.backgroundColors
+            ] ?? {},
         ),
     )
 

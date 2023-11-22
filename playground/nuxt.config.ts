@@ -29,13 +29,4 @@ export default defineNuxtConfig({
         scssForwards: ['@/assets/breakpoints.scss'],
     },
     modules: ['@remindgmbh/nuxt-typo3'],
-    vite: {
-        server: {
-            hmr: {
-                protocol: 'wss',
-                clientPort: 443,
-                path: 'hmr/',
-            },
-        },
-    },
 })

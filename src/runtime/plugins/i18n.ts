@@ -25,7 +25,12 @@ export default defineNuxtPlugin((nuxt) => {
 
     if (config.i18n.messages) {
         for (const locale of Object.keys(config.i18n.messages)) {
-            mergeLocaleMessage(locale, config.i18n.messages[locale])
+            mergeLocaleMessage(
+                locale,
+                config.i18n.messages[
+                    locale as keyof typeof config.i18n.messages
+                ],
+            )
         }
     }
 

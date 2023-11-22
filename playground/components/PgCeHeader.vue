@@ -3,7 +3,6 @@
 </template>
 
 <script setup lang="ts">
-import { useT3ColorScheme } from '#imports'
 import { T3CeHeader } from '#components'
 import colors from '@/colors'
 

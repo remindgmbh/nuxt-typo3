@@ -45,15 +45,6 @@
 
 <script setup lang="ts">
 import { gsap } from 'gsap'
-import {
-    onMounted,
-    ref,
-    useT3Cookiebot,
-    useT3ApiData,
-    useT3LoadingState,
-    useT3Util,
-    useT3ColorScheme,
-} from '#imports'
 import colors from '@/colors'
 
 const HEADER_HEIGHT = '5rem'
