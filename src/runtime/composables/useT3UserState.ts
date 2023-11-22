@@ -12,15 +12,15 @@ export function useT3UserState() {
         setCurrentInitialData,
     } = useT3ApiData()
 
-    const logoutLink = computed<string | undefined>(
-        () => currentInitialData.value?.user.logoutLink,
+    const isLoggedIn = computed<boolean>(
+        () => currentInitialData.value?.user?.logged ?? false,
     )
 
-    const isLoggedIn = computed<boolean>(() => !!logoutLink.value)
-
     async function logout(): Promise<void> {
-        if (logoutLink.value) {
-            const pageData = await api.getPageData({ path: logoutLink.value })
+        if (isLoggedIn.value) {
+            const pageData = await api.getPageData({
+                path: currentInitialData.value?.user?.logoutLink,
+            })
 
             const contentElements = Object.values(pageData.content).flat()
             const contentElement = contentElements.find(

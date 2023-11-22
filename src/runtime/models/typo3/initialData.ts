@@ -3,7 +3,7 @@ import type { Language, NavItem } from '.'
 export interface InitialData {
     navigation: NavItem[]
     i18n: Language[]
-    user: {
+    user?: {
         logged: boolean
         logoutLink?: string
     }
