@@ -124,6 +124,11 @@ const { errorMessage, meta, value, handleBlur, setValue } = useField<string>(
     },
 )
 
+watch(
+    () => props.defaultValue,
+    (value) => setValue(value ?? ''),
+)
+
 function onOptionsChanged(value: T3Model.Input.Autocomplete.OptionGroup[]) {
     if (value.length) {
         _optionGroups.value = value
