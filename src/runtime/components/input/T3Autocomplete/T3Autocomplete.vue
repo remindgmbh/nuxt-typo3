@@ -89,6 +89,7 @@ onUnmounted(() => {
 
 const emit = defineEmits<{
     (e: 'input', value: string): void
+    (e: 'select', value: T3Model.Input.Autocomplete.Option): void
 }>()
 
 const wrapper = ref<HTMLDivElement>()
@@ -152,6 +153,7 @@ function onSelect(option: T3Model.Input.Autocomplete.Option) {
     handleBlur()
     setValue(option.key)
     close()
+    emit('select', option)
 }
 
 function open() {
