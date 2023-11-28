@@ -8,7 +8,8 @@
         }"
     >
         <component :is="component" v-if="cookieAccepted || ignoreCookies" />
-        <T3CookieOverlay
+        <component
+            :is="CookieOverlay"
             v-else
             :message="contentElement.cookie.message"
             :category="contentElement.cookie.category"
@@ -17,6 +18,7 @@
 </template>
 
 <script setup lang="ts">
+import { T3CookieOverlay } from '#components'
 import { useT3DynamicComponent, useT3ContentUtil, useT3Content } from '#imports'
 
 const { injectContentElement } = useT3Content()
@@ -37,6 +39,9 @@ const {
 } = useT3ContentUtil()
 
 const component = useT3DynamicComponent(contentElement.value.type, 'Ce')
+
+const CookieOverlay =
+    useT3DynamicComponent<typeof T3CookieOverlay>('CookieOverlay')
 </script>
 
 <style lang="scss">
