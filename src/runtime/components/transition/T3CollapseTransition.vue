@@ -1,12 +1,14 @@
 <template>
     <transition
         :name="transitionName"
-        @before-enter="beforeEnter"
-        @enter="enter"
-        @after-enter="afterEnter"
-        @before-leave="beforeLeave"
-        @leave="leave"
-        @after-leave="afterLeave"
+        @before-enter="onBeforeEnter"
+        @enter="onEnter"
+        @enter-cancelled="resetStyles"
+        @after-enter="resetStyles"
+        @before-leave="onBeforeLeave"
+        @leave="onLeave"
+        @after-leave="resetStyles"
+        @leave-cancelled="resetStyles"
     >
         <slot></slot>
     </transition>
@@ -23,34 +25,29 @@ withDefaults(
 let initialHeight = ''
 let initialOverflowY = ''
 
-function beforeEnter(el: Element) {
+function onBeforeEnter(el: Element) {
     if (!(el instanceof HTMLElement)) return
     initialHeight = el.style.height
     initialOverflowY = el.style.overflowY
     el.style.height = '0'
 }
-function enter(el: Element) {
+function onEnter(el: Element) {
     if (!(el instanceof HTMLElement)) return
     el.style.overflowY = 'hidden'
     el.style.height = `${el.scrollHeight}px`
 }
-function afterEnter(el: Element) {
-    if (!(el instanceof HTMLElement)) return
-    el.style.height = initialHeight
-    el.style.overflowY = initialOverflowY
-}
-function beforeLeave(el: Element) {
+function onBeforeLeave(el: Element) {
     if (!(el instanceof HTMLElement)) return
     el.style.height = `${el.scrollHeight}px`
 }
-function leave(el: Element) {
+function onLeave(el: Element) {
     if (!(el instanceof HTMLElement)) return
     if (el.scrollHeight !== 0) {
         el.style.overflowY = 'hidden'
         el.style.height = '0'
     }
 }
-function afterLeave(el: Element) {
+function resetStyles(el: Element) {
     if (!(el instanceof HTMLElement)) return
     el.style.height = initialHeight
     el.style.overflowY = initialOverflowY
