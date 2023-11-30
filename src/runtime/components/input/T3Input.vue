@@ -1,12 +1,5 @@
 <template>
-    <input
-        :id="name"
-        v-model="value"
-        class="input"
-        :name="name"
-        @blur="onBlur"
-        @input="onInput"
-    />
+    <input :id="name" v-model="value" class="input" :name="name" />
 </template>
 
 <script setup lang="ts">
@@ -19,17 +12,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
     (e: 'update:modelValue', value: any): void
-    (e: 'blur', ev: Event): void
-    (e: 'input', ev: Event): void
 }>()
-
-function onBlur(ev: Event) {
-    emit('blur', ev)
-}
-
-function onInput(ev: Event) {
-    emit('input', ev)
-}
 
 const value = computed({
     get() {

@@ -18,7 +18,6 @@
         <div ref="wrapper" class="autocomplete__wrapper">
             <component
                 :is="Input"
-                ref="input"
                 v-model="value"
                 :name="name"
                 class="autocomplete__input"
@@ -27,6 +26,8 @@
                 autocomplete="off"
                 @input="onInput"
                 @blur="handleBlur"
+                @focus="open"
+                @keydown="supportKeyboardNavigation"
             />
             <T3CollapseTransition transition-name="options-transition">
                 <div v-show="isOpen" class="autocomplete__options">
@@ -48,7 +49,7 @@
 
 <script setup lang="ts">
 import { type RuleExpression, useField } from 'vee-validate'
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, onUnmounted, ref, watch } from 'vue'
 import {
     navigateTo,
     T3Model,
@@ -77,13 +78,7 @@ const Input = useT3DynamicComponent<typeof T3Input>('Input')
 
 const InputLabel = useT3DynamicComponent<typeof T3InputLabel>('InputLabel')
 
-onMounted(() => {
-    input.value?.$el.addEventListener('focus', open)
-})
-
 onUnmounted(() => {
-    input.value?.$el.removeEventListener('keydown', supportKeyboardNavigation)
-    input.value?.$el.removeEventListener('focus', open)
     document.removeEventListener('click', closeOnOutsideClick)
 })
 
@@ -93,7 +88,6 @@ const emit = defineEmits<{
 }>()
 
 const wrapper = ref<HTMLDivElement>()
-const input = ref<InstanceType<typeof T3Input>>()
 const isOpen = ref(false)
 const _optionGroups = ref<T3Model.Input.Autocomplete.OptionGroup[]>([])
 
@@ -166,7 +160,6 @@ function open() {
         return
     }
     isOpen.value = true
-    input.value?.$el.addEventListener('keydown', supportKeyboardNavigation)
     document.addEventListener('click', closeOnOutsideClick)
 }
 
@@ -175,7 +168,6 @@ function close() {
         return
     }
     isOpen.value = false
-    input.value?.$el.removeEventListener('keydown', supportKeyboardNavigation)
     document.removeEventListener('click', closeOnOutsideClick)
 }
 </script>
