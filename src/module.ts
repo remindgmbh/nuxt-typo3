@@ -50,7 +50,7 @@ export default defineNuxtModule<ModuleOptions>({
         baseUrl: '',
         cookiebotUid: '',
     },
-    setup(options, nuxt) {
+    async setup(options, nuxt) {
         const resolver = createResolver(import.meta.url)
 
         options = nuxt.options.runtimeConfig.public[CONFIG_KEY] = defu(
@@ -105,7 +105,7 @@ export default defineNuxtModule<ModuleOptions>({
             resolver.resolve('runtime/assets/styles/paddedContent.scss'),
         )
 
-        installModule('@remindgmbh/nuxt-logger')
+        await installModule('@remindgmbh/nuxt-logger')
 
         addImportsDir(resolver.resolve('runtime/composables/**/*'))
         addImports({
