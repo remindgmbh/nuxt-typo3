@@ -36,7 +36,7 @@
     },
     "dependencies": {
         "@nuxt/kit": "^3.8.2",
-        "@remindgmbh/nuxt-logger": "github:remindgmbh/nuxt-logger#main",
+        "@remindgmbh/nuxt-logger": "^1.0.2",
         "defu": "^6.1.3",
         "perfect-debounce": "^1.0.0",
         "sass": "^1.69.5",
@@ -49,8 +49,8 @@
     "devDependencies": {
         "@nuxt/module-builder": "^0.5.4",
         "@nuxt/schema": "^3.8.2",
-        "@remindgmbh/eslint-config-nuxt": "github:remindgmbh/eslint-config-nuxt#main",
-        "@remindgmbh/stylelint-config": "github:remindgmbh/stylelint-config#main",
+        "@remindgmbh/eslint-config-nuxt": "^1.0.5",
+        "@remindgmbh/stylelint-config": "^1.0.2",
         "@testing-library/jest-dom": "^6.1.4",
         "@testing-library/vue": "^8.0.0",
         "@types/node": "^20.9.3",
