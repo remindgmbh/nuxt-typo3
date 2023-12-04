@@ -6,8 +6,7 @@
 
 <script setup lang="ts">
 import { type ComponentPublicInstance, onMounted, ref, watch } from 'vue'
-import { useLogger } from '#nuxt-logger'
-import { useT3TopbarLayout } from '#imports'
+import { useLogger, useT3TopbarLayout } from '#imports'
 
 const props = withDefaults(
     defineProps<{

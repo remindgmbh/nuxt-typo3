@@ -1,8 +1,7 @@
 import { useI18n } from 'vue-i18n'
 import { computed, ref, type Ref } from 'vue'
-import { useLogger } from '#nuxt-logger'
 import * as T3Model from '../../models'
-import { navigateTo, useT3Api } from '#imports'
+import { navigateTo, useLogger, useT3Api } from '#imports'
 
 export function useT3CeFormFormframework(
     contentElement: Ref<

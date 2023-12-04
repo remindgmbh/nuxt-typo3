@@ -1,7 +1,6 @@
 import { computed, type Ref } from 'vue'
-import { useLogger } from '#nuxt-logger'
 import * as T3Model from '../models'
-import { useState, useT3Api, useT3ApiPath } from '#imports'
+import { useLogger, useState, useT3Api, useT3ApiPath } from '#imports'
 
 export function useT3ApiData() {
     const api = useT3Api()
