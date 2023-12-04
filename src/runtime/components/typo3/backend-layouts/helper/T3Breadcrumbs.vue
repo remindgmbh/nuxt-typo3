@@ -1,37 +1,37 @@
 <template>
-    <div class="breadcrumbs">
-        <div class="breadcrumbs__container" :class="{ container }">
+    <div class="t3-breadcrumbs">
+        <div class="t3-breadcrumbs__container" :class="{ container }">
             <div
-                class="breadcrumbs__overlay-left"
-                :class="{ 'breadcrumbs__overlay-left--visible': !left }"
+                class="t3-breadcrumbs__overlay-left"
+                :class="{ 't3-breadcrumbs__overlay-left--visible': !left }"
             ></div>
             <div
-                class="breadcrumbs__overlay-right"
+                class="t3-breadcrumbs__overlay-right"
                 :class="{
-                    'breadcrumbs__overlay-right--visible': !right,
+                    't3-breadcrumbs__overlay-right--visible': !right,
                 }"
             ></div>
-            <div ref="viewport" class="breadcrumbs__viewport">
-                <div ref="content" class="breadcrumbs__content">
+            <div ref="viewport" class="t3-breadcrumbs__viewport">
+                <div ref="content" class="t3-breadcrumbs__content">
                     <template
                         v-for="breadcrumb in props.breadcrumbs"
                         :key="breadcrumb.link"
                     >
                         <span
                             v-if="breadcrumb.current"
-                            class="breadcrumbs__link breadcrumbs__link--disabled"
+                            class="t3-breadcrumbs__link t3-breadcrumbs__link--disabled"
                             >{{ breadcrumb.title }}</span
                         >
                         <NuxtLink
                             v-else
-                            class="breadcrumbs__link"
+                            class="t3-breadcrumbs__link"
                             :to="breadcrumb.link"
                             :target="breadcrumb.target"
                             >{{ breadcrumb.title }}</NuxtLink
                         >
                         <span
                             v-if="!breadcrumb.current"
-                            class="breadcrumbs__divider"
+                            class="t3-breadcrumbs__divider"
                         ></span>
                     </template>
                 </div>
@@ -83,7 +83,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-.breadcrumbs {
+.t3-breadcrumbs {
     background-color: v-bind(backgroundColor);
 
     &__viewport {

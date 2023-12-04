@@ -1,7 +1,7 @@
 <!-- HTML in slot must not contain multiple font sizes or margin/padding in order to work -->
 <template>
-    <div ref="root" class="truncated-text">
-        <div ref="content" class="truncated-text__content">
+    <div ref="root" class="t3-truncated-text">
+        <div ref="content" class="t3-truncated-text__content">
             <slot />
         </div>
     </div>
@@ -62,7 +62,7 @@ function getLineHeight() {
 </script>
 
 <style lang="scss">
-.truncated-text {
+.t3-truncated-text {
     overflow: hidden;
 
     &__content {

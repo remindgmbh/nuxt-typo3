@@ -1,5 +1,5 @@
 <template>
-    <div ref="el" class="topbar-layout">
+    <div ref="el" class="t3-topbar-layout">
         <slot />
     </div>
 </template>
@@ -57,7 +57,7 @@ watch(_scrollbarDisabled, (value) => {
 </script>
 
 <style lang="scss">
-.topbar-layout {
+.t3-topbar-layout {
     display: flex;
     flex-direction: column;
     position: relative;

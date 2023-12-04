@@ -3,7 +3,7 @@
     <div
         v-if="props.content"
         ref="el"
-        class="html"
+        class="t3-html"
         v-html="props.content"
     ></div>
 </template>
@@ -25,7 +25,7 @@ useT3LinkReplacer(el, content)
 </script>
 
 <style lang="scss">
-.html {
+.t3-html {
     :first-child {
         margin-top: 0;
     }

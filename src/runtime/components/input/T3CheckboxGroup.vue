@@ -1,29 +1,28 @@
 <template>
     <fieldset
-        class="checkbox-group"
+        class="t3-checkbox-group"
         :class="{
-            'checkbox-group--required': required,
-            'checkbox-group--disabled': disabled,
-            'checkbox-group--error': meta.touched && !meta.valid,
-            'checkbox-group--success': meta.touched && meta.valid,
+            't3-checkbox-group--required': required,
+            't3-checkbox-group--disabled': disabled,
+            't3-checkbox-group--error': meta.touched && !meta.valid,
+            't3-checkbox-group--success': meta.touched && meta.valid,
         }"
     >
-        <component
-            :is="InputLabel"
-            class="checkbox-group__label"
+        <T3InputLabel
+            class="t3-checkbox-group__label"
             :label="label"
             tag="legend"
         />
-        <div class="checkbox-group__options">
+        <div class="t3-checkbox-group__options">
             <div
                 v-for="(optionLabel, optionValue) in options"
                 :key="optionValue"
-                class="checkbox-group__option"
+                class="t3-checkbox-group__option"
             >
                 <input
                     :id="optionValue.toString()"
                     v-model="value"
-                    class="checkbox-group__option-value"
+                    class="t3-checkbox-group__option-value"
                     type="checkbox"
                     :name="name"
                     :value="optionValue.toString()"
@@ -31,7 +30,7 @@
                     @blur="handleBlur"
                 />
                 <label
-                    class="checkbox-group__option-label"
+                    class="t3-checkbox-group__option-label"
                     :for="optionValue.toString()"
                     >{{ optionLabel }}</label
                 >
@@ -44,8 +43,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { type RuleExpression, useField } from 'vee-validate'
-import { useT3DynamicComponent } from '#imports'
-import { T3InputLabel } from '#components'
 
 const props = defineProps<{
     name: string
@@ -56,8 +53,6 @@ const props = defineProps<{
     disabled?: boolean
     required?: boolean
 }>()
-
-const InputLabel = useT3DynamicComponent<typeof T3InputLabel>('InputLabel')
 
 const name = computed(() => props.name)
 
@@ -71,7 +66,7 @@ const { errorMessage, meta, value, handleBlur } = useField<
 </script>
 
 <style lang="scss">
-.checkbox-group {
+.t3-checkbox-group {
     margin: 0;
 
     &__options {

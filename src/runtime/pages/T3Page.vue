@@ -1,12 +1,11 @@
 <template>
-    <div class="page">
+    <div class="t3-page">
         <component
             :is="BackendLayout"
             v-if="currentPageData"
             :page-data="currentPageData"
         />
-        <component
-            :is="PageError"
+        <T3PageError
             v-else
             :error="pageError ?? { statusText: t('unexpectedError') }"
         />
@@ -23,7 +22,7 @@ import {
     useT3DynamicComponent,
     useT3PageHead,
 } from '#imports'
-import { T3PageError } from '#components'
+import { T3BlDefault } from '#components'
 
 const { t } = useI18n()
 
@@ -45,9 +44,8 @@ if (currentPageData.value) {
 const BackendLayout = useT3DynamicComponent(
     currentPageData.value?.appearance.backendLayout,
     'Bl',
+    T3BlDefault,
 )
-
-const PageError = useT3DynamicComponent<typeof T3PageError>('PageError')
 
 onBeforeRouteUpdate((to, from) => {
     if (from.path === to.path) {

@@ -1,9 +1,9 @@
 <template>
-    <div class="page-error container">
-        <div v-if="error.status" class="page-error__status">
+    <div class="t3-page-error container">
+        <div v-if="error.status" class="t3-page-error__status">
             {{ error.status }}
         </div>
-        <div v-if="error.statusText" class="page-error__status-text">
+        <div v-if="error.statusText" class="t3-page-error__status-text">
             {{ error.statusText }}
         </div>
     </div>

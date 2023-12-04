@@ -2,9 +2,9 @@
     <NuxtLink
         v-if="option.link"
         :to="option.link"
-        class="autocomplete-option"
+        class="t3-autocomplete-option"
         :class="{
-            'autocomplete-option--hover': hovered,
+            't3-autocomplete-option--hover': hovered,
         }"
         @mouseover="onMouseover"
         @mouseleave="onMouseleave"
@@ -12,10 +12,10 @@
     >
     <div
         v-else
-        class="autocomplete-option"
+        class="t3-autocomplete-option"
         :class="{
-            'autocomplete-option--selected': selected,
-            'autocomplete-option--hover': hovered,
+            't3-autocomplete-option--selected': selected,
+            't3-autocomplete-option--hover': hovered,
         }"
         @click="onClick"
         @mouseover="onMouseover"
@@ -54,7 +54,7 @@ function onMouseleave(ev: Event) {
 </script>
 
 <style lang="scss">
-.autocomplete-option {
+.t3-autocomplete-option {
     cursor: pointer;
 }
 </style>

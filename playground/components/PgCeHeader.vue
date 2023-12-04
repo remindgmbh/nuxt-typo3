@@ -1,10 +1,16 @@
 <template>
-    <T3CeHeader />
+    <div class="pg-ce-header">
+        <T3Header :content="contentElement.content" />
+    </div>
 </template>
 
 <script setup lang="ts">
-import { T3CeHeader } from '#components'
+import { T3Model } from '#imports'
 import colors from '@/colors'
+
+const { injectContentElement } = useT3Content()
+
+const contentElement = injectContentElement<T3Model.Typo3.Content.Data.Header>()
 
 const colorScheme = useT3ColorScheme({
     light: {

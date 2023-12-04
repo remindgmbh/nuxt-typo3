@@ -1,6 +1,6 @@
 <template>
     <NuxtLink
-        class="link"
+        class="t3-link"
         :to="to?.href"
         :target="to?.target"
         :title="to?.title"

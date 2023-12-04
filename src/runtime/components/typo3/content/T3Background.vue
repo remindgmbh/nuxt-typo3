@@ -1,5 +1,8 @@
 <template>
-    <div class="background" :class="!backgroundFullWidth && containerClasses">
+    <div
+        class="t3-background"
+        :class="!backgroundFullWidth && containerClasses"
+    >
         <slot />
     </div>
 </template>
@@ -12,7 +15,7 @@ const { backgroundColorValue, backgroundFullWidth, containerClasses } =
 </script>
 
 <style lang="scss">
-.background {
+.t3-background {
     background-color: v-bind('backgroundColorValue');
 }
 </style>

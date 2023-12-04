@@ -1,24 +1,19 @@
 <template>
     <div
-        class="textarea"
+        class="t3-textarea"
         :class="{
-            'textarea--required': required,
-            'textarea--disabled': disabled,
-            'textarea--error': meta.touched && !meta.valid,
-            'textarea--success': meta.touched && meta.valid,
+            't3-textarea--required': required,
+            't3-textarea--disabled': disabled,
+            't3-textarea--error': meta.touched && !meta.valid,
+            't3-textarea--success': meta.touched && meta.valid,
         }"
     >
-        <component
-            :is="InputLabel"
-            class="textarea__label"
-            :label="label"
-            :for="name"
-        />
-        <div class="textarea__wrapper">
+        <T3InputLabel class="t3-textarea__label" :label="label" :for="name" />
+        <div class="t3-textarea__wrapper">
             <textarea
                 :id="name"
                 v-model="value"
-                class="textarea__input"
+                class="t3-textarea__input"
                 :name="name"
                 :placeholder="placeholder"
                 :disabled="disabled"
@@ -32,8 +27,6 @@
 <script setup lang="ts">
 import { type RuleExpression, useField } from 'vee-validate'
 import { computed } from 'vue'
-import { useT3DynamicComponent } from '#imports'
-import { T3InputLabel } from '#components'
 
 const props = defineProps<{
     name: string
@@ -44,8 +37,6 @@ const props = defineProps<{
     disabled?: boolean
     required?: boolean
 }>()
-
-const InputLabel = useT3DynamicComponent<typeof T3InputLabel>('InputLabel')
 
 const name = computed(() => props.name)
 
@@ -60,7 +51,7 @@ const { value, errorMessage, meta, handleBlur } = useField(
 </script>
 
 <style lang="scss">
-.textarea {
+.t3-textarea {
     &__input {
         width: 100%;
         box-sizing: border-box;

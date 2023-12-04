@@ -1,12 +1,11 @@
 <template>
-    <form class="form" @submit="submit">
-        <div class="form__elements">
+    <form class="t3-form" @submit="submit">
+        <div class="t3-form__elements">
             <template
                 v-for="formElement in formElements"
                 :key="formElement.name"
             >
-                <component
-                    :is="FormGroup"
+                <T3FormGroup
                     v-if="formElement.type === 'GridRow'"
                     :form-elements="formElement.elements ?? []"
                     :loading="loading"
@@ -14,9 +13,8 @@
                     <template #error="{ errorMessage }">
                         <slot name="error" :error-message="errorMessage"></slot>
                     </template>
-                </component>
-                <component
-                    :is="FormElement"
+                </T3FormGroup>
+                <T3FormElement
                     v-else
                     :form-element="formElement"
                     :loading="loading"
@@ -24,14 +22,14 @@
                     <template #error="{ errorMessage }">
                         <slot name="error" :error-message="errorMessage"></slot>
                     </template>
-                </component>
+                </T3FormElement>
             </template>
         </div>
         <slot name="before-submit"></slot>
-        <div class="form__submit-wrapper">
+        <div class="t3-form__submit-wrapper">
             <button
-                class="form__submit"
-                :class="{ 'form__submit--loading': loading }"
+                class="t3-form__submit"
+                :class="{ 't3-form__submit--loading': loading }"
                 type="submit"
                 :disabled="loading"
             >
@@ -45,8 +43,7 @@
 
 <script setup lang="ts">
 import { useForm } from 'vee-validate'
-import { T3Model, useT3DynamicComponent } from '#imports'
-import { T3FormElement, T3FormGroup } from '#components'
+import { T3Model } from '#imports'
 
 const { handleSubmit } = useForm()
 
@@ -56,9 +53,6 @@ defineProps<{
     loadingLabel?: string
     submitLabel: string
 }>()
-
-const FormElement = useT3DynamicComponent<typeof T3FormElement>('FormElement')
-const FormGroup = useT3DynamicComponent<typeof T3FormGroup>('FormGroup')
 
 const emit = defineEmits<{
     (e: 'submit', data: { [key: string]: string }): void

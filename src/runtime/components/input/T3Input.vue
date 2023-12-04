@@ -1,5 +1,5 @@
 <template>
-    <input :id="name" v-model="value" class="input" :name="name" />
+    <input :id="name" v-model="value" class="t3-input" :name="name" />
 </template>
 
 <script setup lang="ts">

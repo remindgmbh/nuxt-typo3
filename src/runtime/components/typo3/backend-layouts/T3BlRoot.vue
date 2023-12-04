@@ -1,5 +1,5 @@
 <template>
-    <div class="bl-root">
+    <div class="t3-bl-root">
         <T3Col :content-elements="pageData.content.colPos0" />
     </div>
 </template>

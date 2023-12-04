@@ -1,5 +1,5 @@
 <template>
-    <component :is="tag" class="topbar-layout-content">
+    <component :is="tag" class="t3-topbar-layout-content">
         <slot />
     </component>
 </template>
@@ -26,7 +26,7 @@ if (register && currentInstance && currentInstance.proxy) {
 </script>
 
 <style lang="scss">
-.topbar-layout-content {
+.t3-topbar-layout-content {
     flex-grow: 1;
 }
 </style>

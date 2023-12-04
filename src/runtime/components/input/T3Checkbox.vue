@@ -1,27 +1,26 @@
 <template>
     <div
-        class="checkbox"
+        class="t3-checkbox"
         :class="{
-            'checkbox--required': required,
-            'checkbox--disabled': disabled,
-            'checkbox--error': meta.touched && !meta.valid,
-            'checkbox--success': meta.touched && meta.valid,
+            't3-checkbox--required': required,
+            't3-checkbox--disabled': disabled,
+            't3-checkbox--error': meta.touched && !meta.valid,
+            't3-checkbox--success': meta.touched && meta.valid,
         }"
     >
-        <div class="checkbox__wrapper">
+        <div class="t3-checkbox__wrapper">
             <input
                 :id="name"
                 v-model="value"
-                class="checkbox__input"
+                class="t3-checkbox__input"
                 type="checkbox"
                 :name="name"
                 :value="value"
                 :disabled="disabled"
                 @blur="handleBlur"
             />
-            <component
-                :is="InputLabel"
-                class="checkbox__label"
+            <T3InputLabel
+                class="t3-checkbox__label"
                 :label="label"
                 :for="name"
             />
@@ -33,8 +32,6 @@
 <script setup lang="ts">
 import { type RuleExpression, useField } from 'vee-validate'
 import { computed } from 'vue'
-import { useT3DynamicComponent } from '#imports'
-import { T3InputLabel } from '#components'
 
 const props = defineProps<{
     name: string
@@ -44,8 +41,6 @@ const props = defineProps<{
     disabled?: boolean
     required?: boolean
 }>()
-
-const InputLabel = useT3DynamicComponent<typeof T3InputLabel>('InputLabel')
 
 const name = computed(() => props.name)
 
@@ -59,7 +54,7 @@ const { errorMessage, meta, value, handleBlur } = useField<
 </script>
 
 <style lang="scss">
-.checkbox {
+.t3-checkbox {
     &__wrapper {
         display: flex;
         align-items: center;

@@ -2,18 +2,18 @@
     <component
         :is="tag"
         v-if="visible"
-        class="header"
+        class="t3-header"
         :class="{
-            [`header--${content.headerPosition}`]: content.headerPosition,
+            [`t3-header--${content.headerPosition}`]: content.headerPosition,
         }"
     >
         <slot>
-            <div v-if="content.subheader" class="header__sub">
+            <div v-if="content.subheader" class="t3-header__sub">
                 <slot name="sub">
                     {{ content.subheader }}
                 </slot>
             </div>
-            <div class="header__main">
+            <div class="t3-header__main">
                 <slot name="main">
                     <template v-if="!content.headerLink">{{
                         content.header
@@ -38,7 +38,7 @@ const { visible, tag } = useT3Header(props.content)
 </script>
 
 <style lang="scss">
-.header {
+.t3-header {
     margin: inherit;
 
     &--center {

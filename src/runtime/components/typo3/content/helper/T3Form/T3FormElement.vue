@@ -1,15 +1,15 @@
 <template>
     <div
-        class="form-element"
+        class="t3-form-element"
         :class="[
-            `form-element--${formElement.type}`,
+            `t3-form-element--${formElement.type}`,
             {
-                [`form-element--size-${size}`]: size,
+                [`t3-form-element--size-${size}`]: size,
             },
         ]"
     >
         <component
-            :is="component"
+            :is="FormElement"
             :form-element="formElement"
             :loading="loading"
         >
@@ -23,6 +23,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { T3Model, useT3DynamicComponent } from '#imports'
+import { T3FormElementDefault } from '#components'
 
 const props = defineProps<{
     formElement: T3Model.Typo3.Content.Data.Form.FormElement
@@ -31,11 +32,15 @@ const props = defineProps<{
 
 const size = computed(() => props.formElement.properties?.size)
 
-const component = useT3DynamicComponent(props.formElement.type, 'FormElement')
+const FormElement = useT3DynamicComponent(
+    props.formElement.type,
+    'FormElement',
+    T3FormElementDefault,
+)
 </script>
 
 <style lang="scss">
-.form-element {
+.t3-form-element {
     &--Honeypot,
     &--Hidden {
         display: none;

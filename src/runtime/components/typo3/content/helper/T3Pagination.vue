@@ -1,22 +1,22 @@
 <template>
-    <div class="pagination">
+    <div class="t3-pagination">
         <NuxtLink
             v-if="pagination.prev"
             :to="pagination.prev"
-            class="pagination__link pagination__link--prev"
+            class="t3-pagination__link t3-pagination__link--prev"
         ></NuxtLink>
         <span
             v-else
-            class="pagination__link pagination__link--prev pagination__link--disabled"
+            class="t3-pagination__link t3-pagination__link--prev t3-pagination__link--disabled"
         ></span>
-        <div class="pagination__pages">
+        <div class="t3-pagination__pages">
             <template v-for="page in pagination.pages" :key="page.link">
                 <span
                     v-if="page.active"
-                    class="pagination__link pagination__link--disabled"
+                    class="t3-pagination__link t3-pagination__link--disabled"
                     >{{ page.pageNumber }}</span
                 >
-                <NuxtLink v-else class="pagination__link" :to="page.link">{{
+                <NuxtLink v-else class="t3-pagination__link" :to="page.link">{{
                     page.pageNumber
                 }}</NuxtLink>
             </template>
@@ -24,11 +24,11 @@
         <NuxtLink
             v-if="pagination.next"
             :to="pagination.next"
-            class="pagination__link pagination__link--next"
+            class="t3-pagination__link t3-pagination__link--next"
         ></NuxtLink>
         <span
             v-else
-            class="pagination__link pagination__link--next pagination__link--disabled"
+            class="t3-pagination__link t3-pagination__link--next t3-pagination__link--disabled"
         ></span>
     </div>
 </template>

@@ -1,29 +1,28 @@
 <template>
     <fieldset
-        class="radio-button"
+        class="t3-radio-button"
         :class="{
-            'radio-button--required': required,
-            'radio-button--disabled': disabled,
-            'radio-button--error': meta.touched && !meta.valid,
-            'radio-button--success': meta.touched && meta.valid,
+            't3-radio-button--required': required,
+            't3-radio-button--disabled': disabled,
+            't3-radio-button--error': meta.touched && !meta.valid,
+            't3-radio-button--success': meta.touched && meta.valid,
         }"
     >
-        <component
-            :is="InputLabel"
-            class="radio-button__label"
+        <T3InputLabel
+            class="t3-radio-button__label"
             :label="label"
             tag="legend"
         />
-        <div class="radio-button__options">
+        <div class="t3-radio-button__options">
             <div
                 v-for="(optionLabel, optionValue) in options"
                 :key="optionValue"
-                class="radio-button__option"
+                class="t3-radio-button__option"
             >
                 <input
                     :id="optionValue.toString()"
                     v-model="value"
-                    class="radio-button__option-value"
+                    class="t3-radio-button__option-value"
                     :value="optionValue.toString()"
                     type="radio"
                     :name="name"
@@ -31,7 +30,7 @@
                     @blur="handleBlur"
                 />
                 <label
-                    class="radio-button__option-label"
+                    class="t3-radio-button__option-label"
                     :for="optionValue.toString()"
                     >{{ optionLabel }}</label
                 >
@@ -44,8 +43,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { type RuleExpression, useField } from 'vee-validate'
-import { useT3DynamicComponent } from '#imports'
-import { T3InputLabel } from '#components'
 
 const props = defineProps<{
     name: string
@@ -56,8 +53,6 @@ const props = defineProps<{
     disabled?: boolean
     required?: boolean
 }>()
-
-const InputLabel = useT3DynamicComponent<typeof T3InputLabel>('InputLabel')
 
 const name = computed(() => props.name)
 
@@ -72,7 +67,7 @@ const { errorMessage, meta, value, handleBlur } = useField<string | undefined>(
 </script>
 
 <style lang="scss">
-.radio-button {
+.t3-radio-button {
     margin: 0;
 
     &__options {

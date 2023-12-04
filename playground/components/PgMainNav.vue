@@ -1,18 +1,16 @@
 <template>
-    <div class="rlb-main-nav">
+    <div class="pg-main-nav">
         <template v-if="rootPageNavigation">
-            <NuxtLink
-                class="rlb-main-nav__item"
-                :to="rootPageNavigation.link"
-                >{{ rootPageNavigation.title }}</NuxtLink
-            >
+            <NuxtLink class="pg-main-nav__item" :to="rootPageNavigation.link">{{
+                rootPageNavigation.title
+            }}</NuxtLink>
             <template
                 v-for="navItem in rootPageNavigation.children"
                 :key="navItem.link"
             >
                 <NuxtLink
                     v-if="!navItem.children"
-                    class="rlb-main-nav__item"
+                    class="pg-main-nav__item"
                     :to="navItem.link"
                     >{{ navItem.title }}</NuxtLink
                 >
@@ -25,7 +23,7 @@
                     {{ navItem.title }} ↓
                 </button>
             </template>
-            <NuxtLink class="rlb-main-nav__item" to="/static">Static</NuxtLink>
+            <NuxtLink class="pg-main-nav__item" to="/static">Static</NuxtLink>
         </template>
     </div>
 </template>
@@ -51,7 +49,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-.rlb-main-nav {
+.pg-main-nav {
     display: flex;
     gap: 1rem;
     padding: 1rem;

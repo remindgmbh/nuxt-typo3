@@ -1,25 +1,20 @@
 <template>
     <div
-        class="select"
+        class="t3-select"
         :class="{
-            'select--required': required,
-            'select--disabled': disabled,
-            'select--error': meta.touched && !meta.valid,
-            'select--success': meta.touched && meta.valid,
+            't3-select--required': required,
+            't3-select--disabled': disabled,
+            't3-select--error': meta.touched && !meta.valid,
+            't3-select--success': meta.touched && meta.valid,
         }"
     >
-        <component
-            :is="InputLabel"
-            class="select__label"
-            :label="label"
-            tag="span"
-        />
-        <div class="select__wrapper">
+        <T3InputLabel class="t3-select__label" :label="label" tag="span" />
+        <div class="t3-select__wrapper">
             <select
                 :id="name"
                 ref="nativeSelect"
                 v-model="value"
-                class="select__native"
+                class="t3-select__native"
                 :aria-labelledby="name"
                 :name="name"
                 :disabled="disabled"
@@ -38,27 +33,27 @@
 
             <div
                 ref="customSelect"
-                class="select__custom"
-                :class="{ 'select__custom--active': isOpen }"
+                class="t3-select__custom"
+                :class="{ 't3-select__custom--active': isOpen }"
                 aria-hidden="true"
                 @click="toggle"
             >
-                <div class="select__trigger">
+                <div class="t3-select__trigger">
                     <slot name="trigger" :selected-option="selectedOption">
                         {{ selectedOption?.label }}
                     </slot>
                 </div>
                 <T3CollapseTransition transition-name="options-transition">
-                    <div v-show="isOpen" class="select__options-wrapper">
-                        <div class="select__options">
+                    <div v-show="isOpen" class="t3-select__options-wrapper">
+                        <div class="t3-select__options">
                             <div
                                 v-for="option in options"
                                 :key="option.value"
-                                class="select__option"
+                                class="t3-select__option"
                                 :class="{
-                                    'select__option--selected':
+                                    't3-select__option--selected':
                                         option.value === value,
-                                    'select__option--hover':
+                                    't3-select__option--hover':
                                         option.value === hoverOption?.value,
                                 }"
                                 @click="handleBlurAndSetValue(option.value)"
@@ -81,8 +76,7 @@
 <script setup lang="ts">
 import { type RuleExpression, useField } from 'vee-validate'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
-import { T3Model, useT3SelectInput, useT3DynamicComponent } from '#imports'
-import { T3InputLabel } from '#components'
+import { T3Model, useT3SelectInput } from '#imports'
 
 const props = defineProps<{
     name: string
@@ -93,8 +87,6 @@ const props = defineProps<{
     disabled?: boolean
     required?: boolean
 }>()
-
-const InputLabel = useT3DynamicComponent<typeof T3InputLabel>('InputLabel')
 
 const emit = defineEmits<{
     (e: 'change', option?: T3Model.Input.Select.Option): void
@@ -193,7 +185,7 @@ watch(value, () => emit('change', selectedOption.value))
 </script>
 
 <style lang="scss">
-.select {
+.t3-select {
     position: relative;
 
     &__wrapper {
