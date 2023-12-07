@@ -5,7 +5,7 @@
     "license": "BSD-3-Clause",
     "repository": {
         "type": "git",
-        "url": "https://github.com/remindgmbh/nuxt-typo3"
+        "url": "git+https://github.com/remindgmbh/nuxt-typo3.git"
     },
     "type": "module",
     "exports": {
