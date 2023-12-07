@@ -27,9 +27,10 @@
         "lint": "npm run lint:script && npm run lint:style",
         "lint:script": "eslint --ext \".js,.ts,.vue\" .",
         "lint:style": "stylelint \"**/*.{vue,[s]css}\"",
-        "prepare": "npm run dev:prepare && nuxt-module-build build",
-        "prepublishOnly": "npm run typecheck && npm run lint",
+        "postinstall": "npm --prefix ./playground ci",
+        "prepack": "npm run dev:prepare && nuxt-module-build build",
         "preview": "nuxi preview playground",
+        "static-analysis": "npm run dev:prepare && npm run typecheck && npm run lint",
         "test": "vitest run",
         "test:watch": "vitest watch",
         "typecheck": "nuxi typecheck"
