@@ -25,9 +25,6 @@ export default {
         required: 'Pflichtfeld',
         success: 'Erfolgreich',
     },
-    imageGallery: {
-        close: 'Schließen',
-    },
     unexpectedError: 'unerwarteter Fehler',
     validation: {
         alphanumeric: '{label} darf nur alphabetische Zeichen enthalten.',

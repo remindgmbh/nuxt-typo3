@@ -29,9 +29,6 @@ export default {
         required: 'Required field',
         success: 'Success',
     },
-    imageGallery: {
-        close: 'Close',
-    },
     unexpectedError: 'unexpected error',
     validation: {
         alphanumeric: '{label} may only contain alpha-numeric characters.',
