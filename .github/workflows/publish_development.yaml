@@ -11,4 +11,5 @@ jobs:
     steps:
       - uses: remindgmbh/npm-publish-dev-action@v1.0.0
         with:
+          node-version: 20
           npm-token: ${{ secrets.NPM_TOKEN }}
