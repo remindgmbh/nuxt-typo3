@@ -1,10 +1,13 @@
 import type { I18nOptions } from 'vue-i18n'
 import type { CeOptions, Spacing } from '.'
+import type { Typo3 } from '..'
 
 export interface AppConfigInput {
     breadcrumbs?: {
         fullWidth?: boolean
-        currentTitle?: string | (() => string | undefined)
+        currentTitle?:
+            | string
+            | ((pageData: Typo3.Page.Data) => string | undefined)
     }
     // config for content elements, type key has to match CType
     contentElements?: {

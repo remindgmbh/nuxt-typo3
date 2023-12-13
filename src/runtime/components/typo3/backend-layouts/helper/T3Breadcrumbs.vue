@@ -45,8 +45,7 @@ import { computed, ref, onMounted } from 'vue'
 import { T3Model, useT3Config, useT3Theme, useT3Util } from '#imports'
 
 const props = defineProps<{
-    breadcrumbs: T3Model.Typo3.Breadcrumb[]
-    backgroundColor: string
+    pageData: T3Model.Typo3.Page.Data
 }>()
 
 const config = useT3Config()
@@ -61,11 +60,14 @@ const right = ref(true)
 const container = computed(() => !config.breadcrumbs.fullWidth)
 
 const backgroundColor = computed<string | undefined>(
-    () => backgroundColors.value?.[props.backgroundColor],
+    () =>
+        backgroundColors.value?.[
+            props.pageData.appearance.breadcrumbsBackgroundColor
+        ],
 )
 
 const breadcrumbs = computed(() => {
-    const result = props.breadcrumbs
+    const result = props.pageData.breadcrumbs
 
     if (config.breadcrumbs.currentTitle) {
         const currentIndex = result.findIndex(
@@ -74,7 +76,7 @@ const breadcrumbs = computed(() => {
         if (currentIndex >= 0) {
             const currentTitle =
                 config.breadcrumbs.currentTitle instanceof Function
-                    ? config.breadcrumbs.currentTitle()
+                    ? config.breadcrumbs.currentTitle(props.pageData)
                     : config.breadcrumbs.currentTitle
             if (currentTitle) {
                 result[currentIndex].title = currentTitle

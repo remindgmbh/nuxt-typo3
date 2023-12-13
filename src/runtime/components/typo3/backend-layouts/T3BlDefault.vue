@@ -4,12 +4,7 @@
             <T3Col :content-elements="pageData.content.colPos1687238554" />
         </div>
         <nav v-if="breadcrumbsVisible" class="t3-bl-default__breadcrumbs">
-            <T3Breadcrumbs
-                :breadcrumbs="pageData.breadcrumbs"
-                :background-color="
-                    pageData.appearance.breadcrumbsBackgroundColor
-                "
-            />
+            <T3Breadcrumbs :page-data="pageData" />
         </nav>
         <div class="t3-bl-default__main">
             <T3Col :content-elements="pageData.content.colPos0" />

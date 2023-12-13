@@ -118,36 +118,6 @@ export function useT3ApiData() {
         pageData.value = {}
     }
 
-    function findContentElement<T>(
-        filter: (contentElement: Typo3.Content.Element) => boolean,
-    ) {
-        function isContentElement(
-            contentElement: Typo3.Content.Element,
-        ): contentElement is Typo3.Content.Element<T> {
-            return filter(contentElement)
-        }
-
-        return Object.values(currentPageData.value?.content ?? {})
-            .flat()
-            .find(isContentElement)
-    }
-
-    function findContentElementById<T>(
-        id: number,
-    ): Typo3.Content.Element<T> | undefined {
-        return findContentElement<T>(
-            (contentElement) => contentElement.id === id,
-        )
-    }
-
-    function findContentElementByType<T>(
-        type: string,
-    ): Typo3.Content.Element<T> | undefined {
-        return findContentElement<T>(
-            (contentElement) => contentElement.type === type,
-        )
-    }
-
     return {
         currentFooterContent,
         currentInitialData,
@@ -157,8 +127,6 @@ export function useT3ApiData() {
         clearData,
         clearInitialData,
         clearPageData,
-        findContentElementById,
-        findContentElementByType,
         loadFooterContent,
         loadInitialData,
         loadPageData,
