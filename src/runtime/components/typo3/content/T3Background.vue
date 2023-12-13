@@ -8,10 +8,10 @@
 </template>
 
 <script setup lang="ts">
-import { useT3ContentUtil } from '#imports'
+import { useT3Content } from '#imports'
 
 const { backgroundColorValue, backgroundFullWidth, containerClasses } =
-    useT3ContentUtil()
+    useT3Content()
 </script>
 
 <style lang="scss">

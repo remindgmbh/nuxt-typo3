@@ -1,9 +1,9 @@
 import { computed } from 'vue'
 import * as T3Model from '../models'
-import { useT3ApiData } from '#imports'
+import { useT3Data } from '#imports'
 
 export function useT3Languages() {
-    const { currentInitialData, currentPageData } = useT3ApiData()
+    const { currentInitialData, currentPageData } = useT3Data()
 
     const initialDataLanguages = computed<T3Model.Typo3.Language[]>(
         () => currentInitialData.value?.i18n ?? [],

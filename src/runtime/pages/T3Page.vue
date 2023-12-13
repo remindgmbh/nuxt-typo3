@@ -17,10 +17,10 @@ import { useI18n } from 'vue-i18n'
 import { computed, ref } from 'vue'
 import { onBeforeRouteUpdate } from 'vue-router'
 import {
-    useT3ApiData,
-    useT3ApiPath,
+    useT3Data,
     useT3DynamicComponent,
     useT3PageHead,
+    useRoute,
 } from '#imports'
 import { T3BlDefault } from '#components'
 
@@ -30,8 +30,8 @@ const { t } = useI18n()
 // using the computed currentPagePath the old page content is not available anymore
 // so currentPagePath is only set during created hook and when only the route query
 // params (e.g. for solr) change
-const currentPagePath = ref<string>(useT3ApiPath().currentPagePath.value)
-const { pageData, pageError } = useT3ApiData()
+const currentPagePath = ref<string>(useRoute().fullPath)
+const { pageData, pageError } = useT3Data()
 
 const currentPageData = computed(
     () => pageData.value[currentPagePath.value] ?? pageError.value?.data,

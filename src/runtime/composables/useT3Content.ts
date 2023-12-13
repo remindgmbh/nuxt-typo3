@@ -1,33 +1,100 @@
-import { type InjectionKey, type Ref, inject, provide } from 'vue'
-import { Typo3 } from '../models'
-import { useT3Injection } from '#imports'
+import { computed } from 'vue'
+import {
+    useT3Config,
+    useT3Cookiebot,
+    useT3ContentInjection,
+    useT3Theme,
+} from '#imports'
+import { Config } from '../models'
 
-const contentElementInjectionKey = Symbol('t3-content-element') as InjectionKey<
-    Ref<Typo3.Content.Element<unknown>>
->
 export function useT3Content() {
-    const { injectStrict } = useT3Injection()
+    const { injectContentElement } = useT3ContentInjection()
+    const contentElement = injectContentElement()
+    const config = useT3Config()
+    const { isAccepted } = useT3Cookiebot()
+    const { backgroundColors } = useT3Theme()
 
-    function provideContentElement(contentElement: Ref<Typo3.Content.Element>) {
-        provide(contentElementInjectionKey, contentElement)
-    }
+    const ceOptions = computed<Config.CeOptions | undefined>(
+        () =>
+            config.contentElements[
+                contentElement.value.type as keyof typeof config.contentElements
+            ],
+    )
 
-    function injectContentElement<T>(): Ref<Typo3.Content.Element<T>> {
-        return injectStrict<Ref<Typo3.Content.Element<T>>>(
-            contentElementInjectionKey,
-        )
-    }
+    const backgroundColorName = computed<string>(
+        () => contentElement.value.appearance.backgroundColor,
+    )
 
-    function injectOptionalContentElement<T>() {
-        return inject<Ref<Typo3.Content.Element<T>> | undefined>(
-            contentElementInjectionKey,
-            undefined,
-        )
-    }
+    const backgroundColorValue = computed<string | undefined>(
+        () => backgroundColors.value?.[backgroundColorName.value],
+    )
+
+    const backgroundFullWidth = computed<boolean>(
+        () => !!contentElement.value.appearance.backgroundFullWidth,
+    )
+
+    const containerClasses = computed(() => ({
+        container: width.value !== 'full',
+        'container--extended': width.value === 'extended',
+        [`container--${maxWidth.value}`]: !!maxWidth.value,
+    }))
+
+    const cookieAccepted = computed<boolean>(() =>
+        isAccepted(contentElement.value.cookie.category),
+    )
+
+    const ignoreCookies = computed<boolean>(() =>
+        ceOptions.value?.ignoreCookies instanceof Function
+            ? ceOptions.value.ignoreCookies(contentElement.value)
+            : ceOptions.value?.ignoreCookies ?? false,
+    )
+
+    const maxWidth = computed<string | undefined>(() => {
+        return ceOptions.value?.maxWidth instanceof Function
+            ? ceOptions.value.maxWidth(contentElement.value)
+            : ceOptions.value?.maxWidth
+    })
+
+    const padding = computed<boolean>(() =>
+        ceOptions.value?.padding instanceof Function
+            ? ceOptions.value?.padding(contentElement.value)
+            : ceOptions.value?.padding ?? true,
+    )
+
+    const spaceBefore = computed<string>(
+        () => config.spacing[contentElement.value.appearance.spaceBefore],
+    )
+    const spaceAfter = computed<string>(
+        () => config.spacing[contentElement.value.appearance.spaceAfter],
+    )
+    const spaceBeforeInside = computed<string>(
+        () =>
+            backgroundColorName.value &&
+            config.spacing[contentElement.value.appearance.spaceBeforeInside],
+    )
+    const spaceAfterInside = computed<string>(
+        () =>
+            backgroundColorName.value &&
+            config.spacing[contentElement.value.appearance.spaceAfterInside],
+    )
+
+    const width = computed<'default' | 'extended' | 'full'>(() =>
+        ceOptions.value?.width instanceof Function
+            ? ceOptions.value?.width(contentElement.value)
+            : ceOptions.value?.width ?? 'default',
+    )
 
     return {
-        provideContentElement,
-        injectContentElement,
-        injectOptionalContentElement,
+        backgroundColorName,
+        backgroundColorValue,
+        backgroundFullWidth,
+        containerClasses,
+        cookieAccepted,
+        ignoreCookies,
+        padding,
+        spaceBefore,
+        spaceAfter,
+        spaceBeforeInside,
+        spaceAfterInside,
     }
 }

@@ -1,6 +1,6 @@
-import { Typo3 } from '../models'
+import { Typo3 } from '../../models'
 
-export function useT3ApiData() {
+export function useT3DataUtil() {
     function findContentElement<T>(
         filter: (contentElement: Typo3.Content.Element) => boolean,
         pageData: Typo3.Page.Data,

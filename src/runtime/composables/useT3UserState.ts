@@ -1,26 +1,21 @@
 import { computed } from 'vue'
 import * as T3Model from '../models'
-import { navigateTo, useT3Api, useT3ApiData } from '#imports'
+import { navigateTo, useT3Api, useT3Data, useRoute } from '#imports'
 
 export function useT3UserState() {
     const api = useT3Api()
 
-    const {
-        currentInitialData,
-        currentPageData,
-        clearData,
-        setCurrentInitialData,
-    } = useT3ApiData()
+    const { currentInitialData, currentPageData, clearData } = useT3Data()
 
     const isLoggedIn = computed<boolean>(
         () => currentInitialData.value?.user?.logged ?? false,
     )
 
     async function logout(): Promise<void> {
-        if (isLoggedIn.value) {
-            const pageData = await api.getPageData({
-                path: currentInitialData.value?.user?.logoutLink,
-            })
+        if (isLoggedIn.value && currentInitialData.value?.user?.logoutLink) {
+            const pageData = await api.getPageData(
+                currentInitialData.value?.user?.logoutLink,
+            )
 
             const contentElements = Object.values(pageData.content).flat()
             const contentElement = contentElements.find(
@@ -33,11 +28,11 @@ export function useT3UserState() {
                 contentElement?.content.data.redirectUrl ??
                 currentPageData.value?.slug
 
-            const initialData = await api.getInitialData({
-                fetchOptions: { cache: 'no-cache' },
+            const initialData = await api.getInitialData(useRoute().fullPath, {
+                cache: 'no-cache',
             })
             clearData()
-            setCurrentInitialData(initialData)
+            currentInitialData.value = initialData
 
             await navigateTo({
                 path: redirectUrl,

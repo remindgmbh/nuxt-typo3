@@ -17,10 +17,14 @@
 </template>
 
 <script setup lang="ts">
-import { useT3DynamicComponent, useT3ContentUtil, useT3Content } from '#imports'
+import {
+    useT3DynamicComponent,
+    useT3Content,
+    useT3ContentInjection,
+} from '#imports'
 import { T3CeDefault } from '#components'
 
-const { injectContentElement } = useT3Content()
+const { injectContentElement } = useT3ContentInjection()
 
 const contentElement = injectContentElement()
 
@@ -35,7 +39,7 @@ const {
     spaceAfter,
     spaceBeforeInside,
     spaceAfterInside,
-} = useT3ContentUtil()
+} = useT3Content()
 
 const Component = useT3DynamicComponent(
     contentElement.value.type,

@@ -3,9 +3,9 @@
 </template>
 
 <script setup lang="ts">
-import { useT3Content } from '#imports'
+import { useT3ContentInjection } from '#imports'
 
-const { injectContentElement } = useT3Content()
+const { injectContentElement } = useT3ContentInjection()
 
 const contentElement = injectContentElement()
 </script>

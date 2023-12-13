@@ -3,13 +3,13 @@ import {
     addRouteMiddleware,
     defineNuxtPlugin,
     T3Model,
-    useT3ApiData,
+    useT3Data,
     useT3LoadingState,
 } from '#imports'
 
 export default defineNuxtPlugin(() => {
-    const apiData = useT3ApiData()
     const loadingState = useT3LoadingState()
+    const data = useT3Data()
     const { locale } = i18n.global
 
     addRouteMiddleware(
@@ -19,12 +19,12 @@ export default defineNuxtPlugin(() => {
             loadingState.value.from = from
             loadingState.value.to = to
             const promises: Array<Promise<any>> = [
-                apiData.loadInitialData(to.fullPath),
-                apiData.loadFooterContent(to.fullPath),
+                data.loadInitialData(to.fullPath),
+                data.loadFooterData(to.fullPath),
             ]
 
             if (to.name === 'T3Page') {
-                promises.push(apiData.loadPageData(to.fullPath))
+                promises.push(data.loadPageData(to.fullPath))
             }
 
             try {

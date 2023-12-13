@@ -1,19 +1,29 @@
 import { computed, type Ref } from 'vue'
 import { Typo3 } from '../models'
-import { useLogger, useState, useT3Api, useT3ApiPath } from '#imports'
+import { useLogger, useRoute, useState, useT3Api, useT3Config } from '#imports'
 
-export function useT3ApiData() {
+export function useT3Data() {
     const api = useT3Api()
-    const apiPath = useT3ApiPath()
+    const config = useT3Config()
     const logger = useLogger()
+
+    function getLocalizedRootPath(path: string): string {
+        return (
+            config.languages.find(
+                (languagePath) =>
+                    path.startsWith(languagePath) ||
+                    path === languagePath.slice(0, -1),
+            ) ?? '/'
+        )
+    }
 
     const initialData: Ref<{
         [path: string]: Typo3.InitialData | undefined
     }> = useState('t3-initialData', () => ({}))
 
-    const footerContent: Ref<{
+    const footerData: Ref<{
         [path: string]: Typo3.Content.Element<any> | undefined
-    }> = useState('t3-footerContent', () => ({}))
+    }> = useState('t3-footerData', () => ({}))
 
     const pageData: Ref<{
         [path: string]: Typo3.Page.Data | undefined
@@ -22,49 +32,66 @@ export function useT3ApiData() {
     const pageError: Ref<Typo3.Page.Error | undefined> =
         useState('t3-pageError')
 
-    const currentInitialData = computed<Typo3.InitialData | undefined>(
-        () => initialData.value[apiPath.currentInitialDataPath.value],
+    const currentPagePath = computed(() => useRoute().fullPath)
+
+    const currentRootPath = computed(() =>
+        getLocalizedRootPath(currentPagePath.value),
     )
 
-    const currentFooterContent = computed<
-        Typo3.Content.Element<any> | undefined
-    >(() => footerContent.value[apiPath.currentInitialDataPath.value])
+    const currentInitialData = computed<Typo3.InitialData | undefined>({
+        get() {
+            return initialData.value[currentRootPath.value]
+        },
+        set(value) {
+            initialData.value[currentRootPath.value] = value
+        },
+    })
 
-    const currentPageData = computed<Typo3.Page.Data | undefined>(
-        () => pageData.value[apiPath.currentPagePath.value],
-    )
+    const currentFooterData = computed<Typo3.Content.Element<any> | undefined>({
+        get() {
+            return footerData.value[currentRootPath.value]
+        },
+        set(value) {
+            footerData.value[currentRootPath.value] = value
+        },
+    })
+
+    const currentPageData = computed<Typo3.Page.Data | undefined>({
+        get() {
+            return pageData.value[currentPagePath.value]
+        },
+        set(value) {
+            pageData.value[currentPagePath.value] = value
+        },
+    })
 
     async function loadInitialData(
         path: string,
     ): Promise<Typo3.InitialData | undefined> {
-        const initialDataPath = apiPath.getInitialDataPath(path)
+        const rootPath = getLocalizedRootPath(path)
 
-        if (!initialData.value[initialDataPath]) {
+        if (!initialData.value[rootPath]) {
             try {
-                const result = await api.getInitialData({
-                    path: initialDataPath,
-                })
-                initialData.value[initialDataPath] = result
+                const result = await api.getInitialData(rootPath)
+                initialData.value[rootPath] = result
                 return result
             } catch (error) {
                 // log error and do nothing so undefined is returned
                 logger.error(error)
             }
         }
-        return initialData.value[initialDataPath]
+        return initialData.value[rootPath]
     }
 
-    async function loadFooterContent(
+    async function loadFooterData(
         path: string,
     ): Promise<Typo3.Content.Element<any> | undefined> {
-        const initialDataPath = apiPath.getInitialDataPath(path)
+        const rootPath = getLocalizedRootPath(path)
 
-        if (!footerContent.value[initialDataPath]) {
+        if (!footerData.value[rootPath]) {
             try {
-                const result = await api.getFooterContent({
-                    path: initialDataPath,
-                })
-                footerContent.value[initialDataPath] = result
+                const result = await api.getFooterData(rootPath)
+                footerData.value[rootPath] = result
                 return result
             } catch (error) {
                 // log error and do nothing so undefined is returned
@@ -72,7 +99,7 @@ export function useT3ApiData() {
             }
         }
 
-        return footerContent.value[initialDataPath]
+        return footerData.value[rootPath]
     }
 
     async function loadPageData(
@@ -81,7 +108,7 @@ export function useT3ApiData() {
         pageError.value = {}
         if (!pageData.value[path]) {
             try {
-                const result = await api.getPageData({ path })
+                const result = await api.getPageData(path)
                 pageData.value[path] = result
                 return result
             } catch (error) {
@@ -97,17 +124,14 @@ export function useT3ApiData() {
         return pageData.value[path]
     }
 
-    function setCurrentPage(data: Typo3.Page.Data): void {
-        pageData.value[apiPath.currentPagePath.value] = data
-    }
-
-    function setCurrentInitialData(data: Typo3.InitialData): void {
-        initialData.value[apiPath.currentInitialDataPath.value] = data
-    }
-
     function clearData(): void {
+        clearFooterData()
         clearInitialData()
         clearPageData()
+    }
+
+    function clearFooterData(): void {
+        footerData.value = {}
     }
 
     function clearInitialData(): void {
@@ -119,18 +143,20 @@ export function useT3ApiData() {
     }
 
     return {
-        currentFooterContent,
+        currentFooterData,
         currentInitialData,
         currentPageData,
+        footerData,
+        initialData,
         pageData,
         pageError,
         clearData,
+        clearFooterData,
         clearInitialData,
         clearPageData,
-        loadFooterContent,
+        getLocalizedRootPath,
+        loadFooterData,
         loadInitialData,
         loadPageData,
-        setCurrentInitialData,
-        setCurrentPage,
     }
 }

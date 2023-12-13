@@ -1,10 +1,10 @@
 import { computed } from 'vue'
 import * as T3Model from '../models'
-import { useRoute, useT3ApiData } from '#imports'
+import { useRoute, useT3Data } from '#imports'
 
 export function useT3Navigation() {
     const route = useRoute()
-    const { currentInitialData } = useT3ApiData()
+    const { currentInitialData } = useT3Data()
 
     const rootPageNavigation = computed<T3Model.Typo3.NavItem | undefined>(
         () => currentInitialData.value?.navigation.at(0),

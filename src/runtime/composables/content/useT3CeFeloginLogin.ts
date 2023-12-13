@@ -3,7 +3,13 @@ import { type GenericValidateFunction } from 'vee-validate'
 import { useI18n } from 'vue-i18n'
 import { computed, ref, type Ref } from 'vue'
 import * as T3Model from '../../models'
-import { navigateTo, useT3Api, useT3ApiData, useT3YupUtil } from '#imports'
+import {
+    navigateTo,
+    useRoute,
+    useT3Api,
+    useT3Data,
+    useT3YupUtil,
+} from '#imports'
 
 export function useT3CeFeloginLogin(
     contentElement: Ref<
@@ -13,7 +19,7 @@ export function useT3CeFeloginLogin(
     const { t } = useI18n()
     const { schemaToValidateFunction } = useT3YupUtil()
     const api = useT3Api()
-    const { clearData, setCurrentInitialData, currentPageData } = useT3ApiData()
+    const { clearData, currentInitialData, currentPageData } = useT3Data()
 
     const message = ref<{
         header: string
@@ -118,12 +124,13 @@ export function useT3CeFeloginLogin(
                 result.content.data.status === 'success'
             ) {
                 // Login Status changed => clearData in case logged in user has extended permissions
-                const initialData = await api.getInitialData({
-                    fetchOptions: { cache: 'no-cache' },
-                })
+                const initialData = await api.getInitialData(
+                    useRoute().fullPath,
+                    { cache: 'no-cache' },
+                )
                 const currentPath = currentPageData.value?.slug
                 clearData()
-                setCurrentInitialData(initialData)
+                currentInitialData.value = initialData
 
                 // If no redirect is set up use current path so page reloads and fetches API data
                 if (!redirectUrl) {

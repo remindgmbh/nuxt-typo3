@@ -1,12 +1,12 @@
 import { defu } from 'defu'
 import { computed } from 'vue'
-import { useT3Content, useT3Theme } from '#imports'
+import { useT3ContentInjection, useT3Theme } from '#imports'
 
 export function useT3ColorScheme<T>(
     colorSchemes: { [theme: string]: T },
     backgroundColor?: string,
 ) {
-    const { injectOptionalContentElement } = useT3Content()
+    const { injectOptionalContentElement } = useT3ContentInjection()
 
     const contentElement = injectOptionalContentElement()
 
