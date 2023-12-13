@@ -4,17 +4,15 @@ import { useAppConfig, useRuntimeConfig } from '#imports'
 
 export function useT3Config() {
     const appConfigDefaults: T3Model.Config.AppConfigDefaults = {
+        breadcrumbs: {
+            fullWidth: false,
+        },
         contentElements: {},
         i18n: {
             locale: 'de',
         },
         imageFileExtension: 'webp',
         languages: [],
-        layout: {
-            breadcrumbs: {
-                fullWidth: false,
-            },
-        },
         spacing: {
             'extra-small': '0.5rem',
             small: '1rem',

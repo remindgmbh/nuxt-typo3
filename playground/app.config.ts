@@ -1,4 +1,3 @@
-import { Typo3 } from '../src/runtime/models'
 import de from './locales/de.json'
 import en from './locales/en.json'
 import colors from './colors'
@@ -20,7 +19,7 @@ export default defineAppConfig({
     typo3: {
         contentElements: {
             header: {
-                maxWidth: (contentElement: Typo3.Content.Element) =>
+                maxWidth: (contentElement) =>
                     !contentElement.appearance.backgroundColor ? 'lg' : 'md',
                 width: 'extended',
             },

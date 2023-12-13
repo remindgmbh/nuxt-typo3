@@ -2,6 +2,10 @@ import type { I18nOptions } from 'vue-i18n'
 import type { CeOptions, Spacing } from '.'
 
 export interface AppConfigInput {
+    breadcrumbs?: {
+        fullWidth?: boolean
+        currentTitle?: string | (() => string | undefined)
+    }
     // config for content elements, type key has to match CType
     contentElements?: {
         [type: string]: CeOptions | undefined
@@ -13,12 +17,6 @@ export interface AppConfigInput {
     imageFileExtension?: string
     // language paths in addition to default language
     languages?: string[]
-    layout?: {
-        breadcrumbs: {
-            // if set to true, breadcrumbs ignore container width
-            fullWidth: boolean
-        }
-    }
     spacing?: Spacing
     theme?: {
         backgroundColors: {

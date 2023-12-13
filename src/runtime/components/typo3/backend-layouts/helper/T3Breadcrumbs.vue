@@ -14,7 +14,7 @@
             <div ref="viewport" class="t3-breadcrumbs__viewport">
                 <div ref="content" class="t3-breadcrumbs__content">
                     <template
-                        v-for="breadcrumb in props.breadcrumbs"
+                        v-for="breadcrumb in breadcrumbs"
                         :key="breadcrumb.link"
                     >
                         <span
@@ -58,11 +58,32 @@ const content = ref<HTMLDivElement>()
 const left = ref(true)
 const right = ref(true)
 
-const container = computed(() => !config.layout.breadcrumbs.fullWidth)
+const container = computed(() => !config.breadcrumbs.fullWidth)
 
 const backgroundColor = computed<string | undefined>(
     () => backgroundColors.value?.[props.backgroundColor],
 )
+
+const breadcrumbs = computed(() => {
+    const result = props.breadcrumbs
+
+    if (config.breadcrumbs.currentTitle) {
+        const currentIndex = result.findIndex(
+            (breadcrumb) => breadcrumb.current,
+        )
+        if (currentIndex >= 0) {
+            const currentTitle =
+                config.breadcrumbs.currentTitle instanceof Function
+                    ? config.breadcrumbs.currentTitle()
+                    : config.breadcrumbs.currentTitle
+            if (currentTitle) {
+                result[currentIndex].title = currentTitle
+            }
+        }
+    }
+
+    return result
+})
 
 onMounted(() => {
     if (viewport.value && content.value) {
