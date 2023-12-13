@@ -6,6 +6,7 @@ import {
     defineNuxtModule,
     extendPages,
     installModule,
+    addRouteMiddleware,
     addImports,
 } from '@nuxt/kit'
 import type { ViteConfig } from '@nuxt/schema'
@@ -119,8 +120,10 @@ export default defineNuxtModule<ModuleOptions>({
         addPlugin({
             src: resolver.resolve('runtime/plugins/i18n'),
         })
-        addPlugin({
-            src: resolver.resolve('runtime/plugins/middleware'),
+        addRouteMiddleware({
+            name: 'data',
+            path: resolver.resolve('runtime/middleware/data.global'),
+            global: true,
         })
         extendPages((pages) => {
             pages.push({
