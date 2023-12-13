@@ -30,6 +30,8 @@
 
 <script setup lang="ts">
 import colors from '@/colors'
+import { ref, onMounted } from 'vue'
+import { useT3Menu, useT3Navigation, useT3ColorScheme } from '#imports'
 
 const { rootPageNavigation } = useT3Navigation()
 const { triggers, toggle } = useT3Menu()

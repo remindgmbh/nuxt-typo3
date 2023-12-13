@@ -29,6 +29,8 @@
 <script setup lang="ts">
 import { vOnClickOutside } from '@vueuse/components'
 import colors from '@/colors'
+import { computed } from 'vue'
+import { useT3Menu, useT3Navigation, useT3ColorScheme } from '#imports'
 
 const { active, triggers, close } = useT3Menu()
 const { navItemsWithChildren } = useT3Navigation()

@@ -29,4 +29,7 @@ export default defineNuxtConfig({
         scssForwards: ['@/assets/breakpoints.scss'],
     },
     modules: ['@remindgmbh/nuxt-typo3'],
+    imports: {
+        autoImport: false,
+    },
 })

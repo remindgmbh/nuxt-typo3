@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { T3Model } from '#imports'
+import { T3Model, useT3Content, useT3ColorScheme } from '#imports'
 import colors from '@/colors'
 
 const { injectContentElement } = useT3Content()

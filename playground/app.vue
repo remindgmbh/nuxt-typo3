@@ -46,6 +46,14 @@
 <script setup lang="ts">
 import { gsap } from 'gsap'
 import colors from '@/colors'
+import { ref, onMounted } from 'vue'
+import {
+    useT3Cookiebot,
+    useT3ApiData,
+    useT3LoadingState,
+    useT3Util,
+    useT3ColorScheme,
+} from '#imports'
 
 const HEADER_HEIGHT = '5rem'
 const HEADER_HEIGHT_DENSE = '3rem'
