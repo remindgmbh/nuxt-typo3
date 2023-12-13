@@ -1,10 +1,6 @@
 <template>
     <T3CollapseTransition transition-name="menu-collapse-transition">
-        <div
-            v-if="activeNavItem"
-            v-on-click-outside="[close, { ignore: triggers }]"
-            class="pg-dropdown"
-        >
+        <div v-if="activeNavItem" class="pg-dropdown">
             <T3AutoHeightContainer class="pg-dropdown__items-wrapper">
                 <div class="pg-dropdown__items">
                     <NuxtLink
@@ -27,12 +23,11 @@
 </template>
 
 <script setup lang="ts">
-import { vOnClickOutside } from '@vueuse/components'
 import colors from '@/colors'
 import { computed } from 'vue'
 import { useT3Menu, useT3Navigation, useT3ColorScheme } from '#imports'
 
-const { active, triggers, close } = useT3Menu()
+const { active } = useT3Menu()
 const { navItemsWithChildren } = useT3Navigation()
 
 const colorScheme = useT3ColorScheme({

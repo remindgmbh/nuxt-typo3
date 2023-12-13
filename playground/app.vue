@@ -8,15 +8,7 @@
             />
             <PgDropdown />
         </T3TopbarLayoutHeader>
-        <T3TopbarLayoutMenu
-            v-model="menuVisible"
-            class="app__menu"
-            :transition="{
-                name: 'menu-transition',
-                onEnter: menuOnEnter,
-                onLeave: menuOnLeave,
-            }"
-        >
+        <T3TopbarLayoutMenu v-model="menuVisible" class="app__menu">
             <div class="app__menu-content">
                 <div>top</div>
                 <div v-for="i in 100" :key="i">{{ i }}</div>
@@ -44,7 +36,6 @@
 </template>
 
 <script setup lang="ts">
-import { gsap } from 'gsap'
 import colors from '@/colors'
 import { ref, onMounted } from 'vue'
 import {
@@ -88,44 +79,6 @@ const colorScheme = useT3ColorScheme({
 const menuVisible = ref(false)
 const scrollbarDisabled = ref(false)
 const headerHeight = ref(HEADER_HEIGHT)
-
-function menuOnEnter(element: Element, done: () => void) {
-    if (!(element instanceof HTMLElement)) {
-        return
-    }
-    const initialHeight = element.style.height
-    gsap.fromTo(
-        element,
-        { height: 0 },
-        {
-            height: element.clientHeight,
-            duration: 1,
-            onComplete: () => {
-                done()
-                element.style.height = initialHeight
-            },
-        },
-    )
-}
-
-function menuOnLeave(element: Element, done: () => void): void {
-    if (!(element instanceof HTMLElement)) {
-        return
-    }
-    const initialHeight = element.style.height
-    gsap.fromTo(
-        element,
-        { height: element.clientHeight },
-        {
-            height: 0,
-            duration: 1,
-            onComplete: () => {
-                done()
-                element.style.height = initialHeight
-            },
-        },
-    )
-}
 
 onMounted(() => {
     detectScrollEnd(document.body, 'top', (detached) => {
