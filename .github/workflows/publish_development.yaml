@@ -9,7 +9,9 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: remindgmbh/npm-publish-dev-action@v1.0.0
+      - uses: remindgmbh/semantic-release-action@v2.1.0
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           node-version: 20
           npm-token: ${{ secrets.NPM_TOKEN }}
+          type: npm-pre
