@@ -121,7 +121,7 @@ export default defineNuxtModule<ModuleOptions>({
             src: resolver.resolve('runtime/plugins/i18n'),
         })
         addRouteMiddleware({
-            name: 'data',
+            name: 't3-data',
             path: resolver.resolve('runtime/middleware/data.global'),
             global: true,
         })
