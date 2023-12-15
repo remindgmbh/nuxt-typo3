@@ -9,7 +9,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: remindgmbh/semantic-release-action@b504efe1020a20016a6f87400d1e920930a52236
+      - uses: remindgmbh/semantic-release-action@v2.1.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           node-version: 20
