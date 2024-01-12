@@ -32,8 +32,8 @@ const props = withDefaults(
     }>(),
     {
         transition: () => ({
-            name: 'tab-change-transition',
             mode: 'out-in',
+            name: 'tab-change-transition',
         }),
     },
 )

@@ -13,8 +13,8 @@ withDefaults(
         tag?: keyof HTMLElementTagNameMap
     }>(),
     {
-        tag: 'label',
         label: undefined,
+        tag: 'label',
     },
 )
 </script>

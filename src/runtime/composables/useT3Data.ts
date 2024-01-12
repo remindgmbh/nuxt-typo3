@@ -1,6 +1,6 @@
-import { computed, type Ref } from 'vue'
-import { Typo3 } from '../models'
+import { type Ref, computed } from 'vue'
 import { useLogger, useRoute, useState, useT3Api, useT3Config } from '#imports'
+import { Typo3 } from '../models'
 
 export function useT3Data() {
     const api = useT3Api()
@@ -150,6 +150,7 @@ export function useT3Data() {
         initialData,
         pageData,
         pageError,
+
         clearData,
         clearFooterData,
         clearInitialData,

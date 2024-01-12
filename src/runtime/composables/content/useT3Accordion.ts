@@ -1,4 +1,4 @@
-import { ref, toValue, type MaybeRefOrGetter } from 'vue'
+import { type MaybeRefOrGetter, ref, toValue } from 'vue'
 
 export function useT3Accordion(
     initialActiveItems: MaybeRefOrGetter<any[]>,

@@ -18,9 +18,9 @@
 
 <script setup lang="ts">
 import {
-    useT3DynamicComponent,
     useT3Content,
     useT3ContentInjection,
+    useT3DynamicComponent,
 } from '#imports'
 import { T3CeDefault } from '#components'
 

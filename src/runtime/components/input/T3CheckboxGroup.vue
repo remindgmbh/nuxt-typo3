@@ -41,8 +41,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { type RuleExpression, useField } from 'vee-validate'
+import { computed } from 'vue'
 
 const props = defineProps<{
     name: string
@@ -60,8 +60,8 @@ const name = computed(() => props.name)
 const { errorMessage, meta, value, handleBlur } = useField<
     string[] | boolean | undefined
 >(name, props.validation, {
-    type: 'checkbox',
     initialValue: props.defaultValue ?? [],
+    type: 'checkbox',
 })
 </script>
 

@@ -27,10 +27,10 @@ withDefaults(
         transition?: TransitionProps
     }>(),
     {
+        tag: 'nav',
         transition: () => ({
             name: 'menu-transition',
         }),
-        tag: 'nav',
     },
 )
 

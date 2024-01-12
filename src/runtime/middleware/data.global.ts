@@ -1,10 +1,10 @@
-import { i18n } from '../plugins/i18n'
 import {
-    defineNuxtRouteMiddleware,
     T3Model,
+    defineNuxtRouteMiddleware,
     useT3Data,
     useT3LoadingState,
 } from '#imports'
+import { i18n } from '../plugins/i18n'
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
     const loadingState = useT3LoadingState()

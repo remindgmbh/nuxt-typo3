@@ -3,9 +3,9 @@
 </template>
 
 <script setup lang="ts">
-import { useField } from 'vee-validate'
 import { computed, watch } from 'vue'
 import { T3Model } from '#imports'
+import { useField } from 'vee-validate'
 
 const props = defineProps<{
     formElement: T3Model.Typo3.Content.Data.Form.FormElement

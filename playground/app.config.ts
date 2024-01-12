@@ -1,17 +1,18 @@
-import de from './locales/de.json'
-import en from './locales/en.json'
 import colors from './colors'
 import { defineAppConfig } from '#imports'
 
+import de from './locales/de.json'
+import en from './locales/en.json'
+
 const backgroundColors = {
+    dark: {
+        black: colors.blackLight,
+    },
     light: {
+        accent: colors.accent,
         black: colors.black,
         primary: colors.primary,
         secondary: colors.secondary,
-        accent: colors.accent,
-    },
-    dark: {
-        black: colors.blackLight,
     },
 }
 
@@ -27,8 +28,8 @@ export default defineAppConfig({
                 maxWidth: 'md',
             },
             textmedia: {
-                maxWidth: 'lg',
                 ignoreCookies: true,
+                maxWidth: 'lg',
                 padding: false,
             },
         },

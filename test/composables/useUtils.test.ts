@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { useT3Util } from '../../src/runtime/composables/useT3Util'
+import { useT3Util } from '../../src/runtime/composables/util/useT3Util'
 
 const util = useT3Util()
 

@@ -1,97 +1,97 @@
-import { type MetaObject } from '@nuxt/schema'
 import * as T3Model from '../models'
 import { useHead, useT3Config } from '#imports'
+import { type MetaObject } from '@nuxt/schema'
 
 export function useT3PageHead(pageData: T3Model.Typo3.Page.Data) {
     const title = pageData.breadcrumbs.find((bc) => bc.current)?.title
-    const meta = pageData.meta
+    const { meta } = pageData
 
     const head: MetaObject = {
-        title: meta.title || title,
         htmlAttrs: {
             lang: pageData.i18n.find((language) => language.active)
                 ?.twoLetterIsoCode,
         },
         meta: [
             {
+                content: meta.description,
                 hid: 'description',
                 name: 'description',
-                content: meta.description,
             },
             {
-                hid: 'robots',
-                name: 'robots',
                 content: Object.keys(meta.robots)
                     .filter(
                         (key) => meta.robots[key as keyof typeof meta.robots],
                     )
                     .join(', '),
+                hid: 'robots',
+                name: 'robots',
             },
             {
+                content: meta.twitterTitle || meta.title || title,
                 hid: 'twitter:title',
                 name: 'twitter:title',
-                content: meta.twitterTitle || meta.title || title,
             },
             {
+                content: meta.twitterDescription,
                 hid: 'twitter:description',
                 name: 'twitter:description',
-                content: meta.twitterDescription,
             },
             {
+                content: meta.twitterCard,
                 hid: 'twitter:card',
                 name: 'twitter:card',
-                content: meta.twitterCard,
             },
             {
+                content: meta.ogTitle || meta.title || title,
                 hid: 'og:title',
                 property: 'og:title',
-                content: meta.ogTitle || meta.title || title,
             },
             {
+                content: meta.ogDescription || meta.description,
                 hid: 'og:description',
                 name: 'og:description',
-                content: meta.ogDescription || meta.description,
             },
             {
+                content: 'website',
                 hid: 'og:type',
                 property: 'og:type',
-                content: 'website',
             },
         ],
+        title: meta.title || title,
     }
 
     if (meta.twitterImage) {
         head.meta?.push({
+            content: meta.twitterImage.publicUrl,
             hid: `twitter:image:${meta.twitterImage.properties.uidLocal}`,
             name: 'twitter:image',
-            content: meta.twitterImage.publicUrl,
         })
     }
 
     if (meta.ogImage) {
         head.meta?.push({
+            content: meta.ogImage.publicUrl,
             hid: `og:image:${meta.ogImage.properties.uidLocal}`,
             name: 'og:image',
-            content: meta.ogImage.publicUrl,
         })
     }
 
     if (meta.canonical && meta.canonical.href) {
         const config = useT3Config()
-        const baseUrl = config.baseUrl
+        const { baseUrl } = config
         const url = `${baseUrl}${meta.canonical.href}`
 
         head.link = [
             {
-                rel: 'canonical',
                 href: url,
+                rel: 'canonical',
             },
         ]
 
         head.meta?.push({
+            content: url,
             hid: 'og:url',
             property: 'og:url',
-            content: url,
         })
     }
 

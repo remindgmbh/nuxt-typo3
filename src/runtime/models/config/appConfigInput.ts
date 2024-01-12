@@ -1,5 +1,5 @@
-import type { I18nOptions } from 'vue-i18n'
 import type { CeOptions, Spacing } from '.'
+import type { I18nOptions } from 'vue-i18n'
 import type { Typo3 } from '..'
 
 export interface AppConfigInput {

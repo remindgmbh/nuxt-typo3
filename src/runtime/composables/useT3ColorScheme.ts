@@ -1,6 +1,6 @@
-import { defu } from 'defu'
-import { computed } from 'vue'
 import { useT3ContentInjection, useT3Theme } from '#imports'
+import { computed } from 'vue'
+import { defu } from 'defu'
 
 export function useT3ColorScheme<T>(
     colorSchemes: { [theme: string]: T },

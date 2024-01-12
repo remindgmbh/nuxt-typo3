@@ -13,9 +13,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { T3Model } from '#imports'
 import { T3Breadcrumbs } from '#components'
+import { T3Model } from '#imports'
+import { computed } from 'vue'
 
 const props = defineProps<{
     pageData: T3Model.Typo3.Page.Data

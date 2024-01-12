@@ -1,18 +1,18 @@
 import {
-    addImportsDir,
     addComponentsDir,
+    addImports,
+    addImportsDir,
     addPlugin,
+    addRouteMiddleware,
     createResolver,
     defineNuxtModule,
     extendPages,
     installModule,
-    addRouteMiddleware,
-    addImports,
 } from '@nuxt/kit'
+import { name, version } from '../package.json'
+import type { CSSOptions } from 'vite'
 import type { ViteConfig } from '@nuxt/schema'
 import { defu } from 'defu'
-import type { CSSOptions } from 'vite'
-import { name, version } from '../package.json'
 
 export const CONFIG_KEY = 'typo3'
 
@@ -37,11 +37,6 @@ export interface ModuleOptions {
 }
 
 export default defineNuxtModule<ModuleOptions>({
-    meta: {
-        name,
-        version,
-        configKey: CONFIG_KEY,
-    },
     defaults: {
         api: {
             baseUrl: '',
@@ -51,13 +46,20 @@ export default defineNuxtModule<ModuleOptions>({
         baseUrl: '',
         cookiebotUid: '',
     },
+    meta: {
+        configKey: CONFIG_KEY,
+        name,
+        version,
+    },
     async setup(options, nuxt) {
         const resolver = createResolver(import.meta.url)
 
-        options = nuxt.options.runtimeConfig.public[CONFIG_KEY] = defu(
+        nuxt.options.runtimeConfig.public[CONFIG_KEY] = defu(
             nuxt.options.runtimeConfig.public[CONFIG_KEY],
             options,
         )
+
+        options = nuxt.options.runtimeConfig.public[CONFIG_KEY]
 
         if (options.scssForwards) {
             const scssForwards =
@@ -105,14 +107,14 @@ export default defineNuxtModule<ModuleOptions>({
 
         addImportsDir(resolver.resolve('runtime/composables/**/*'))
         addImports({
+            as: 'T3Model',
             from: resolver.resolve('runtime/models'),
             name: '*',
-            as: 'T3Model',
         })
         addComponentsDir({
+            global: true,
             path: resolver.resolve('runtime/components'),
             pathPrefix: false,
-            global: true,
         })
         addPlugin({
             src: resolver.resolve('runtime/plugins/cookiebot'),
@@ -121,15 +123,15 @@ export default defineNuxtModule<ModuleOptions>({
             src: resolver.resolve('runtime/plugins/i18n'),
         })
         addRouteMiddleware({
+            global: true,
             name: 't3-data',
             path: resolver.resolve('runtime/middleware/data.global'),
-            global: true,
         })
         extendPages((pages) => {
             pages.push({
+                file: resolver.resolve('runtime/pages/T3Page'),
                 name: 'T3Page',
                 path: '/:pathMatch(.*)*',
-                file: resolver.resolve('runtime/pages/T3Page'),
             })
         })
     },

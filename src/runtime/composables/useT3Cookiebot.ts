@@ -8,8 +8,8 @@ export function useT3Cookiebot() {
             'none'
         >
     >('t3-cookies', () => ({
-        necessary: false,
         marketing: false,
+        necessary: false,
         preferences: false,
         statistics: false,
     }))
@@ -36,6 +36,7 @@ export function useT3Cookiebot() {
 
     return {
         cookieCategories,
+
         acceptCookies,
         isAccepted,
         showBanner,

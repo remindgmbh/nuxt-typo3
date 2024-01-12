@@ -1,5 +1,5 @@
+import { type Component, getCurrentInstance, resolveComponent } from 'vue'
 import { pascalCase } from 'scule'
-import { resolveComponent, getCurrentInstance, type Component } from 'vue'
 import { useT3Config } from '#imports'
 
 export function useT3DynamicComponent(

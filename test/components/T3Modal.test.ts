@@ -1,8 +1,8 @@
 import '@testing-library/jest-dom'
+import { type RenderOptions, fireEvent, render } from '@testing-library/vue'
 import { describe, expect, it } from 'vitest'
-import { fireEvent, render, type RenderOptions } from '@testing-library/vue'
-import { defu } from 'defu'
 import T3Modal from '../../src/runtime/components/ui/T3Modal.vue'
+import { defu } from 'defu'
 
 const modalContent = 'Modal Content'
 
@@ -71,7 +71,10 @@ describe('T3Modal', () => {
     it('should hide modal on background click with closeOnOutsideClick set', async () => {
         const { emitted, getByTestId, queryByText, rerender } = renderComponent(
             {
-                props: { modelValue: true, closeOnOutsideClick: true },
+                props: {
+                    closeOnOutsideClick: true,
+                    modelValue: true,
+                },
             },
         )
 
@@ -94,7 +97,10 @@ describe('T3Modal', () => {
 
     it('should not hide modal on content click', async () => {
         const { emitted, getByText } = renderComponent({
-            props: { modelValue: true, closeOnOutsideClick: true },
+            props: {
+                closeOnOutsideClick: true,
+                modelValue: true,
+            },
         })
 
         const contentElement = getByText(modalContent)

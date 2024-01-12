@@ -1,6 +1,6 @@
-import { defu } from 'defu'
-import { computed, type Ref } from 'vue'
+import { type Ref, computed } from 'vue'
 import { useState, useT3Config } from '#imports'
+import { defu } from 'defu'
 
 export function useT3Theme() {
     const { theme } = useT3Config()

@@ -1,7 +1,7 @@
+import { defineNuxtPlugin, useT3Config } from '#imports'
 import { createI18n } from 'vue-i18n'
 import de from '../locales/de'
 import en from '../locales/en'
-import { defineNuxtPlugin, useT3Config } from '#imports'
 
 export interface MessageContext {
     named: (value: string) => string
@@ -9,8 +9,8 @@ export interface MessageContext {
 }
 
 export const i18n = createI18n({
-    legacy: false,
     globalInjection: true,
+    legacy: false,
     locale: 'de',
     messages: {
         de,

@@ -1,6 +1,6 @@
-import { defu } from 'defu'
 import * as T3Model from '../models'
 import { useAppConfig, useRuntimeConfig } from '#imports'
+import { defu } from 'defu'
 
 export function useT3Config() {
     const appConfigDefaults: T3Model.Config.AppConfigDefaults = {
@@ -14,6 +14,7 @@ export function useT3Config() {
         imageFileExtension: 'webp',
         languages: [],
         spacing: {
+            /* eslint-disable sort-keys */
             'extra-small': '0.5rem',
             small: '1rem',
             medium: '2rem',

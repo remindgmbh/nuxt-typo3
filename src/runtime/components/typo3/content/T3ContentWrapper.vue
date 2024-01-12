@@ -6,8 +6,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { T3Model, useT3ContentInjection } from '#imports'
+import { computed } from 'vue'
 
 const props = defineProps<{
     contentElement: T3Model.Typo3.Content.Element

@@ -41,8 +41,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted } from 'vue'
 import { T3Model, useT3Config, useT3Theme, useT3Util } from '#imports'
+import { computed, onMounted, ref } from 'vue'
 
 const props = defineProps<{
     pageData: T3Model.Typo3.Page.Data

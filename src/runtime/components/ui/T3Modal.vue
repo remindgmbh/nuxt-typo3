@@ -51,8 +51,8 @@ const props = withDefaults(
     }>(),
     {
         backgroundTransitionName: 'modal-background-transition',
-        contentTransitionName: 'modal-content-transition',
         closeOnOutsideClick: false,
+        contentTransitionName: 'modal-content-transition',
         tag: 'div',
     },
 )

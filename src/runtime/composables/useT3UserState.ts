@@ -1,6 +1,6 @@
-import { computed } from 'vue'
 import * as T3Model from '../models'
-import { navigateTo, useT3Api, useT3Data, useRoute } from '#imports'
+import { navigateTo, useRoute, useT3Api, useT3Data } from '#imports'
+import { computed } from 'vue'
 
 export function useT3UserState() {
     const api = useT3Api()
@@ -35,12 +35,16 @@ export function useT3UserState() {
             currentInitialData.value = initialData
 
             await navigateTo({
-                path: redirectUrl,
                 force: true,
+                path: redirectUrl,
                 replace: true,
             })
         }
     }
 
-    return { isLoggedIn, logout }
+    return {
+        isLoggedIn,
+
+        logout,
+    }
 }

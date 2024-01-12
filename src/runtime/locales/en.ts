@@ -11,10 +11,10 @@ export default {
             return `Accept ${categoryValue} cookies`
         },
         category: {
+            marketing: 'marketing',
             necessary: 'necessary',
             preferences: 'preferences',
             statistics: 'statistics',
-            marketing: 'marketing',
         },
         message: ({ named, linked }: MessageContext) => {
             const categoryKey = named('category')
@@ -24,9 +24,9 @@ export default {
         },
     },
     form: {
-        submit: 'Submit',
         loading: 'Loading',
         required: 'Required field',
+        submit: 'Submit',
         success: 'Success',
     },
     unexpectedError: 'unexpected error',

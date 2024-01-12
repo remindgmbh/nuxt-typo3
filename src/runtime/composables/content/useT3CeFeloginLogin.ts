@@ -1,8 +1,6 @@
-import { string, Schema } from 'yup'
-import { type GenericValidateFunction } from 'vee-validate'
-import { useI18n } from 'vue-i18n'
-import { computed, ref, type Ref } from 'vue'
 import * as T3Model from '../../models'
+import { type Ref, computed, ref } from 'vue'
+import { Schema, string } from 'yup'
 import {
     navigateTo,
     useRoute,
@@ -10,6 +8,8 @@ import {
     useT3Data,
     useT3YupUtil,
 } from '#imports'
+import { type GenericValidateFunction } from 'vee-validate'
+import { useI18n } from 'vue-i18n'
 
 export function useT3CeFeloginLogin(
     contentElement: Ref<
@@ -22,11 +22,11 @@ export function useT3CeFeloginLogin(
     const { clearData, currentInitialData, currentPageData } = useT3Data()
 
     const message = ref<{
-        header: string
         body: string
+        header: string
     }>({
-        header: contentElement.value.content.data.message.header,
         body: contentElement.value.content.data.message.message,
+        header: contentElement.value.content.data.message.header,
     })
 
     const loading = ref<boolean>(false)
@@ -117,7 +117,7 @@ export function useT3CeFeloginLogin(
                 body,
             })
 
-            let redirectUrl = result.content.data.redirectUrl
+            let { redirectUrl } = result.content.data
 
             if (
                 loginType === 'logout' ||
@@ -144,8 +144,8 @@ export function useT3CeFeloginLogin(
 
             if (redirectUrl) {
                 await navigateTo({
-                    path: redirectUrl,
                     force: true,
+                    path: redirectUrl,
                     replace: true,
                 })
             }
@@ -159,6 +159,7 @@ export function useT3CeFeloginLogin(
         loading,
         message,
         submitLabel,
+
         submit,
     }
 }

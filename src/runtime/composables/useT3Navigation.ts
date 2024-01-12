@@ -1,6 +1,6 @@
-import { computed } from 'vue'
 import * as T3Model from '../models'
 import { useRoute, useT3Data } from '#imports'
+import { computed } from 'vue'
 
 export function useT3Navigation() {
     const route = useRoute()
@@ -49,5 +49,9 @@ export function useT3Navigation() {
         }
     }
 
-    return { activeNavItems, navItemsWithChildren, rootPageNavigation }
+    return {
+        activeNavItems,
+        navItemsWithChildren,
+        rootPageNavigation,
+    }
 }

@@ -13,16 +13,16 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
 import { computed, ref } from 'vue'
-import { onBeforeRouteUpdate } from 'vue-router'
 import {
+    useRoute,
     useT3Data,
     useT3DynamicComponent,
     useT3PageHead,
-    useRoute,
 } from '#imports'
 import { T3BlDefault } from '#components'
+import { onBeforeRouteUpdate } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 

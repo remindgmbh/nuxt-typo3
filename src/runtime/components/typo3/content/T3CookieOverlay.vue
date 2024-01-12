@@ -18,8 +18,8 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
 import { T3Model, useT3Cookiebot } from '#imports'
+import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 

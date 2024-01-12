@@ -1,13 +1,19 @@
 import '@testing-library/jest-dom'
-import { defu } from 'defu'
+import { type RenderOptions, fireEvent, render } from '@testing-library/vue'
 import { describe, expect, it } from 'vitest'
-import { fireEvent, render, type RenderOptions } from '@testing-library/vue'
 import T3Accordion from '../../src/runtime/components/typo3/content/helper/T3Accordion.vue'
 import T3CollapseTransition from '../../src/runtime/components/transition/T3CollapseTransition.vue'
+import { defu } from 'defu'
 
 const items = [
-    { title: 'Title A', content: 'Content A' },
-    { title: 'Title B', content: 'Content B' },
+    {
+        content: 'Content A',
+        title: 'Title A',
+    },
+    {
+        content: 'Content B',
+        title: 'Title B',
+    },
 ]
 
 describe('T3Accordion', () => {
@@ -20,8 +26,8 @@ describe('T3Accordion', () => {
                 },
                 props: { items },
                 slots: {
-                    title: ({ item }) => item.title,
                     content: ({ item }) => item.content,
+                    title: ({ item }) => item.title,
                 },
             } as RenderOptions),
         )
@@ -63,7 +69,7 @@ describe('T3Accordion', () => {
     it('should show item after click and hide after another click', async () => {
         const { getByText } = renderComponent()
 
-        const { content, title } = items[0]
+        const [{ content, title }] = items
 
         const titleElement = getByText(title)
 
@@ -103,8 +109,10 @@ describe('T3Accordion', () => {
     it('should hide item after another one is opened', async () => {
         const { getByText } = renderComponent()
 
-        const { content: content0, title: title0 } = items[0]
-        const { content: content1, title: title1 } = items[1]
+        const [
+            { content: content0, title: title0 },
+            { content: content1, title: title1 },
+        ] = items
 
         const title0Element = getByText(title0)
         const title1Element = getByText(title1)
@@ -129,8 +137,10 @@ describe('T3Accordion', () => {
     it('should show multiple items with multiple prop', async () => {
         const { getByText } = renderComponent({ props: { multiple: true } })
 
-        const { content: content0, title: title0 } = items[0]
-        const { content: content1, title: title1 } = items[1]
+        const [
+            { content: content0, title: title0 },
+            { content: content1, title: title1 },
+        ] = items
 
         const title0Element = getByText(title0)
         const title1Element = getByText(title1)

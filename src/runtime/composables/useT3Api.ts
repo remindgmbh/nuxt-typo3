@@ -1,8 +1,8 @@
-import { type NitroFetchRequest } from 'nitropack'
-import { FetchError, type FetchOptions } from 'ofetch'
-import { computed } from 'vue'
 import * as T3Model from '../models'
+import { FetchError, type FetchOptions } from 'ofetch'
 import { useRequestHeaders, useT3Config } from '#imports'
+import { type NitroFetchRequest } from 'nitropack'
+import { computed } from 'vue'
 
 export function useT3Api() {
     const config = useT3Config()
@@ -30,7 +30,9 @@ export function useT3Api() {
 
         return await get<T3Model.Typo3.InitialData>(path, {
             ...options,
-            params: { type },
+            params: {
+                type,
+            },
         })
     }
 
@@ -64,7 +66,9 @@ export function useT3Api() {
         const type = config.api.footerDataType
         return await get<T3Model.Typo3.Content.Element<any>>(path, {
             ...options,
-            params: { type },
+            params: {
+                type,
+            },
         })
     }
 
@@ -91,10 +95,10 @@ export function useT3Api() {
     }
 
     return {
+        get,
         getFooterData,
         getInitialData,
         getPageData,
-        get,
         post,
     }
 }

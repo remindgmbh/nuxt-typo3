@@ -26,8 +26,8 @@ export function useT3ContentInjection() {
     }
 
     return {
-        provideContentElement,
         injectContentElement,
         injectOptionalContentElement,
+        provideContentElement,
     }
 }

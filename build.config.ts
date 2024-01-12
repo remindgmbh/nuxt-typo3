@@ -1,7 +1,7 @@
 // temporary fix until https://github.com/nuxt/module-builder/issues/90 is resolved
 
-import { defineBuildConfig } from 'unbuild'
 import copy from 'rollup-plugin-copy'
+import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
     hooks: {
@@ -9,10 +9,10 @@ export default defineBuildConfig({
             if (Array.isArray(options.plugins)) {
                 options.plugins.push(
                     copy({
-                        targets: [
-                            { src: 'src/runtime/**/*.scss', dest: 'dist' },
-                        ],
                         flatten: false,
+                        targets: [
+                            { dest: 'dist', src: 'src/runtime/**/*.scss' },
+                        ],
                     }),
                 )
             }

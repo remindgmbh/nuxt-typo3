@@ -18,8 +18,8 @@
     </picture>
 </template>
 <script setup lang="ts">
+import { T3Model, useT3Asset, useT3Breakpoints } from '#imports'
 import { computed } from 'vue'
-import { T3Model, useT3Breakpoints, useT3Asset } from '#imports'
 
 const props = defineProps<{
     file: T3Model.Typo3.Asset

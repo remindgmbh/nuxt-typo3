@@ -1,5 +1,5 @@
-import { computed } from 'vue'
 import * as T3Model from '../models'
+import { computed } from 'vue'
 import { useT3Config } from '#imports'
 
 export function useT3Asset(asset: T3Model.Typo3.Asset) {
@@ -53,5 +53,9 @@ export function useT3Asset(asset: T3Model.Typo3.Asset) {
         }
     })
 
-    return { type, getImageUrl }
+    return {
+        type,
+
+        getImageUrl,
+    }
 }

@@ -36,10 +36,10 @@ export default defineNuxtPlugin((nuxt) => {
     useHead({
         script: [
             {
-                src: 'https://consent.cookiebot.com/uc.js',
                 'data-cbid': config.cookiebotUid,
-                type: 'text/javascript',
                 id: 'Cookiebot',
+                src: 'https://consent.cookiebot.com/uc.js',
+                type: 'text/javascript',
             },
         ],
     })

@@ -24,6 +24,7 @@ export function useT3Menu(statePrefix: string = 't3-menu') {
     return {
         active: readonly(active),
         triggers,
+
         close,
         toggle,
     }

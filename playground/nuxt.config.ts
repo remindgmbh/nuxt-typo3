@@ -1,35 +1,35 @@
 export default defineNuxtConfig({
-    runtimeConfig: {
-        public: {
-            typo3: {
-                baseUrl: '',
-                api: {
-                    baseUrl: '',
-                },
-                cookiebotUid: '',
-            },
+    components: [
+        {
+            global: true,
+            path: '@/components',
         },
+    ],
+    css: ['@/assets/base.scss'],
+    imports: {
+        autoImport: false,
     },
     logger: {
         level: 3,
     },
-    components: [
-        {
-            path: '@/components',
-            global: true,
+    modules: ['@remindgmbh/nuxt-typo3'],
+    runtimeConfig: {
+        public: {
+            typo3: {
+                api: {
+                    baseUrl: '',
+                },
+                baseUrl: '',
+                cookiebotUid: '',
+            },
         },
-    ],
+    },
     typescript: {
         shim: false,
         strict: true,
     },
-    css: ['@/assets/base.scss'],
     typo3: {
         componentPrefix: 'Pg',
         scssForwards: ['@/assets/breakpoints.scss'],
-    },
-    modules: ['@remindgmbh/nuxt-typo3'],
-    imports: {
-        autoImport: false,
     },
 })

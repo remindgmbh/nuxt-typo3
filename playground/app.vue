@@ -36,15 +36,15 @@
 </template>
 
 <script setup lang="ts">
-import colors from '@/colors'
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import {
+    useT3ColorScheme,
     useT3Cookiebot,
     useT3Data,
     useT3LoadingState,
     useT3Util,
-    useT3ColorScheme,
 } from '#imports'
+import colors from '@/colors'
 
 const HEADER_HEIGHT = '5rem'
 const HEADER_HEIGHT_DENSE = '3rem'
@@ -55,6 +55,10 @@ const loading = useT3LoadingState()
 const { detectScrollEnd } = useT3Util()
 
 const colorScheme = useT3ColorScheme({
+    dark: {
+        background: colors.black,
+        font: colors.white,
+    },
     light: {
         background: colors.white,
         font: colors.black,
@@ -69,10 +73,6 @@ const colorScheme = useT3ColorScheme({
             background: colors.primary,
             border: colors.accent,
         },
-    },
-    dark: {
-        background: colors.black,
-        font: colors.white,
     },
 })
 

@@ -1,5 +1,5 @@
-import { computed, type Ref } from 'vue'
 import * as T3Model from '../../models'
+import { type Ref, computed } from 'vue'
 
 export function useT3CeTable(
     contentElement: Ref<
@@ -39,8 +39,8 @@ export function useT3CeTable(
     return {
         headerLeft,
         headerTop,
-        thead,
         tbody,
         tfoot,
+        thead,
     }
 }

@@ -41,5 +41,9 @@ export function useT3SelectInput<T>(
         }
     }
 
-    return { hoverOption, supportKeyboardNavigation }
+    return {
+        hoverOption,
+
+        supportKeyboardNavigation,
+    }
 }

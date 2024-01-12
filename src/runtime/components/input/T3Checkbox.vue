@@ -48,8 +48,8 @@ const name = computed(() => props.name)
 const { errorMessage, meta, value, handleBlur } = useField<
     string[] | boolean | undefined
 >(name, props.validation, {
-    type: 'checkbox',
     initialValue: props.defaultValue ?? false,
+    type: 'checkbox',
 })
 </script>
 

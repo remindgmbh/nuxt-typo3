@@ -1,5 +1,5 @@
-import { computed } from 'vue'
 import * as T3Model from '../../models'
+import { computed } from 'vue'
 import { useT3Asset } from '#imports'
 
 export function useT3TextAsset(content: T3Model.Typo3.Content.Data.TextAsset) {
@@ -21,8 +21,8 @@ export function useT3TextAsset(content: T3Model.Typo3.Content.Data.TextAsset) {
 
     return {
         asset,
-        assetIsSmall,
         assetIsRight,
+        assetIsSmall,
         type,
     }
 }

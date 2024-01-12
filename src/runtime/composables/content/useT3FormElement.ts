@@ -1,8 +1,8 @@
-import { array, boolean, date, number, string, Schema } from 'yup'
-import { useI18n } from 'vue-i18n'
-import { type GenericValidateFunction, type RuleExpression } from 'vee-validate'
-import { computed } from 'vue'
 import * as T3Model from '../../models'
+import { type GenericValidateFunction, type RuleExpression } from 'vee-validate'
+import { Schema, array, boolean, date, number, string } from 'yup'
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useT3YupUtil } from '#imports'
 
 const REGEX_ALPHANUMERIC = /^(\w*)$/
@@ -33,7 +33,7 @@ export function useT3FormElement(
 
     function getValidation(): RuleExpression<any> {
         const result: GenericValidateFunction[] = []
-        const label = formElement.label
+        const { label } = formElement
 
         if (formElement.validators) {
             formElement.validators.forEach((validator) => {
@@ -160,9 +160,9 @@ export function useT3FormElement(
     }
 
     return {
-        required,
         options,
         placeholder,
+        required,
         validation,
     }
 }

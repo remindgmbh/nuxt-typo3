@@ -8,10 +8,10 @@ export default {
             return `${categoryValue} Cookies zulassen`
         },
         category: {
+            marketing: 'Marketing',
             necessary: 'Notwendige',
             preferences: 'Präferenzen',
             statistics: 'Statistik',
-            marketing: 'Marketing',
         },
         message: ({ named, linked }: MessageContext) => {
             const categoryKey = named('category')
@@ -20,9 +20,9 @@ export default {
         },
     },
     form: {
-        submit: 'Absenden',
         loading: 'Lädt',
         required: 'Pflichtfeld',
+        submit: 'Absenden',
         success: 'Erfolgreich',
     },
     unexpectedError: 'unerwarteter Fehler',

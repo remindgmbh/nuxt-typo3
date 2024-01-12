@@ -1,7 +1,7 @@
-import { useI18n } from 'vue-i18n'
-import { computed, ref, type Ref } from 'vue'
 import * as T3Model from '../../models'
+import { type Ref, computed, ref } from 'vue'
 import { navigateTo, useLogger, useT3Api } from '#imports'
+import { useI18n } from 'vue-i18n'
 
 export function useT3CeFormFormframework(
     contentElement: Ref<
@@ -68,6 +68,7 @@ export function useT3CeFormFormframework(
         requiredHint,
         submitLabel,
         successLabel,
+
         submit,
     }
 }

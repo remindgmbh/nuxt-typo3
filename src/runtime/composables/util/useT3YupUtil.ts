@@ -33,5 +33,9 @@ export function useT3YupUtil() {
         }
     }
 
-    return { parseDateString, parseNumber, schemaToValidateFunction }
+    return {
+        parseDateString,
+        parseNumber,
+        schemaToValidateFunction,
+    }
 }

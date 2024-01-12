@@ -16,8 +16,8 @@
 </template>
 
 <script setup lang="ts">
+import { useT3Languages, useT3Theme, useT3UserState } from '#imports'
 import { computed } from 'vue'
-import { useT3Languages, useT3UserState, useT3Theme } from '#imports'
 
 const props = defineProps<{
     menuVisible: boolean

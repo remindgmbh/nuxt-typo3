@@ -3,8 +3,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { T3Model } from '#imports'
+import { computed } from 'vue'
 
 const props = defineProps<{
     formElement: T3Model.Typo3.Content.Data.Form.FormElement

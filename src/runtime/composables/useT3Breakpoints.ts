@@ -1,6 +1,6 @@
 import { computed } from 'vue'
-import screenWidths from '../assets/styles/js/screenWidths.module.scss'
 import containerWidths from '../assets/styles/js/containerWidths.module.scss'
+import screenWidths from '../assets/styles/js/screenWidths.module.scss'
 
 export function useT3Breakpoints() {
     const getPxValue = (value: string) => {

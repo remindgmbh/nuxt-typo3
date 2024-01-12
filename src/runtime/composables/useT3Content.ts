@@ -1,11 +1,11 @@
-import { computed } from 'vue'
 import {
     useT3Config,
-    useT3Cookiebot,
     useT3ContentInjection,
+    useT3Cookiebot,
     useT3Theme,
 } from '#imports'
 import { Config } from '../models'
+import { computed } from 'vue'
 
 export function useT3Content() {
     const { injectContentElement } = useT3ContentInjection()
@@ -92,9 +92,9 @@ export function useT3Content() {
         cookieAccepted,
         ignoreCookies,
         padding,
-        spaceBefore,
         spaceAfter,
-        spaceBeforeInside,
         spaceAfterInside,
+        spaceBefore,
+        spaceBeforeInside,
     }
 }

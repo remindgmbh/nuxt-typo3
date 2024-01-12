@@ -42,8 +42,8 @@
 </template>
 
 <script setup lang="ts">
-import { useForm } from 'vee-validate'
 import { T3Model } from '#imports'
+import { useForm } from 'vee-validate'
 
 const { handleSubmit } = useForm()
 
