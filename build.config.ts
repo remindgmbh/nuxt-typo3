@@ -1,21 +1,11 @@
-// temporary fix until https://github.com/nuxt/module-builder/issues/90 is resolved
+// see https://github.com/nuxt/module-builder/issues/90#issuecomment-1902706165
 
-import copy from 'rollup-plugin-copy'
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
     hooks: {
-        'rollup:options'(_ctx, options) {
-            if (Array.isArray(options.plugins)) {
-                options.plugins.push(
-                    copy({
-                        flatten: false,
-                        targets: [
-                            { dest: 'dist', src: 'src/runtime/**/*.scss' },
-                        ],
-                    }),
-                )
-            }
+        'mkdist:entry:options'(_ctx, _entry, opts) {
+            opts.loaders = ['js', 'vue']
         },
     },
 })
