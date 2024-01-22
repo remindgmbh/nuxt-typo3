@@ -14,20 +14,29 @@
         <T3AutoHeightContainer class="t3-tabs__contents">
             <transition v-bind="transition">
                 <section :key="activeItemIndex" class="t3-tabs__content">
-                    <slot name="content" :item="activeItem" />
+                    <slot
+                        name="content"
+                        :item="activeItem"
+                        :index="activeItemIndex"
+                    />
                 </section>
             </transition>
         </T3AutoHeightContainer>
     </section>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T">
 import { type TransitionProps } from 'vue'
 import { useT3Tabs } from '#imports'
 
+defineSlots<{
+    title(props: { item: T; index: number }): any
+    content(props: { item: T; index: number }): any
+}>()
+
 const props = withDefaults(
     defineProps<{
-        items: any[]
+        items: T[]
         transition?: TransitionProps
     }>(),
     {

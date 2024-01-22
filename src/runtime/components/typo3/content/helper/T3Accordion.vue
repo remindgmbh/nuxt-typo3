@@ -29,12 +29,17 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" generic="T">
 import { useT3Accordion } from '#imports'
+
+defineSlots<{
+    title(props: { item: T; index: number }): any
+    content(props: { item: T; index: number }): any
+}>()
 
 const props = withDefaults(
     defineProps<{
-        items: any[]
+        items: T[]
         multiple?: boolean
         initialActiveItems?: number[]
         disabledItems?: number[]
