@@ -6,8 +6,8 @@ export function useT3Navigation() {
     const route = useRoute()
     const { currentInitialData } = useT3Data()
 
-    const rootPageNavigation = computed<T3Model.Typo3.NavItem | undefined>(
-        () => currentInitialData.value?.navigation.at(0),
+    const rootPageNavigation = computed<T3Model.Typo3.NavItem | undefined>(() =>
+        currentInitialData.value?.navigation.at(0),
     )
 
     const navItemsWithChildren = computed<T3Model.Typo3.NavItem[]>(() =>
