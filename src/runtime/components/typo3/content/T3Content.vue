@@ -1,11 +1,9 @@
 <template>
     <article
         class="t3-content"
-        :class="{
-            'padded-content': padding,
-            ...((!backgroundColorValue || backgroundFullWidth) &&
-                containerClasses),
-        }"
+        :class="
+            (!backgroundColorValue || backgroundFullWidth) && containerClasses
+        "
     >
         <component :is="Component" v-if="cookieAccepted || ignoreCookies" />
         <T3CookieOverlay
@@ -34,7 +32,6 @@ const {
     containerClasses,
     cookieAccepted,
     ignoreCookies,
-    padding,
     spaceBefore,
     spaceAfter,
     spaceBeforeInside,

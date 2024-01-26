@@ -12,10 +12,6 @@ export interface CeOptions {
     maxWidth?:
         | string
         | ((contentElement: Typo3.Content.Element<any>) => string | undefined)
-    // enable or disable padding left and right for content element
-    padding?:
-        | boolean
-        | ((contentElement: Typo3.Content.Element<any>) => boolean)
     // default uses container-width for container
     // extended uses screen-width instead of container-width for container
     // full ignores container completely

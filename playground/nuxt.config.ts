@@ -30,6 +30,6 @@ export default defineNuxtConfig({
     },
     typo3: {
         componentPrefix: 'Pg',
-        scssForwards: ['@/assets/breakpoints.scss'],
+        scssForwards: ['@/assets/variables.scss'],
     },
 })

@@ -36,7 +36,8 @@ export function useT3Content() {
     const containerClasses = computed(() => ({
         container: width.value !== 'full',
         'container--extended': width.value === 'extended',
-        [`container--${maxWidth.value}`]: !!maxWidth.value,
+        [`container--${maxWidth.value}`]:
+            !!maxWidth.value && width.value !== 'full',
     }))
 
     const cookieAccepted = computed<boolean>(() =>
@@ -54,12 +55,6 @@ export function useT3Content() {
             ? ceOptions.value.maxWidth(contentElement.value)
             : ceOptions.value?.maxWidth
     })
-
-    const padding = computed<boolean>(() =>
-        ceOptions.value?.padding instanceof Function
-            ? ceOptions.value?.padding(contentElement.value)
-            : ceOptions.value?.padding ?? true,
-    )
 
     const spaceBefore = computed<string>(
         () => config.spacing[contentElement.value.appearance.spaceBefore],
@@ -91,7 +86,6 @@ export function useT3Content() {
         containerClasses,
         cookieAccepted,
         ignoreCookies,
-        padding,
         spaceAfter,
         spaceAfterInside,
         spaceBefore,

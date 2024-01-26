@@ -1,10 +1,10 @@
 // Export screen-widths to use in JavaScript
 
-@use '../breakpoints';
+@use '../variables';
 
 /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :export {
-    @each $name, $value in breakpoints.$screen-widths {
+    @each $name, $value in variables.$screen-widths {
         #{$name}: $value;
     }
 }

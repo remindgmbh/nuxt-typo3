@@ -1,4 +1,4 @@
-@forward '../../src/runtime/assets/styles/breakpoints.scss' with (
+@forward '../../src/runtime/assets/styles/variables.scss' with (
     $container-widths: (
         xs: calc(100% - 2rem),
         sm: 35rem,

@@ -1,0 +1,28 @@
+@use 'sass:map';
+@use 'breakpoints';
+@use 'util';
+@use 'variables';
+
+@mixin padding($fixed-x: null, $fixed-y: null) {
+    @if $fixed-x {
+        @include util.padding-x($fixed-x);
+    }
+
+    @if $fixed-y {
+        @include util.padding-y($fixed-y);
+    }
+
+    @include breakpoints.loop using ($breakpoint) {
+        $padding: map.get(variables.$content-paddings, $breakpoint);
+
+        @if $padding {
+            @if not($fixed-x) {
+                @include util.padding-x($padding);
+            }
+
+            @if not($fixed-y) {
+                @include util.padding-y($padding);
+            }
+        }
+    }
+}

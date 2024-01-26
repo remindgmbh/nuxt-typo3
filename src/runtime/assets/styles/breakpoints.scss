@@ -1,58 +1,23 @@
+@use 'variables';
 @use 'sass:list';
 @use 'sass:map';
 
-$screen-widths: (
-    xs: 0,
-    sm: 576px,
-    md: 768px,
-    lg: 992px,
-    xl: 1200px,
-    xxl: 1400px,
-) !default;
-$container-widths: (
-    xs: 100%,
-    sm: 540px,
-    md: 720px,
-    lg: 960px,
-    xl: 1140px,
-    xxl: 1320px,
-) !default;
-$content-paddings: (
-    xs: 1rem,
-    sm: 1rem,
-    md: 1rem,
-    lg: 1rem,
-    xl: 1rem,
-    xxl: 1rem,
-) !default;
-
 @mixin up($name) {
-    @media only screen and (min-width: map.get($screen-widths, $name)) {
+    @media only screen and (min-width: map.get(variables.$screen-widths, $name)) {
         @content;
     }
 }
 
 @mixin down($name) {
-    @media only screen and (max-width: map.get($screen-widths, $name)) {
+    @media only screen and (max-width: map.get(variables.$screen-widths, $name)) {
         @content;
     }
 }
 
 @mixin loop {
-    @if list.length($screen-widths) != list.length($container-widths) {
-        @error '$screen-widths and $container-widths differ in length';
-    }
-
-    @each $name, $container-width in $container-widths {
-        $screen-width: map.get($screen-widths, $name);
-        $content-padding: map.get($content-paddings, $name);
-
-        @if not $screen-width {
-            @error '"#{$name}" defined in $container-widths but not in $screen-widths';
-        }
-
-        @media (min-width: $screen-width) {
-            @content (("content-padding": $content-padding, "container-width": $container-width, "name": $name, "screen-width": $screen-width));
+    @each $name, $screen-width in variables.$screen-widths {
+        @include up($name) {
+            @content ($name);
         }
     }
 }
