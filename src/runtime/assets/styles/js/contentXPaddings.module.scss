@@ -4,7 +4,7 @@
 
 /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :export {
-    @each $name, $value in variables.$content-paddings {
+    @each $name, $value in variables.$content-x-paddings {
         #{$name}: $value;
     }
 }

@@ -3,26 +3,12 @@
 @use 'util';
 @use 'variables';
 
-@mixin padding($fixed-x: null, $fixed-y: null) {
-    @if $fixed-x {
-        @include util.padding-x($fixed-x);
-    }
-
-    @if $fixed-y {
-        @include util.padding-y($fixed-y);
-    }
-
+@mixin padding-x {
     @include breakpoints.loop using ($breakpoint) {
-        $padding: map.get(variables.$content-paddings, $breakpoint);
+        $padding: map.get(variables.$content-x-paddings, $breakpoint);
 
         @if $padding {
-            @if not($fixed-x) {
-                @include util.padding-x($padding);
-            }
-
-            @if not($fixed-y) {
-                @include util.padding-y($padding);
-            }
+            @include util.padding-x($padding);
         }
     }
 }
