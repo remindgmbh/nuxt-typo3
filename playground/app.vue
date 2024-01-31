@@ -28,8 +28,8 @@
                 :transition="{ name: 'page-transition', mode: 'in-out' }"
             />
         </T3TopbarLayoutContent>
-        <T3TopbarLayoutFooter v-if="currentFooterData" class="app__footer">
-            <pre>{{ currentFooterData.content }}</pre>
+        <T3TopbarLayoutFooter v-if="footer" class="app__footer">
+            <pre>{{ footer }}</pre>
             <button @click="showBanner">Cookies</button>
         </T3TopbarLayoutFooter>
     </T3TopbarLayout>
@@ -40,7 +40,7 @@ import { onMounted, ref } from 'vue'
 import {
     useT3ColorScheme,
     useT3Cookiebot,
-    useT3Data,
+    useT3Footer,
     useT3LoadingState,
     useT3Util,
 } from '#imports'
@@ -50,7 +50,7 @@ const HEADER_HEIGHT = '5rem'
 const HEADER_HEIGHT_DENSE = '3rem'
 
 const { showBanner } = useT3Cookiebot()
-const { currentFooterData } = useT3Data()
+const footer = useT3Footer()
 const loading = useT3LoadingState()
 const { detectScrollEnd } = useT3Util()
 

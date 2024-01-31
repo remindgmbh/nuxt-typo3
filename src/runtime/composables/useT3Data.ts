@@ -21,10 +21,6 @@ export function useT3Data() {
         [path: string]: Typo3.InitialData | undefined
     }> = useState('t3-initialData', () => ({}))
 
-    const footerData: Ref<{
-        [path: string]: Typo3.Content.Element<any> | undefined
-    }> = useState('t3-footerData', () => ({}))
-
     const pageData: Ref<{
         [path: string]: Typo3.Page.Data | undefined
     }> = useState('t3-pageData', () => ({}))
@@ -44,15 +40,6 @@ export function useT3Data() {
         },
         set(value) {
             initialData.value[currentRootPath.value] = value
-        },
-    })
-
-    const currentFooterData = computed<Typo3.Content.Element<any> | undefined>({
-        get() {
-            return footerData.value[currentRootPath.value]
-        },
-        set(value) {
-            footerData.value[currentRootPath.value] = value
         },
     })
 
@@ -83,25 +70,6 @@ export function useT3Data() {
         return initialData.value[rootPath]
     }
 
-    async function loadFooterData(
-        path: string,
-    ): Promise<Typo3.Content.Element<any> | undefined> {
-        const rootPath = getLocalizedRootPath(path)
-
-        if (!footerData.value[rootPath]) {
-            try {
-                const result = await api.getFooterData(rootPath)
-                footerData.value[rootPath] = result
-                return result
-            } catch (error) {
-                // log error and do nothing so undefined is returned
-                logger.error(error)
-            }
-        }
-
-        return footerData.value[rootPath]
-    }
-
     async function loadPageData(
         path: string,
     ): Promise<Typo3.Page.Data | undefined> {
@@ -125,13 +93,8 @@ export function useT3Data() {
     }
 
     function clearData(): void {
-        clearFooterData()
         clearInitialData()
         clearPageData()
-    }
-
-    function clearFooterData(): void {
-        footerData.value = {}
     }
 
     function clearInitialData(): void {
@@ -143,20 +106,16 @@ export function useT3Data() {
     }
 
     return {
-        currentFooterData,
         currentInitialData,
         currentPageData,
-        footerData,
         initialData,
         pageData,
         pageError,
 
         clearData,
-        clearFooterData,
         clearInitialData,
         clearPageData,
         getLocalizedRootPath,
-        loadFooterData,
         loadInitialData,
         loadPageData,
     }

@@ -14,20 +14,15 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     loadingState.value.type = from.path === to.path ? 'data' : 'page'
     loadingState.value.from = from
     loadingState.value.to = to
-    const promises: Array<Promise<any>> = [
-        data.loadInitialData(to.fullPath),
-        data.loadFooterData(to.fullPath),
-    ]
+    const promises: Array<Promise<any>> = [data.loadInitialData(to.fullPath)]
 
     if (to.name === 'T3Page') {
         promises.push(data.loadPageData(to.fullPath))
     }
 
     try {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const [initialData, footerContent, pageData]: [
+        const [initialData, pageData]: [
             T3Model.Typo3.InitialData?,
-            T3Model.Typo3.Content.Element<any>?,
             T3Model.Typo3.Page.Data?,
             ...unknown[],
         ] = await Promise.all(promises)

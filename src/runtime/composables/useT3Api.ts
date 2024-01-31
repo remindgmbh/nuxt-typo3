@@ -59,19 +59,6 @@ export function useT3Api() {
         }
     }
 
-    async function getFooterData(
-        path: string,
-        options: FetchOptions = {},
-    ): Promise<T3Model.Typo3.Content.Element<any>> {
-        const type = config.api.footerDataType
-        return await get<T3Model.Typo3.Content.Element<any>>(path, {
-            ...options,
-            params: {
-                type,
-            },
-        })
-    }
-
     async function get<T = unknown>(
         request: NitroFetchRequest,
         options?: FetchOptions,
@@ -96,7 +83,6 @@ export function useT3Api() {
 
     return {
         get,
-        getFooterData,
         getInitialData,
         getPageData,
         post,
