@@ -6,7 +6,7 @@
         :title="to?.title"
         v-bind="$attrs"
     >
-        <slot>{{ to?.title }}</slot>
+        <slot>{{ to?.linkText }}</slot>
     </NuxtLink>
 </template>
 
