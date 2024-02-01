@@ -8,4 +8,5 @@ export interface InitialData {
         logged: boolean
         logoutLink?: string
     }
+    [key: string]: unknown
 }
