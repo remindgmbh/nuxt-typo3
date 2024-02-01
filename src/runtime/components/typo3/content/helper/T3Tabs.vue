@@ -8,16 +8,27 @@
                 :class="{ 't3-tabs__link--active': activeItemIndex === index }"
                 @click="toggle(index)"
             >
-                <slot name="title" :item="item" :index="index" />
+                <slot
+                    name="title"
+                    :is-active="index === activeItemIndex"
+                    :item="item"
+                    :index="index"
+                    :toggle="toggle"
+                />
             </button>
         </div>
         <T3AutoHeightContainer class="t3-tabs__contents">
             <transition v-bind="transition">
-                <section :key="activeItemIndex" class="t3-tabs__content">
+                <section
+                    v-if="activeItemIndex !== undefined"
+                    :key="activeItemIndex"
+                    class="t3-tabs__content"
+                >
                     <slot
                         name="content"
                         :item="activeItem"
                         :index="activeItemIndex"
+                        :toggle="toggle"
                     />
                 </section>
             </transition>
@@ -30,16 +41,27 @@ import { type TransitionProps } from 'vue'
 import { useT3Tabs } from '#imports'
 
 defineSlots<{
-    title(props: { item: T; index: number }): any
-    content(props: { item: T; index: number }): any
+    title(props: {
+        isActive: boolean
+        item: T
+        index: number
+        toggle: (index?: number) => void
+    }): any
+    content(props: {
+        item: T | undefined
+        index: number
+        toggle: (index?: number) => void
+    }): any
 }>()
 
 const props = withDefaults(
     defineProps<{
+        initialActiveIndex?: number | null
         items: T[]
         transition?: TransitionProps
     }>(),
     {
+        initialActiveIndex: 0,
         transition: () => ({
             mode: 'out-in',
             name: 'tab-change-transition',
@@ -47,5 +69,8 @@ const props = withDefaults(
     },
 )
 
-const { activeItem, activeItemIndex, toggle } = useT3Tabs(props.items)
+const { activeItem, activeItemIndex, toggle } = useT3Tabs<T>(
+    props.items,
+    props.initialActiveIndex ?? undefined,
+)
 </script>
