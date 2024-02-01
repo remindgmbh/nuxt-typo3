@@ -99,7 +99,7 @@ export default defineNuxtModule<ModuleOptions>({
         nuxt.options.alias['#nuxt-typo3'] = resolver.resolve('runtime')
 
         nuxt.options.css.unshift(
-            resolver.resolve('runtime/assets/styles/container.scss'),
+            resolver.resolve('runtime/assets/styles/global.scss'),
         )
 
         await installModule('@remindgmbh/nuxt-logger')

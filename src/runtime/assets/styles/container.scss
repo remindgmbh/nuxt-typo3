@@ -1,34 +1,14 @@
 @use 'sass:map';
 @use 'breakpoints';
+@use 'util';
 @use 'variables';
 
-.container {
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
-
+@mixin padding-x {
     @include breakpoints.loop using ($breakpoint) {
-        max-width: map.get(variables.$container-widths, $breakpoint);
+        $padding: map.get(variables.$container-padding-x, $breakpoint);
 
-        &--extended {
-            $max-width: map.get(variables.$screen-widths, $breakpoint);
-
-            @if $max-width == 0 {
-                $max-width: 100%;
-            }
-
-            max-width: $max-width;
-        }
-    }
-
-    // two loops are required so values are overridden
-    @include breakpoints.loop using ($breakpoint) {
-        &--#{$breakpoint} {
-            max-width: map.get(variables.$container-widths, $breakpoint);
-        }
-
-        &--#{$breakpoint}#{&}--extended {
-            max-width: map.get(variables.$screen-widths, $breakpoint);
+        @if $padding {
+            @include util.padding-x($padding);
         }
     }
 }
