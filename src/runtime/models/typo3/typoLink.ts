@@ -4,5 +4,5 @@ export interface TypoLink {
     class?: string
     title?: string
     linkText?: string
-    // additionalAttributes: string[]
+    additionalAttributes?: any[]
 }
