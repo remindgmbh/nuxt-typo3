@@ -1,15 +1,15 @@
 <template>
     <T3CheckboxGroup
+        :default-value="formElement.defaultValue || []"
+        :disabled="loading"
+        :label="formElement.label"
         :name="formElement.name"
         :options="options"
-        :label="formElement.label"
-        :default-value="formElement.defaultValue || []"
-        :validation="validation"
-        :disabled="loading"
         :required="required"
+        :validation="validation"
     >
         <template #error="{ errorMessage }">
-            <slot name="error" :error-message="errorMessage"></slot> </template
+            <slot :error-message="errorMessage" name="error"></slot> </template
     ></T3CheckboxGroup>
 </template>
 

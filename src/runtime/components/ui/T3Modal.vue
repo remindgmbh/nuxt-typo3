@@ -9,11 +9,11 @@
     >
         <transition
             :name="backgroundTransitionName"
-            @before-enter="setBackgroundTransitioning(true)"
             @after-enter="setBackgroundTransitioning(false)"
-            @enter-cancelled="setBackgroundTransitioning(false)"
-            @before-leave="setBackgroundTransitioning(true)"
             @after-leave="setBackgroundTransitioning(false)"
+            @before-enter="setBackgroundTransitioning(true)"
+            @before-leave="setBackgroundTransitioning(true)"
+            @enter-cancelled="setBackgroundTransitioning(false)"
             @leave-cancelled="setBackgroundTransitioning(false)"
         >
             <div
@@ -25,11 +25,11 @@
         </transition>
         <transition
             :name="contentTransitionName"
-            @before-enter="setContentTransitioning(true)"
             @after-enter="setContentTransitioning(false)"
-            @enter-cancelled="setContentTransitioning(false)"
-            @before-leave="setContentTransitioning(true)"
             @after-leave="setContentTransitioning(false)"
+            @before-enter="setContentTransitioning(true)"
+            @before-leave="setContentTransitioning(true)"
+            @enter-cancelled="setContentTransitioning(false)"
             @leave-cancelled="setContentTransitioning(false)"
         >
             <slot v-if="visible" />

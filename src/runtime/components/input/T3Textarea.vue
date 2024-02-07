@@ -8,19 +8,19 @@
             't3-textarea--success': meta.touched && meta.valid,
         }"
     >
-        <T3InputLabel class="t3-textarea__label" :label="label" :for="name" />
+        <T3InputLabel class="t3-textarea__label" :for="name" :label="label" />
         <div class="t3-textarea__wrapper">
             <textarea
                 :id="name"
                 v-model="value"
                 class="t3-textarea__input"
+                :disabled="disabled"
                 :name="name"
                 :placeholder="placeholder"
-                :disabled="disabled"
                 @blur="handleBlur"
             />
         </div>
-        <slot name="error" :error-message="errorMessage"></slot>
+        <slot :error-message="errorMessage" name="error"></slot>
     </div>
 </template>
 

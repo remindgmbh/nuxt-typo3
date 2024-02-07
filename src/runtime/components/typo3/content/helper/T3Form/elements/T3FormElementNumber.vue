@@ -1,19 +1,19 @@
 <template>
     <T3Textfield
-        :name="formElement.name"
-        :label="formElement.label"
         :default-value="formElement.defaultValue"
-        :validation="validation"
-        type="number"
-        :placeholder="placeholder"
         :disabled="loading"
-        :step="step"
-        :min="min"
+        :label="formElement.label"
         :max="max"
+        :min="min"
+        :name="formElement.name"
+        :placeholder="placeholder"
         :required="required"
+        :step="step"
+        type="number"
+        :validation="validation"
     >
         <template #error="{ errorMessage }">
-            <slot name="error" :error-message="errorMessage"></slot>
+            <slot :error-message="errorMessage" name="error"></slot>
         </template>
     </T3Textfield>
 </template>

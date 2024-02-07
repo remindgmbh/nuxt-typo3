@@ -1,16 +1,16 @@
 <template>
     <T3Textfield
-        :name="formElement.name"
-        :label="formElement.label"
         :default-value="formElement.defaultValue"
-        :validation="validation"
-        type="email"
-        :placeholder="placeholder"
         :disabled="loading"
+        :label="formElement.label"
+        :name="formElement.name"
+        :placeholder="placeholder"
         :required="required"
+        type="email"
+        :validation="validation"
     >
         <template #error="{ errorMessage }">
-            <slot name="error" :error-message="errorMessage"></slot>
+            <slot :error-message="errorMessage" name="error"></slot>
         </template>
     </T3Textfield>
 </template>

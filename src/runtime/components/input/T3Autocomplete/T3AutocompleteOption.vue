@@ -1,13 +1,13 @@
 <template>
     <NuxtLink
         v-if="option.link"
-        :to="option.link"
         class="t3-autocomplete-option"
         :class="{
             't3-autocomplete-option--hover': hovered,
         }"
-        @mouseover="onMouseover"
+        :to="option.link"
         @mouseleave="onMouseleave"
+        @mouseover="onMouseover"
         >{{ option.label }}</NuxtLink
     >
     <div
@@ -18,8 +18,8 @@
             't3-autocomplete-option--hover': hovered,
         }"
         @click="onClick"
-        @mouseover="onMouseover"
         @mouseleave="onMouseleave"
+        @mouseover="onMouseover"
     >
         {{ option.label }}
     </div>
@@ -35,9 +35,7 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{
-    (e: 'click', ev: Event): void
-    (e: 'mouseover', ev: Event): void
-    (e: 'mouseleave', ev: Event): void
+    (e: 'click' | 'mouseover' | 'mouseleave', ev: Event): void
 }>()
 
 function onClick(ev: Event) {

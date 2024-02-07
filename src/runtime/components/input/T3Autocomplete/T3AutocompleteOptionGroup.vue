@@ -12,12 +12,12 @@
         <div class="t3-autocomplete-option-group__items">
             <template v-for="option in optionGroup.options" :key="option.key">
                 <T3AutocompleteOption
-                    :option="option"
                     :hovered="hoverOption === option"
+                    :option="option"
                     :selected="value === option.key"
                     @click="() => emit('select', option)"
-                    @mouseover="() => emit('update:hoverOption', option)"
                     @mouseleave="() => emit('update:hoverOption', undefined)"
+                    @mouseover="() => emit('update:hoverOption', option)"
                 />
             </template>
         </div>

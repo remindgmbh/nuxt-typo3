@@ -1,11 +1,11 @@
 <template>
     <video
-        :src="file.publicUrl"
         :autoplay="!!file.properties.autoplay"
-        :preload="file.properties.lazyLoading ? 'none' : undefined"
+        :controls="controls"
         :loop="loop"
         :muted="muted"
-        :controls="controls"
+        :preload="file.properties.lazyLoading ? 'none' : undefined"
+        :src="file.publicUrl"
     ></video>
 </template>
 <script setup lang="ts">

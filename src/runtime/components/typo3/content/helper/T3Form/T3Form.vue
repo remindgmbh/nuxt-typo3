@@ -11,7 +11,7 @@
                     :loading="loading"
                 >
                     <template #error="{ errorMessage }">
-                        <slot name="error" :error-message="errorMessage"></slot>
+                        <slot :error-message="errorMessage" name="error"></slot>
                     </template>
                 </T3FormGroup>
                 <T3FormElement
@@ -20,7 +20,7 @@
                     :loading="loading"
                 >
                     <template #error="{ errorMessage }">
-                        <slot name="error" :error-message="errorMessage"></slot>
+                        <slot :error-message="errorMessage" name="error"></slot>
                     </template>
                 </T3FormElement>
             </template>
@@ -30,8 +30,8 @@
             <button
                 class="t3-form__submit"
                 :class="{ 't3-form__submit--loading': loading }"
-                type="submit"
                 :disabled="loading"
+                type="submit"
             >
                 <slot name="submit">
                     {{ loading && loadingLabel ? loadingLabel : submitLabel }}

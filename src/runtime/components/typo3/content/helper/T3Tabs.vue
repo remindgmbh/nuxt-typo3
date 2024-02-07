@@ -9,10 +9,10 @@
                 @click="toggle(index)"
             >
                 <slot
-                    name="title"
+                    :index="index"
                     :is-active="index === activeItemIndex"
                     :item="item"
-                    :index="index"
+                    name="title"
                     :toggle="toggle"
                 />
             </button>
@@ -25,9 +25,9 @@
                     class="t3-tabs__content"
                 >
                     <slot
-                        name="content"
-                        :item="activeItem"
                         :index="activeItemIndex"
+                        :item="activeItem"
+                        name="content"
                         :toggle="toggle"
                     />
                 </section>

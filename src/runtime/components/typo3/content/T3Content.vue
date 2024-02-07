@@ -8,8 +8,8 @@
         <component :is="Component" v-if="cookieAccepted || ignoreCookies" />
         <T3CookieOverlay
             v-else
-            :message="contentElement.cookie.message"
             :category="contentElement.cookie.category"
+            :message="contentElement.cookie.message"
         />
     </article>
 </template>

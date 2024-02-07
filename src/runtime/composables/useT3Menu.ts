@@ -1,7 +1,7 @@
 import { type ComponentPublicInstance, type Ref, readonly } from 'vue'
 import { useState } from '#imports'
 
-export function useT3Menu(statePrefix: string = 't3-menu') {
+export function useT3Menu(statePrefix = 't3-menu') {
     const active: Ref<string | undefined> = useState<string | undefined>(
         `${statePrefix}-active`,
         () => undefined,

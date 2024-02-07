@@ -23,10 +23,10 @@
                     :id="optionValue.toString()"
                     v-model="value"
                     class="t3-checkbox-group__option-value"
-                    type="checkbox"
-                    :name="name"
-                    :value="optionValue.toString()"
                     :disabled="disabled"
+                    :name="name"
+                    type="checkbox"
+                    :value="optionValue.toString()"
                     @blur="handleBlur"
                 />
                 <label
@@ -36,7 +36,7 @@
                 >
             </div>
         </div>
-        <slot name="error" :error-message="errorMessage"></slot>
+        <slot :error-message="errorMessage" name="error"></slot>
     </fieldset>
 </template>
 

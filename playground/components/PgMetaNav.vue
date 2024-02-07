@@ -25,8 +25,10 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-    (e: 'update:menuVisible', value?: boolean): void
-    (e: 'update:scrollbarDisabled', value?: boolean): void
+    (
+        e: 'update:menuVisible' | 'update:scrollbarDisabled',
+        value?: boolean,
+    ): void
 }>()
 
 const { availableLanguages } = useT3Languages()

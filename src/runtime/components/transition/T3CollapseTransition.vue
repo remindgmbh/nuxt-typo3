@@ -1,13 +1,13 @@
 <template>
     <transition
         :name="transitionName"
+        @after-enter="resetStyles"
+        @after-leave="resetStyles"
         @before-enter="onBeforeEnter"
+        @before-leave="onBeforeLeave"
         @enter="onEnter"
         @enter-cancelled="resetStyles"
-        @after-enter="resetStyles"
-        @before-leave="onBeforeLeave"
         @leave="onLeave"
-        @after-leave="resetStyles"
         @leave-cancelled="resetStyles"
     >
         <slot></slot>

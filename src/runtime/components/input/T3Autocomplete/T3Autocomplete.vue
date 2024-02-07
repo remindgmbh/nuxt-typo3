@@ -11,20 +11,20 @@
         <T3InputLabel
             v-if="label"
             class="t3-autocomplete__label"
-            :label="label"
             :for="name"
+            :label="label"
         />
         <div ref="wrapper" class="t3-autocomplete__wrapper">
             <T3Input
                 v-model="value"
-                :name="name"
+                autocomplete="off"
                 class="t3-autocomplete__input"
                 :disabled="disabled"
+                :name="name"
                 :placeholder="placeholder"
-                autocomplete="off"
-                @input="onInput"
                 @blur="handleBlur"
                 @focus="open"
+                @input="onInput"
                 @keydown="supportKeyboardNavigation"
             />
             <T3CollapseTransition transition-name="options-transition">
@@ -40,7 +40,7 @@
                 </div>
             </T3CollapseTransition>
         </div>
-        <slot name="error" :error-message="errorMessage"></slot>
+        <slot :error-message="errorMessage" name="error"></slot>
     </div>
 </template>
 

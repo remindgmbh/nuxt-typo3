@@ -1,8 +1,8 @@
 <template>
     <iframe
+        :loading="file.properties.lazyLoading ? 'lazy' : undefined"
         :src="file.publicUrl"
         :title="file.properties.title"
-        :loading="file.properties.lazyLoading ? 'lazy' : undefined"
     />
 </template>
 <script setup lang="ts">

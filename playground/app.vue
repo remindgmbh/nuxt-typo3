@@ -3,8 +3,8 @@
         <T3TopbarLayoutHeader class="app__header">
             <PgMainNav />
             <PgMetaNav
-                v-model:scrollbar-disabled="scrollbarDisabled"
                 v-model:menu-visible="menuVisible"
+                v-model:scrollbar-disabled="scrollbarDisabled"
             />
             <PgDropdown />
         </T3TopbarLayoutHeader>

@@ -33,29 +33,29 @@ onMounted(() => {
 
 function getContentHeight() {
     if (content.value && root.value) {
-        const temp = document.createElement(content.value!.nodeName)
-        temp.innerHTML = content.value!.innerHTML
-        root.value!.appendChild(temp)
-        const result = root.value!.clientHeight
-        root.value!.removeChild(temp)
+        const temp = document.createElement(content.value.nodeName)
+        temp.innerHTML = content.value.innerHTML
+        root.value.appendChild(temp)
+        const result = root.value.clientHeight
+        root.value.removeChild(temp)
         return result
     }
 }
 
 function getLineHeight() {
     if (content.value && root.value) {
-        const temp = document.createElement(content.value!.nodeName)
+        const temp = document.createElement(content.value.nodeName)
 
         temp.style.margin = '0px'
         temp.style.padding = '0px'
-        temp.style.fontFamily = content.value!.style.fontFamily
-        temp.style.fontSize = content.value!.style.fontSize
+        temp.style.fontFamily = content.value.style.fontFamily
+        temp.style.fontSize = content.value.style.fontSize
 
         // Add nbsp as html
         temp.innerHTML = String.fromCharCode(160)
-        root.value!.appendChild(temp)
+        root.value.appendChild(temp)
         const result = temp.clientHeight
-        root.value!.removeChild(temp)
+        root.value.removeChild(temp)
         return result
     }
 }

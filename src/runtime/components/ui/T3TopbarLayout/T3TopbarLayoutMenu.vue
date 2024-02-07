@@ -1,9 +1,9 @@
 <template>
     <transition
         v-bind="transition"
+        @after-leave="onAfterLeave"
         @before-enter="onBeforeEnter"
         @before-leave="onBeforeLeave"
-        @after-leave="onAfterLeave"
     >
         <component :is="tag" v-if="modelValue" class="t3-topbar-layout-menu">
             <slot :close="() => emit('update:modelValue', false)" />

@@ -13,7 +13,7 @@
                 type="button"
                 @click="toggle(index)"
             >
-                <slot name="title" :item="item" :index="index" />
+                <slot :index="index" :item="item" name="title" />
             </button>
             <T3CollapseTransition v-if="!disabledItems.includes(index)">
                 <section
@@ -21,7 +21,7 @@
                     class="t3-accordion__content-wrapper"
                 >
                     <div class="t3-accordion__content">
-                        <slot name="content" :item="item" :index="index" />
+                        <slot :index="index" :item="item" name="content" />
                     </div>
                 </section>
             </T3CollapseTransition>

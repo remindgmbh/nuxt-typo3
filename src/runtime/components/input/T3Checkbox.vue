@@ -13,19 +13,19 @@
                 :id="name"
                 v-model="value"
                 class="t3-checkbox__input"
-                type="checkbox"
-                :name="name"
-                :value="value"
                 :disabled="disabled"
+                :name="name"
+                type="checkbox"
+                :value="value"
                 @blur="handleBlur"
             />
             <T3InputLabel
                 class="t3-checkbox__label"
-                :label="label"
                 :for="name"
+                :label="label"
             />
         </div>
-        <slot name="error" :error-message="errorMessage"></slot>
+        <slot :error-message="errorMessage" name="error"></slot>
     </div>
 </template>
 

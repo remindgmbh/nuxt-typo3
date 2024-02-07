@@ -25,8 +25,8 @@
                         <NuxtLink
                             v-else
                             class="t3-breadcrumbs__link"
-                            :to="breadcrumb.link"
                             :target="breadcrumb.target"
+                            :to="breadcrumb.link"
                             >{{ breadcrumb.title }}</NuxtLink
                         >
                         <span

@@ -7,13 +7,13 @@
             :srcset="source.srcset"
         />
         <img
-            :src="src"
             :alt="file.properties.alternative"
-            :height="file.properties.dimensions.height"
-            :width="file.properties.dimensions.width"
-            :title="file.properties.title"
             :description="file.properties.description"
+            :height="file.properties.dimensions.height"
             :loading="file.properties.lazyLoading ? 'lazy' : undefined"
+            :src="src"
+            :title="file.properties.title"
+            :width="file.properties.dimensions.width"
         />
     </picture>
 </template>

@@ -8,22 +8,22 @@
             't3-textfield--success': meta.touched && meta.valid,
         }"
     >
-        <T3InputLabel class="t3-textfield__label" :label="label" :for="name" />
+        <T3InputLabel class="t3-textfield__label" :for="name" :label="label" />
         <div class="t3-textfield__wrapper">
             <T3Input
                 v-model="value"
                 class="t3-textfield__input"
-                :type="type"
-                :name="name"
-                :min="min"
-                :max="max"
-                :step="step"
-                :placeholder="placeholder"
                 :disabled="disabled"
+                :max="max"
+                :min="min"
+                :name="name"
+                :placeholder="placeholder"
+                :step="step"
+                :type="type"
                 @blur="handleBlur"
             />
         </div>
-        <slot name="error" :error-message="errorMessage"></slot>
+        <slot :error-message="errorMessage" name="error"></slot>
     </div>
 </template>
 

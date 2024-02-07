@@ -23,10 +23,10 @@
                     :id="optionValue.toString()"
                     v-model="value"
                     class="t3-radio-button__option-value"
-                    :value="optionValue.toString()"
-                    type="radio"
-                    :name="name"
                     :disabled="disabled"
+                    :name="name"
+                    type="radio"
+                    :value="optionValue.toString()"
                     @blur="handleBlur"
                 />
                 <label
@@ -36,7 +36,7 @@
                 >
             </div>
         </div>
-        <slot name="error" :error-message="errorMessage"></slot>
+        <slot :error-message="errorMessage" name="error"></slot>
     </fieldset>
 </template>
 

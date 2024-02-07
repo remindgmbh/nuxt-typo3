@@ -14,10 +14,10 @@
                 :id="name"
                 ref="nativeSelect"
                 v-model="value"
-                class="t3-select__native"
                 :aria-labelledby="name"
-                :name="name"
+                class="t3-select__native"
                 :disabled="disabled"
+                :name="name"
                 @blur="handleBlur"
             >
                 <option
@@ -33,9 +33,9 @@
 
             <div
                 ref="customSelect"
+                aria-hidden="true"
                 class="t3-select__custom"
                 :class="{ 't3-select__custom--active': isOpen }"
-                aria-hidden="true"
                 @click="toggle"
             >
                 <div class="t3-select__trigger">
@@ -57,8 +57,8 @@
                                         option.value === hoverOption?.value,
                                 }"
                                 @click="handleBlurAndSetValue(option.value)"
-                                @mouseover="hoverOption = option"
                                 @mouseleave="hoverOption = undefined"
+                                @mouseover="hoverOption = option"
                             >
                                 <slot name="option" :option="option">
                                     {{ option.label }}
@@ -69,7 +69,7 @@
                 </T3CollapseTransition>
             </div>
         </div>
-        <slot name="error" :error-message="errorMessage"></slot>
+        <slot :error-message="errorMessage" name="error"></slot>
     </div>
 </template>
 

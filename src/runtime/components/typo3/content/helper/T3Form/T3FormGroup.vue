@@ -7,7 +7,7 @@
             :loading="loading"
         >
             <template #error="{ errorMessage }">
-                <slot name="error" :error-message="errorMessage"></slot>
+                <slot :error-message="errorMessage" name="error"></slot>
             </template>
         </T3FormElement>
     </div>

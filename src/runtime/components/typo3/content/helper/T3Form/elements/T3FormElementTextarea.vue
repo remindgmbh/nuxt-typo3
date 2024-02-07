@@ -1,15 +1,15 @@
 <template>
     <T3Textarea
-        :name="formElement.name"
-        :label="formElement.label"
         :default-value="formElement.defaultValue"
-        :validation="validation"
-        :placeholder="placeholder"
         :disabled="loading"
+        :label="formElement.label"
+        :name="formElement.name"
+        :placeholder="placeholder"
         :required="required"
+        :validation="validation"
     >
         <template #error="{ errorMessage }">
-            <slot name="error" :error-message="errorMessage"></slot> </template
+            <slot :error-message="errorMessage" name="error"></slot> </template
     ></T3Textarea>
 </template>
 

@@ -1,16 +1,16 @@
 <template>
     <T3Checkbox
-        :name="formElement.name"
-        :label="formElement.label ?? formElement.name"
         :default-value="
             formElement.defaultValue ? formElement.defaultValue : false
         "
-        :validation="validation"
         :disabled="loading"
+        :label="formElement.label ?? formElement.name"
+        :name="formElement.name"
         :required="required"
+        :validation="validation"
     >
         <template #error="{ errorMessage }">
-            <slot name="error" :error-message="errorMessage"></slot>
+            <slot :error-message="errorMessage" name="error"></slot>
         </template>
     </T3Checkbox>
 </template>

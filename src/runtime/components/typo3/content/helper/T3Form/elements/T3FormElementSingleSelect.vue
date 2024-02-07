@@ -1,15 +1,15 @@
 <template>
     <T3Select
+        :default-value="formElement.defaultValue"
+        :disabled="loading"
+        :label="formElement.label"
         :name="formElement.name"
         :options="selectOptions"
-        :label="formElement.label"
-        :default-value="formElement.defaultValue"
-        :validation="validation"
-        :disabled="loading"
         :required="required"
+        :validation="validation"
     >
         <template #error="{ errorMessage }">
-            <slot name="error" :error-message="errorMessage"></slot> </template
+            <slot :error-message="errorMessage" name="error"></slot> </template
     ></T3Select>
 </template>
 
