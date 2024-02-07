@@ -1,42 +1,54 @@
 <template>
     <div class="t3-pagination">
-        <NuxtLink
-            v-if="pagination.prev"
+        <component
+            :is="pagination.prev ? NuxtLink : 'div'"
+            v-if="!disableNavigation"
+            class="t3-pagination__navigation t3-pagination__navigation--prev"
+            :class="{ 't3-pagination__navigation--disabled': !pagination.prev }"
             :to="pagination.prev"
-            class="t3-pagination__link t3-pagination__link--prev"
-        ></NuxtLink>
-        <span
-            v-else
-            class="t3-pagination__link t3-pagination__link--prev t3-pagination__link--disabled"
-        ></span>
+        >
+            <slot name="prev"></slot>
+        </component>
         <div class="t3-pagination__pages">
-            <template v-for="page in pagination.pages" :key="page.link">
-                <span
-                    v-if="page.active"
-                    class="t3-pagination__link t3-pagination__link--disabled"
-                    >{{ page.pageNumber }}</span
+            <template v-for="(page, index) in pages" :key="page.link">
+                <component
+                    :is="page.active ? 'div' : NuxtLink"
+                    class="t3-pagination__page"
+                    :class="{
+                        't3-pagination__page--disabled': page.active,
+                    }"
+                    :to="page.link"
                 >
-                <NuxtLink v-else class="t3-pagination__link" :to="page.link">{{
-                    page.pageNumber
-                }}</NuxtLink>
+                    <slot name="page" :page="page">{{ page.pageNumber }}</slot>
+                </component>
+                <slot v-if="showDivider(index)" name="divider"></slot>
             </template>
         </div>
-        <NuxtLink
-            v-if="pagination.next"
+        <component
+            :is="pagination.next ? NuxtLink : 'div'"
+            v-if="!disableNavigation"
+            class="t3-pagination__navigation t3-pagination__navigation--next"
+            :class="{ 't3-pagination__navigation--disabled': !pagination.next }"
             :to="pagination.next"
-            class="t3-pagination__link t3-pagination__link--next"
-        ></NuxtLink>
-        <span
-            v-else
-            class="t3-pagination__link t3-pagination__link--next t3-pagination__link--disabled"
-        ></span>
+        >
+            <slot name="next"></slot>
+        </component>
     </div>
 </template>
 
 <script setup lang="ts">
-import { T3Model } from '#imports'
+import { T3Model, useT3Pagination } from '#imports'
+import { NuxtLink } from '#components'
+import { toRef } from 'vue'
 
-defineProps<{
+const props = defineProps<{
+    disableNavigation?: boolean
+    numberOfPages?: number
     pagination: T3Model.Typo3.Extbase.Pagination
 }>()
+
+const { pages, showDivider } = useT3Pagination(
+    toRef(() => props.pagination),
+    toRef(() => props.numberOfPages),
+)
 </script>

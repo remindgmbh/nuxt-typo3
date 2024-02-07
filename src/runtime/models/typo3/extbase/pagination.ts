@@ -1,3 +1,5 @@
+import type { PaginationPage } from '.'
+
 export interface Pagination {
     startRecordNumber: number
     endRecordNumber: number
@@ -5,9 +7,5 @@ export interface Pagination {
     last: string
     prev?: string
     next?: string
-    pages: Array<{
-        pageNumber: number
-        link: string
-        active: boolean
-    }>
+    pages: PaginationPage[]
 }
