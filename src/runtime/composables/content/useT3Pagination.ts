@@ -22,23 +22,35 @@ export function useT3Pagination(
             )
             if (page) {
                 result.add(page)
+                return true
             }
+            return false
         }
 
+        // add first page
         result.add(pagination.value.pages[0])
+
+        // add last page
         result.add(pagination.value.pages[pagination.value.pages.length - 1])
 
         if (currentPage.value) {
+            // add current page
             result.add(currentPage.value)
 
+            // add pages around current page until limit is reached
             for (let i = 1; result.size < numberOfPages.value; i++) {
-                setPage(currentPage.value.pageNumber + i)
+                const next = setPage(currentPage.value.pageNumber + i)
 
                 if (result.size >= numberOfPages.value) {
                     break
                 }
 
-                setPage(currentPage.value.pageNumber - i)
+                const prev = setPage(currentPage.value.pageNumber - i)
+
+                // no pages are available anymore
+                if (!next && !prev) {
+                    break
+                }
             }
         }
 
