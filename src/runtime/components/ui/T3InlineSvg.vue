@@ -6,8 +6,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { compileString } from 'sass'
+import { useId } from '#imports'
 
 const props = defineProps<{
     src: string
@@ -16,7 +17,7 @@ const props = defineProps<{
 const html = ref<string>()
 const attributes = ref<{ [key: string]: string }>({})
 
-const id = computed(() => `svg-${crypto.randomUUID()}`)
+const id = useId()
 
 onMounted(async () => {
     await loadSvg()
@@ -39,9 +40,7 @@ async function loadSvg() {
     const styleElements = documentElement.getElementsByTagName('style')
 
     for (const styleElement of styleElements) {
-        const { css } = compileString(
-            `#${id.value} { ${styleElement.innerHTML} }`,
-        )
+        const { css } = compileString(`#${id} { ${styleElement.innerHTML} }`)
         styleElement.innerHTML = css
     }
 
