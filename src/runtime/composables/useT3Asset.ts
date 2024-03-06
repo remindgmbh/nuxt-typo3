@@ -47,6 +47,9 @@ export function useT3Asset(asset: T3Model.Typo3.Asset) {
             case 'audio':
                 return 'audio'
             case 'image':
+                if (asset.properties.extension === 'svg') {
+                    return 'svg'
+                }
                 return 'image'
             default:
                 return 'default'

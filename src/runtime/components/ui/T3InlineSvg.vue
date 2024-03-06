@@ -12,6 +12,8 @@ import { useId } from '#imports'
 
 const props = defineProps<{
     src: string
+    title?: string
+    description?: string
 }>()
 
 const html = ref<string>()
@@ -42,6 +44,18 @@ async function loadSvg() {
     for (const styleElement of styleElements) {
         const { css } = compileString(`#${id} { ${styleElement.innerHTML} }`)
         styleElement.innerHTML = css
+    }
+
+    if (props.title) {
+        const title = document.createElement('title')
+        title.innerText = props.title
+        documentElement.appendChild(title)
+    }
+
+    if (props.description) {
+        const desc = document.createElement('desc')
+        desc.innerText = props.description
+        documentElement.appendChild(desc)
     }
 
     html.value = documentElement.innerHTML
