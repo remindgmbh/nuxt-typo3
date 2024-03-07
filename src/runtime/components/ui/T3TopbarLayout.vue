@@ -159,7 +159,7 @@ watch(scrollbarDisabled, (value) => {
         position: fixed;
         width: 100%;
         top: 0;
-        z-index: 1;
+        z-index: 10;
         height: var(--header-height);
     }
 
@@ -169,7 +169,7 @@ watch(scrollbarDisabled, (value) => {
     }
 
     &__menu {
-        z-index: 2;
+        z-index: 20;
         position: fixed;
         width: 100%;
         max-height: calc(100% - var(--header-height));
