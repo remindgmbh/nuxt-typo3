@@ -1,9 +1,13 @@
+/* eslint-disable @typescript-eslint/no-invalid-void-type */
 import * as T3Model from '../models'
+import type { ActiveHeadEntry, MergeHead, UseHeadInput } from '@unhead/vue'
 import { useHead, useT3Config } from '#imports'
 import { type MetaObject } from '@nuxt/schema'
 
 // Temporary explicit return type until this issue is fixed: https://github.com/nuxt/module-builder/issues/224
-export function useT3PageHead(pageData: T3Model.Typo3.Page.Data): unknown {
+export function useT3PageHead(
+    pageData: T3Model.Typo3.Page.Data,
+): void | ActiveHeadEntry<UseHeadInput<MergeHead>> {
     const title = pageData.breadcrumbs.find((bc) => bc.current)?.title
     const { meta } = pageData
 
