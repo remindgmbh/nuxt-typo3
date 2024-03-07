@@ -57,9 +57,9 @@ const props = withDefaults(
     },
 )
 
-const { injectScrollbarDisabled } = useT3TopbarLayoutInjection()
+const { injectOptionalScrollbarDisabled } = useT3TopbarLayoutInjection()
 
-const scrollbarDisabled = injectScrollbarDisabled()
+const scrollbarDisabled = injectOptionalScrollbarDisabled()
 
 const emit = defineEmits<{
     (e: 'update:modelValue', value: boolean): void

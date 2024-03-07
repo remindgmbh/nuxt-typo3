@@ -33,11 +33,11 @@ const scrollbarDisabled = injectScrollbarDisabled()
 const menuVisible = injectMenuVisible()
 
 function toggleMenu(): void {
-    if (menuVisible) menuVisible.value = !menuVisible.value
+    menuVisible.value = !menuVisible.value
 }
 
 function toggleScrollbar(): void {
-    if (scrollbarDisabled) scrollbarDisabled.value = !scrollbarDisabled.value
+    scrollbarDisabled.value = !scrollbarDisabled.value
 }
 
 function toggleTheme(): void {
