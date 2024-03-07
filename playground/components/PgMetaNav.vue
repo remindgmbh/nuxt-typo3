@@ -16,49 +16,28 @@
 </template>
 
 <script setup lang="ts">
-import { useT3Languages, useT3Theme, useT3UserState } from '#imports'
-import { computed } from 'vue'
-
-const props = defineProps<{
-    menuVisible: boolean
-    scrollbarDisabled: boolean
-}>()
-
-const emit = defineEmits<{
-    (
-        e: 'update:menuVisible' | 'update:scrollbarDisabled',
-        value?: boolean,
-    ): void
-}>()
+import {
+    useT3Languages,
+    useT3Theme,
+    useT3TopbarLayoutInjection,
+    useT3UserState,
+} from '#imports'
 
 const { availableLanguages } = useT3Languages()
 const { isLoggedIn, logout } = useT3UserState()
 const { selectedTheme } = useT3Theme()
+const { injectMenuVisible, injectScrollbarDisabled } =
+    useT3TopbarLayoutInjection()
 
-const menuVisible = computed({
-    get() {
-        return props.menuVisible
-    },
-    set(value: boolean) {
-        emit('update:menuVisible', value)
-    },
-})
-
-const scrollbarDisabled = computed({
-    get() {
-        return props.scrollbarDisabled
-    },
-    set(value: boolean) {
-        emit('update:scrollbarDisabled', value)
-    },
-})
+const scrollbarDisabled = injectScrollbarDisabled()
+const menuVisible = injectMenuVisible()
 
 function toggleMenu(): void {
-    menuVisible.value = !menuVisible.value
+    if (menuVisible) menuVisible.value = !menuVisible.value
 }
 
 function toggleScrollbar(): void {
-    scrollbarDisabled.value = !scrollbarDisabled.value
+    if (scrollbarDisabled) scrollbarDisabled.value = !scrollbarDisabled.value
 }
 
 function toggleTheme(): void {

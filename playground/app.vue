@@ -1,21 +1,20 @@
 <template>
-    <T3TopbarLayout v-model:scrollbar-disabled="scrollbarDisabled" class="app">
-        <T3TopbarLayoutHeader class="app__header">
+    <T3TopbarLayout
+        class="app"
+        content-class="app__content"
+        footer-class="app__footer"
+        header-class="app__header"
+        :header-height-default="headerHeightDefault"
+        :header-height-dense="headerHeightDense"
+        menu-class="app__menu"
+        menu-full-height
+    >
+        <template #header>
             <PgMainNav />
-            <PgMetaNav
-                v-model:menu-visible="menuVisible"
-                v-model:scrollbar-disabled="scrollbarDisabled"
-            />
+            <PgMetaNav />
             <PgDropdown />
-        </T3TopbarLayoutHeader>
-        <T3TopbarLayoutMenu v-model="menuVisible" class="app__menu">
-            <div class="app__menu-content">
-                <div>top</div>
-                <div v-for="i in 100" :key="i">{{ i }}</div>
-                <div>bottom</div>
-            </div>
-        </T3TopbarLayoutMenu>
-        <T3TopbarLayoutContent class="app__content">
+        </template>
+        <template #content>
             <div
                 class="app__loading-bar"
                 :class="{
@@ -27,32 +26,32 @@
             <NuxtPage
                 :transition="{ name: 'page-transition', mode: 'in-out' }"
             />
-        </T3TopbarLayoutContent>
-        <T3TopbarLayoutFooter v-if="footer" class="app__footer">
+        </template>
+        <template #menu>
+            <PgMenu />
+        </template>
+        <template #footer>
             <pre>{{ footer }}</pre>
             <button @click="showBanner">Cookies</button>
-        </T3TopbarLayoutFooter>
+        </template>
     </T3TopbarLayout>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
 import {
     useT3ColorScheme,
     useT3Cookiebot,
     useT3Footer,
     useT3LoadingState,
-    useT3Util,
 } from '#imports'
 import colors from '@/colors'
 
-const HEADER_HEIGHT = '5rem'
-const HEADER_HEIGHT_DENSE = '3rem'
+const headerHeightDefault = '6rem'
+const headerHeightDense = '3rem'
 
 const { showBanner } = useT3Cookiebot()
 const footer = useT3Footer()
 const loading = useT3LoadingState()
-const { detectScrollEnd } = useT3Util()
 
 const colorScheme = useT3ColorScheme({
     dark: {
@@ -69,21 +68,7 @@ const colorScheme = useT3ColorScheme({
             border: colors.secondary,
         },
         loadingBar: colors.secondary,
-        menu: {
-            background: colors.primary,
-            border: colors.accent,
-        },
     },
-})
-
-const menuVisible = ref(false)
-const scrollbarDisabled = ref(false)
-const headerHeight = ref(HEADER_HEIGHT)
-
-onMounted(() => {
-    detectScrollEnd(document.body, 'top', (detached) => {
-        headerHeight.value = detached ? HEADER_HEIGHT_DENSE : HEADER_HEIGHT
-    })
 })
 </script>
 <style lang="scss">
@@ -113,7 +98,6 @@ onMounted(() => {
 
     &__header {
         background-color: v-bind('colorScheme.background');
-        height: v-bind(headerHeight);
         transition: height 0.5s;
         display: flex;
         justify-content: space-between;
@@ -122,29 +106,31 @@ onMounted(() => {
         width: 100%;
     }
 
+    &__content {
+        overflow-x: hidden;
+        position: relative;
+        transition: margin 0.5s;
+        background-color: v-bind('colorScheme.background');
+    }
+
     &__footer {
         background-color: v-bind('colorScheme.footer?.background');
         color: v-bind('colorScheme.background');
     }
 
-    &__menu {
-        margin-top: v-bind(headerHeight);
-        width: 100%;
-        height: calc(100% - v-bind(headerHeight));
-        overflow: auto;
-    }
+    .menu-transition {
+        &-enter-active,
+        &-leave-active {
+            transition: transform 2s;
+        }
 
-    &__menu-content {
-        background-color: v-bind('colorScheme.menu?.background');
-        border-bottom: solid 1rem v-bind('colorScheme.menu?.border');
-        box-sizing: border-box;
-    }
+        &-enter-from {
+            transform: translateX(100%);
+        }
 
-    &__content {
-        overflow-x: hidden;
-        position: relative;
-        background-color: v-bind('colorScheme.background');
-        flex-grow: 1;
+        &-leave-to {
+            transform: translateX(100%);
+        }
     }
 
     .page-transition {
