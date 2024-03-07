@@ -4,25 +4,7 @@ import { useRequestHeaders, useT3Config } from '#imports'
 import { type NitroFetchRequest } from 'nitropack'
 import { computed } from 'vue'
 
-// Temporary explicit return type until this issue is fixed: https://github.com/nuxt/module-builder/issues/224
-export function useT3Api(): {
-    get: <T = unknown>(
-        request: NitroFetchRequest,
-        options?: FetchOptions,
-    ) => Promise<T>
-    getInitialData: (
-        path: string,
-        options?: FetchOptions,
-    ) => Promise<T3Model.Typo3.InitialData>
-    getPageData: (
-        path: string,
-        options?: FetchOptions,
-    ) => Promise<T3Model.Typo3.Page.Data>
-    post: <T = unknown>(
-        request: NitroFetchRequest,
-        options?: FetchOptions,
-    ) => Promise<T>
-} {
+export function useT3Api() {
     const config = useT3Config()
 
     const defaultOptions = computed<FetchOptions>(() => {
@@ -80,7 +62,7 @@ export function useT3Api(): {
     async function get<T = unknown>(
         request: NitroFetchRequest,
         options?: FetchOptions,
-    ) {
+    ): Promise<T> {
         return await $fetch<T>(request, {
             ...defaultOptions.value,
             ...options,
@@ -91,7 +73,7 @@ export function useT3Api(): {
     async function post<T = unknown>(
         request: NitroFetchRequest,
         options?: FetchOptions,
-    ) {
+    ): Promise<T> {
         return await $fetch<T>(request, {
             ...defaultOptions.value,
             ...options,
