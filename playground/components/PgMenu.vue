@@ -1,7 +1,7 @@
 <template>
-    <div class="pg-menu">
+    <div v-if="active === 'menu'" class="pg-menu">
         <div>top</div>
-        <button @click="menuVisible = false">close</button>
+        <button @click="close">close</button>
         <div v-for="i in 100" :key="i">{{ i }}</div>
         <div>bottom</div>
     </div>
@@ -18,9 +18,8 @@ const colorScheme = useT3ColorScheme({
     },
 })
 
-const { injectMenuVisible } = useT3TopbarLayoutInjection()
-
-const menuVisible = injectMenuVisible()
+const { injectMenu } = useT3TopbarLayoutInjection()
+const { active, close } = injectMenu()
 </script>
 
 <style lang="scss">

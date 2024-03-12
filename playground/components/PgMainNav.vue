@@ -17,7 +17,6 @@
                 <button
                     v-else
                     :id="navItem.link"
-                    ref="menuTriggers"
                     @click="() => toggle(navItem.link)"
                 >
                     {{ navItem.title }} ↓
@@ -29,13 +28,16 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { useT3ColorScheme, useT3Menu, useT3Navigation } from '#imports'
+import {
+    useT3ColorScheme,
+    useT3Navigation,
+    useT3TopbarLayoutInjection,
+} from '#imports'
 import colors from '@/colors'
 
 const { rootPageNavigation } = useT3Navigation()
-const { triggers, toggle } = useT3Menu()
-const menuTriggers = ref<HTMLButtonElement[]>([])
+const { injectMenu } = useT3TopbarLayoutInjection()
+const { toggle } = injectMenu()
 
 const colorScheme = useT3ColorScheme({
     light: {
@@ -43,10 +45,6 @@ const colorScheme = useT3ColorScheme({
             active: colors.primary,
         },
     },
-})
-
-onMounted(() => {
-    triggers.value = menuTriggers.value
 })
 </script>
 

@@ -23,12 +23,17 @@
 </template>
 
 <script setup lang="ts">
-import { useT3ColorScheme, useT3Menu, useT3Navigation } from '#imports'
+import {
+    useT3ColorScheme,
+    useT3Navigation,
+    useT3TopbarLayoutInjection,
+} from '#imports'
 import colors from '@/colors'
 import { computed } from 'vue'
 
-const { active } = useT3Menu()
+const { injectMenu } = useT3TopbarLayoutInjection()
 const { navItemsWithChildren } = useT3Navigation()
+const { active } = injectMenu()
 
 const colorScheme = useT3ColorScheme({
     light: {

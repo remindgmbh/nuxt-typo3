@@ -6,7 +6,7 @@
             :to="language.link"
             >{{ language.navigationTitle }}</NuxtLink
         >
-        <button @click="toggleMenu">Toggle Menu</button>
+        <button @click="toggle('menu')">Toggle Menu</button>
         <button @click="toggleScrollbar">Toggle Scrollbar</button>
         <button @click="toggleTheme">
             {{ selectedTheme }}
@@ -26,15 +26,10 @@ import {
 const { availableLanguages } = useT3Languages()
 const { isLoggedIn, logout } = useT3UserState()
 const { selectedTheme } = useT3Theme()
-const { injectMenuVisible, injectScrollbarDisabled } =
-    useT3TopbarLayoutInjection()
+const { injectMenu, injectScrollbarDisabled } = useT3TopbarLayoutInjection()
 
 const scrollbarDisabled = injectScrollbarDisabled()
-const menuVisible = injectMenuVisible()
-
-function toggleMenu(): void {
-    menuVisible.value = !menuVisible.value
-}
+const { toggle } = injectMenu()
 
 function toggleScrollbar(): void {
     scrollbarDisabled.value = !scrollbarDisabled.value
