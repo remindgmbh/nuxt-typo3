@@ -1,5 +1,5 @@
 <template>
-    <div class="t3-topbar-layout">
+    <div class="t3-topbar-layout" @click="closeOnOutsideClick">
         <header class="t3-topbar-layout__header" :class="headerClass">
             <slot name="header"></slot>
         </header>
@@ -17,6 +17,7 @@
         >
             <nav
                 v-if="menuActive"
+                ref="menuEl"
                 class="t3-topbar-layout__menu"
                 :class="[
                     menuClass,
@@ -60,6 +61,7 @@ const props = withDefaults(
         headerHeightDefault: string
         headerHeightDense?: string
         menuClass?: string
+        menuCloseOnOutsideClick?: boolean
         menuFullHeight?: boolean
         menuOverlapHeader?: boolean
         menuTransition?: TransitionProps
@@ -80,10 +82,13 @@ const props = withDefaults(
 const { detectScrollEnd } = useT3Util()
 const { provideMenu, provideScrollbarDisabled } = useT3TopbarLayoutInjection()
 
+const menuEl = ref<HTMLElement>()
 const scrollbarDisabled = ref(false)
 const headerHeight = ref(props.headerHeightDefault)
 const menuStatus = ref(MenuStatus.Entering)
 const menuActive = ref<string | undefined>(undefined)
+
+const isTrigger = ref(false)
 
 provideScrollbarDisabled(scrollbarDisabled)
 provideMenu({
@@ -102,11 +107,26 @@ onMounted(() => {
     })
 })
 
+function closeOnOutsideClick(event: MouseEvent) {
+    if (
+        props.menuCloseOnOutsideClick &&
+        !isTrigger.value &&
+        menuActive.value &&
+        menuEl.value &&
+        !event.composedPath().includes(menuEl.value)
+    ) {
+        close()
+    }
+    isTrigger.value = false
+}
+
 function close() {
+    isTrigger.value = true
     menuActive.value = undefined
 }
 
 function toggle(id?: string) {
+    isTrigger.value = true
     menuActive.value = menuActive.value === id ? undefined : id
 }
 
