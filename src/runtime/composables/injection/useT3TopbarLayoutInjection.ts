@@ -1,9 +1,13 @@
 import { type InjectionKey, type Ref, inject, provide } from 'vue'
 import { useT3Injection } from '#imports'
 
-const menuVisibleInjectionKey = Symbol(
-    't3-topbar-layout:menuVisible',
-) as InjectionKey<Ref<boolean>>
+interface Menu {
+    active: Ref<string | undefined>
+    close: () => void
+    toggle: (id?: string, event?: Event) => void
+}
+
+const menuInjectionKey = Symbol('t3-topbar-layout:menu') as InjectionKey<Menu>
 
 const scrollbarDisabledInjectionKey = Symbol(
     't3-topbar-layout:scrollbarDisabled',
@@ -12,12 +16,12 @@ const scrollbarDisabledInjectionKey = Symbol(
 export function useT3TopbarLayoutInjection() {
     const { injectStrict } = useT3Injection()
 
-    function injectOptionalMenuVisible() {
-        return inject(menuVisibleInjectionKey)
+    function injectOptionalMenu() {
+        return inject(menuInjectionKey)
     }
 
-    function injectMenuVisible() {
-        return injectStrict(menuVisibleInjectionKey)
+    function injectMenu() {
+        return injectStrict(menuInjectionKey)
     }
 
     function injectOptionalScrollbarDisabled() {
@@ -28,8 +32,8 @@ export function useT3TopbarLayoutInjection() {
         return injectStrict(scrollbarDisabledInjectionKey)
     }
 
-    function provideMenuVisible(menuVisible: Ref<boolean>) {
-        provide(menuVisibleInjectionKey, menuVisible)
+    function provideMenu(menu: Menu) {
+        provide(menuInjectionKey, menu)
     }
 
     function provideScrollbarDisabled(scrollbarDisabled: Ref<boolean>) {
@@ -37,11 +41,11 @@ export function useT3TopbarLayoutInjection() {
     }
 
     return {
-        injectMenuVisible,
-        injectOptionalMenuVisible,
+        injectMenu,
+        injectOptionalMenu,
         injectOptionalScrollbarDisabled,
         injectScrollbarDisabled,
-        provideMenuVisible,
+        provideMenu,
         provideScrollbarDisabled,
     }
 }

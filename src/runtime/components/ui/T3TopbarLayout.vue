@@ -16,7 +16,7 @@
             @before-leave="menuOnBeforeLeave"
         >
             <nav
-                v-if="menuVisible"
+                v-if="menuActive"
                 class="t3-topbar-layout__menu"
                 :class="[
                     menuClass,
@@ -27,7 +27,7 @@
                     },
                 ]"
             >
-                <slot :close="() => (menuVisible = false)" name="menu"></slot>
+                <slot name="menu"></slot>
             </nav>
         </transition>
     </div>
@@ -40,6 +40,7 @@ import {
     callWithAsyncErrorHandling,
     getCurrentInstance,
     onMounted,
+    readonly,
     ref,
     watch,
 } from 'vue'
@@ -75,16 +76,19 @@ const props = withDefaults(
 )
 
 const { detectScrollEnd } = useT3Util()
-const { provideMenuVisible, provideScrollbarDisabled } =
-    useT3TopbarLayoutInjection()
+const { provideMenu, provideScrollbarDisabled } = useT3TopbarLayoutInjection()
 
-const menuVisible = ref(false)
 const scrollbarDisabled = ref(false)
 const headerHeight = ref(props.headerHeightDefault)
 const menuStatus = ref(MenuStatus.Entering)
+const menuActive = ref<string | undefined>(undefined)
 
 provideScrollbarDisabled(scrollbarDisabled)
-provideMenuVisible(menuVisible)
+provideMenu({
+    active: readonly(menuActive),
+    close,
+    toggle,
+})
 
 onMounted(() => {
     detectScrollEnd(document.body, 'top', (detached) => {
@@ -95,6 +99,14 @@ onMounted(() => {
         }
     })
 })
+
+function close() {
+    menuActive.value = undefined
+}
+
+function toggle(id?: string) {
+    menuActive.value = menuActive.value === id ? undefined : id
+}
 
 function callHook(
     el: Element,
