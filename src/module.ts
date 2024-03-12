@@ -21,8 +21,6 @@ export interface ModuleOptions {
     api: {
         // URL of the TYPO3 Backend
         baseUrl?: string
-        // Type number of the footer data, only required if changed in backend
-        footerDataType?: number
         // Type number of the initial data, only required if changed in backend
         initialDataType?: number
     }
@@ -40,7 +38,6 @@ export default defineNuxtModule<ModuleOptions>({
     defaults: {
         api: {
             baseUrl: '',
-            footerDataType: 836,
             initialDataType: 834,
         },
         baseUrl: '',
