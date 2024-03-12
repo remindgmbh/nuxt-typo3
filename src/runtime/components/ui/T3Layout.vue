@@ -183,7 +183,7 @@ if (props.closeOnRouteChange) {
 .t3-layout {
     --header-height: v-bind('headerHeightDense ?? headerHeight');
 
-    @include breakpoints.up(variables.$topbar-layout-header-dense-breakpoint) {
+    @include breakpoints.up(variables.$layout-header-dense-breakpoint) {
         --header-height: v-bind(headerHeight);
     }
 
