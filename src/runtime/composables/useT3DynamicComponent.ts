@@ -1,12 +1,14 @@
 import { type Component, getCurrentInstance, resolveComponent } from 'vue'
+import { useLogger, useT3Config } from '#imports'
 import { pascalCase } from 'scule'
-import { useT3Config } from '#imports'
 
 export function useT3DynamicComponent(
     dynamicNamePart: string | undefined,
     staticNamePart: string,
     fallbackComponent: Component,
 ) {
+    const logger = useLogger()
+
     const { componentPrefix } = useT3Config()
 
     const instance = getCurrentInstance()
@@ -28,6 +30,8 @@ export function useT3DynamicComponent(
             return resolveComponent(componentName)
         }
     }
+
+    logger.warn(`Failed to resolve component`, componentNames)
 
     return fallbackComponent
 }
