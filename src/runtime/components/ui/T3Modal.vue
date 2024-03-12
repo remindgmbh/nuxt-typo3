@@ -39,7 +39,7 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { useT3TopbarLayoutInjection } from '#imports'
+import { useT3LayoutInjection } from '#imports'
 
 const props = withDefaults(
     defineProps<{
@@ -57,7 +57,7 @@ const props = withDefaults(
     },
 )
 
-const { injectOptionalScrollbarDisabled } = useT3TopbarLayoutInjection()
+const { injectOptionalScrollbarDisabled } = useT3LayoutInjection()
 
 const scrollbarDisabled = injectOptionalScrollbarDisabled()
 

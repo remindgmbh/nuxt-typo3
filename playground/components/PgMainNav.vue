@@ -30,13 +30,13 @@
 <script setup lang="ts">
 import {
     useT3ColorScheme,
+    useT3LayoutInjection,
     useT3Navigation,
-    useT3TopbarLayoutInjection,
 } from '#imports'
 import colors from '@/colors'
 
 const { rootPageNavigation } = useT3Navigation()
-const { injectMenu } = useT3TopbarLayoutInjection()
+const { injectMenu } = useT3LayoutInjection()
 const { toggle } = injectMenu()
 
 const colorScheme = useT3ColorScheme({

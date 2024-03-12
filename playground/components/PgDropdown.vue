@@ -25,13 +25,13 @@
 <script setup lang="ts">
 import {
     useT3ColorScheme,
+    useT3LayoutInjection,
     useT3Navigation,
-    useT3TopbarLayoutInjection,
 } from '#imports'
 import colors from '@/colors'
 import { computed } from 'vue'
 
-const { injectMenu } = useT3TopbarLayoutInjection()
+const { injectMenu } = useT3LayoutInjection()
 const { navItemsWithChildren } = useT3Navigation()
 const { active } = injectMenu()
 

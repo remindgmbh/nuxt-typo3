@@ -7,13 +7,13 @@ interface Menu {
     toggle: (id?: string, event?: Event) => void
 }
 
-const menuInjectionKey = Symbol('t3-topbar-layout:menu') as InjectionKey<Menu>
+const menuInjectionKey = Symbol('t3-layout:menu') as InjectionKey<Menu>
 
 const scrollbarDisabledInjectionKey = Symbol(
-    't3-topbar-layout:scrollbarDisabled',
+    't3-layout:scrollbarDisabled',
 ) as InjectionKey<Ref<boolean>>
 
-export function useT3TopbarLayoutInjection() {
+export function useT3LayoutInjection() {
     const { injectStrict } = useT3Injection()
 
     function injectOptionalMenu() {

@@ -18,15 +18,15 @@
 <script setup lang="ts">
 import {
     useT3Languages,
+    useT3LayoutInjection,
     useT3Theme,
-    useT3TopbarLayoutInjection,
     useT3UserState,
 } from '#imports'
 
 const { availableLanguages } = useT3Languages()
 const { isLoggedIn, logout } = useT3UserState()
 const { selectedTheme } = useT3Theme()
-const { injectMenu, injectScrollbarDisabled } = useT3TopbarLayoutInjection()
+const { injectMenu, injectScrollbarDisabled } = useT3LayoutInjection()
 
 const scrollbarDisabled = injectScrollbarDisabled()
 const { toggle } = injectMenu()

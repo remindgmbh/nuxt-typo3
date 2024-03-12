@@ -1,12 +1,12 @@
 <template>
-    <div class="t3-topbar-layout" @click="closeOnOutsideClick">
-        <header class="t3-topbar-layout__header" :class="headerClass">
+    <div class="t3-layout" @click="closeOnOutsideClick">
+        <header class="t3-layout__header" :class="headerClass">
             <slot name="header"></slot>
         </header>
-        <main class="t3-topbar-layout__content" :class="contentClass">
+        <main class="t3-layout__content" :class="contentClass">
             <slot name="content"></slot>
         </main>
-        <footer class="t3-topbar-layout__footer" :class="footerClass">
+        <footer class="t3-layout__footer" :class="footerClass">
             <slot name="footer"></slot>
         </footer>
         <transition
@@ -18,13 +18,12 @@
             <nav
                 v-if="menuActive"
                 ref="menuEl"
-                class="t3-topbar-layout__menu"
+                class="t3-layout__menu"
                 :class="[
                     menuClass,
-                    { 't3-topbar-layout__menu--full-height': menuFullHeight },
+                    { 't3-layout__menu--full-height': menuFullHeight },
                     {
-                        't3-topbar-layout__menu--overlap-header':
-                            menuOverlapHeader,
+                        't3-layout__menu--overlap-header': menuOverlapHeader,
                     },
                 ]"
             >
@@ -45,7 +44,7 @@ import {
     ref,
     watch,
 } from 'vue'
-import { useRoute, useT3TopbarLayoutInjection, useT3Util } from '#imports'
+import { useRoute, useT3LayoutInjection, useT3Util } from '#imports'
 
 enum MenuStatus {
     Entering,
@@ -80,7 +79,7 @@ const props = withDefaults(
 )
 
 const { detectScrollEnd } = useT3Util()
-const { provideMenu, provideScrollbarDisabled } = useT3TopbarLayoutInjection()
+const { provideMenu, provideScrollbarDisabled } = useT3LayoutInjection()
 
 const menuEl = ref<HTMLElement>()
 const scrollbarDisabled = ref(false)
@@ -181,7 +180,7 @@ if (props.closeOnRouteChange) {
 @use '#nuxt-typo3/assets/styles/breakpoints' as breakpoints;
 @use '#nuxt-typo3/assets/styles/variables' as variables;
 
-.t3-topbar-layout {
+.t3-layout {
     --header-height: v-bind('headerHeightDense ?? headerHeight');
 
     @include breakpoints.up(variables.$topbar-layout-header-dense-breakpoint) {

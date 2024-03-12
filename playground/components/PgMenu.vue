@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { useT3ColorScheme, useT3TopbarLayoutInjection } from '#imports'
+import { useT3ColorScheme, useT3LayoutInjection } from '#imports'
 import colors from '@/colors'
 
 const colorScheme = useT3ColorScheme({
@@ -18,7 +18,7 @@ const colorScheme = useT3ColorScheme({
     },
 })
 
-const { injectMenu } = useT3TopbarLayoutInjection()
+const { injectMenu } = useT3LayoutInjection()
 const { active, close } = injectMenu()
 </script>
 
