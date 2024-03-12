@@ -1,5 +1,5 @@
 <template>
-    <T3TopbarLayout
+    <T3Layout
         class="app"
         content-class="app__content"
         footer-class="app__footer"
@@ -34,7 +34,7 @@
             <pre>{{ footer }}</pre>
             <button @click="showBanner">Cookies</button>
         </template>
-    </T3TopbarLayout>
+    </T3Layout>
 </template>
 
 <script setup lang="ts">
