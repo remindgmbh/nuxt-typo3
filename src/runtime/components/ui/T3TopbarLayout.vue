@@ -44,7 +44,7 @@ import {
     ref,
     watch,
 } from 'vue'
-import { useT3TopbarLayoutInjection, useT3Util } from '#imports'
+import { useRoute, useT3TopbarLayoutInjection, useT3Util } from '#imports'
 
 enum MenuStatus {
     Entering,
@@ -53,6 +53,7 @@ enum MenuStatus {
 
 const props = withDefaults(
     defineProps<{
+        closeOnRouteChange?: boolean
         contentClass?: string
         footerClass?: string
         headerClass?: string
@@ -64,6 +65,7 @@ const props = withDefaults(
         menuTransition?: TransitionProps
     }>(),
     {
+        closeOnRouteChange: true,
         contentClass: undefined,
         footerClass: undefined,
         headerClass: undefined,
@@ -149,6 +151,10 @@ function menuOnAfterLeave(el: Element): void {
 watch(scrollbarDisabled, (value) => {
     document.documentElement.style.overflowY = value ? 'hidden' : 'initial'
 })
+
+if (props.closeOnRouteChange) {
+    watch(() => useRoute().fullPath, close)
+}
 </script>
 
 <style lang="scss">
