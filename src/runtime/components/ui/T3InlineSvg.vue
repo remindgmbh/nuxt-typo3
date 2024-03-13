@@ -7,7 +7,6 @@
 
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
-import { compileString } from 'sass'
 import { useId } from '#imports'
 
 const props = defineProps<{
@@ -42,8 +41,18 @@ async function loadSvg() {
     const styleElements = documentElement.getElementsByTagName('style')
 
     for (const styleElement of styleElements) {
-        const { css } = compileString(`#${id} { ${styleElement.innerHTML} }`)
-        styleElement.innerHTML = css
+        const cssRules: string[] = []
+        const sheet = new CSSStyleSheet()
+        sheet.replaceSync(styleElement.innerHTML)
+
+        for (const rule of sheet.cssRules) {
+            if (rule instanceof CSSStyleRule) {
+                rule.selectorText = `#${id} ${rule.selectorText}`
+            }
+            cssRules.push(rule.cssText)
+        }
+
+        styleElement.innerHTML = cssRules.join(' ')
     }
 
     if (props.title) {
