@@ -12,8 +12,9 @@ export interface CeOptions {
     maxWidth?:
         | string
         | ((contentElement: Typo3.Content.Element<any>) => string | undefined)
-    // default uses container-width for container
-    // extended uses screen-width instead of container-width for container
+    // determines container width based on variables.scss
+    // default uses $container-widths
+    // extended $screen-widths
     // full ignores container completely
     width?:
         | 'default'
