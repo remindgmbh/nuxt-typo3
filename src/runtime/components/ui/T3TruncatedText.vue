@@ -1,8 +1,7 @@
-<!-- HTML in slot must not contain multiple font sizes or margin/padding in order to work -->
 <template>
     <div ref="root" class="t3-truncated-text">
         <div ref="content" class="t3-truncated-text__content">
-            <slot />
+            <slot></slot>
         </div>
     </div>
 </template>
@@ -71,6 +70,14 @@ function getLineHeight() {
         -webkit-box-orient: vertical;
         overflow: hidden;
         -webkit-line-clamp: v-bind(lines);
+
+        // HTML in slot must not contain multiple font sizes, line heights or margin/padding in order to work
+        * {
+            font-size: inherit !important;
+            line-height: inherit !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
     }
 }
 </style>
