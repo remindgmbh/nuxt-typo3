@@ -56,6 +56,12 @@ export default defineNuxtModule<ModuleOptions>({
             options,
         )
 
+        nuxt.hook('prepare:types', (options) => {
+            options.references.push({
+                path: resolver.resolve('runtime/types/nuxt.d.ts'),
+            })
+        })
+
         options = nuxt.options.runtimeConfig.public[CONFIG_KEY]
 
         if (options.scssForwards) {
