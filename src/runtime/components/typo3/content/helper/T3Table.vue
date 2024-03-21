@@ -3,11 +3,11 @@
         <div
             class="t3-table__overlay-left"
             :class="{ 't3-table__overlay-left--visible': !left }"
-        />
+        ></div>
         <div
             class="t3-table__overlay-right"
             :class="{ 't3-table__overlay-right--visible': !right }"
-        />
+        ></div>
         <div ref="viewport" class="t3-table__viewport">
             <table ref="table">
                 <caption v-if="caption">
@@ -49,16 +49,15 @@
 import { onMounted, ref } from 'vue'
 import { useT3Util } from '#imports'
 
-const { detectScrollEnd } = useT3Util()
-
 defineProps<{
     caption?: string
-    headerLeft: boolean
     headerTop: boolean
     tbody: string[][]
     tfoot?: string[]
     thead?: string[]
 }>()
+
+const { detectScrollEnd } = useT3Util()
 
 const table = ref<HTMLTableElement>()
 const viewport = ref<HTMLDivElement>()

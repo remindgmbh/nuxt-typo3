@@ -22,7 +22,7 @@ export function useT3DynamicComponent(
             )
         }
 
-        componentNames.push('T3' + staticNamePart + pascalCase(dynamicNamePart))
+        componentNames.push(`T3${staticNamePart}${pascalCase(dynamicNamePart)}`)
     }
 
     for (const componentName of componentNames) {

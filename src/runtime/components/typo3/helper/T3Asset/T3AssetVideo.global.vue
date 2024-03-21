@@ -8,6 +8,7 @@
         :src="file.publicUrl"
     ></video>
 </template>
+
 <script setup lang="ts">
 import { T3Model } from '#imports'
 

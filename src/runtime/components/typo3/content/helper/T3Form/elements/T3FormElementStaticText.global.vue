@@ -8,7 +8,6 @@ import { computed } from 'vue'
 
 const props = defineProps<{
     formElement: T3Model.Typo3.Content.Data.Form.FormElement
-    loading?: boolean
 }>()
 
 const text = computed(() => props.formElement.properties?.text ?? '')

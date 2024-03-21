@@ -13,7 +13,7 @@
                 type="button"
                 @click="toggle(index)"
             >
-                <slot :index="index" :item="item" name="title" />
+                <slot :index="index" :item="item" name="title"></slot>
             </button>
             <T3CollapseTransition v-if="!disabledItems.includes(index)">
                 <section
@@ -21,7 +21,7 @@
                     class="t3-accordion__content-wrapper"
                 >
                     <div class="t3-accordion__content">
-                        <slot :index="index" :item="item" name="content" />
+                        <slot :index="index" :item="item" name="content"></slot>
                     </div>
                 </section>
             </T3CollapseTransition>
@@ -31,11 +31,6 @@
 
 <script setup lang="ts" generic="T">
 import { useT3Accordion } from '#imports'
-
-defineSlots<{
-    title(props: { item: T; index: number }): any
-    content(props: { item: T; index: number }): any
-}>()
 
 const props = withDefaults(
     defineProps<{
@@ -49,6 +44,11 @@ const props = withDefaults(
         initialActiveItems: () => [],
     },
 )
+
+defineSlots<{
+    title(props: { item: T; index: number }): any
+    content(props: { item: T; index: number }): any
+}>()
 
 const { activeItems, toggle } = useT3Accordion(
     props.initialActiveItems,

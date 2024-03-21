@@ -3,7 +3,7 @@
         class="t3-background"
         :class="!backgroundFullWidth && containerClasses"
     >
-        <slot />
+        <slot></slot>
     </div>
 </template>
 

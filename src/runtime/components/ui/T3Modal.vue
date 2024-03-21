@@ -7,7 +7,7 @@
             't3-modal--transitioning': transitioning,
         }"
     >
-        <transition
+        <Transition
             :name="backgroundTransitionName"
             @after-enter="setBackgroundTransitioning(false)"
             @after-leave="setBackgroundTransitioning(false)"
@@ -22,8 +22,8 @@
                 data-testid="background"
                 @click="onBackgroundClick"
             ></div>
-        </transition>
-        <transition
+        </Transition>
+        <Transition
             :name="contentTransitionName"
             @after-enter="setContentTransitioning(false)"
             @after-leave="setContentTransitioning(false)"
@@ -32,8 +32,8 @@
             @enter-cancelled="setContentTransitioning(false)"
             @leave-cancelled="setContentTransitioning(false)"
         >
-            <slot v-if="visible" />
-        </transition>
+            <slot v-if="visible"></slot>
+        </Transition>
     </component>
 </template>
 
@@ -57,13 +57,13 @@ const props = withDefaults(
     },
 )
 
-const { injectOptionalScrollbarDisabled } = useT3LayoutInjection()
-
-const scrollbarDisabled = injectOptionalScrollbarDisabled()
-
 const emit = defineEmits<{
     (e: 'update:modelValue', value: boolean): void
 }>()
+
+const { injectOptionalScrollbarDisabled } = useT3LayoutInjection()
+
+const scrollbarDisabled = injectOptionalScrollbarDisabled()
 
 const visible = computed({
     get() {

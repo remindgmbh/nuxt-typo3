@@ -3,8 +3,9 @@
         :loading="file.properties.lazyLoading ? 'lazy' : undefined"
         :src="file.publicUrl"
         :title="file.properties.title"
-    />
+    ></iframe>
 </template>
+
 <script setup lang="ts">
 import { T3Model } from '#imports'
 

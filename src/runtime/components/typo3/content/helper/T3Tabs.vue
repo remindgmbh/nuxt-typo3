@@ -14,11 +14,11 @@
                     :item="item"
                     name="title"
                     :toggle="toggle"
-                />
+                ></slot>
             </button>
         </div>
         <T3AutoHeightContainer class="t3-tabs__contents">
-            <transition v-bind="transition">
+            <Transition v-bind="transition">
                 <section
                     v-if="activeItemIndex !== undefined"
                     :key="activeItemIndex"
@@ -29,9 +29,9 @@
                         :item="activeItem"
                         name="content"
                         :toggle="toggle"
-                    />
+                    ></slot>
                 </section>
-            </transition>
+            </Transition>
         </T3AutoHeightContainer>
     </section>
 </template>
@@ -39,20 +39,6 @@
 <script setup lang="ts" generic="T">
 import { type TransitionProps } from 'vue'
 import { useT3Tabs } from '#imports'
-
-defineSlots<{
-    title(props: {
-        isActive: boolean
-        item: T
-        index: number
-        toggle: (index?: number) => void
-    }): any
-    content(props: {
-        item: T | undefined
-        index: number
-        toggle: (index?: number) => void
-    }): any
-}>()
 
 const props = withDefaults(
     defineProps<{
@@ -68,6 +54,20 @@ const props = withDefaults(
         }),
     },
 )
+
+defineSlots<{
+    title(props: {
+        isActive: boolean
+        item: T
+        index: number
+        toggle: (index?: number) => void
+    }): any
+    content(props: {
+        item: T | undefined
+        index: number
+        toggle: (index?: number) => void
+    }): any
+}>()
 
 const { activeItem, activeItemIndex, toggle } = useT3Tabs<T>(
     props.items,

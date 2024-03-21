@@ -1,5 +1,5 @@
 <template>
-    <transition
+    <Transition
         :name="transitionName"
         @after-enter="resetStyles"
         @after-leave="resetStyles"
@@ -11,7 +11,7 @@
         @leave-cancelled="resetStyles"
     >
         <slot></slot>
-    </transition>
+    </Transition>
 </template>
 
 <script setup lang="ts">

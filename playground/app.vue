@@ -71,6 +71,7 @@ const colorScheme = useT3ColorScheme({
     },
 })
 </script>
+
 <style lang="scss">
 .app {
     position: relative;

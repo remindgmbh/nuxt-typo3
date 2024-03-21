@@ -45,8 +45,6 @@
 import { T3Model } from '#imports'
 import { useForm } from 'vee-validate'
 
-const { handleSubmit } = useForm()
-
 defineProps<{
     formElements: T3Model.Typo3.Content.Data.Form.FormElement[]
     loading?: boolean
@@ -57,6 +55,8 @@ defineProps<{
 const emit = defineEmits<{
     (e: 'submit', data: { [key: string]: string }): void
 }>()
+
+const { handleSubmit } = useForm()
 
 const submit = handleSubmit((values) => emit('submit', values))
 </script>

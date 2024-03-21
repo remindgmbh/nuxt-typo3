@@ -18,7 +18,7 @@
                 :name="name"
                 :placeholder="placeholder"
                 @blur="handleBlur"
-            />
+            ></textarea>
         </div>
         <slot :error-message="errorMessage" name="error"></slot>
     </div>

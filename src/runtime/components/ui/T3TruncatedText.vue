@@ -5,6 +5,7 @@
         </div>
     </div>
 </template>
+
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { debounce } from 'perfect-debounce'

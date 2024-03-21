@@ -9,7 +9,7 @@
         <footer class="t3-layout__footer" :class="footerClass">
             <slot name="footer"></slot>
         </footer>
-        <transition
+        <Transition
             v-bind="menuTransition"
             @after-leave="menuOnAfterLeave"
             @before-enter="menuOnBeforeEnter"
@@ -29,7 +29,7 @@
             >
                 <slot name="menu"></slot>
             </nav>
-        </transition>
+        </Transition>
     </div>
 </template>
 
@@ -45,11 +45,6 @@ import {
     watch,
 } from 'vue'
 import { useRoute, useT3LayoutInjection, useT3Util } from '#imports'
-
-enum MenuStatus {
-    Entering,
-    Leaving,
-}
 
 const props = withDefaults(
     defineProps<{
@@ -77,6 +72,11 @@ const props = withDefaults(
         }),
     },
 )
+
+enum MenuStatus {
+    Entering,
+    Leaving,
+}
 
 const { detectScrollEnd } = useT3Util()
 const { provideMenu, provideScrollbarDisabled } = useT3LayoutInjection()

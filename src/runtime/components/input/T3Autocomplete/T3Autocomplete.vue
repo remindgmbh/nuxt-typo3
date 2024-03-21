@@ -55,20 +55,19 @@ const props = defineProps<{
     optionGroups: T3Model.Input.Autocomplete.OptionGroup[]
     defaultValue?: string
     validation?: RuleExpression<any>
-    emptyLabel?: string
     placeholder?: string
     disabled?: boolean
     required?: boolean
 }>()
 
-onUnmounted(() => {
-    document.removeEventListener('click', closeOnOutsideClick)
-})
-
 const emit = defineEmits<{
     (e: 'input', value: string): void
     (e: 'select', value: T3Model.Input.Autocomplete.Option): void
 }>()
+
+onUnmounted(() => {
+    document.removeEventListener('click', closeOnOutsideClick)
+})
 
 const wrapper = ref<HTMLDivElement>()
 const isOpen = ref(false)

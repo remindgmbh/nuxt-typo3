@@ -1,7 +1,7 @@
 <template>
     <component :is="tag" ref="container" class="t3-auto-height-container">
         <div ref="content" class="t3-auto-height-container__content">
-            <slot />
+            <slot></slot>
         </div>
     </component>
 </template>
