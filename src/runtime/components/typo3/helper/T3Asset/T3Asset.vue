@@ -12,6 +12,7 @@
 /* eslint-disable vue/no-unused-properties*/
 import { T3Model, useT3Asset, useT3DynamicComponent } from '#imports'
 import { T3AssetDefault } from '#components'
+import { toRef } from 'vue'
 
 const props = defineProps<{
     file: T3Model.Typo3.Asset
@@ -24,7 +25,7 @@ const props = defineProps<{
     controls?: boolean
 }>()
 
-const { type } = useT3Asset(props.file)
+const { type } = useT3Asset(toRef(() => props.file))
 
 const Component = useT3DynamicComponent(type.value, 'Asset', T3AssetDefault)
 </script>

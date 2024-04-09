@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import { T3Model, useT3Asset, useT3Breakpoints } from '#imports'
-import { computed } from 'vue'
+import { computed, toRef } from 'vue'
 
 const props = defineProps<{
     file: T3Model.Typo3.Asset
@@ -31,7 +31,7 @@ const props = defineProps<{
 }>()
 
 const { breakpointsDesc, screenWidths } = useT3Breakpoints()
-const { getImageUrl } = useT3Asset(props.file)
+const { getImageUrl } = useT3Asset(toRef(() => props.file))
 
 const src = computed(() =>
     props.file.properties.fileReferenceUid

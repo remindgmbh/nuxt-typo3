@@ -1,5 +1,5 @@
 import * as T3Model from '../../models'
-import { computed } from 'vue'
+import { computed, toRef } from 'vue'
 import { useT3Asset } from '#imports'
 
 export function useT3TextAsset(content: T3Model.Typo3.Content.Data.TextAsset) {
@@ -12,7 +12,8 @@ export function useT3TextAsset(content: T3Model.Typo3.Content.Data.TextAsset) {
     )
     const type = computed<string | undefined>(() => {
         if (asset.value) {
-            const { type } = useT3Asset(asset.value)
+            const value = asset.value
+            const { type } = useT3Asset(toRef(() => value))
             return type.value
         } else {
             return undefined

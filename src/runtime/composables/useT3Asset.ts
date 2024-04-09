@@ -1,8 +1,8 @@
 import * as T3Model from '../models'
-import { computed } from 'vue'
+import { type Ref, computed } from 'vue'
 import { useT3Config } from '#imports'
 
-export function useT3Asset(asset: T3Model.Typo3.Asset) {
+export function useT3Asset(asset: Ref<T3Model.Typo3.Asset>) {
     const config = useT3Config()
 
     function getImageUrl(
@@ -14,7 +14,7 @@ export function useT3Asset(asset: T3Model.Typo3.Asset) {
         const url = new URL('image', config.api.baseUrl)
         url.searchParams.append(
             'uid',
-            asset.properties.fileReferenceUid.toString(),
+            asset.value.properties.fileReferenceUid.toString(),
         )
         url.searchParams.append(
             'fileExtension',
@@ -37,9 +37,13 @@ export function useT3Asset(asset: T3Model.Typo3.Asset) {
     }
 
     const type = computed<string>(() => {
-        switch (asset.properties.type) {
+        switch (asset.value.properties.type) {
             case 'video': {
-                if (['youtube', 'vimeo'].includes(asset.properties.extension)) {
+                if (
+                    ['youtube', 'vimeo'].includes(
+                        asset.value.properties.extension,
+                    )
+                ) {
                     return 'video-embedded'
                 }
                 return 'video'
@@ -47,7 +51,7 @@ export function useT3Asset(asset: T3Model.Typo3.Asset) {
             case 'audio':
                 return 'audio'
             case 'image':
-                if (asset.properties.extension === 'svg') {
+                if (asset.value.properties.extension === 'svg') {
                     return 'svg'
                 }
                 return 'image'
