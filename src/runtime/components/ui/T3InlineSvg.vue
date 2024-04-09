@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
-import { useId } from '#imports'
+import { useId, useT3Api } from '#imports'
 
 const props = defineProps<{
     src: string
@@ -17,6 +17,7 @@ const props = defineProps<{
 
 const html = ref<string>()
 const attributes = ref<{ [key: string]: string }>({})
+const api = useT3Api()
 
 const id = useId()
 
@@ -25,7 +26,7 @@ onMounted(async () => {
 })
 
 async function loadSvg() {
-    const blob = await $fetch<Blob>(props.src)
+    const blob = await api.get<Blob>(props.src, { baseURL: undefined })
     const text = await blob.text()
 
     const parser = new DOMParser()
