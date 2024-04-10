@@ -13,14 +13,26 @@ const scrollbarDisabledInjectionKey = Symbol(
     't3-layout:scrollbarDisabled',
 ) as InjectionKey<Ref<boolean>>
 
+const headerHeightInjectionKey = Symbol(
+    't3-layout:headerHeight',
+) as InjectionKey<Ref<string>>
+
 export function useT3LayoutInjection() {
     const { injectStrict } = useT3Injection()
+
+    function injectHeaderHeight(): Ref<string> {
+        return injectStrict(headerHeightInjectionKey)
+    }
+
+    function injectOptionalHeaderHeight() {
+        return inject(headerHeightInjectionKey)
+    }
 
     function injectOptionalMenu() {
         return inject(menuInjectionKey)
     }
 
-    function injectMenu() {
+    function injectMenu(): Menu {
         return injectStrict(menuInjectionKey)
     }
 
@@ -28,8 +40,12 @@ export function useT3LayoutInjection() {
         return inject(scrollbarDisabledInjectionKey)
     }
 
-    function injectScrollbarDisabled() {
+    function injectScrollbarDisabled(): Ref<boolean> {
         return injectStrict(scrollbarDisabledInjectionKey)
+    }
+
+    function provideHeaderHeight(headerHeight: Ref<string>) {
+        provide(headerHeightInjectionKey, headerHeight)
     }
 
     function provideMenu(menu: Menu) {
@@ -41,10 +57,13 @@ export function useT3LayoutInjection() {
     }
 
     return {
+        injectHeaderHeight,
         injectMenu,
+        injectOptionalHeaderHeight,
         injectOptionalMenu,
         injectOptionalScrollbarDisabled,
         injectScrollbarDisabled,
+        provideHeaderHeight,
         provideMenu,
         provideScrollbarDisabled,
     }

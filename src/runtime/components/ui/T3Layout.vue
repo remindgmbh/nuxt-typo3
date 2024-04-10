@@ -79,7 +79,8 @@ enum MenuStatus {
 }
 
 const { detectScrollEnd } = useT3Util()
-const { provideMenu, provideScrollbarDisabled } = useT3LayoutInjection()
+const { provideHeaderHeight, provideMenu, provideScrollbarDisabled } =
+    useT3LayoutInjection()
 
 const menuEl = ref<HTMLElement>()
 const scrollbarDisabled = ref(false)
@@ -89,6 +90,7 @@ const menuActive = ref<string | undefined>(undefined)
 
 const isTrigger = ref(false)
 
+provideHeaderHeight(headerHeight)
 provideScrollbarDisabled(scrollbarDisabled)
 provideMenu({
     active: readonly(menuActive),
