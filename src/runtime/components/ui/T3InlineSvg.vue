@@ -7,13 +7,15 @@
 
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
-import { useId, useT3Api } from '#imports'
+import { useId, useLogger, useT3Api } from '#imports'
 
 const props = defineProps<{
     src: string
     title?: string
     description?: string
 }>()
+
+const logger = useLogger()
 
 const html = ref<string>()
 const attributes = ref<{ [key: string]: string }>({})
@@ -41,19 +43,25 @@ async function loadSvg() {
 
     const styleElements = documentElement.getElementsByTagName('style')
 
-    for (const styleElement of styleElements) {
-        const cssRules: string[] = []
-        const sheet = new CSSStyleSheet()
-        sheet.replaceSync(styleElement.innerHTML)
+    try {
+        for (const styleElement of styleElements) {
+            const cssRules: string[] = []
+            const sheet = new CSSStyleSheet()
+            sheet.replaceSync(styleElement.innerHTML)
 
-        for (const rule of sheet.cssRules) {
-            if (rule instanceof CSSStyleRule) {
-                rule.selectorText = `#${id} ${rule.selectorText}`
+            for (const rule of sheet.cssRules) {
+                if (rule instanceof CSSStyleRule) {
+                    rule.selectorText = `#${id} ${rule.selectorText}`
+                }
+                cssRules.push(rule.cssText)
             }
-            cssRules.push(rule.cssText)
-        }
 
-        styleElement.innerHTML = cssRules.join(' ')
+            styleElement.innerHTML = cssRules.join(' ')
+        }
+    } catch {
+        logger.warn(
+            "Browser does not support 'CSSStyleSheet() constructor', skipping ID selector for SVG CSS rules",
+        )
     }
 
     if (props.title) {
