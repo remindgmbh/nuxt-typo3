@@ -57,9 +57,14 @@ export default defineNuxtModule<ModuleOptions>({
         )
 
         nuxt.hook('prepare:types', (options) => {
-            options.references.push({
-                path: resolver.resolve('runtime/types/nuxt.d.ts'),
-            })
+            options.references.push(
+                {
+                    path: resolver.resolve('runtime/types/hooks.d.ts'),
+                },
+                {
+                    path: resolver.resolve('runtime/types/schema.d.ts'),
+                },
+            )
         })
 
         options = nuxt.options.runtimeConfig.public[CONFIG_KEY]
