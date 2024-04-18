@@ -1,5 +1,6 @@
 <template>
     <article
+        :id="`c${contentElement.id}`"
         class="t3-content"
         :class="
             (!backgroundColorValue || backgroundFullWidth) && containerClasses
