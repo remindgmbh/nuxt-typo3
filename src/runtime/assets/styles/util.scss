@@ -21,3 +21,13 @@
     padding-top: $value;
     padding-bottom: $value;
 }
+
+@mixin margin-x($value) {
+    margin-left: $value;
+    margin-right: $value;
+}
+
+@mixin margin-y($value) {
+    margin-top: $value;
+    margin-bottom: $value;
+}
