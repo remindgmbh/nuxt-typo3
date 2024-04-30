@@ -76,8 +76,10 @@ function getLineHeight() {
         * {
             font-size: inherit !important;
             line-height: inherit !important;
-            padding: 0 !important;
-            margin: 0 !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
         }
     }
 }
