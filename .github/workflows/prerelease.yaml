@@ -1,4 +1,4 @@
-name: Publish Development
+name: Prerelease
 
 on:
   push:
@@ -6,12 +6,10 @@ on:
       - "develop"
 
 jobs:
-  publish:
+  prerelease:
     runs-on: ubuntu-latest
     steps:
-      - uses: remindgmbh/semantic-release-action@v2.2.1
+      - uses: remindgmbh/npm-publish-prerelease-action@v1.1.0
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           node-version: 20
           npm-token: ${{ secrets.NPM_TOKEN }}
-          type: npm-pre
