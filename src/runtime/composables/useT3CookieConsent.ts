@@ -1,7 +1,9 @@
 import type * as T3Model from '../models'
-import { useState } from '#imports'
+import { useNuxtApp, useState } from '#imports'
 
-export function useT3Cookiebot() {
+export function useT3CookieConsent() {
+    const nuxt = useNuxtApp()
+
     const cookieCategories = useState<
         Omit<
             { [key in T3Model.Typo3.Content.Cookie['category']]: boolean },
@@ -21,17 +23,13 @@ export function useT3Cookiebot() {
     }
 
     function showBanner(): void {
-        window.Cookiebot?.renew()
+        nuxt.callHook('typo3:cookieConsent:showBanner')
     }
 
     function acceptCookies(
         category: Omit<T3Model.Typo3.Content.Cookie['category'], 'none'>,
     ): void {
-        window.Cookiebot?.submitCustomConsent(
-            category === 'preferences' || window.Cookiebot.consent.preferences,
-            category === 'statistics' || window.Cookiebot.consent.statistics,
-            category === 'marketing' || window.Cookiebot.consent.marketing,
-        )
+        nuxt.callHook('typo3:cookieConsent:acceptCookies', category)
     }
 
     return {

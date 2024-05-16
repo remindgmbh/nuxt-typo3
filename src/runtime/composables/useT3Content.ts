@@ -1,7 +1,7 @@
 import {
     useT3Config,
     useT3ContentInjection,
-    useT3Cookiebot,
+    useT3CookieConsent,
     useT3Theme,
 } from '#imports'
 import type { Config } from '../models'
@@ -11,7 +11,7 @@ export function useT3Content() {
     const { injectContentElement } = useT3ContentInjection()
     const contentElement = injectContentElement()
     const config = useT3Config()
-    const { isAccepted } = useT3Cookiebot()
+    const { isAccepted } = useT3CookieConsent()
     const { backgroundColors } = useT3Theme()
 
     const ceOptions = computed<Config.CeOptions | undefined>(

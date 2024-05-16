@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { type T3Model, useT3Cookiebot } from '#imports'
+import { type T3Model, useT3CookieConsent } from '#imports'
 import { useI18n } from 'vue-i18n'
 
 defineProps<{
@@ -28,5 +28,5 @@ defineProps<{
 
 const { t } = useI18n()
 
-const { acceptCookies } = useT3Cookiebot()
+const { acceptCookies } = useT3CookieConsent()
 </script>

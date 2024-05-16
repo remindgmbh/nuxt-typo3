@@ -123,9 +123,6 @@ export default defineNuxtModule<ModuleOptions>({
             pathPrefix: false,
         })
         addPlugin({
-            src: resolver.resolve('runtime/plugins/cookiebot'),
-        })
-        addPlugin({
             src: resolver.resolve('runtime/plugins/i18n'),
         })
         addRouteMiddleware({

@@ -40,7 +40,7 @@
 <script setup lang="ts">
 import {
     useT3ColorScheme,
-    useT3Cookiebot,
+    useT3CookieConsent,
     useT3Footer,
     useT3LoadingState,
 } from '#imports'
@@ -49,7 +49,7 @@ import colors from '@/colors'
 const headerHeightDefault = '6rem'
 const headerHeightDense = '3rem'
 
-const { showBanner } = useT3Cookiebot()
+const { showBanner } = useT3CookieConsent()
 const footer = useT3Footer()
 const loading = useT3LoadingState()
 
