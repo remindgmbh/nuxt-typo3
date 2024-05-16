@@ -30,7 +30,7 @@
         "prepack": "npm run dev:prepare && nuxt-module-build build",
         "preview": "nuxi preview playground",
         "static-analysis": "npm run dev:prepare && npm run typecheck && npm run lint",
-        "typecheck": "nuxi typecheck"
+        "typecheck": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
     },
     "dependencies": {
         "@nuxt/kit": "^3.11.2",
