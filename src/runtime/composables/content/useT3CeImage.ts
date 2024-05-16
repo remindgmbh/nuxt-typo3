@@ -1,4 +1,4 @@
-import * as T3Model from '../../models'
+import type * as T3Model from '../../models'
 import { type Ref, computed } from 'vue'
 
 export function useT3CeImage(

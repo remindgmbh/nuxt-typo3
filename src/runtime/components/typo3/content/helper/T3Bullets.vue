@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { T3Model, useT3Bullets } from '#imports'
+import { type T3Model, useT3Bullets } from '#imports'
 
 const props = defineProps<{
     content: T3Model.Typo3.Content.Data.Bullets

@@ -1,4 +1,4 @@
-import * as T3Model from '../models'
+import type * as T3Model from '../models'
 import { computed } from 'vue'
 import { useT3Data } from '#imports'
 

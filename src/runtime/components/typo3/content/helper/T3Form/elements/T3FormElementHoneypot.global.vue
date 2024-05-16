@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { T3Model } from '#imports'
+import { type T3Model } from '#imports'
 
 defineProps<{
     formElement: T3Model.Typo3.Content.Data.Form.FormElement

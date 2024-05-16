@@ -9,8 +9,7 @@
 </template>
 
 <script setup lang="ts">
-/* eslint-disable vue/no-unused-properties*/
-import { T3Model, useT3Asset, useT3DynamicComponent } from '#imports'
+import { type T3Model, useT3Asset, useT3DynamicComponent } from '#imports'
 import { T3AssetDefault } from '#components'
 import { toRef } from 'vue'
 

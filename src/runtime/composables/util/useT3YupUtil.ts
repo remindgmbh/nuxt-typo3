@@ -1,11 +1,11 @@
-import { Schema, ValidationError } from 'yup'
+import { type Schema, ValidationError } from 'yup'
 
 export function useT3YupUtil() {
     function parseDateString(
         value: any,
         _originalValue: any,
     ): Date | undefined {
-        if (value instanceof Date && !isNaN(value.getTime())) {
+        if (value instanceof Date && !Number.isNaN(value.getTime())) {
             return value
         }
     }

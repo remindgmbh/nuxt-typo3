@@ -19,7 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { T3Model, useT3FormElement } from '#imports'
+import { type T3Model, useT3FormElement } from '#imports'
 import { computed } from 'vue'
 
 const props = defineProps<{

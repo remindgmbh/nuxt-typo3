@@ -1,6 +1,6 @@
-import * as T3Model from '../../models'
+import type * as T3Model from '../../models'
 import { type GenericValidateFunction, type RuleExpression } from 'vee-validate'
-import { Schema, array, boolean, date, number, string } from 'yup'
+import { type Schema, array, boolean, date, number, string } from 'yup'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useT3YupUtil } from '#imports'

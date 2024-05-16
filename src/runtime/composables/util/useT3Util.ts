@@ -27,7 +27,7 @@ export function useT3Util() {
             )
             .substring(1)
             .match(/.{2}/g)
-            ?.map((x) => parseInt(x, 16))
+            ?.map((x) => Number.parseInt(x, 16))
     }
 
     function detectScrollEnd(

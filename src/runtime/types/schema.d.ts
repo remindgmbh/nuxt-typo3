@@ -1,5 +1,5 @@
 import type * as T3Model from '../models'
-import { CONFIG_KEY, ModuleOptions } from '../../module'
+import type { CONFIG_KEY, ModuleOptions } from '../../module'
 
 declare module 'nuxt/schema' {
     interface PublicRuntimeConfig {

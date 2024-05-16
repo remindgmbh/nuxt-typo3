@@ -1,4 +1,4 @@
-import * as T3Model from '../models'
+import type * as T3Model from '../models'
 import { navigateTo, useRoute, useT3Api, useT3Data } from '#imports'
 import { computed } from 'vue'
 

@@ -46,7 +46,7 @@
 
 <script setup lang="ts">
 import { type RuleExpression, useField } from 'vee-validate'
-import { T3Model, navigateTo, useT3SelectInput } from '#imports'
+import { type T3Model, navigateTo, useT3SelectInput } from '#imports'
 import { computed, onUnmounted, ref, watch } from 'vue'
 
 const props = defineProps<{

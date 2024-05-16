@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { T3Model, useT3Pagination } from '#imports'
+import { type T3Model, useT3Pagination } from '#imports'
 import { NuxtLink } from '#components'
 import { toRef } from 'vue'
 

@@ -1,4 +1,4 @@
-import { Typo3 } from '../../models'
+import type { Typo3 } from '../../models'
 
 export function useT3DataUtil() {
     function findContentElement<T>(

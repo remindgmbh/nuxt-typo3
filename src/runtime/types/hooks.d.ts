@@ -1,4 +1,4 @@
-import { HookResult } from '@nuxt/schema'
+import type { HookResult } from '@nuxt/schema'
 import { type Ref } from 'vue'
 
 declare module '#app' {

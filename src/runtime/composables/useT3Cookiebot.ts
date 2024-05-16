@@ -1,4 +1,4 @@
-import * as T3Model from '../models'
+import type * as T3Model from '../models'
 import { useState } from '#imports'
 
 export function useT3Cookiebot() {

@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import { computed, watch } from 'vue'
-import { T3Model } from '#imports'
+import { type T3Model } from '#imports'
 import { useField } from 'vee-validate'
 
 const props = defineProps<{

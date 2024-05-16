@@ -1,5 +1,5 @@
 import { type InjectionKey, type Ref, inject, provide } from 'vue'
-import { Typo3 } from '../../models'
+import type { Typo3 } from '../../models'
 import { useT3Injection } from '#imports'
 
 const contentElementInjectionKey = Symbol('t3-content-element') as InjectionKey<

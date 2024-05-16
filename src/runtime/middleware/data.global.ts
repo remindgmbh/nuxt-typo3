@@ -1,5 +1,5 @@
 import {
-    T3Model,
+    type T3Model,
     defineNuxtRouteMiddleware,
     useT3Data,
     useT3LoadingState,

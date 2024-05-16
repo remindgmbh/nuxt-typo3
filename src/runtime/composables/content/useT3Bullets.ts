@@ -1,4 +1,4 @@
-import * as T3Model from '../../models'
+import type * as T3Model from '../../models'
 import { computed } from 'vue'
 
 export function useT3Bullets(content: T3Model.Typo3.Content.Data.Bullets) {

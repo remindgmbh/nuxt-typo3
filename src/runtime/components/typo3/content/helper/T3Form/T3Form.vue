@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { T3Model } from '#imports'
+import { type T3Model } from '#imports'
 import { useForm } from 'vee-validate'
 
 defineProps<{

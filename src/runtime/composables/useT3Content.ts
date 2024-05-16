@@ -4,7 +4,7 @@ import {
     useT3Cookiebot,
     useT3Theme,
 } from '#imports'
-import { Config } from '../models'
+import type { Config } from '../models'
 import { computed } from 'vue'
 
 export function useT3Content() {

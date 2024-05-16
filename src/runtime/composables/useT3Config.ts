@@ -1,4 +1,4 @@
-import * as T3Model from '../models'
+import type * as T3Model from '../models'
 import { useAppConfig, useRuntimeConfig } from '#imports'
 import { defu } from 'defu'
 

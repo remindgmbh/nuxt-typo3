@@ -66,13 +66,13 @@ async function loadSvg() {
 
     if (props.title) {
         const title = document.createElement('title')
-        title.innerText = props.title
+        title.textContent = props.title
         documentElement.appendChild(title)
     }
 
     if (props.description) {
         const desc = document.createElement('desc')
-        desc.innerText = props.description
+        desc.textContent = props.description
         documentElement.appendChild(desc)
     }
 

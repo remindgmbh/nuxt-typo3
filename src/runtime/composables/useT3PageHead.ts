@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-invalid-void-type */
-import * as T3Model from '../models'
+import type * as T3Model from '../models'
 import type { ActiveHeadEntry, MergeHead, UseHeadInput } from '@unhead/vue'
 import { useHead, useT3Config } from '#imports'
 import { type MetaObject } from '@nuxt/schema'
