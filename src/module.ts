@@ -26,6 +26,8 @@ export interface ModuleOptions {
     }
     // URL of the frontend project, used for page meta data
     baseUrl: string
+    // prefix to use when resolving dynamic component
+    // if empty only T3 prefix is used
     componentPrefix?: string
     // UID from cookiebot, required if cookie consent banner should be shown
     cookiebotUid?: string
