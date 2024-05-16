@@ -29,8 +29,6 @@ export interface ModuleOptions {
     // prefix to use when resolving dynamic component
     // if empty only T3 prefix is used
     componentPrefix?: string
-    // UID from cookiebot, required if cookie consent banner should be shown
-    cookiebotUid?: string
     // Path to SCSS Variables to override default values defined in runtime/assets/style/*.scss
     // See playground assets/breakpoints.scss or assets/colors.scss for example
     scssForwards?: string | string[]
@@ -43,7 +41,6 @@ export default defineNuxtModule<ModuleOptions>({
             initialDataType: 834,
         },
         baseUrl: '',
-        cookiebotUid: '',
     },
     meta: {
         configKey: CONFIG_KEY,
