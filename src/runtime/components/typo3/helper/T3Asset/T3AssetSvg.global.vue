@@ -14,11 +14,11 @@ const props = defineProps<{
     file: T3Model.Typo3.Asset
 }>()
 
-const { getImageUrl } = useT3Asset(toRef(() => props.file))
+const { getAssetUrl } = useT3Asset(toRef(() => props.file))
 
 const src = computed(() =>
     props.file.properties.fileReferenceUid
-        ? getImageUrl('svg')
+        ? getAssetUrl('svg')
         : props.file.publicUrl,
 )
 </script>

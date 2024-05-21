@@ -5,21 +5,24 @@ import { useT3Config } from '#imports'
 export function useT3Asset(asset: Ref<T3Model.Typo3.Asset>) {
     const config = useT3Config()
 
-    function getImageUrl(
+    function getAssetUrl(
         fileExtension?: string,
         maxWidth?: number,
         maxHeight?: number,
         breakpoint?: string,
     ) {
-        const url = new URL('image', config.api.baseUrl)
+        const url = new URL('asset', config.api.baseUrl)
         url.searchParams.append(
             'uid',
             asset.value.properties.fileReferenceUid.toString(),
         )
-        url.searchParams.append(
-            'fileExtension',
-            fileExtension ?? config.imageFileExtension,
-        )
+
+        if (asset.value.properties.type === 'image') {
+            url.searchParams.append(
+                'fileExtension',
+                fileExtension ?? config.imageFileExtension,
+            )
+        }
 
         if (maxWidth) {
             url.searchParams.append('maxWidth', maxWidth.toString())
@@ -63,6 +66,6 @@ export function useT3Asset(asset: Ref<T3Model.Typo3.Asset>) {
     return {
         type,
 
-        getImageUrl,
+        getAssetUrl,
     }
 }

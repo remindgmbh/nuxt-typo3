@@ -31,11 +31,11 @@ const props = defineProps<{
 }>()
 
 const { breakpointsDesc, screenWidths } = useT3Breakpoints()
-const { getImageUrl } = useT3Asset(toRef(() => props.file))
+const { getAssetUrl } = useT3Asset(toRef(() => props.file))
 
 const src = computed(() =>
     props.file.properties.fileReferenceUid
-        ? getImageUrl(props.fileExtension, props.maxWidth, props.maxHeight)
+        ? getAssetUrl(props.fileExtension, props.maxWidth, props.maxHeight)
         : props.file.publicUrl,
 )
 
@@ -51,7 +51,7 @@ const sources = computed(() => {
 
             result.push({
                 media: `(min-width: ${screenWidths[breakpoint]})`,
-                srcset: getImageUrl(
+                srcset: getAssetUrl(
                     props.fileExtension,
                     width,
                     undefined,
