@@ -1,7 +1,7 @@
 <template>
     <ClientOnly>
         <!-- eslint-disable-next-line vue/no-v-html -->
-        <svg :id="id" v-bind="attributes" v-html="html"></svg>
+        <svg :id="id" v-bind="{ ...attributes, ...$attrs }" v-html="html"></svg>
     </ClientOnly>
 </template>
 
