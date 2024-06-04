@@ -15,9 +15,9 @@ export interface Meta {
     authorEmail: string
     ogTitle: string
     ogDescription: string
-    ogImage?: Asset
+    ogImage?: Asset.Image
     twitterTitle: string
     twitterDescription: string
     twitterCard: string
-    twitterImage?: Asset
+    twitterImage?: Asset.Image
 }

@@ -1,7 +1,7 @@
+export * as Asset from './asset'
 export * as Content from './content'
 export * as Extbase from './extbase'
 export * as Page from './page'
-export type { Asset } from './asset'
 export type { Breadcrumb } from './breadcrumb'
 export type { InitialData } from './initialData'
 export type { Language } from './language'

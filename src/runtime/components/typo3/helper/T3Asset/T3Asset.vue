@@ -1,8 +1,5 @@
 <template>
-    <T3Link
-        v-if="props.file.properties.linkData"
-        :to="props.file.properties.linkData"
-    >
+    <T3Link v-if="props.file.link" :to="props.file.link">
         <component :is="Component" v-bind="props" />
     </T3Link>
     <component :is="Component" v-else v-bind="props" />
@@ -14,7 +11,7 @@ import { T3AssetDefault } from '#components'
 import { toRef } from 'vue'
 
 const props = defineProps<{
-    file: T3Model.Typo3.Asset
+    file: T3Model.Typo3.Asset.Base
     fileExtension?: string
     maxHeight?: number
     maxWidth?: number

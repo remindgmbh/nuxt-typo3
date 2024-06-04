@@ -5,6 +5,6 @@ export interface Item extends Text {
     id: number
     pid: number
     title: string
-    images: Asset[]
+    image: Asset.Image
     items: Item[]
 }

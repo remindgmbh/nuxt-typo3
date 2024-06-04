@@ -67,16 +67,16 @@ export function useT3PageHead(
 
     if (meta.twitterImage) {
         head.meta?.push({
-            content: meta.twitterImage.publicUrl,
-            hid: `twitter:image:${meta.twitterImage.properties.uidLocal}`,
+            content: meta.twitterImage.url,
+            hid: `twitter:image:${meta.twitterImage.fileReferenceUid}`,
             name: 'twitter:image',
         })
     }
 
     if (meta.ogImage) {
         head.meta?.push({
-            content: meta.ogImage.publicUrl,
-            hid: `og:image:${meta.ogImage.properties.uidLocal}`,
+            content: meta.ogImage.url,
+            hid: `og:image:${meta.ogImage.fileReferenceUid}`,
             name: 'og:image',
         })
     }
