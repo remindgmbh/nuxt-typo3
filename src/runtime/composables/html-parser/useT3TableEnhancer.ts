@@ -1,45 +1,56 @@
-import { type Ref, onMounted, watch } from 'vue'
+import { type Ref, onMounted } from 'vue'
 import { useT3Util } from '#imports'
 
-export function useT3TableEnhancer(
-    el: Ref<HTMLElement | undefined>,
-    content: Ref<string>,
-) {
+export function useT3TableEnhancer(el: Ref<HTMLElement | undefined>) {
     const { detectScrollEnd } = useT3Util()
 
     onMounted(() => {
-        addOverlays()
-    })
-
-    watch(content, addOverlays)
-
-    function addOverlays() {
         if (el.value) {
-            const tables = el.value.getElementsByTagName('table')
-            for (const table of tables) {
-                const container = document.createElement('div')
-                container.classList.add('table')
-
-                table.replaceWith(container)
-
-                const viewport = document.createElement('div')
-                viewport.classList.add('table__viewport')
-
-                const overlayLeft = document.createElement('div')
-                overlayLeft.classList.add('table__overlay-left')
-
-                const overlayRight = document.createElement('div')
-                overlayRight.classList.add('table__overlay-right')
-
-                container.appendChild(overlayLeft)
-                container.appendChild(overlayRight)
-                viewport.appendChild(table)
-                container.appendChild(viewport)
-
-                detectOverlayScrollEnd('left', overlayLeft, table, viewport)
-                detectOverlayScrollEnd('right', overlayRight, table, viewport)
+            if (isTableElement(el.value)) {
+                addOverlays(el.value)
+            } else {
+                const tables = el.value.getElementsByTagName('table')
+                for (const table of tables) {
+                    addOverlays(table)
+                }
             }
         }
+    })
+
+    function isTableElement(
+        maybeTable: HTMLElement,
+    ): maybeTable is HTMLTableElement {
+        return maybeTable.tagName === 'TABLE'
+    }
+
+    function addOverlays(table: HTMLTableElement) {
+        const container = document.createElement('div')
+        container.classList.add('t3-table')
+
+        table.replaceWith(container)
+
+        const viewport = document.createElement('div')
+        viewport.classList.add('t3-table__viewport')
+
+        const overlayLeft = document.createElement('div')
+        overlayLeft.classList.add(
+            't3-table__overlay',
+            't3-table__overlay--left',
+        )
+
+        const overlayRight = document.createElement('div')
+        overlayRight.classList.add(
+            't3-table__overlay',
+            't3-table__overlay--right',
+        )
+
+        container.appendChild(overlayLeft)
+        container.appendChild(overlayRight)
+        viewport.appendChild(table)
+        container.appendChild(viewport)
+
+        detectOverlayScrollEnd('left', overlayLeft, table, viewport)
+        detectOverlayScrollEnd('right', overlayRight, table, viewport)
     }
 
     function detectOverlayScrollEnd(
@@ -53,13 +64,9 @@ export function useT3TableEnhancer(
             direction,
             (detached) => {
                 if (detached) {
-                    overlay.classList.add(
-                        `table__overlay-${direction}--visible`,
-                    )
+                    overlay.classList.add(`t3-table__overlay--visible`)
                 } else {
-                    overlay.classList.remove(
-                        `table__overlay-${direction}--visible`,
-                    )
+                    overlay.classList.remove(`t3-table__overlay--visible`)
                 }
             },
             viewport,

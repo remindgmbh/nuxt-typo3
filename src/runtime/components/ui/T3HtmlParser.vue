@@ -1,11 +1,14 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
-    <div
-        v-if="props.content"
-        ref="el"
-        class="t3-html"
-        v-html="props.content"
-    ></div>
+    <T3TableContainer>
+        <div
+            v-if="content"
+            ref="el"
+            class="t3-html"
+            v-bind="$attrs"
+            v-html="content"
+        ></div>
+    </T3TableContainer>
 </template>
 
 <script setup lang="ts">
@@ -19,8 +22,8 @@ const props = defineProps<{
 const el = ref<HTMLDivElement>()
 
 const content = computed(() => props.content)
+useT3TableEnhancer(el)
 
-useT3TableEnhancer(el, content)
 useT3LinkReplacer(el, content)
 
 useNuxtApp().callHook('typo3:parseHtml', el, content)
