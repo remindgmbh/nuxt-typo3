@@ -1,22 +1,11 @@
-import { type Ref, onBeforeUnmount, onMounted, watch } from 'vue'
+import { type Ref, onBeforeUnmount, onMounted } from 'vue'
 import { navigateTo } from '#imports'
 
-export function useT3LinkReplacer(
-    el: Ref<HTMLElement | undefined>,
-    content: Ref<string>,
-) {
+export function useT3LinkReplacer(el: Ref<HTMLElement | undefined>) {
     let links: HTMLCollectionOf<HTMLAnchorElement> | undefined
 
-    onMounted(() => {
-        addListeners()
-    })
-
+    onMounted(addListeners)
     onBeforeUnmount(removeListeners)
-
-    watch(content, () => {
-        removeListeners()
-        addListeners()
-    })
 
     function addListeners() {
         if (el.value) {

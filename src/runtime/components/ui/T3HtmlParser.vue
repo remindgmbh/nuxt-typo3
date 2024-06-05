@@ -12,21 +12,19 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
 import { useNuxtApp, useT3LinkReplacer, useT3TableEnhancer } from '#imports'
+import { ref } from 'vue'
 
-const props = defineProps<{
+defineProps<{
     content: string
 }>()
 
 const el = ref<HTMLDivElement>()
 
-const content = computed(() => props.content)
 useT3TableEnhancer(el)
+useT3LinkReplacer(el)
 
-useT3LinkReplacer(el, content)
-
-useNuxtApp().callHook('typo3:parseHtml', el, content)
+useNuxtApp().callHook('typo3:parseHtml', el)
 </script>
 
 <style lang="scss">
