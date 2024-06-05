@@ -6,28 +6,23 @@ export function useT3TableEnhancer(el: Ref<HTMLElement | undefined>) {
 
     onMounted(() => {
         if (el.value) {
-            if (isTableElement(el.value)) {
-                addOverlays(el.value)
-            } else {
-                const tables = el.value.getElementsByTagName('table')
-                for (const table of tables) {
-                    addOverlays(table)
-                }
+            const tables = el.value.getElementsByTagName('table')
+            for (const table of tables) {
+                addOverlays(table)
             }
         }
     })
 
-    function isTableElement(
-        maybeTable: HTMLElement,
-    ): maybeTable is HTMLTableElement {
-        return maybeTable.tagName === 'TABLE'
-    }
-
     function addOverlays(table: HTMLTableElement) {
-        const container = document.createElement('div')
-        container.classList.add('t3-table')
+        let container: HTMLElement
 
-        table.replaceWith(container)
+        if (table.parentElement?.classList.contains('t3-table')) {
+            container = table.parentElement
+        } else {
+            container = document.createElement('div')
+            container.classList.add('t3-table')
+            table.replaceWith(container)
+        }
 
         const viewport = document.createElement('div')
         viewport.classList.add('t3-table__viewport')

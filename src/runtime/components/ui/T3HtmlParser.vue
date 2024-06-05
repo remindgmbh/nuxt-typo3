@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
-    <T3TableContainer>
+    <T3TableWrapper>
         <div
             v-if="content"
             ref="el"
@@ -8,7 +8,7 @@
             v-bind="$attrs"
             v-html="content"
         ></div>
-    </T3TableContainer>
+    </T3TableWrapper>
 </template>
 
 <script setup lang="ts">

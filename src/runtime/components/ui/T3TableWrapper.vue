@@ -2,7 +2,11 @@
     <slot></slot>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps<{
+    overlayColor?: string
+}>()
+</script>
 
 <style lang="scss">
 .t3-table {
@@ -26,31 +30,26 @@
         z-index: $viewport-z-index + 1;
         pointer-events: none;
 
-        // &--visible {
-        //     // define width, for example:
-        //     width: 2rem;
-        // }
+        &--visible {
+            width: 0;
+        }
 
         &--left {
             left: 0;
-
-            // define background, for example:
-            // background: linear-gradient(
-            //     to left,
-            //     rgb(255 255 255 / 0%) 0%,
-            //     white 100%
-            // );
+            background: linear-gradient(
+                to left,
+                rgb(255 255 255 / 0%) 0%,
+                v-bind('overlayColor') 100%
+            );
         }
 
         &--right {
             right: 0;
-
-            // define background, for example:
-            // background: linear-gradient(
-            //     to right,
-            //     rgb(255 255 255 / 0%) 0%,
-            //     white 100%
-            // );
+            background: linear-gradient(
+                to right,
+                rgb(255 255 255 / 0%) 0%,
+                v-bind('overlayColor') 100%
+            );
         }
     }
 }
