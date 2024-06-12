@@ -1,5 +1,5 @@
 <template>
-    <T3FormStaticText :header="formElement.label" :text="text" />
+    <T3FormStaticText :text="text" />
 </template>
 
 <script setup lang="ts">

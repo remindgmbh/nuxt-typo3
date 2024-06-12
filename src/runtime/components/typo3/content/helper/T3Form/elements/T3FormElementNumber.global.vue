@@ -2,7 +2,6 @@
     <T3Textfield
         :default-value="formElement.defaultValue"
         :disabled="loading"
-        :label="formElement.label"
         :max="max"
         :min="min"
         :name="formElement.name"
@@ -11,11 +10,7 @@
         :step="step"
         type="number"
         :validation="validation"
-    >
-        <template #error="{ errorMessage }">
-            <slot :error-message="errorMessage" name="error"></slot>
-        </template>
-    </T3Textfield>
+    />
 </template>
 
 <script setup lang="ts">

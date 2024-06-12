@@ -53,7 +53,7 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{
-    (e: 'submit', data: { [key: string]: string }): void
+    submit: [data: { [key: string]: string }]
 }>()
 
 const { handleSubmit } = useForm()

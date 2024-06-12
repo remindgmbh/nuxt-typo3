@@ -1,75 +1,71 @@
 <template>
-    <div
-        class="t3-select"
-        :class="{
-            't3-select--required': required,
-            't3-select--disabled': disabled,
-            't3-select--error': meta.touched && !meta.valid,
-            't3-select--success': meta.touched && meta.valid,
-        }"
-    >
-        <T3InputLabel class="t3-select__label" :label="label" tag="span" />
-        <div class="t3-select__wrapper">
-            <select
-                :id="name"
-                ref="nativeSelect"
-                v-model="value"
-                :aria-labelledby="name"
-                class="t3-select__native"
-                :disabled="disabled"
-                :name="name"
-                @blur="handleBlur"
+    <div class="t3-select">
+        <select
+            :id="name"
+            ref="nativeSelect"
+            v-model="value"
+            :aria-labelledby="name"
+            class="t3-select__native"
+            :disabled="disabled"
+            :name="name"
+            :required="required"
+            @blur="handleBlur"
+        >
+            <option
+                v-for="option in options"
+                :key="option.value"
+                :value="option.value"
             >
-                <option
-                    v-for="option in options"
-                    :key="option.value"
-                    :value="option.value"
-                >
-                    <slot name="option" :option="option">
-                        {{ option.label }}
-                    </slot>
-                </option>
-            </select>
+                <slot name="option" :option="option">
+                    {{ option.label }}
+                </slot>
+            </option>
+        </select>
 
+        <div
+            ref="customSelect"
+            aria-hidden="true"
+            class="t3-select__custom"
+            :class="{ 't3-select__custom--active': isOpen }"
+            @click="toggle"
+        >
             <div
-                ref="customSelect"
-                aria-hidden="true"
-                class="t3-select__custom"
-                :class="{ 't3-select__custom--active': isOpen }"
-                @click="toggle"
+                class="t3-select__trigger"
+                :class="{ 't3-select__trigger--active': isOpen }"
             >
-                <div class="t3-select__trigger">
-                    <slot name="trigger" :selected-option="selectedOption">
-                        {{ selectedOption?.label }}
-                    </slot>
-                </div>
-                <T3CollapseTransition transition-name="options-transition">
-                    <div v-show="isOpen" class="t3-select__options-wrapper">
-                        <div class="t3-select__options">
-                            <div
-                                v-for="option in options"
-                                :key="option.value"
-                                class="t3-select__option"
-                                :class="{
-                                    't3-select__option--selected':
-                                        option.value === value,
-                                    't3-select__option--hover':
-                                        option.value === hoverOption?.value,
-                                }"
-                                @click="handleBlurAndSetValue(option.value)"
-                                @mouseleave="hoverOption = undefined"
-                                @mouseover="hoverOption = option"
-                            >
-                                <slot name="option" :option="option">
-                                    {{ option.label }}
-                                </slot>
-                            </div>
+                <slot
+                    :active="isOpen"
+                    name="trigger"
+                    :selected-option="selectedOption"
+                >
+                    {{ selectedOption?.label }}
+                </slot>
+            </div>
+            <T3CollapseTransition transition-name="options-transition">
+                <div v-show="isOpen" class="t3-select__options-wrapper">
+                    <div class="t3-select__options">
+                        <div
+                            v-for="option in options"
+                            :key="option.value"
+                            class="t3-select__option"
+                            :class="{
+                                't3-select__option--selected':
+                                    option.value === value,
+                                't3-select__option--hover':
+                                    option.value === hoverOption?.value,
+                            }"
+                            @click="handleBlurAndSetValue(option.value)"
+                            @mouseleave="hoverOption = undefined"
+                            @mouseover="hoverOption = option"
+                        >
+                            <slot name="option" :option="option">
+                                {{ option.label }}
+                            </slot>
                         </div>
                     </div>
-                </T3CollapseTransition>
-            </div>
+                </div>
+            </T3CollapseTransition>
         </div>
-        <slot :error-message="errorMessage" name="error"></slot>
     </div>
 </template>
 
@@ -80,7 +76,6 @@ import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 
 const props = defineProps<{
     name: string
-    label?: string
     options: T3Model.Input.Select.Option[]
     defaultValue?: string
     validation?: RuleExpression<any>
@@ -89,7 +84,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-    (e: 'change', option?: T3Model.Input.Select.Option): void
+    change: [option?: T3Model.Input.Select.Option]
 }>()
 
 onMounted(() => {
@@ -102,11 +97,9 @@ onUnmounted(() => {
     nativeSelect.value?.removeEventListener('keydown', openCustomSelect)
 })
 
-const name = computed(() => props.name)
-
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
-const { errorMessage, meta, value, handleBlur, setValue } = useField<string>(
-    name,
+const { value, handleBlur, setValue } = useField<string>(
+    () => props.name,
     props.validation,
     {
         initialValue:
@@ -187,10 +180,6 @@ watch(value, () => emit('change', selectedOption.value))
 <style lang="scss">
 .t3-select {
     position: relative;
-
-    &__wrapper {
-        position: relative;
-    }
 
     &__native {
         position: absolute;

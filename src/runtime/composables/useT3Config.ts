@@ -8,6 +8,10 @@ export function useT3Config() {
             fullWidth: false,
         },
         contentElements: {},
+        form: {
+            fieldset: ['MultiCheckbox', 'RadioButton'],
+            hideLabel: ['Checkbox'],
+        },
         i18n: {
             locale: 'de',
         },

@@ -8,11 +8,7 @@
         :name="formElement.name"
         :required="required"
         :validation="validation"
-    >
-        <template #error="{ errorMessage }">
-            <slot :error-message="errorMessage" name="error"></slot>
-        </template>
-    </T3Checkbox>
+    />
 </template>
 
 <script setup lang="ts">

@@ -1,25 +1,31 @@
 <template>
-    <input :id="name" v-model="value" class="t3-input" :name="name" />
+    <component
+        :is="type === 'textarea' ? 'textarea' : 'input'"
+        :id="name"
+        class="t3-input"
+        :name="name"
+        :type="type"
+        :value="modelValue"
+        @input="emit('update:modelValue', $event.target.value)"
+    />
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-
-const props = defineProps<{
+defineProps<{
     modelValue: any
     name: string
+    type:
+        | 'text'
+        | 'email'
+        | 'number'
+        | 'password'
+        | 'date'
+        | 'time'
+        | 'tel'
+        | 'textarea'
 }>()
 
 const emit = defineEmits<{
-    (e: 'update:modelValue', value: any): void
+    'update:modelValue': [value?: any]
 }>()
-
-const value = computed({
-    get() {
-        return props.modelValue
-    },
-    set(value: any) {
-        emit('update:modelValue', value)
-    },
-})
 </script>

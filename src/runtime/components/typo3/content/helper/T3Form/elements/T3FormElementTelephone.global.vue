@@ -2,17 +2,12 @@
     <T3Textfield
         :default-value="formElement.defaultValue"
         :disabled="loading"
-        :label="formElement.label"
         :name="formElement.name"
         :placeholder="placeholder"
         :required="required"
         type="tel"
         :validation="validation"
-    >
-        <template #error="{ errorMessage }">
-            <slot :error-message="errorMessage" name="error"></slot>
-        </template>
-    </T3Textfield>
+    />
 </template>
 
 <script setup lang="ts">

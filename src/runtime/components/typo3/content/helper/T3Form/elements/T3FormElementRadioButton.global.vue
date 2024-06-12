@@ -2,16 +2,11 @@
     <T3RadioButton
         :default-value="formElement.defaultValue"
         :disabled="loading"
-        :label="formElement.label"
         :name="formElement.name"
         :options="options"
         :required="required"
         :validation="validation"
-    >
-        <template #error="{ errorMessage }">
-            <slot :error-message="errorMessage" name="error"></slot>
-        </template>
-    </T3RadioButton>
+    />
 </template>
 
 <script setup lang="ts">

@@ -13,6 +13,10 @@ export interface AppConfigInput {
     contentElements?: {
         [type: string]: CeOptions | undefined
     }
+    form?: {
+        fieldset?: string[]
+        hideLabel?: string[]
+    }
     // options from https://github.com/intlify/vue-i18n-next
     i18n?: I18nOptions
     // global file extension for images coming from typo3
