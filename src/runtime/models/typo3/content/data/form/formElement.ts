@@ -30,20 +30,17 @@ export type FormElementType =
 
 export interface Validator {
     identifier: ValidationType
-    options: { [key: string]: string }
+    customErrorMessage?: string
+    options?: { [key: string]: string }
 }
 
 export interface Properties {
-    size?: number
+    size?: string
     options?: { [key: string]: string }
     prependOptionLabel?: string
     text?: string
-    fluidAdditionalAttributes?: {
-        max?: string
-        min?: string
-        placeholder?: string
-        step?: string
-    }
+    placeholder?: string
+    step?: string
 }
 
 export interface FormElement {

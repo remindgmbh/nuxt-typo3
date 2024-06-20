@@ -1,29 +1,11 @@
 <template>
     <form class="t3-form" @submit="submit">
         <div class="t3-form__elements">
-            <template
-                v-for="formElement in formElements"
-                :key="formElement.name"
-            >
-                <T3FormGroup
-                    v-if="formElement.type === 'GridRow'"
-                    :form-elements="formElement.elements ?? []"
-                    :loading="loading"
-                >
-                    <template #error="{ errorMessage }">
-                        <slot :error-message="errorMessage" name="error"></slot>
-                    </template>
-                </T3FormGroup>
-                <T3FormElement
-                    v-else
-                    :form-element="formElement"
-                    :loading="loading"
-                >
-                    <template #error="{ errorMessage }">
-                        <slot :error-message="errorMessage" name="error"></slot>
-                    </template>
-                </T3FormElement>
-            </template>
+            <T3FormElements :form-elements="formElements" :loading="loading">
+                <template #error="{ errorMessage }">
+                    <slot :error-message="errorMessage" name="error"></slot>
+                </template>
+            </T3FormElements>
         </div>
         <slot name="before-submit"></slot>
         <div class="t3-form__submit-wrapper">

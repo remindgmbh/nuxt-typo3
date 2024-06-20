@@ -9,8 +9,8 @@ export function useT3Config() {
         },
         contentElements: {},
         form: {
-            fieldset: ['MultiCheckbox', 'RadioButton'],
-            hideLabel: ['Checkbox'],
+            fieldset: ['Fieldset', 'MultiCheckbox', 'RadioButton'],
+            hideLabel: ['Checkbox', 'GridRow'],
         },
         i18n: {
             locale: 'de',

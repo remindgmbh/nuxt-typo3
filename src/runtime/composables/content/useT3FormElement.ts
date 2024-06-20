@@ -19,7 +19,7 @@ export function useT3FormElement(
     )
 
     const placeholder = computed<string | undefined>(
-        () => formElement.properties?.fluidAdditionalAttributes?.placeholder,
+        () => formElement.properties?.placeholder,
     )
 
     const validation = computed<RuleExpression<any>>(() => getValidation())
@@ -41,10 +41,12 @@ export function useT3FormElement(
 
                 switch (validator.identifier) {
                     case 'StringLength': {
-                        const min =
-                            Number.parseInt(validator.options.minimum) || 0
-                        const max =
-                            Number.parseInt(validator.options.maximum) || 0
+                        const min = Number.parseInt(
+                            validator.options?.minimum ?? '',
+                        )
+                        const max = Number.parseInt(
+                            validator.options?.maximum ?? '',
+                        )
                         schema = string()
                             .min(min, t('validation.min', { label, min }))
                             .max(max, t('validation.max', { label, max }))
@@ -104,10 +106,12 @@ export function useT3FormElement(
                             .typeError(t('validation.numeric', { label }))
                         break
                     case 'NumberRange': {
-                        const min =
-                            Number.parseInt(validator.options.minimum) || 0
-                        const max =
-                            Number.parseInt(validator.options.maximum) || 0
+                        const min = Number.parseInt(
+                            validator.options?.minimum ?? '',
+                        )
+                        const max = Number.parseInt(
+                            validator.options?.maximum ?? '',
+                        )
                         schema = number()
                             .transform(parseNumber)
                             .min(min)
@@ -117,7 +121,7 @@ export function useT3FormElement(
                     }
                     case 'RegularExpression': {
                         const regex = new RegExp(
-                            validator.options.regularExpression,
+                            validator.options?.regularExpression ?? '',
                         )
                         schema = string().matches(
                             regex,
@@ -126,8 +130,8 @@ export function useT3FormElement(
                         break
                     }
                     case 'DateRange': {
-                        const min = validator.options.minimum
-                        const max = validator.options.maximum
+                        const min = validator.options?.minimum
+                        const max = validator.options?.maximum
 
                         let dateSchema = date()
                             .transform(parseDateString)

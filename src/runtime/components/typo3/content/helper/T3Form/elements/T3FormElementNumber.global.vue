@@ -27,20 +27,19 @@ const { required, placeholder, validation } = useT3FormElement(
 )
 
 const step = computed(
-    () =>
-        Number.parseInt(
-            props.formElement.properties?.fluidAdditionalAttributes?.step ?? '',
-        ) || 1,
+    () => Number.parseInt(props.formElement.properties?.step ?? '') || 1,
+)
+
+const numberRangeValidator = computed(() =>
+    props.formElement.validators?.find(
+        (validator) => validator.identifier === 'NumberRange',
+    ),
 )
 
 const min = computed(() =>
-    Number.parseInt(
-        props.formElement.properties?.fluidAdditionalAttributes?.min ?? '',
-    ),
+    Number.parseInt(numberRangeValidator.value?.options?.minimum ?? ''),
 )
 const max = computed(() =>
-    Number.parseInt(
-        props.formElement.properties?.fluidAdditionalAttributes?.max ?? '',
-    ),
+    Number.parseInt(numberRangeValidator.value?.options?.maximum ?? ''),
 )
 </script>
