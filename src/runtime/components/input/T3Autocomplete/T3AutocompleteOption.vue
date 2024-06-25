@@ -35,7 +35,9 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{
-    (e: 'click' | 'mouseover' | 'mouseleave', ev: Event): void
+    click: [ev: Event]
+    mouseover: [ev: Event]
+    mouseleave: [ev: Event]
 }>()
 
 function onClick(ev: Event) {

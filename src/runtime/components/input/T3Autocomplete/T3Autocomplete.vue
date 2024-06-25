@@ -1,46 +1,30 @@
 <template>
-    <div
-        class="t3-autocomplete"
-        :class="{
-            't3-autocomplete--required': required,
-            't3-autocomplete--disabled': disabled,
-            't3-autocomplete--error': meta.touched && !meta.valid,
-            't3-autocomplete--success': meta.touched && meta.valid,
-        }"
-    >
-        <T3InputLabel
-            v-if="label"
-            class="t3-autocomplete__label"
-            :for="name"
-            :label="label"
+    <div ref="el" class="t3-autocomplete">
+        <T3Input
+            v-model="value"
+            autocomplete="off"
+            class="t3-autocomplete__input"
+            :disabled="disabled"
+            :name="name"
+            :placeholder="placeholder"
+            type="text"
+            @blur="handleBlur"
+            @focus="open"
+            @input="onInput"
+            @keydown="supportKeyboardNavigation"
         />
-        <div ref="wrapper" class="t3-autocomplete__wrapper">
-            <T3Input
-                v-model="value"
-                autocomplete="off"
-                class="t3-autocomplete__input"
-                :disabled="disabled"
-                :name="name"
-                :placeholder="placeholder"
-                @blur="handleBlur"
-                @focus="open"
-                @input="onInput"
-                @keydown="supportKeyboardNavigation"
-            />
-            <T3CollapseTransition transition-name="options-transition">
-                <div v-show="isOpen" class="t3-autocomplete__options">
-                    <T3AutocompleteOptionGroup
-                        v-for="optionGroup in optionGroups"
-                        :key="optionGroup.name"
-                        v-model:hover-option="hoverOption"
-                        :option-group="optionGroup"
-                        :value="value"
-                        @select="onSelect"
-                    />
-                </div>
-            </T3CollapseTransition>
-        </div>
-        <slot :error-message="errorMessage" name="error"></slot>
+        <T3CollapseTransition transition-name="options-transition">
+            <div v-show="isOpen" class="t3-autocomplete__options">
+                <T3AutocompleteOptionGroup
+                    v-for="optionGroup in optionGroups"
+                    :key="optionGroup.name"
+                    v-model:hover-option="hoverOption"
+                    :option-group="optionGroup"
+                    :value="value"
+                    @select="onSelect"
+                />
+            </div>
+        </T3CollapseTransition>
     </div>
 </template>
 
@@ -51,33 +35,29 @@ import { computed, onUnmounted, ref, watch } from 'vue'
 
 const props = defineProps<{
     name: string
-    label?: string
     optionGroups: T3Model.Input.Autocomplete.OptionGroup[]
     defaultValue?: string
     validation?: RuleExpression<any>
     placeholder?: string
     disabled?: boolean
-    required?: boolean
 }>()
 
 const emit = defineEmits<{
-    (e: 'input', value: string): void
-    (e: 'select', value: T3Model.Input.Autocomplete.Option): void
+    input: [value: string]
+    select: [value: T3Model.Input.Autocomplete.Option]
 }>()
 
 onUnmounted(() => {
     document.removeEventListener('click', closeOnOutsideClick)
 })
 
-const wrapper = ref<HTMLDivElement>()
+const el = ref<HTMLDivElement>()
 const isOpen = ref(false)
 const _optionGroups = ref<T3Model.Input.Autocomplete.OptionGroup[]>([])
 
 const options = computed(() =>
     props.optionGroups.flatMap((optionGroup) => optionGroup.options),
 )
-const name = computed(() => props.name)
-
 function onKeyboardSelect(hoverOption: T3Model.Input.Autocomplete.Option) {
     if (hoverOption.link) {
         return navigateTo(hoverOption.link)
@@ -92,8 +72,8 @@ const { hoverOption, supportKeyboardNavigation } = useT3SelectInput(
 )
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
-const { errorMessage, meta, value, handleBlur, setValue } = useField<string>(
-    name,
+const { value, handleBlur, setValue } = useField<string>(
+    () => props.name,
     props.validation,
     {
         initialValue: props.defaultValue,
@@ -121,11 +101,7 @@ function onInput() {
 }
 
 function closeOnOutsideClick(e: MouseEvent) {
-    if (
-        wrapper.value &&
-        e.target instanceof Node &&
-        !wrapper.value.contains(e.target)
-    ) {
+    if (el.value && e.target instanceof Node && !el.value.contains(e.target)) {
         close()
     }
 }
@@ -169,10 +145,6 @@ function close() {
         left: 0;
         width: 100%;
         height: 100%;
-    }
-
-    &__wrapper {
-        position: relative;
     }
 
     &__options {

@@ -34,7 +34,7 @@ defineProps<{
 }>()
 
 const emit = defineEmits<{
-    (e: 'select', option: T3Model.Input.Autocomplete.Option): void
-    (e: 'update:hoverOption', option?: T3Model.Input.Autocomplete.Option): void
+    select: [option: T3Model.Input.Autocomplete.Option]
+    'update:hoverOption': [option?: T3Model.Input.Autocomplete.Option]
 }>()
 </script>

@@ -2,15 +2,10 @@
     <T3CheckboxGroup
         :default-value="formElement.defaultValue || []"
         :disabled="loading"
-        :label="formElement.label"
         :name="formElement.name"
         :options="options"
-        :required="required"
         :validation="validation"
-    >
-        <template #error="{ errorMessage }">
-            <slot :error-message="errorMessage" name="error"></slot> </template
-    ></T3CheckboxGroup>
+    />
 </template>
 
 <script setup lang="ts">
@@ -21,5 +16,5 @@ const props = defineProps<{
     loading?: boolean
 }>()
 
-const { required, options, validation } = useT3FormElement(props.formElement)
+const { options, validation } = useT3FormElement(props.formElement)
 </script>
