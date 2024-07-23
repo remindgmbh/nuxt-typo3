@@ -12,7 +12,7 @@
             @blur="handleBlur"
         />
         <span class="t3-checkbox__label">
-            {{ label }}
+            <T3HtmlParser :content="label" />
         </span>
     </label>
 </template>
