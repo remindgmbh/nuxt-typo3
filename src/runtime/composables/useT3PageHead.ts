@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-invalid-void-type */
-import type * as T3Model from '../models'
 import type { ActiveHeadEntry, MergeHead, UseHeadInput } from '@unhead/vue'
-import { useHead, useT3Config } from '#imports'
+import { type T3Model, useHead, useT3Config } from '#imports'
 import { type MetaObject } from '@nuxt/schema'
 
 // Temporary explicit return type until this issue is fixed: https://github.com/nuxt/module-builder/issues/224

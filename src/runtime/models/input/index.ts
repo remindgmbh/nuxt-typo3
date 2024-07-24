@@ -1,2 +1,2 @@
-export * as Autocomplete from './autocomplete'
-export * as Select from './select'
+export * as Autocomplete from './autocomplete/index'
+export * as Select from './select/index'

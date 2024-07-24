@@ -1,5 +1,4 @@
-import type * as T3Model from '../models'
-import { useNuxtApp, useState } from '#imports'
+import { type T3Model, useNuxtApp, useState } from '#imports'
 
 export function useT3CookieConsent() {
     const nuxt = useNuxtApp()

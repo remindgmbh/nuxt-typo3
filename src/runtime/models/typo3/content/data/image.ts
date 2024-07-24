@@ -1,5 +1,5 @@
-import type { Asset } from '../..'
-import type { Header } from '.'
+import type { Asset } from '../../index'
+import type { Header } from './index'
 
 export interface Image extends Header {
     image: Asset.Image

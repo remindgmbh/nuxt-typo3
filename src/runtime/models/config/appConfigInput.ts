@@ -1,6 +1,6 @@
-import type { CeOptions, Spacing } from '.'
+import type { CeOptions, Spacing } from './index'
 import type { I18nOptions } from 'vue-i18n'
-import type { Typo3 } from '..'
+import type { Typo3 } from '../index'
 
 export interface AppConfigInput {
     breadcrumbs?: {

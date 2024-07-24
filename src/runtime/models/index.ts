@@ -1,3 +1,3 @@
-export * as Config from './config'
-export * as Input from './input'
-export * as Typo3 from './typo3'
+export * as Config from './config/index'
+export * as Input from './input/index'
+export * as Typo3 from './typo3/index'

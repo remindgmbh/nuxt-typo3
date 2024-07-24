@@ -1,6 +1,5 @@
-import type * as T3Model from '../models'
 import { type Ref, computed } from 'vue'
-import { useT3Config } from '#imports'
+import { type T3Model, useT3Config } from '#imports'
 
 export function useT3Asset(asset: Ref<T3Model.Typo3.Asset.Base>) {
     const config = useT3Config()

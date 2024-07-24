@@ -1,4 +1,4 @@
-import type { PaginationPage } from '.'
+import type { PaginationPage } from './index'
 
 export interface Pagination {
     startRecordNumber: number

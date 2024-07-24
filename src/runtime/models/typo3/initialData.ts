@@ -1,4 +1,4 @@
-import type { Language, NavItem } from '.'
+import type { Language, NavItem } from './index'
 
 export interface InitialData {
     footer: unknown

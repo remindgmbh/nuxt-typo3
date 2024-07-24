@@ -1,5 +1,5 @@
-export * as Form from './form'
-export * as Login from './login'
+export * as Form from './form/index'
+export * as Login from './login/index'
 export type { Accordion } from './accordion'
 export type { Bullets } from './bullets'
 export type { Formframework } from './formframework'

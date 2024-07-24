@@ -1,5 +1,4 @@
-import type { Form } from './login'
-import type { Header } from '.'
+import type { Header, Login } from './index'
 
 interface Message {
     header: string
@@ -15,7 +14,7 @@ interface FlashMessage {
 
 export interface Felogin extends Header {
     data: {
-        form: Form
+        form: Login.Form
         message: Message
         status?: 'success'
         recovery: string
@@ -25,7 +24,7 @@ export interface Felogin extends Header {
 
 export interface FeloginActionResponse extends Header {
     data: {
-        form?: Form
+        form?: Login.Form
         message?: Message
         flashMessages?: FlashMessage[]
         recovery?: string

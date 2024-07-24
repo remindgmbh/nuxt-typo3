@@ -1,6 +1,5 @@
-import type * as T3Model from '../../models'
 import { type Ref, computed, ref } from 'vue'
-import { navigateTo, useLogger, useT3Api } from '#imports'
+import { type T3Model, navigateTo, useLogger, useT3Api } from '#imports'
 import { useI18n } from 'vue-i18n'
 
 export function useT3CeFormFormframework(

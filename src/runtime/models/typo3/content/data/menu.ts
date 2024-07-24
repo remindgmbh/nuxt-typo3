@@ -1,5 +1,5 @@
-import type { Breadcrumb } from '../..'
-import type { Header } from '.'
+import type { Breadcrumb } from '../../index'
+import type { Header } from './index'
 
 export interface MenuItem extends Breadcrumb {
     children: MenuItem[]

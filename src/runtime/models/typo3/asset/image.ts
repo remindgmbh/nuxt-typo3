@@ -1,4 +1,4 @@
-import type { Base } from './base'
+import type { Base } from './index'
 
 export interface Image extends Base {
     alternative?: string

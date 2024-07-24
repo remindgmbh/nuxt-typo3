@@ -1,8 +1,7 @@
-import type { Form } from './form'
-import type { Header } from '.'
+import type { Form, Header } from './index'
 
 export interface Formframework extends Header {
     link: string
-    form: Form
+    form: Form.Form
     bodytext: string
 }

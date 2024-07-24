@@ -1,13 +1,13 @@
-import type { Typo3 } from '../../models'
+import { type T3Model } from '#imports'
 
 export function useT3DataUtil() {
     function findContentElement<T>(
-        filter: (contentElement: Typo3.Content.Element) => boolean,
-        pageData: Typo3.Page.Data,
+        filter: (contentElement: T3Model.Typo3.Content.Element) => boolean,
+        pageData: T3Model.Typo3.Page.Data,
     ) {
         function isContentElement(
-            contentElement: Typo3.Content.Element,
-        ): contentElement is Typo3.Content.Element<T> {
+            contentElement: T3Model.Typo3.Content.Element,
+        ): contentElement is T3Model.Typo3.Content.Element<T> {
             return filter(contentElement)
         }
 
@@ -18,8 +18,8 @@ export function useT3DataUtil() {
 
     function findContentElementById<T>(
         id: number,
-        pageData: Typo3.Page.Data,
-    ): Typo3.Content.Element<T> | undefined {
+        pageData: T3Model.Typo3.Page.Data,
+    ): T3Model.Typo3.Content.Element<T> | undefined {
         return findContentElement<T>(
             (contentElement) => contentElement.id === id,
             pageData,
@@ -28,8 +28,8 @@ export function useT3DataUtil() {
 
     function findContentElementByType<T>(
         type: string,
-        pageData: Typo3.Page.Data,
-    ): Typo3.Content.Element<T> | undefined {
+        pageData: T3Model.Typo3.Page.Data,
+    ): T3Model.Typo3.Content.Element<T> | undefined {
         return findContentElement<T>(
             (contentElement) => contentElement.type === type,
             pageData,

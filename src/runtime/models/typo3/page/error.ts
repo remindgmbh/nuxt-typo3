@@ -1,4 +1,4 @@
-import type { Data } from '.'
+import type { Data } from './index'
 
 export class Error {
     data?: Data

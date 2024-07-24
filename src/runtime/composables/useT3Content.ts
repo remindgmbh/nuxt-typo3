@@ -1,10 +1,10 @@
 import {
+    type T3Model,
     useT3Config,
     useT3ContentInjection,
     useT3CookieConsent,
     useT3Theme,
 } from '#imports'
-import type { Config } from '../models'
 import { computed } from 'vue'
 
 export function useT3Content() {
@@ -14,7 +14,7 @@ export function useT3Content() {
     const { isAccepted } = useT3CookieConsent()
     const { backgroundColors } = useT3Theme()
 
-    const ceOptions = computed<Config.CeOptions | undefined>(
+    const ceOptions = computed<T3Model.Config.CeOptions | undefined>(
         () =>
             config.contentElements[
                 contentElement.value.type as keyof typeof config.contentElements

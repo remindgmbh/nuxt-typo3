@@ -1,25 +1,26 @@
 import { type InjectionKey, type Ref, inject, provide } from 'vue'
-import type { Typo3 } from '../../models'
-import { useT3Injection } from '#imports'
+import { type T3Model, useT3Injection } from '#imports'
 
 const contentElementInjectionKey = Symbol('t3-content-element') as InjectionKey<
-    Ref<Typo3.Content.Element<unknown>>
+    Ref<T3Model.Typo3.Content.Element<unknown>>
 >
 export function useT3ContentInjection() {
     const { injectStrict } = useT3Injection()
 
-    function provideContentElement(contentElement: Ref<Typo3.Content.Element>) {
+    function provideContentElement(
+        contentElement: Ref<T3Model.Typo3.Content.Element>,
+    ) {
         provide(contentElementInjectionKey, contentElement)
     }
 
-    function injectContentElement<T>(): Ref<Typo3.Content.Element<T>> {
-        return injectStrict<Ref<Typo3.Content.Element<T>>>(
+    function injectContentElement<T>(): Ref<T3Model.Typo3.Content.Element<T>> {
+        return injectStrict<Ref<T3Model.Typo3.Content.Element<T>>>(
             contentElementInjectionKey,
         )
     }
 
     function injectOptionalContentElement<T>() {
-        return inject<Ref<Typo3.Content.Element<T>> | undefined>(
+        return inject<Ref<T3Model.Typo3.Content.Element<T>> | undefined>(
             contentElementInjectionKey,
             undefined,
         )

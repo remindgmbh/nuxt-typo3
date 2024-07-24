@@ -1,4 +1,4 @@
-import type { FilterValue } from '.'
+import type { FilterValue } from './index'
 
 export interface Filter {
     name: string

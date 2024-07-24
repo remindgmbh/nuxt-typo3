@@ -1,6 +1,12 @@
 import { type Ref, computed } from 'vue'
-import { useLogger, useRoute, useState, useT3Api, useT3Config } from '#imports'
-import { Typo3 } from '../models'
+import {
+    T3Model,
+    useLogger,
+    useRoute,
+    useState,
+    useT3Api,
+    useT3Config,
+} from '#imports'
 
 export function useT3Data() {
     const api = useT3Api()
@@ -18,14 +24,14 @@ export function useT3Data() {
     }
 
     const initialData: Ref<{
-        [path: string]: Typo3.InitialData | undefined
+        [path: string]: T3Model.Typo3.InitialData | undefined
     }> = useState('t3-initialData', () => ({}))
 
     const pageData: Ref<{
-        [path: string]: Typo3.Page.Data | undefined
+        [path: string]: T3Model.Typo3.Page.Data | undefined
     }> = useState('t3-pageData', () => ({}))
 
-    const pageError: Ref<Typo3.Page.Error | undefined> =
+    const pageError: Ref<T3Model.Typo3.Page.Error | undefined> =
         useState('t3-pageError')
 
     const currentPagePath = computed(() => useRoute().fullPath)
@@ -34,7 +40,7 @@ export function useT3Data() {
         getLocalizedRootPath(currentPagePath.value),
     )
 
-    const currentInitialData = computed<Typo3.InitialData | undefined>({
+    const currentInitialData = computed<T3Model.Typo3.InitialData | undefined>({
         get() {
             return initialData.value[currentRootPath.value]
         },
@@ -43,7 +49,7 @@ export function useT3Data() {
         },
     })
 
-    const currentPageData = computed<Typo3.Page.Data | undefined>({
+    const currentPageData = computed<T3Model.Typo3.Page.Data | undefined>({
         get() {
             return pageData.value[currentPagePath.value]
         },
@@ -54,7 +60,7 @@ export function useT3Data() {
 
     async function loadInitialData(
         path: string,
-    ): Promise<Typo3.InitialData | undefined> {
+    ): Promise<T3Model.Typo3.InitialData | undefined> {
         const rootPath = getLocalizedRootPath(path)
 
         if (!initialData.value[rootPath]) {
@@ -72,7 +78,7 @@ export function useT3Data() {
 
     async function loadPageData(
         path: string,
-    ): Promise<Typo3.Page.Data | undefined> {
+    ): Promise<T3Model.Typo3.Page.Data | undefined> {
         pageError.value = {}
         if (!pageData.value[path]) {
             try {
@@ -80,7 +86,7 @@ export function useT3Data() {
                 pageData.value[path] = result
                 return result
             } catch (error) {
-                if (error instanceof Typo3.Page.Error) {
+                if (error instanceof T3Model.Typo3.Page.Error) {
                     // assigning error directly leads to "Cannot stringify arbitrary non-POJOs PageError"
                     pageError.value = { ...error }
                 } else {

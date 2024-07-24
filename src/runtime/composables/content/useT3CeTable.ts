@@ -1,5 +1,5 @@
-import type * as T3Model from '../../models'
 import { type Ref, computed } from 'vue'
+import { type T3Model } from '#imports'
 
 export function useT3CeTable(
     contentElement: Ref<

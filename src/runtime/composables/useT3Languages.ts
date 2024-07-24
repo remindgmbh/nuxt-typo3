@@ -1,6 +1,5 @@
-import type * as T3Model from '../models'
+import { type T3Model, useT3Data } from '#imports'
 import { computed } from 'vue'
-import { useT3Data } from '#imports'
 
 export function useT3Languages() {
     const { currentInitialData, currentPageData } = useT3Data()

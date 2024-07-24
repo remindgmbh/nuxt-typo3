@@ -1,4 +1,4 @@
-import type { Header } from '.'
+import type { Header } from './index'
 
 export interface Table extends Header {
     bodytext: string[][]

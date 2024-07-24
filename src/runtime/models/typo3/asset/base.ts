@@ -1,4 +1,4 @@
-import type { TypoLink } from '..'
+import type { TypoLink } from '../index'
 
 export interface Base {
     url: string

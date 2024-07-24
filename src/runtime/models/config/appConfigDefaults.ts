@@ -1,4 +1,4 @@
-import type { AppConfigInput } from '.'
+import type { AppConfigInput } from './index'
 
 export interface AppConfigDefaults {
     breadcrumbs: NonNullable<AppConfigInput['breadcrumbs']>

@@ -1,7 +1,7 @@
-import type * as T3Model from '../../models'
 import { type Ref, computed, ref } from 'vue'
 import { type Schema, string } from 'yup'
 import {
+    type T3Model,
     navigateTo,
     useRoute,
     useT3Api,

@@ -1,6 +1,5 @@
-import * as T3Model from '../models'
 import { FetchError, type FetchOptions } from 'ofetch'
-import { useRequestHeaders, useT3Config } from '#imports'
+import { T3Model, useRequestHeaders, useT3Config } from '#imports'
 import { type NitroFetchRequest } from 'nitropack'
 import { computed } from 'vue'
 

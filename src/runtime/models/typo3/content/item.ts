@@ -1,5 +1,5 @@
-import type { Asset } from '..'
-import type { Text } from './data'
+import type { Asset } from '../index'
+import type { Text } from './data/index'
 
 export interface Item extends Text {
     id: number
