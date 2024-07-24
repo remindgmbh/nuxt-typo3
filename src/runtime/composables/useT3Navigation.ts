@@ -18,7 +18,7 @@ export function useT3Navigation() {
 
     const activeNavItems = computed<T3Model.Typo3.NavItem[]>(() =>
         rootPageNavigation.value
-            ? getActiveNavItems(route.path, rootPageNavigation.value) ?? []
+            ? (getActiveNavItems(route.path, rootPageNavigation.value) ?? [])
             : [],
     )
 

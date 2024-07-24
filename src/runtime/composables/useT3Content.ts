@@ -47,7 +47,7 @@ export function useT3Content() {
     const ignoreCookies = computed<boolean>(() =>
         ceOptions.value?.ignoreCookies instanceof Function
             ? ceOptions.value.ignoreCookies(contentElement.value)
-            : ceOptions.value?.ignoreCookies ?? false,
+            : (ceOptions.value?.ignoreCookies ?? false),
     )
 
     const maxWidth = computed<string | undefined>(() => {
@@ -76,7 +76,7 @@ export function useT3Content() {
     const width = computed<'default' | 'extended' | 'full'>(() =>
         ceOptions.value?.width instanceof Function
             ? ceOptions.value?.width(contentElement.value)
-            : ceOptions.value?.width ?? 'default',
+            : (ceOptions.value?.width ?? 'default'),
     )
 
     return {

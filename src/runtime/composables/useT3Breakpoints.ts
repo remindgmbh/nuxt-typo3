@@ -4,7 +4,7 @@ import screenWidths from '../assets/styles/js/screenWidths.module.scss'
 
 export function useT3Breakpoints() {
     const getPxValue = (value: string) => {
-        const regex = /^\d+(r?em)$/
+        const regex = /^\d+r?em$/
         const multiplier = regex.test(value) ? 16 : 1
         return Number.parseInt(value) * multiplier
     }

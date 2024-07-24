@@ -185,14 +185,14 @@ if (props.closeOnRouteChange) {
 .t3-layout {
     --header-height: v-bind('headerHeightDense ?? headerHeight');
 
-    @include breakpoints.up(variables.$layout-header-dense-breakpoint) {
-        --header-height: v-bind(headerHeight);
-    }
-
     display: flex;
     flex-direction: column;
     position: relative;
     min-height: 100vh;
+
+    @include breakpoints.up(variables.$layout-header-dense-breakpoint) {
+        --header-height: v-bind(headerHeight);
+    }
 
     &__header {
         position: fixed;

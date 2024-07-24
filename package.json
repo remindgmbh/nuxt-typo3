@@ -33,28 +33,28 @@
         "typecheck": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
     },
     "dependencies": {
-        "@nuxt/kit": "^3.11.2",
+        "@nuxt/kit": "^3.12.4",
         "@remindgmbh/nuxt-logger": "^1.0.3",
         "defu": "^6.1.4",
         "perfect-debounce": "^1.0.0",
-        "sass": "^1.77.1",
+        "sass": "^1.77.8",
         "scule": "^1.3.0",
-        "vee-validate": "^4.13.1",
+        "vee-validate": "^4.13.2",
         "vue-i18n": "^9.13.1",
         "yup": "^1.4.0"
     },
     "devDependencies": {
-        "@nuxt/module-builder": "^0.6.0",
-        "@nuxt/schema": "^3.11.2",
+        "@nuxt/module-builder": "^0.8.1",
+        "@nuxt/schema": "^3.12.4",
         "@remindgmbh/eslint-config-nuxt": "^2.0.0",
         "@remindgmbh/stylelint-config": "^1.1.1",
-        "@types/node": "^20.12.12",
-        "eslint": "^9.2.0",
-        "nuxt": "^3.11.2",
-        "prettier": "^3.2.5",
-        "stylelint": "^16.5.0",
-        "typescript": "^5.4.5",
-        "vue-tsc": "^2.0.19"
+        "@types/node": "^20.14.11",
+        "eslint": "^9.7.0",
+        "nuxt": "^3.12.4",
+        "prettier": "^3.3.3",
+        "stylelint": "^16.7.0",
+        "typescript": "^5.5.4",
+        "vue-tsc": "^2.0.28"
     },
     "volta": {
         "node": "20.9.0"
