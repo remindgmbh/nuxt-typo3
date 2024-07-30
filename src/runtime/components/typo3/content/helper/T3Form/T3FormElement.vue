@@ -1,6 +1,7 @@
 <template>
     <component
         :is="wrapperTag"
+        aria-live="polite"
         class="t3-form-element"
         :class="[
             `t3-form-element--${type}`,
