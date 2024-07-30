@@ -2,6 +2,8 @@
     <div ref="el" class="t3-autocomplete">
         <T3Input
             v-model="value"
+            :aria-errormessage="ariaErrormessage"
+            :aria-invalid="ariaInvalid"
             autocomplete="off"
             class="t3-autocomplete__input"
             :disabled="disabled"
@@ -34,6 +36,8 @@ import { type T3Model, navigateTo, useT3SelectInput } from '#imports'
 import { computed, onUnmounted, ref, watch } from 'vue'
 
 const props = defineProps<{
+    ariaErrormessage?: string
+    ariaInvalid?: boolean
     name: string
     optionGroups: T3Model.Input.Autocomplete.OptionGroup[]
     defaultValue?: string

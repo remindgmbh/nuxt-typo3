@@ -4,7 +4,6 @@
             formElement.defaultValue ? formElement.defaultValue : false
         "
         :disabled="loading"
-        :label="formElement.label ?? formElement.name"
         :name="formElement.name"
         :required="required"
         :validation="validation"

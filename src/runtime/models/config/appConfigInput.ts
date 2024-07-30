@@ -14,8 +14,9 @@ export interface AppConfigInput {
         [type: string]: CeOptions | undefined
     }
     form?: {
-        fieldset?: string[]
+        wrapper?: { [tag: string]: string[] }
         hideLabel?: string[]
+        reverseOrder?: string[]
     }
     // options from https://github.com/intlify/vue-i18n-next
     i18n?: I18nOptions

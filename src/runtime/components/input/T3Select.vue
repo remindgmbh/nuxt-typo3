@@ -4,6 +4,8 @@
             :id="name"
             ref="nativeSelect"
             v-model="value"
+            :aria-errormessage="ariaErrormessage"
+            :aria-invalid="ariaInvalid"
             :aria-labelledby="name"
             class="t3-select__native"
             :disabled="disabled"
@@ -75,6 +77,8 @@ import { type T3Model, useT3SelectInput } from '#imports'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 
 const props = defineProps<{
+    ariaInvalid?: boolean
+    ariaErrormessage?: string
     name: string
     options: T3Model.Input.Select.Option[]
     defaultValue?: string

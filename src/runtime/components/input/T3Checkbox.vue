@@ -1,20 +1,15 @@
 <template>
-    <label class="t3-checkbox" :for="name">
-        <input
-            :id="name"
-            v-model="value"
-            class="t3-checkbox__input"
-            :disabled="disabled"
-            :name="name"
-            :required="required"
-            type="checkbox"
-            :value="value"
-            @blur="handleBlur"
-        />
-        <span class="t3-checkbox__label">
-            <T3HtmlParser :content="label" />
-        </span>
-    </label>
+    <input
+        :id="name"
+        v-model="value"
+        class="t3-checkbox"
+        :disabled="disabled"
+        :name="name"
+        :required="required"
+        type="checkbox"
+        :value="value"
+        @blur="handleBlur"
+    />
 </template>
 
 <script setup lang="ts">
@@ -23,7 +18,6 @@ import { type RuleExpression, useField } from 'vee-validate'
 const props = defineProps<{
     name: string
     defaultValue?: boolean
-    label: string
     validation?: RuleExpression<any>
     disabled?: boolean
     required?: boolean

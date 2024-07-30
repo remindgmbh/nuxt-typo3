@@ -1,6 +1,6 @@
 <template>
     <component
-        :is="fieldset ? 'fieldset' : 'div'"
+        :is="wrapperTag"
         class="t3-form-element"
         :class="[
             `t3-form-element--${type}`,
@@ -13,23 +13,44 @@
             },
         ]"
     >
-        <component
-            :is="fieldset ? 'legend' : 'label'"
-            v-if="!hideLabel && formElement.label"
-            class="t3-form-element__label"
-            :for="formElement.name"
-            >{{ formElement.label }}</component
-        >
-        <component
-            :is="FormElement"
-            class="t3-form-element__input"
-            :form-element="formElement"
-            :loading="loading"
-        />
+        <T3Sortable :order="order">
+            <template v-if="showLabel" #[LABEL]>
+                <component
+                    :is="labelTag"
+                    class="t3-form-element__label"
+                    :for="formElement.name"
+                >
+                    <slot :label="formElement.label" name="label">
+                        <T3HtmlParser :content="formElement.label" />
+                        <span
+                            v-if="required"
+                            aria-hidden="true"
+                            class="t3-form-element__required-hint"
+                            >*</span
+                        >
+                    </slot>
+                </component>
+            </template>
+            <template #[INPUT]>
+                <component
+                    :is="FormElement"
+                    class="t3-form-element__input"
+                    :form-element="formElement"
+                    :loading="loading"
+                    v-bind="ariaAttrs"
+                />
+            </template>
+        </T3Sortable>
         <slot :error-message="errorMessage" name="error">
             <T3CollapseTransition transition-name="error-transition">
-                <div v-if="errorMessage" class="t3-form-element__error">
-                    {{ errorMessage }}
+                <div
+                    v-if="errorMessage"
+                    :id="errorMessageId"
+                    class="t3-form-element__error"
+                >
+                    <slot :error-message="errorMessage" name="errorMessage">
+                        {{ errorMessage }}
+                    </slot>
                 </div>
             </T3CollapseTransition>
         </slot>
@@ -53,14 +74,48 @@ const props = defineProps<{
     loading?: boolean
 }>()
 
+const LABEL = 'label'
+const INPUT = 'input'
+
 const config = useT3Config()
 
-const fieldset = computed(() =>
-    config.form.fieldset?.includes(props.formElement.type),
+const order = computed(() => {
+    const result = [LABEL, INPUT]
+    return config.form.reverseOrder?.includes(props.formElement.type)
+        ? result.reverse()
+        : result
+})
+
+const wrapperTag = computed(
+    () =>
+        Object.keys(config.form.wrapper ?? {}).find((tag) =>
+            config.form.wrapper?.[tag].includes(props.formElement.type),
+        ) ?? 'div',
 )
 
-const hideLabel = computed(() =>
-    config.form.hideLabel?.includes(props.formElement.type),
+const labelTag = computed(() =>
+    config.form.wrapper?.fieldset.includes(props.formElement.type)
+        ? 'legend'
+        : wrapperTag.value === 'label'
+          ? 'span'
+          : 'label',
+)
+
+const showLabel = computed(
+    () =>
+        props.formElement.label &&
+        !config.form.hideLabel?.includes(props.formElement.type),
+)
+
+const errorMessageId = computed(() => `${props.formElement.name}-error`)
+
+const ariaAttrs = computed(() =>
+    props.formElement.validators?.length
+        ? {
+              'aria-errormessage': errorMessageId.value,
+              'aria-invalid': !!errorMessage.value,
+          }
+        : undefined,
 )
 
 const size = computed(() => props.formElement.properties?.size)

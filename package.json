@@ -56,6 +56,9 @@
         "typescript": "^5.5.4",
         "vue-tsc": "^2.0.28"
     },
+    "overrides": {
+        "nuxi": "3.11.1"
+    },
     "volta": {
         "node": "20.9.0"
     }
