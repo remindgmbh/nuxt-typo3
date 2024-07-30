@@ -56,14 +56,14 @@ export function useT3FormElement(
                         schema = string()
                             .min(
                                 min,
-                                getErrorMessage('validation.min', {
+                                getErrorMessage('validation.stringLength.min', {
                                     label,
                                     min,
                                 }),
                             )
                             .max(
                                 max,
-                                getErrorMessage('validation.max', {
+                                getErrorMessage('validation.stringLength.max', {
                                     label,
                                     max,
                                 }),
@@ -73,12 +73,14 @@ export function useT3FormElement(
                     }
                     case 'EmailAddress':
                         schema = string().email(
-                            getErrorMessage('validation.email', { label }),
+                            getErrorMessage('validation.emailAddress', {
+                                label,
+                            }),
                         )
                         break
 
                     case 'NotEmpty': {
-                        const msg = getErrorMessage('validation.required', {
+                        const msg = getErrorMessage('validation.notEmpty', {
                             label,
                         })
                         switch (formElement.type) {
@@ -127,7 +129,7 @@ export function useT3FormElement(
                     }
                     case 'Float':
                         schema = number().transform(parseNumber).typeError(
-                            getErrorMessage('validation.numeric', {
+                            getErrorMessage('validation.float', {
                                 label,
                             }),
                         )
@@ -143,14 +145,14 @@ export function useT3FormElement(
                             .transform(parseNumber)
                             .min(
                                 min,
-                                getErrorMessage('validation.min', {
+                                getErrorMessage('validation.numberRange.min', {
                                     label,
                                     min,
                                 }),
                             )
                             .max(
                                 max,
-                                getErrorMessage('validation.max', {
+                                getErrorMessage('validation.numberRange.max', {
                                     label,
                                     max,
                                 }),
@@ -164,7 +166,9 @@ export function useT3FormElement(
                         )
                         schema = string().matches(
                             regex,
-                            getErrorMessage('validation.regex', { label }),
+                            getErrorMessage('validation.regularExpression', {
+                                label,
+                            }),
                         )
                         break
                     }
@@ -179,18 +183,50 @@ export function useT3FormElement(
                         if (min) {
                             dateSchema = dateSchema.min(
                                 min,
-                                getErrorMessage('validation.min', { label }),
+                                getErrorMessage('validation.dateRange.min', {
+                                    label,
+                                    min,
+                                }),
                             )
                         }
 
                         if (max) {
                             dateSchema = dateSchema.max(
                                 max,
-                                getErrorMessage('validation.max', { label }),
+                                getErrorMessage('validation.dateRange.max', {
+                                    label,
+                                    max,
+                                }),
                             )
                         }
 
                         schema = dateSchema
+                        break
+                    }
+                    case 'Count': {
+                        const min = Number.parseInt(
+                            validator.options?.minimum ?? '',
+                        )
+                        const max = Number.parseInt(
+                            validator.options?.maximum ?? '',
+                        )
+
+                        schema = array()
+                            .min(
+                                min,
+                                getErrorMessage('validation.count.min', {
+                                    label,
+                                    min,
+                                }),
+                            )
+                            .max(
+                                max,
+                                getErrorMessage('validation.count.max', {
+                                    label,
+                                    max,
+                                }),
+                            )
+
                         break
                     }
                 }

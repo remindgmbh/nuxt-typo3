@@ -32,13 +32,26 @@ export default {
     unexpectedError: 'unexpected error',
     validation: {
         alphanumeric: '{label} may only contain alpha-numeric characters.',
-        email: '{label} must be a valid email address.',
+        count: {
+            max: '{label} may have a maximum of {max} selected values.',
+            min: '{label} must have at least {min} selected values.',
+        },
+        dateRange: {
+            max: '{label} must not be after {max}.',
+            min: '{label} must not be before {min}.',
+        },
+        emailAddress: '{label} must be a valid email address.',
+        float: '{label} may only contain numeric characters.',
         integer: '{label} must be an integer.',
-        max: '{label} must be {max} or less.',
-        min: '{label} must be {min} or more.',
-        numeric: '{label} may only contain numeric characters.',
-        regex: '{label} format is invalid.',
-        required: '{label} is required.',
-        type: '{label} must be of type {type}.',
+        notEmpty: '{label} is required.',
+        numberRange: {
+            max: '{label} may be a maximum of {max}.',
+            min: '{label} must be at least {min}.',
+        },
+        regularExpression: '{label} format is invalid.',
+        stringLength: {
+            max: '{label} must be {max} characters or less.',
+            min: '{label} must be {min} characters or more.',
+        },
     },
 }
