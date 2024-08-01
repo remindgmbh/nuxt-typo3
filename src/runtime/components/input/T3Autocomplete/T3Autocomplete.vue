@@ -154,7 +154,7 @@ function supportKeyboardNavigation(e: KeyboardEvent): void {
     }
 
     // press ESC or Tab -> close selectCustom
-    if (['Escape'].includes(e.key)) {
+    if (['Escape', 'Tab'].includes(e.key)) {
         close()
     }
 }

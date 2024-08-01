@@ -5,6 +5,7 @@
         :class="{
             't3-autocomplete-option--hover': hovered,
         }"
+        tabindex="-1"
         :to="option.link"
         @mouseleave="onMouseleave"
         @mouseover="onMouseover"
