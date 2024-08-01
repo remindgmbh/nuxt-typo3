@@ -6,11 +6,14 @@
             v-model="value"
             :aria-controls="listboxId"
             :aria-errormessage="ariaErrormessage"
+            :aria-expanded="isOpen"
+            aria-haspopup="listbox"
             :aria-invalid="ariaInvalid"
             class="t3-select__trigger"
             :disabled="disabled"
             :name="name"
             :required="required"
+            role="combobox"
             @blur="onBlur"
             @keydown="onKeydown"
             @mousedown="onMousedown"
@@ -18,6 +21,7 @@
             <option
                 v-for="option in options"
                 :key="option.value"
+                aria-hidden="true"
                 :value="option.value"
             >
                 {{ option.label }}
@@ -34,6 +38,7 @@
                     <li
                         v-for="option in options"
                         :key="option.value"
+                        :aria-selected="option.value === value"
                         class="t3-select__option"
                         :class="{
                             't3-select__option--selected':
