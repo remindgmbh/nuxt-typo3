@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import { type RuleExpression, useField } from 'vee-validate'
-import { type T3Model, navigateTo, useT3SelectInput } from '#imports'
+import { type T3Model, navigateTo } from '#imports'
 import { computed, onUnmounted, ref, watch } from 'vue'
 
 const props = defineProps<{
@@ -57,22 +57,14 @@ onUnmounted(() => {
 
 const el = ref<HTMLDivElement>()
 const isOpen = ref(false)
+const hoverOption = ref<T3Model.Input.Autocomplete.Option>()
+const hoverOptionIndex = computed<number>(() =>
+    options.value.findIndex((value) => hoverOption.value === value),
+)
 const _optionGroups = ref<T3Model.Input.Autocomplete.OptionGroup[]>([])
 
 const options = computed(() =>
     props.optionGroups.flatMap((optionGroup) => optionGroup.options),
-)
-function onKeyboardSelect(hoverOption: T3Model.Input.Autocomplete.Option) {
-    if (hoverOption.link) {
-        return navigateTo(hoverOption.link)
-    } else {
-        onSelect(hoverOption)
-    }
-}
-
-const { hoverOption, supportKeyboardNavigation } = useT3SelectInput(
-    onKeyboardSelect,
-    options,
 )
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
@@ -131,6 +123,40 @@ function close() {
     }
     isOpen.value = false
     document.removeEventListener('click', closeOnOutsideClick)
+}
+
+function supportKeyboardNavigation(e: KeyboardEvent): void {
+    // press down -> go next
+    if (
+        e.key === 'ArrowDown' &&
+        hoverOptionIndex.value < options.value.length - 1
+    ) {
+        e.preventDefault() // prevent page scrolling
+        hoverOption.value = options.value.at(hoverOptionIndex.value + 1)
+    }
+
+    // press up -> go previous
+    if (e.key === 'ArrowUp' && hoverOptionIndex.value > 0) {
+        e.preventDefault() // prevent page scrolling
+        hoverOption.value = options.value.at(hoverOptionIndex.value - 1)
+    }
+
+    // press Enter -> select the option
+    if (e.key === 'Enter') {
+        if (hoverOption.value !== undefined) {
+            e.preventDefault()
+            if (hoverOption.value.link) {
+                navigateTo(hoverOption.value.link)
+            } else {
+                onSelect(hoverOption.value)
+            }
+        }
+    }
+
+    // press ESC or Tab -> close selectCustom
+    if (['Escape'].includes(e.key)) {
+        close()
+    }
 }
 </script>
 

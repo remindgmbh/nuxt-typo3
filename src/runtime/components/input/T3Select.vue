@@ -1,80 +1,61 @@
 <template>
-    <div class="t3-select">
+    <div class="t3-select" :class="{ 't3-select--open': isOpen }">
         <select
             :id="name"
-            ref="nativeSelect"
+            ref="selectEl"
             v-model="value"
+            :aria-controls="listboxId"
             :aria-errormessage="ariaErrormessage"
             :aria-invalid="ariaInvalid"
-            :aria-labelledby="name"
-            class="t3-select__native"
+            class="t3-select__trigger"
             :disabled="disabled"
             :name="name"
             :required="required"
-            @blur="handleBlur"
+            @blur="onBlur"
+            @keydown="onKeydown"
+            @mousedown="onMousedown"
         >
             <option
                 v-for="option in options"
                 :key="option.value"
                 :value="option.value"
             >
-                <slot name="option" :option="option">
-                    {{ option.label }}
-                </slot>
+                {{ option.label }}
             </option>
         </select>
-
-        <div
-            ref="customSelect"
-            aria-hidden="true"
-            class="t3-select__custom"
-            :class="{ 't3-select__custom--active': isOpen }"
-            @click="toggle"
-        >
+        <T3CollapseTransition transition-name="options-transition">
             <div
-                class="t3-select__trigger"
-                :class="{ 't3-select__trigger--active': isOpen }"
+                v-show="isOpen"
+                ref="optionsWrapperEl"
+                class="t3-select__options-wrapper"
+                tabindex="-1"
             >
-                <slot
-                    :active="isOpen"
-                    name="trigger"
-                    :selected-option="selectedOption"
-                >
-                    {{ selectedOption?.label }}
-                </slot>
+                <ul :id="listboxId" class="t3-select__options" role="listbox">
+                    <li
+                        v-for="option in options"
+                        :key="option.value"
+                        class="t3-select__option"
+                        :class="{
+                            't3-select__option--selected':
+                                option.value === value,
+                        }"
+                        role="option"
+                        @click="select(option.value)"
+                    >
+                        <slot name="option" :option="option">
+                            {{ option.label }}
+                        </slot>
+                    </li>
+                </ul>
             </div>
-            <T3CollapseTransition transition-name="options-transition">
-                <div v-show="isOpen" class="t3-select__options-wrapper">
-                    <div class="t3-select__options">
-                        <div
-                            v-for="option in options"
-                            :key="option.value"
-                            class="t3-select__option"
-                            :class="{
-                                't3-select__option--selected':
-                                    option.value === value,
-                                't3-select__option--hover':
-                                    option.value === hoverOption?.value,
-                            }"
-                            @click="handleBlurAndSetValue(option.value)"
-                            @mouseleave="hoverOption = undefined"
-                            @mouseover="hoverOption = option"
-                        >
-                            <slot name="option" :option="option">
-                                {{ option.label }}
-                            </slot>
-                        </div>
-                    </div>
-                </div>
-            </T3CollapseTransition>
-        </div>
+        </T3CollapseTransition>
     </div>
 </template>
 
 <script setup lang="ts">
 import { type RuleExpression, useField } from 'vee-validate'
-import { type T3Model, useT3SelectInput } from '#imports'
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
+import { type T3Model } from '#imports'
 
 const props = defineProps<{
     ariaInvalid?: boolean
@@ -87,21 +68,13 @@ const props = defineProps<{
     required?: boolean
 }>()
 
-const emit = defineEmits<{
-    change: [option?: T3Model.Input.Select.Option]
-}>()
+const selectEl = ref<HTMLSelectElement>()
+const optionsWrapperEl = ref<HTMLDivElement>()
 
-onMounted(() => {
-    nativeSelect.value?.addEventListener('keydown', openCustomSelect)
-})
+const isOpen = ref(false)
+const canHover = computed(() => window?.matchMedia('(hover: hover)').matches)
+const listboxId = computed(() => `${props.name}-listbox`)
 
-onUnmounted(() => {
-    document.removeEventListener('keydown', supportKeyboardNavigation)
-    document.removeEventListener('click', closeOnOutsideClick)
-    nativeSelect.value?.removeEventListener('keydown', openCustomSelect)
-})
-
-// computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
 const { value, handleBlur, setValue } = useField<string>(
     () => props.name,
     props.validation,
@@ -114,119 +87,97 @@ const { value, handleBlur, setValue } = useField<string>(
     },
 )
 
-const customSelect = ref<HTMLDivElement>()
-const nativeSelect = ref<HTMLSelectElement>()
-const isOpen = ref(false)
-
-function handleBlurAndSetValue(value: string) {
-    handleBlur()
-    setValue(value)
+function onKeydown(e: KeyboardEvent) {
+    switch (e.code) {
+        case 'Space':
+            handleEvent(e, () => {
+                if (!isOpen.value) {
+                    open()
+                }
+            })
+            break
+        case 'Escape':
+        case 'Enter':
+            handleEvent(e, () => {
+                if (isOpen.value) {
+                    close()
+                }
+            })
+            break
+        default:
+            break
+    }
 }
 
-function select(hoverOption: T3Model.Input.Select.Option) {
-    handleBlurAndSetValue(hoverOption.value)
+function onMousedown(e: MouseEvent) {
+    handleEvent(e, isOpen.value ? close : open)
+}
+
+function handleEvent(e: Event, callback: () => void) {
+    if (canHover.value) {
+        e.preventDefault()
+        callback()
+    }
+}
+
+function select(value: string) {
+    setValue(value)
     close()
 }
 
-const { hoverOption, supportKeyboardNavigation } = useT3SelectInput(
-    select,
-    props.options,
-)
-
-const selectedOption = computed(() =>
-    props.options.find((option) => option.value === value.value),
-)
-
-const canHover = computed(() => window.matchMedia('(hover: hover)').matches)
-
-function toggle() {
-    isOpen.value ? close() : open()
-}
-
-function open() {
-    if (props.disabled) {
-        return
-    }
-    isOpen.value = true
-    nativeSelect.value?.removeEventListener('keydown', openCustomSelect)
-    document.addEventListener('keydown', supportKeyboardNavigation)
-    document.addEventListener('click', closeOnOutsideClick)
-}
-
-function close() {
-    isOpen.value = false
-    document.removeEventListener('keydown', supportKeyboardNavigation)
-    document.removeEventListener('click', closeOnOutsideClick)
-    nativeSelect.value?.addEventListener('keydown', openCustomSelect)
-}
-
-function openCustomSelect(e: KeyboardEvent) {
-    if (canHover.value && e.key === ' ') {
-        e.preventDefault()
-        e.stopImmediatePropagation()
-        open()
-    }
-}
-
-function closeOnOutsideClick(e: MouseEvent) {
-    if (
-        customSelect.value &&
-        e.target instanceof Node &&
-        !customSelect.value.contains(e.target)
-    ) {
+function onBlur(e: FocusEvent) {
+    handleBlur(e)
+    if (e.relatedTarget !== optionsWrapperEl.value) {
         close()
     }
 }
 
-watch(value, () => emit('change', selectedOption.value))
+function open() {
+    isOpen.value = true
+    selectEl.value?.focus()
+}
+
+function close() {
+    isOpen.value = false
+}
 </script>
 
 <style lang="scss">
 .t3-select {
     position: relative;
 
-    &__native {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-
-    &__custom {
-        position: relative;
-        pointer-events: none;
-
-        @media (hover: hover) {
-            pointer-events: auto;
-        }
-
-        // set transition for opening options
-        // .options-transition {
-        //     &-enter-active,
-        //     &-leave-active {
-        //         transition: height ...;
-        //     }
-        // }
-    }
-
     &__trigger {
         position: relative;
-        box-sizing: border-box;
-        cursor: pointer;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        appearance: none;
+        border: none;
+        background-color: transparent;
+        padding: 0;
+        font-family: inherit;
+        font-size: inherit;
+        font-style: inherit;
+        font-weight: inherit;
     }
 
     &__options-wrapper {
         position: absolute;
         top: 100%;
-        left: 0;
         width: 100%;
+        left: 0;
         z-index: 1;
         box-sizing: border-box;
     }
 
+    &__options {
+        margin: 0;
+        padding: 0;
+    }
+
     &__option {
         cursor: pointer;
+        list-style-type: none;
     }
 }
 </style>
