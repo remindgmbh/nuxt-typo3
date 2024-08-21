@@ -124,6 +124,9 @@ export default defineNuxtModule<ModuleOptions>({
         addPlugin({
             src: resolver.resolve('runtime/plugins/i18n'),
         })
+        addPlugin({
+            src: resolver.resolve('runtime/plugins/htmlSsrDirective'),
+        })
         addRouteMiddleware({
             global: true,
             name: 't3-data',

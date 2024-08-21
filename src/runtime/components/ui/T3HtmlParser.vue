@@ -1,13 +1,14 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
     <T3TableWrapper>
-        <div
+        <component
+            :is="tag"
             v-if="content"
             ref="el"
+            v-html-ssr="content"
             class="t3-html"
             v-bind="$attrs"
-            v-html="content"
-        ></div>
+        />
     </T3TableWrapper>
 </template>
 
@@ -15,9 +16,13 @@
 import { useNuxtApp, useT3LinkReplacer, useT3TableEnhancer } from '#imports'
 import { ref } from 'vue'
 
-defineProps<{
-    content: string
-}>()
+withDefaults(
+    defineProps<{
+        content: string
+        tag?: keyof HTMLElementTagNameMap
+    }>(),
+    { tag: 'div' },
+)
 
 const el = ref<HTMLDivElement>()
 
