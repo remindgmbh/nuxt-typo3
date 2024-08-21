@@ -4,7 +4,6 @@
         :target="to?.target"
         :title="to?.title"
         :to="to?.href"
-        v-bind="$attrs"
     >
         <slot>{{ to?.linkText }}</slot>
     </NuxtLink>
