@@ -2,40 +2,50 @@
     <div class="t3-breadcrumbs">
         <div class="t3-breadcrumbs__container" :class="{ container }">
             <div
-                class="t3-breadcrumbs__overlay-left"
-                :class="{ 't3-breadcrumbs__overlay-left--visible': !left }"
+                class="t3-breadcrumbs__overlay t3-breadcrumbs__overlay--left"
+                :class="{ 't3-breadcrumbs__overlay--visible': !left }"
             ></div>
             <div
-                class="t3-breadcrumbs__overlay-right"
+                class="t3-breadcrumbs__overlay t3-breadcrumbs__overlay--right"
                 :class="{
-                    't3-breadcrumbs__overlay-right--visible': !right,
+                    't3-breadcrumbs__overlay--visible': !right,
                 }"
             ></div>
-            <div ref="viewport" class="t3-breadcrumbs__viewport">
-                <div ref="content" class="t3-breadcrumbs__content">
+            <nav
+                ref="viewport"
+                :aria-label="ariaLabel"
+                class="t3-breadcrumbs__viewport"
+            >
+                <ol ref="content" class="t3-breadcrumbs__content">
                     <template
                         v-for="breadcrumb in breadcrumbs"
                         :key="breadcrumb.link"
                     >
-                        <span
-                            v-if="breadcrumb.current"
-                            class="t3-breadcrumbs__link t3-breadcrumbs__link--disabled"
-                            >{{ breadcrumb.title }}</span
-                        >
-                        <NuxtLink
-                            v-else
-                            class="t3-breadcrumbs__link"
-                            :target="breadcrumb.target"
-                            :to="breadcrumb.link"
-                            >{{ breadcrumb.title }}</NuxtLink
-                        >
-                        <span
-                            v-if="!breadcrumb.current"
-                            class="t3-breadcrumbs__divider"
-                        ></span>
+                        <li class="t3-breadcrumbs__item">
+                            <T3Link
+                                :aria-current="
+                                    breadcrumb.current ? 'page' : undefined
+                                "
+                                class="t3-breadcrumbs__link"
+                                :class="{
+                                    't3-breadcrumbs__link--disabled':
+                                        breadcrumb.current,
+                                }"
+                                :disabled="!!breadcrumb.current"
+                                :target="breadcrumb.target"
+                                :to="breadcrumb.link"
+                            >
+                                {{ breadcrumb.title }}
+                            </T3Link>
+                            <span
+                                v-if="!breadcrumb.current"
+                                aria-hidden
+                                class="t3-breadcrumbs__divider"
+                            ></span>
+                        </li>
                     </template>
-                </div>
-            </div>
+                </ol>
+            </nav>
         </div>
     </div>
 </template>
@@ -45,6 +55,7 @@ import { type T3Model, useT3Config, useT3Theme, useT3Util } from '#imports'
 import { computed, onMounted, ref } from 'vue'
 
 const props = defineProps<{
+    ariaLabel?: string
     pageData: T3Model.Typo3.Page.Data
 }>()
 
@@ -52,8 +63,8 @@ const config = useT3Config()
 const { backgroundColors } = useT3Theme()
 const { detectScrollEnd } = useT3Util()
 
-const viewport = ref<HTMLDivElement>()
-const content = ref<HTMLDivElement>()
+const viewport = ref<HTMLElement>()
+const content = ref<HTMLUListElement>()
 const left = ref(true)
 const right = ref(true)
 
@@ -109,6 +120,11 @@ onMounted(() => {
 .t3-breadcrumbs {
     background-color: v-bind(backgroundColor);
 
+    &__container {
+        position: relative;
+        box-sizing: border-box;
+    }
+
     &__viewport {
         overflow-x: auto;
         position: relative;
@@ -116,10 +132,12 @@ onMounted(() => {
 
     &__content {
         width: fit-content;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
     }
 
-    &__overlay-left,
-    &__overlay-right {
+    &__overlay {
         content: '';
         top: 0;
         position: absolute;
@@ -127,14 +145,24 @@ onMounted(() => {
         height: 100%;
         z-index: 1;
         pointer-events: none;
-    }
 
-    &__overlay-left {
-        left: 0;
-    }
+        &--left {
+            left: 0;
+            background: linear-gradient(
+                to left,
+                rgb(255 255 255 / 0%) 0%,
+                v-bind(backgroundColor) 100%
+            );
+        }
 
-    &__overlay-right {
-        right: 0;
+        &--right {
+            right: 0;
+            background: linear-gradient(
+                to right,
+                rgb(255 255 255 / 0%) 0%,
+                v-bind(backgroundColor) 100%
+            );
+        }
     }
 }
 </style>

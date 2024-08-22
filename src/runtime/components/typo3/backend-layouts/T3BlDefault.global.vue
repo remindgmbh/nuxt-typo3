@@ -3,9 +3,9 @@
         <div class="t3-bl-default__before-breadcrumbs">
             <T3Col :content-elements="pageData.content.colPos1687238554" />
         </div>
-        <nav v-if="breadcrumbsVisible" class="t3-bl-default__breadcrumbs">
+        <div v-if="breadcrumbsVisible" class="t3-bl-default__breadcrumbs">
             <T3Breadcrumbs :page-data="pageData" />
-        </nav>
+        </div>
         <div class="t3-bl-default__main">
             <T3Col :content-elements="pageData.content.colPos0" />
         </div>
