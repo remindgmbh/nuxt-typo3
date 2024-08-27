@@ -18,9 +18,6 @@ export interface CeOptions {
     // full ignores container completely
     width?:
         | 'default'
-        | 'extended'
         | 'full'
-        | ((
-              contentElement: Typo3.Content.Element<any>,
-          ) => 'default' | 'extended' | 'full')
+        | ((contentElement: Typo3.Content.Element<any>) => 'default' | 'full')
 }

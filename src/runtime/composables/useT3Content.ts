@@ -35,7 +35,6 @@ export function useT3Content() {
 
     const containerClasses = computed(() => ({
         container: width.value !== 'full',
-        'container--extended': width.value === 'extended',
         [`container--${maxWidth.value}`]:
             !!maxWidth.value && width.value !== 'full',
     }))
@@ -73,7 +72,7 @@ export function useT3Content() {
             config.spacing[contentElement.value.appearance.spaceAfterInside],
     )
 
-    const width = computed<'default' | 'extended' | 'full'>(() =>
+    const width = computed<'default' | 'full'>(() =>
         ceOptions.value?.width instanceof Function
             ? ceOptions.value?.width(contentElement.value)
             : (ceOptions.value?.width ?? 'default'),
