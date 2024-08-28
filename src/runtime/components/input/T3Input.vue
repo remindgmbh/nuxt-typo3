@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
+export interface Props {
     modelValue: any
     name: string
     type:
@@ -23,9 +23,13 @@ defineProps<{
         | 'time'
         | 'tel'
         | 'textarea'
-}>()
+}
 
-const emit = defineEmits<{
-    'update:modelValue': [value?: any]
-}>()
+export interface Emits {
+    (e: 'update:modelValue', value: any): void
+}
+
+defineProps<Props>()
+
+const emit = defineEmits<Emits>()
 </script>
