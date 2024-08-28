@@ -9,4 +9,5 @@ export interface Base {
     description?: string
     lazyLoading: boolean
     link?: TypoLink
+    uidLocal?: number
 }

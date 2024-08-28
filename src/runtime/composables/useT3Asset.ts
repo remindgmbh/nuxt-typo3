@@ -11,7 +11,13 @@ export function useT3Asset(asset: Ref<T3Model.Typo3.Asset.Base>) {
         breakpoint?: string,
     ) {
         const url = new URL('asset', config.api.baseUrl)
-        url.searchParams.append('uid', asset.value.fileReferenceUid.toString())
+
+        // uidLocal may be null while fileReferenceUid contains the actual file uid
+        // see: https://github.com/TYPO3-Headless/headless/pull/761
+        url.searchParams.append(
+            asset.value.uidLocal ? 'uid' : 'uidLocal',
+            asset.value.fileReferenceUid.toString(),
+        )
 
         if (asset.value.type === 'image') {
             url.searchParams.append(
