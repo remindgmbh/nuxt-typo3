@@ -16,8 +16,22 @@
 
 @mixin loop {
     @each $name, $screen-width in variables.$screen-widths {
-        @include up($name) {
-            @content ($name);
+        @content ($name);
+    }
+}
+
+@mixin loop-up {
+    @include loop using ($breakpoint) {
+        @include up($breakpoint) {
+            @content ($breakpoint);
+        }
+    }
+}
+
+@mixin loop-down {
+    @include loop using ($breakpoint) {
+        @include down($breakpoint) {
+            @content ($breakpoint);
         }
     }
 }

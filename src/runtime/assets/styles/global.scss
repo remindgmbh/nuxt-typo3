@@ -1,18 +1,12 @@
 @use 'sass:map';
 @use 'breakpoints';
+@use 'container';
 @use 'variables';
 
 .container {
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
+    @include container.base;
 
-    @include breakpoints.loop using ($breakpoint) {
-        max-width: map.get(variables.$container-widths, $breakpoint);
-    }
-
-    // two loops are required so values are overridden
-    @include breakpoints.loop using ($breakpoint) {
+    @include breakpoints.loop-up using ($breakpoint) {
         &--#{$breakpoint} {
             max-width: map.get(variables.$container-widths, $breakpoint);
         }

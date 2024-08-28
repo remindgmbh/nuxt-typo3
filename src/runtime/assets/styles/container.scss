@@ -4,11 +4,22 @@
 @use 'variables';
 
 @mixin padding-x {
-    @include breakpoints.loop using ($breakpoint) {
+    @include breakpoints.loop-up using ($breakpoint) {
         $padding: map.get(variables.$container-padding-x, $breakpoint);
 
         @if $padding {
             @include util.padding-x($padding);
         }
+    }
+}
+
+@mixin base {
+    box-sizing: border-box;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+
+    @include breakpoints.loop-up using ($breakpoint) {
+        max-width: map.get(variables.$container-widths, $breakpoint);
     }
 }
