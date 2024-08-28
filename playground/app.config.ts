@@ -22,7 +22,6 @@ export default defineAppConfig({
             header: {
                 maxWidth: (contentElement) =>
                     !contentElement.appearance.backgroundColor ? 'lg' : 'md',
-                width: 'extended',
             },
             text: {
                 maxWidth: 'md',
@@ -30,7 +29,6 @@ export default defineAppConfig({
             textmedia: {
                 ignoreCookies: true,
                 maxWidth: 'lg',
-                padding: false,
             },
         },
         i18n: {
