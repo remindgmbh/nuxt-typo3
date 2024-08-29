@@ -1,69 +1,56 @@
 <template>
-    <component
-        :is="tag"
-        class="t3-modal"
-        :class="{
-            't3-modal--visible': visible || transitioning,
-            't3-modal--transitioning': transitioning,
-        }"
-    >
-        <Transition
-            :name="backgroundTransitionName"
-            @after-enter="setBackgroundTransitioning(false)"
-            @after-leave="setBackgroundTransitioning(false)"
-            @before-enter="setBackgroundTransitioning(true)"
-            @before-leave="setBackgroundTransitioning(true)"
-            @enter-cancelled="setBackgroundTransitioning(false)"
-            @leave-cancelled="setBackgroundTransitioning(false)"
-        >
-            <div
-                v-if="visible"
-                class="t3-modal__background"
-                data-testid="background"
-                @click="onBackgroundClick"
-            ></div>
-        </Transition>
-        <Transition
-            :name="contentTransitionName"
-            @after-enter="setContentTransitioning(false)"
-            @after-leave="setContentTransitioning(false)"
-            @before-enter="setContentTransitioning(true)"
-            @before-leave="setContentTransitioning(true)"
-            @enter-cancelled="setContentTransitioning(false)"
-            @leave-cancelled="setContentTransitioning(false)"
-        >
-            <slot v-if="visible"></slot>
-        </Transition>
-    </component>
+    <Teleport to="body">
+        <!-- css v-bind not working without extra wrapper around transition, see: https://github.com/vuejs/core/issues/7312 -->
+        <div v-bind="$attrs">
+            <Transition :name="transitionName">
+                <div
+                    v-if="modelValue"
+                    ref="modalRef"
+                    class="t3-modal"
+                    @click="onOutsideClick"
+                >
+                    <slot></slot>
+                </div>
+            </Transition>
+        </div>
+    </Teleport>
 </template>
 
 <script setup lang="ts">
+import { type FocusTrap, createFocusTrap } from 'focus-trap'
 import { computed, ref, watch } from 'vue'
-import { useT3LayoutInjection } from '#imports'
+import { nextTick, useT3LayoutInjection } from '#imports'
 
-const props = withDefaults(
-    defineProps<{
-        backgroundTransitionName?: string
-        contentTransitionName?: string
-        closeOnOutsideClick?: boolean
-        modelValue: boolean
-        tag?: keyof HTMLElementTagNameMap
-    }>(),
-    {
-        backgroundTransitionName: 'modal-background-transition',
-        closeOnOutsideClick: false,
-        contentTransitionName: 'modal-content-transition',
-        tag: 'div',
-    },
-)
+export interface Props {
+    backgroundColor?: string
+    closeOnOutsideClick?: boolean
+    modelValue: boolean
+    transitionName?: string
+}
 
-const emit = defineEmits<{
-    'update:modelValue': [value: boolean]
-}>()
+export interface Emits {
+    (e: 'update:modelValue', value: boolean): void
+}
+
+const props = withDefaults(defineProps<Props>(), {
+    backgroundColor: undefined,
+    closeOnOutsideClick: false,
+    transitionName: 'modal-transition',
+})
+
+const emit = defineEmits<Emits>()
+
+defineOptions({
+    inheritAttrs: false,
+})
 
 const { injectOptionalScrollbarDisabled } = useT3LayoutInjection()
 
 const scrollbarDisabled = injectOptionalScrollbarDisabled()
+
+const modalRef = ref<HTMLDivElement>()
+
+const focusTrap = ref<FocusTrap>()
 
 const visible = computed({
     get() {
@@ -74,61 +61,40 @@ const visible = computed({
     },
 })
 
-watch(visible, (value) => {
-    if (scrollbarDisabled) scrollbarDisabled.value = value
-})
-
-const backgroundTransitioning = ref(false)
-const contentTransitioning = ref(false)
-
-const transitioning = computed(
-    () => backgroundTransitioning.value || contentTransitioning.value,
-)
-
-function setBackgroundTransitioning(value: boolean) {
-    backgroundTransitioning.value = value
-}
-
-function setContentTransitioning(value: boolean) {
-    contentTransitioning.value = value
-}
-
-function onBackgroundClick() {
-    if (props.closeOnOutsideClick) {
+function onOutsideClick(e: MouseEvent) {
+    if (props.closeOnOutsideClick && e.target === modalRef.value) {
         visible.value = false
     }
 }
+
+watch(visible, (value) => {
+    if (scrollbarDisabled) {
+        scrollbarDisabled.value = value
+    }
+    if (value) {
+        nextTick(() => {
+            if (modalRef.value) {
+                focusTrap.value = createFocusTrap(modalRef.value, {
+                    initialFocus: false,
+                })
+                focusTrap.value.activate()
+            }
+        })
+    } else {
+        focusTrap.value?.deactivate()
+    }
+})
 </script>
 
 <style lang="scss">
 .t3-modal {
+    position: fixed;
+    z-index: 30;
     top: 0;
     left: 0;
-    position: fixed;
-    width: 0;
-    height: 0;
-    overflow: hidden;
-    display: flex;
-    z-index: 30;
-
-    &--visible {
-        height: 100%;
-        width: 100%;
-    }
-
-    &--transitioning {
-        overflow: hidden;
-    }
-
-    &__background {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        z-index: -1;
-
-        // Set background color
-    }
+    width: 100%;
+    height: 100%;
+    background-color: v-bind(backgroundColor);
+    overflow: auto;
 }
 </style>
