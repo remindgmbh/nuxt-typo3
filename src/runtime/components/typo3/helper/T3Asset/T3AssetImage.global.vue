@@ -47,6 +47,19 @@ const sources = computed(() => {
             let width: number | undefined
             if (props.sizes) {
                 width = props.sizes?.[breakpoint]
+
+                // if no width for breakpoint is defined try smaller breakpoints
+                if (!width) {
+                    const smallerBreakpoints = breakpointsDesc.value.slice(
+                        i + 1,
+                    )
+                    for (let j = 0; j < smallerBreakpoints.length; j++) {
+                        width = props.sizes?.[smallerBreakpoints[j]]
+                        if (width) {
+                            break
+                        }
+                    }
+                }
             }
 
             result.push({
