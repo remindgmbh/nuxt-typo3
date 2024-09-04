@@ -22,7 +22,7 @@
                     :for="formElement.name"
                 >
                     <slot :label="formElement.label" name="label">
-                        <T3HtmlParser :content="formElement.label" />
+                        <T3HtmlParser :content="formElement.label" tag="span" />
                         <span
                             v-if="required"
                             aria-hidden="true"
@@ -44,15 +44,16 @@
         </T3Sortable>
         <slot :error-message="errorMessage" name="error">
             <T3CollapseTransition transition-name="error-transition">
-                <div
-                    v-if="errorMessage"
+                <span
+                    v-show="errorMessage"
                     :id="errorMessageId"
                     class="t3-form-element__error"
                 >
-                    <slot :error-message="errorMessage" name="errorMessage">
-                        {{ errorMessage }}
+                    <!-- use lastErrorMessage because with v-show errorMessage is not available during transition leave  -->
+                    <slot :error-message="lastErrorMessage" name="errorMessage">
+                        {{ lastErrorMessage }}
                     </slot>
-                </div>
+                </span>
             </T3CollapseTransition>
         </slot>
     </component>
@@ -65,7 +66,7 @@ import {
     useT3DynamicComponent,
     useT3FormElement,
 } from '#imports'
-import { computed, inject, toValue } from 'vue'
+import { computed, inject, ref, toValue, watch } from 'vue'
 import { FormContextKey } from 'vee-validate'
 import { T3FormElementDefault } from '#components'
 import { kebabCase } from 'scule'
@@ -141,6 +142,14 @@ const valid = computed(() => state.value?.valid)
 const errorMessage = computed(
     () => form?.errors.value[toValue(() => props.formElement.name)],
 )
+
+const lastErrorMessage = ref<string>()
+
+watch(errorMessage, (value) => {
+    if (value) {
+        lastErrorMessage.value = value
+    }
+})
 </script>
 
 <style lang="scss">

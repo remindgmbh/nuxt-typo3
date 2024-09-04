@@ -13,7 +13,6 @@
             :disabled="disabled"
             :name="name"
             :required="required"
-            role="combobox"
             @blur="onBlur"
             @keydown="onKeydown"
             @mousedown="onMousedown"
