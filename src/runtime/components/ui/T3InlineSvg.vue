@@ -28,55 +28,62 @@ onMounted(async () => {
 })
 
 async function loadSvg() {
-    const blob = await api.get<Blob>(props.src, { baseURL: undefined })
-    const text = await blob.text()
-
-    const parser = new DOMParser()
-    const { documentElement } = parser.parseFromString(text, 'image/svg+xml')
-
-    for (const attribute of documentElement.attributes) {
-        if (attribute.name === 'id') {
-            continue
-        }
-        attributes.value[attribute.name] = attribute.value
-    }
-
-    const styleElements = documentElement.getElementsByTagName('style')
-
     try {
-        for (const styleElement of styleElements) {
-            const cssRules: string[] = []
-            const sheet = new CSSStyleSheet()
-            sheet.replaceSync(styleElement.innerHTML)
+        const blob = await api.get<Blob>(props.src, { baseURL: undefined })
+        const text = await blob.text()
 
-            for (const rule of sheet.cssRules) {
-                if (rule instanceof CSSStyleRule) {
-                    rule.selectorText = `#${id} ${rule.selectorText}`
-                }
-                cssRules.push(rule.cssText)
-            }
-
-            styleElement.innerHTML = cssRules.join(' ')
-        }
-    } catch {
-        logger.warn(
-            "Browser does not support 'CSSStyleSheet() constructor', skipping ID selector for SVG CSS rules",
+        const parser = new DOMParser()
+        const { documentElement } = parser.parseFromString(
+            text,
+            'image/svg+xml',
         )
-    }
 
-    if (props.title) {
-        const title = document.createElement('title')
-        title.textContent = props.title
-        documentElement.appendChild(title)
-    }
+        for (const attribute of documentElement.attributes) {
+            if (attribute.name === 'id') {
+                continue
+            }
+            attributes.value[attribute.name] = attribute.value
+        }
 
-    if (props.description) {
-        const desc = document.createElement('desc')
-        desc.textContent = props.description
-        documentElement.appendChild(desc)
-    }
+        const styleElements = documentElement.getElementsByTagName('style')
 
-    html.value = documentElement.innerHTML
+        try {
+            for (const styleElement of styleElements) {
+                const cssRules: string[] = []
+                const sheet = new CSSStyleSheet()
+                sheet.replaceSync(styleElement.innerHTML)
+
+                for (const rule of sheet.cssRules) {
+                    if (rule instanceof CSSStyleRule) {
+                        rule.selectorText = `#${id} ${rule.selectorText}`
+                    }
+                    cssRules.push(rule.cssText)
+                }
+
+                styleElement.innerHTML = cssRules.join(' ')
+            }
+        } catch {
+            logger.warn(
+                "Browser does not support 'CSSStyleSheet() constructor', skipping ID selector for SVG CSS rules",
+            )
+        }
+
+        if (props.title) {
+            const title = document.createElement('title')
+            title.textContent = props.title
+            documentElement.appendChild(title)
+        }
+
+        if (props.description) {
+            const desc = document.createElement('desc')
+            desc.textContent = props.description
+            documentElement.appendChild(desc)
+        }
+
+        html.value = documentElement.innerHTML
+    } catch (e) {
+        logger.error(e)
+    }
 }
 
 watch(() => props.src, loadSvg)
