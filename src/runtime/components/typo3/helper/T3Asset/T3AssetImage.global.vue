@@ -23,6 +23,7 @@ import { type T3Model, useT3Asset, useT3Breakpoints } from '#imports'
 import { computed, toRef } from 'vue'
 
 const props = defineProps<{
+    crop?: string
     file: T3Model.Typo3.Asset.Image
     fileExtension?: string
     maxHeight?: number
@@ -35,7 +36,13 @@ const { getAssetUrl } = useT3Asset(toRef(() => props.file))
 
 const src = computed(() =>
     props.file.fileReferenceUid
-        ? getAssetUrl(props.fileExtension, props.maxWidth, props.maxHeight)
+        ? getAssetUrl(
+              props.fileExtension,
+              props.maxWidth,
+              props.maxHeight,
+              undefined,
+              props.crop,
+          )
         : props.file.url,
 )
 
@@ -69,6 +76,7 @@ const sources = computed(() => {
                     width,
                     undefined,
                     breakpoint,
+                    props.crop,
                 ),
             })
         }

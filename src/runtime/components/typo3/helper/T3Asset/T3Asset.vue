@@ -11,6 +11,7 @@ import { T3AssetDefault } from '#components'
 import { toRef } from 'vue'
 
 const props = defineProps<{
+    crop?: string
     file: T3Model.Typo3.Asset.Base
     fileExtension?: string
     maxHeight?: number

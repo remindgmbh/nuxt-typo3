@@ -9,6 +9,7 @@ export function useT3Asset(asset: Ref<T3Model.Typo3.Asset.Base>) {
         maxWidth?: number,
         maxHeight?: number,
         breakpoint?: string,
+        crop?: string,
     ) {
         const url = new URL('asset', config.api.baseUrl)
 
@@ -36,6 +37,10 @@ export function useT3Asset(asset: Ref<T3Model.Typo3.Asset.Base>) {
 
         if (breakpoint) {
             url.searchParams.append('breakpoint', breakpoint)
+        }
+
+        if (crop) {
+            url.searchParams.append('crop', crop)
         }
 
         return url.toString()
