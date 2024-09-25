@@ -15,7 +15,7 @@
             >
                 <slot :index="index" :item="item" name="title"></slot>
             </button>
-            <T3CollapseTransition v-if="!disabledItems.includes(index)">
+            <T3CollapseTransition v-show="!disabledItems.includes(index)">
                 <section
                     v-show="activeItems.includes(index)"
                     class="t3-accordion__content-wrapper"

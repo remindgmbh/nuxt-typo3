@@ -20,12 +20,12 @@
         <T3AutoHeightContainer class="t3-tabs__contents">
             <Transition v-bind="transition">
                 <section
-                    v-if="activeItemIndex !== undefined"
+                    v-show="activeItemIndex !== undefined"
                     :key="activeItemIndex"
                     class="t3-tabs__content"
                 >
                     <slot
-                        :index="activeItemIndex"
+                        :index="activeItemIndex!"
                         :item="activeItem"
                         name="content"
                         :toggle="toggle"
