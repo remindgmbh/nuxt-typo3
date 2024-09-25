@@ -1,12 +1,12 @@
 import type { Breadcrumb, Content, Language } from '../index'
-import type { Meta } from './index'
+import type { MetaObject } from '@nuxt/schema'
 
 export interface Data {
     id: number
     type: string
     slug: string
     media: any[]
-    meta: Meta
+    seo: MetaObject
     categories: string
     breadcrumbs: Breadcrumb[]
     appearance: {
