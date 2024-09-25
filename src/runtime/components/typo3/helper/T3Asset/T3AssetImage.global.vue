@@ -31,6 +31,8 @@ const props = defineProps<{
     sizes?: { [breakpoint: string]: number }
 }>()
 
+const pixelDensities = [1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75, 3]
+
 const { breakpointsDesc, screenWidths } = useT3Breakpoints()
 const { getAssetUrl } = useT3Asset(toRef(() => props.file))
 
@@ -69,15 +71,22 @@ const sources = computed(() => {
                 }
             }
 
+            const srcset = pixelDensities
+                .map((pixelDensity) => {
+                    const url = getAssetUrl(
+                        props.fileExtension,
+                        width ? Math.ceil(width * pixelDensity) : undefined,
+                        undefined,
+                        breakpoint,
+                        props.crop,
+                    )
+                    return `${url} ${pixelDensity}x`
+                })
+                .join(', ')
+
             result.push({
                 media: `(min-width: ${screenWidths[breakpoint]})`,
-                srcset: getAssetUrl(
-                    props.fileExtension,
-                    width,
-                    undefined,
-                    breakpoint,
-                    props.crop,
-                ),
+                srcset,
             })
         }
     }
