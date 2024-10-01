@@ -13,19 +13,15 @@ const scrollbarDisabledInjectionKey = Symbol(
     't3-layout:scrollbarDisabled',
 ) as InjectionKey<Ref<boolean>>
 
-const headerHeightInjectionKey = Symbol(
-    't3-layout:headerHeight',
-) as InjectionKey<Ref<string>>
+const detachedInjectionKey = Symbol('t3-layout:detached') as InjectionKey<
+    Ref<boolean>
+>
 
 export function useT3LayoutInjection() {
     const { injectStrict } = useT3Injection()
 
-    function injectHeaderHeight(): Ref<string> {
-        return injectStrict(headerHeightInjectionKey)
-    }
-
-    function injectOptionalHeaderHeight() {
-        return inject(headerHeightInjectionKey)
+    function injectDetached(): Ref<boolean> {
+        return injectStrict(detachedInjectionKey)
     }
 
     function injectOptionalMenu() {
@@ -44,8 +40,8 @@ export function useT3LayoutInjection() {
         return injectStrict(scrollbarDisabledInjectionKey)
     }
 
-    function provideHeaderHeight(headerHeight: Ref<string>) {
-        provide(headerHeightInjectionKey, headerHeight)
+    function provideDetached(detached: Ref<boolean>) {
+        provide(detachedInjectionKey, detached)
     }
 
     function provideMenu(menu: Menu) {
@@ -57,13 +53,12 @@ export function useT3LayoutInjection() {
     }
 
     return {
-        injectHeaderHeight,
+        injectDetached,
         injectMenu,
-        injectOptionalHeaderHeight,
         injectOptionalMenu,
         injectOptionalScrollbarDisabled,
         injectScrollbarDisabled,
-        provideHeaderHeight,
+        provideDetached,
         provideMenu,
         provideScrollbarDisabled,
     }

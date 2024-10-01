@@ -1,5 +1,9 @@
 <template>
-    <div class="t3-layout" @click="closeOnOutsideClick">
+    <div
+        class="t3-layout"
+        :class="{ 't3-layout--detached': detached }"
+        @click="closeOnOutsideClick"
+    >
         <header class="t3-layout__header" :class="headerClass">
             <slot name="header"></slot>
         </header>
@@ -48,25 +52,22 @@ import { useRoute, useT3LayoutInjection, useT3Util } from '#imports'
 
 const props = withDefaults(
     defineProps<{
-        closeOnRouteChange?: boolean
         contentClass?: string
         footerClass?: string
         headerClass?: string
-        headerHeightDefault: string
-        headerHeightDense?: string
         menuClass?: string
         menuCloseOnOutsideClick?: boolean
+        menuCloseOnRouteChange?: boolean
         menuFullHeight?: boolean
         menuOverlapHeader?: boolean
         menuTransition?: TransitionProps
     }>(),
     {
-        closeOnRouteChange: true,
         contentClass: undefined,
         footerClass: undefined,
         headerClass: undefined,
-        headerHeightDense: undefined,
         menuClass: undefined,
+        menuCloseOnRouteChange: true,
         menuTransition: () => ({
             name: 'menu-transition',
         }),
@@ -79,32 +80,28 @@ enum MenuStatus {
 }
 
 const { detectScrollEnd } = useT3Util()
-const { provideHeaderHeight, provideMenu, provideScrollbarDisabled } =
+const { provideMenu, provideScrollbarDisabled, provideDetached } =
     useT3LayoutInjection()
 
 const menuEl = ref<HTMLElement>()
 const scrollbarDisabled = ref(false)
-const headerHeight = ref(props.headerHeightDefault)
+const detached = ref(false)
 const menuStatus = ref(MenuStatus.Entering)
 const menuActive = ref<string | undefined>(undefined)
 
 const isTrigger = ref(false)
 
-provideHeaderHeight(headerHeight)
 provideScrollbarDisabled(scrollbarDisabled)
 provideMenu({
     active: readonly(menuActive),
     close,
     toggle,
 })
+provideDetached(detached)
 
 onMounted(() => {
-    detectScrollEnd(document.body, 'top', (detached) => {
-        if (props.headerHeightDense) {
-            headerHeight.value = detached
-                ? props.headerHeightDense
-                : props.headerHeightDefault
-        }
+    detectScrollEnd(document.body, 'top', (_detached) => {
+        detached.value = _detached
     })
 })
 
@@ -173,26 +170,40 @@ watch(scrollbarDisabled, (value) => {
     document.documentElement.style.overflowY = value ? 'hidden' : 'initial'
 })
 
-if (props.closeOnRouteChange) {
+if (props.menuCloseOnRouteChange) {
     watch(() => useRoute().fullPath, close)
 }
 </script>
 
 <style lang="scss">
+@use 'sass:map';
 @use '#nuxt-typo3/assets/styles/breakpoints' as breakpoints;
 @use '#nuxt-typo3/assets/styles/variables' as variables;
 
 .t3-layout {
-    --header-height: v-bind('headerHeightDense ?? headerHeight');
+    // two loops are required so dense values always have priority
+    @include breakpoints.loop-up using ($breakpoint) {
+        $height: map.get(variables.$layout-header-default, $breakpoint);
+
+        @if $height {
+            --header-height: #{$height};
+        }
+    }
+
+    @include breakpoints.loop-up using ($breakpoint) {
+        $height: map.get(variables.$layout-header-dense, $breakpoint);
+
+        @if $height {
+            &--detached {
+                --header-height: #{$height};
+            }
+        }
+    }
 
     display: flex;
     flex-direction: column;
     position: relative;
     min-height: 100vh;
-
-    @include breakpoints.up(variables.$layout-header-dense-breakpoint) {
-        --header-height: v-bind(headerHeight);
-    }
 
     &__header {
         position: fixed;
