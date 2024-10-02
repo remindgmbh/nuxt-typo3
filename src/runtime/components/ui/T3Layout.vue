@@ -4,7 +4,7 @@
         :class="{ 't3-layout--detached': detached }"
         @click="closeOnOutsideClick"
     >
-        <header class="t3-layout__header" :class="headerClass">
+        <header ref="headerRef" class="t3-layout__header" :class="headerClass">
             <slot name="header"></slot>
         </header>
         <main class="t3-layout__content" :class="contentClass">
@@ -21,7 +21,7 @@
         >
             <nav
                 v-if="menuActive"
-                ref="menuEl"
+                ref="menuRef"
                 class="t3-layout__menu"
                 :class="[
                     menuClass,
@@ -43,11 +43,13 @@ import {
     type TransitionProps,
     callWithAsyncErrorHandling,
     getCurrentInstance,
+    nextTick,
     onMounted,
     readonly,
     ref,
     watch,
 } from 'vue'
+import { type FocusTrap, createFocusTrap } from 'focus-trap'
 import { useRoute, useT3LayoutInjection, useT3Util } from '#imports'
 
 const props = withDefaults(
@@ -83,12 +85,13 @@ const { detectScrollEnd } = useT3Util()
 const { provideMenu, provideScrollbarDisabled, provideDetached } =
     useT3LayoutInjection()
 
-const menuEl = ref<HTMLElement>()
+const headerRef = ref<HTMLElement>()
+const menuRef = ref<HTMLElement>()
 const scrollbarDisabled = ref(false)
 const detached = ref(false)
 const menuStatus = ref(MenuStatus.Entering)
 const menuActive = ref<string | undefined>(undefined)
-
+const focusTrap = ref<FocusTrap>()
 const isTrigger = ref(false)
 
 provideScrollbarDisabled(scrollbarDisabled)
@@ -110,8 +113,8 @@ function closeOnOutsideClick(event: MouseEvent) {
         props.menuCloseOnOutsideClick &&
         !isTrigger.value &&
         menuActive.value &&
-        menuEl.value &&
-        !event.composedPath().includes(menuEl.value)
+        menuRef.value &&
+        !event.composedPath().includes(menuRef.value)
     ) {
         close()
     }
@@ -173,6 +176,26 @@ watch(scrollbarDisabled, (value) => {
 if (props.menuCloseOnRouteChange) {
     watch(() => useRoute().fullPath, close)
 }
+
+watch(menuActive, (value) => {
+    if (value) {
+        nextTick(() => {
+            if (headerRef.value && menuRef.value) {
+                focusTrap.value = createFocusTrap(
+                    props.menuOverlapHeader
+                        ? [menuRef.value]
+                        : [headerRef.value, menuRef.value],
+                    {
+                        initialFocus: false,
+                    },
+                )
+                focusTrap.value.activate()
+            }
+        })
+    } else {
+        focusTrap.value?.deactivate()
+    }
+})
 </script>
 
 <style lang="scss">
@@ -181,6 +204,11 @@ if (props.menuCloseOnRouteChange) {
 @use '#nuxt-typo3/assets/styles/variables' as variables;
 
 .t3-layout {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 100vh;
+
     // two loops are required so dense values always have priority
     @include breakpoints.loop-up using ($breakpoint) {
         $height: map.get(variables.$layout-header-default, $breakpoint);
@@ -199,11 +227,6 @@ if (props.menuCloseOnRouteChange) {
             }
         }
     }
-
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    min-height: 100vh;
 
     &__header {
         position: fixed;
