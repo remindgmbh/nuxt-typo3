@@ -1,7 +1,7 @@
 <template>
     <div ref="el" class="t3-autocomplete">
         <T3Input
-            v-model="value"
+            v-model="input"
             :aria-errormessage="ariaErrormessage"
             :aria-invalid="ariaInvalid"
             autocomplete="off"
@@ -55,6 +55,7 @@ onUnmounted(() => {
     document.removeEventListener('click', closeOnOutsideClick)
 })
 
+const input = ref('')
 const el = ref<HTMLDivElement>()
 const isOpen = ref(false)
 const hoverOption = ref<T3Model.Input.Autocomplete.Option>()
@@ -93,7 +94,8 @@ function onOptionsChanged(value: T3Model.Input.Autocomplete.OptionGroup[]) {
 watch(() => props.optionGroups, onOptionsChanged)
 
 function onInput() {
-    emit('input', value.value)
+    setValue(input.value)
+    emit('input', input.value)
 }
 
 function closeOnOutsideClick(e: MouseEvent) {
@@ -105,6 +107,7 @@ function closeOnOutsideClick(e: MouseEvent) {
 function onSelect(option: T3Model.Input.Autocomplete.Option) {
     handleBlur()
     setValue(option.key)
+    input.value = option.label
     close()
     emit('select', option)
 }
