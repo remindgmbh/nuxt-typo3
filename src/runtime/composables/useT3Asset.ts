@@ -20,7 +20,7 @@ export function useT3Asset(asset: Ref<T3Model.Typo3.Asset.Base>) {
             asset.value.fileReferenceUid.toString(),
         )
 
-        if (asset.value.type === 'image') {
+        if (asset.value.type === 'image' && asset.value.extension !== 'mixed') {
             url.searchParams.append(
                 'fileExtension',
                 fileExtension ?? config.imageFileExtension,
