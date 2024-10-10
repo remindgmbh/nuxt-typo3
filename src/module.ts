@@ -68,35 +68,39 @@ export default defineNuxtModule<ModuleOptions>({
 
         options = nuxt.options.runtimeConfig.public[CONFIG_KEY]
 
+        let viteConfig: ViteConfig = {
+            css: {
+                preprocessorOptions: {
+                    scss: {
+                        api: 'modern',
+                    },
+                },
+            },
+        }
+
         if (options.scssForwards) {
             const scssForwards =
                 typeof options.scssForwards === 'string'
                     ? [options.scssForwards]
                     : options.scssForwards
-            const cssOptions: CSSOptions = {
-                preprocessorOptions: {
-                    scss: {
-                        additionalData: `${scssForwards
-                            .map((value) => `@forward "${value}"`)
-                            .join(';')};`.concat(
-                            nuxt.options.vite.css?.preprocessorOptions?.scss
-                                .additionalData ?? '',
-                        ),
+
+            viteConfig = defu(
+                {
+                    css: {
+                        preprocessorOptions: {
+                            scss: {
+                                additionalData:
+                                    `${scssForwards.map((value) => `@forward "${value}"`).join(';')};`.concat(
+                                        nuxt.options.vite.css
+                                            ?.preprocessorOptions?.scss
+                                            .additionalData ?? '',
+                                    ),
+                            },
+                        },
                     },
                 },
-            }
-
-            nuxt.options.vite.css = defu(
-                cssOptions,
-                nuxt.options.vite.css ?? {},
+                viteConfig,
             )
-        }
-
-        const viteConfig: ViteConfig = {
-            // https://github.com/vitejs/vite/issues/9220
-            optimizeDeps: {
-                include: ['yup'],
-            },
         }
 
         nuxt.options.vite = defu(viteConfig, nuxt.options.vite)
