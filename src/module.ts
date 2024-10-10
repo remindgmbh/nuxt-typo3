@@ -103,7 +103,8 @@ export default defineNuxtModule<ModuleOptions>({
 
         nuxt.options.pages = true
 
-        nuxt.options.alias['#nuxt-typo3'] = resolver.resolve('runtime')
+        nuxt.options.alias['@remindgmbh/nuxt-typo3'] =
+            resolver.resolve('runtime')
 
         nuxt.options.css.unshift(
             resolver.resolve('runtime/assets/styles/global.scss'),

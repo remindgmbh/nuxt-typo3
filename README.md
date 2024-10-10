@@ -36,7 +36,7 @@ Available [App Config](https://nuxt.com/docs/guide/directory-structure/app-confi
 ## Customization
 
 To customize a components template, script and style just create a component with the same name to override the original.
-Import the original component explicitly from `#nuxt-typo3/components/...` and use it in the template to simply add additional script and styles.
+Import the original component explicitly from `@remindgmbh/nuxt-typo3/components/...` and use it in the template to simply add additional script and styles.
 
 
 **IMPORTANT**: Never use styles in assets for customizing components because they will be loaded regardless if the component is used on the current page or not.

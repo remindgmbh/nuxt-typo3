@@ -200,8 +200,8 @@ watch(menuActive, (value) => {
 
 <style lang="scss">
 @use 'sass:map';
-@use '#nuxt-typo3/assets/styles/breakpoints' as breakpoints;
-@use '#nuxt-typo3/assets/styles/variables' as variables;
+@use '@remindgmbh/nuxt-typo3/assets/styles/breakpoints';
+@use '@remindgmbh/nuxt-typo3/assets/styles/variables';
 
 .t3-layout {
     display: flex;
