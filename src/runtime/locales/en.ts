@@ -1,27 +1,20 @@
-import { type MessageContext } from '../plugins/i18n'
+import { type MessageContext } from 'vue-i18n'
 import { useT3Util } from '../composables/util/useT3Util'
 
 const { capitalize } = useT3Util()
 
 export default {
     cookie: {
-        accept: ({ linked, named }: MessageContext) => {
-            const categoryKey = named('category')
-            const categoryValue = linked(`cookie.category.${categoryKey}`)
-            return `Accept ${categoryValue} cookies`
-        },
+        accept: ({ linked, named }: MessageContext) =>
+            `Accept ${linked(`cookie.category.${named('category')}`)} cookies`,
         category: {
             marketing: 'marketing',
             necessary: 'necessary',
             preferences: 'preferences',
             statistics: 'statistics',
         },
-        message: ({ named, linked }: MessageContext) => {
-            const categoryKey = named('category')
-            const categoryValue = linked(`cookie.category.${categoryKey}`)
-            const capitalizedCategoryValue = capitalize(categoryValue)
-            return `${capitalizedCategoryValue} cookies have to be accepted to show this content.`
-        },
+        message: ({ named, linked }: MessageContext) =>
+            `${capitalize(linked(`cookie.category.${named('category')}`))} cookies have to be accepted to show this content.`,
     },
     form: {
         loading: 'Loading',

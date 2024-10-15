@@ -1,26 +1,12 @@
-import { defineNuxtPlugin, useT3Config } from '#imports'
-import { createI18n } from 'vue-i18n'
-import de from '../locales/de'
-import en from '../locales/en'
-
-export interface MessageContext {
-    named: (value: string) => string
-    linked: (value: string) => string
-}
-
-export const i18n = createI18n({
-    globalInjection: true,
-    legacy: false,
-    locale: 'de',
-    messages: {
-        de,
-        en,
-    },
-})
+import { defineNuxtPlugin, useT3Config, useT3I18n } from '#imports'
 
 export default defineNuxtPlugin((nuxt) => {
-    const config = useT3Config()
     const { vueApp } = nuxt
+
+    const config = useT3Config()
+
+    const i18n = useT3I18n()
+
     const { mergeLocaleMessage } = i18n.global
 
     if (config.i18n.messages) {

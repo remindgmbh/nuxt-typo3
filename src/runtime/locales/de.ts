@@ -1,23 +1,17 @@
-import { type MessageContext } from '../plugins/i18n'
+import { type MessageContext } from 'vue-i18n'
 
 export default {
     cookie: {
-        accept: ({ linked, named }: MessageContext) => {
-            const categoryKey = named('category')
-            const categoryValue = linked(`cookie.category.${categoryKey}`)
-            return `${categoryValue} Cookies zulassen`
-        },
+        accept: ({ linked, named }: MessageContext) =>
+            `${linked(`cookie.category.${named('category')}`)} Cookies zulassen`,
         category: {
             marketing: 'Marketing',
             necessary: 'Notwendige',
             preferences: 'Präferenzen',
             statistics: 'Statistik',
         },
-        message: ({ named, linked }: MessageContext) => {
-            const categoryKey = named('category')
-            const categoryValue = linked(`cookie.category.${categoryKey}`)
-            return `Damit dieser Inhalt angezeigt werden kann müssen ${categoryValue} Cookies zugelassen werden.`
-        },
+        message: ({ named, linked }: MessageContext) =>
+            `Damit dieser Inhalt angezeigt werden kann müssen ${linked(`cookie.category.${named('category')}`)} Cookies zugelassen werden.`,
     },
     form: {
         loading: 'Lädt',

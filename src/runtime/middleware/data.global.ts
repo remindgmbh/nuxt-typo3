@@ -2,14 +2,14 @@ import {
     type T3Model,
     defineNuxtRouteMiddleware,
     useT3Data,
+    useT3I18n,
     useT3LoadingState,
 } from '#imports'
-import { i18n } from '../plugins/i18n'
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
+    const i18n = useT3I18n()
     const loadingState = useT3LoadingState()
     const data = useT3Data()
-    const { locale } = i18n.global
 
     loadingState.value.type = from.path === to.path ? 'data' : 'page'
     loadingState.value.from = from
@@ -34,7 +34,8 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
             const language = languages.find((language) => language.active)
 
             if (language?.twoLetterIsoCode) {
-                locale.value = language.twoLetterIsoCode as any
+                // cast to any required because only 'de' and 'en' are allowed due to config in useT3I18n
+                i18n.global.locale.value = language.twoLetterIsoCode as any
             }
         }
     } finally {

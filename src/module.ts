@@ -10,7 +10,6 @@ import {
     installModule,
 } from '@nuxt/kit'
 import { name, version } from '../package.json'
-import type { CSSOptions } from 'vite'
 import type { ViteConfig } from '@nuxt/schema'
 import { defu } from 'defu'
 
