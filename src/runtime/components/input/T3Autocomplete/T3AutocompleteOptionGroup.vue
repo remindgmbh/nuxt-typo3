@@ -14,7 +14,7 @@
                 <T3AutocompleteOption
                     :hovered="hoverOption === option"
                     :option="option"
-                    :selected="value === option.key"
+                    :selected="value.key === option.key"
                     @click="() => emit('select', option)"
                     @mouseleave="() => emit('update:hoverOption', undefined)"
                     @mouseover="() => emit('update:hoverOption', option)"
@@ -29,7 +29,7 @@ import { type T3Model } from '#imports'
 
 defineProps<{
     optionGroup: T3Model.Input.Autocomplete.OptionGroup
-    value: string
+    value: T3Model.Input.Autocomplete.Option
     hoverOption?: T3Model.Input.Autocomplete.Option
 }>()
 

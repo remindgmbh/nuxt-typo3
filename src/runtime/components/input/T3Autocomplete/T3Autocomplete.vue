@@ -35,27 +35,38 @@ import { type RuleExpression, useField } from 'vee-validate'
 import { type T3Model, navigateTo } from '#imports'
 import { computed, onUnmounted, ref, watch } from 'vue'
 
-const props = defineProps<{
+export interface Props {
     ariaErrormessage?: string
     ariaInvalid?: boolean
     name: string
     optionGroups: T3Model.Input.Autocomplete.OptionGroup[]
-    defaultValue?: string
+    defaultValue?: T3Model.Input.Autocomplete.Option
     validation?: RuleExpression<any>
     placeholder?: string
     disabled?: boolean
-}>()
+}
 
-const emit = defineEmits<{
-    input: [value: string]
-    select: [value: T3Model.Input.Autocomplete.Option]
-}>()
+export interface Emits {
+    (e: 'input' | 'select', value: T3Model.Input.Autocomplete.Option): void
+}
+
+const props = defineProps<Props>()
+
+const emit = defineEmits<Emits>()
 
 onUnmounted(() => {
     document.removeEventListener('click', closeOnOutsideClick)
 })
 
-const input = ref('')
+const input = computed({
+    get() {
+        return value.value.label
+    },
+    set(value: string) {
+        setValue({ key: '', label: value })
+    },
+})
+
 const el = ref<HTMLDivElement>()
 const isOpen = ref(false)
 const hoverOption = ref<T3Model.Input.Autocomplete.Option>()
@@ -69,17 +80,18 @@ const options = computed(() =>
 )
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
-const { value, handleBlur, setValue } = useField<string>(
-    () => props.name,
-    props.validation,
-    {
-        initialValue: props.defaultValue,
-    },
-)
+const { value, handleBlur, setValue } =
+    useField<T3Model.Input.Autocomplete.Option>(
+        () => props.name,
+        props.validation,
+        {
+            initialValue: props.defaultValue,
+        },
+    )
 
 watch(
     () => props.defaultValue,
-    (value) => setValue(value ?? ''),
+    (value) => setValue(value ?? { key: '', label: '' }),
 )
 
 function onOptionsChanged(value: T3Model.Input.Autocomplete.OptionGroup[]) {
@@ -94,8 +106,7 @@ function onOptionsChanged(value: T3Model.Input.Autocomplete.OptionGroup[]) {
 watch(() => props.optionGroups, onOptionsChanged)
 
 function onInput() {
-    setValue(input.value)
-    emit('input', input.value)
+    emit('input', value.value)
 }
 
 function closeOnOutsideClick(e: MouseEvent) {
@@ -106,8 +117,7 @@ function closeOnOutsideClick(e: MouseEvent) {
 
 function onSelect(option: T3Model.Input.Autocomplete.Option) {
     handleBlur()
-    setValue(option.key)
-    input.value = option.label
+    setValue(option)
     close()
     emit('select', option)
 }
