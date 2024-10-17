@@ -35,7 +35,9 @@
                                 :target="breadcrumb.target"
                                 :to="breadcrumb.link"
                             >
-                                {{ breadcrumb.title }}
+                                <slot name="title" :title="breadcrumb.title">
+                                    {{ breadcrumb.title }}
+                                </slot>
                             </T3Link>
                             <span
                                 v-if="!breadcrumb.current"
