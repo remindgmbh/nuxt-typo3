@@ -14,14 +14,16 @@
                 </slot>
             </div>
             <div class="t3-header__main">
-                <slot name="main">
-                    <template v-if="!content.headerLink">{{
-                        content.header
-                    }}</template>
-                    <T3Link v-else :to="content.headerLink">
+                <template v-if="!content.headerLink">
+                    <slot name="main">
                         {{ content.header }}
-                    </T3Link>
-                </slot>
+                    </slot>
+                </template>
+                <T3Link v-else :to="content.headerLink">
+                    <slot name="main">
+                        {{ content.header }}
+                    </slot>
+                </T3Link>
             </div>
         </slot>
     </component>
