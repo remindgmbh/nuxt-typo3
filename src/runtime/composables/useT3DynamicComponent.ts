@@ -7,15 +7,12 @@ export function useT3DynamicComponent(
     staticNamePart: string,
     fallbackComponent: Component,
 ) {
-    const logger = useLogger()
-
-    const { componentPrefix } = useT3Config()
-
-    const instance = getCurrentInstance()
-
-    const componentNames = []
-
     if (dynamicNamePart) {
+        const logger = useLogger()
+        const { componentPrefix } = useT3Config()
+        const instance = getCurrentInstance()
+        const componentNames = []
+
         if (componentPrefix) {
             componentNames.push(
                 componentPrefix + staticNamePart + pascalCase(dynamicNamePart),
@@ -23,15 +20,15 @@ export function useT3DynamicComponent(
         }
 
         componentNames.push(`T3${staticNamePart}${pascalCase(dynamicNamePart)}`)
-    }
 
-    for (const componentName of componentNames) {
-        if (instance?.appContext.components[componentName]) {
-            return resolveComponent(componentName)
+        for (const componentName of componentNames) {
+            if (instance?.appContext.components[componentName]) {
+                return resolveComponent(componentName)
+            }
         }
-    }
 
-    logger.warn(`Failed to resolve component`, componentNames)
+        logger.warn(`Failed to resolve component`, componentNames)
+    }
 
     return fallbackComponent
 }
