@@ -5,9 +5,7 @@ import type { Typo3 } from '../index'
 export interface AppConfigInput {
     breadcrumbs?: {
         fullWidth?: boolean
-        currentTitle?:
-            | string
-            | ((pageData: Typo3.Page.Data) => string | undefined)
+        currentTitle?: string | ((pageData: Typo3.Page) => string | undefined)
     }
     // config for content elements, type key has to match CType
     contentElements?: {

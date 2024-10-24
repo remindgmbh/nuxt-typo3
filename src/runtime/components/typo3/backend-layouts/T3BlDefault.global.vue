@@ -18,7 +18,7 @@ import { type T3Model } from '#imports'
 import { computed } from 'vue'
 
 const props = defineProps<{
-    pageData: T3Model.Typo3.Page.Data
+    pageData: T3Model.Typo3.Page
 }>()
 
 const breadcrumbsVisible = computed(() => props.pageData.breadcrumbs.length > 1)

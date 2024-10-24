@@ -121,6 +121,11 @@ export default defineNuxtModule<ModuleOptions>({
             from: resolver.resolve('runtime/models'),
             name: '*',
         })
+        addImports({
+            as: 'T3Error',
+            from: resolver.resolve('runtime/error'),
+            name: '*',
+        })
         addComponentsDir({
             path: resolver.resolve('runtime/components'),
             pathPrefix: false,

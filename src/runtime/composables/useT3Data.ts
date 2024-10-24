@@ -1,6 +1,7 @@
 import { type Ref, computed } from 'vue'
 import {
-    T3Model,
+    T3Error,
+    type T3Model,
     useLogger,
     useRoute,
     useState,
@@ -28,10 +29,10 @@ export function useT3Data() {
     }> = useState('t3-initialData', () => ({}))
 
     const pageData: Ref<{
-        [path: string]: T3Model.Typo3.Page.Data | undefined
+        [path: string]: T3Model.Typo3.Page | undefined
     }> = useState('t3-pageData', () => ({}))
 
-    const pageError: Ref<T3Model.Typo3.Page.Error | undefined> =
+    const pageError: Ref<T3Error.PageError | undefined> =
         useState('t3-pageError')
 
     const currentPagePath = computed(() => useRoute().fullPath)
@@ -49,7 +50,7 @@ export function useT3Data() {
         },
     })
 
-    const currentPageData = computed<T3Model.Typo3.Page.Data | undefined>({
+    const currentPageData = computed<T3Model.Typo3.Page | undefined>({
         get() {
             return pageData.value[currentPagePath.value]
         },
@@ -78,15 +79,15 @@ export function useT3Data() {
 
     async function loadPageData(
         path: string,
-    ): Promise<T3Model.Typo3.Page.Data | undefined> {
-        pageError.value = {}
+    ): Promise<T3Model.Typo3.Page | undefined> {
+        pageError.value = undefined
         if (!pageData.value[path]) {
             try {
                 const result = await api.getPageData(path)
                 pageData.value[path] = result
                 return result
             } catch (error) {
-                if (error instanceof T3Model.Typo3.Page.Error) {
+                if (error instanceof T3Error.PageError) {
                     // assigning error directly leads to "Cannot stringify arbitrary non-POJOs PageError"
                     pageError.value = { ...error }
                 } else {

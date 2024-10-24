@@ -58,7 +58,7 @@ import { computed, onMounted, ref } from 'vue'
 
 const props = defineProps<{
     ariaLabel?: string
-    pageData: T3Model.Typo3.Page.Data
+    pageData: T3Model.Typo3.Page
 }>()
 
 const config = useT3Config()

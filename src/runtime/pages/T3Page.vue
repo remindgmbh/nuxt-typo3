@@ -1,10 +1,7 @@
 <template>
     <div class="t3-page">
         <component :is="BackendLayout" v-if="pageData" :page-data="pageData" />
-        <T3PageError
-            v-else
-            :error="pageError ?? { statusText: t('unexpectedError') }"
-        />
+        <T3PageError v-else-if="pageError" :error="pageError" />
     </div>
 </template>
 
@@ -19,9 +16,6 @@ import type { MetaObject } from '@nuxt/schema'
 import { T3BlDefault } from '#components'
 import { computed } from 'vue'
 import defu from 'defu'
-import { useI18n } from 'vue-i18n'
-
-const { t } = useI18n()
 
 const { currentPageData, pageError } = useT3Data()
 const { activeLanguage } = useT3Languages()

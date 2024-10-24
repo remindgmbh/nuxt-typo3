@@ -23,7 +23,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     try {
         const [initialData, pageData]: [
             T3Model.Typo3.InitialData?,
-            T3Model.Typo3.Page.Data?,
+            T3Model.Typo3.Page?,
             ...unknown[],
         ] = await Promise.all(promises)
 

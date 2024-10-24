@@ -19,7 +19,6 @@ export default {
         submit: 'Absenden',
         success: 'Erfolgreich',
     },
-    unexpectedError: 'unerwarteter Fehler',
     validation: {
         alphanumeric: '{label} darf nur alphabetische Zeichen enthalten.',
         count: {

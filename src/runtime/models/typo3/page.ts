@@ -1,7 +1,7 @@
-import type { Breadcrumb, Content, Language } from '../index'
+import type { Breadcrumb, Content, Language } from './index'
 import type { MetaObject } from '@nuxt/schema'
 
-export interface Data {
+export interface Page {
     id: number
     type: string
     slug: string

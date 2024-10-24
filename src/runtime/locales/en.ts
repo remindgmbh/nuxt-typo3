@@ -22,7 +22,6 @@ export default {
         submit: 'Submit',
         success: 'Success',
     },
-    unexpectedError: 'unexpected error',
     validation: {
         alphanumeric: '{label} may only contain alpha-numeric characters.',
         count: {

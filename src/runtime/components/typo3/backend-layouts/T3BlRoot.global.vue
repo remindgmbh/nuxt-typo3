@@ -8,6 +8,6 @@
 import { type T3Model } from '#imports'
 
 defineProps<{
-    pageData: T3Model.Typo3.Page.Data
+    pageData: T3Model.Typo3.Page
 }>()
 </script>

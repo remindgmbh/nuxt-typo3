@@ -1,5 +1,5 @@
-import { FetchError, type FetchOptions } from 'ofetch'
-import { T3Model, useRequestHeaders, useT3Config } from '#imports'
+import { T3Error, type T3Model, useRequestHeaders, useT3Config } from '#imports'
+import { type FetchOptions } from 'ofetch'
 import { type NitroFetchRequest } from 'nitropack'
 import { computed } from 'vue'
 
@@ -38,24 +38,23 @@ export function useT3Api() {
     async function getPageData(
         path: string,
         options: FetchOptions = {},
-    ): Promise<T3Model.Typo3.Page.Data> {
-        try {
-            return await get<T3Model.Typo3.Page.Data>(path, options)
-        } catch (error) {
-            if (error instanceof FetchError) {
-                const pageError = new T3Model.Typo3.Page.Error()
-                pageError.message = error.message
-                pageError.status = error.response?.status
-                pageError.statusText = error.response?.statusText
-                pageError.url = error.response?.url
-                if (typeof error.data !== 'string') {
-                    pageError.data = error.data
+    ): Promise<T3Model.Typo3.Page> {
+        return await get<T3Model.Typo3.Page>(path, {
+            ...options,
+            async onResponseError({ response }) {
+                const pageError = new T3Error.PageError()
+                pageError.status = response.status
+
+                if (typeof response._data !== 'string') {
+                    pageError.data = response._data
+                } else {
+                    pageError.html = response._data
                 }
+
                 throw pageError
-            } else {
-                throw error
-            }
-        }
+            },
+            retry: false,
+        })
     }
 
     async function get<T = unknown>(
