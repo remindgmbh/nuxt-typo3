@@ -4,6 +4,7 @@
             v-model="input"
             :aria-errormessage="ariaErrormessage"
             :aria-invalid="ariaInvalid"
+            :aria-label="ariaLabel"
             autocomplete="off"
             class="t3-autocomplete__input"
             :disabled="disabled"
@@ -38,6 +39,7 @@ import { computed, onUnmounted, ref, watch } from 'vue'
 export interface Props {
     ariaErrormessage?: string
     ariaInvalid?: boolean
+    ariaLabel?: string
     name: string
     optionGroups: T3Model.Input.Autocomplete.OptionGroup[]
     defaultValue?: T3Model.Input.Autocomplete.Option
