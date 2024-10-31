@@ -14,6 +14,17 @@
     }
 }
 
+@mixin only($name) {
+    $screen-width-value: map.get(variables.$screen-widths, $name);
+    $screen-widths-values: map.values(variables.$screen-widths);
+    $index: list.index($screen-widths-values, $screen-width-value);
+    $next-screen-width: list.nth($screen-widths-values, $index + 1);
+
+    @media only screen and (min-width: $screen-width-value) and (max-width: $next-screen-width) {
+        @content;
+    }
+}
+
 @mixin loop {
     @each $name, $screen-width in variables.$screen-widths {
         @content ($name);
