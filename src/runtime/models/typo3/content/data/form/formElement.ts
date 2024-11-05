@@ -36,12 +36,13 @@ export interface Validator {
 }
 
 export interface Properties {
-    size?: string
+    elementDescription?: string
     options?: { [key: string]: string }
-    prependOptionLabel?: string
-    text?: string
     placeholder?: string
+    prependOptionLabel?: string
+    size?: string
     step?: string
+    text?: string
 }
 
 export interface FormElement {
