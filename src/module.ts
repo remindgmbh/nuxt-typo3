@@ -75,6 +75,12 @@ export default defineNuxtModule<ModuleOptions>({
                     },
                 },
             },
+            // https://github.com/vitejs/vite/issues/9220
+            // without this the following error occurs when using this module in a project in dev mode:
+            // Uncaught (in promise) SyntaxError: The requested module doesn't provide an export named: 'snakeCase'
+            optimizeDeps: {
+                include: ['yup'],
+            },
         }
 
         if (options.scssForwards) {
