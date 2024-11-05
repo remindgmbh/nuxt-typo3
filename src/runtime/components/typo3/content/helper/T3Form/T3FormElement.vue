@@ -16,6 +16,7 @@
     >
         <T3Sortable :order="order">
             <template v-if="showLabel" #[LABEL]>
+                <slot :form-element="formElement" name="beforeLabel"></slot>
                 <component
                     :is="labelTag"
                     class="t3-form-element__label"
@@ -31,8 +32,10 @@
                         >
                     </slot>
                 </component>
+                <slot :form-element="formElement" name="afterLabel"></slot>
             </template>
             <template #[INPUT]>
+                <slot :form-element="formElement" name="beforeInput"></slot>
                 <component
                     :is="FormElement"
                     class="t3-form-element__input"
@@ -40,8 +43,10 @@
                     :loading="loading"
                     v-bind="ariaAttrs"
                 />
+                <slot :form-element="formElement" name="afterInput"></slot>
             </template>
         </T3Sortable>
+        <slot :form-element="formElement" name="beforeError"></slot>
         <slot :error-message="errorMessage" name="error">
             <T3CollapseTransition transition-name="error-transition">
                 <span
@@ -56,6 +61,7 @@
                 </span>
             </T3CollapseTransition>
         </slot>
+        <slot :form-element="formElement" name="afterError"></slot>
     </component>
 </template>
 
@@ -71,10 +77,12 @@ import { FormContextKey } from 'vee-validate'
 import { T3FormElementDefault } from '#components'
 import { kebabCase } from 'scule'
 
-const props = defineProps<{
+export interface Props {
     formElement: T3Model.Typo3.Content.Data.Form.FormElement
     loading?: boolean
-}>()
+}
+
+const props = defineProps<Props>()
 
 const LABEL = 'label'
 const INPUT = 'input'
