@@ -11,13 +11,16 @@
             :name="name"
             :placeholder="placeholder"
             type="text"
-            @blur="handleBlur"
-            @focus="open"
+            @blur="onBlur"
+            @focus="onFocus"
             @input="onInput"
             @keydown="supportKeyboardNavigation"
         />
-        <T3CollapseTransition transition-name="options-transition">
-            <div v-show="isOpen" class="t3-autocomplete__options">
+        <Transition name="options-transition">
+            <div
+                v-show="isOpen && options.length > 0"
+                class="t3-autocomplete__options"
+            >
                 <T3AutocompleteOptionGroup
                     v-for="optionGroup in optionGroups"
                     :key="optionGroup.name"
@@ -27,14 +30,14 @@
                     @select="onSelect"
                 />
             </div>
-        </T3CollapseTransition>
+        </Transition>
     </div>
 </template>
 
 <script setup lang="ts">
 import { type RuleExpression, useField } from 'vee-validate'
 import { type T3Model, navigateTo } from '#imports'
-import { computed, onUnmounted, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 export interface Props {
     ariaErrormessage?: string
@@ -56,10 +59,6 @@ const props = defineProps<Props>()
 
 const emit = defineEmits<Emits>()
 
-onUnmounted(() => {
-    document.removeEventListener('click', closeOnOutsideClick)
-})
-
 const input = computed({
     get() {
         return value.value.label
@@ -75,7 +74,6 @@ const hoverOption = ref<T3Model.Input.Autocomplete.Option>()
 const hoverOptionIndex = computed<number>(() =>
     options.value.findIndex((value) => hoverOption.value === value),
 )
-const _optionGroups = ref<T3Model.Input.Autocomplete.OptionGroup[]>([])
 
 const options = computed(() =>
     props.optionGroups.flatMap((optionGroup) => optionGroup.options),
@@ -96,48 +94,31 @@ watch(
     (value) => setValue(value ?? { key: '', label: '' }),
 )
 
-function onOptionsChanged(value: T3Model.Input.Autocomplete.OptionGroup[]) {
-    if (value.length) {
-        _optionGroups.value = value
-        open()
-    } else {
-        close()
-    }
-}
-
-watch(() => props.optionGroups, onOptionsChanged)
-
 function onInput() {
+    open()
     emit('input', value.value)
 }
 
-function closeOnOutsideClick(e: MouseEvent) {
-    if (el.value && e.target instanceof Node && !el.value.contains(e.target)) {
-        close()
-    }
-}
-
 function onSelect(option: T3Model.Input.Autocomplete.Option) {
-    handleBlur()
     setValue(option)
-    close()
     emit('select', option)
 }
 
+function onFocus() {
+    open()
+}
+
+function onBlur(e: Event) {
+    close()
+    handleBlur(e)
+}
+
 function open() {
-    if (isOpen.value || props.disabled || options.value.length === 0) {
-        return
-    }
     isOpen.value = true
-    document.addEventListener('click', closeOnOutsideClick)
 }
 
 function close() {
-    if (!isOpen.value) {
-        return
-    }
     isOpen.value = false
-    document.removeEventListener('click', closeOnOutsideClick)
 }
 
 function supportKeyboardNavigation(e: KeyboardEvent): void {
@@ -165,11 +146,12 @@ function supportKeyboardNavigation(e: KeyboardEvent): void {
             } else {
                 onSelect(hoverOption.value)
             }
+            close()
         }
     }
 
-    // press ESC or Tab -> close selectCustom
-    if (['Escape', 'Tab'].includes(e.key)) {
+    // press ESC -> close autocomplete
+    if (['Escape'].includes(e.key)) {
         close()
     }
 }
@@ -200,13 +182,5 @@ function supportKeyboardNavigation(e: KeyboardEvent): void {
         z-index: 1;
         box-sizing: border-box;
     }
-
-    // set transition for opening options
-    // .options-transition {
-    //     &-enter-active,
-    //     &-leave-active {
-    //         transition: height ...;
-    //     }
-    // }
 }
 </style>
