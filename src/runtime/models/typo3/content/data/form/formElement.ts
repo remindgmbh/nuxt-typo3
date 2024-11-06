@@ -9,6 +9,7 @@ export type ValidationType =
     | 'RegularExpression'
     | 'DateRange'
     | 'Count'
+    | 'FileSize'
 
 export type FormElementType =
     | 'Checkbox'
