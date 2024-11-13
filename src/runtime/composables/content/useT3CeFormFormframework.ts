@@ -63,7 +63,14 @@ export function useT3CeFormFormframework() {
         )
 
         Object.keys(data).forEach((key) => {
-            body.set(key, data[key] ?? '')
+            // necessary for multiple files
+            if (Array.isArray(data[key])) {
+                data[key].forEach((value, index) => {
+                    body.append(`${key}[${index}]`, value)
+                })
+            } else {
+                body.set(key, data[key] ?? '')
+            }
         })
 
         try {

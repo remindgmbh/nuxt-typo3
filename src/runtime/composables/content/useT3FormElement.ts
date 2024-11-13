@@ -1,7 +1,8 @@
 import { type GenericValidateFunction, type RuleExpression } from 'vee-validate'
-import { type Schema, array, boolean, date, number, string } from 'yup'
+import { type Schema, array, boolean, date, mixed, number, string } from 'yup'
 import { type T3Model, useT3YupUtil } from '#imports'
 import { computed } from 'vue'
+import { filesize } from 'filesize'
 import { useI18n } from 'vue-i18n'
 
 const REGEX_ALPHANUMERIC = /^(\w*)$/
@@ -100,6 +101,9 @@ export function useT3FormElement(
                                     .transform(parseDateString)
                                     .required(msg)
                                     .default(undefined)
+                                break
+                            case 'FileUpload':
+                                schema = mixed().required(msg)
                                 break
                             default: {
                                 schema = string().required(msg)
@@ -227,6 +231,79 @@ export function useT3FormElement(
                                 }),
                             )
 
+                        break
+                    }
+                    case 'FileSize': {
+                        const min = Number.parseInt(
+                            validator.options?.minimum ?? '',
+                        )
+                        const max = Number.parseInt(
+                            validator.options?.maximum ?? '',
+                        )
+
+                        schema = mixed<File | File[]>().test((value, ctx) => {
+                            if (value) {
+                                const files = Array.isArray(value)
+                                    ? value
+                                    : [value]
+
+                                if (files.some((file) => file.size < min)) {
+                                    return ctx.createError({
+                                        message: getErrorMessage(
+                                            'validation.fileSize.min',
+                                            {
+                                                label,
+                                                min: filesize(min),
+                                            },
+                                        ),
+                                    })
+                                }
+
+                                if (files.some((file) => file.size > max)) {
+                                    return ctx.createError({
+                                        message: getErrorMessage(
+                                            'validation.fileSize.max',
+                                            { label, max: filesize(max) },
+                                        ),
+                                    })
+                                }
+                            }
+
+                            return true
+                        })
+
+                        break
+                    }
+                    case 'MimeType': {
+                        const mimeTypes =
+                            validator.options?.allowed ?? ([] as string[])
+
+                        schema = mixed<File | File[]>().test((value, ctx) => {
+                            if (value) {
+                                const files = Array.isArray(value)
+                                    ? value
+                                    : [value]
+
+                                if (
+                                    files.some(
+                                        (file) =>
+                                            !mimeTypes.includes(file.type),
+                                    )
+                                ) {
+                                    return ctx.createError({
+                                        message: getErrorMessage(
+                                            'validation.mimeType',
+                                            {
+                                                label,
+                                                mimeType: mimeTypes.join(', '),
+                                            },
+                                        ),
+                                    })
+                                }
+                            }
+
+                            return true
+                        })
                         break
                     }
                 }

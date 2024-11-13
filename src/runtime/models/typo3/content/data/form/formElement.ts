@@ -10,6 +10,7 @@ export type ValidationType =
     | 'DateRange'
     | 'Count'
     | 'FileSize'
+    | 'MimeType'
 
 export type FormElementType =
     | 'Checkbox'
@@ -33,11 +34,13 @@ export type FormElementType =
 export interface Validator {
     identifier: ValidationType
     customErrorMessage?: string
-    options?: { [key: string]: string }
+    options?: { [key: string]: any }
 }
 
 export interface Properties {
+    allowedMimeTypes?: string[]
     elementDescription?: string
+    multiple?: boolean
     options?: { [key: string]: string }
     placeholder?: string
     prependOptionLabel?: string

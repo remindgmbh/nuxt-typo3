@@ -33,8 +33,13 @@ export default {
             min: '{label} must not be before {min}.',
         },
         emailAddress: '{label} must be a valid email address.',
+        fileSize: {
+            max: '{label} may be a maximum of {max}.',
+            min: '{label} must be at least {min}.',
+        },
         float: '{label} may only contain numeric characters.',
         integer: '{label} must be an integer.',
+        mimeType: '{label} has to be of type {mimeType}.',
         notEmpty: '{label} is required.',
         numberRange: {
             max: '{label} may be a maximum of {max}.',
