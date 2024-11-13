@@ -1,15 +1,38 @@
-import { type Ref, computed, ref } from 'vue'
-import { type T3Model, navigateTo, useLogger, useT3Api } from '#imports'
+import {
+    type T3Model,
+    navigateTo,
+    useLogger,
+    useT3Api,
+    useT3ContentInjection,
+} from '#imports'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-export function useT3CeFormFormframework(
-    contentElement: Ref<
-        T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Formframework>
-    >,
-) {
+export function useT3CeFormFormframework() {
     const logger = useLogger()
     const api = useT3Api()
     const { t } = useI18n()
+    const { injectContentElement } = useT3ContentInjection()
+
+    const injectedContentElement =
+        injectContentElement<T3Model.Typo3.Content.Data.Formframework>()
+
+    const responseContentElement =
+        ref<
+            T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Formframework>
+        >()
+
+    const contentElement = computed(
+        () => responseContentElement.value ?? injectedContentElement.value,
+    )
+
+    const formElements = computed(
+        () => contentElement.value.content.form.elements,
+    )
+
+    const apiErrors = computed(
+        () => contentElement.value.content.form.api.errors,
+    )
 
     const i18n = computed(() => contentElement.value.content.form.i18n)
 
@@ -34,7 +57,10 @@ export function useT3CeFormFormframework(
     async function submit(data: Record<string, any>): Promise<void> {
         loading.value = true
         const body = new FormData()
-        body.set('responseElementId', contentElement.value.id.toString())
+        body.set(
+            'responseElementId',
+            injectedContentElement.value.id.toString(),
+        )
 
         Object.keys(data).forEach((key) => {
             body.set(key, data[key] ?? '')
@@ -43,18 +69,22 @@ export function useT3CeFormFormframework(
         try {
             const result = await api.post<
                 T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.Formframework>
-            >(contentElement.value.content.link, { body })
+            >(injectedContentElement.value.content.link, { body })
 
             if (typeof result.content.form === 'string') {
                 logger.error('TYPO3 Error:', result.content.form)
-            } else if (
-                result.content.form.api.status === 'success' &&
-                result.content.form.api.actionAfterSuccess
-            ) {
-                await navigateTo({
-                    path: result.content.form.api.actionAfterSuccess
-                        .redirectUrl,
-                })
+            } else {
+                responseContentElement.value = result
+
+                if (
+                    result.content.form.api.status === 'success' &&
+                    result.content.form.api.actionAfterSuccess
+                ) {
+                    await navigateTo({
+                        path: result.content.form.api.actionAfterSuccess
+                            .redirectUrl,
+                    })
+                }
             }
         } finally {
             loading.value = false
@@ -62,6 +92,9 @@ export function useT3CeFormFormframework(
     }
 
     return {
+        apiErrors,
+        contentElement,
+        formElements,
         loading,
         loadingLabel,
         requiredHint,

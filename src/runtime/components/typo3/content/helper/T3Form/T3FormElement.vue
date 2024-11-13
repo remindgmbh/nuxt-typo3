@@ -78,6 +78,7 @@ import { T3FormElementDefault } from '#components'
 import { kebabCase } from 'scule'
 
 export interface Props {
+    apiError?: string
     formElement: T3Model.Typo3.Content.Data.Form.FormElement
     loading?: boolean
 }
@@ -158,6 +159,15 @@ watch(errorMessage, (value) => {
         lastErrorMessage.value = value
     }
 })
+
+watch(
+    () => props.apiError,
+    (value) => {
+        if (value) {
+            form?.resetField(props.formElement.name, { errors: [value] })
+        }
+    },
+)
 </script>
 
 <style lang="scss">

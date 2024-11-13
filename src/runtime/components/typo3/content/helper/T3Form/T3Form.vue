@@ -1,7 +1,11 @@
 <template>
     <form class="t3-form" @submit="submit">
         <div class="t3-form__elements">
-            <T3FormElements :form-elements="formElements" :loading="loading">
+            <T3FormElements
+                :api-errors="apiErrors"
+                :form-elements="formElements"
+                :loading="loading"
+            >
                 <template #error="{ errorMessage }">
                     <slot :error-message="errorMessage" name="error"></slot>
                 </template>
@@ -27,12 +31,15 @@
 import { type T3Model } from '#imports'
 import { useForm } from 'vee-validate'
 
-defineProps<{
+export interface Props {
+    apiErrors?: T3Model.Typo3.Content.Data.Form.Form['api']['errors']
     formElements: T3Model.Typo3.Content.Data.Form.FormElement[]
     loading?: boolean
     loadingLabel?: string
     submitLabel: string
-}>()
+}
+
+defineProps<Props>()
 
 const emit = defineEmits<{
     submit: [data: { [key: string]: string }]

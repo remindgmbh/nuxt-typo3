@@ -4,7 +4,7 @@ export interface Form {
     id: string
     api: {
         status?: 'success' | 'failure'
-        errors: any
+        errors: { [key: string]: string }
         actionAfterSuccess?: {
             message?: string
             redirectUrl: string
