@@ -1,8 +1,7 @@
 <template>
     <T3FileUpload
-        :accept="accept"
-        :default-value="formElement.defaultValue"
         :disabled="loading"
+        :mime-types="formElement.properties?.allowedMimeTypes"
         :multiple="formElement.properties?.multiple"
         :name="formElement.name"
         :placeholder="placeholder"
@@ -13,7 +12,6 @@
 
 <script setup lang="ts">
 import { type T3Model, useT3FormElement } from '#imports'
-import { computed } from 'vue'
 
 const props = defineProps<{
     formElement: T3Model.Typo3.Content.Data.Form.FormElement
@@ -22,9 +20,5 @@ const props = defineProps<{
 
 const { required, placeholder, validation } = useT3FormElement(
     props.formElement,
-)
-
-const accept = computed(() =>
-    props.formElement.properties?.allowedMimeTypes?.join(','),
 )
 </script>
