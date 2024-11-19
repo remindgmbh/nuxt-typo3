@@ -1,56 +1,80 @@
 <template>
-    <div class="t3-accordion">
-        <section
+    <ul class="t3-accordion">
+        <li
             v-for="(item, index) in items"
             :key="index"
             class="t3-accordion__item"
         >
             <button
-                class="t3-accordion__link"
+                :id="getButtonId(item)"
+                :aria-controls="getContentId(item)"
+                :aria-expanded="activeItems.includes(index)"
+                class="t3-accordion__button"
                 :class="{
-                    't3-accordion__link--active': activeItems.includes(index),
+                    't3-accordion__button--active': activeItems.includes(index),
                 }"
                 type="button"
                 @click="toggle(index)"
             >
-                <slot :index="index" :item="item" name="title"></slot>
+                <slot
+                    :active="activeItems.includes(index)"
+                    :index="index"
+                    :item="item"
+                    name="title"
+                    >{{ item.header }}</slot
+                >
             </button>
             <T3CollapseTransition v-show="!disabledItems.includes(index)">
                 <section
                     v-show="activeItems.includes(index)"
+                    :id="getContentId(item)"
+                    :aria-labelledby="getButtonId(item)"
                     class="t3-accordion__content-wrapper"
                 >
                     <div class="t3-accordion__content">
-                        <slot :index="index" :item="item" name="content"></slot>
+                        <slot
+                            :active="activeItems.includes(index)"
+                            :index="index"
+                            :item="item"
+                            name="content"
+                        >
+                            <T3Text :content="item" />
+                        </slot>
                     </div>
                 </section>
             </T3CollapseTransition>
-        </section>
-    </div>
+        </li>
+    </ul>
 </template>
 
-<script setup lang="ts" generic="T">
-import { useT3Accordion } from '#imports'
+<script setup lang="ts">
+import { type T3Model, useT3Accordion } from '#imports'
 
-const props = withDefaults(
-    defineProps<{
-        items: T[]
-        multiple?: boolean
-        initialActiveItems?: number[]
-        disabledItems?: number[]
-    }>(),
-    {
-        disabledItems: () => [],
-        initialActiveItems: () => [],
-    },
-)
+export interface Props {
+    id: string
+    items: T3Model.Typo3.Content.Item[]
+    multiple?: boolean
+    initialActiveItems?: number[]
+    disabledItems?: number[]
+}
+
+const props = withDefaults(defineProps<Props>(), {
+    disabledItems: () => [],
+    initialActiveItems: () => [],
+})
 
 defineSlots<{
-    title(props: { item: T; index: number }): any
-    content(props: { item: T; index: number }): any
+    title(props: { item: T3Model.Typo3.Content.Item; index: number }): any
+    content(props: { item: T3Model.Typo3.Content.Item; index: number }): any
 }>()
 
-const { activeItems, toggle } = useT3Accordion(
+const {
+    activeItems,
+    getContentId,
+    getButtonId: getButtonId,
+    toggle,
+} = useT3Accordion(
+    props.id,
     props.initialActiveItems,
     props.disabledItems,
     props.multiple,
