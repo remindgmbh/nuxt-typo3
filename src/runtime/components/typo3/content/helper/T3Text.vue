@@ -8,7 +8,9 @@
 <script setup lang="ts">
 import { type T3Model } from '#imports'
 
-defineProps<{
+export interface Props {
     content: T3Model.Typo3.Content.Data.Text
-}>()
+}
+
+defineProps<Props>()
 </script>
