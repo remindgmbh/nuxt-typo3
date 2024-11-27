@@ -33,6 +33,8 @@ export function useT3Content() {
         () => !!contentElement.value.appearance.backgroundFullWidth,
     )
 
+    const componentName = computed(() => ceOptions.value?.componentName)
+
     const containerClasses = computed(() => ({
         container: width.value !== 'full',
         [`container--${maxWidth.value}`]:
@@ -82,6 +84,7 @@ export function useT3Content() {
         backgroundColorName,
         backgroundColorValue,
         backgroundFullWidth,
+        componentName,
         containerClasses,
         cookieAccepted,
         ignoreCookies,

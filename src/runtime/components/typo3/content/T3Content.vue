@@ -30,6 +30,7 @@ const contentElement = injectContentElement()
 const {
     backgroundFullWidth,
     backgroundColorValue,
+    componentName,
     containerClasses,
     cookieAccepted,
     ignoreCookies,
@@ -40,7 +41,7 @@ const {
 } = useT3Content()
 
 const Component = useT3DynamicComponent(
-    contentElement.value.type,
+    componentName.value ?? contentElement.value.type,
     'Ce',
     T3CeDefault,
 )

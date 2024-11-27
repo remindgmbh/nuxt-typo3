@@ -1,5 +1,7 @@
 import type { Typo3 } from '../index'
 export interface CeOptions {
+    // use alternative name for component
+    componentName?: string
     // if set to true, content element is shown even if cookie should block it
     // required if not the whole content element should be blocked by cookie,
     // but only one part, for example a video in a textmedia element.
