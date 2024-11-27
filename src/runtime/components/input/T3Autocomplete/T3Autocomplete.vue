@@ -85,7 +85,7 @@ const { value, handleBlur, setValue } =
         () => props.name,
         props.validation,
         {
-            initialValue: props.defaultValue,
+            initialValue: props.defaultValue ?? { key: '', label: '' },
         },
     )
 
