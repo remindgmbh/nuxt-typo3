@@ -1,9 +1,9 @@
-import { defineNuxtPlugin, useT3Config, useT3I18n } from '#imports'
+import { defineNuxtPlugin, useAppConfig, useT3I18n } from '#imports'
 
 export default defineNuxtPlugin((nuxt) => {
     const { vueApp } = nuxt
 
-    const config = useT3Config()
+    const { typo3: config } = useAppConfig()
 
     const i18n = useT3I18n()
 

@@ -1,6 +1,6 @@
 import {
     type T3Model,
-    useT3Config,
+    useAppConfig,
     useT3ContentInjection,
     useT3CookieConsent,
     useT3Theme,
@@ -10,7 +10,7 @@ import { computed } from 'vue'
 export function useT3Content() {
     const { injectContentElement } = useT3ContentInjection()
     const contentElement = injectContentElement()
-    const config = useT3Config()
+    const { typo3: config } = useAppConfig()
     const { isAccepted } = useT3CookieConsent()
     const { backgroundColors } = useT3Theme()
 

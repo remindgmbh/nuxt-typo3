@@ -2,16 +2,16 @@ import { type Ref, computed } from 'vue'
 import {
     T3Error,
     type T3Model,
+    useAppConfig,
     useLogger,
     useRoute,
     useState,
     useT3Api,
-    useT3Config,
 } from '#imports'
 
 export function useT3Data() {
     const api = useT3Api()
-    const config = useT3Config()
+    const { typo3: config } = useAppConfig()
     const logger = useLogger()
 
     function getLocalizedRootPath(path: string): string {

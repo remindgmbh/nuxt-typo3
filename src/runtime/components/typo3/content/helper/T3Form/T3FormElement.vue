@@ -68,7 +68,7 @@
 <script setup lang="ts">
 import {
     type T3Model,
-    useT3Config,
+    useAppConfig,
     useT3DynamicComponent,
     useT3FormElement,
 } from '#imports'
@@ -88,7 +88,7 @@ const props = defineProps<Props>()
 const LABEL = 'label'
 const INPUT = 'input'
 
-const config = useT3Config()
+const { typo3: config } = useAppConfig()
 
 const order = computed(() => {
     const result = [LABEL, INPUT]

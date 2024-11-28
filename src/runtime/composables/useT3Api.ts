@@ -1,10 +1,15 @@
-import { T3Error, type T3Model, useRequestHeaders, useT3Config } from '#imports'
+import {
+    T3Error,
+    type T3Model,
+    useAppConfig,
+    useRequestHeaders,
+} from '#imports'
 import { type FetchOptions } from 'ofetch'
 import { type NitroFetchRequest } from 'nitropack'
 import { computed } from 'vue'
 
 export function useT3Api() {
-    const config = useT3Config()
+    const { typo3: config } = useAppConfig()
 
     const defaultOptions = computed<FetchOptions>(() => {
         // remove undefined header values

@@ -19,7 +19,6 @@ export default defineNuxtConfig({
                 api: {
                     baseUrl: '',
                 },
-                baseUrl: '',
             },
         },
     },

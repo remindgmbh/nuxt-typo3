@@ -16,31 +16,12 @@ import { defu } from 'defu'
 export const CONFIG_KEY = 'typo3'
 
 export interface ModuleOptions {
-    // TYPO3 Headless Backend information
-    api: {
-        // URL of the TYPO3 Backend
-        baseUrl?: string
-        // Type number of the initial data, only required if changed in backend
-        initialDataType?: number
-    }
-    // URL of the frontend project, used for page meta data
-    baseUrl: string
-    // prefix to use when resolving dynamic component
-    // if empty only T3 prefix is used
-    componentPrefix?: string
     // Path to SCSS Variables to override default values defined in runtime/assets/style/*.scss
     // See playground assets/breakpoints.scss or assets/colors.scss for example
     scssForwards?: string | string[]
 }
 
 export default defineNuxtModule<ModuleOptions>({
-    defaults: {
-        api: {
-            baseUrl: '',
-            initialDataType: 834,
-        },
-        baseUrl: '',
-    },
     meta: {
         configKey: CONFIG_KEY,
         name,
@@ -48,11 +29,6 @@ export default defineNuxtModule<ModuleOptions>({
     },
     async setup(options, nuxt) {
         const resolver = createResolver(import.meta.url)
-
-        nuxt.options.runtimeConfig.public[CONFIG_KEY] = defu(
-            nuxt.options.runtimeConfig.public[CONFIG_KEY],
-            options,
-        )
 
         nuxt.hook('prepare:types', (options) => {
             options.references.push(
@@ -64,8 +40,6 @@ export default defineNuxtModule<ModuleOptions>({
                 },
             )
         })
-
-        options = nuxt.options.runtimeConfig.public[CONFIG_KEY]
 
         let viteConfig: ViteConfig = {
             css: {
@@ -135,6 +109,9 @@ export default defineNuxtModule<ModuleOptions>({
         addComponentsDir({
             path: resolver.resolve('runtime/components'),
             pathPrefix: false,
+        })
+        addPlugin({
+            src: resolver.resolve('runtime/plugins/appConfig'),
         })
         addPlugin({
             src: resolver.resolve('runtime/plugins/i18n'),

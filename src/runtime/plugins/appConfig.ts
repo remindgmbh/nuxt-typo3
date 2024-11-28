@@ -1,8 +1,21 @@
-import { type T3Model, useAppConfig, useRuntimeConfig } from '#imports'
-import { defu } from 'defu'
+import {
+    type T3Model,
+    defineNuxtPlugin,
+    updateAppConfig,
+    useAppConfig,
+    useRuntimeConfig,
+} from '#imports'
+import defu from 'defu'
 
-export function useT3Config() {
-    const appConfigDefaults: T3Model.Config.AppConfigDefaults = {
+export default defineNuxtPlugin(() => {
+    const runtimeConfig = useRuntimeConfig()
+    const appConfig = useAppConfig()
+
+    const defaultAppConfig: T3Model.Config.AppConfig = {
+        api: {
+            baseUrl: runtimeConfig.public.typo3.api?.baseUrl,
+            initialDataType: 834,
+        },
         breadcrumbs: {
             fullWidth: false,
         },
@@ -17,6 +30,7 @@ export function useT3Config() {
         },
         i18n: {
             locale: 'de',
+            messages: {},
         },
         imageFileExtension: 'webp',
         languages: [],
@@ -34,13 +48,7 @@ export function useT3Config() {
         },
     }
 
-    const appConfig = useAppConfig()
-    const runtimeConfig = useRuntimeConfig()
+    const updatedAppConfig = defu(appConfig.typo3, defaultAppConfig)
 
-    const config = {
-        ...defu(appConfig.typo3, appConfigDefaults),
-        ...runtimeConfig.public.typo3,
-    }
-
-    return config
-}
+    updateAppConfig({ typo3: updatedAppConfig })
+})

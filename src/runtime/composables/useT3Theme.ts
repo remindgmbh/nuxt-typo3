@@ -1,29 +1,30 @@
 import { type Ref, computed } from 'vue'
-import { useState, useT3Config } from '#imports'
+import { useAppConfig, useState } from '#imports'
 import { defu } from 'defu'
 
 export function useT3Theme() {
-    const { theme } = useT3Config()
+    const { typo3: config } = useAppConfig()
 
     const selectedTheme: Ref<string> = useState<string>(
         't3-theme',
-        () => theme.default,
+        () => config.theme.default,
     )
 
     const backgroundColors = computed<{ [name: string]: string }>(() =>
         defu(
-            theme.backgroundColors[
-                selectedTheme.value as keyof typeof theme.backgroundColors
+            config.theme.backgroundColors[
+                selectedTheme.value as keyof typeof config.theme.backgroundColors
             ],
-            theme.backgroundColors[
-                theme.default as keyof typeof theme.backgroundColors
+            config.theme.backgroundColors[
+                config.theme
+                    .default as keyof typeof config.theme.backgroundColors
             ] ?? {},
         ),
     )
 
     return {
         backgroundColors,
-        defaultTheme: theme.default as string,
+        defaultTheme: config.theme.default as string,
         selectedTheme,
     }
 }

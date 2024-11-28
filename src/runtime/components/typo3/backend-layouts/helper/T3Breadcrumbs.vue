@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { type T3Model, useT3Config, useT3Theme, useT3Util } from '#imports'
+import { type T3Model, useAppConfig, useT3Theme, useT3Util } from '#imports'
 import { computed, onMounted, ref } from 'vue'
 
 const props = defineProps<{
@@ -61,7 +61,7 @@ const props = defineProps<{
     pageData: T3Model.Typo3.Page
 }>()
 
-const config = useT3Config()
+const { typo3: config } = useAppConfig()
 const { backgroundColors } = useT3Theme()
 const { detectScrollEnd } = useT3Util()
 

@@ -1,9 +1,9 @@
 import type * as T3Model from '../models'
-import type { CONFIG_KEY, ModuleOptions } from '../../module'
+import type { CONFIG_KEY } from '../../module'
 
 declare module 'nuxt/schema' {
     interface PublicRuntimeConfig {
-        [CONFIG_KEY]: ModuleOptions
+        [CONFIG_KEY]: T3Model.Config.PublicRuntimeConfig
     }
 
     interface AppConfigInput {
@@ -11,13 +11,13 @@ declare module 'nuxt/schema' {
     }
 
     interface AppConfig {
-        [CONFIG_KEY]: T3Model.Config.AppConfigInput
+        [CONFIG_KEY]: T3Model.Config.AppConfig
     }
 }
 
 declare module '@nuxt/schema' {
     interface PublicRuntimeConfig {
-        [CONFIG_KEY]: ModuleOptions
+        [CONFIG_KEY]: T3Model.Config.PublicRuntimeConfig
     }
 
     interface AppConfigInput {
@@ -25,7 +25,7 @@ declare module '@nuxt/schema' {
     }
 
     interface AppConfig {
-        [CONFIG_KEY]: T3Model.Config.AppConfigInput
+        [CONFIG_KEY]: T3Model.Config.AppConfig
     }
 }
 

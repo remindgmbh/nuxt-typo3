@@ -1,5 +1,5 @@
 import { type Component, getCurrentInstance, resolveComponent } from 'vue'
-import { useLogger, useT3Config } from '#imports'
+import { useAppConfig, useLogger } from '#imports'
 import { pascalCase } from 'scule'
 
 export function useT3DynamicComponent(
@@ -9,13 +9,15 @@ export function useT3DynamicComponent(
 ) {
     if (dynamicNamePart) {
         const logger = useLogger()
-        const { componentPrefix } = useT3Config()
+        const { typo3: config } = useAppConfig()
         const instance = getCurrentInstance()
         const componentNames = []
 
-        if (componentPrefix) {
+        if (config.componentPrefix) {
             componentNames.push(
-                componentPrefix + staticNamePart + pascalCase(dynamicNamePart),
+                config.componentPrefix +
+                    staticNamePart +
+                    pascalCase(dynamicNamePart),
             )
         }
 
