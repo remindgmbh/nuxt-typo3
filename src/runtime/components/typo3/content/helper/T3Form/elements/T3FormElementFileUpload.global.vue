@@ -2,7 +2,7 @@
     <T3FileUpload
         :disabled="loading"
         :mime-types="formElement.properties?.allowedMimeTypes"
-        :multiple="formElement.properties?.multiple"
+        :multiple="!!formElement.properties?.multiple"
         :name="formElement.name"
         :placeholder="placeholder"
         :required="required"

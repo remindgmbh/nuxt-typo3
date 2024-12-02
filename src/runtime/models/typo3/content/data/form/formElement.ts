@@ -40,7 +40,7 @@ export interface Validator {
 export interface Properties {
     allowedMimeTypes?: string[]
     elementDescription?: string
-    multiple?: boolean
+    multiple?: true | ''
     options?: { [key: string]: string }
     placeholder?: string
     prependOptionLabel?: string
