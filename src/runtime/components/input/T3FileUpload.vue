@@ -148,7 +148,7 @@ function updateFiles(newValue: File[] | undefined) {
 
         inputEl.value.files = dataTransfer.files
 
-        setValue(newValue)
+        setValue(!props.multiple ? newValue?.at(0) : newValue)
     }
 }
 </script>
