@@ -58,10 +58,10 @@
 
 <script setup lang="ts">
 import { type RuleExpression, useField } from 'vee-validate'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { type T3Model } from '#imports'
 
-const props = defineProps<{
+export interface Props {
     ariaInvalid?: boolean
     ariaErrormessage?: string
     name: string
@@ -70,7 +70,14 @@ const props = defineProps<{
     validation?: RuleExpression<any>
     disabled?: boolean
     required?: boolean
-}>()
+}
+
+export interface Emits {
+    (e: 'change', value: string): void
+}
+
+const props = defineProps<Props>()
+const emit = defineEmits<Emits>()
 
 const selectEl = ref<HTMLSelectElement>()
 const optionsWrapperEl = ref<HTMLDivElement>()
@@ -144,6 +151,10 @@ function open() {
 function close() {
     isOpen.value = false
 }
+
+watch(value, (newValue) => {
+    emit('change', newValue)
+})
 </script>
 
 <style lang="scss">
