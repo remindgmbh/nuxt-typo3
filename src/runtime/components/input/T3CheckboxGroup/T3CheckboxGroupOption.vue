@@ -1,13 +1,13 @@
 <template>
     <input
-        :id="name"
+        :id="name + value"
         autocomplete="off"
         :checked="checked"
-        class="t3-checkbox"
         :disabled="disabled"
         :name="name"
         :required="required"
         type="checkbox"
+        :value="value"
         @blur="handleBlur"
         @change="handleChange"
     />
@@ -18,28 +18,26 @@ import { type RuleExpression, useField } from 'vee-validate'
 
 export interface Props {
     name: string
-    defaultValue?: boolean
-    validation?: RuleExpression<any>
+    defaultValue?: string[]
     disabled?: boolean
     required?: boolean
+    value: string
+    validation?: RuleExpression<any>
 }
 
 const props = defineProps<Props>()
 
-const model = defineModel<boolean>({ default: false })
-
-model.value = props.defaultValue
+const model = defineModel<string[]>({ default: [] })
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
-const { checked, handleChange, handleBlur } = useField<boolean>(
+const { checked, handleChange, handleBlur } = useField<string | string[]>(
     () => props.name,
     props.validation,
     {
-        checkedValue: true,
+        checkedValue: props.value,
         initialValue: props.defaultValue ?? model.value,
         syncVModel: true,
         type: 'checkbox',
-        uncheckedValue: false,
     },
 )
 

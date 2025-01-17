@@ -79,6 +79,19 @@ export interface Emits {
 const props = defineProps<Props>()
 const emit = defineEmits<Emits>()
 
+const model = defineModel<string>({ default: '' })
+
+if (props.defaultValue) {
+    const defaultOption = props.options.find(
+        (option) => option.value === props.defaultValue,
+    )
+    if (defaultOption) {
+        model.value = defaultOption.value
+    }
+} else {
+    model.value = props.options.at(0)?.value ?? ''
+}
+
 const selectEl = ref<HTMLSelectElement>()
 const optionsWrapperEl = ref<HTMLDivElement>()
 
@@ -90,11 +103,8 @@ const { value, handleBlur, setValue } = useField<string>(
     () => props.name,
     props.validation,
     {
-        initialValue:
-            props.options.find((value) => value.value === props.defaultValue)
-                ?.value ??
-            props.options.at(0)?.value ??
-            '',
+        initialValue: model.value,
+        syncVModel: true,
     },
 )
 

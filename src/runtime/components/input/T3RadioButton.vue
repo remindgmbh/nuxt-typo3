@@ -8,7 +8,8 @@
         >
             <input
                 :id="name + optionValue.toString()"
-                v-model="value"
+                v-model="model"
+                autocomplete="off"
                 class="t3-radio-button__value"
                 :disabled="disabled"
                 :name="name"
@@ -26,23 +27,28 @@
 import { type RuleExpression, useField } from 'vee-validate'
 import { computed } from 'vue'
 
-const props = defineProps<{
+export interface Props {
+    defaultValue?: string
+    disabled?: boolean
     name: string
     options: { [key: string]: string }
-    defaultValue?: string
-    validation?: RuleExpression<any>
-    disabled?: boolean
     required?: boolean
-}>()
+    validation?: RuleExpression<any>
+}
+
+const props = defineProps<Props>()
+
+const model = defineModel<string>({ default: '' })
 
 const name = computed(() => props.name)
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
-const { value, handleBlur } = useField<string | undefined>(
-    () => props.name,
-    props.validation,
-    {
-        initialValue: props.defaultValue,
-    },
-)
+const { handleBlur } = useField<string>(() => props.name, props.validation, {
+    initialValue: props.defaultValue ?? model.value,
+    syncVModel: true,
+})
+
+if (props.defaultValue) {
+    model.value = props.defaultValue
+}
 </script>

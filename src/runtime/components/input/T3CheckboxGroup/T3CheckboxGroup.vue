@@ -6,15 +6,14 @@
             class="t3-checkbox-group__option"
             :for="name + optionValue.toString()"
         >
-            <input
-                :id="name + optionValue.toString()"
-                v-model="value"
+            <T3CheckboxGroupOption
+                v-model="model"
                 class="t3-checkbox-group__value"
+                :default-value="defaultValue"
                 :disabled="disabled"
                 :name="name"
-                type="checkbox"
+                :validation="validation"
                 :value="optionValue.toString()"
-                @blur="handleBlur"
             />
             <span class="t3-checkbox-group__label">{{ optionLabel }}</span>
         </label>
@@ -22,26 +21,18 @@
 </template>
 
 <script setup lang="ts">
-import { type RuleExpression, useField } from 'vee-validate'
+import { type RuleExpression } from 'vee-validate'
 import { computed } from 'vue'
 
 const props = defineProps<{
+    defaultValue?: string[]
+    disabled?: boolean
     name: string
     options: { [key: string]: string }
-    defaultValue?: string[]
     validation?: RuleExpression<any>
-    disabled?: boolean
 }>()
 
 const name = computed(() => props.name)
 
-// computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
-const { value, handleBlur } = useField<string[] | boolean | undefined>(
-    () => props.name,
-    props.validation,
-    {
-        initialValue: props.defaultValue ?? [],
-        type: 'checkbox',
-    },
-)
+const model = defineModel<string[]>({ default: [] })
 </script>

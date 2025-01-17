@@ -5,14 +5,13 @@
         class="t3-input"
         :name="name"
         :type="type"
-        :value="modelValue"
-        @input="emit('update:modelValue', $event.target.value)"
+        :value="model"
+        @input="model = $event.target.value"
     />
 </template>
 
 <script setup lang="ts">
 export interface Props {
-    modelValue: any
     name: string
     type:
         | 'text'
@@ -25,11 +24,7 @@ export interface Props {
         | 'textarea'
 }
 
-export interface Emits {
-    (e: 'update:modelValue', value: any): void
-}
-
 defineProps<Props>()
 
-const emit = defineEmits<Emits>()
+const model = defineModel<unknown>()
 </script>

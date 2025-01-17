@@ -43,12 +43,12 @@ export interface Props {
     ariaErrormessage?: string
     ariaInvalid?: boolean
     ariaLabel?: string
+    defaultValue?: T3Model.Input.Autocomplete.Option
+    disabled?: boolean
     name: string
     optionGroups: T3Model.Input.Autocomplete.OptionGroup[]
-    defaultValue?: T3Model.Input.Autocomplete.Option
-    validation?: RuleExpression<any>
     placeholder?: string
-    disabled?: boolean
+    validation?: RuleExpression<any>
 }
 
 export interface Emits {
@@ -58,6 +58,10 @@ export interface Emits {
 const props = defineProps<Props>()
 
 const emit = defineEmits<Emits>()
+
+const model = defineModel<T3Model.Input.Autocomplete.Option>({
+    default: { key: '', label: '' },
+})
 
 const input = computed({
     get() {
@@ -93,6 +97,19 @@ watch(
     () => props.defaultValue,
     (value) => setValue(value ?? { key: '', label: '' }),
 )
+
+// use two watchers as syncVModel from vee-validate does not seem to work: https://github.com/logaretm/vee-validate/issues/4962
+watch(value, (newValue) => {
+    if (newValue !== model.value) {
+        model.value = newValue
+    }
+})
+
+watch(model, (newValue) => {
+    if (newValue !== value.value) {
+        value.value = newValue
+    }
+})
 
 function onInput() {
     open()
