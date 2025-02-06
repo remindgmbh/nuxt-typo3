@@ -1,6 +1,6 @@
 <template>
     <T3Input
-        v-model="model"
+        v-model="value"
         class="t3-textfield"
         :disabled="disabled"
         :max="max"
@@ -35,7 +35,7 @@ const props = defineProps<Props>()
 const model = defineModel<string | number>({ default: '' })
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
-const { handleBlur } = useField<string | number>(
+const { value, handleBlur } = useField<string | number>(
     () => props.name,
     props.validation,
     {

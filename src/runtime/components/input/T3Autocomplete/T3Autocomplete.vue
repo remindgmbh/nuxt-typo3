@@ -89,14 +89,13 @@ const { value, handleBlur, setValue } =
         () => props.name,
         props.validation,
         {
-            initialValue: props.defaultValue ?? { key: '', label: '' },
+            initialValue: props.defaultValue ?? model.value,
         },
     )
 
-watch(
-    () => props.defaultValue,
-    (value) => setValue(value ?? { key: '', label: '' }),
-)
+if (props.defaultValue) {
+    model.value = props.defaultValue
+}
 
 // use two watchers as syncVModel from vee-validate does not seem to work: https://github.com/logaretm/vee-validate/issues/4962
 watch(value, (newValue) => {

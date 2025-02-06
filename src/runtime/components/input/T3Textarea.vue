@@ -1,7 +1,7 @@
 <template>
     <T3Input
         :id="name"
-        v-model="model"
+        v-model="value"
         class="t3-textarea"
         :disabled="disabled"
         :name="name"
@@ -32,10 +32,14 @@ const props = defineProps<Props>()
 const model = defineModel<string>({ default: '' })
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
-const { handleBlur } = useField<string>(() => props.name, props.validation, {
-    initialValue: props.defaultValue ?? model.value,
-    syncVModel: true,
-})
+const { value, handleBlur } = useField<string>(
+    () => props.name,
+    props.validation,
+    {
+        initialValue: props.defaultValue ?? model.value,
+        syncVModel: true,
+    },
+)
 
 if (props.defaultValue) {
     model.value = props.defaultValue
