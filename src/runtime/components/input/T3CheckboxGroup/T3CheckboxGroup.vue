@@ -24,13 +24,15 @@
 import { type RuleExpression } from 'vee-validate'
 import { computed } from 'vue'
 
-const props = defineProps<{
+export interface Props {
     defaultValue?: string[]
     disabled?: boolean
     name: string
     options: { [key: string]: string }
     validation?: RuleExpression<any>
-}>()
+}
+
+const props = defineProps<Props>()
 
 const name = computed(() => props.name)
 

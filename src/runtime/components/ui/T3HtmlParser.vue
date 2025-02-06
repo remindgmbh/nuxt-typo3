@@ -16,13 +16,12 @@
 import { useNuxtApp, useT3LinkReplacer, useT3TableEnhancer } from '#imports'
 import { ref } from 'vue'
 
-withDefaults(
-    defineProps<{
-        content: string
-        tag?: keyof HTMLElementTagNameMap
-    }>(),
-    { tag: 'div' },
-)
+export interface Props {
+    content: string
+    tag?: keyof HTMLElementTagNameMap
+}
+
+withDefaults(defineProps<Props>(), { tag: 'div' })
 
 const el = ref<HTMLDivElement>()
 
