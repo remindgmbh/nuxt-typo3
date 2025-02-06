@@ -67,8 +67,9 @@ export interface Props {
     hideLabel?: boolean
     label: string
     labelTag?: 'legend' | 'span' | 'label'
-    name: string
     loading?: boolean
+    name: string
+    noForm?: boolean
     required?: boolean
     reverseOrder?: boolean
     // used for styling
@@ -96,7 +97,7 @@ const errorMessageId = computed(() => `${props.name}-error`)
 const type = computed(() => props.type)
 
 // inject form manually because useIsFieldTouched and useIsFieldValid throw a warning because state?.value is initially undefined
-const form = inject(FormContextKey)
+const form = props.noForm ? undefined : inject(FormContextKey)
 const state = computed(() => form?.getPathState(toValue(() => props.name)))
 
 const touched = computed(() => state.value?.touched)
