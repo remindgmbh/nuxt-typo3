@@ -3,15 +3,13 @@
         :is="wrapperTag"
         aria-live="polite"
         class="t3-input-wrapper"
-        :class="[
-            `t3-input-wrapper--${type}`,
-            {
-                't3-input-wrapper--required': required,
-                't3-input-wrapper--disabled': loading,
-                't3-input-wrapper--error': touched && !valid,
-                't3-input-wrapper--success': touched && valid,
-            },
-        ]"
+        :class="{
+            [`t3-input-wrapper--${type}`]: type,
+            't3-input-wrapper--required': required,
+            't3-input-wrapper--disabled': loading,
+            't3-input-wrapper--error': touched && !valid,
+            't3-input-wrapper--success': touched && valid,
+        }"
     >
         <T3Sortable :order="order">
             <template v-if="!hideLabel" #[LABEL]>
