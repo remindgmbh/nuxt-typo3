@@ -1,7 +1,10 @@
 <template>
-    <T3Select
+    <T3FormElementSelect
         :default-value="formElement.defaultValue"
         :disabled="loading"
+        :error="apiError"
+        :label="formElement.label"
+        :loading="loading"
         :name="formElement.name"
         :options="selectOptions"
         :required="required"
@@ -11,12 +14,10 @@
 
 <script setup lang="ts">
 import { type T3Model, useT3FormElement } from '#imports'
+import { type Props } from '@remindgmbh/nuxt-typo3/components/typo3/content/helper/T3Form/T3FormFrameworkElement.vue'
 import { computed } from 'vue'
 
-const props = defineProps<{
-    formElement: T3Model.Typo3.Content.Data.Form.FormElement
-    loading?: boolean
-}>()
+const props = defineProps<Props>()
 
 const { required, options, validation } = useT3FormElement(props.formElement)
 

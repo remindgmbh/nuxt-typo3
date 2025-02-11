@@ -2,13 +2,12 @@
     <component
         :is="wrapperTag"
         aria-live="polite"
-        class="t3-input-wrapper"
+        class="t3-form-element"
         :class="{
-            [`t3-input-wrapper--${type}`]: type,
-            't3-input-wrapper--required': required,
-            't3-input-wrapper--disabled': loading,
-            't3-input-wrapper--error': touched && !valid,
-            't3-input-wrapper--success': touched && valid,
+            't3-form-element--required': required,
+            't3-form-element--disabled': loading,
+            't3-form-element--error': touched && !valid,
+            't3-form-element--success': touched && valid,
         }"
     >
         <T3Sortable :order="order">
@@ -16,7 +15,7 @@
                 <slot name="beforeLabel"></slot>
                 <component
                     :is="labelTag"
-                    class="t3-input-wrapper__label"
+                    class="t3-form-element__label"
                     :for="name"
                 >
                     <slot :label="label" name="label">
@@ -24,7 +23,7 @@
                         <span
                             v-if="required"
                             aria-hidden="true"
-                            class="t3-input-wrapper__required-hint"
+                            class="t3-form-element__required-hint"
                             >*</span
                         >
                     </slot>
@@ -33,7 +32,7 @@
             </template>
             <template #[INPUT]>
                 <slot
-                    css-class="t3-input-wrapper__input"
+                    css-class="t3-form-element__input"
                     :error-aria-attrs="errorAriaAttrs"
                     name="input"
                 ></slot>
@@ -45,7 +44,7 @@
                 <span
                     v-show="errorMessage"
                     :id="errorMessageId"
-                    class="t3-input-wrapper__error"
+                    class="t3-form-element__error"
                 >
                     <!-- use lastErrorMessage because with v-show errorMessage is not available during transition leave  -->
                     <slot :error-message="lastErrorMessage" name="errorMessage">
@@ -62,20 +61,22 @@
 import { computed, inject, ref, toValue, watch } from 'vue'
 import { FormContextKey } from 'vee-validate'
 
-export interface Props {
+export interface FormElementProps {
     error?: string
-    hideLabel?: boolean
     label: string
-    labelTag?: 'legend' | 'span' | 'label'
     loading?: boolean
     name: string
-    noForm?: boolean
     required?: boolean
+}
+
+interface ConfigurationProps {
+    hideLabel?: boolean
+    labelTag?: 'legend' | 'span' | 'label'
     reverseOrder?: boolean
-    // used for styling
-    type?: string
     wrapperTag?: keyof HTMLElementTagNameMap
 }
+
+export type Props = FormElementProps & ConfigurationProps
 
 const props = withDefaults(defineProps<Props>(), {
     error: undefined,
@@ -94,10 +95,8 @@ const order = computed(() => {
 
 const errorMessageId = computed(() => `${props.name}-error`)
 
-const type = computed(() => props.type)
-
 // inject form manually because useIsFieldTouched and useIsFieldValid throw a warning because state?.value is initially undefined
-const form = props.noForm ? undefined : inject(FormContextKey)
+const form = inject(FormContextKey, undefined)
 const state = computed(() => form?.getPathState(toValue(() => props.name)))
 
 const touched = computed(() => state.value?.touched)

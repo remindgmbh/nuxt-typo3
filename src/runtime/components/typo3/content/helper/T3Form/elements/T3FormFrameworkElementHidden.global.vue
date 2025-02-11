@@ -4,12 +4,10 @@
 
 <script setup lang="ts">
 import { computed, watch } from 'vue'
-import { type T3Model } from '#imports'
+import { type Props } from '@remindgmbh/nuxt-typo3/components/typo3/content/helper/T3Form/T3FormFrameworkElement.vue'
 import { useField } from 'vee-validate'
 
-const props = defineProps<{
-    formElement: T3Model.Typo3.Content.Data.Form.FormElement
-}>()
+const props = defineProps<Props>()
 
 const name = computed(() => props.formElement.name)
 

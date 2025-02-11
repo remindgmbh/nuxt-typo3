@@ -6,7 +6,6 @@ type RequiredAppConfig = Required<
         | 'api'
         | 'breadcrumbs'
         | 'contentElements'
-        | 'form'
         | 'i18n'
         | 'imageFileExtension'
         | 'languages'
@@ -22,14 +21,6 @@ export type AppConfig = RequiredAppConfig & {
     }
     breadcrumbs: {
         fullWidth: Required<RequiredAppConfig['breadcrumbs']>['fullWidth']
-    }
-    form: {
-        hideLabel: Required<RequiredAppConfig['form']>['hideLabel']
-        reverseOrder: Required<RequiredAppConfig['form']>['reverseOrder']
-        wrapper: {
-            fieldset: Required<RequiredAppConfig['form']>['wrapper']['fieldset']
-            label: Required<RequiredAppConfig['form']>['wrapper']['label']
-        }
     }
     i18n: {
         locale: Required<RequiredAppConfig['i18n']>['locale']

@@ -1,5 +1,5 @@
 <template>
-    <T3FormElement
+    <T3FormFrameworkElement
         v-for="formElement in formElements"
         :key="formElement.name"
         :api-error="apiErrors?.[formElement.identifier]"
@@ -9,7 +9,7 @@
         <template #error="{ errorMessage }">
             <slot :error-message="errorMessage" name="error"></slot>
         </template>
-    </T3FormElement>
+    </T3FormFrameworkElement>
 </template>
 
 <script setup lang="ts">

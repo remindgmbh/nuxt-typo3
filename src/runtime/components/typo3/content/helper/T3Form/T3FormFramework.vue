@@ -1,7 +1,7 @@
 <template>
-    <form class="t3-form" @submit="submit">
-        <div class="t3-form__elements">
-            <T3FormElements
+    <form class="t3-form-framework" @submit="submit">
+        <div class="t3-form-framework__elements">
+            <T3FormFrameworkElements
                 :api-errors="apiErrors"
                 :form-elements="formElements"
                 :loading="loading"
@@ -9,13 +9,13 @@
                 <template #error="{ errorMessage }">
                     <slot :error-message="errorMessage" name="error"></slot>
                 </template>
-            </T3FormElements>
+            </T3FormFrameworkElements>
         </div>
         <slot name="before-submit"></slot>
-        <div class="t3-form__submit-wrapper">
+        <div class="t3-form-framework__submit-wrapper">
             <button
-                class="t3-form__submit"
-                :class="{ 't3-form__submit--loading': loading }"
+                class="t3-form-framework__submit"
+                :class="{ 't3-form-framework__submit--loading': loading }"
                 :disabled="loading"
                 type="submit"
             >

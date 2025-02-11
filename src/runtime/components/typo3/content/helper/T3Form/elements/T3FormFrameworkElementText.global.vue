@@ -1,22 +1,23 @@
 <template>
-    <T3Textfield
+    <T3FormElementTextfield
         :default-value="formElement.defaultValue"
         :disabled="loading"
+        :error="apiError"
+        :label="formElement.label"
+        :loading="loading"
         :name="formElement.name"
         :placeholder="placeholder"
         :required="required"
-        type="password"
+        type="text"
         :validation="validation"
     />
 </template>
 
 <script setup lang="ts">
-import { type T3Model, useT3FormElement } from '#imports'
+import { type Props } from '@remindgmbh/nuxt-typo3/components/typo3/content/helper/T3Form/T3FormFrameworkElement.vue'
+import { useT3FormElement } from '#imports'
 
-const props = defineProps<{
-    formElement: T3Model.Typo3.Content.Data.Form.FormElement
-    loading?: boolean
-}>()
+const props = defineProps<Props>()
 
 const { required, placeholder, validation } = useT3FormElement(
     props.formElement,

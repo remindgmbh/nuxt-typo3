@@ -20,14 +20,6 @@ export default defineNuxtPlugin(() => {
             fullWidth: false,
         },
         contentElements: {},
-        form: {
-            hideLabel: ['GridRow'],
-            reverseOrder: ['Checkbox'],
-            wrapper: {
-                fieldset: ['Fieldset', 'MultiCheckbox', 'RadioButton'],
-                label: ['Checkbox'],
-            },
-        },
         i18n: {
             locale: 'de',
             messages: {},
