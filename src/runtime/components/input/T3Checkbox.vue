@@ -5,7 +5,6 @@
         :checked="checked"
         class="t3-checkbox"
         :disabled="disabled"
-        :name="name"
         :required="required"
         type="checkbox"
         @blur="handleBlur"

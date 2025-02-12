@@ -1,6 +1,5 @@
 <template>
     <T3Input
-        :id="name"
         v-model="value"
         class="t3-textarea"
         :disabled="disabled"

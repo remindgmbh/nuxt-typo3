@@ -1,10 +1,8 @@
 <template>
     <input
-        :id="name + value"
         autocomplete="off"
         :checked="checked"
         :disabled="disabled"
-        :name="name"
         :required="required"
         type="checkbox"
         :value="value"

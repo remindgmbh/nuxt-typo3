@@ -11,7 +11,6 @@
             :aria-invalid="ariaInvalid"
             class="t3-select__trigger"
             :disabled="disabled"
-            :name="name"
             :required="required"
             @blur="onBlur"
             @keydown="onKeydown"

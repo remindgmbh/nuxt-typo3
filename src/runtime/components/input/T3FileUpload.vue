@@ -18,7 +18,6 @@
             class="t3-file-upload__input"
             :disabled="disabled"
             :multiple="multiple"
-            :name="name"
             :placeholder="placeholder"
             :required="required"
             type="file"

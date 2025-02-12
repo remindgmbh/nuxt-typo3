@@ -4,7 +4,6 @@
             v-for="(optionLabel, optionValue) in options"
             :key="optionValue"
             class="t3-checkbox-group__option"
-            :for="name + optionValue.toString()"
         >
             <T3CheckboxGroupOption
                 v-model="model"

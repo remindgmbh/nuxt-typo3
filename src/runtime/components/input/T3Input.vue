@@ -3,7 +3,6 @@
         :is="type === 'textarea' ? 'textarea' : 'input'"
         :id="name"
         class="t3-input"
-        :name="name"
         :type="type"
         :value="model"
         @input="model = $event.target.value"

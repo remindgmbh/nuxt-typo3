@@ -8,12 +8,12 @@
         }"
     >
         <slot>
-            <div v-if="content.subheader" class="t3-header__sub">
+            <span v-if="content.subheader" class="t3-header__sub">
                 <slot name="sub">
                     {{ content.subheader }}
                 </slot>
-            </div>
-            <div class="t3-header__main">
+            </span>
+            <span class="t3-header__main">
                 <template v-if="!content.headerLink">
                     <slot name="main">
                         {{ content.header }}
@@ -24,7 +24,7 @@
                         {{ content.header }}
                     </slot>
                 </T3Link>
-            </div>
+            </span>
         </slot>
     </component>
 </template>
