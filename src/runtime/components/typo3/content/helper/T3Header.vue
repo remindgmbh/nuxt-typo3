@@ -58,9 +58,12 @@ const { visible, tag } = useT3Header(props.content)
     &__sub {
         font-size: initial;
         font-weight: initial;
+        display: block;
     }
 
     &__main {
+        display: block;
+
         a {
             text-decoration: inherit;
             color: inherit;
