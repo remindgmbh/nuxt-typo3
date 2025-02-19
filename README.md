@@ -29,8 +29,6 @@ TYPO3 Instance with the following extensions:
 
 ## Configuration
 
-Module options are described in `ModuleOptions` Interface in [module.ts](src/module.ts) and can be set using the config key `typo3`. Public runtimeConfig can be used as well to set module options.
-
 Available [App Config](https://nuxt.com/docs/guide/directory-structure/app-config) inputs are described in [AppConfigInput Interface](src/runtime/models/config/appConfigInput.ts).
 
 ## Customization

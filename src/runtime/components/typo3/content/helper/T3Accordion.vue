@@ -64,8 +64,16 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 defineSlots<{
-    title(props: { item: T3Model.Typo3.Content.Item; index: number }): any
-    content(props: { item: T3Model.Typo3.Content.Item; index: number }): any
+    title(props: {
+        active: boolean
+        index: number
+        item: T3Model.Typo3.Content.Item
+    }): any
+    content(props: {
+        active: boolean
+        index: number
+        item: T3Model.Typo3.Content.Item
+    }): any
 }>()
 
 const {

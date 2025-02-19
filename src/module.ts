@@ -15,13 +15,7 @@ import { defu } from 'defu'
 
 export const CONFIG_KEY = 'typo3'
 
-export interface ModuleOptions {
-    // Path to SCSS Variables to override default values defined in runtime/assets/style/*.scss
-    // See playground assets/breakpoints.scss or assets/colors.scss for example
-    scssForwards?: string | string[]
-}
-
-export default defineNuxtModule<ModuleOptions>({
+export default defineNuxtModule({
     meta: {
         configKey: CONFIG_KEY,
         name,
@@ -41,7 +35,7 @@ export default defineNuxtModule<ModuleOptions>({
             )
         })
 
-        let viteConfig: ViteConfig = {
+        const viteConfig: ViteConfig = {
             css: {
                 preprocessorOptions: {
                     scss: {
@@ -55,31 +49,6 @@ export default defineNuxtModule<ModuleOptions>({
             optimizeDeps: {
                 include: ['yup'],
             },
-        }
-
-        if (options.scssForwards) {
-            const scssForwards =
-                typeof options.scssForwards === 'string'
-                    ? [options.scssForwards]
-                    : options.scssForwards
-
-            viteConfig = defu(
-                {
-                    css: {
-                        preprocessorOptions: {
-                            scss: {
-                                additionalData:
-                                    `${scssForwards.map((value) => `@forward "${value}"`).join(';')};`.concat(
-                                        nuxt.options.vite.css
-                                            ?.preprocessorOptions?.scss
-                                            .additionalData ?? '',
-                                    ),
-                            },
-                        },
-                    },
-                },
-                viteConfig,
-            )
         }
 
         nuxt.options.vite = defu(viteConfig, nuxt.options.vite)

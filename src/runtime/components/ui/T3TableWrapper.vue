@@ -26,7 +26,7 @@ defineProps<{
         position: absolute;
         width: 0;
         height: 100%;
-        transition: width 0;
+        transition: width 0s;
         z-index: $viewport-z-index + 1;
         pointer-events: none;
 
