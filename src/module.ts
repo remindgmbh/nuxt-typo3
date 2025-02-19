@@ -21,7 +21,7 @@ export default defineNuxtModule({
         name,
         version,
     },
-    async setup(options, nuxt) {
+    async setup(_options, nuxt) {
         const resolver = createResolver(import.meta.url)
 
         nuxt.hook('prepare:types', (options) => {
@@ -36,13 +36,6 @@ export default defineNuxtModule({
         })
 
         const viteConfig: ViteConfig = {
-            css: {
-                preprocessorOptions: {
-                    scss: {
-                        api: 'modern',
-                    },
-                },
-            },
             // https://github.com/vitejs/vite/issues/9220
             // without this the following error occurs when using this module in a project in dev mode:
             // Uncaught (in promise) SyntaxError: The requested module doesn't provide an export named: 'snakeCase'
