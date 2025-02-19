@@ -8,23 +8,23 @@
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { debounce } from 'perfect-debounce'
+import { useT3Debounce } from '#imports'
 
 const root = ref<HTMLDivElement>()
 const content = ref<HTMLDivElement>()
 
 const lines = ref<number>(0)
 
+const { debounce } = useT3Debounce(() => {
+    const lineHeight = getLineHeight()
+    const contentHeight = getContentHeight()
+    if (lineHeight && contentHeight) {
+        lines.value = Math.floor(contentHeight / lineHeight)
+    }
+}, 50)
+
 onMounted(() => {
-    const resizeObserver = new ResizeObserver(
-        debounce(() => {
-            const lineHeight = getLineHeight()
-            const contentHeight = getContentHeight()
-            if (lineHeight && contentHeight) {
-                lines.value = Math.floor(contentHeight / lineHeight)
-            }
-        }, 50),
-    )
+    const resizeObserver = new ResizeObserver(debounce)
 
     if (root.value) {
         resizeObserver.observe(root.value)
