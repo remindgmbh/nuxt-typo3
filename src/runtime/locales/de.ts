@@ -1,4 +1,4 @@
-import { type MessageContext } from 'vue-i18n'
+import type { MessageContext } from 'vue-i18n'
 
 export default {
     cookie: {

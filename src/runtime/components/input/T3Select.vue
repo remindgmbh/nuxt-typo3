@@ -58,7 +58,7 @@
 <script setup lang="ts">
 import { type RuleExpression, useField } from 'vee-validate'
 import { computed, ref, watch } from 'vue'
-import { type T3Model } from '#imports'
+import type { T3Model } from '#imports'
 
 export interface Props {
     ariaInvalid?: boolean

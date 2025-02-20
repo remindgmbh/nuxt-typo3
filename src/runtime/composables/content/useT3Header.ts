@@ -1,4 +1,4 @@
-import { type T3Model } from '#imports'
+import type { T3Model } from '#imports'
 import { computed } from 'vue'
 
 export function useT3Header(content: T3Model.Typo3.Content.Data.Header) {

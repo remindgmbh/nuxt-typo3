@@ -8,7 +8,7 @@ import {
     useT3Data,
     useT3YupUtil,
 } from '#imports'
-import { type GenericValidateFunction } from 'vee-validate'
+import type { GenericValidateFunction } from 'vee-validate'
 import { useI18n } from 'vue-i18n'
 
 export function useT3CeFeloginLogin(

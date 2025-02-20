@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts" generic="T">
-import { type TransitionProps } from 'vue'
+import type { TransitionProps } from 'vue'
 import { useT3Tabs } from '#imports'
 
 const props = withDefaults(

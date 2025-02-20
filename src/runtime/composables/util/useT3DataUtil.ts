@@ -1,4 +1,4 @@
-import { type T3Model } from '#imports'
+import type { T3Model } from '#imports'
 
 export function useT3DataUtil() {
     function findContentElement<T>(

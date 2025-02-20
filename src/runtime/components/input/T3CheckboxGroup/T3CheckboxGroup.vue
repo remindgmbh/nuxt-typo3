@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { type RuleExpression } from 'vee-validate'
+import type { RuleExpression } from 'vee-validate'
 import { computed } from 'vue'
 
 export interface Props {

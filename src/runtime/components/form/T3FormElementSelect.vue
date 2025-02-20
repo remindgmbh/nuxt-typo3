@@ -24,8 +24,8 @@
 </template>
 
 <script setup lang="ts">
-import { type FormElementProps } from '@remindgmbh/nuxt-typo3/components/form/T3FormElement.vue'
-import { type Props as InputProps } from '@remindgmbh/nuxt-typo3/components/input/T3Select.vue'
+import type { FormElementProps } from '@remindgmbh/nuxt-typo3/components/form/T3FormElement.vue'
+import type { Props as InputProps } from '@remindgmbh/nuxt-typo3/components/input/T3Select.vue'
 
 export type Props = InputProps & FormElementProps
 

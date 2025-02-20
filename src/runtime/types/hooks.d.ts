@@ -1,6 +1,6 @@
 import type * as T3Model from '../models'
 import type { HookResult } from '@nuxt/schema'
-import { type Ref } from 'vue'
+import type { Ref } from 'vue'
 
 declare module '#app' {
     interface RuntimeNuxtHooks {

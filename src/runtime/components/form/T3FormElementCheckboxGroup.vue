@@ -25,8 +25,8 @@
 </template>
 
 <script setup lang="ts">
-import { type FormElementProps } from '@remindgmbh/nuxt-typo3/components/form/T3FormElement.vue'
-import { type Props as InputProps } from '@remindgmbh/nuxt-typo3/components/input/T3CheckboxGroup/T3CheckboxGroup.vue'
+import type { FormElementProps } from '@remindgmbh/nuxt-typo3/components/form/T3FormElement.vue'
+import type { Props as InputProps } from '@remindgmbh/nuxt-typo3/components/input/T3CheckboxGroup/T3CheckboxGroup.vue'
 
 export type Props = InputProps & FormElementProps
 

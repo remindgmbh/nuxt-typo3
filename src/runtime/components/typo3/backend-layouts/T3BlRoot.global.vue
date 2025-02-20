@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { type T3Model } from '#imports'
+import type { T3Model } from '#imports'
 
 defineProps<{
     pageData: T3Model.Typo3.Page

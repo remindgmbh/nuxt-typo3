@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { type T3Model } from '#imports'
+import type { T3Model } from '#imports'
 import { computed } from 'vue'
 
 const props = defineProps<{

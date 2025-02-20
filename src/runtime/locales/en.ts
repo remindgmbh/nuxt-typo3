@@ -1,4 +1,4 @@
-import { type MessageContext } from 'vue-i18n'
+import type { MessageContext } from 'vue-i18n'
 import { useT3Util } from '../composables/util/useT3Util'
 
 const { capitalize } = useT3Util()

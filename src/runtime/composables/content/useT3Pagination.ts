@@ -1,5 +1,5 @@
 import { type Ref, computed } from 'vue'
-import { type T3Model } from '#imports'
+import type { T3Model } from '#imports'
 
 export function useT3Pagination(
     pagination: Ref<T3Model.Typo3.Extbase.Pagination>,

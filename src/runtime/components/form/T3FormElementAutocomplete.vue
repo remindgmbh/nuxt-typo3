@@ -27,12 +27,12 @@
 </template>
 
 <script setup lang="ts">
-import {
-    type Emits,
-    type Props as InputProps,
+import type {
+    Emits,
+    Props as InputProps,
 } from '@remindgmbh/nuxt-typo3/components/input/T3Autocomplete/T3Autocomplete.vue'
-import { type FormElementProps } from '@remindgmbh/nuxt-typo3/components/form/T3FormElement.vue'
-import { type T3Model } from '#imports'
+import type { FormElementProps } from '@remindgmbh/nuxt-typo3/components/form/T3FormElement.vue'
+import type { T3Model } from '#imports'
 
 export type Props = InputProps & FormElementProps
 

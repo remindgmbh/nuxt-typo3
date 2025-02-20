@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { type T3Error } from '#imports'
+import type { T3Error } from '#imports'
 
 defineProps<{ error: T3Error.PageError }>()
 </script>

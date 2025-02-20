@@ -1,4 +1,4 @@
-import { type GenericValidateFunction, type RuleExpression } from 'vee-validate'
+import type { GenericValidateFunction, RuleExpression } from 'vee-validate'
 import { type Schema, array, boolean, date, mixed, number, string } from 'yup'
 import { type T3Model, useT3YupUtil } from '#imports'
 import { computed } from 'vue'

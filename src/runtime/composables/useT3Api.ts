@@ -4,8 +4,8 @@ import {
     useAppConfig,
     useRequestHeaders,
 } from '#imports'
-import { type FetchOptions } from 'ofetch'
-import { type NitroFetchRequest } from 'nitropack'
+import type { FetchOptions } from 'ofetch'
+import type { NitroFetchRequest } from 'nitropack'
 import { computed } from 'vue'
 
 export function useT3Api() {
