@@ -48,7 +48,7 @@
         "@nuxt/module-builder": "^0.8.4",
         "@nuxt/schema": "^3.15.4",
         "@remindgmbh/eslint-config-nuxt": "^2.0.0",
-        "@remindgmbh/stylelint-config": "^1.1.1",
+        "@remindgmbh/stylelint-config": "^1.2.0",
         "@types/node": "^22.13.4",
         "eslint": "^9.20.1",
         "nuxt": "^3.15.4",
