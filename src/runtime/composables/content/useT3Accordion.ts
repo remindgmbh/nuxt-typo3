@@ -1,41 +1,53 @@
-import { type MaybeRefOrGetter, ref, toValue } from 'vue'
-import type { T3Model } from '#imports'
+import { type Ref, ref } from 'vue'
 
 export function useT3Accordion(
-    id: MaybeRefOrGetter<string>,
-    initialActiveItems: MaybeRefOrGetter<any[]>,
-    disabledItems: MaybeRefOrGetter<any[]>,
-    multiple: MaybeRefOrGetter<boolean>,
+    id: Ref<string>,
+    initialActiveItems: Ref<number[]>,
+    disabledItems: Ref<number[]>,
+    multiple: Ref<boolean>,
 ) {
-    const activeItems = ref<number[]>([])
+    const activeItems = ref<string[]>([])
 
-    activeItems.value.push(...toValue(initialActiveItems))
+    activeItems.value.push(
+        ...initialActiveItems.value.map((index) => getKey(index)),
+    )
 
     function toggle(index: number): void {
-        if (toValue(disabledItems).includes(index)) {
+        const key = getKey(index)
+        if (disabledItems.value.includes(index)) {
             return
         }
-        if (activeItems.value.includes(index)) {
-            activeItems.value.splice(activeItems.value.indexOf(index), 1)
-        } else if (toValue(multiple)) {
-            activeItems.value.push(index)
+        if (activeItems.value.includes(key)) {
+            activeItems.value.splice(activeItems.value.indexOf(key), 1)
+        } else if (multiple.value) {
+            activeItems.value.push(key)
         } else {
-            activeItems.value = [index]
+            activeItems.value = [key]
         }
     }
 
-    function getButtonId(item: T3Model.Typo3.Content.Item) {
-        return `${id}-button-${item.id}`
+    function getKey(index: number) {
+        return `${id.value}-${index}`
     }
 
-    function getContentId(item: T3Model.Typo3.Content.Item) {
-        return `${id}-content-${item.id}`
+    function getButtonId(index: number) {
+        return `${getKey(index)}-button`
+    }
+
+    function getContentId(index: number) {
+        return `${getKey(index)}-content`
+    }
+
+    function isActive(index: number) {
+        return activeItems.value.includes(getKey(index))
     }
 
     return {
         activeItems,
         getButtonId,
         getContentId,
+        getKey,
+        isActive,
         toggle,
     }
 }

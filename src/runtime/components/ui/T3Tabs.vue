@@ -1,11 +1,15 @@
 <template>
     <section class="t3-tabs">
-        <div class="t3-tabs__links">
+        <div class="t3-tabs__links" role="tablist">
             <button
                 v-for="(item, index) in props.items"
-                :key="index"
+                :id="getButtonId(index)"
+                :key="getKey(index)"
+                :aria-controls="getContentId(index)"
+                :aria-selected="activeItemIndex === index"
                 class="t3-tabs__link"
                 :class="{ 't3-tabs__link--active': activeItemIndex === index }"
+                type="button"
                 @click="toggle(index)"
             >
                 <slot
@@ -21,7 +25,9 @@
             <Transition v-bind="transition">
                 <section
                     v-show="activeItemIndex !== undefined"
+                    :id="getContentId(activeItemIndex ?? 0)"
                     :key="activeItemIndex"
+                    :aria-labelledby="getButtonId(activeItemIndex ?? 0)"
                     class="t3-tabs__content"
                 >
                     <slot
@@ -37,24 +43,17 @@
 </template>
 
 <script setup lang="ts" generic="T">
+import { toRef, useId, useT3Tabs } from '#imports'
 import type { TransitionProps } from 'vue'
-import { useT3Tabs } from '#imports'
 
 export interface Props<T> {
-    initialActiveIndex?: number | null
+    id?: string
+    initialActiveIndex?: number
     items: T[]
     transition?: TransitionProps
 }
 
-const props = withDefaults(defineProps<Props<T>>(), {
-    initialActiveIndex: 0,
-    transition: () => ({
-        mode: 'out-in',
-        name: 'tab-change-transition',
-    }),
-})
-
-defineSlots<{
+export interface Slots<T> {
     title(props: {
         isActive: boolean
         item: T
@@ -66,10 +65,29 @@ defineSlots<{
         index: number
         toggle: (index?: number) => void
     }): any
-}>()
+}
 
-const { activeItem, activeItemIndex, toggle } = useT3Tabs<T>(
-    props.items,
-    props.initialActiveIndex ?? undefined,
+const props = withDefaults(defineProps<Props<T>>(), {
+    id: useId(),
+    initialActiveIndex: 0,
+    transition: () => ({
+        mode: 'out-in',
+        name: 'tab-change-transition',
+    }),
+})
+
+defineSlots<Slots<T>>()
+
+const {
+    activeItem,
+    activeItemIndex,
+    getButtonId,
+    getContentId,
+    getKey,
+    toggle,
+} = useT3Tabs<T>(
+    toRef(() => props.id),
+    toRef(() => props.items),
+    toRef(() => props.initialActiveIndex),
 )
 </script>
