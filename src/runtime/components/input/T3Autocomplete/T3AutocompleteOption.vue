@@ -29,17 +29,21 @@
 <script setup lang="ts">
 import type { T3Model } from '#imports'
 
-defineProps<{
+export interface Props {
     option: T3Model.Input.Autocomplete.Option
     selected: boolean
     hovered: boolean
-}>()
+}
 
-const emit = defineEmits<{
+export interface Emits {
     click: [ev: Event]
     mouseover: [ev: Event]
     mouseleave: [ev: Event]
-}>()
+}
+
+defineProps<Props>()
+
+const emit = defineEmits<Emits>()
 
 function onClick(ev: Event) {
     emit('click', ev)

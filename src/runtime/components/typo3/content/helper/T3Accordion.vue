@@ -76,12 +76,7 @@ defineSlots<{
     }): any
 }>()
 
-const {
-    activeItems,
-    getContentId,
-    getButtonId: getButtonId,
-    toggle,
-} = useT3Accordion(
+const { activeItems, getContentId, getButtonId, toggle } = useT3Accordion(
     props.id,
     props.initialActiveItems,
     props.disabledItems,

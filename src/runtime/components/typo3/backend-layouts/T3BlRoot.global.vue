@@ -7,7 +7,9 @@
 <script setup lang="ts">
 import type { T3Model } from '#imports'
 
-defineProps<{
+export interface Props {
     pageData: T3Model.Typo3.Page
-}>()
+}
+
+defineProps<Props>()
 </script>

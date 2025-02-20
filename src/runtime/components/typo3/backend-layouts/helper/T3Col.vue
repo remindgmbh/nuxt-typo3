@@ -10,10 +10,9 @@
 <script setup lang="ts">
 import type { T3Model } from '#imports'
 
-withDefaults(
-    defineProps<{
-        contentElements?: T3Model.Typo3.Content.Element[]
-    }>(),
-    { contentElements: () => [] },
-)
+export interface Props {
+    contentElements?: T3Model.Typo3.Content.Element[]
+}
+
+withDefaults(defineProps<Props>(), { contentElements: () => [] })
 </script>

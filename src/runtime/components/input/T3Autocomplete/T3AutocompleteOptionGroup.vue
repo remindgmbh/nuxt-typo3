@@ -27,14 +27,18 @@
 <script setup lang="ts">
 import type { T3Model } from '#imports'
 
-defineProps<{
+export interface Props {
+    hoverOption?: T3Model.Input.Autocomplete.Option
     optionGroup: T3Model.Input.Autocomplete.OptionGroup
     value: T3Model.Input.Autocomplete.Option
-    hoverOption?: T3Model.Input.Autocomplete.Option
-}>()
+}
 
-const emit = defineEmits<{
+export interface Emits {
     select: [option: T3Model.Input.Autocomplete.Option]
     'update:hoverOption': [option?: T3Model.Input.Autocomplete.Option]
-}>()
+}
+
+defineProps<Props>()
+
+const emit = defineEmits<Emits>()
 </script>

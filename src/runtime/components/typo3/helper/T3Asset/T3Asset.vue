@@ -10,7 +10,7 @@ import { type T3Model, useT3Asset, useT3DynamicComponent } from '#imports'
 import { T3AssetDefault } from '#components'
 import { toRef } from 'vue'
 
-const props = defineProps<{
+export interface Props {
     crop?: string
     file: T3Model.Typo3.Asset.Base
     fileExtension?: string
@@ -20,7 +20,9 @@ const props = defineProps<{
     loop?: boolean
     muted?: boolean
     controls?: boolean
-}>()
+}
+
+const props = defineProps<Props>()
 
 const { type } = useT3Asset(toRef(() => props.file))
 

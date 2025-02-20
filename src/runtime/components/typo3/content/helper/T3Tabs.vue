@@ -40,20 +40,19 @@
 import type { TransitionProps } from 'vue'
 import { useT3Tabs } from '#imports'
 
-const props = withDefaults(
-    defineProps<{
-        initialActiveIndex?: number | null
-        items: T[]
-        transition?: TransitionProps
-    }>(),
-    {
-        initialActiveIndex: 0,
-        transition: () => ({
-            mode: 'out-in',
-            name: 'tab-change-transition',
-        }),
-    },
-)
+export interface Props<T> {
+    initialActiveIndex?: number | null
+    items: T[]
+    transition?: TransitionProps
+}
+
+const props = withDefaults(defineProps<Props<T>>(), {
+    initialActiveIndex: 0,
+    transition: () => ({
+        mode: 'out-in',
+        name: 'tab-change-transition',
+    }),
+})
 
 defineSlots<{
     title(props: {

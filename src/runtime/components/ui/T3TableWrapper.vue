@@ -3,9 +3,11 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
+export interface Props {
     overlayColor?: string
-}>()
+}
+
+defineProps<Props>()
 </script>
 
 <style lang="scss">

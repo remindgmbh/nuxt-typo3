@@ -52,29 +52,28 @@ import {
 import { type FocusTrap, createFocusTrap } from 'focus-trap'
 import { useRoute, useT3LayoutInjection, useT3Util } from '#imports'
 
-const props = withDefaults(
-    defineProps<{
-        contentClass?: string
-        footerClass?: string
-        headerClass?: string
-        menuClass?: string
-        menuCloseOnOutsideClick?: boolean
-        menuCloseOnRouteChange?: boolean
-        menuFullHeight?: boolean
-        menuOverlapHeader?: boolean
-        menuTransition?: TransitionProps
-    }>(),
-    {
-        contentClass: undefined,
-        footerClass: undefined,
-        headerClass: undefined,
-        menuClass: undefined,
-        menuCloseOnRouteChange: true,
-        menuTransition: () => ({
-            name: 'menu-transition',
-        }),
-    },
-)
+export interface Props {
+    contentClass?: string
+    footerClass?: string
+    headerClass?: string
+    menuClass?: string
+    menuCloseOnOutsideClick?: boolean
+    menuCloseOnRouteChange?: boolean
+    menuFullHeight?: boolean
+    menuOverlapHeader?: boolean
+    menuTransition?: TransitionProps
+}
+
+const props = withDefaults(defineProps<Props>(), {
+    contentClass: undefined,
+    footerClass: undefined,
+    headerClass: undefined,
+    menuClass: undefined,
+    menuCloseOnRouteChange: true,
+    menuTransition: () => ({
+        name: 'menu-transition',
+    }),
+})
 
 enum MenuStatus {
     Entering,

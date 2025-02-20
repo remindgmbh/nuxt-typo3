@@ -58,22 +58,21 @@
 import { type T3Model, useT3Pagination } from '#imports'
 import { toRef } from 'vue'
 
-const props = withDefaults(
-    defineProps<{
-        ariaLabelNextPage?: string
-        ariaLabelPage?: (page: T3Model.Typo3.Extbase.PaginationPage) => string
-        ariaLabelPrevPage?: string
-        disableNavigation?: boolean
-        numberOfPages?: number
-        pagination: T3Model.Typo3.Extbase.Pagination
-    }>(),
-    {
-        ariaLabelNextPage: undefined,
-        ariaLabelPage: () => '',
-        ariaLabelPrevPage: undefined,
-        numberOfPages: undefined,
-    },
-)
+export interface Props {
+    ariaLabelNextPage?: string
+    ariaLabelPage?: (page: T3Model.Typo3.Extbase.PaginationPage) => string
+    ariaLabelPrevPage?: string
+    disableNavigation?: boolean
+    numberOfPages?: number
+    pagination: T3Model.Typo3.Extbase.Pagination
+}
+
+const props = withDefaults(defineProps<Props>(), {
+    ariaLabelNextPage: undefined,
+    ariaLabelPage: () => '',
+    ariaLabelPrevPage: undefined,
+    numberOfPages: undefined,
+})
 
 const { pages, showDivider } = useT3Pagination(
     toRef(() => props.pagination),

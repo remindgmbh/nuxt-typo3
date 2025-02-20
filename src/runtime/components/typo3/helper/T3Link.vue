@@ -14,12 +14,14 @@
 import type { T3Model } from '#imports'
 import { computed } from 'vue'
 
-const props = defineProps<{
+export interface Props {
     // define explicitly because NuxtLink/RouterLink sets aria-current depending on active state without considering query
     ariaCurrent?: Element['ariaCurrent']
     disabled?: boolean
     to?: T3Model.Typo3.TypoLink | string
-}>()
+}
+
+const props = defineProps<Props>()
 
 const href = computed(
     () => (typeof props.to === 'string' ? props.to : props.to?.href) ?? '',

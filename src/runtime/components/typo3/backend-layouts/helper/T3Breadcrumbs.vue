@@ -56,10 +56,12 @@
 import { type T3Model, useAppConfig, useT3Theme, useT3Util } from '#imports'
 import { computed, onMounted, ref } from 'vue'
 
-const props = defineProps<{
+export interface Props {
     ariaLabel?: string
     pageData: T3Model.Typo3.Page
-}>()
+}
+
+const props = defineProps<Props>()
 
 const { typo3: config } = useAppConfig()
 const { backgroundColors } = useT3Theme()

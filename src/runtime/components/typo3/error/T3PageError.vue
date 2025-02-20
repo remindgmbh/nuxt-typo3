@@ -15,7 +15,11 @@
 <script setup lang="ts">
 import type { T3Error } from '#imports'
 
-defineProps<{ error: T3Error.PageError }>()
+export interface Props {
+    error: T3Error.PageError
+}
+
+defineProps<Props>()
 </script>
 
 <style lang="scss">

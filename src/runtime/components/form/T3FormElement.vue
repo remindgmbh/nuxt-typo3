@@ -61,7 +61,8 @@
 import { computed, inject, ref, toValue, watch } from 'vue'
 import { FormContextKey } from 'vee-validate'
 
-export interface FormElementProps {
+// these props have to be defined as props in the actual form element implementations as well
+export interface DynamicProps {
     error?: string
     label: string
     loading?: boolean
@@ -69,14 +70,15 @@ export interface FormElementProps {
     required?: boolean
 }
 
-interface ConfigurationProps {
+// these props can be used by the actual form element implementations for configuration
+interface StaticProps {
     hideLabel?: boolean
     labelTag?: 'legend' | 'span' | 'label'
     reverseOrder?: boolean
     wrapperTag?: keyof HTMLElementTagNameMap
 }
 
-export type Props = FormElementProps & ConfigurationProps
+export type Props = DynamicProps & StaticProps
 
 const props = withDefaults(defineProps<Props>(), {
     error: undefined,

@@ -9,12 +9,11 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 
-withDefaults(
-    defineProps<{
-        tag?: keyof HTMLElementTagNameMap
-    }>(),
-    { tag: 'div' },
-)
+export interface Props {
+    tag?: keyof HTMLElementTagNameMap
+}
+
+withDefaults(defineProps<Props>(), { tag: 'div' })
 
 const container = ref<HTMLElement>()
 const content = ref<HTMLElement>()

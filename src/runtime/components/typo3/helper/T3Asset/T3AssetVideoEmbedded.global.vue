@@ -9,7 +9,11 @@
 <script setup lang="ts">
 import type { T3Model } from '#imports'
 
-defineProps<{ file: T3Model.Typo3.Asset.Video }>()
+export interface Props {
+    file: T3Model.Typo3.Asset.Video
+}
+
+defineProps<Props>()
 </script>
 
 <style lang="scss">

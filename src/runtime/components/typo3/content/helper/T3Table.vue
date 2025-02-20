@@ -40,13 +40,15 @@
 import { ref } from 'vue'
 import { useT3TableEnhancer } from '#imports'
 
-defineProps<{
+export interface Props {
     caption?: string
     headerLeft?: boolean
     tbody: string[][]
     tfoot?: string[]
     thead?: string[]
-}>()
+}
+
+defineProps<Props>()
 
 const el = ref<HTMLTableElement>()
 

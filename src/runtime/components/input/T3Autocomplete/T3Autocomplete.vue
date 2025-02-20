@@ -52,7 +52,8 @@ export interface Props {
 }
 
 export interface Emits {
-    (e: 'input' | 'select', value: T3Model.Input.Autocomplete.Option): void
+    input: [value: T3Model.Input.Autocomplete.Option]
+    select: [value: T3Model.Input.Autocomplete.Option]
 }
 
 const props = defineProps<Props>()

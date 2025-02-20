@@ -9,11 +9,13 @@
 import { onMounted, ref, watch } from 'vue'
 import { useId, useLogger, useT3Api } from '#imports'
 
-const props = defineProps<{
+export interface Props {
     src: string
     title?: string
     description?: string
-}>()
+}
+
+const props = defineProps<Props>()
 
 const logger = useLogger()
 

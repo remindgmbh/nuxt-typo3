@@ -15,12 +15,11 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(
-    defineProps<{
-        transitionName?: string
-    }>(),
-    { transitionName: 'collapse-transition' },
-)
+export interface Props {
+    transitionName?: string
+}
+
+withDefaults(defineProps<Props>(), { transitionName: 'collapse-transition' })
 
 let initialHeight = ''
 let initialOverflowY = ''

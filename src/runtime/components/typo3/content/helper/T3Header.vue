@@ -32,9 +32,11 @@
 <script setup lang="ts">
 import { type T3Model, useT3Header } from '#imports'
 
-const props = defineProps<{
+export interface Props {
     content: T3Model.Typo3.Content.Data.Header
-}>()
+}
+
+const props = defineProps<Props>()
 
 const { visible, tag } = useT3Header(props.content)
 </script>

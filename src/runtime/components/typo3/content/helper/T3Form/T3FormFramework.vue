@@ -38,12 +38,13 @@ export interface Props {
     loadingLabel?: string
     submitLabel: string
 }
+export interface Emits {
+    submit: [data: { [key: string]: string }]
+}
 
 defineProps<Props>()
 
-const emit = defineEmits<{
-    submit: [data: { [key: string]: string }]
-}>()
+const emit = defineEmits<Emits>()
 
 const { handleSubmit } = useForm()
 

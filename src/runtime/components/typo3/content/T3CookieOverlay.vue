@@ -21,10 +21,12 @@
 import { type T3Model, useT3CookieConsent } from '#imports'
 import { useI18n } from 'vue-i18n'
 
-defineProps<{
+export interface Props {
     category: T3Model.Typo3.Content.Cookie['category']
     message?: string
-}>()
+}
+
+defineProps<Props>()
 
 const { t } = useI18n()
 

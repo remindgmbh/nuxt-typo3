@@ -22,14 +22,16 @@
 import { type T3Model, useT3Asset, useT3Breakpoints } from '#imports'
 import { computed, toRef } from 'vue'
 
-const props = defineProps<{
+export interface Props {
     crop?: string
     file: T3Model.Typo3.Asset.Image
     fileExtension?: string
     maxHeight?: number
     maxWidth?: number
     sizes?: { [breakpoint: string]: number }
-}>()
+}
+
+const props = defineProps<Props>()
 
 const pixelDensities = [1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75, 3]
 

@@ -9,9 +9,11 @@
 import { type T3Model, useT3ContentInjection } from '#imports'
 import { computed } from 'vue'
 
-const props = defineProps<{
+export interface Props {
     contentElement: T3Model.Typo3.Content.Element
-}>()
+}
+
+const props = defineProps<Props>()
 
 const { provideContentElement } = useT3ContentInjection()
 

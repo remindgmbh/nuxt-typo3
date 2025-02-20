@@ -13,12 +13,14 @@
 import { type T3Model, useT3Asset } from '#imports'
 import { computed, toRef } from 'vue'
 
-const props = defineProps<{
+export interface Props {
     file: T3Model.Typo3.Asset.Video
     loop?: boolean
     muted?: boolean
     controls?: boolean
-}>()
+}
+
+const props = defineProps<Props>()
 
 const { getAssetUrl } = useT3Asset(toRef(() => props.file))
 

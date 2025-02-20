@@ -3,7 +3,9 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
+export interface Props {
     order: string[]
-}>()
+}
+
+defineProps<Props>()
 </script>

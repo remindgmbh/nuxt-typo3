@@ -72,7 +72,7 @@ export interface Props {
 }
 
 export interface Emits {
-    (e: 'change', value: string): void
+    change: [value: string]
 }
 
 const props = defineProps<Props>()
