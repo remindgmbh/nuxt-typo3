@@ -9,11 +9,10 @@
         :required="required"
         wrapper-tag="fieldset"
     >
-        <template #input="{ cssClass, errorAriaAttrs }">
+        <template #input="{ attrs }">
             <T3RadioButton
-                v-bind="errorAriaAttrs"
+                v-bind="attrs"
                 v-model="model"
-                :class="cssClass"
                 :default-value="defaultValue"
                 :disabled="disabled"
                 :name="name"

@@ -32,8 +32,11 @@
             </template>
             <template #[INPUT]>
                 <slot
-                    css-class="t3-form-element__input"
-                    :error-aria-attrs="errorAriaAttrs"
+                    :attrs="{
+                        class: 't3-form-element__input',
+                        'aria-errormessage': errorMessageId,
+                        'aria-invalid': !!errorMessage,
+                    }"
                     name="input"
                 ></slot>
             </template>
@@ -108,11 +111,6 @@ const errorMessage = computed(
 )
 
 const lastErrorMessage = ref<string>()
-
-const errorAriaAttrs = computed(() => ({
-    'aria-errormessage': errorMessageId.value,
-    'aria-invalid': !!errorMessage.value,
-}))
 
 watch(errorMessage, (value) => {
     if (value) {

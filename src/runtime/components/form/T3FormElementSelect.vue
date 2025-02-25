@@ -7,11 +7,10 @@
         :name="name"
         :required="required"
     >
-        <template #input="{ cssClass, errorAriaAttrs }">
+        <template #input="{ attrs }">
             <T3Select
-                v-bind="errorAriaAttrs"
+                v-bind="attrs"
                 v-model="model"
-                :class="cssClass"
                 :default-value="defaultValue"
                 :disabled="disabled"
                 :name="name"

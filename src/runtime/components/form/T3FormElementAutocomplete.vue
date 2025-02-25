@@ -7,18 +7,17 @@
         :name="name"
         :required="required"
     >
-        <template #input="{ cssClass, errorAriaAttrs }">
+        <template #input="{ attrs }">
             <T3Autocomplete
+                v-bind="attrs"
                 v-model="model"
                 :aria-label="ariaLabel"
-                :class="cssClass"
                 :default-value="defaultValue"
                 :disabled="disabled"
                 :name="name"
                 :option-groups="optionGroups"
                 :placeholder="placeholder"
                 :validation="validation"
-                v-bind="errorAriaAttrs"
                 @input="(value) => emit('input', value)"
                 @select="(value) => emit('select', value)"
             />

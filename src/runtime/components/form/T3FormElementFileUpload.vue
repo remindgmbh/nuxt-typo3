@@ -7,9 +7,9 @@
         :name="name"
         :required="required"
     >
-        <template #input="{ cssClass, errorAriaAttrs }">
+        <template #input="{ attrs }">
             <T3FileUpload
-                :class="cssClass"
+                v-bind="attrs"
                 :disabled="disabled"
                 :mime-types="mimeTypes"
                 :multiple="multiple"
@@ -17,7 +17,6 @@
                 :placeholder="placeholder"
                 :required="required"
                 :validation="validation"
-                v-bind="errorAriaAttrs"
             />
         </template>
     </T3FormElement>
