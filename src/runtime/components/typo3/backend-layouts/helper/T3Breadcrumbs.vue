@@ -61,7 +61,12 @@ export interface Props {
     pageData: T3Model.Typo3.Page
 }
 
+export interface Slots {
+    title(props: { title: string }): any
+}
+
 const props = defineProps<Props>()
+defineSlots<Slots>()
 
 const { typo3: config } = useAppConfig()
 const { backgroundColors } = useT3Theme()

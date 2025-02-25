@@ -7,7 +7,12 @@ export interface Props {
     overlayColor?: string
 }
 
+export interface Slots {
+    default(): any
+}
+
 defineProps<Props>()
+defineSlots<Slots>()
 </script>
 
 <style lang="scss">

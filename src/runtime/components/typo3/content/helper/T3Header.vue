@@ -36,7 +36,14 @@ export interface Props {
     content: T3Model.Typo3.Content.Data.Header
 }
 
+export interface Slots {
+    default(): any
+    sub(): any
+    main(): any
+}
+
 const props = defineProps<Props>()
+defineSlots<Slots>()
 
 const { visible, tag } = useT3Header(props.content)
 </script>

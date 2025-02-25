@@ -32,6 +32,10 @@ export interface Emits {
     (e: 'update:modelValue', value: boolean): void
 }
 
+export interface Slots {
+    default(): any
+}
+
 const props = withDefaults(defineProps<Props>(), {
     backgroundColor: undefined,
     closeOnOutsideClick: false,
@@ -39,6 +43,8 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const emit = defineEmits<Emits>()
+
+defineSlots<Slots>()
 
 defineOptions({
     inheritAttrs: false,

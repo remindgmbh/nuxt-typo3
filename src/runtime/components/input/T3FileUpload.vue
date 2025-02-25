@@ -2,7 +2,7 @@
     <div class="t3-file-upload">
         <slot name="beforeLabel"></slot>
         <label
-            v-if="$slots.label"
+            v-if="slots.label"
             class="t3-file-upload__label"
             :for="name"
             @dragover.prevent
@@ -25,7 +25,7 @@
             @change="onChange"
         />
         <slot :files="files" name="beforeFiles"></slot>
-        <ul v-if="$slots.file" class="t3-file-upload__files">
+        <ul v-if="slots.file" class="t3-file-upload__files">
             <li
                 v-for="(file, index) in files"
                 :key="index + file.name"
@@ -56,7 +56,18 @@ export interface Props {
     validation?: RuleExpression<any>
 }
 
+export interface Slots {
+    beforeLabel(): any
+    label(): any
+    afterLabel(): any
+    beforeFiles(props: { files: File[] }): any
+    file(props: { file: File; remove: () => void }): any
+    afterFiles(props: { files: File[] }): any
+}
+
 const props = defineProps<Props>()
+
+const slots = defineSlots<Slots>()
 
 const accept = computed(() => props.mimeTypes?.join(','))
 

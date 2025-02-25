@@ -5,11 +5,7 @@
         :api-error="apiErrors?.[formElement.identifier]"
         :form-element="formElement"
         :loading="loading"
-    >
-        <template #error="{ errorMessage }">
-            <slot :error-message="errorMessage" name="error"></slot>
-        </template>
-    </T3FormFrameworkElement>
+    />
 </template>
 
 <script setup lang="ts">

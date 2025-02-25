@@ -10,6 +10,12 @@
 <script setup lang="ts">
 import { useT3Content } from '#imports'
 
+export interface Slots {
+    default(): any
+}
+
+defineSlots<Slots>()
+
 const { backgroundColorValue, backgroundFullWidth, containerClasses } =
     useT3Content()
 </script>

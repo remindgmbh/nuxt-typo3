@@ -64,6 +64,13 @@ export interface Props {
     menuTransition?: TransitionProps
 }
 
+export interface Slots {
+    header(): any
+    content(): any
+    footer(): any
+    menu(): any
+}
+
 const props = withDefaults(defineProps<Props>(), {
     contentClass: undefined,
     footerClass: undefined,
@@ -74,6 +81,8 @@ const props = withDefaults(defineProps<Props>(), {
         name: 'menu-transition',
     }),
 })
+
+defineSlots<Slots>()
 
 enum MenuStatus {
     Entering,

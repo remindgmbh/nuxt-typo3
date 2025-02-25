@@ -83,12 +83,25 @@ interface StaticProps {
 
 export type Props = DynamicProps & StaticProps
 
+export interface Slots {
+    beforeLabel(): any
+    afterLabel(): any
+    label(props: { label: string }): any
+    input(props: { attrs: Record<string, unknown> }): any
+    beforeError(): any
+    error(props: { errorMessage?: string }): any
+    errorMessage(props: { errorMessage?: string }): any
+    afterError(): any
+}
+
 const props = withDefaults(defineProps<Props>(), {
     error: undefined,
     labelTag: 'label',
     type: undefined,
     wrapperTag: 'div',
 })
+
+defineSlots<Slots>()
 
 const LABEL = 'label'
 const INPUT = 'input'

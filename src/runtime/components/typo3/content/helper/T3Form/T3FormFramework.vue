@@ -5,13 +5,9 @@
                 :api-errors="apiErrors"
                 :form-elements="formElements"
                 :loading="loading"
-            >
-                <template #error="{ errorMessage }">
-                    <slot :error-message="errorMessage" name="error"></slot>
-                </template>
-            </T3FormFrameworkElements>
+            />
         </div>
-        <slot name="before-submit"></slot>
+        <slot name="beforeSubmit"></slot>
         <div class="t3-form-framework__submit-wrapper">
             <button
                 class="t3-form-framework__submit"
@@ -42,9 +38,14 @@ export interface Emits {
     submit: [data: { [key: string]: string }]
 }
 
-defineProps<Props>()
+export interface Slots {
+    beforeSubmit(): any
+    submit(): any
+}
 
+defineProps<Props>()
 const emit = defineEmits<Emits>()
+defineSlots<Slots>()
 
 const { handleSubmit } = useForm()
 

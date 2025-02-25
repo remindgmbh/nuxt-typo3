@@ -10,6 +10,12 @@
 import { onMounted, ref } from 'vue'
 import { useT3Debounce } from '#imports'
 
+export interface Slots {
+    default(): any
+}
+
+defineSlots<Slots>()
+
 const root = ref<HTMLDivElement>()
 const content = ref<HTMLDivElement>()
 

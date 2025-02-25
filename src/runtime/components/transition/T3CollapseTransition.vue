@@ -19,7 +19,12 @@ export interface Props {
     transitionName?: string
 }
 
+export interface Slots {
+    default(): any
+}
+
 withDefaults(defineProps<Props>(), { transitionName: 'collapse-transition' })
+defineSlots<Slots>()
 
 let initialHeight = ''
 let initialOverflowY = ''

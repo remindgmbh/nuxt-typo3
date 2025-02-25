@@ -13,7 +13,12 @@ export interface Props {
     tag?: keyof HTMLElementTagNameMap
 }
 
+export interface Slots {
+    default(): any
+}
+
 withDefaults(defineProps<Props>(), { tag: 'div' })
+defineSlots<Slots>()
 
 const container = ref<HTMLElement>()
 const content = ref<HTMLElement>()

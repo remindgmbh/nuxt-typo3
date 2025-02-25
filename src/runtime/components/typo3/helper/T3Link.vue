@@ -21,7 +21,12 @@ export interface Props {
     to?: T3Model.Typo3.TypoLink | string
 }
 
+export interface Slots {
+    default(): any
+}
+
 const props = defineProps<Props>()
+defineSlots<Slots>()
 
 const href = computed(
     () => (typeof props.to === 'string' ? props.to : props.to?.href) ?? '',

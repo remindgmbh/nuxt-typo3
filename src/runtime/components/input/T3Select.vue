@@ -71,12 +71,17 @@ export interface Props {
     required?: boolean
 }
 
+export interface Slots {
+    option(props: { option: T3Model.Input.Select.Option }): any
+}
+
 export interface Emits {
     change: [value: string]
 }
 
 const props = defineProps<Props>()
 const emit = defineEmits<Emits>()
+defineSlots<Slots>()
 
 const model = defineModel<string>({ default: '' })
 

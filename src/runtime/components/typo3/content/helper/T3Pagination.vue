@@ -67,12 +67,21 @@ export interface Props {
     pagination: T3Model.Typo3.Extbase.Pagination
 }
 
+export interface Slots {
+    prev(): any
+    page(props: { page: T3Model.Typo3.Extbase.PaginationPage }): any
+    divider(): any
+    next(): any
+}
+
 const props = withDefaults(defineProps<Props>(), {
     ariaLabelNextPage: undefined,
     ariaLabelPage: () => '',
     ariaLabelPrevPage: undefined,
     numberOfPages: undefined,
 })
+
+defineSlots<Slots>()
 
 const { pages, showDivider } = useT3Pagination(
     toRef(() => props.pagination),
