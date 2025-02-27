@@ -13,7 +13,12 @@
 </template>
 
 <script setup lang="ts">
-import { useNuxtApp, useT3LinkReplacer, useT3TableEnhancer } from '#imports'
+import {
+    useNuxtApp,
+    useT3CookiesLinkReplacer,
+    useT3LinkReplacer,
+    useT3TableEnhancer,
+} from '#imports'
 import { ref } from 'vue'
 
 export interface Props {
@@ -27,6 +32,7 @@ const el = ref<HTMLDivElement>()
 
 useT3TableEnhancer(el)
 useT3LinkReplacer(el)
+useT3CookiesLinkReplacer(el)
 
 useNuxtApp().callHook('typo3:parseHtml', el)
 </script>
