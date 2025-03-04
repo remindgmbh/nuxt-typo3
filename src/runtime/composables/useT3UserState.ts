@@ -4,6 +4,7 @@ import {
     useRoute,
     useT3Api,
     useT3Data,
+    useT3DataUtil,
 } from '#imports'
 import { computed } from 'vue'
 
@@ -11,6 +12,7 @@ export function useT3UserState() {
     const api = useT3Api()
 
     const { currentInitialData, currentPageData, clearData } = useT3Data()
+    const { findContentElementByType } = useT3DataUtil()
 
     const isLoggedIn = computed<boolean>(
         () => currentInitialData.value?.user?.logged ?? false,
@@ -22,12 +24,15 @@ export function useT3UserState() {
                 currentInitialData.value?.user?.logoutLink,
             )
 
-            const contentElements = Object.values(pageData.content).flat()
-            const contentElement = contentElements.find(
-                (contentElement) => contentElement.type === 'felogin_login',
-            ) as
-                | T3Model.Typo3.Content.Element<T3Model.Typo3.Content.Data.FeloginActionResponse>
-                | undefined
+            if (api.pageIsRedirect(pageData)) {
+                throw new Error('Logout Link is redirect')
+            }
+
+            const contentElement =
+                findContentElementByType<T3Model.Typo3.Content.Data.FeloginActionResponse>(
+                    'felogin_login',
+                    pageData,
+                )
 
             const redirectUrl =
                 contentElement?.content.data.redirectUrl ??

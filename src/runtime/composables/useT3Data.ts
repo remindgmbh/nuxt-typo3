@@ -79,12 +79,16 @@ export function useT3Data() {
 
     async function loadPageData(
         path: string,
-    ): Promise<T3Model.Typo3.Page | undefined> {
+    ): Promise<T3Model.Typo3.Page | T3Model.Typo3.Redirect | undefined> {
         pageError.value = undefined
         if (!pageData.value[path]) {
             try {
                 const result = await api.getPageData(path)
-                pageData.value[path] = result
+
+                if (!api.pageIsRedirect(result)) {
+                    pageData.value[path] = result
+                }
+
                 return result
             } catch (error) {
                 if (error instanceof T3Error.PageError) {

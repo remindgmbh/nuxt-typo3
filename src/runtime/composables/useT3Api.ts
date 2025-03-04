@@ -43,15 +43,17 @@ export function useT3Api() {
     async function getPageData(
         path: string,
         options: FetchOptions = {},
-    ): Promise<T3Model.Typo3.Page> {
-        return await get<T3Model.Typo3.Page>(path, {
+    ): Promise<T3Model.Typo3.Page | T3Model.Typo3.Redirect> {
+        return await get<T3Model.Typo3.Page | T3Model.Typo3.Redirect>(path, {
             ...options,
             async onResponseError({ response }) {
                 const pageError = new T3Error.PageError()
                 pageError.status = response.status
 
                 if (typeof response._data !== 'string') {
-                    pageError.data = response._data
+                    if (!pageIsRedirect(response._data)) {
+                        pageError.data = response._data
+                    }
                 } else {
                     pageError.html = response._data
                 }
@@ -60,6 +62,12 @@ export function useT3Api() {
             },
             retry: false,
         })
+    }
+
+    function pageIsRedirect(
+        page: T3Model.Typo3.Page | T3Model.Typo3.Redirect,
+    ): page is T3Model.Typo3.Redirect {
+        return (page as T3Model.Typo3.Redirect).redirectUrl !== undefined
     }
 
     async function get<T = unknown>(
@@ -88,6 +96,7 @@ export function useT3Api() {
         get,
         getInitialData,
         getPageData,
+        pageIsRedirect,
         post,
     }
 }

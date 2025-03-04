@@ -1,6 +1,7 @@
 import {
     type T3Model,
     defineNuxtRouteMiddleware,
+    navigateTo,
     useT3Data,
     useT3I18n,
     useT3LoadingState,
@@ -23,9 +24,15 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     try {
         const [initialData, pageData]: [
             T3Model.Typo3.InitialData?,
-            T3Model.Typo3.Page?,
+            (T3Model.Typo3.Page | T3Model.Typo3.Redirect)?,
             ...unknown[],
         ] = await Promise.all(promises)
+
+        if (pageData && isRedirect(pageData)) {
+            return navigateTo(pageData.redirectUrl, {
+                external: pageData.statusCode !== 307,
+            })
+        }
 
         const languages =
             to.name === 'T3Page' ? pageData?.i18n : initialData?.i18n
@@ -42,3 +49,9 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         loadingState.value = {}
     }
 })
+
+function isRedirect(
+    page: T3Model.Typo3.Page | T3Model.Typo3.Redirect,
+): page is T3Model.Typo3.Redirect {
+    return (page as T3Model.Typo3.Redirect).redirectUrl !== undefined
+}
