@@ -1,6 +1,5 @@
 <template>
     <NuxtLink
-        :aria-current="ariaCurrent"
         class="t3-link"
         :target="target"
         :title="title"
@@ -15,8 +14,6 @@ import type { T3Model } from '#imports'
 import { computed } from 'vue'
 
 export interface Props {
-    // define explicitly because NuxtLink/RouterLink sets aria-current depending on active state without considering query
-    ariaCurrent?: Element['ariaCurrent']
     disabled?: boolean
     to?: T3Model.Typo3.TypoLink | string
 }
