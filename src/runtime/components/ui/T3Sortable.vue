@@ -1,5 +1,5 @@
 <template>
-    <slot v-for="name in order" :key="name" :name="name"></slot>
+    <slot v-for="name in order" :key="name" :name="name" />
 </template>
 
 <script setup lang="ts">

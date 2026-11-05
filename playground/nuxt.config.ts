@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     logger: {
         level: 3,
     },
-    modules: ['@remindgmbh/nuxt-typo3'],
+    modules: ['@remindgmbh/nuxt-logger', '@remindgmbh/nuxt-typo3'],
     runtimeConfig: {
         public: {
             typo3: {

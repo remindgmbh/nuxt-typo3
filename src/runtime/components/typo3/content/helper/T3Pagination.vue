@@ -13,7 +13,7 @@
                     }"
                     :to="pagination.prev"
                 >
-                    <slot name="prev"></slot>
+                    <slot name="prev" />
                 </T3Link>
             </li>
             <li
@@ -33,7 +33,7 @@
                 >
                     <slot name="page" :page="page">{{ page.pageNumber }}</slot>
                 </T3Link>
-                <slot v-if="showDivider(index)" name="divider"></slot>
+                <slot v-if="showDivider(index)" name="divider" />
             </li>
             <li
                 v-if="!disableNavigation"
@@ -47,7 +47,7 @@
                     }"
                     :to="pagination.next"
                 >
-                    <slot name="next"></slot>
+                    <slot name="next" />
                 </T3Link>
             </li>
         </ul>

@@ -28,24 +28,11 @@
 </template>
 
 <script setup lang="ts">
-import {
-    useT3ColorScheme,
-    useT3LayoutInjection,
-    useT3Navigation,
-} from '#imports'
-import colors from '@/colors'
+import { useT3LayoutInjection, useT3Navigation } from '#imports'
 
 const { rootPageNavigation } = useT3Navigation()
 const { injectMenu } = useT3LayoutInjection()
 const { toggle } = injectMenu()
-
-const colorScheme = useT3ColorScheme({
-    light: {
-        link: {
-            active: colors.primary,
-        },
-    },
-})
 </script>
 
 <style lang="scss">
@@ -56,10 +43,6 @@ const colorScheme = useT3ColorScheme({
 
     &--column {
         flex-direction: column;
-    }
-
-    .router-link-active {
-        color: v-bind('colorScheme.link?.active');
     }
 }
 </style>

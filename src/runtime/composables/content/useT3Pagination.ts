@@ -28,10 +28,17 @@ export function useT3Pagination(
         }
 
         // add first page
-        result.add(pagination.value.pages[0])
+        const firstPage = pagination.value.pages[0]
+        if (firstPage) {
+            result.add(firstPage)
+        }
 
         // add last page
-        result.add(pagination.value.pages[pagination.value.pages.length - 1])
+        const lastPage =
+            pagination.value.pages[pagination.value.pages.length - 1]
+        if (lastPage) {
+            result.add(lastPage)
+        }
 
         if (currentPage.value) {
             // add current page

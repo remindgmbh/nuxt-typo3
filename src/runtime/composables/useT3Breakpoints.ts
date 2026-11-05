@@ -28,7 +28,7 @@ export function useT3Breakpoints() {
 
     const breakpointsAsc = computed<string[]>(() =>
         Object.keys(screenWidthsInPx.value).sort(
-            (a, b) => screenWidthsInPx.value[a] - screenWidthsInPx.value[b],
+            (a, b) => screenWidthsInPx.value[a]! - screenWidthsInPx.value[b]!,
         ),
     )
 

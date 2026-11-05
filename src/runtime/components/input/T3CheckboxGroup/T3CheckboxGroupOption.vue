@@ -13,6 +13,7 @@
 
 <script setup lang="ts">
 import { type RuleExpression, useField } from 'vee-validate'
+import { defineModel } from 'vue'
 
 export interface Props {
     name: string
@@ -25,7 +26,7 @@ export interface Props {
 
 const props = defineProps<Props>()
 
-const model = defineModel<string[]>({ default: [] })
+const model = defineModel<string[]>({ default: () => [] })
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
 const { checked, handleChange, handleBlur } = useField<string | string[]>(
@@ -33,13 +34,13 @@ const { checked, handleChange, handleBlur } = useField<string | string[]>(
     props.validation,
     {
         checkedValue: props.value,
-        initialValue: props.defaultValue ?? model.value,
+        initialValue: (props.defaultValue ?? model.value) as string[],
         syncVModel: true,
         type: 'checkbox',
     },
 )
 
 if (props.defaultValue) {
-    model.value = props.defaultValue
+    model.value = props.defaultValue as typeof model.value
 }
 </script>

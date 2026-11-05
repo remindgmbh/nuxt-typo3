@@ -18,8 +18,6 @@ export interface Props {
     defaultValue?: string
     disabled?: boolean
     // used from vee-validate to sync with value: https://vee-validate.logaretm.com/v4/guide/composition-api/custom-inputs/#v-model-support
-
-    modelValue?: string
     name: string
     placeholder?: string
     required?: boolean

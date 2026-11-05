@@ -12,7 +12,7 @@
     >
         <T3Sortable :order="order">
             <template v-if="!hideLabel" #[LABEL]>
-                <slot name="beforeLabel"></slot>
+                <slot name="beforeLabel" />
                 <component
                     :is="labelTag"
                     class="t3-form-element__label"
@@ -28,7 +28,7 @@
                         >
                     </slot>
                 </component>
-                <slot name="afterLabel"></slot>
+                <slot name="afterLabel" />
             </template>
             <template #[INPUT]>
                 <slot
@@ -38,10 +38,10 @@
                         'aria-invalid': !!errorMessage,
                     }"
                     name="input"
-                ></slot>
+                />
             </template>
         </T3Sortable>
-        <slot name="beforeError"></slot>
+        <slot name="beforeError" />
         <slot :error-message="errorMessage" name="error">
             <T3CollapseTransition transition-name="error-transition">
                 <span
@@ -56,7 +56,7 @@
                 </span>
             </T3CollapseTransition>
         </slot>
-        <slot name="afterError"></slot>
+        <slot name="afterError" />
     </component>
 </template>
 

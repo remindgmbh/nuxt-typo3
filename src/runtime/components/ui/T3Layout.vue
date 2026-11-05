@@ -5,13 +5,13 @@
         @click="closeOnOutsideClick"
     >
         <header ref="headerRef" class="t3-layout__header" :class="headerClass">
-            <slot name="header"></slot>
+            <slot name="header" />
         </header>
         <main class="t3-layout__content" :class="contentClass">
-            <slot name="content"></slot>
+            <slot name="content" />
         </main>
         <footer class="t3-layout__footer" :class="footerClass">
-            <slot name="footer"></slot>
+            <slot name="footer" />
         </footer>
         <Transition
             v-bind="menuTransition"
@@ -31,7 +31,7 @@
                     },
                 ]"
             >
-                <slot name="menu"></slot>
+                <slot name="menu" />
             </nav>
         </Transition>
     </div>

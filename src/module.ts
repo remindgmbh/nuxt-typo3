@@ -7,7 +7,6 @@ import {
     createResolver,
     defineNuxtModule,
     extendPages,
-    installModule,
 } from '@nuxt/kit'
 import { name, version } from '../package.json'
 import type { ViteConfig } from '@nuxt/schema'
@@ -54,8 +53,6 @@ export default defineNuxtModule({
         nuxt.options.css.unshift(
             resolver.resolve('runtime/assets/styles/global.scss'),
         )
-
-        await installModule('@remindgmbh/nuxt-logger')
 
         addImportsDir(resolver.resolve('runtime/composables/**/*'))
         addImports({

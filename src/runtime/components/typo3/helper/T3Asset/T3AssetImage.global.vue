@@ -54,7 +54,7 @@ const sources = computed(() => {
     const result: Array<{ media: string; srcset: string }> = []
     if (props.file.fileReferenceUid) {
         for (let i = 0; i < breakpointsDesc.value.length; i++) {
-            const breakpoint = breakpointsDesc.value[i]
+            const breakpoint = breakpointsDesc.value[i] || ''
             let width: number | undefined
             if (props.sizes) {
                 width = props.sizes?.[breakpoint]
@@ -65,7 +65,10 @@ const sources = computed(() => {
                         i + 1,
                     )
                     for (let j = 0; j < smallerBreakpoints.length; j++) {
-                        width = props.sizes?.[smallerBreakpoints[j]]
+                        const smallerBreakpoint = smallerBreakpoints[j]
+                        if (smallerBreakpoint !== undefined) {
+                            width = props.sizes?.[smallerBreakpoint]
+                        }
                         if (width) {
                             break
                         }

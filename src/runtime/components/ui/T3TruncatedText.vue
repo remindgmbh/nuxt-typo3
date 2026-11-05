@@ -1,7 +1,7 @@
 <template>
     <div ref="root" class="t3-truncated-text">
         <div ref="content" class="t3-truncated-text__content">
-            <slot></slot>
+            <slot />
         </div>
     </div>
 </template>

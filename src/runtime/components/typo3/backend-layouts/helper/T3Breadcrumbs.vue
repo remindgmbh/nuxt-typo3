@@ -98,7 +98,7 @@ const breadcrumbs = computed(() => {
                 config.breadcrumbs.currentTitle instanceof Function
                     ? config.breadcrumbs.currentTitle(props.pageData)
                     : config.breadcrumbs.currentTitle
-            if (currentTitle) {
+            if (currentTitle && result[currentIndex]) {
                 result[currentIndex].title = currentTitle
             }
         }

@@ -10,7 +10,7 @@
         @leave="onLeave"
         @leave-cancelled="resetStyles"
     >
-        <slot></slot>
+        <slot />
     </Transition>
 </template>
 

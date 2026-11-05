@@ -8,8 +8,7 @@ export interface CeOptions {
     // in that case cookie behaviour has to be implemented in custom component,
     // see T3CeTextmedia in playground for example
     ignoreCookies?:
-        | boolean
-        | ((contentElement: Typo3.Content.Element<any>) => boolean)
+        boolean | ((contentElement: Typo3.Content.Element<any>) => boolean)
     // max width used for container specified by breakpoint name
     maxWidth?:
         | string
