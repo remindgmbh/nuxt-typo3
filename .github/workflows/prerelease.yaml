@@ -11,5 +11,5 @@ jobs:
     steps:
       - uses: remindgmbh/npm-publish-prerelease-action@v1.1.0
         with:
-          node-version: 20
+          node-version: 24
           npm-token: ${{ secrets.NPM_TOKEN }}
