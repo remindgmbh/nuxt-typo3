@@ -23,10 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-    useT3LayoutInjection,
-    useT3Navigation,
-} from '#imports'
+import { useT3LayoutInjection, useT3Navigation } from '#imports'
 import { computed } from 'vue'
 
 const { injectMenu } = useT3LayoutInjection()

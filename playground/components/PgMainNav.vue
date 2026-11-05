@@ -28,10 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-    useT3LayoutInjection,
-    useT3Navigation,
-} from '#imports'
+import { useT3LayoutInjection, useT3Navigation } from '#imports'
 
 const { rootPageNavigation } = useT3Navigation()
 const { injectMenu } = useT3LayoutInjection()

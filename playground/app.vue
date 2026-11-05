@@ -38,11 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-    useT3CookieConsent,
-    useT3Footer,
-    useT3LoadingState,
-} from '#imports'
+import { useT3CookieConsent, useT3Footer, useT3LoadingState } from '#imports'
 
 const headerHeightDefault = '6rem'
 const headerHeightDense = '3rem'

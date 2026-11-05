@@ -11,5 +11,3 @@ const { injectContentElement } = useT3ContentInjection()
 
 const contentElement = injectContentElement<T3Model.Typo3.Content.Data.Header>()
 </script>
-
-<style lang="scss"></style>
