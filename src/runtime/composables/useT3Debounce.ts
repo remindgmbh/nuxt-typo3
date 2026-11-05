@@ -4,7 +4,7 @@ export function useT3Debounce<T>(
     callback: (...args: any[]) => PromiseLike<T> | T,
     timeout = 500,
 ) {
-    let timer: NodeJS.Timeout | undefined
+    let timer: ReturnType<typeof setTimeout> | undefined
     const promise = ref<PromiseLike<T>>()
 
     const debounce = (...args: any[]): PromiseLike<unknown> => {

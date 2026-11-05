@@ -18,8 +18,8 @@
                 :option-groups="optionGroups"
                 :placeholder="placeholder"
                 :validation="validation"
-                @input="(value) => emit('input', value)"
-                @select="(value) => emit('select', value)"
+                @input="handleInput"
+                @select="handleSelect"
             />
         </template>
     </T3FormElement>
@@ -32,6 +32,7 @@ import type {
 } from '@remindgmbh/nuxt-typo3/components/input/T3Autocomplete/T3Autocomplete.vue'
 import type { DynamicProps as FormElementProps } from '@remindgmbh/nuxt-typo3/components/form/T3FormElement.vue'
 import type { T3Model } from '#imports'
+import { defineModel } from 'vue'
 
 export type Props = InputProps & FormElementProps
 
@@ -39,7 +40,13 @@ defineProps<Props>()
 
 const emit = defineEmits<Emits>()
 
+const handleInput = (value: T3Model.Input.Autocomplete.Option) =>
+    emit('input', value)
+
+const handleSelect = (value: T3Model.Input.Autocomplete.Option) =>
+    emit('select', value)
+
 const model = defineModel<T3Model.Input.Autocomplete.Option>({
-    default: { key: '', label: '' },
+    default: () => ({ key: '', label: '' }),
 })
 </script>

@@ -57,18 +57,18 @@ export function useT3Content() {
             : ceOptions.value?.maxWidth
     })
 
-    const spaceBefore = computed<string>(
+    const spaceBefore = computed<string | undefined>(
         () => config.spacing[contentElement.value.appearance.spaceBefore],
     )
-    const spaceAfter = computed<string>(
+    const spaceAfter = computed<string | undefined>(
         () => config.spacing[contentElement.value.appearance.spaceAfter],
     )
-    const spaceBeforeInside = computed<string>(
+    const spaceBeforeInside = computed<string | undefined>(
         () =>
             backgroundColorName.value &&
             config.spacing[contentElement.value.appearance.spaceBeforeInside],
     )
-    const spaceAfterInside = computed<string>(
+    const spaceAfterInside = computed<string | undefined>(
         () =>
             backgroundColorName.value &&
             config.spacing[contentElement.value.appearance.spaceAfterInside],

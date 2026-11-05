@@ -9,7 +9,7 @@
                     class="t3-modal"
                     @click="onOutsideClick"
                 >
-                    <slot></slot>
+                    <slot />
                 </div>
             </Transition>
         </div>

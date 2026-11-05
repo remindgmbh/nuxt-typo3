@@ -24,26 +24,17 @@
 
 <script setup lang="ts">
 import {
-    useT3ColorScheme,
     useT3LayoutInjection,
     useT3Navigation,
 } from '#imports'
-import colors from '@/colors'
 import { computed } from 'vue'
 
 const { injectMenu } = useT3LayoutInjection()
 const { navItemsWithChildren } = useT3Navigation()
 const { active } = injectMenu()
 
-const colorScheme = useT3ColorScheme({
-    light: {
-        background: colors.accent,
-        link: colors.primary,
-    },
-})
-
 const activeNavItem = computed(() =>
-    navItemsWithChildren.value.find((item) => item.link === active.value),
+    navItemsWithChildren.value.find((item: any) => item.link === active.value),
 )
 </script>
 
@@ -56,7 +47,6 @@ const activeNavItem = computed(() =>
 }
 
 .pg-dropdown {
-    background-color: v-bind('colorScheme.background');
     position: absolute;
     top: 100%;
     width: 100%;
@@ -70,10 +60,6 @@ const activeNavItem = computed(() =>
         gap: 1rem;
         padding: 1rem;
         flex-direction: column;
-
-        .router-link-active {
-            color: v-bind('colorScheme.link');
-        }
     }
 }
 </style>

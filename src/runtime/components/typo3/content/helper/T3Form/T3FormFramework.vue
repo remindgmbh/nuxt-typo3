@@ -7,7 +7,7 @@
                 :loading="loading"
             />
         </div>
-        <slot name="beforeSubmit"></slot>
+        <slot name="beforeSubmit" />
         <div class="t3-form-framework__submit-wrapper">
             <button
                 class="t3-form-framework__submit"

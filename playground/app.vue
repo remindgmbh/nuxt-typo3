@@ -39,12 +39,10 @@
 
 <script setup lang="ts">
 import {
-    useT3ColorScheme,
     useT3CookieConsent,
     useT3Footer,
     useT3LoadingState,
 } from '#imports'
-import colors from '@/colors'
 
 const headerHeightDefault = '6rem'
 const headerHeightDense = '3rem'
@@ -52,36 +50,16 @@ const headerHeightDense = '3rem'
 const { showBanner } = useT3CookieConsent()
 const footer = useT3Footer()
 const loading = useT3LoadingState()
-
-const colorScheme = useT3ColorScheme({
-    dark: {
-        background: colors.black,
-        font: colors.white,
-    },
-    light: {
-        background: colors.white,
-        font: colors.black,
-        footer: {
-            background: colors.secondary,
-        },
-        header: {
-            border: colors.secondary,
-        },
-        loadingBar: colors.secondary,
-    },
-})
 </script>
 
 <style lang="scss">
 .app {
     position: relative;
-    color: v-bind('colorScheme.font');
     display: flex;
     flex-direction: column;
 
     &__loading-bar {
         position: absolute;
-        background-color: v-bind('colorScheme.background');
         height: 0;
         width: 100%;
 
@@ -93,17 +71,14 @@ const colorScheme = useT3ColorScheme({
     &__loading-progress {
         position: absolute;
         inset: 0 100% 0 0;
-        background-color: v-bind('colorScheme.loadingBar');
         animation: loading 2s linear infinite;
     }
 
     &__header {
-        background-color: v-bind('colorScheme.background');
         transition: height 0.5s;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 0.125rem v-bind('colorScheme.header?.border') solid;
         width: 100%;
     }
 
@@ -111,12 +86,6 @@ const colorScheme = useT3ColorScheme({
         overflow-x: hidden;
         position: relative;
         transition: margin 0.5s;
-        background-color: v-bind('colorScheme.background');
-    }
-
-    &__footer {
-        background-color: v-bind('colorScheme.footer?.background');
-        color: v-bind('colorScheme.background');
     }
 
     .menu-transition {

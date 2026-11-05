@@ -26,7 +26,7 @@
                     :index="index"
                     :item="item"
                     name="title"
-                ></slot>
+                />
             </button>
             <T3CollapseTransition v-show="!disabledItems.includes(index)">
                 <section
@@ -41,8 +41,7 @@
                             :index="index"
                             :item="item"
                             name="content"
-                        >
-                        </slot>
+                        />
                     </div>
                 </section>
             </T3CollapseTransition>
@@ -55,8 +54,7 @@ import { toRef, useId, useT3Accordion } from '#imports'
 
 export interface Props<T> {
     buttonAttrs?:
-        | Record<string, unknown>
-        | ((item: T) => Record<string, unknown>)
+        Record<string, unknown> | ((item: T) => Record<string, unknown>)
     id?: string
     items: T[]
     multiple?: boolean

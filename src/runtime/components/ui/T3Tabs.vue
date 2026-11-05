@@ -18,7 +18,7 @@
                     :item="item"
                     name="title"
                     :toggle="toggle"
-                ></slot>
+                />
             </button>
         </div>
         <T3AutoHeightContainer class="t3-tabs__contents">
@@ -35,7 +35,7 @@
                         :item="activeItem"
                         name="content"
                         :toggle="toggle"
-                    ></slot>
+                    />
                 </section>
             </Transition>
         </T3AutoHeightContainer>

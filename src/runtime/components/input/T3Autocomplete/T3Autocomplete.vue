@@ -37,7 +37,7 @@
 <script setup lang="ts">
 import { type RuleExpression, useField } from 'vee-validate'
 import { type T3Model, navigateTo } from '#imports'
-import { computed, ref, watch } from 'vue'
+import { computed, defineModel, ref, watch } from 'vue'
 
 export interface Props {
     ariaErrormessage?: string
@@ -61,7 +61,7 @@ const props = defineProps<Props>()
 const emit = defineEmits<Emits>()
 
 const model = defineModel<T3Model.Input.Autocomplete.Option>({
-    default: { key: '', label: '' },
+    default: () => ({ key: '', label: '' }),
 })
 
 const input = computed({
@@ -77,11 +77,11 @@ const el = ref<HTMLDivElement>()
 const isOpen = ref(false)
 const hoverOption = ref<T3Model.Input.Autocomplete.Option>()
 const hoverOptionIndex = computed<number>(() =>
-    options.value.findIndex((value) => hoverOption.value === value),
+    options.value.findIndex((value: any) => hoverOption.value === value),
 )
 
 const options = computed(() =>
-    props.optionGroups.flatMap((optionGroup) => optionGroup.options),
+    props.optionGroups.flatMap((optionGroup: any) => optionGroup.options),
 )
 
 // computed property required: https://vee-validate.logaretm.com/v4/guide/composition-api/caveats#reactive-field-names-with-usefield
@@ -99,13 +99,13 @@ if (props.defaultValue) {
 }
 
 // use two watchers as syncVModel from vee-validate does not seem to work: https://github.com/logaretm/vee-validate/issues/4962
-watch(value, (newValue) => {
+watch(value, (newValue: any) => {
     if (newValue !== model.value) {
         model.value = newValue
     }
 })
 
-watch(model, (newValue) => {
+watch(model, (newValue: any) => {
     if (newValue !== value.value) {
         value.value = newValue
     }

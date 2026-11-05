@@ -1,6 +1,6 @@
 <template>
     <div class="t3-file-upload">
-        <slot name="beforeLabel"></slot>
+        <slot name="beforeLabel" />
         <label
             v-if="slots.label"
             class="t3-file-upload__label"
@@ -8,9 +8,9 @@
             @dragover.prevent
             @drop.prevent="onDrop"
         >
-            <slot name="label"></slot>
+            <slot name="label" />
         </label>
-        <slot name="afterLabel"></slot>
+        <slot name="afterLabel" />
         <input
             :id="name"
             ref="inputEl"
@@ -24,21 +24,17 @@
             @blur="handleBlur"
             @change="onChange"
         />
-        <slot :files="files" name="beforeFiles"></slot>
+        <slot :files="files" name="beforeFiles" />
         <ul v-if="slots.file" class="t3-file-upload__files">
             <li
                 v-for="(file, index) in files"
                 :key="index + file.name"
                 class="t3-file-upload__file"
             >
-                <slot
-                    :file="file"
-                    name="file"
-                    :remove="() => remove(index)"
-                ></slot>
+                <slot :file="file" name="file" :remove="() => remove(index)" />
             </li>
         </ul>
-        <slot :files="files" name="afterFiles"></slot>
+        <slot :files="files" name="afterFiles" />
     </div>
 </template>
 
@@ -92,7 +88,10 @@ function onChange(e: Event) {
 
             if (e.target.files) {
                 for (let i = 0; i < e.target.files.length; i++) {
-                    newFiles.push(e.target.files[i])
+                    const file = e.target.files.item(i)
+                    if (file) {
+                        newFiles.push(file)
+                    }
                 }
             }
 

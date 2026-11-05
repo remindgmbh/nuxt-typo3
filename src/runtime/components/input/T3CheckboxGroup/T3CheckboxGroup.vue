@@ -20,8 +20,8 @@
 </template>
 
 <script setup lang="ts">
+import { computed, defineModel } from 'vue'
 import type { RuleExpression } from 'vee-validate'
-import { computed } from 'vue'
 
 export interface Props {
     defaultValue?: string[]
@@ -35,5 +35,5 @@ const props = defineProps<Props>()
 
 const name = computed(() => props.name)
 
-const model = defineModel<string[]>({ default: [] })
+const model = defineModel<string[]>({ default: () => [] })
 </script>

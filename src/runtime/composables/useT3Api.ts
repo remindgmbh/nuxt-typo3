@@ -74,22 +74,22 @@ export function useT3Api() {
         request: NitroFetchRequest,
         options?: FetchOptions,
     ): Promise<T> {
-        return await $fetch<T>(request, {
+        return (await $fetch<T>(request, {
             ...defaultOptions.value,
             ...options,
             method: 'GET',
-        })
+        })) as T
     }
 
     async function post<T = unknown>(
         request: NitroFetchRequest,
         options?: FetchOptions,
     ): Promise<T> {
-        return await $fetch<T>(request, {
+        return (await $fetch<T>(request, {
             ...defaultOptions.value,
             ...options,
             method: 'POST',
-        })
+        })) as T
     }
 
     return {
