@@ -38,7 +38,3 @@ Import the original component explicitly from `@remindgmbh/nuxt-typo3/components
 
 
 **IMPORTANT**: Never use styles in assets for customizing components because they will be loaded regardless if the component is used on the current page or not.
-
-## Development
-
-Use `npm install` to install dependencies. Add `.env` file to playground directory and set `NUXT_PUBLIC_TYPO3_BASE_URL` and `NUXT_PUBLIC_TYPO3_API_BASE_URL`. Then use `npm run dev` to start a dev server.
